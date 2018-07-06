@@ -10,6 +10,8 @@ import UIKit
 
 class HorizontalScrollView: UIScrollView, UIScrollViewDelegate {
     
+    var pageSelected: ((Int)->Void)?
+    
     override func awakeFromNib() {
         delegate = self
         showsHorizontalScrollIndicator = false
@@ -41,6 +43,7 @@ class HorizontalScrollView: UIScrollView, UIScrollViewDelegate {
     func scrollToBigger() {
         let x = contentOffset.x / self.frame.width + 0.5
         let i = Int(x)
+        pageSelected?(i)
         let x2 = self.frame.width * CGFloat(i)
         setContentOffset(CGPoint(x: x2, y: 0), animated: true)
     }

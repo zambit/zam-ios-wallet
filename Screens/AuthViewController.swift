@@ -24,6 +24,9 @@ class AuthViewController: UIViewController {
         registrationButton.layer.masksToBounds = false
         //
         scrollView.pages = [welcome_screen_0, welcome_screen_1]
+        scrollView.pageSelected = { [weak self] page in
+            self?.pageControl.currentPage = page
+        }
         //
         pageControl.numberOfPages = scrollView.pages.count
     }
