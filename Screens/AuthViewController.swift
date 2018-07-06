@@ -29,10 +29,14 @@ class AuthViewController: UIViewController {
         }
         //
         pageControl.numberOfPages = scrollView.pages.count
+        
     }
     
     
     
+    @IBAction func onPageControl(_ sender: UIPageControl) {
+        self.scrollView.select(page: sender.currentPage)
+    }
     @IBAction func onRegistrationButton(_ sender: Any) {
     }
     

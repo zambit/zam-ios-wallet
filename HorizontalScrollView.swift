@@ -12,6 +12,10 @@ class HorizontalScrollView: UIScrollView, UIScrollViewDelegate {
     
     var pageSelected: ((Int)->Void)?
     
+    public func select(page: Int) {
+        self.scrollTo(index: page)
+    }
+    
     override func awakeFromNib() {
         delegate = self
         showsHorizontalScrollIndicator = false
@@ -31,11 +35,9 @@ class HorizontalScrollView: UIScrollView, UIScrollViewDelegate {
         }
     }
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        print("deceleration end")
         self.scrollToBigger()
     }
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        print("did, will:\(decelerate)")
         if !decelerate {
             self.scrollToBigger()
         }
@@ -43,8 +45,11 @@ class HorizontalScrollView: UIScrollView, UIScrollViewDelegate {
     func scrollToBigger() {
         let x = contentOffset.x / self.frame.width + 0.5
         let i = Int(x)
-        pageSelected?(i)
-        let x2 = self.frame.width * CGFloat(i)
+        self.pageSelected?(i)
+        self.scrollTo(index: i)
+    }
+    func scrollTo(index: Int) {
+        let x2 = self.frame.width * CGFloat(index)
         setContentOffset(CGPoint(x: x2, y: 0), animated: true)
     }
 

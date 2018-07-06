@@ -22,6 +22,9 @@
                                 <rect key="frame" x="168" y="490" width="39" height="37"/>
                                 <color key="pageIndicatorTintColor" red="0.9129021139960215" green="0.9129021139960215" blue="0.9129021139960215" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <color key="currentPageIndicatorTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <action selector="onPageControl:" destination="BYZ-38-t0r" eventType="valueChanged" id="N7n-cn-GZw"/>
+                                </connections>
                             </pageControl>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jye-6p-MbS">
                                 <rect key="frame" x="30" y="597" width="315" height="50"/>
