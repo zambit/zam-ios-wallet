@@ -36,6 +36,10 @@
                                     <action selector="onLoginButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Sy9-bO-KKh"/>
                                 </connections>
                             </button>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e0v-eG-qM0" userLabel="Welcome Scroll View">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="490"/>
+                                <color key="backgroundColor" red="0.85209618577855351" green="0.77188078680684691" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jg0-ut-fyW">
                                 <rect key="frame" x="30" y="542" width="315" height="50"/>
                                 <constraints>
@@ -53,20 +57,63 @@
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Jye-6p-MbS" secondAttribute="trailing" constant="30" id="0kB-9W-ZWn"/>
                             <constraint firstItem="jg0-ut-fyW" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="30" id="RqA-eF-zc0"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="e0v-eG-qM0" secondAttribute="trailing" id="bVV-Dt-AUt"/>
+                            <constraint firstItem="e0v-eG-qM0" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="dGo-F3-X7d"/>
                             <constraint firstItem="Jye-6p-MbS" firstAttribute="top" secondItem="jg0-ut-fyW" secondAttribute="bottom" constant="5" id="giQ-Dh-pDq"/>
+                            <constraint firstItem="e0v-eG-qM0" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="j7H-Oc-XKQ"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Jye-6p-MbS" secondAttribute="bottom" constant="20" id="jYF-zq-uku"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="jg0-ut-fyW" secondAttribute="trailing" constant="30" id="pTJ-A4-wGb"/>
                             <constraint firstItem="ps4-su-MEH" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="vDl-pP-3M0"/>
                             <constraint firstItem="Jye-6p-MbS" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="30" id="w0o-ZL-fYK"/>
                             <constraint firstItem="jg0-ut-fyW" firstAttribute="top" secondItem="ps4-su-MEH" secondAttribute="bottom" constant="15" id="wan-in-GcA"/>
+                            <constraint firstItem="ps4-su-MEH" firstAttribute="top" secondItem="e0v-eG-qM0" secondAttribute="bottom" id="xij-l9-0gS"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
                         <outlet property="registrationButton" destination="jg0-ut-fyW" id="j9C-jT-s79"/>
+                        <outlet property="scrollView" destination="e0v-eG-qM0" id="OvN-ln-EqF"/>
+                        <outlet property="welcome_screen_0" destination="Cck-E7-i4W" id="pKP-2M-aEH"/>
+                        <outlet property="welcome_screen_1" destination="T3y-zR-VHM" id="AJh-XL-I6z"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="Cck-E7-i4W" userLabel="Welcome Entry Screen">
+                    <rect key="frame" x="0.0" y="0.0" width="488" height="338"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iVr-cO-a1J">
+                            <rect key="frame" x="208.5" y="157.5" width="71.5" height="23.5"/>
+                            <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" red="0.60285807525566337" green="1" blue="0.75562033742434898" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    <constraints>
+                        <constraint firstItem="iVr-cO-a1J" firstAttribute="centerY" secondItem="Cck-E7-i4W" secondAttribute="centerY" id="BIW-yP-QEh"/>
+                        <constraint firstItem="iVr-cO-a1J" firstAttribute="centerX" secondItem="Cck-E7-i4W" secondAttribute="centerX" id="uVV-Ok-wAs"/>
+                    </constraints>
+                    <viewLayoutGuide key="safeArea" id="Qjg-1p-2dN"/>
+                </view>
+                <view contentMode="scaleToFill" id="T3y-zR-VHM" userLabel="Welcome Second Screen">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ready for use" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9v7-bG-PqS">
+                            <rect key="frame" x="71.5" y="48" width="98.5" height="32"/>
+                            <fontDescription key="fontDescription" name="Noteworthy-Light" family="Noteworthy" pointSize="20"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" red="1" green="0.99806826783681235" blue="0.67137100198491495" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    <constraints>
+                        <constraint firstItem="9v7-bG-PqS" firstAttribute="centerY" secondItem="T3y-zR-VHM" secondAttribute="centerY" id="WeY-74-eWQ"/>
+                        <constraint firstItem="9v7-bG-PqS" firstAttribute="centerX" secondItem="T3y-zR-VHM" secondAttribute="centerX" id="f6a-wt-r9Y"/>
+                    </constraints>
+                    <viewLayoutGuide key="safeArea" id="9QR-5g-neD"/>
+                </view>
             </objects>
             <point key="canvasLocation" x="32.799999999999997" y="31.934032983508249"/>
         </scene>
