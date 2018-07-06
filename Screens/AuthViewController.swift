@@ -12,6 +12,7 @@ class AuthViewController: UIViewController {
     @IBOutlet var welcome_screen_0: UIView!
     @IBOutlet var welcome_screen_1: UIView!
     
+    @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var registrationButton: UIButton!
     @IBOutlet weak var scrollView: HorizontalScrollView!
     
@@ -22,9 +23,9 @@ class AuthViewController: UIViewController {
         registrationButton.layer.cornerRadius = 5
         registrationButton.layer.masksToBounds = false
         //
-        scrollView.alwaysBounceHorizontal = true
-        scrollView.showsHorizontalScrollIndicator = false
         scrollView.pages = [welcome_screen_0, welcome_screen_1]
+        //
+        pageControl.numberOfPages = scrollView.pages.count
     }
     
     

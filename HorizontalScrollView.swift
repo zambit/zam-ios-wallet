@@ -8,7 +8,13 @@
 
 import UIKit
 
-class HorizontalScrollView: UIScrollView {
+class HorizontalScrollView: UIScrollView, UIScrollViewDelegate {
+    
+    override func awakeFromNib() {
+        delegate = self
+        showsHorizontalScrollIndicator = false
+        bounces = false
+    }
     
     var pages: [UIView] = [] {
         willSet {
@@ -21,6 +27,22 @@ class HorizontalScrollView: UIScrollView {
                 self.addSubview(view)
             }
         }
+    }
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        print("deceleration end")
+        self.scrollToBigger()
+    }
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        print("did, will:\(decelerate)")
+        if !decelerate {
+            self.scrollToBigger()
+        }
+    }
+    func scrollToBigger() {
+        let x = contentOffset.x / self.frame.width + 0.5
+        let i = Int(x)
+        let x2 = self.frame.width * CGFloat(i)
+        setContentOffset(CGPoint(x: x2, y: 0), animated: true)
     }
 
     override func layoutSubviews() {

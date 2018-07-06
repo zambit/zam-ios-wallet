@@ -71,6 +71,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="pageControl" destination="ps4-su-MEH" id="zgE-Mc-Yph"/>
                         <outlet property="registrationButton" destination="jg0-ut-fyW" id="j9C-jT-s79"/>
                         <outlet property="scrollView" destination="e0v-eG-qM0" id="OvN-ln-EqF"/>
                         <outlet property="welcome_screen_0" destination="Cck-E7-i4W" id="pKP-2M-aEH"/>
