@@ -74,6 +74,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="login_screen" destination="lDk-ya-0yp" id="43M-1J-0Mi"/>
                         <outlet property="pageControl" destination="ps4-su-MEH" id="zgE-Mc-Yph"/>
                         <outlet property="registrationButton" destination="jg0-ut-fyW" id="j9C-jT-s79"/>
                         <outlet property="registration_screen" destination="aD6-aJ-W1T" id="9Ku-s8-u9n"/>
@@ -191,6 +192,54 @@
                     </constraints>
                     <viewLayoutGuide key="safeArea" id="nek-cq-ce1"/>
                 </view>
+                <view contentMode="scaleToFill" id="lDk-ya-0yp" userLabel="Login Screen">
+                    <rect key="frame" x="0.0" y="0.0" width="403" height="311"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Телефон / Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NwF-nt-zmL">
+                            <rect key="frame" x="10" y="91" width="383" height="30"/>
+                            <nil key="textColor"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Пароль" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SQ6-JR-h56">
+                            <rect key="frame" x="10" y="131" width="383" height="30"/>
+                            <nil key="textColor"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Login" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m8O-b6-yKW">
+                            <rect key="frame" x="180" y="40" width="42" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tro-PC-dz2">
+                            <rect key="frame" x="10" y="181" width="383" height="28"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                            <state key="normal" title="Забыли пароль?">
+                                <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="Tro-PC-dz2" firstAttribute="top" secondItem="SQ6-JR-h56" secondAttribute="bottom" constant="20" id="4JD-uf-Iyo"/>
+                        <constraint firstItem="NwF-nt-zmL" firstAttribute="centerX" secondItem="lDk-ya-0yp" secondAttribute="centerX" id="8A8-rz-GJP"/>
+                        <constraint firstItem="XnF-bU-SbG" firstAttribute="trailing" secondItem="Tro-PC-dz2" secondAttribute="trailing" constant="10" id="8Yp-Wg-bRV"/>
+                        <constraint firstItem="XnF-bU-SbG" firstAttribute="trailing" secondItem="SQ6-JR-h56" secondAttribute="trailing" constant="10" id="9gq-iz-pJh"/>
+                        <constraint firstItem="SQ6-JR-h56" firstAttribute="leading" secondItem="XnF-bU-SbG" secondAttribute="leading" constant="10" id="KMl-5q-APf"/>
+                        <constraint firstItem="NwF-nt-zmL" firstAttribute="leading" secondItem="XnF-bU-SbG" secondAttribute="leading" constant="10" id="L9O-Qw-f0p"/>
+                        <constraint firstItem="SQ6-JR-h56" firstAttribute="centerX" secondItem="lDk-ya-0yp" secondAttribute="centerX" id="OEd-7F-G6a"/>
+                        <constraint firstItem="NwF-nt-zmL" firstAttribute="top" secondItem="m8O-b6-yKW" secondAttribute="bottom" constant="30" id="OWe-hh-FWz"/>
+                        <constraint firstItem="Tro-PC-dz2" firstAttribute="leading" secondItem="XnF-bU-SbG" secondAttribute="leading" constant="10" id="SjZ-PR-85d"/>
+                        <constraint firstItem="XnF-bU-SbG" firstAttribute="trailing" secondItem="NwF-nt-zmL" secondAttribute="trailing" constant="10" id="TPT-0i-nQH"/>
+                        <constraint firstItem="m8O-b6-yKW" firstAttribute="centerX" secondItem="lDk-ya-0yp" secondAttribute="centerX" id="iC2-wj-Fip"/>
+                        <constraint firstItem="SQ6-JR-h56" firstAttribute="top" secondItem="NwF-nt-zmL" secondAttribute="bottom" constant="10" id="qvu-Yz-odN"/>
+                        <constraint firstItem="m8O-b6-yKW" firstAttribute="top" secondItem="XnF-bU-SbG" secondAttribute="top" constant="40" id="rUQ-ph-k2V"/>
+                    </constraints>
+                    <viewLayoutGuide key="safeArea" id="XnF-bU-SbG"/>
+                </view>
             </objects>
             <point key="canvasLocation" x="32.799999999999997" y="31.934032983508249"/>
         </scene>
@@ -263,7 +312,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U1k-R6-PWZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1414" y="-93"/>
+            <point key="canvasLocation" x="831" y="32"/>
         </scene>
     </scenes>
 </document>
