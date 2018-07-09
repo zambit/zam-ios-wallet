@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SMSConfirmationViewController : UIViewController, UITextFieldDelegate {
+class SMSConfirmationViewController : KeyboardViewController, UITextFieldDelegate {
     
     // events
     var codeEntered: ((String)->Void)?

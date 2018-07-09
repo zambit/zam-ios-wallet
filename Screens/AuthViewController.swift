@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AuthViewController: UIViewController {
+class AuthViewController: KeyboardViewController {
     @IBOutlet var welcome_screen_0: UIView!
     @IBOutlet var welcome_screen_1: UIView!
     @IBOutlet var registration_screen: UIView!
@@ -19,6 +19,7 @@ class AuthViewController: UIViewController {
     @IBOutlet weak var scrollView: HorizontalScrollView!
     
     // controller operation mode
+    // TODO: make me simple / split / avoid massive
     enum OperationMode {
         case login
         case tutorial

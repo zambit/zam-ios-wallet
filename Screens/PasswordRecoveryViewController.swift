@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PasswordRecoveryViewController : UIViewController {
+class PasswordRecoveryViewController : KeyboardViewController {
     
     @IBOutlet weak var nextButton: UIButton!
     

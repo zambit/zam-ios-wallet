@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NewPasswordViewController : UIViewController {
+class NewPasswordViewController : KeyboardViewController {
     
     // events
     var onNewPassword: ((String)->Void)?

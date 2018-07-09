@@ -16,6 +16,7 @@
 		8CF1DE4720F37B5E0036F986 /* SMSConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF1DE4620F37B5E0036F986 /* SMSConfirmationViewController.swift */; };
 		8CF1DE4920F3A0BB0036F986 /* PasswordRecoveryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF1DE4820F3A0BB0036F986 /* PasswordRecoveryViewController.swift */; };
 		8CF1DE4B20F3AD210036F986 /* NewPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF1DE4A20F3AD210036F986 /* NewPasswordViewController.swift */; };
+		8CF1DE4D20F3BDB90036F986 /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF1DE4C20F3BDB90036F986 /* KeyboardViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		8CF1DE4620F37B5E0036F986 /* SMSConfirmationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMSConfirmationViewController.swift; sourceTree = "<group>"; };
 		8CF1DE4820F3A0BB0036F986 /* PasswordRecoveryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordRecoveryViewController.swift; sourceTree = "<group>"; };
 		8CF1DE4A20F3AD210036F986 /* NewPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPasswordViewController.swift; sourceTree = "<group>"; };
+		8CF1DE4C20F3BDB90036F986 /* KeyboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,7 +48,7 @@
 		8C34615E20EF8FA700746724 = {
 			isa = PBXGroup;
 			children = (
-				8CF1DE4420EFB1A70036F986 /* HorizontalScrollView.swift */,
+				8CF1DE4E20F3BFC30036F986 /* Base */,
 				8CF1DE4320EF9D170036F986 /* Screens */,
 				8C34616920EF8FA700746724 /* wallet */,
 				8C34616820EF8FA700746724 /* Products */,
@@ -82,6 +84,15 @@
 				8CF1DE4A20F3AD210036F986 /* NewPasswordViewController.swift */,
 			);
 			path = Screens;
+			sourceTree = "<group>";
+		};
+		8CF1DE4E20F3BFC30036F986 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				8CF1DE4C20F3BDB90036F986 /* KeyboardViewController.swift */,
+				8CF1DE4420EFB1A70036F986 /* HorizontalScrollView.swift */,
+			);
+			path = Base;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -159,6 +170,7 @@
 				8CF1DE4720F37B5E0036F986 /* SMSConfirmationViewController.swift in Sources */,
 				8CF1DE4B20F3AD210036F986 /* NewPasswordViewController.swift in Sources */,
 				8CF1DE4520EFB1A70036F986 /* HorizontalScrollView.swift in Sources */,
+				8CF1DE4D20F3BDB90036F986 /* KeyboardViewController.swift in Sources */,
 				8CF1DE4920F3A0BB0036F986 /* PasswordRecoveryViewController.swift in Sources */,
 				8C34616B20EF8FA700746724 /* AppDelegate.swift in Sources */,
 			);
