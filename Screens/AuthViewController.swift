@@ -64,6 +64,7 @@ class AuthViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
         if let target = segue.destination as? SMSConfirmationViewController {
             switch(mode) {
             case .registration:
