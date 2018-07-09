@@ -59,6 +59,9 @@ class AuthViewController: UIViewController {
     private func openSMSConfirmationScreen() {
         self.performSegue(withIdentifier: "to_sms_confirm", sender: self)
     }
+    private func openPasswordRecoveryScreen() {
+        self.performSegue(withIdentifier: "to_pwd_recovery", sender: self)
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let target = segue.destination as? SMSConfirmationViewController {
@@ -96,5 +99,10 @@ class AuthViewController: UIViewController {
         } else {
             setLoginMode()
         }
+    }
+    
+    // MARK: login view connection
+    @IBAction func onPasswordRecoveryButton(_ sender: Any) {
+        openPasswordRecoveryScreen()
     }
 }
