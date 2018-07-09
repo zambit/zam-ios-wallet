@@ -11,10 +11,13 @@ import UIKit
 class AuthViewController: UIViewController {
     @IBOutlet var welcome_screen_0: UIView!
     @IBOutlet var welcome_screen_1: UIView!
+    @IBOutlet var registration_screen: UIView!
     
     @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var registrationButton: UIButton!
     @IBOutlet weak var scrollView: HorizontalScrollView!
+    
+    var registrationScreenActive = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,9 +26,12 @@ class AuthViewController: UIViewController {
         registrationButton.layer.cornerRadius = 5
         registrationButton.layer.masksToBounds = false
         //
-        scrollView.pages = [welcome_screen_0, welcome_screen_1]
-        scrollView.pageSelected = { [weak self] page in
-            self?.pageControl.currentPage = page
+        scrollView.pages = [welcome_screen_0, welcome_screen_1, registration_screen]
+        scrollView.onPageSelected = { [weak self] page in
+            if let me = self {
+                me.pageControl.currentPage = page
+                me.registrationScreenActive = page == me.scrollView.pages.count - 1
+            }
         }
         //
         pageControl.numberOfPages = scrollView.pages.count
@@ -38,6 +44,11 @@ class AuthViewController: UIViewController {
         self.scrollView.select(page: sender.currentPage)
     }
     @IBAction func onRegistrationButton(_ sender: Any) {
+        if registrationScreenActive {
+            print("perform registration and sms auth")
+        } else {
+            self.scrollView.select(page: scrollView.pages.count - 1)
+        }
     }
     
     @IBAction func onLoginButton(_ sender: Any) {

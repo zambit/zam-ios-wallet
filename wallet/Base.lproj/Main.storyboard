@@ -76,6 +76,7 @@
                     <connections>
                         <outlet property="pageControl" destination="ps4-su-MEH" id="zgE-Mc-Yph"/>
                         <outlet property="registrationButton" destination="jg0-ut-fyW" id="j9C-jT-s79"/>
+                        <outlet property="registration_screen" destination="aD6-aJ-W1T" id="9Ku-s8-u9n"/>
                         <outlet property="scrollView" destination="e0v-eG-qM0" id="OvN-ln-EqF"/>
                         <outlet property="welcome_screen_0" destination="Cck-E7-i4W" id="pKP-2M-aEH"/>
                         <outlet property="welcome_screen_1" destination="T3y-zR-VHM" id="AJh-XL-I6z"/>
@@ -117,6 +118,77 @@
                         <constraint firstItem="9v7-bG-PqS" firstAttribute="centerX" secondItem="T3y-zR-VHM" secondAttribute="centerX" id="f6a-wt-r9Y"/>
                     </constraints>
                     <viewLayoutGuide key="safeArea" id="9QR-5g-neD"/>
+                </view>
+                <view contentMode="scaleToFill" id="aD6-aJ-W1T" userLabel="Registration Screen">
+                    <rect key="frame" x="0.0" y="0.0" width="324" height="351"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Регистрация" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Ot-r7-ZGe">
+                            <rect key="frame" x="110.5" y="50" width="103" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Телефон" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bzc-xM-3OO">
+                            <rect key="frame" x="60" y="101" width="254" height="30"/>
+                            <nil key="textColor"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="+44" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sTP-HI-Pyj">
+                            <rect key="frame" x="10" y="101" width="45" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="45" id="k0c-Nh-Y69"/>
+                            </constraints>
+                            <nil key="textColor"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Пароль" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Kmq-ob-LVe">
+                            <rect key="frame" x="10" y="141" width="304" height="30"/>
+                            <nil key="textColor"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Пароль ещё раз" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tHp-lu-uu8">
+                            <rect key="frame" x="10" y="181" width="304" height="30"/>
+                            <nil key="textColor"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9wm-Q7-Hqj">
+                            <rect key="frame" x="10" y="221" width="51" height="31"/>
+                        </switch>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Check me out" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XMP-oe-cKM">
+                            <rect key="frame" x="69" y="226" width="245" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="XMP-oe-cKM" firstAttribute="centerY" secondItem="9wm-Q7-Hqj" secondAttribute="centerY" id="0Pb-Yv-ZeG"/>
+                        <constraint firstItem="Kmq-ob-LVe" firstAttribute="leading" secondItem="nek-cq-ce1" secondAttribute="leading" constant="10" id="24b-cx-IBU"/>
+                        <constraint firstItem="bzc-xM-3OO" firstAttribute="top" secondItem="8Ot-r7-ZGe" secondAttribute="bottom" constant="30" id="48T-sS-Bld"/>
+                        <constraint firstItem="XMP-oe-cKM" firstAttribute="leading" secondItem="9wm-Q7-Hqj" secondAttribute="trailing" constant="10" id="4Bu-DX-4C0"/>
+                        <constraint firstItem="sTP-HI-Pyj" firstAttribute="leading" secondItem="nek-cq-ce1" secondAttribute="leading" constant="10" id="5kQ-QD-Jhp"/>
+                        <constraint firstItem="tHp-lu-uu8" firstAttribute="top" secondItem="Kmq-ob-LVe" secondAttribute="bottom" constant="10" id="8bY-jT-6Af"/>
+                        <constraint firstItem="bzc-xM-3OO" firstAttribute="leading" secondItem="sTP-HI-Pyj" secondAttribute="trailing" constant="5" id="KSn-l4-FaV"/>
+                        <constraint firstItem="8Ot-r7-ZGe" firstAttribute="top" secondItem="nek-cq-ce1" secondAttribute="top" constant="50" id="Lh7-Yb-PGl"/>
+                        <constraint firstItem="XMP-oe-cKM" firstAttribute="leading" secondItem="9wm-Q7-Hqj" secondAttribute="trailing" constant="10" id="MYk-Tg-Y4x"/>
+                        <constraint firstItem="9wm-Q7-Hqj" firstAttribute="leading" secondItem="nek-cq-ce1" secondAttribute="leading" constant="10" id="PzN-Jc-bol"/>
+                        <constraint firstItem="9wm-Q7-Hqj" firstAttribute="top" secondItem="tHp-lu-uu8" secondAttribute="bottom" constant="10" id="ViU-jq-JR5"/>
+                        <constraint firstItem="nek-cq-ce1" firstAttribute="trailing" secondItem="tHp-lu-uu8" secondAttribute="trailing" constant="10" id="aGw-T7-OQr"/>
+                        <constraint firstItem="8Ot-r7-ZGe" firstAttribute="centerX" secondItem="aD6-aJ-W1T" secondAttribute="centerX" id="dSG-1c-D48"/>
+                        <constraint firstItem="Kmq-ob-LVe" firstAttribute="top" secondItem="bzc-xM-3OO" secondAttribute="bottom" constant="10" id="f06-y9-UQ6"/>
+                        <constraint firstItem="nek-cq-ce1" firstAttribute="trailing" secondItem="XMP-oe-cKM" secondAttribute="trailing" constant="10" id="fB9-ss-A0U"/>
+                        <constraint firstItem="nek-cq-ce1" firstAttribute="trailing" secondItem="Kmq-ob-LVe" secondAttribute="trailing" constant="10" id="gCI-QW-Acl"/>
+                        <constraint firstItem="nek-cq-ce1" firstAttribute="trailing" secondItem="bzc-xM-3OO" secondAttribute="trailing" constant="10" id="iE6-n6-nTT"/>
+                        <constraint firstItem="tHp-lu-uu8" firstAttribute="leading" secondItem="nek-cq-ce1" secondAttribute="leading" constant="10" id="kC9-Pz-QMi"/>
+                        <constraint firstItem="bzc-xM-3OO" firstAttribute="centerY" secondItem="sTP-HI-Pyj" secondAttribute="centerY" id="mnQ-HK-0eU"/>
+                    </constraints>
+                    <viewLayoutGuide key="safeArea" id="nek-cq-ce1"/>
                 </view>
             </objects>
             <point key="canvasLocation" x="32.799999999999997" y="31.934032983508249"/>
