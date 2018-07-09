@@ -8,7 +8,12 @@
 
 import UIKit
 
-class SMSConfirmationViewController : UIViewController {
+class SMSConfirmationViewController : UIViewController, UITextFieldDelegate {
+    
+    // events
+    var codeEntered: ((String)->Void)?
+    //
+    @IBOutlet weak var smsTextField: UITextField!
     
     // confirmation type caption
     public var topTitle: String = ""
@@ -23,6 +28,7 @@ class SMSConfirmationViewController : UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         captionLabel.text = topTitle
+        smsTextField.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -53,5 +59,12 @@ class SMSConfirmationViewController : UIViewController {
     
     @IBAction func onCloseButton(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
+    }
+    // MARK: UITextFieldDelegate
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if let code = textField.text {
+            self.codeEntered?(code)
+        }
+        return true
     }
 }

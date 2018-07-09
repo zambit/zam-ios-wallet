@@ -23,8 +23,25 @@ class PasswordRecoveryViewController : UIViewController {
         super.prepare(for: segue, sender: sender)
         if let target = segue.destination as? SMSConfirmationViewController {
             target.topTitle = "Подтвердите восстановление"
+            target.codeEntered = { [weak self, weak target] code in
+                print(code)
+                // if code isOk
+                target?.dismiss(animated: false) {
+                    self?.performSegue(withIdentifier: "to_new_password", sender: self)
+                }
+        
+            }
+        }
+        else if let target = segue.destination as? NewPasswordViewController {
+            target.onNewPassword = { [weak self, weak target] password in
+                print("we have a new password: \(password)")
+                target?.dismiss(animated: false) {
+                    self?.dismiss(animated: true, completion: nil)
+                }
+            }
         }
     }
+
     @IBAction func onNextButton(_ sender: Any) {
         self.performSegue(withIdentifier: "to_pwd_sms_confirm", sender: self)
     }

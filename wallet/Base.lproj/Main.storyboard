@@ -82,7 +82,7 @@
                         <outlet property="welcome_screen_0" destination="Cck-E7-i4W" id="pKP-2M-aEH"/>
                         <outlet property="welcome_screen_1" destination="T3y-zR-VHM" id="AJh-XL-I6z"/>
                         <segue destination="u4b-mW-zRC" kind="presentation" identifier="to_sms_confirm" id="uEk-kY-feu"/>
-                        <segue destination="eFc-qx-BcN" kind="show" identifier="to_pwd_recovery" id="HH3-cI-HzN"/>
+                        <segue destination="eFc-qx-BcN" kind="presentation" identifier="to_pwd_recovery" id="HH3-cI-HzN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -317,11 +317,83 @@
                     <connections>
                         <outlet property="nextButton" destination="RPR-7H-Cxz" id="NKE-vz-HSh"/>
                         <segue destination="u4b-mW-zRC" kind="presentation" identifier="to_pwd_sms_confirm" id="5Qi-rf-D4S"/>
+                        <segue destination="VZX-um-L0z" kind="show" identifier="to_new_password" id="OJb-lH-yjN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PbS-9m-54p" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="33" y="781"/>
+        </scene>
+        <!--New Password-->
+        <scene sceneID="k2t-FX-tYl">
+            <objects>
+                <viewController id="VZX-um-L0z" userLabel="New Password" customClass="NewPasswordViewController" customModule="wallet" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="96U-ID-VhN">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Введите новый пароль" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rLj-9D-Qog">
+                                <rect key="frame" x="20" y="170" width="335" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Пароль" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EUY-fA-qCX">
+                                <rect key="frame" x="20" y="214" width="335" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="hrH-2Y-cgG"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Пароль ещё раз" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="579-ft-XFR">
+                                <rect key="frame" x="20" y="264" width="335" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="d9g-gr-1Ld"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AQA-1y-VrO">
+                                <rect key="frame" x="30" y="542" width="315" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="c6V-hF-WiQ"/>
+                                </constraints>
+                                <state key="normal" title="Cool">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="onCoolButton:" destination="VZX-um-L0z" eventType="touchUpInside" id="G1q-Od-UJZ"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="579-ft-XFR" firstAttribute="top" secondItem="EUY-fA-qCX" secondAttribute="bottom" constant="10" id="4VV-bl-vQP"/>
+                            <constraint firstItem="hTI-n1-6zw" firstAttribute="trailing" secondItem="rLj-9D-Qog" secondAttribute="trailing" constant="20" id="A8t-SE-UO5"/>
+                            <constraint firstItem="rLj-9D-Qog" firstAttribute="top" secondItem="hTI-n1-6zw" secondAttribute="top" constant="150" id="ERX-X1-OxL"/>
+                            <constraint firstItem="EUY-fA-qCX" firstAttribute="leading" secondItem="hTI-n1-6zw" secondAttribute="leading" constant="20" id="P7l-ZH-vte"/>
+                            <constraint firstItem="EUY-fA-qCX" firstAttribute="centerX" secondItem="96U-ID-VhN" secondAttribute="centerX" id="SJd-62-VuO"/>
+                            <constraint firstItem="AQA-1y-VrO" firstAttribute="leading" secondItem="hTI-n1-6zw" secondAttribute="leading" constant="30" id="Vi5-il-HBw"/>
+                            <constraint firstItem="hTI-n1-6zw" firstAttribute="trailing" secondItem="EUY-fA-qCX" secondAttribute="trailing" constant="20" id="Za7-wN-H5u"/>
+                            <constraint firstItem="rLj-9D-Qog" firstAttribute="leading" secondItem="hTI-n1-6zw" secondAttribute="leading" constant="20" id="d3x-5F-ukM"/>
+                            <constraint firstItem="EUY-fA-qCX" firstAttribute="top" secondItem="rLj-9D-Qog" secondAttribute="bottom" constant="20" id="gML-1g-zqN"/>
+                            <constraint firstItem="hTI-n1-6zw" firstAttribute="bottom" secondItem="AQA-1y-VrO" secondAttribute="bottom" constant="75" id="m4d-Lg-cXd"/>
+                            <constraint firstItem="579-ft-XFR" firstAttribute="leading" secondItem="hTI-n1-6zw" secondAttribute="leading" constant="20" id="pxL-9I-4Dn"/>
+                            <constraint firstItem="hTI-n1-6zw" firstAttribute="trailing" secondItem="AQA-1y-VrO" secondAttribute="trailing" constant="30" id="qsk-VF-Yap"/>
+                            <constraint firstItem="hTI-n1-6zw" firstAttribute="trailing" secondItem="579-ft-XFR" secondAttribute="trailing" constant="20" id="thw-6C-mO2"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="hTI-n1-6zw"/>
+                    </view>
+                    <connections>
+                        <outlet property="coolButton" destination="AQA-1y-VrO" id="evc-lr-9ev"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nsP-BB-Wr0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="830" y="780"/>
         </scene>
         <!--SMS Confirmation-->
         <scene sceneID="iOx-Nk-LhO">
@@ -388,6 +460,7 @@
                     <connections>
                         <outlet property="captionLabel" destination="ExD-PP-jwQ" id="kQd-5F-S6u"/>
                         <outlet property="resendButton" destination="0kl-EO-fWx" id="LSO-KN-hJT"/>
+                        <outlet property="smsTextField" destination="tjq-XT-XKC" id="3sp-d1-yxs"/>
                         <outlet property="timerLabel" destination="edu-8A-91U" id="GSO-ea-3AN"/>
                     </connections>
                 </viewController>
