@@ -22,7 +22,7 @@ class HorizontalScrollView: UIScrollView, UIScrollViewDelegate {
         delegate = self
         showsHorizontalScrollIndicator = false
         bounces = false
-        self.decelerationRate = 0
+        decelerationRate = 0
     }
     
     var pages: [UIView] = [] {
@@ -37,6 +37,7 @@ class HorizontalScrollView: UIScrollView, UIScrollViewDelegate {
             }
         }
     }
+    
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         self.scrollToBigger()
     }

@@ -9,11 +9,21 @@
 import UIKit
 
 class SMSConfirmationViewController : UIViewController {
+    
+    // confirmation type caption
+    public var topTitle: String = ""
+    
+    @IBOutlet weak var captionLabel: UILabel!
     @IBOutlet weak var timerLabel: UILabel!
     @IBOutlet weak var resendButton: UIButton!
     
     var seconds: Int = 11
     var timer: Timer?
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        captionLabel.text = topTitle
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

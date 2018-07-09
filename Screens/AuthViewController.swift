@@ -60,6 +60,19 @@ class AuthViewController: UIViewController {
         self.performSegue(withIdentifier: "to_sms_confirm", sender: self)
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let target = segue.destination as? SMSConfirmationViewController {
+            switch(mode) {
+            case .registration:
+                target.topTitle = "Подтверждение регистрации"
+            case .login:
+                target.topTitle = "Подтверждение входа"
+            default:
+                break
+            }
+        }
+    }
+    
     @IBAction func onPageControl(_ sender: UIPageControl) {
         self.scrollView.select(page: sender.currentPage)
     }
@@ -76,6 +89,12 @@ class AuthViewController: UIViewController {
     }
     
     @IBAction func onLoginButton(_ sender: Any) {
-        setLoginMode()
+        if mode == .login {
+            // perform login request
+            // and show the sms code view
+            self.openSMSConfirmationScreen()
+        } else {
+            setLoginMode()
+        }
     }
 }

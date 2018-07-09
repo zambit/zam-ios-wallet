@@ -306,6 +306,7 @@
                         <viewLayoutGuide key="safeArea" id="kFe-6N-7aB"/>
                     </view>
                     <connections>
+                        <outlet property="captionLabel" destination="ExD-PP-jwQ" id="kQd-5F-S6u"/>
                         <outlet property="resendButton" destination="0kl-EO-fWx" id="LSO-KN-hJT"/>
                         <outlet property="timerLabel" destination="edu-8A-91U" id="GSO-ea-3AN"/>
                     </connections>
