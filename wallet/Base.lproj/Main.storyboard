@@ -80,6 +80,7 @@
                         <outlet property="scrollView" destination="e0v-eG-qM0" id="OvN-ln-EqF"/>
                         <outlet property="welcome_screen_0" destination="Cck-E7-i4W" id="pKP-2M-aEH"/>
                         <outlet property="welcome_screen_1" destination="T3y-zR-VHM" id="AJh-XL-I6z"/>
+                        <segue destination="u4b-mW-zRC" kind="presentation" identifier="to_sms_confirm" id="uEk-kY-feu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -192,6 +193,77 @@
                 </view>
             </objects>
             <point key="canvasLocation" x="32.799999999999997" y="31.934032983508249"/>
+        </scene>
+        <!--SMS confirmation-->
+        <scene sceneID="iOx-Nk-LhO">
+            <objects>
+                <viewController id="u4b-mW-zRC" userLabel="SMS confirmation" customClass="SMSConfirmationViewController" customModule="wallet" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Vxw-Ds-5bN">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Подтверждение регистрации" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ExD-PP-jwQ">
+                                <rect key="frame" x="52" y="170" width="272" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Код из СМС" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tjq-XT-XKC">
+                                <rect key="frame" x="20" y="214" width="335" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="dpf-n6-QqZ"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="edu-8A-91U">
+                                <rect key="frame" x="171" y="274" width="33.5" height="23.5"/>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0kl-EO-fWx">
+                                <rect key="frame" x="109" y="327.5" width="156" height="33"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" title="Отправить ещё раз">
+                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cgl-EL-PJg">
+                                <rect key="frame" x="172" y="40" width="30" height="30"/>
+                                <state key="normal" title="x">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="onCloseButton:" destination="u4b-mW-zRC" eventType="touchUpInside" id="TjL-gB-sO1"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="ExD-PP-jwQ" firstAttribute="centerX" secondItem="Vxw-Ds-5bN" secondAttribute="centerX" id="KSp-aL-6zZ"/>
+                            <constraint firstItem="ExD-PP-jwQ" firstAttribute="top" secondItem="kFe-6N-7aB" secondAttribute="top" constant="150" id="NH6-08-xyU"/>
+                            <constraint firstItem="0kl-EO-fWx" firstAttribute="top" secondItem="edu-8A-91U" secondAttribute="bottom" constant="30" id="VG6-SE-l9X"/>
+                            <constraint firstItem="kFe-6N-7aB" firstAttribute="trailing" secondItem="tjq-XT-XKC" secondAttribute="trailing" constant="20" id="XN4-BF-pJd"/>
+                            <constraint firstItem="edu-8A-91U" firstAttribute="centerX" secondItem="Vxw-Ds-5bN" secondAttribute="centerX" id="XNb-cf-JTv"/>
+                            <constraint firstItem="tjq-XT-XKC" firstAttribute="top" secondItem="ExD-PP-jwQ" secondAttribute="bottom" constant="20" id="aCo-8y-v0S"/>
+                            <constraint firstItem="cgl-EL-PJg" firstAttribute="top" secondItem="kFe-6N-7aB" secondAttribute="top" constant="20" id="cpV-mh-hyd"/>
+                            <constraint firstItem="tjq-XT-XKC" firstAttribute="leading" secondItem="kFe-6N-7aB" secondAttribute="leading" constant="20" id="daO-at-azu"/>
+                            <constraint firstItem="edu-8A-91U" firstAttribute="top" secondItem="tjq-XT-XKC" secondAttribute="bottom" constant="20" id="hYN-3N-wIo"/>
+                            <constraint firstItem="0kl-EO-fWx" firstAttribute="centerX" secondItem="Vxw-Ds-5bN" secondAttribute="centerX" id="qIi-ev-Nbg"/>
+                            <constraint firstItem="cgl-EL-PJg" firstAttribute="centerX" secondItem="Vxw-Ds-5bN" secondAttribute="centerX" id="xab-QT-niD"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="kFe-6N-7aB"/>
+                    </view>
+                    <connections>
+                        <outlet property="resendButton" destination="0kl-EO-fWx" id="LSO-KN-hJT"/>
+                        <outlet property="timerLabel" destination="edu-8A-91U" id="GSO-ea-3AN"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="U1k-R6-PWZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1414" y="-93"/>
         </scene>
     </scenes>
 </document>

@@ -38,7 +38,9 @@ class AuthViewController: UIViewController {
         
     }
     
-    
+    private func openSMSConfirmationScreen() {
+        self.performSegue(withIdentifier: "to_sms_confirm", sender: self)
+    }
     
     @IBAction func onPageControl(_ sender: UIPageControl) {
         self.scrollView.select(page: sender.currentPage)
@@ -46,6 +48,7 @@ class AuthViewController: UIViewController {
     @IBAction func onRegistrationButton(_ sender: Any) {
         if registrationScreenActive {
             print("perform registration and sms auth")
+            self.openSMSConfirmationScreen()
         } else {
             self.scrollView.select(page: scrollView.pages.count - 1)
         }
