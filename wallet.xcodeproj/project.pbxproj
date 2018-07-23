@@ -10,6 +10,7 @@
 		8C0918FA2105F75200703224 /* Tutorial.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C0918F92105F75200703224 /* Tutorial.storyboard */; };
 		8C0918FC2105F75900703224 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C0918FB2105F75900703224 /* Login.storyboard */; };
 		8C0918FE2105F76200703224 /* Registration.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C0918FD2105F76200703224 /* Registration.storyboard */; };
+		8C091900210601F300703224 /* ForgotPassword.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C0918FF210601F300703224 /* ForgotPassword.storyboard */; };
 		8C34616B20EF8FA700746724 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C34616A20EF8FA700746724 /* AppDelegate.swift */; };
 		8C34617020EF8FA700746724 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C34616E20EF8FA700746724 /* Main.storyboard */; };
 		8C34617220EF8FA900746724 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8C34617120EF8FA900746724 /* Assets.xcassets */; };
@@ -26,6 +27,7 @@
 		8C0918F92105F75200703224 /* Tutorial.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Tutorial.storyboard; sourceTree = "<group>"; };
 		8C0918FB2105F75900703224 /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		8C0918FD2105F76200703224 /* Registration.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Registration.storyboard; sourceTree = "<group>"; };
+		8C0918FF210601F300703224 /* ForgotPassword.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ForgotPassword.storyboard; sourceTree = "<group>"; };
 		8C34616720EF8FA700746724 /* wallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = wallet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C34616A20EF8FA700746724 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8C34616F20EF8FA700746724 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -79,6 +81,7 @@
 				8C0918F92105F75200703224 /* Tutorial.storyboard */,
 				8C0918FB2105F75900703224 /* Login.storyboard */,
 				8C0918FD2105F76200703224 /* Registration.storyboard */,
+				8C0918FF210601F300703224 /* ForgotPassword.storyboard */,
 				8C34617620EF8FA900746724 /* Info.plist */,
 			);
 			path = wallet;
@@ -167,6 +170,7 @@
 				8C34617220EF8FA900746724 /* Assets.xcassets in Resources */,
 				8C0918FA2105F75200703224 /* Tutorial.storyboard in Resources */,
 				8C0918FC2105F75900703224 /* Login.storyboard in Resources */,
+				8C091900210601F300703224 /* ForgotPassword.storyboard in Resources */,
 				8C34617020EF8FA700746724 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
