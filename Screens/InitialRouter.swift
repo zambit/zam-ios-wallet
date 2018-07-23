@@ -16,8 +16,8 @@ struct InitialRouter: Router {
         case onboarding
     }
 
-    func route(to point: Point, from context: UIViewController) {
-        
+    func route(to point: InitialRouter.Point, from context: UIViewController, parameters: [Any]?) {
+
     }
 
 }
