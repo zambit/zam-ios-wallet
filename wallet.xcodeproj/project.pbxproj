@@ -19,6 +19,12 @@
 		8C09192D21061F3600703224 /* ControllerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C09192C21061F3600703224 /* ControllerHelper.swift */; };
 		8C091934210620C800703224 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C091933210620C800703224 /* OnboardingViewController.swift */; };
 		8C091936210621D800703224 /* OnboardingViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C091935210621D800703224 /* OnboardingViewPresenter.swift */; };
+		8C091938210622AA00703224 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C091937210622AA00703224 /* Request.swift */; };
+		8C09193B210623F200703224 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C09193A210623F200703224 /* Environment.swift */; };
+		8C09193D2106243600703224 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C09193C2106243600703224 /* Response.swift */; };
+		8C09193F210625E500703224 /* Provider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C09193E210625E500703224 /* Provider.swift */; };
+		8C0919412106264200703224 /* Dispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0919402106264200703224 /* Dispatcher.swift */; };
+		8C0919432106268900703224 /* HTTPDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0919422106268900703224 /* HTTPDispatcher.swift */; };
 		8C34616B20EF8FA700746724 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C34616A20EF8FA700746724 /* AppDelegate.swift */; };
 		8C34617020EF8FA700746724 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C34616E20EF8FA700746724 /* Main.storyboard */; };
 		8C34617220EF8FA900746724 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8C34617120EF8FA900746724 /* Assets.xcassets */; };
@@ -44,6 +50,12 @@
 		8C09192C21061F3600703224 /* ControllerHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControllerHelper.swift; sourceTree = "<group>"; };
 		8C091933210620C800703224 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		8C091935210621D800703224 /* OnboardingViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewPresenter.swift; sourceTree = "<group>"; };
+		8C091937210622AA00703224 /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
+		8C09193A210623F200703224 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
+		8C09193C2106243600703224 /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
+		8C09193E210625E500703224 /* Provider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Provider.swift; sourceTree = "<group>"; };
+		8C0919402106264200703224 /* Dispatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dispatcher.swift; sourceTree = "<group>"; };
+		8C0919422106268900703224 /* HTTPDispatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPDispatcher.swift; sourceTree = "<group>"; };
 		8C34616720EF8FA700746724 /* wallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = wallet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C34616A20EF8FA700746724 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8C34616F20EF8FA700746724 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -102,10 +114,32 @@
 			path = Controllers;
 			sourceTree = "<group>";
 		};
+		8C091939210622AF00703224 /* NetworkLayer */ = {
+			isa = PBXGroup;
+			children = (
+				8C091937210622AA00703224 /* Request.swift */,
+				8C09193A210623F200703224 /* Environment.swift */,
+				8C09193C2106243600703224 /* Response.swift */,
+				8C09193E210625E500703224 /* Provider.swift */,
+				8C0919402106264200703224 /* Dispatcher.swift */,
+				8C0919442106284900703224 /* HTTP */,
+			);
+			path = NetworkLayer;
+			sourceTree = "<group>";
+		};
+		8C0919442106284900703224 /* HTTP */ = {
+			isa = PBXGroup;
+			children = (
+				8C0919422106268900703224 /* HTTPDispatcher.swift */,
+			);
+			path = HTTP;
+			sourceTree = "<group>";
+		};
 		8C34615E20EF8FA700746724 = {
 			isa = PBXGroup;
 			children = (
 				8C09192B21061ED800703224 /* Helpers */,
+				8C091939210622AF00703224 /* NetworkLayer */,
 				8C09193021061F9300703224 /* Coordinators */,
 				8C0919322106206100703224 /* Controllers */,
 				8C0919312106205600703224 /* View */,
@@ -239,20 +273,26 @@
 			buildActionMask = 2147483647;
 			files = (
 				8C091906210605AF00703224 /* Router.swift in Sources */,
+				8C091938210622AA00703224 /* Request.swift in Sources */,
 				8C091936210621D800703224 /* OnboardingViewPresenter.swift in Sources */,
 				8CF1DE4220EF98160036F986 /* AuthViewController.swift in Sources */,
+				8C09193D2106243600703224 /* Response.swift in Sources */,
 				8C091934210620C800703224 /* OnboardingViewController.swift in Sources */,
 				8CF1DE4720F37B5E0036F986 /* SMSConfirmationViewController.swift in Sources */,
 				8C09192D21061F3600703224 /* ControllerHelper.swift in Sources */,
 				8C091908210605FA00703224 /* InitialRouter.swift in Sources */,
 				8CF1DE4B20F3AD210036F986 /* NewPasswordViewController.swift in Sources */,
+				8C09193F210625E500703224 /* Provider.swift in Sources */,
 				8C09190A2106068D00703224 /* OnboardingRouter.swift in Sources */,
 				8C09192621061C0600703224 /* Coordinator.swift in Sources */,
 				8CF1DE4520EFB1A70036F986 /* HorizontalScrollView.swift in Sources */,
+				8C0919412106264200703224 /* Dispatcher.swift in Sources */,
 				8CF1DE4D20F3BDB90036F986 /* KeyboardViewController.swift in Sources */,
 				8C09192821061C6000703224 /* RegistrationCoordinator.swift in Sources */,
 				8CF1DE4920F3A0BB0036F986 /* PasswordRecoveryViewController.swift in Sources */,
 				8C34616B20EF8FA700746724 /* AppDelegate.swift in Sources */,
+				8C09193B210623F200703224 /* Environment.swift in Sources */,
+				8C0919432106268900703224 /* HTTPDispatcher.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
