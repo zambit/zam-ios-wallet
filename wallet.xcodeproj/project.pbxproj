@@ -11,6 +11,14 @@
 		8C0918FC2105F75900703224 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C0918FB2105F75900703224 /* Login.storyboard */; };
 		8C0918FE2105F76200703224 /* Registration.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C0918FD2105F76200703224 /* Registration.storyboard */; };
 		8C091900210601F300703224 /* ForgotPassword.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C0918FF210601F300703224 /* ForgotPassword.storyboard */; };
+		8C091906210605AF00703224 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C091905210605AF00703224 /* Router.swift */; };
+		8C091908210605FA00703224 /* InitialRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C091907210605FA00703224 /* InitialRouter.swift */; };
+		8C09190A2106068D00703224 /* OnboardingRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0919092106068D00703224 /* OnboardingRouter.swift */; };
+		8C09192621061C0600703224 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C09192521061C0600703224 /* Coordinator.swift */; };
+		8C09192821061C6000703224 /* RegistrationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C09192721061C6000703224 /* RegistrationCoordinator.swift */; };
+		8C09192D21061F3600703224 /* ControllerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C09192C21061F3600703224 /* ControllerHelper.swift */; };
+		8C091934210620C800703224 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C091933210620C800703224 /* OnboardingViewController.swift */; };
+		8C091936210621D800703224 /* OnboardingViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C091935210621D800703224 /* OnboardingViewPresenter.swift */; };
 		8C34616B20EF8FA700746724 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C34616A20EF8FA700746724 /* AppDelegate.swift */; };
 		8C34617020EF8FA700746724 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C34616E20EF8FA700746724 /* Main.storyboard */; };
 		8C34617220EF8FA900746724 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8C34617120EF8FA900746724 /* Assets.xcassets */; };
@@ -28,6 +36,14 @@
 		8C0918FB2105F75900703224 /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		8C0918FD2105F76200703224 /* Registration.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Registration.storyboard; sourceTree = "<group>"; };
 		8C0918FF210601F300703224 /* ForgotPassword.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ForgotPassword.storyboard; sourceTree = "<group>"; };
+		8C091905210605AF00703224 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		8C091907210605FA00703224 /* InitialRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialRouter.swift; sourceTree = "<group>"; };
+		8C0919092106068D00703224 /* OnboardingRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingRouter.swift; sourceTree = "<group>"; };
+		8C09192521061C0600703224 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		8C09192721061C6000703224 /* RegistrationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationCoordinator.swift; sourceTree = "<group>"; };
+		8C09192C21061F3600703224 /* ControllerHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControllerHelper.swift; sourceTree = "<group>"; };
+		8C091933210620C800703224 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
+		8C091935210621D800703224 /* OnboardingViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewPresenter.swift; sourceTree = "<group>"; };
 		8C34616720EF8FA700746724 /* wallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = wallet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C34616A20EF8FA700746724 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8C34616F20EF8FA700746724 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -53,9 +69,46 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8C09192B21061ED800703224 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				8C09192C21061F3600703224 /* ControllerHelper.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		8C09193021061F9300703224 /* Coordinators */ = {
+			isa = PBXGroup;
+			children = (
+				8C09192521061C0600703224 /* Coordinator.swift */,
+				8C09192721061C6000703224 /* RegistrationCoordinator.swift */,
+			);
+			path = Coordinators;
+			sourceTree = "<group>";
+		};
+		8C0919312106205600703224 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8C0919322106206100703224 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				8C091935210621D800703224 /* OnboardingViewPresenter.swift */,
+				8C091933210620C800703224 /* OnboardingViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
 		8C34615E20EF8FA700746724 = {
 			isa = PBXGroup;
 			children = (
+				8C09192B21061ED800703224 /* Helpers */,
+				8C09193021061F9300703224 /* Coordinators */,
+				8C0919322106206100703224 /* Controllers */,
+				8C0919312106205600703224 /* View */,
 				8CF1DE4E20F3BFC30036F986 /* Base */,
 				8CF1DE4320EF9D170036F986 /* Screens */,
 				8C34616920EF8FA700746724 /* wallet */,
@@ -92,6 +145,9 @@
 			children = (
 				8CF1DE4120EF98160036F986 /* AuthViewController.swift */,
 				8CF1DE4620F37B5E0036F986 /* SMSConfirmationViewController.swift */,
+				8C091905210605AF00703224 /* Router.swift */,
+				8C091907210605FA00703224 /* InitialRouter.swift */,
+				8C0919092106068D00703224 /* OnboardingRouter.swift */,
 				8CF1DE4820F3A0BB0036F986 /* PasswordRecoveryViewController.swift */,
 				8CF1DE4A20F3AD210036F986 /* NewPasswordViewController.swift */,
 			);
@@ -182,11 +238,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C091906210605AF00703224 /* Router.swift in Sources */,
+				8C091936210621D800703224 /* OnboardingViewPresenter.swift in Sources */,
 				8CF1DE4220EF98160036F986 /* AuthViewController.swift in Sources */,
+				8C091934210620C800703224 /* OnboardingViewController.swift in Sources */,
 				8CF1DE4720F37B5E0036F986 /* SMSConfirmationViewController.swift in Sources */,
+				8C09192D21061F3600703224 /* ControllerHelper.swift in Sources */,
+				8C091908210605FA00703224 /* InitialRouter.swift in Sources */,
 				8CF1DE4B20F3AD210036F986 /* NewPasswordViewController.swift in Sources */,
+				8C09190A2106068D00703224 /* OnboardingRouter.swift in Sources */,
+				8C09192621061C0600703224 /* Coordinator.swift in Sources */,
 				8CF1DE4520EFB1A70036F986 /* HorizontalScrollView.swift in Sources */,
 				8CF1DE4D20F3BDB90036F986 /* KeyboardViewController.swift in Sources */,
+				8C09192821061C6000703224 /* RegistrationCoordinator.swift in Sources */,
 				8CF1DE4920F3A0BB0036F986 /* PasswordRecoveryViewController.swift in Sources */,
 				8C34616B20EF8FA700746724 /* AppDelegate.swift in Sources */,
 			);
