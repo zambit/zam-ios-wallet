@@ -13,9 +13,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
+    var api: SignupAPI?
+
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        api = SignupAPI(provider: SignupProvider(environment: WalletEnvironment(), dispatcher: HTTPDispatcher()))
+
+        print("start")
+        api?.sendVerificationCode(to: "79136653903").done {
+            print("success")
+        }
+        .catch { error in
+            print(error)
+        }
+
         return true
     }
 

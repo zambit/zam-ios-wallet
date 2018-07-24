@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		541C19581D5E40129C1757A8 /* Pods_wallet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9C98DC4F4721DB056807636 /* Pods_wallet.framework */; };
 		8C0918FA2105F75200703224 /* Tutorial.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C0918F92105F75200703224 /* Tutorial.storyboard */; };
 		8C0918FC2105F75900703224 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C0918FB2105F75900703224 /* Login.storyboard */; };
 		8C0918FE2105F76200703224 /* Registration.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C0918FD2105F76200703224 /* Registration.storyboard */; };
@@ -25,6 +26,18 @@
 		8C09193F210625E500703224 /* Provider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C09193E210625E500703224 /* Provider.swift */; };
 		8C0919412106264200703224 /* Dispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0919402106264200703224 /* Dispatcher.swift */; };
 		8C0919432106268900703224 /* HTTPDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0919422106268900703224 /* HTTPDispatcher.swift */; };
+		8C091949210714D800703224 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C091948210714D800703224 /* NetworkService.swift */; };
+		8C09194B210716C500703224 /* SignupRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C09194A210716C500703224 /* SignupRequest.swift */; };
+		8C09194D2107214300703224 /* WalletEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C09194C2107214300703224 /* WalletEnvironment.swift */; };
+		8C09194F2107225700703224 /* SignupProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C09194E2107225700703224 /* SignupProvider.swift */; };
+		8C0919512107234B00703224 /* SignupAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0919502107234B00703224 /* SignupAPI.swift */; };
+		8C0919532107320800703224 /* CodableFailure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0919522107320800703224 /* CodableFailure.swift */; };
+		8C0919562107362300703224 /* CodableSuccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0919552107362300703224 /* CodableSuccess.swift */; };
+		8C09195821073ECC00703224 /* CodableError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C09195721073ECC00703224 /* CodableError.swift */; };
+		8C09195C2107511200703224 /* JSONInitializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C09195B2107511200703224 /* JSONInitializable.swift */; };
+		8C09195F21076B5D00703224 /* RecoveryAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C09195E21076B5D00703224 /* RecoveryAPI.swift */; };
+		8C09196221076B7000703224 /* RecoveryProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C09196121076B7000703224 /* RecoveryProvider.swift */; };
+		8C09196421076B8200703224 /* RecoveryRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C09196321076B8200703224 /* RecoveryRequest.swift */; };
 		8C34616B20EF8FA700746724 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C34616A20EF8FA700746724 /* AppDelegate.swift */; };
 		8C34617020EF8FA700746724 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C34616E20EF8FA700746724 /* Main.storyboard */; };
 		8C34617220EF8FA900746724 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8C34617120EF8FA900746724 /* Assets.xcassets */; };
@@ -38,6 +51,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		42ABDBB88471C035425F5733 /* Pods-wallet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wallet.release.xcconfig"; path = "Pods/Target Support Files/Pods-wallet/Pods-wallet.release.xcconfig"; sourceTree = "<group>"; };
+		74C9F725CE2426EB7B82906E /* Pods-wallet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wallet.debug.xcconfig"; path = "Pods/Target Support Files/Pods-wallet/Pods-wallet.debug.xcconfig"; sourceTree = "<group>"; };
 		8C0918F92105F75200703224 /* Tutorial.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Tutorial.storyboard; sourceTree = "<group>"; };
 		8C0918FB2105F75900703224 /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		8C0918FD2105F76200703224 /* Registration.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Registration.storyboard; sourceTree = "<group>"; };
@@ -56,6 +71,18 @@
 		8C09193E210625E500703224 /* Provider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Provider.swift; sourceTree = "<group>"; };
 		8C0919402106264200703224 /* Dispatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dispatcher.swift; sourceTree = "<group>"; };
 		8C0919422106268900703224 /* HTTPDispatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPDispatcher.swift; sourceTree = "<group>"; };
+		8C091948210714D800703224 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		8C09194A210716C500703224 /* SignupRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupRequest.swift; sourceTree = "<group>"; };
+		8C09194C2107214300703224 /* WalletEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletEnvironment.swift; sourceTree = "<group>"; };
+		8C09194E2107225700703224 /* SignupProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupProvider.swift; sourceTree = "<group>"; };
+		8C0919502107234B00703224 /* SignupAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupAPI.swift; sourceTree = "<group>"; };
+		8C0919522107320800703224 /* CodableFailure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableFailure.swift; sourceTree = "<group>"; };
+		8C0919552107362300703224 /* CodableSuccess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableSuccess.swift; sourceTree = "<group>"; };
+		8C09195721073ECC00703224 /* CodableError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableError.swift; sourceTree = "<group>"; };
+		8C09195B2107511200703224 /* JSONInitializable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONInitializable.swift; sourceTree = "<group>"; };
+		8C09195E21076B5D00703224 /* RecoveryAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecoveryAPI.swift; sourceTree = "<group>"; };
+		8C09196121076B7000703224 /* RecoveryProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecoveryProvider.swift; sourceTree = "<group>"; };
+		8C09196321076B8200703224 /* RecoveryRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecoveryRequest.swift; sourceTree = "<group>"; };
 		8C34616720EF8FA700746724 /* wallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = wallet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C34616A20EF8FA700746724 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8C34616F20EF8FA700746724 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -68,6 +95,7 @@
 		8CF1DE4820F3A0BB0036F986 /* PasswordRecoveryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordRecoveryViewController.swift; sourceTree = "<group>"; };
 		8CF1DE4A20F3AD210036F986 /* NewPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPasswordViewController.swift; sourceTree = "<group>"; };
 		8CF1DE4C20F3BDB90036F986 /* KeyboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardViewController.swift; sourceTree = "<group>"; };
+		C9C98DC4F4721DB056807636 /* Pods_wallet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_wallet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +103,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				541C19581D5E40129C1757A8 /* Pods_wallet.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -117,11 +146,14 @@
 		8C091939210622AF00703224 /* NetworkLayer */ = {
 			isa = PBXGroup;
 			children = (
+				8C09195B2107511200703224 /* JSONInitializable.swift */,
 				8C091937210622AA00703224 /* Request.swift */,
 				8C09193A210623F200703224 /* Environment.swift */,
 				8C09193C2106243600703224 /* Response.swift */,
 				8C09193E210625E500703224 /* Provider.swift */,
 				8C0919402106264200703224 /* Dispatcher.swift */,
+				8C091948210714D800703224 /* NetworkService.swift */,
+				8C091947210714AA00703224 /* WalletAPI */,
 				8C0919442106284900703224 /* HTTP */,
 			);
 			path = NetworkLayer;
@@ -135,18 +167,54 @@
 			path = HTTP;
 			sourceTree = "<group>";
 		};
+		8C091947210714AA00703224 /* WalletAPI */ = {
+			isa = PBXGroup;
+			children = (
+				8C09194C2107214300703224 /* WalletEnvironment.swift */,
+				8C09196021076B6000703224 /* RecoveryAPI */,
+				8C09195D21076B0800703224 /* SignupAPI */,
+				8C0919542107347300703224 /* Codable */,
+			);
+			path = WalletAPI;
+			sourceTree = "<group>";
+		};
+		8C0919542107347300703224 /* Codable */ = {
+			isa = PBXGroup;
+			children = (
+				8C0919522107320800703224 /* CodableFailure.swift */,
+				8C0919552107362300703224 /* CodableSuccess.swift */,
+				8C09195721073ECC00703224 /* CodableError.swift */,
+			);
+			path = Codable;
+			sourceTree = "<group>";
+		};
+		8C09195D21076B0800703224 /* SignupAPI */ = {
+			isa = PBXGroup;
+			children = (
+				8C09194E2107225700703224 /* SignupProvider.swift */,
+				8C09194A210716C500703224 /* SignupRequest.swift */,
+				8C0919502107234B00703224 /* SignupAPI.swift */,
+			);
+			path = SignupAPI;
+			sourceTree = "<group>";
+		};
+		8C09196021076B6000703224 /* RecoveryAPI */ = {
+			isa = PBXGroup;
+			children = (
+				8C09196121076B7000703224 /* RecoveryProvider.swift */,
+				8C09196321076B8200703224 /* RecoveryRequest.swift */,
+				8C09195E21076B5D00703224 /* RecoveryAPI.swift */,
+			);
+			path = RecoveryAPI;
+			sourceTree = "<group>";
+		};
 		8C34615E20EF8FA700746724 = {
 			isa = PBXGroup;
 			children = (
-				8C09192B21061ED800703224 /* Helpers */,
-				8C091939210622AF00703224 /* NetworkLayer */,
-				8C09193021061F9300703224 /* Coordinators */,
-				8C0919322106206100703224 /* Controllers */,
-				8C0919312106205600703224 /* View */,
-				8CF1DE4E20F3BFC30036F986 /* Base */,
-				8CF1DE4320EF9D170036F986 /* Screens */,
 				8C34616920EF8FA700746724 /* wallet */,
 				8C34616820EF8FA700746724 /* Products */,
+				96F68B133DC137F5FC79CBFB /* Pods */,
+				A80FB99567D0B30071513DAF /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -161,6 +229,13 @@
 		8C34616920EF8FA700746724 /* wallet */ = {
 			isa = PBXGroup;
 			children = (
+				8C09192B21061ED800703224 /* Helpers */,
+				8C091939210622AF00703224 /* NetworkLayer */,
+				8C09193021061F9300703224 /* Coordinators */,
+				8C0919322106206100703224 /* Controllers */,
+				8C0919312106205600703224 /* View */,
+				8CF1DE4E20F3BFC30036F986 /* Base */,
+				8CF1DE4320EF9D170036F986 /* Screens */,
 				8C34616A20EF8FA700746724 /* AppDelegate.swift */,
 				8C34616E20EF8FA700746724 /* Main.storyboard */,
 				8C34617120EF8FA900746724 /* Assets.xcassets */,
@@ -197,6 +272,23 @@
 			path = Base;
 			sourceTree = "<group>";
 		};
+		96F68B133DC137F5FC79CBFB /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				74C9F725CE2426EB7B82906E /* Pods-wallet.debug.xcconfig */,
+				42ABDBB88471C035425F5733 /* Pods-wallet.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		A80FB99567D0B30071513DAF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C9C98DC4F4721DB056807636 /* Pods_wallet.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -204,9 +296,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8C34617920EF8FA900746724 /* Build configuration list for PBXNativeTarget "wallet" */;
 			buildPhases = (
+				1B67D123CB5B5B983AA999A1 /* [CP] Check Pods Manifest.lock */,
 				8C34616320EF8FA700746724 /* Sources */,
 				8C34616420EF8FA700746724 /* Frameworks */,
 				8C34616520EF8FA700746724 /* Resources */,
+				4C67692F34AE6F68E056DB05 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -267,30 +361,83 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		1B67D123CB5B5B983AA999A1 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-wallet-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4C67692F34AE6F68E056DB05 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-wallet/Pods-wallet-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-wallet/Pods-wallet-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		8C34616320EF8FA700746724 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C09196421076B8200703224 /* RecoveryRequest.swift in Sources */,
 				8C091906210605AF00703224 /* Router.swift in Sources */,
 				8C091938210622AA00703224 /* Request.swift in Sources */,
+				8C091949210714D800703224 /* NetworkService.swift in Sources */,
 				8C091936210621D800703224 /* OnboardingViewPresenter.swift in Sources */,
 				8CF1DE4220EF98160036F986 /* AuthViewController.swift in Sources */,
 				8C09193D2106243600703224 /* Response.swift in Sources */,
+				8C0919512107234B00703224 /* SignupAPI.swift in Sources */,
 				8C091934210620C800703224 /* OnboardingViewController.swift in Sources */,
 				8CF1DE4720F37B5E0036F986 /* SMSConfirmationViewController.swift in Sources */,
+				8C09194D2107214300703224 /* WalletEnvironment.swift in Sources */,
 				8C09192D21061F3600703224 /* ControllerHelper.swift in Sources */,
+				8C09196221076B7000703224 /* RecoveryProvider.swift in Sources */,
 				8C091908210605FA00703224 /* InitialRouter.swift in Sources */,
 				8CF1DE4B20F3AD210036F986 /* NewPasswordViewController.swift in Sources */,
 				8C09193F210625E500703224 /* Provider.swift in Sources */,
+				8C09194F2107225700703224 /* SignupProvider.swift in Sources */,
 				8C09190A2106068D00703224 /* OnboardingRouter.swift in Sources */,
 				8C09192621061C0600703224 /* Coordinator.swift in Sources */,
+				8C09195821073ECC00703224 /* CodableError.swift in Sources */,
 				8CF1DE4520EFB1A70036F986 /* HorizontalScrollView.swift in Sources */,
 				8C0919412106264200703224 /* Dispatcher.swift in Sources */,
 				8CF1DE4D20F3BDB90036F986 /* KeyboardViewController.swift in Sources */,
+				8C09195C2107511200703224 /* JSONInitializable.swift in Sources */,
 				8C09192821061C6000703224 /* RegistrationCoordinator.swift in Sources */,
 				8CF1DE4920F3A0BB0036F986 /* PasswordRecoveryViewController.swift in Sources */,
+				8C0919562107362300703224 /* CodableSuccess.swift in Sources */,
+				8C09195F21076B5D00703224 /* RecoveryAPI.swift in Sources */,
 				8C34616B20EF8FA700746724 /* AppDelegate.swift in Sources */,
+				8C09194B210716C500703224 /* SignupRequest.swift in Sources */,
+				8C0919532107320800703224 /* CodableFailure.swift in Sources */,
 				8C09193B210623F200703224 /* Environment.swift in Sources */,
 				8C0919432106268900703224 /* HTTPDispatcher.swift in Sources */,
 			);
@@ -434,6 +581,7 @@
 		};
 		8C34617A20EF8FA900746724 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 74C9F725CE2426EB7B82906E /* Pods-wallet.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -453,6 +601,7 @@
 		};
 		8C34617B20EF8FA900746724 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 42ABDBB88471C035425F5733 /* Pods-wallet.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

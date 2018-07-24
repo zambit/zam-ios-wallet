@@ -17,22 +17,6 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "wallet/NetworkLayer/Response.swift"
-            timestampString = "554134037.084417"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "33"
-            endingLineNumber = "33"
-            landmarkName = "toCodable()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "wallet/NetworkLayer/WalletAPI/SignupAPI.swift"
             timestampString = "554134037.084473"
             startingColumnNumber = "9223372036854775807"
@@ -78,16 +62,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "wallet/NetworkLayer/HTTP/HTTPDispatcher.swift"
-            timestampString = "554134037.0846159"
+            filePath = "wallet/NetworkLayer/WalletAPI/SignupAPI/SignupAPI.swift"
+            timestampString = "554137842.6726331"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "15"
-            endingLineNumber = "15"
-            landmarkName = "urlSession(_:didReceive:completionHandler:)"
+            startingLineNumber = "42"
+            endingLineNumber = "42"
+            landmarkName = "sendVerificationCode(to:additional:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
