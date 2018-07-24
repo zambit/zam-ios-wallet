@@ -1,0 +1,28 @@
+PODS:
+  - PromiseKit (6.3.4):
+    - PromiseKit/CorePromise (= 6.3.4)
+    - PromiseKit/Foundation (= 6.3.4)
+    - PromiseKit/UIKit (= 6.3.4)
+  - PromiseKit/CorePromise (6.3.4)
+  - PromiseKit/Foundation (6.3.4):
+    - PromiseKit/CorePromise
+  - PromiseKit/UIKit (6.3.4):
+    - PromiseKit/CorePromise
+  - SwiftyJSON (4.1.0)
+
+DEPENDENCIES:
+  - PromiseKit (~> 6.0)
+  - SwiftyJSON (~> 4.0)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - PromiseKit
+    - SwiftyJSON
+
+SPEC CHECKSUMS:
+  PromiseKit: e1425568123ec844a944c93f2bcb29d511d39cf5
+  SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
+
+PODFILE CHECKSUM: 175b64179e3f1bfe1d736a9ceebd9c6f19bed222
+
+COCOAPODS: 1.5.3
