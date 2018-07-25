@@ -8,6 +8,9 @@
 
 import Foundation
 
+/**
+ Protocol defines request with path, method, parameters and optional headers. Can be used implementing with enum object which cases are different requests uniting logically.
+ */
 protocol Request {
 
     var path: String { get }

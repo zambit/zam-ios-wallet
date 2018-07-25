@@ -8,6 +8,9 @@
 
 import Foundation
 
+/**
+ Enum provides universal object to handle server response and work with it.
+ */
 enum Response {
     case data(Data)
     case error(Error)
@@ -38,6 +41,15 @@ enum Response {
         }
     }
 
+    /**
+     Extracting Codable 'success' or 'failure' object from response.
+
+     Throws error if response can't be converted to provided types or if response object is '.error' (internal application error)
+
+     - parameters:
+        - success: Closure that calls if extracted object is Success object and provides this object
+        - failure: Closure that calls if extracted object is Failure object and provides this object
+     */
     func extractResult<Success: Codable, Failure: Codable>(success: (Success) -> Void, failure: (Failure) -> Void) throws {
         switch self {
         case .data(let data):

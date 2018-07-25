@@ -33,7 +33,6 @@
 		8C0919512107234B00703224 /* SignupAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0919502107234B00703224 /* SignupAPI.swift */; };
 		8C0919532107320800703224 /* CodableFailure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0919522107320800703224 /* CodableFailure.swift */; };
 		8C0919562107362300703224 /* CodableSuccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0919552107362300703224 /* CodableSuccess.swift */; };
-		8C09195821073ECC00703224 /* CodableError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C09195721073ECC00703224 /* CodableError.swift */; };
 		8C09195F21076B5D00703224 /* RecoveryAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C09195E21076B5D00703224 /* RecoveryAPI.swift */; };
 		8C09196221076B7000703224 /* RecoveryProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C09196121076B7000703224 /* RecoveryProvider.swift */; };
 		8C09196421076B8200703224 /* RecoveryRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C09196321076B8200703224 /* RecoveryRequest.swift */; };
@@ -84,7 +83,6 @@
 		8C0919502107234B00703224 /* SignupAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupAPI.swift; sourceTree = "<group>"; };
 		8C0919522107320800703224 /* CodableFailure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableFailure.swift; sourceTree = "<group>"; };
 		8C0919552107362300703224 /* CodableSuccess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableSuccess.swift; sourceTree = "<group>"; };
-		8C09195721073ECC00703224 /* CodableError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableError.swift; sourceTree = "<group>"; };
 		8C09195E21076B5D00703224 /* RecoveryAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecoveryAPI.swift; sourceTree = "<group>"; };
 		8C09196121076B7000703224 /* RecoveryProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecoveryProvider.swift; sourceTree = "<group>"; };
 		8C09196321076B8200703224 /* RecoveryRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecoveryRequest.swift; sourceTree = "<group>"; };
@@ -197,7 +195,6 @@
 			children = (
 				8C0919522107320800703224 /* CodableFailure.swift */,
 				8C0919552107362300703224 /* CodableSuccess.swift */,
-				8C09195721073ECC00703224 /* CodableError.swift */,
 			);
 			path = Codable;
 			sourceTree = "<group>";
@@ -463,7 +460,6 @@
 				8C0919782108C2B900703224 /* UserProvider.swift in Sources */,
 				8C09190A2106068D00703224 /* OnboardingRouter.swift in Sources */,
 				8C09192621061C0600703224 /* Coordinator.swift in Sources */,
-				8C09195821073ECC00703224 /* CodableError.swift in Sources */,
 				8C09196A2108951F00703224 /* WalletResponseError.swift in Sources */,
 				8CF1DE4520EFB1A70036F986 /* HorizontalScrollView.swift in Sources */,
 				8C0919412106264200703224 /* Dispatcher.swift in Sources */,

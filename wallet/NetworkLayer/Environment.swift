@@ -8,6 +8,9 @@
 
 import Foundation
 
+/**
+ Protocol defines general API object that provides host path and default headers.
+ */
 protocol Environment {
 
     var host: String { get }

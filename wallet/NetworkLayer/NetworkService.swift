@@ -6,6 +6,9 @@
 //  Copyright © 2018 zamzam. All rights reserved.
 //
 
+/**
+ Protocol provides template for implementing different parts of API as services.
+ */
 protocol NetworkService {
 
     associatedtype APIProvider: Provider
