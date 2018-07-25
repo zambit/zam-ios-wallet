@@ -48,20 +48,22 @@ struct HTTPDispatcher: Dispatcher {
         var urlRequest = URLRequest(url: fullURL)
 
         switch request.parameters {
-        case .body(let params):
+        case .body(let params)?:
             let encoder = JSONEncoder()
             urlRequest.httpBody = try encoder.encode(params)
 
-        case .url(let params):
+        case .url(let params)?:
             guard var components = URLComponents(string: fullURLString) else {
                 throw HTTPDispatcherError.badURL
             }
 
-            components.queryItems = params?.map {
+            components.queryItems = params.map {
                 return URLQueryItem(name: $0.key, value: $0.value)
             }
 
             urlRequest.url = components.url
+        case .none:
+            break
         }
 
         // Add headers from provider and request

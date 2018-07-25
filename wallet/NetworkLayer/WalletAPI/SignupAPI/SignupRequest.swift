@@ -35,7 +35,7 @@ enum SignupRequest: Request {
         }
     }
 
-    var parameters: RequestParams {
+    var parameters: RequestParams? {
         switch self {
         case let .start(phone: phone, referrerPhone: referrerPhone):
             if let rp = referrerPhone {

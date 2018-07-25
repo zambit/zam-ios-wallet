@@ -14,7 +14,7 @@ protocol Request {
 
     var method: HTTPMethod { get }
 
-    var parameters: RequestParams { get }
+    var parameters: RequestParams? { get }
 
     var headers: [String: Any]? { get }
 }
@@ -27,6 +27,6 @@ enum HTTPMethod: String {
 }
 
 enum RequestParams {
-    case body([String: String]?)
-    case url([String: String]?)
+    case body([String: String])
+    case url([String: String])
 }

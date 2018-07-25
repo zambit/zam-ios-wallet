@@ -15,16 +15,63 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var api: SignupAPI?
 
+    var authApi: AuthAPI?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         api = SignupAPI(provider: SignupProvider(environment: WalletEnvironment(), dispatcher: HTTPDispatcher()))
 
+        authApi = AuthAPI(provider: AuthProvider(environment: WalletEnvironment(), dispatcher: HTTPDispatcher()))
+
+        let phone = "+79136653903"
+        let code = "195227"
+        let password = "a12345678b"
+
         print("start")
-        api?.sendVerificationCode(to: "aasd").done {
-            print("success")
-        }
-        .catch { error in
+//        api?.sendVerificationCode(to: phone).done {
+//            print("success")
+//        }
+//        .catch { error in
+//            print(error)
+//        }
+
+
+//        api?.verifyUserAccount(passing: code, hasBeenSentTo: phone).done {
+//            [weak self]
+//            token in
+//
+//            guard let strongSelf = self else {
+//                return
+//            }
+//
+//            print("Signup token: \(token)")
+//
+//            strongSelf.api?.providePassword(password, confirmation: password, for: phone, signUpToken: token).done { authToken in
+//
+//                print("Auth token: \(authToken)")
+//            }.catch { error in
+//                print(error)
+//            }
+//        }.catch { error in
+//            print(error)
+//        }
+
+        authApi?.signIn(phone: phone, password: password).done {
+            [weak self]
+            token in
+
+            guard let strongSelf = self else {
+                return
+            }
+
+            print("Auth token: \(token)")
+
+            strongSelf.authApi?.checkIfUserAuthorized(token: token).done { phone in
+                print("User authorized with phone: \(phone)")
+            }.catch { error in
+                print(error)
+            }
+        }.catch { error in
             print(error)
         }
 

@@ -6,7 +6,6 @@
 //  Copyright © 2018 zamzam. All rights reserved.
 //
 
-import Foundation
 import PromiseKit
 
 struct RecoveryProvider: Provider {

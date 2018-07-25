@@ -49,21 +49,63 @@ struct SignupAPI: NetworkService {
         }
     }
 
-    func verifyUserAccount(passing verificationCode: String, hasBeenSentTo phone: String) {
+    func verifyUserAccount(passing verificationCode: String, hasBeenSentTo phone: String) -> Promise<String> {
+        return provider.execute(.verify(phone: phone, verificationCode: verificationCode))
+            .then {
+                (response: Response) -> Promise<String> in
 
+                return Promise { seal in
+                    switch response {
+                    case .data(_):
+
+                        let success: (CodableSuccessSignUpTokenData) -> Void = { s in
+                            seal.fulfill(s.data.token)
+                        }
+
+                        let failure: (CodableFailure) -> Void = { f in
+                            let error = WalletResponseError.serverFailureResponse(errors: f.errors)
+                            seal.reject(error)
+                        }
+
+                        do {
+                            try response.extractResult(success: success, failure: failure)
+                        } catch let error {
+                            seal.reject(error)
+                        }
+                    case .error(let error):
+                        seal.reject(error)
+                    }
+                }
+        }
     }
 
-    func providePassword(_ password: String, confirmation: String, for phone: String, signUpToken: String) {
+    func providePassword(_ password: String, confirmation: String, for phone: String, signUpToken: String) -> Promise<String> {
+        return provider.execute(.finish(phone: phone, signupToken: signUpToken, password: password, passwordConfirmation: confirmation))
+            .then {
+                (response: Response) -> Promise<String> in
 
+                return Promise { seal in
+                    switch response {
+                    case .data(_):
+
+                        let success: (CodableSuccessAuthTokenData) -> Void = { s in
+                            seal.fulfill(s.data.token)
+                        }
+
+                        let failure: (CodableFailure) -> Void = { f in
+                            let error = WalletResponseError.serverFailureResponse(errors: f.errors)
+                            seal.reject(error)
+                        }
+
+                        do {
+                            try response.extractResult(success: success, failure: failure)
+                        } catch let error {
+                            seal.reject(error)
+                        }
+                    case .error(let error):
+                        seal.reject(error)
+                    }
+                }
+        }
     }
 }
-
-enum VerififactionError: Error {
-    case codableInternalError
-    case wrongParametres
-    case userAlreadyExists
-    case referrerNotFound
-    case internalServerError
-}
-
-

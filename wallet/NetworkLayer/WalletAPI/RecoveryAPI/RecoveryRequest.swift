@@ -35,7 +35,7 @@ enum RecoveryRequest: Request {
         }
     }
 
-    var parameters: RequestParams {
+    var parameters: RequestParams? {
         switch self {
         case let .start(phone: phone):
 

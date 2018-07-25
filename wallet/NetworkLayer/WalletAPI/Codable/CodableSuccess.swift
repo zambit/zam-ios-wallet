@@ -17,7 +17,7 @@ struct CodableSuccessEmptyData: Codable {
     }
 }
 
-struct CodableSuccessTokenData: Codable {
+struct CodableSuccessAuthTokenData: Codable {
 
     let result: Bool
     let data: Token
@@ -51,6 +51,44 @@ struct CodableSuccessSignUpTokenData: Codable {
 
         private enum CodingKeys: String, CodingKey {
             case token = "signup_token"
+        }
+    }
+}
+
+struct CodableSuccessRecoveryTokenData: Codable {
+
+    let result: Bool
+    let data: RecoveryToken
+
+    private enum CodingKeys: String, CodingKey {
+        case result
+        case data
+    }
+
+    struct RecoveryToken: Codable {
+        let token: String
+
+        private enum CodingKeys: String, CodingKey {
+            case token = "recovery_token"
+        }
+    }
+}
+
+struct CodableSuccessAuthorizedPhoneData: Codable {
+
+    let result: Bool
+    let data: Phone
+
+    private enum CodingKeys: String, CodingKey {
+        case result
+        case data
+    }
+
+    struct Phone: Codable {
+        let phone: String
+
+        private enum CodingKeys: String, CodingKey {
+            case phone
         }
     }
 }
