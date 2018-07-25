@@ -41,6 +41,9 @@
 		8C09196D21089FA700703224 /* AuthRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C09196C21089FA700703224 /* AuthRequest.swift */; };
 		8C09196F21089FB200703224 /* AuthProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C09196E21089FB200703224 /* AuthProvider.swift */; };
 		8C09197121089FBB00703224 /* AuthAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C09197021089FBB00703224 /* AuthAPI.swift */; };
+		8C0919742108BE5700703224 /* UserAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0919732108BE5700703224 /* UserAPI.swift */; };
+		8C0919762108BE6000703224 /* UserRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0919752108BE6000703224 /* UserRequest.swift */; };
+		8C0919782108C2B900703224 /* UserProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0919772108C2B900703224 /* UserProvider.swift */; };
 		8C34616B20EF8FA700746724 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C34616A20EF8FA700746724 /* AppDelegate.swift */; };
 		8C34617020EF8FA700746724 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C34616E20EF8FA700746724 /* Main.storyboard */; };
 		8C34617220EF8FA900746724 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8C34617120EF8FA900746724 /* Assets.xcassets */; };
@@ -89,6 +92,9 @@
 		8C09196C21089FA700703224 /* AuthRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRequest.swift; sourceTree = "<group>"; };
 		8C09196E21089FB200703224 /* AuthProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthProvider.swift; sourceTree = "<group>"; };
 		8C09197021089FBB00703224 /* AuthAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAPI.swift; sourceTree = "<group>"; };
+		8C0919732108BE5700703224 /* UserAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAPI.swift; sourceTree = "<group>"; };
+		8C0919752108BE6000703224 /* UserRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRequest.swift; sourceTree = "<group>"; };
+		8C0919772108C2B900703224 /* UserProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProvider.swift; sourceTree = "<group>"; };
 		8C34616720EF8FA700746724 /* wallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = wallet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C34616A20EF8FA700746724 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8C34616F20EF8FA700746724 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -177,6 +183,7 @@
 			children = (
 				8C09194C2107214300703224 /* WalletEnvironment.swift */,
 				8C0919692108951F00703224 /* WalletResponseError.swift */,
+				8C0919722108BC6C00703224 /* UserAPI */,
 				8C09196B21089EDF00703224 /* SigninAPI */,
 				8C09196021076B6000703224 /* RecoveryAPI */,
 				8C09195D21076B0800703224 /* SignupAPI */,
@@ -223,6 +230,16 @@
 				8C09197021089FBB00703224 /* AuthAPI.swift */,
 			);
 			path = SigninAPI;
+			sourceTree = "<group>";
+		};
+		8C0919722108BC6C00703224 /* UserAPI */ = {
+			isa = PBXGroup;
+			children = (
+				8C0919772108C2B900703224 /* UserProvider.swift */,
+				8C0919752108BE6000703224 /* UserRequest.swift */,
+				8C0919732108BE5700703224 /* UserAPI.swift */,
+			);
+			path = UserAPI;
 			sourceTree = "<group>";
 		};
 		8C34615E20EF8FA700746724 = {
@@ -428,9 +445,11 @@
 				8C091906210605AF00703224 /* Router.swift in Sources */,
 				8C091938210622AA00703224 /* Request.swift in Sources */,
 				8C091949210714D800703224 /* NetworkService.swift in Sources */,
+				8C0919762108BE6000703224 /* UserRequest.swift in Sources */,
 				8C091936210621D800703224 /* OnboardingViewPresenter.swift in Sources */,
 				8CF1DE4220EF98160036F986 /* AuthViewController.swift in Sources */,
 				8C09193D2106243600703224 /* Response.swift in Sources */,
+				8C0919742108BE5700703224 /* UserAPI.swift in Sources */,
 				8C0919512107234B00703224 /* SignupAPI.swift in Sources */,
 				8C091934210620C800703224 /* OnboardingViewController.swift in Sources */,
 				8CF1DE4720F37B5E0036F986 /* SMSConfirmationViewController.swift in Sources */,
@@ -441,6 +460,7 @@
 				8CF1DE4B20F3AD210036F986 /* NewPasswordViewController.swift in Sources */,
 				8C09193F210625E500703224 /* Provider.swift in Sources */,
 				8C09194F2107225700703224 /* SignupProvider.swift in Sources */,
+				8C0919782108C2B900703224 /* UserProvider.swift in Sources */,
 				8C09190A2106068D00703224 /* OnboardingRouter.swift in Sources */,
 				8C09192621061C0600703224 /* Coordinator.swift in Sources */,
 				8C09195821073ECC00703224 /* CodableError.swift in Sources */,
