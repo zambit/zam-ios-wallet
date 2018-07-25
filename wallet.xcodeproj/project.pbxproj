@@ -38,6 +38,7 @@
 		8C09195F21076B5D00703224 /* RecoveryAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C09195E21076B5D00703224 /* RecoveryAPI.swift */; };
 		8C09196221076B7000703224 /* RecoveryProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C09196121076B7000703224 /* RecoveryProvider.swift */; };
 		8C09196421076B8200703224 /* RecoveryRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C09196321076B8200703224 /* RecoveryRequest.swift */; };
+		8C09196A2108951F00703224 /* WalletResponseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0919692108951F00703224 /* WalletResponseError.swift */; };
 		8C34616B20EF8FA700746724 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C34616A20EF8FA700746724 /* AppDelegate.swift */; };
 		8C34617020EF8FA700746724 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C34616E20EF8FA700746724 /* Main.storyboard */; };
 		8C34617220EF8FA900746724 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8C34617120EF8FA900746724 /* Assets.xcassets */; };
@@ -83,6 +84,7 @@
 		8C09195E21076B5D00703224 /* RecoveryAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecoveryAPI.swift; sourceTree = "<group>"; };
 		8C09196121076B7000703224 /* RecoveryProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecoveryProvider.swift; sourceTree = "<group>"; };
 		8C09196321076B8200703224 /* RecoveryRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecoveryRequest.swift; sourceTree = "<group>"; };
+		8C0919692108951F00703224 /* WalletResponseError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletResponseError.swift; sourceTree = "<group>"; };
 		8C34616720EF8FA700746724 /* wallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = wallet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C34616A20EF8FA700746724 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8C34616F20EF8FA700746724 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -171,6 +173,7 @@
 			isa = PBXGroup;
 			children = (
 				8C09194C2107214300703224 /* WalletEnvironment.swift */,
+				8C0919692108951F00703224 /* WalletResponseError.swift */,
 				8C09196021076B6000703224 /* RecoveryAPI */,
 				8C09195D21076B0800703224 /* SignupAPI */,
 				8C0919542107347300703224 /* Codable */,
@@ -427,6 +430,7 @@
 				8C09190A2106068D00703224 /* OnboardingRouter.swift in Sources */,
 				8C09192621061C0600703224 /* Coordinator.swift in Sources */,
 				8C09195821073ECC00703224 /* CodableError.swift in Sources */,
+				8C09196A2108951F00703224 /* WalletResponseError.swift in Sources */,
 				8CF1DE4520EFB1A70036F986 /* HorizontalScrollView.swift in Sources */,
 				8C0919412106264200703224 /* Dispatcher.swift in Sources */,
 				8CF1DE4D20F3BDB90036F986 /* KeyboardViewController.swift in Sources */,

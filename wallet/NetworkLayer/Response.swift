@@ -26,27 +26,44 @@ enum Response {
         self = .error(ResponseError.invalidData)
     }
 
-    func toCodable<Success: Codable, Failure: Codable>() throws -> (Success?, Failure?) {
+    func toCodable<Object: Codable>() throws -> Object {
         switch self {
         case .data(let d):
             let decoder = JSONDecoder()
+            let object = try decoder.decode(Object.self, from: d)
 
-            let success = try? decoder.decode(Success.self, from: d)
-            let failure = try? decoder.decode(Failure.self, from: d)
-
-            if success == nil, failure == nil {
-                throw ResponseError.cantConvertToGivenCodable
-            }
-
-            return (success, failure)
+            return object
         case .error(_):
-            throw ResponseError.tryConvertErrorToCodable
+            throw ResponseError.tryConvertApplicationErrorToCodable
+        }
+    }
+
+    func extractResult<Success: Codable, Failure: Codable>(success: (Success) -> Void, failure: (Failure) -> Void) throws {
+        switch self {
+        case .data(let data):
+            let decoder = JSONDecoder()
+
+            do {
+                let fail = try decoder.decode(Failure.self, from: data)
+                failure(fail)
+                return
+            } catch let f {
+                do {
+                    let suc = try decoder.decode(Success.self, from: data)
+                    success(suc)
+                } catch let s {
+                    throw ResponseError.responseDoesntCorrespondsToSuccessAndFailureTypes(successError: s, failureError: f)
+                }
+            }
+        case .error(_):
+            throw ResponseError.tryConvertApplicationErrorToCodable
         }
     }
 }
 
 enum ResponseError: Error {
     case invalidData
-    case tryConvertErrorToCodable
+    case tryConvertApplicationErrorToCodable
     case cantConvertToGivenCodable
+    case responseDoesntCorrespondsToSuccessAndFailureTypes(successError: Error, failureError: Error)
 }

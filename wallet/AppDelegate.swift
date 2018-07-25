@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         api = SignupAPI(provider: SignupProvider(environment: WalletEnvironment(), dispatcher: HTTPDispatcher()))
 
         print("start")
-        api?.sendVerificationCode(to: "79136653903").done {
+        api?.sendVerificationCode(to: "aasd").done {
             print("success")
         }
         .catch { error in

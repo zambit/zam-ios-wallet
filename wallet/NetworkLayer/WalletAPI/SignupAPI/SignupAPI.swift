@@ -25,34 +25,23 @@ struct SignupAPI: NetworkService {
 
                 return Promise { seal in
                     switch response {
-                    case .data(let data):
-                        do {
-                            let responsedObject: (CodableSuccessEmptyData?, CodableFailure?) = try response.toCodable()
+                    case .data(_):
 
-                            if let _ = responsedObject.0 {
-                                seal.fulfill(())
-                            }
-
-                            if let fail = responsedObject.1 {
-
-
-
-                            }
-
-                        } catch let e {
-                            seal.reject(e)
+                        let success: (CodableSuccessEmptyData) -> Void = { _ in
+                            seal.fulfill(())
                         }
 
-//                        print(String(data: data, encoding: String.Encoding.utf8))
-//
-//                        do {
-//                            let json = try JSON(data: data, options: .allowFragments)
-//                            let object = try Success(with: json)
-//                        } catch let e {
-//                            print(e)
-//                        }
+                        let failure: (CodableFailure) -> Void = { f in
+                            let error = WalletResponseError.serverFailureResponse(errors: f.errors)
+                            seal.reject(error)
+                        }
 
-                        seal.reject(CodableError.internalCodableConvertionFailure)
+                        do {
+                            try response.extractResult(success: success, failure: failure)
+                        } catch let error {
+                            seal.reject(error)
+                        }
+
                     case .error(let error):
                         seal.reject(error)
                     }
@@ -75,15 +64,6 @@ enum VerififactionError: Error {
     case userAlreadyExists
     case referrerNotFound
     case internalServerError
-}
-
-struct Success: JSONInitializable {
-    let result: Bool
-
-    init(with json: JSON) throws {
-        print(json)
-        self.result = json["result"].boolValue
-    }
 }
 
 
