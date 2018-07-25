@@ -8,7 +8,6 @@
 
 import Foundation
 import PromiseKit
-import SwiftyJSON
 
 struct SignupAPI: NetworkService {
 
