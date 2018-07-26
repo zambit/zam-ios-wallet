@@ -11,7 +11,7 @@ import UIKit
 
 class VerifyPhoneNumberWithSmsViewController: UIViewController {
 
-    var onContinue: ((String) -> Void)?
+    var onContinue: ((String, String) -> Void)?
 
     func prepare(phone: String) {
         print(phone)

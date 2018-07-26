@@ -8,18 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		541C19581D5E40129C1757A8 /* Pods_wallet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9C98DC4F4721DB056807636 /* Pods_wallet.framework */; };
-		8C0918FA2105F75200703224 /* Tutorial.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C0918F92105F75200703224 /* Tutorial.storyboard */; };
+		8C0918FA2105F75200703224 /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C0918F92105F75200703224 /* Onboarding.storyboard */; };
 		8C0918FC2105F75900703224 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C0918FB2105F75900703224 /* Login.storyboard */; };
 		8C0918FE2105F76200703224 /* Registration.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C0918FD2105F76200703224 /* Registration.storyboard */; };
 		8C091900210601F300703224 /* ForgotPassword.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C0918FF210601F300703224 /* ForgotPassword.storyboard */; };
 		8C091906210605AF00703224 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C091905210605AF00703224 /* Router.swift */; };
 		8C091908210605FA00703224 /* InitialRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C091907210605FA00703224 /* InitialRouter.swift */; };
 		8C09190A2106068D00703224 /* OnboardingRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0919092106068D00703224 /* OnboardingRouter.swift */; };
-		8C09192621061C0600703224 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C09192521061C0600703224 /* Coordinator.swift */; };
-		8C09192821061C6000703224 /* RegistrationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C09192721061C6000703224 /* RegistrationCoordinator.swift */; };
 		8C09192D21061F3600703224 /* ControllerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C09192C21061F3600703224 /* ControllerHelper.swift */; };
 		8C091934210620C800703224 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C091933210620C800703224 /* OnboardingViewController.swift */; };
-		8C091936210621D800703224 /* OnboardingViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C091935210621D800703224 /* OnboardingViewPresenter.swift */; };
 		8C091938210622AA00703224 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C091937210622AA00703224 /* Request.swift */; };
 		8C09193B210623F200703224 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C09193A210623F200703224 /* Environment.swift */; };
 		8C09193D2106243600703224 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C09193C2106243600703224 /* Response.swift */; };
@@ -47,6 +44,15 @@
 		8C09197D2108D6F300703224 /* EnterPhoneNumberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C09197C2108D6F300703224 /* EnterPhoneNumberViewController.swift */; };
 		8C09197F2108D8B600703224 /* VerifyPhoneNumberWithSmsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C09197E2108D8B600703224 /* VerifyPhoneNumberWithSmsViewController.swift */; };
 		8C0919812108D99400703224 /* CreateNewPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0919802108D99400703224 /* CreateNewPasswordViewController.swift */; };
+		8C0919832109CC2000703224 /* EnterLoginPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0919822109CC2000703224 /* EnterLoginPasswordViewController.swift */; };
+		8C333D302109E0B400949AC0 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D2F2109E0B400949AC0 /* UserViewController.swift */; };
+		8C333D342109F02000949AC0 /* ScreenFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D332109F02000949AC0 /* ScreenFlow.swift */; };
+		8C333D362109F09800949AC0 /* LoginFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D352109F09800949AC0 /* LoginFlow.swift */; };
+		8C333D382109F3D500949AC0 /* OnboardingFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D372109F3D500949AC0 /* OnboardingFlow.swift */; };
+		8C333D3C2109FC2D00949AC0 /* ExampleOnboardingItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D3B2109FC2D00949AC0 /* ExampleOnboardingItem.swift */; };
+		8C333D3E2109FD1000949AC0 /* ExampleOnboardingItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C333D3D2109FD1000949AC0 /* ExampleOnboardingItem.xib */; };
+		8C333D40210A08A600949AC0 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D3F210A08A600949AC0 /* UIView+Extensions.swift */; };
+		8C333D42210A094500949AC0 /* UIColor+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D41210A094500949AC0 /* UIColor+Additions.swift */; };
 		8C34616B20EF8FA700746724 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C34616A20EF8FA700746724 /* AppDelegate.swift */; };
 		8C34617020EF8FA700746724 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C34616E20EF8FA700746724 /* Main.storyboard */; };
 		8C34617220EF8FA900746724 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8C34617120EF8FA900746724 /* Assets.xcassets */; };
@@ -62,18 +68,15 @@
 /* Begin PBXFileReference section */
 		42ABDBB88471C035425F5733 /* Pods-wallet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wallet.release.xcconfig"; path = "Pods/Target Support Files/Pods-wallet/Pods-wallet.release.xcconfig"; sourceTree = "<group>"; };
 		74C9F725CE2426EB7B82906E /* Pods-wallet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wallet.debug.xcconfig"; path = "Pods/Target Support Files/Pods-wallet/Pods-wallet.debug.xcconfig"; sourceTree = "<group>"; };
-		8C0918F92105F75200703224 /* Tutorial.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Tutorial.storyboard; sourceTree = "<group>"; };
+		8C0918F92105F75200703224 /* Onboarding.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
 		8C0918FB2105F75900703224 /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		8C0918FD2105F76200703224 /* Registration.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Registration.storyboard; sourceTree = "<group>"; };
 		8C0918FF210601F300703224 /* ForgotPassword.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ForgotPassword.storyboard; sourceTree = "<group>"; };
 		8C091905210605AF00703224 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		8C091907210605FA00703224 /* InitialRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialRouter.swift; sourceTree = "<group>"; };
 		8C0919092106068D00703224 /* OnboardingRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingRouter.swift; sourceTree = "<group>"; };
-		8C09192521061C0600703224 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
-		8C09192721061C6000703224 /* RegistrationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationCoordinator.swift; sourceTree = "<group>"; };
 		8C09192C21061F3600703224 /* ControllerHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControllerHelper.swift; sourceTree = "<group>"; };
 		8C091933210620C800703224 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
-		8C091935210621D800703224 /* OnboardingViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewPresenter.swift; sourceTree = "<group>"; };
 		8C091937210622AA00703224 /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		8C09193A210623F200703224 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		8C09193C2106243600703224 /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
@@ -101,6 +104,15 @@
 		8C09197C2108D6F300703224 /* EnterPhoneNumberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterPhoneNumberViewController.swift; sourceTree = "<group>"; };
 		8C09197E2108D8B600703224 /* VerifyPhoneNumberWithSmsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyPhoneNumberWithSmsViewController.swift; sourceTree = "<group>"; };
 		8C0919802108D99400703224 /* CreateNewPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewPasswordViewController.swift; sourceTree = "<group>"; };
+		8C0919822109CC2000703224 /* EnterLoginPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterLoginPasswordViewController.swift; sourceTree = "<group>"; };
+		8C333D2F2109E0B400949AC0 /* UserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
+		8C333D332109F02000949AC0 /* ScreenFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenFlow.swift; sourceTree = "<group>"; };
+		8C333D352109F09800949AC0 /* LoginFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFlow.swift; sourceTree = "<group>"; };
+		8C333D372109F3D500949AC0 /* OnboardingFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFlow.swift; sourceTree = "<group>"; };
+		8C333D3B2109FC2D00949AC0 /* ExampleOnboardingItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleOnboardingItem.swift; sourceTree = "<group>"; };
+		8C333D3D2109FD1000949AC0 /* ExampleOnboardingItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExampleOnboardingItem.xib; sourceTree = "<group>"; };
+		8C333D3F210A08A600949AC0 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
+		8C333D41210A094500949AC0 /* UIColor+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Additions.swift"; sourceTree = "<group>"; };
 		8C34616720EF8FA700746724 /* wallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = wallet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C34616A20EF8FA700746724 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8C34616F20EF8FA700746724 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -131,37 +143,33 @@
 		8C09192B21061ED800703224 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				8C333D41210A094500949AC0 /* UIColor+Additions.swift */,
 				8C09192C21061F3600703224 /* ControllerHelper.swift */,
+				8C333D3F210A08A600949AC0 /* UIView+Extensions.swift */,
 			);
 			path = Helpers;
-			sourceTree = "<group>";
-		};
-		8C09193021061F9300703224 /* Coordinators */ = {
-			isa = PBXGroup;
-			children = (
-				8C09192521061C0600703224 /* Coordinator.swift */,
-				8C09192721061C6000703224 /* RegistrationCoordinator.swift */,
-			);
-			path = Coordinators;
 			sourceTree = "<group>";
 		};
 		8C0919312106205600703224 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				8C333D3B2109FC2D00949AC0 /* ExampleOnboardingItem.swift */,
+				8C333D3D2109FD1000949AC0 /* ExampleOnboardingItem.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
 		};
-		8C0919322106206100703224 /* Controllers */ = {
+		8C0919322106206100703224 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				8C091935210621D800703224 /* OnboardingViewPresenter.swift */,
+				8C091933210620C800703224 /* OnboardingViewController.swift */,
 				8C09197C2108D6F300703224 /* EnterPhoneNumberViewController.swift */,
 				8C09197E2108D8B600703224 /* VerifyPhoneNumberWithSmsViewController.swift */,
 				8C0919802108D99400703224 /* CreateNewPasswordViewController.swift */,
-				8C091933210620C800703224 /* OnboardingViewController.swift */,
+				8C0919822109CC2000703224 /* EnterLoginPasswordViewController.swift */,
+				8C333D2F2109E0B400949AC0 /* UserViewController.swift */,
 			);
-			path = Controllers;
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 		8C091939210622AF00703224 /* NetworkLayer */ = {
@@ -250,12 +258,15 @@
 			path = UserAPI;
 			sourceTree = "<group>";
 		};
-		8C0919792108D64E00703224 /* Flows */ = {
+		8C0919792108D64E00703224 /* ScreenFlows */ = {
 			isa = PBXGroup;
 			children = (
+				8C333D332109F02000949AC0 /* ScreenFlow.swift */,
 				8C09197A2108D66100703224 /* SignUpFlow.swift */,
+				8C333D352109F09800949AC0 /* LoginFlow.swift */,
+				8C333D372109F3D500949AC0 /* OnboardingFlow.swift */,
 			);
-			path = Flows;
+			path = ScreenFlows;
 			sourceTree = "<group>";
 		};
 		8C34615E20EF8FA700746724 = {
@@ -282,16 +293,15 @@
 				8C34616A20EF8FA700746724 /* AppDelegate.swift */,
 				8C09192B21061ED800703224 /* Helpers */,
 				8C091939210622AF00703224 /* NetworkLayer */,
-				8C0919792108D64E00703224 /* Flows */,
-				8C09193021061F9300703224 /* Coordinators */,
-				8C0919322106206100703224 /* Controllers */,
+				8C0919792108D64E00703224 /* ScreenFlows */,
+				8C0919322106206100703224 /* ViewControllers */,
 				8C0919312106205600703224 /* View */,
 				8CF1DE4E20F3BFC30036F986 /* Base */,
 				8CF1DE4320EF9D170036F986 /* Screens */,
 				8C34616E20EF8FA700746724 /* Main.storyboard */,
 				8C34617120EF8FA900746724 /* Assets.xcassets */,
 				8C34617320EF8FA900746724 /* LaunchScreen.storyboard */,
-				8C0918F92105F75200703224 /* Tutorial.storyboard */,
+				8C0918F92105F75200703224 /* Onboarding.storyboard */,
 				8C0918FB2105F75900703224 /* Login.storyboard */,
 				8C0918FD2105F76200703224 /* Registration.storyboard */,
 				8C0918FF210601F300703224 /* ForgotPassword.storyboard */,
@@ -400,10 +410,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C333D3E2109FD1000949AC0 /* ExampleOnboardingItem.xib in Resources */,
 				8C34617520EF8FA900746724 /* LaunchScreen.storyboard in Resources */,
 				8C0918FE2105F76200703224 /* Registration.storyboard in Resources */,
 				8C34617220EF8FA900746724 /* Assets.xcassets in Resources */,
-				8C0918FA2105F75200703224 /* Tutorial.storyboard in Resources */,
+				8C0918FA2105F75200703224 /* Onboarding.storyboard in Resources */,
 				8C0918FC2105F75900703224 /* Login.storyboard in Resources */,
 				8C091900210601F300703224 /* ForgotPassword.storyboard in Resources */,
 				8C34617020EF8FA700746724 /* Main.storyboard in Resources */,
@@ -459,9 +470,9 @@
 				8C09196421076B8200703224 /* RecoveryRequest.swift in Sources */,
 				8C091906210605AF00703224 /* Router.swift in Sources */,
 				8C091938210622AA00703224 /* Request.swift in Sources */,
+				8C333D382109F3D500949AC0 /* OnboardingFlow.swift in Sources */,
 				8C091949210714D800703224 /* NetworkService.swift in Sources */,
 				8C0919762108BE6000703224 /* UserRequest.swift in Sources */,
-				8C091936210621D800703224 /* OnboardingViewPresenter.swift in Sources */,
 				8CF1DE4220EF98160036F986 /* AuthViewController.swift in Sources */,
 				8C09193D2106243600703224 /* Response.swift in Sources */,
 				8C0919742108BE5700703224 /* UserAPI.swift in Sources */,
@@ -478,26 +489,31 @@
 				8C0919782108C2B900703224 /* UserProvider.swift in Sources */,
 				8C09190A2106068D00703224 /* OnboardingRouter.swift in Sources */,
 				8C09197F2108D8B600703224 /* VerifyPhoneNumberWithSmsViewController.swift in Sources */,
-				8C09192621061C0600703224 /* Coordinator.swift in Sources */,
+				8C333D40210A08A600949AC0 /* UIView+Extensions.swift in Sources */,
 				8C09196A2108951F00703224 /* WalletResponseError.swift in Sources */,
 				8C09197D2108D6F300703224 /* EnterPhoneNumberViewController.swift in Sources */,
+				8C333D302109E0B400949AC0 /* UserViewController.swift in Sources */,
 				8CF1DE4520EFB1A70036F986 /* HorizontalScrollView.swift in Sources */,
 				8C0919412106264200703224 /* Dispatcher.swift in Sources */,
 				8CF1DE4D20F3BDB90036F986 /* KeyboardViewController.swift in Sources */,
 				8C09196F21089FB200703224 /* AuthProvider.swift in Sources */,
-				8C09192821061C6000703224 /* RegistrationCoordinator.swift in Sources */,
 				8CF1DE4920F3A0BB0036F986 /* PasswordRecoveryViewController.swift in Sources */,
+				8C0919832109CC2000703224 /* EnterLoginPasswordViewController.swift in Sources */,
 				8C0919562107362300703224 /* CodableSuccess.swift in Sources */,
 				8C09197B2108D66100703224 /* SignUpFlow.swift in Sources */,
 				8C09197121089FBB00703224 /* AuthAPI.swift in Sources */,
 				8C09195F21076B5D00703224 /* RecoveryAPI.swift in Sources */,
 				8C34616B20EF8FA700746724 /* AppDelegate.swift in Sources */,
+				8C333D342109F02000949AC0 /* ScreenFlow.swift in Sources */,
 				8C09194B210716C500703224 /* SignupRequest.swift in Sources */,
 				8C0919532107320800703224 /* CodableFailure.swift in Sources */,
+				8C333D42210A094500949AC0 /* UIColor+Additions.swift in Sources */,
 				8C09193B210623F200703224 /* Environment.swift in Sources */,
 				8C09196D21089FA700703224 /* AuthRequest.swift in Sources */,
+				8C333D3C2109FC2D00949AC0 /* ExampleOnboardingItem.swift in Sources */,
 				8C0919812108D99400703224 /* CreateNewPasswordViewController.swift in Sources */,
 				8C0919432106268900703224 /* HTTPDispatcher.swift in Sources */,
+				8C333D362109F09800949AC0 /* LoginFlow.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

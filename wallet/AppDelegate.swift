@@ -56,24 +56,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //            print(error)
 //        }
 
-        authApi?.signIn(phone: phone, password: password).done {
-            [weak self]
-            token in
-
-            guard let strongSelf = self else {
-                return
-            }
-
-            print("Auth token: \(token)")
-
-            strongSelf.authApi?.checkIfUserAuthorized(token: token).done { phone in
-                print("User authorized with phone: \(phone)")
-            }.catch { error in
-                print(error)
-            }
-        }.catch { error in
-            print(error)
-        }
+//        authApi?.signIn(phone: phone, password: password).done {
+//            [weak self]
+//            token in
+//
+//            guard let strongSelf = self else {
+//                return
+//            }
+//
+//            print("Auth token: \(token)")
+//
+//            strongSelf.authApi?.checkIfUserAuthorized(token: token).done { phone in
+//                print("User authorized with phone: \(phone)")
+//            }.catch { error in
+//                print(error)
+//            }
+//        }.catch { error in
+//            print(error)
+//        }
 
         return true
     }

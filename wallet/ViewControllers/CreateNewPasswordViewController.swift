@@ -11,6 +11,9 @@ import UIKit
 
 class CreateNewPasswordViewController: UIViewController {
 
-    
+    var onContinue: ((_ authToken: String) -> Void)?
 
+    func prepare(phone: String, signupToken: String) {
+        print("Phone: \(phone), SignUp token: \(signupToken)")
+    }
 }

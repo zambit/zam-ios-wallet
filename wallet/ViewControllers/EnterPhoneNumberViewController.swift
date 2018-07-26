@@ -11,7 +11,8 @@ import UIKit
 
 class EnterPhoneNumberViewController: UIViewController {
 
-    var onContinue: ((String) -> Void)?
+    var onContinue: ((_ phone: String) -> Void)?
+    
     var onSkip: (() -> Void)?
     
 }
