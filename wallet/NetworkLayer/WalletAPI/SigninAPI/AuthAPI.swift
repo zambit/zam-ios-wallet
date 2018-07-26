@@ -9,6 +9,9 @@
 import Foundation
 import PromiseKit
 
+/**
+ Authorization process API. Provides requests for signing in, signing out, checking user authorization, confirming user phone with link and creating new user from pending transaction.
+ */
 struct AuthAPI: NetworkService {
 
     private let provider: AuthProvider
@@ -17,6 +20,9 @@ struct AuthAPI: NetworkService {
         self.provider = provider
     }
 
+    /**
+     Authorize user and get auth token, works only for full-verified user accounts
+     */
     func signIn(phone: String, password: String) -> Promise<String> {
         return provider.execute(.signIn(phone: phone, password: password))
             .then {
@@ -47,6 +53,9 @@ struct AuthAPI: NetworkService {
         }
     }
 
+    /**
+     Invalidates user's current authorization session
+     */
     func signOut(token: String) -> Promise<Bool> {
         return provider.execute(.signOut(token: token))
             .then {
@@ -78,6 +87,9 @@ struct AuthAPI: NetworkService {
         }
     }
 
+    /**
+     Checks if user authorized, returns his phone on success
+     */
     func checkIfUserAuthorized(token: String) -> Promise<String> {
         return provider.execute(.checkAuthorized(token: token))
             .then {
@@ -109,6 +121,9 @@ struct AuthAPI: NetworkService {
         }
     }
 
+    /**
+     Confirm user phone
+     */
     func confirmUserPhone(token: String, link: String) -> Promise<String> {
         return provider.execute(.confirmUserPhone(token: token, confirmationId: link))
             .then {
@@ -140,6 +155,9 @@ struct AuthAPI: NetworkService {
         }
     }
 
+    /**
+     Create new user from pending transaction
+     */
     func createNewUserFromPendingTransaction(token: String, link: String) -> Promise <String> {
         return provider.execute(.createNewUserFromPendingTransaction(token: token, recvInvitationId: link))
             .then {

@@ -8,6 +8,9 @@
 
 import Foundation
 
+/**
+ This struct imitating default json failure response from Wallet Remote API.
+ */
 struct CodableFailure: Codable {
 
     let result: Bool

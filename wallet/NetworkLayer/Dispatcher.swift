@@ -9,8 +9,8 @@
 import PromiseKit
 
 /**
- Protocol defines object, implementing sending requests and handling responses on basic level.
- Use to organize work with network through URLSession or Alamofire using one Dispatcher template.
+ Protocol defines object, that should implement sending requests and handling responses on basic level.
+ Use to organize work with network through URLSession, Alamofire or another Networks modules using one Dispatcher template.
  */
 protocol Dispatcher {
 

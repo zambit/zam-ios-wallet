@@ -9,6 +9,9 @@
 import Foundation
 import PromiseKit
 
+/**
+ Signing up API. Provides requests for sending verification code to phone, verifing phone and providing password.
+ */
 struct SignupAPI: NetworkService {
 
     private let provider: SignupProvider
@@ -17,6 +20,9 @@ struct SignupAPI: NetworkService {
         self.provider = provider
     }
 
+    /**
+     Start user account creation by sending verification code via SMS.
+     */
     func sendVerificationCode(to phone: String, additional: String? = nil) -> Promise<Void> {
         return provider.execute(.start(phone: phone, referrerPhone: additional))
             .then {
@@ -48,6 +54,9 @@ struct SignupAPI: NetworkService {
         }
     }
 
+    /**
+     Verifies user account by passing SMS Code which has been sent previously.
+     */
     func verifyUserAccount(passing verificationCode: String, hasBeenSentTo phone: String) -> Promise<String> {
         return provider.execute(.verify(phone: phone, verificationCode: verificationCode))
             .then {
@@ -78,6 +87,9 @@ struct SignupAPI: NetworkService {
         }
     }
 
+    /**
+     Finish account creation by setting user password, this request requires SignUp Token.
+     */
     func providePassword(_ password: String, confirmation: String, for phone: String, signUpToken: String) -> Promise<String> {
         return provider.execute(.finish(phone: phone, signupToken: signUpToken, password: password, passwordConfirmation: confirmation))
             .then {
