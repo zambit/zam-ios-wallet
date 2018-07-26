@@ -15,6 +15,15 @@ class ExampleOnboardingItem: UICollectionViewCell {
     @IBOutlet var titleLabel: UILabel?
     @IBOutlet var textLabel: UILabel?
 
+    var insets: UIEdgeInsets = UIEdgeInsets.zero {
+        didSet {
+            view.frame = CGRect(x: insets.left,
+                                y: insets.top,
+                                width: bounds.width - insets.left - insets.right,
+                                height: bounds.height - insets.top - insets.bottom)
+        }
+    }
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         initFromNib()
@@ -42,8 +51,12 @@ class ExampleOnboardingItem: UICollectionViewCell {
     private func initFromNib() {
         Bundle.main.loadNibNamed("ExampleOnboardingItem", owner: self, options: nil)
         addSubview(view)
-        contentView.frame = self.bounds
-        contentView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+
+        view.frame = CGRect(x: insets.left,
+                            y: insets.top,
+                            width: bounds.width - insets.left - insets.right,
+                            height: bounds.height - insets.top - insets.bottom)
+        view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
     }
 
     private func setupStyle() {

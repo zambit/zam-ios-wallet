@@ -36,8 +36,8 @@
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="CP5-c6-mRd">
                                 <rect key="frame" x="168" y="606" width="39" height="37"/>
                             </pageControl>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" canCancelContentTouches="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="RO3-tV-6eS">
-                                <rect key="frame" x="30" y="44" width="315" height="562"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" canCancelContentTouches="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="RO3-tV-6eS">
+                                <rect key="frame" x="0.0" y="44" width="375" height="562"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="RIx-AZ-X6I">
                                     <size key="itemSize" width="315" height="569"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -49,8 +49,8 @@
                         </subviews>
                         <color key="backgroundColor" red="0.85209618580000002" green="0.77188078680000005" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
-                            <constraint firstItem="gmb-F7-bMd" firstAttribute="trailing" secondItem="RO3-tV-6eS" secondAttribute="trailing" constant="30" id="7J1-5t-vW7"/>
-                            <constraint firstItem="RO3-tV-6eS" firstAttribute="leading" secondItem="gmb-F7-bMd" secondAttribute="leading" constant="30" id="8iD-as-1AV"/>
+                            <constraint firstItem="gmb-F7-bMd" firstAttribute="trailing" secondItem="RO3-tV-6eS" secondAttribute="trailing" id="7J1-5t-vW7"/>
+                            <constraint firstItem="RO3-tV-6eS" firstAttribute="leading" secondItem="gmb-F7-bMd" secondAttribute="leading" id="8iD-as-1AV"/>
                             <constraint firstItem="CP5-c6-mRd" firstAttribute="top" secondItem="RO3-tV-6eS" secondAttribute="bottom" id="AXP-bt-l38"/>
                             <constraint firstItem="CP5-c6-mRd" firstAttribute="centerX" secondItem="1yK-xk-RtQ" secondAttribute="centerX" id="LBv-UK-KhW"/>
                             <constraint firstItem="BuK-SA-P4i" firstAttribute="centerX" secondItem="QD6-C1-fhQ" secondAttribute="centerX" id="UxE-nW-A6C"/>

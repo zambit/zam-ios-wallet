@@ -30,23 +30,28 @@ class OnboardingViewController: UIViewController, UICollectionViewDataSource, UI
                                text: "Et harum Discription quidem rerum facilis est et expedita distinctiolorem ipsun"),
             OnboardingItemData(image: UIImage(),
                                title: "Item 2",
+                               text: "Et harum Discription quidem rerum facilis est et expedita distinctiolorem ipsun"),
+            OnboardingItemData(image: UIImage(),
+                               title: "Item 3",
                                text: "Et harum Discription quidem rerum facilis est et expedita distinctiolorem ipsun")
         ]
 
         pagesCollectionView?.register(ExampleOnboardingItem.self, forCellWithReuseIdentifier: "ExampleOnboardingItem")
         pagesCollectionView?.delegate = self
         pagesCollectionView?.dataSource = self
-        pagesCollectionView?.clipsToBounds = false
         pagesCollectionView?.backgroundColor = .clear
 
         pageControl?.numberOfPages = onboardingItems.count
         pagesCollectionView?.reloadData()
-
         setupViewControllerStyle()
     }
 
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return onboardingItems.count
+    }
+
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 1
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -56,7 +61,8 @@ class OnboardingViewController: UIViewController, UICollectionViewDataSource, UI
             fatalError()
         }
 
-        cell.configure(data: onboardingItems[indexPath.item])
+        cell.configure(data: onboardingItems[indexPath.section])
+        cell.insets = UIEdgeInsets(top: 0, left: 30.0, bottom: 0, right: 30.0)
         return cell
     }
 
@@ -64,7 +70,9 @@ class OnboardingViewController: UIViewController, UICollectionViewDataSource, UI
         return collectionView.bounds.size
     }
 
-    func coll
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        pageControl?.currentPage = indexPath.section
+    }
 
     private func setupViewControllerStyle() {
         self.view.applyGradient(colors: [.backgroundDarker, .backgroundLighter])
