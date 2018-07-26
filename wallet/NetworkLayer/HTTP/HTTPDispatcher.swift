@@ -9,6 +9,9 @@
 import Foundation
 import PromiseKit
 
+/**
+ This struct is default iOS network implementation using URLSession.
+ */
 struct HTTPDispatcher: Dispatcher {
 
     func dispatch(request: Request, with environment: Environment) -> Promise<Response> {
@@ -37,6 +40,9 @@ struct HTTPDispatcher: Dispatcher {
         return session
     }()
 
+    /**
+     Prepare url request from Request and Environment objects.
+     */
     private func prepareURLRequest(for request: Request, with environment: Environment) throws -> URLRequest {
 
         let fullURLString = "\(environment.host)/\(request.path)"

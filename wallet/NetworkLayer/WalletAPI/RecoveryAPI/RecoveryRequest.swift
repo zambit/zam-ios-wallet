@@ -9,6 +9,7 @@
 import Foundation
 
 enum RecoveryRequest: Request {
+    
     case start(phone: String)
     case verify(phone: String, verificationCode: String)
     case finish(phone: String, recoveryToken: String, newPassword: String, newPasswordConfirmation: String)

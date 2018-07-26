@@ -9,6 +9,7 @@
 import Foundation
 
 enum SignupRequest: Request {
+    
     case start(phone: String, referrerPhone: String?)
     case verify(phone: String, verificationCode: String)
     case finish(phone: String, signupToken: String, password: String, passwordConfirmation: String)

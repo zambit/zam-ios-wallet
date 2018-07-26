@@ -8,6 +8,8 @@
 
 import Foundation
 
+// Different templates of success responses from Wallet Remote API
+
 struct CodableSuccessEmptyData: Codable {
 
     let result: Bool
