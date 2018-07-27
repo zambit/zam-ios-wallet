@@ -53,6 +53,9 @@
 		8C333D3E2109FD1000949AC0 /* ExampleOnboardingItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C333D3D2109FD1000949AC0 /* ExampleOnboardingItem.xib */; };
 		8C333D40210A08A600949AC0 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D3F210A08A600949AC0 /* UIView+Extensions.swift */; };
 		8C333D42210A094500949AC0 /* UIColor+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D41210A094500949AC0 /* UIColor+Additions.swift */; };
+		8C333D44210B001500949AC0 /* LargeTextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D43210B001500949AC0 /* LargeTextButton.swift */; };
+		8C333D46210B0D5400949AC0 /* LaunchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D45210B0D5400949AC0 /* LaunchScreenViewController.swift */; };
+		8C333D48210B0F3700949AC0 /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D47210B0F3700949AC0 /* UIViewController+Extensions.swift */; };
 		8C34616B20EF8FA700746724 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C34616A20EF8FA700746724 /* AppDelegate.swift */; };
 		8C34617020EF8FA700746724 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C34616E20EF8FA700746724 /* Main.storyboard */; };
 		8C34617220EF8FA900746724 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8C34617120EF8FA900746724 /* Assets.xcassets */; };
@@ -113,6 +116,9 @@
 		8C333D3D2109FD1000949AC0 /* ExampleOnboardingItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExampleOnboardingItem.xib; sourceTree = "<group>"; };
 		8C333D3F210A08A600949AC0 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		8C333D41210A094500949AC0 /* UIColor+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Additions.swift"; sourceTree = "<group>"; };
+		8C333D43210B001500949AC0 /* LargeTextButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeTextButton.swift; sourceTree = "<group>"; };
+		8C333D45210B0D5400949AC0 /* LaunchScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenViewController.swift; sourceTree = "<group>"; };
+		8C333D47210B0F3700949AC0 /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
 		8C34616720EF8FA700746724 /* wallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = wallet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C34616A20EF8FA700746724 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8C34616F20EF8FA700746724 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -144,6 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				8C333D41210A094500949AC0 /* UIColor+Additions.swift */,
+				8C333D47210B0F3700949AC0 /* UIViewController+Extensions.swift */,
 				8C09192C21061F3600703224 /* ControllerHelper.swift */,
 				8C333D3F210A08A600949AC0 /* UIView+Extensions.swift */,
 			);
@@ -153,6 +160,7 @@
 		8C0919312106205600703224 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				8C333D43210B001500949AC0 /* LargeTextButton.swift */,
 				8C333D3B2109FC2D00949AC0 /* ExampleOnboardingItem.swift */,
 				8C333D3D2109FD1000949AC0 /* ExampleOnboardingItem.xib */,
 			);
@@ -162,6 +170,7 @@
 		8C0919322106206100703224 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				8C333D45210B0D5400949AC0 /* LaunchScreenViewController.swift */,
 				8C091933210620C800703224 /* OnboardingViewController.swift */,
 				8C09197C2108D6F300703224 /* EnterPhoneNumberViewController.swift */,
 				8C09197E2108D8B600703224 /* VerifyPhoneNumberWithSmsViewController.swift */,
@@ -262,9 +271,9 @@
 			isa = PBXGroup;
 			children = (
 				8C333D332109F02000949AC0 /* ScreenFlow.swift */,
+				8C333D372109F3D500949AC0 /* OnboardingFlow.swift */,
 				8C09197A2108D66100703224 /* SignUpFlow.swift */,
 				8C333D352109F09800949AC0 /* LoginFlow.swift */,
-				8C333D372109F3D500949AC0 /* OnboardingFlow.swift */,
 			);
 			path = ScreenFlows;
 			sourceTree = "<group>";
@@ -479,6 +488,7 @@
 				8C0919512107234B00703224 /* SignupAPI.swift in Sources */,
 				8C091934210620C800703224 /* OnboardingViewController.swift in Sources */,
 				8CF1DE4720F37B5E0036F986 /* SMSConfirmationViewController.swift in Sources */,
+				8C333D48210B0F3700949AC0 /* UIViewController+Extensions.swift in Sources */,
 				8C09194D2107214300703224 /* WalletEnvironment.swift in Sources */,
 				8C09192D21061F3600703224 /* ControllerHelper.swift in Sources */,
 				8C09196221076B7000703224 /* RecoveryProvider.swift in Sources */,
@@ -501,9 +511,11 @@
 				8C0919832109CC2000703224 /* EnterLoginPasswordViewController.swift in Sources */,
 				8C0919562107362300703224 /* CodableSuccess.swift in Sources */,
 				8C09197B2108D66100703224 /* SignUpFlow.swift in Sources */,
+				8C333D46210B0D5400949AC0 /* LaunchScreenViewController.swift in Sources */,
 				8C09197121089FBB00703224 /* AuthAPI.swift in Sources */,
 				8C09195F21076B5D00703224 /* RecoveryAPI.swift in Sources */,
 				8C34616B20EF8FA700746724 /* AppDelegate.swift in Sources */,
+				8C333D44210B001500949AC0 /* LargeTextButton.swift in Sources */,
 				8C333D342109F02000949AC0 /* ScreenFlow.swift in Sources */,
 				8C09194B210716C500703224 /* SignupRequest.swift in Sources */,
 				8C0919532107320800703224 /* CodableFailure.swift in Sources */,

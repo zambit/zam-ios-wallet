@@ -18,20 +18,20 @@ class OnboardingViewController: UIViewController, UICollectionViewDataSource, UI
 
     @IBOutlet var pagesCollectionView: UICollectionView?
     @IBOutlet var pageControl: UIPageControl?
-    @IBOutlet var registrationButton: UIButton?
+    @IBOutlet var registrationButton: LargeTextButton?
     @IBOutlet var loginButton: UIButton?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         onboardingItems = [
-            OnboardingItemData(image: UIImage(),
+            OnboardingItemData(image: #imageLiteral(resourceName: "illustrations_stub"),
                                title: "Item 1",
                                text: "Et harum Discription quidem rerum facilis est et expedita distinctiolorem ipsun"),
-            OnboardingItemData(image: UIImage(),
+            OnboardingItemData(image: #imageLiteral(resourceName: "illustrations_stub"),
                                title: "Item 2",
                                text: "Et harum Discription quidem rerum facilis est et expedita distinctiolorem ipsun"),
-            OnboardingItemData(image: UIImage(),
+            OnboardingItemData(image: #imageLiteral(resourceName: "illustrations_stub"),
                                title: "Item 3",
                                text: "Et harum Discription quidem rerum facilis est et expedita distinctiolorem ipsun")
         ]
@@ -40,10 +40,15 @@ class OnboardingViewController: UIViewController, UICollectionViewDataSource, UI
         pagesCollectionView?.delegate = self
         pagesCollectionView?.dataSource = self
         pagesCollectionView?.backgroundColor = .clear
+        pagesCollectionView?.reloadData()
 
         pageControl?.numberOfPages = onboardingItems.count
-        pagesCollectionView?.reloadData()
-        setupViewControllerStyle()
+        pageControl?.currentPageIndicatorTintColor = .skyBlue
+
+        registrationButton?.addTarget(self, action: #selector(registrationButtonTouchUpInsideEvent(_:)), for: .touchUpInside)
+        loginButton?.addTarget(self, action: #selector(loginButtonTouchUpInsideEvent(_:)), for: .touchUpInside)
+
+        setupDefaultStyle()
     }
 
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -74,8 +79,14 @@ class OnboardingViewController: UIViewController, UICollectionViewDataSource, UI
         pageControl?.currentPage = indexPath.section
     }
 
-    private func setupViewControllerStyle() {
-        self.view.applyGradient(colors: [.backgroundDarker, .backgroundLighter])
+    @objc
+    private func registrationButtonTouchUpInsideEvent(_ sender: Any) {
+        onSignup?()
+    }
+
+    @objc
+    private func loginButtonTouchUpInsideEvent(_ sender: Any) {
+        onLogin?()
     }
 }
 

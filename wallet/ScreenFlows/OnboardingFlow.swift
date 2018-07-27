@@ -25,7 +25,11 @@ final class OnboardingFlow: ScreenFlow {
     }
 
     lazy var onboardingScreen: OnboardingViewController = {
-        let vc = OnboardingViewController()
+        let _vc = ControllerHelper.instantiateViewController(identifier: "OnboardingViewController", storyboardName: "Onboarding")
+
+        guard let vc = _vc as? OnboardingViewController else {
+            fatalError()
+        }
 
         let onLogin: () -> Void = {
             [weak self] in

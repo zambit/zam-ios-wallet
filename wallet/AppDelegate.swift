@@ -13,6 +13,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
+    var mainScreenFlow: ScreenFlow?
+
     var api: SignupAPI?
 
     var authApi: AuthAPI?
@@ -23,11 +25,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         authApi = AuthAPI(provider: AuthProvider(environment: WalletEnvironment(), dispatcher: HTTPDispatcher()))
 
+        UIApplication.shared.statusBarStyle = .lightContent
+
+        UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
+        UINavigationBar.appearance().shadowImage = UIImage()
+        UINavigationBar.appearance().backgroundColor = .clear
+        UINavigationBar.appearance().isTranslucent = true
+
         let phone = "+79136653903"
         let code = "195227"
         let password = "a12345678b"
 
         print("start")
+
+        let navigationController = UINavigationController()
+        self.mainScreenFlow = OnboardingFlow(navigationController: navigationController)
+
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        self.window?.rootViewController = navigationController
+        self.window?.makeKeyAndVisible()
+
+        self.mainScreenFlow?.begin()
 //        api?.sendVerificationCode(to: phone).done {
 //            print("success")
 //        }

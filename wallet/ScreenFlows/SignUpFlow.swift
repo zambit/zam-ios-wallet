@@ -22,7 +22,12 @@ final class SignUpFlow: ScreenFlow {
     }
 
     lazy var enterPhoneNumberScreen: EnterPhoneNumberViewController = {
-        let vc = EnterPhoneNumberViewController()
+        let _vc = ControllerHelper.instantiateViewController(identifier: "EnterPhoneNumberViewController", storyboardName: "Registration")
+
+        guard let vc = _vc as? EnterPhoneNumberViewController else {
+            fatalError()
+        }
+
         let onContinue: (String) -> Void = {
             [weak self]
             phone in

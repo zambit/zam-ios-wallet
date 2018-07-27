@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -23,17 +24,14 @@
             <rect key="frame" x="0.0" y="0.0" width="305" height="532"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="H1k-XA-WtQ">
-                    <rect key="frame" x="30" y="100" width="245" height="222.5"/>
-                </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Large Title" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bnQ-xA-uUR">
-                    <rect key="frame" x="0.0" y="378.5" width="305" height="41"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" ambiguous="YES" text="Large Title" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bnQ-xA-uUR">
+                    <rect key="frame" x="0.0" y="401" width="305" height="41"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="34"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9jQ-WY-HvR">
-                    <rect key="frame" x="0.0" y="435.5" width="305" height="76.5"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9jQ-WY-HvR">
+                    <rect key="frame" x="0.0" y="458" width="305" height="54"/>
                     <string key="text">Et harum Discription
 quidem rerum
 facilis est et expedita distinctiolorem ipsun</string>
@@ -41,12 +39,18 @@ facilis est et expedita distinctiolorem ipsun</string>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="H1k-XA-WtQ">
+                    <rect key="frame" x="53" y="100" width="199" height="199"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="H1k-XA-WtQ" secondAttribute="height" multiplier="1:1" id="aQU-KK-Txk"/>
+                    </constraints>
+                </imageView>
             </subviews>
             <constraints>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="bnQ-xA-uUR" secondAttribute="trailing" id="5XY-Y7-frs"/>
                 <constraint firstItem="H1k-XA-WtQ" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="80" id="632-ea-LNu"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="H1k-XA-WtQ" secondAttribute="trailing" constant="30" id="9xu-Tk-nul"/>
-                <constraint firstItem="H1k-XA-WtQ" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="30" id="Oi5-7w-K4E"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="H1k-XA-WtQ" secondAttribute="trailing" constant="53" id="9xu-Tk-nul"/>
+                <constraint firstItem="H1k-XA-WtQ" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="53" id="Oi5-7w-K4E"/>
                 <constraint firstItem="9jQ-WY-HvR" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="Pum-Xe-8JW"/>
                 <constraint firstItem="9jQ-WY-HvR" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="RM9-tv-ezl"/>
                 <constraint firstItem="bnQ-xA-uUR" firstAttribute="centerX" secondItem="H1k-XA-WtQ" secondAttribute="centerX" id="Z6R-t7-LFf"/>

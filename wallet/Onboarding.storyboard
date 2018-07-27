@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="GZ2-Kt-76m">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -13,7 +13,7 @@
         <!--Onboarding View Controller-->
         <scene sceneID="b8H-dS-LEK">
             <objects>
-                <viewController id="GZ2-Kt-76m" customClass="OnboardingViewController" customModule="wallet" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OnboardingViewController" id="GZ2-Kt-76m" customClass="OnboardingViewController" customModule="wallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="1yK-xk-RtQ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -25,19 +25,23 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QD6-C1-fhQ">
-                                <rect key="frame" x="131" y="666" width="114" height="32"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QD6-C1-fhQ" customClass="LargeTextButton" customModule="wallet" customModuleProvider="target">
+                                <rect key="frame" x="74" y="642" width="228" height="56"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="228" id="WRY-Sh-2LE"/>
+                                    <constraint firstAttribute="height" constant="56" id="lYf-BP-rSk"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
-                                <state key="normal" title="REGISTRATION">
+                                <state key="normal" title="REGISTRATION" image="icArrowRight">
                                     <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                             </button>
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="CP5-c6-mRd">
-                                <rect key="frame" x="168" y="606" width="39" height="37"/>
+                                <rect key="frame" x="168" y="582" width="39" height="37"/>
                             </pageControl>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" canCancelContentTouches="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="RO3-tV-6eS">
-                                <rect key="frame" x="0.0" y="44" width="375" height="562"/>
+                                <rect key="frame" x="0.0" y="44" width="375" height="538"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="RIx-AZ-X6I">
                                     <size key="itemSize" width="315" height="569"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -74,4 +78,7 @@
             <point key="canvasLocation" x="-74.400000000000006" y="189.90147783251231"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="icArrowRight" width="32" height="32"/>
+    </resources>
 </document>

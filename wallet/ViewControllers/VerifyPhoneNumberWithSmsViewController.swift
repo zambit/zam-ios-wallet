@@ -16,5 +16,4 @@ class VerifyPhoneNumberWithSmsViewController: UIViewController {
     func prepare(phone: String) {
         print(phone)
     }
-
 }
