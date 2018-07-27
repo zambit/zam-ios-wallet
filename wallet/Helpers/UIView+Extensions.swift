@@ -9,6 +9,7 @@
 import UIKit
 
 extension UIView {
+    
     func applyGradient(colors: [UIColor]) -> Void {
         self.applyGradient(colors: colors, locations: nil)
     }

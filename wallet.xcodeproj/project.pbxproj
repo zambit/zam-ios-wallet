@@ -67,6 +67,7 @@
 		8C333D5E210B5E1600949AC0 /* NewPasswordFormView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C333D5D210B5E1600949AC0 /* NewPasswordFormView.xib */; };
 		8C333D60210B5E2900949AC0 /* NewPasswordFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D5F210B5E2900949AC0 /* NewPasswordFormView.swift */; };
 		8C333D66210B6E7600949AC0 /* UITextField+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D64210B619200949AC0 /* UITextField+Extensions.swift */; };
+		8C333D68210B72A100949AC0 /* ContinueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D67210B72A100949AC0 /* ContinueViewController.swift */; };
 		8C34616B20EF8FA700746724 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C34616A20EF8FA700746724 /* AppDelegate.swift */; };
 		8C34617020EF8FA700746724 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C34616E20EF8FA700746724 /* Main.storyboard */; };
 		8C34617220EF8FA900746724 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8C34617120EF8FA900746724 /* Assets.xcassets */; };
@@ -141,6 +142,7 @@
 		8C333D5D210B5E1600949AC0 /* NewPasswordFormView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewPasswordFormView.xib; sourceTree = "<group>"; };
 		8C333D5F210B5E2900949AC0 /* NewPasswordFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPasswordFormView.swift; sourceTree = "<group>"; };
 		8C333D64210B619200949AC0 /* UITextField+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extensions.swift"; sourceTree = "<group>"; };
+		8C333D67210B72A100949AC0 /* ContinueViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContinueViewController.swift; sourceTree = "<group>"; };
 		8C34616720EF8FA700746724 /* wallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = wallet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C34616A20EF8FA700746724 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8C34616F20EF8FA700746724 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -198,6 +200,7 @@
 		8C0919322106206100703224 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				8C333D67210B72A100949AC0 /* ContinueViewController.swift */,
 				8C333D45210B0D5400949AC0 /* LaunchScreenViewController.swift */,
 				8C091933210620C800703224 /* OnboardingViewController.swift */,
 				8C09197C2108D6F300703224 /* EnterPhoneNumberViewController.swift */,
@@ -582,6 +585,7 @@
 				8C333D4A210B1C4300949AC0 /* TextCheckBoxView.swift in Sources */,
 				8C09197F2108D8B600703224 /* VerifyPhoneNumberWithSmsViewController.swift in Sources */,
 				8C333D40210A08A600949AC0 /* UIView+Extensions.swift in Sources */,
+				8C333D68210B72A100949AC0 /* ContinueViewController.swift in Sources */,
 				8C09196A2108951F00703224 /* WalletResponseError.swift in Sources */,
 				8C09197D2108D6F300703224 /* EnterPhoneNumberViewController.swift in Sources */,
 				8C333D302109E0B400949AC0 /* UserViewController.swift in Sources */,
