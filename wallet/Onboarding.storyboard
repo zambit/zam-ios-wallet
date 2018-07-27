@@ -51,7 +51,7 @@
                                 <cells/>
                             </collectionView>
                         </subviews>
-                        <color key="backgroundColor" red="0.85209618580000002" green="0.77188078680000005" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="gmb-F7-bMd" firstAttribute="trailing" secondItem="RO3-tV-6eS" secondAttribute="trailing" id="7J1-5t-vW7"/>
                             <constraint firstItem="RO3-tV-6eS" firstAttribute="leading" secondItem="gmb-F7-bMd" secondAttribute="leading" id="8iD-as-1AV"/>

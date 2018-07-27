@@ -43,8 +43,7 @@ final class OnboardingFlow: ScreenFlow {
                 return
             }
 
-            let target = LoginFlow(navigationController: navController)
-            target.begin()
+            strongSelf.loginFlow?.begin()
         }
 
         let onSignup: () -> Void = {
@@ -59,13 +58,32 @@ final class OnboardingFlow: ScreenFlow {
                 return
             }
 
-            let target = SignUpFlow(navigationController: navController)
-            target.begin()
+            strongSelf.signupFlow?.begin()
         }
 
         vc.onLogin = onLogin
         vc.onSignup = onSignup
         return vc
+    }()
+
+    lazy var loginFlow: LoginFlow? = {
+        guard let navController = navigationController else {
+            print("Navigation controller not found")
+            return nil
+        }
+
+        let flow = LoginFlow(navigationController: navController)
+        return flow
+    }()
+
+    lazy var signupFlow: SignUpFlow? = {
+        guard let navController = navigationController else {
+            print("Navigation controller not found")
+            return nil
+        }
+
+        let flow = SignUpFlow(navigationController: navController)
+        return flow
     }()
 
 }

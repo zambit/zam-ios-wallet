@@ -1,7 +1,176 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13142" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12042"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <scenes/>
+    <scenes>
+        <!--Enter Phone Number View Controller-->
+        <scene sceneID="ahj-vz-8SG">
+            <objects>
+                <viewController storyboardIdentifier="EnterPhoneNumberViewController" id="Pyg-73-OqK" customClass="EnterPhoneNumberViewController" customModule="wallet" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="tUF-U7-7TA">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What's your phone number?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U4Y-RM-BPg">
+                                <rect key="frame" x="16" y="36" width="343" height="81.5"/>
+                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="34"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qQ8-XH-WUs" customClass="PhoneNumberFormView" customModule="wallet" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="142.5" width="375" height="56"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="56" id="w2H-ng-OF1"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yY4-cD-Qm1" customClass="LargeIconButton" customModule="wallet" customModuleProvider="target">
+                                <rect key="frame" x="291" y="583" width="60" height="60"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="UBg-LH-KT8"/>
+                                    <constraint firstAttribute="height" constant="60" id="aDH-qF-EHz"/>
+                                </constraints>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="U4Y-RM-BPg" secondAttribute="trailing" constant="16" id="2ha-1E-Wvu"/>
+                            <constraint firstItem="qQ8-XH-WUs" firstAttribute="top" secondItem="U4Y-RM-BPg" secondAttribute="bottom" constant="25" id="3qq-uG-0N5"/>
+                            <constraint firstItem="U4Y-RM-BPg" firstAttribute="top" secondItem="egG-wf-OqO" secondAttribute="top" constant="16" id="PVF-2c-ahe"/>
+                            <constraint firstItem="egG-wf-OqO" firstAttribute="trailing" secondItem="yY4-cD-Qm1" secondAttribute="trailing" constant="24" id="UOm-zz-zKb"/>
+                            <constraint firstItem="egG-wf-OqO" firstAttribute="trailing" secondItem="qQ8-XH-WUs" secondAttribute="trailing" id="ZMm-x6-qFJ"/>
+                            <constraint firstItem="qQ8-XH-WUs" firstAttribute="leading" secondItem="egG-wf-OqO" secondAttribute="leading" id="plK-hK-eiJ"/>
+                            <constraint firstItem="egG-wf-OqO" firstAttribute="bottom" secondItem="yY4-cD-Qm1" secondAttribute="bottom" constant="24" id="tw1-mZ-PDp"/>
+                            <constraint firstItem="U4Y-RM-BPg" firstAttribute="leading" secondItem="egG-wf-OqO" secondAttribute="leading" constant="16" id="zz9-Kf-9xn"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="egG-wf-OqO"/>
+                    </view>
+                    <connections>
+                        <outlet property="continueButton" destination="yY4-cD-Qm1" id="biH-RX-QAM"/>
+                        <outlet property="continueButtonBottomConstraint" destination="tw1-mZ-PDp" id="Xec-tN-Fzp"/>
+                        <outlet property="largeTitleLabel" destination="U4Y-RM-BPg" id="Fbq-nU-Gfe"/>
+                        <outlet property="phoneNumberFormView" destination="qQ8-XH-WUs" id="q4o-aW-0v8"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4AW-mO-z2B" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-418" y="255"/>
+        </scene>
+        <!--Verify Phone Number With Sms View Controller-->
+        <scene sceneID="bRc-aH-hZa">
+            <objects>
+                <viewController storyboardIdentifier="VerifyPhoneNumberWithSmsViewController" id="M2G-cM-Sue" customClass="VerifyPhoneNumberWithSmsViewController" customModule="wallet" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="19j-Om-sn0">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What's your phone number?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5C8-LU-ILM">
+                                <rect key="frame" x="16" y="36" width="343" height="81.5"/>
+                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="34"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3FS-X7-4ZV" customClass="VerificationCodeFormView" customModule="wallet" customModuleProvider="target">
+                                <rect key="frame" x="16" y="142" width="343" height="56"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="56" id="RVY-1x-yy0"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fDU-AV-0sT" customClass="LargeIconButton" customModule="wallet" customModuleProvider="target">
+                                <rect key="frame" x="291" y="583" width="60" height="60"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="B9j-sb-fwq"/>
+                                    <constraint firstAttribute="height" constant="60" id="uW3-MS-HW1"/>
+                                </constraints>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="sIn-t9-VZF" firstAttribute="bottom" secondItem="fDU-AV-0sT" secondAttribute="bottom" constant="24" id="0xM-Ph-g7f"/>
+                            <constraint firstItem="5C8-LU-ILM" firstAttribute="leading" secondItem="sIn-t9-VZF" secondAttribute="leading" constant="16" id="Dl3-4W-Ppd"/>
+                            <constraint firstItem="sIn-t9-VZF" firstAttribute="trailing" secondItem="fDU-AV-0sT" secondAttribute="trailing" constant="24" id="EQ8-1E-jtl"/>
+                            <constraint firstItem="3FS-X7-4ZV" firstAttribute="trailing" secondItem="5C8-LU-ILM" secondAttribute="trailing" id="H2X-qz-Ccw"/>
+                            <constraint firstItem="5C8-LU-ILM" firstAttribute="top" secondItem="sIn-t9-VZF" secondAttribute="top" constant="16" id="Z3J-Mi-LOT"/>
+                            <constraint firstItem="sIn-t9-VZF" firstAttribute="trailing" secondItem="5C8-LU-ILM" secondAttribute="trailing" constant="16" id="kpg-Xf-sdu"/>
+                            <constraint firstItem="3FS-X7-4ZV" firstAttribute="top" secondItem="5C8-LU-ILM" secondAttribute="bottom" constant="24" id="mj7-vJ-1ZF"/>
+                            <constraint firstItem="3FS-X7-4ZV" firstAttribute="leading" secondItem="5C8-LU-ILM" secondAttribute="leading" id="nCf-4d-MSK"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="sIn-t9-VZF"/>
+                    </view>
+                    <connections>
+                        <outlet property="continueButton" destination="fDU-AV-0sT" id="Obe-Fj-sP1"/>
+                        <outlet property="continueButtonBottomConstraint" destination="0xM-Ph-g7f" id="3Vm-Cl-JaL"/>
+                        <outlet property="largeTitleLabel" destination="5C8-LU-ILM" id="vjP-ph-h7k"/>
+                        <outlet property="verificationCodeFormView" destination="3FS-X7-4ZV" id="xoZ-i9-Hok"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AVM-6k-sDh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="613.60000000000002" y="253.2233883058471"/>
+        </scene>
+        <!--Create New Password View Controller-->
+        <scene sceneID="hKm-GD-hJA">
+            <objects>
+                <viewController storyboardIdentifier="CreateNewPasswordViewController" id="O4A-O5-OzH" customClass="CreateNewPasswordViewController" customModule="wallet" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Cx1-kA-TRG">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create a new password" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HrH-uf-gIy">
+                                <rect key="frame" x="16" y="36" width="343" height="81.5"/>
+                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="34"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SE1-m1-7P3" customClass="NewPasswordFormView" customModule="wallet" customModuleProvider="target">
+                                <rect key="frame" x="16" y="142" width="343" height="146"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="146" id="o3U-HE-MCg"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VGq-BV-aTL" customClass="LargeIconButton" customModule="wallet" customModuleProvider="target">
+                                <rect key="frame" x="291" y="583" width="60" height="60"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="gX7-8r-GKb"/>
+                                    <constraint firstAttribute="width" constant="60" id="xvS-Dn-TvG"/>
+                                </constraints>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="HrH-uf-gIy" firstAttribute="top" secondItem="trT-Z0-yVr" secondAttribute="top" constant="16" id="BsP-5l-UuO"/>
+                            <constraint firstItem="SE1-m1-7P3" firstAttribute="top" secondItem="HrH-uf-gIy" secondAttribute="bottom" constant="24" id="Fsh-iW-kMt"/>
+                            <constraint firstItem="SE1-m1-7P3" firstAttribute="trailing" secondItem="HrH-uf-gIy" secondAttribute="trailing" id="HuL-bA-jiF"/>
+                            <constraint firstItem="HrH-uf-gIy" firstAttribute="leading" secondItem="trT-Z0-yVr" secondAttribute="leading" constant="16" id="NGs-by-HT4"/>
+                            <constraint firstItem="trT-Z0-yVr" firstAttribute="trailing" secondItem="HrH-uf-gIy" secondAttribute="trailing" constant="16" id="PwC-sz-Yzm"/>
+                            <constraint firstItem="SE1-m1-7P3" firstAttribute="leading" secondItem="HrH-uf-gIy" secondAttribute="leading" id="aTf-Cd-nEV"/>
+                            <constraint firstItem="trT-Z0-yVr" firstAttribute="trailing" secondItem="VGq-BV-aTL" secondAttribute="trailing" constant="24" id="kcB-6h-FJe"/>
+                            <constraint firstItem="trT-Z0-yVr" firstAttribute="bottom" secondItem="VGq-BV-aTL" secondAttribute="bottom" constant="24" id="vPh-bZ-rpM"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="trT-Z0-yVr"/>
+                    </view>
+                    <connections>
+                        <outlet property="continueButton" destination="VGq-BV-aTL" id="Ydu-cX-rpD"/>
+                        <outlet property="continueButtonBottomConstraint" destination="vPh-bZ-rpM" id="tP2-pH-SRc"/>
+                        <outlet property="largeTitleLabel" destination="HrH-uf-gIy" id="QRO-15-eoH"/>
+                        <outlet property="newPasswordFormView" destination="SE1-m1-7P3" id="f1a-gU-Mzg"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="m4I-7U-FOc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1553" y="253"/>
+        </scene>
+    </scenes>
 </document>

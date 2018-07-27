@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TextCheckBoxView" customModule="wallet" customModuleProvider="target">
+            <connections>
+                <outlet property="checkBox" destination="XB5-Xf-BFj" id="8Yv-YY-nDX"/>
+                <outlet property="contentView" destination="iN0-l3-epB" id="CLz-bk-oqp"/>
+                <outlet property="textLabel" destination="TzV-yT-wCg" id="GKQ-JD-ulp"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="385" height="84"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XB5-Xf-BFj" customClass="CheckBoxButton" customModule="wallet" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="0.0" width="84" height="84"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="XB5-Xf-BFj" secondAttribute="height" multiplier="1:1" id="uPf-W6-fdc"/>
+                    </constraints>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Text" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TzV-yT-wCg">
+                    <rect key="frame" x="92" y="0.0" width="293" height="84"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="TzV-yT-wCg" secondAttribute="bottom" id="0oC-yL-JOZ"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="TzV-yT-wCg" secondAttribute="trailing" id="JMs-zp-tXJ"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="XB5-Xf-BFj" secondAttribute="bottom" id="PFg-2q-es6"/>
+                <constraint firstItem="TzV-yT-wCg" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="cXV-ji-LPu"/>
+                <constraint firstItem="TzV-yT-wCg" firstAttribute="leading" secondItem="XB5-Xf-BFj" secondAttribute="trailing" constant="8" id="iCp-Gr-4FH"/>
+                <constraint firstItem="XB5-Xf-BFj" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="k4w-DS-XPH"/>
+                <constraint firstItem="XB5-Xf-BFj" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="kQu-JM-KK7"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="38.5" y="-238"/>
+        </view>
+    </objects>
+</document>

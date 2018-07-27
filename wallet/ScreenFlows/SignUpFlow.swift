@@ -43,11 +43,17 @@ final class SignUpFlow: ScreenFlow {
         }
 
         vc.onContinue = onContinue
+        vc.signupAPI = SignupAPI(provider: SignupProvider(environment: WalletEnvironment(), dispatcher: HTTPDispatcher()))
         return vc
     }()
 
     lazy var verifyPhoneNumberWithSmsScreen: VerifyPhoneNumberWithSmsViewController = {
-        let vc = VerifyPhoneNumberWithSmsViewController()
+        let _vc = ControllerHelper.instantiateViewController(identifier: "VerifyPhoneNumberWithSmsViewController", storyboardName: "Registration")
+
+        guard let vc = _vc as? VerifyPhoneNumberWithSmsViewController else {
+            fatalError()
+        }
+
         let onContinue: (String, String) -> Void = {
             [weak self]
             phone, signUpToken in
@@ -63,11 +69,17 @@ final class SignUpFlow: ScreenFlow {
         }
 
         vc.onContinue = onContinue
+        vc.signupAPI = SignupAPI(provider: SignupProvider(environment: WalletEnvironment(), dispatcher: HTTPDispatcher()))
         return vc
     }()
 
     lazy var createNewPasswordScreen: CreateNewPasswordViewController = {
-        let vc = CreateNewPasswordViewController()
+        let _vc = ControllerHelper.instantiateViewController(identifier: "CreateNewPasswordViewController", storyboardName: "Registration")
+
+        guard let vc = _vc as? CreateNewPasswordViewController else {
+            fatalError()
+        }
+
         let onContinue: (String) -> Void = {
             [weak self]
             authToken in
@@ -81,6 +93,8 @@ final class SignUpFlow: ScreenFlow {
 
             strongSelf.navigationController?.pushViewController(target, animated: true)
         }
+        vc.onContinue = onContinue
+        vc.signupAPI = SignupAPI(provider: SignupProvider(environment: WalletEnvironment(), dispatcher: HTTPDispatcher()))
         return vc
     }()
 
