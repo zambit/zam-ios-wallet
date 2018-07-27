@@ -9,6 +9,9 @@
 import Foundation
 import UIKit
 
+/**
+ Button appropriates large button from Onboarding screen. Blue title on middle. Blue arrow_icon on right. Roun corners. Size defines outside class.
+ */
 class LargeTextButton: UIButton {
 
     override func layoutSubviews() {

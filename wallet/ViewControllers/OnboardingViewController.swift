@@ -9,11 +9,23 @@
 import Foundation
 import UIKit
 
+/**
+ Onboarding screen.
+ */
 class OnboardingViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
+    /**
+     Flow parameter for moving to login flow
+     */
     var onLogin: (() -> Void)?
+    /**
+     Flow parameter for moving to signup flow
+     */
     var onSignup: (() -> Void)?
 
+    /**
+     Pages of the onboarding CollectionView
+     */
     private var onboardingItems: [OnboardingItemData] = []
 
     @IBOutlet var pagesCollectionView: UICollectionView?
@@ -51,6 +63,8 @@ class OnboardingViewController: UIViewController, UICollectionViewDataSource, UI
         setupDefaultStyle()
     }
 
+    // UICollectionView dataSource
+
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return onboardingItems.count
     }
@@ -71,12 +85,14 @@ class OnboardingViewController: UIViewController, UICollectionViewDataSource, UI
         return cell
     }
 
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return collectionView.bounds.size
-    }
-
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         pageControl?.currentPage = indexPath.section
+    }
+
+    // UICollectionView delegate flow layout
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return collectionView.bounds.size
     }
 
     @objc
@@ -90,6 +106,9 @@ class OnboardingViewController: UIViewController, UICollectionViewDataSource, UI
     }
 }
 
+/**
+ Struct represents all properties needed to fill Onboarding page with data.
+ */
 struct OnboardingItemData {
     var image: UIImage
     var title: String

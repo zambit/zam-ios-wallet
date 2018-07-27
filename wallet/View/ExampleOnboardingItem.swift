@@ -8,6 +8,9 @@
 
 import UIKit
 
+/**
+ Page of the tutorial on Onboarding screen. This skeleton defined only by sample design. Image + Title + Text.
+ */
 class ExampleOnboardingItem: UICollectionViewCell {
 
     @IBOutlet var view: UIView!
