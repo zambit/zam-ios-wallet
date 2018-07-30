@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class ContinueViewController: UIViewController {
+class ContinueViewController: FlowViewController {
 
     @IBOutlet var continueButton: LargeIconButton?
     @IBOutlet var continueButtonBottomConstraint: NSLayoutConstraint?

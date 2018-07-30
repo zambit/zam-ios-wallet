@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class EnterLoginPasswordViewController: UIViewController {
+class EnterLoginPasswordViewController: FlowViewController {
 
     var onContinue: ((_ authToken: String) -> Void)?
     var onExit: (() -> Void)?

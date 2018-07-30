@@ -63,6 +63,7 @@ final class OnboardingFlow: ScreenFlow {
 
         vc.onLogin = onLogin
         vc.onSignup = onSignup
+        vc.flow = self
         return vc
     }
 

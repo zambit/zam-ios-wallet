@@ -44,6 +44,7 @@ final class SignUpFlow: ScreenFlow {
 
         vc.onContinue = onContinue
         vc.signupAPI = SignupAPI(provider: SignupProvider(environment: WalletEnvironment(), dispatcher: HTTPDispatcher()))
+        vc.flow = self
         return vc
     }
 
@@ -70,6 +71,7 @@ final class SignUpFlow: ScreenFlow {
 
         vc.onContinue = onContinue
         vc.signupAPI = SignupAPI(provider: SignupProvider(environment: WalletEnvironment(), dispatcher: HTTPDispatcher()))
+        vc.flow = self
         return vc
     }
 
@@ -95,6 +97,7 @@ final class SignUpFlow: ScreenFlow {
         }
         vc.onContinue = onContinue
         vc.signupAPI = SignupAPI(provider: SignupProvider(environment: WalletEnvironment(), dispatcher: HTTPDispatcher()))
+        vc.flow = self
         return vc
     }
 
