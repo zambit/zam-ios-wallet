@@ -68,6 +68,19 @@ class NewPasswordFormView: UIView {
         self.passwordTextField?.font = UIFont.systemFont(ofSize: 20, weight: .regular)
         self.passwordTextField?.textColor = .white
 
+        let placeholderColor = UIColor.white.withAlphaComponent(0.2)
+        let placeholderFont = UIFont.systemFont(ofSize: 20, weight: .regular)
+        let placeholderAttributedParameters = [
+            NSAttributedStringKey.font: placeholderFont,
+            NSAttributedStringKey.foregroundColor: placeholderColor
+        ]
+
+        let passwordPlaceholderString = NSAttributedString(string: "Password", attributes: placeholderAttributedParameters)
+        let confirmationPlaceholderString = NSAttributedString(string: "Confirm your password", attributes: placeholderAttributedParameters)
+
+        self.passwordTextField?.attributedPlaceholder = passwordPlaceholderString
+        self.passwordConfirmationTextField?.attributedPlaceholder = confirmationPlaceholderString
+
         self.passwordConfirmationTextField?.font = UIFont.systemFont(ofSize: 20, weight: .regular)
         self.passwordConfirmationTextField?.textColor = .white
 
