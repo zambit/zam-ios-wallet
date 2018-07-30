@@ -24,7 +24,7 @@ final class OnboardingFlow: ScreenFlow {
         self.navigationController?.pushViewController(onboardingScreen, animated: true)
     }
 
-    lazy var onboardingScreen: OnboardingViewController = {
+    private var onboardingScreen: OnboardingViewController {
         let _vc = ControllerHelper.instantiateViewController(identifier: "OnboardingViewController", storyboardName: "Onboarding")
 
         guard let vc = _vc as? OnboardingViewController else {
@@ -38,7 +38,7 @@ final class OnboardingFlow: ScreenFlow {
                 return
             }
 
-            guard let navController = strongSelf.navigationController else {
+            guard let _ = strongSelf.navigationController else {
                 print("Navigation controller not found")
                 return
             }
@@ -53,7 +53,7 @@ final class OnboardingFlow: ScreenFlow {
                 return
             }
 
-            guard let navController = strongSelf.navigationController else {
+            guard let _ = strongSelf.navigationController else {
                 print("Navigation controller not found")
                 return
             }
@@ -64,9 +64,9 @@ final class OnboardingFlow: ScreenFlow {
         vc.onLogin = onLogin
         vc.onSignup = onSignup
         return vc
-    }()
+    }
 
-    lazy var loginFlow: LoginFlow? = {
+    private var loginFlow: LoginFlow? {
         guard let navController = navigationController else {
             print("Navigation controller not found")
             return nil
@@ -74,9 +74,9 @@ final class OnboardingFlow: ScreenFlow {
 
         let flow = LoginFlow(navigationController: navController)
         return flow
-    }()
+    }
 
-    lazy var signupFlow: SignUpFlow? = {
+    private var signupFlow: SignUpFlow? {
         guard let navController = navigationController else {
             print("Navigation controller not found")
             return nil
@@ -84,6 +84,6 @@ final class OnboardingFlow: ScreenFlow {
 
         let flow = SignUpFlow(navigationController: navController)
         return flow
-    }()
+    }
 
 }
