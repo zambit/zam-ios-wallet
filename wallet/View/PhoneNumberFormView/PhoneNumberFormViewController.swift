@@ -14,13 +14,16 @@ import UIKit
  */
 class PhoneNumberFormViewController: UIView, UITextFieldDelegate {
 
-    enum CountryImageAnimationState {
+    /**
+     Enum providing different tasks to animate
+     */
+    enum CountryImageAnimationTask {
         case show(country: String)
         case hide
         case idle
         case change(toCountry: String)
 
-        static func stateFrom(oldCountryNameValue: String?, newCountryNameValue: String?) -> CountryImageAnimationState {
+        static func taskFrom(oldCountryNameValue: String?, newCountryNameValue: String?) -> CountryImageAnimationTask {
 
             if let old = oldCountryNameValue {
                 // old is value
@@ -50,17 +53,22 @@ class PhoneNumberFormViewController: UIView, UITextFieldDelegate {
         }
     }
 
+    /**
+     Masks dictionary
+     */
     private var masks: [String: [String: String]] = [:]
+
+    /**
+      Current mask
+     */
     private var currentMask: (String, [String: String])? {
         willSet {
-            let state = CountryImageAnimationState.stateFrom(
+            let state = CountryImageAnimationTask.taskFrom(
                 oldCountryNameValue: currentMask?.1["country_name"],
                 newCountryNameValue: newValue?.1["country_name"]
             )
 
-            setupCountryImageAnimationWith(state: state) {
-
-            }
+            setupCountryImageAnimationWith(state: state) {}
         }
     }
 
@@ -72,15 +80,24 @@ class PhoneNumberFormViewController: UIView, UITextFieldDelegate {
     @IBOutlet private var rightLabelsToContentViewConstraint: NSLayoutConstraint?
     @IBOutlet private var rightImageToContentViewConstraint: NSLayoutConstraint?
 
+    /**
+     Output concatiated text from detail and main textFields
+     */
     var text: String {
         var result: String = ""
 
         if let detail = detailPhonePartTextField?.text {
-            result.append("\(detail)")
+            let numbers = detail.filter {
+                "1234567890".contains($0)
+            }
+            result.append("\(numbers)")
         }
 
         if let main = mainPhonePartTextField?.text {
-            result.append("\(main)")
+            let numbers = main.filter {
+                "1234567890".contains($0)
+            }
+            result.append("\(numbers)")
         }
 
         return result
@@ -112,10 +129,6 @@ class PhoneNumberFormViewController: UIView, UITextFieldDelegate {
         mainPhonePartTextField?.addTarget(self, action: #selector(mainTextFieldEditingEnd(_:)), for: .editingDidEnd)
     }
 
-    func provideDictionaryOfMasks(_ masks: [String: [String: String]]) {
-        self.masks = masks
-    }
-
     private func setupStyle() {
         self.backgroundColor = .clear
         self.contentView.backgroundColor = .clear
@@ -138,18 +151,11 @@ class PhoneNumberFormViewController: UIView, UITextFieldDelegate {
         self.countryImageView?.setImage(#imageLiteral(resourceName: "icon_placeholder"))
     }
 
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        if let detailTextField = detailPhonePartTextField, textField == detailPhonePartTextField {
-            return detailTextFieldShouldChangeCharactersIn(range: range, replacementString: string, textField: detailTextField)
-        }
-
-        if textField == mainPhonePartTextField {
-            return mainTextFieldShouldChangeCharactersIn(range: range, replacementString: string)
-        }
-
-        return true
+    func provideDictionaryOfMasks(_ masks: [String: [String: String]]) {
+        self.masks = masks
     }
 
+    // - UITextField events handlers
     @objc
     private func detailTextFieldEditingBegin(_ sender: UITextField) {
         sender.text?.addPrefixIfNeeded("+")
@@ -166,8 +172,6 @@ class PhoneNumberFormViewController: UIView, UITextFieldDelegate {
         currentMask = masks.filter {
             "+\($0.key)" == text
         }.first
-
-        print(currentMask?.0)
     }
 
     @objc
@@ -180,6 +184,19 @@ class PhoneNumberFormViewController: UIView, UITextFieldDelegate {
     private func mainTextFieldEditingEnd(_ sender: UITextField) {
         sender.resignFirstResponder()
         sender.layoutIfNeeded()
+    }
+
+    // - UITextFieldDelegate
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if let detailTextField = detailPhonePartTextField, textField == detailPhonePartTextField {
+            return detailTextFieldShouldChangeCharactersIn(range: range, replacementString: string, textField: detailTextField)
+        }
+
+        if textField == mainPhonePartTextField {
+            return mainTextFieldShouldChangeCharactersIn(range: range, replacementString: string)
+        }
+
+        return true
     }
 
     private func detailTextFieldShouldChangeCharactersIn(range: NSRange, replacementString string: String, textField: UITextField) -> Bool {
@@ -252,7 +269,7 @@ class PhoneNumberFormViewController: UIView, UITextFieldDelegate {
         return resulting
     }
 
-    private func setupCountryImageAnimationWith(state: CountryImageAnimationState, completion handler: @escaping () -> Void) {
+    private func setupCountryImageAnimationWith(state: CountryImageAnimationTask, completion handler: @escaping () -> Void) {
 
         switch state {
         case .show(country: let country):
