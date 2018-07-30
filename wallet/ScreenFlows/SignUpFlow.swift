@@ -21,7 +21,7 @@ final class SignUpFlow: ScreenFlow {
         self.navigationController?.pushViewController(enterPhoneNumberScreen, animated: true)
     }
 
-    lazy var enterPhoneNumberScreen: EnterPhoneNumberViewController = {
+    private var enterPhoneNumberScreen: EnterPhoneNumberViewController {
         let _vc = ControllerHelper.instantiateViewController(identifier: "EnterPhoneNumberViewController", storyboardName: "Registration")
 
         guard let vc = _vc as? EnterPhoneNumberViewController else {
@@ -45,9 +45,9 @@ final class SignUpFlow: ScreenFlow {
         vc.onContinue = onContinue
         vc.signupAPI = SignupAPI(provider: SignupProvider(environment: WalletEnvironment(), dispatcher: HTTPDispatcher()))
         return vc
-    }()
+    }
 
-    lazy var verifyPhoneNumberWithSmsScreen: VerifyPhoneNumberWithSmsViewController = {
+    private var verifyPhoneNumberWithSmsScreen: VerifyPhoneNumberWithSmsViewController {
         let _vc = ControllerHelper.instantiateViewController(identifier: "VerifyPhoneNumberWithSmsViewController", storyboardName: "Registration")
 
         guard let vc = _vc as? VerifyPhoneNumberWithSmsViewController else {
@@ -71,9 +71,9 @@ final class SignUpFlow: ScreenFlow {
         vc.onContinue = onContinue
         vc.signupAPI = SignupAPI(provider: SignupProvider(environment: WalletEnvironment(), dispatcher: HTTPDispatcher()))
         return vc
-    }()
+    }
 
-    lazy var createNewPasswordScreen: CreateNewPasswordViewController = {
+    private var createNewPasswordScreen: CreateNewPasswordViewController {
         let _vc = ControllerHelper.instantiateViewController(identifier: "CreateNewPasswordViewController", storyboardName: "Registration")
 
         guard let vc = _vc as? CreateNewPasswordViewController else {
@@ -96,10 +96,10 @@ final class SignUpFlow: ScreenFlow {
         vc.onContinue = onContinue
         vc.signupAPI = SignupAPI(provider: SignupProvider(environment: WalletEnvironment(), dispatcher: HTTPDispatcher()))
         return vc
-    }()
+    }
 
-    lazy var userScreen: UserViewController = {
+    private var userScreen: UserViewController {
         let vc = UserViewController()
         return vc
-    }()
+    }
 }

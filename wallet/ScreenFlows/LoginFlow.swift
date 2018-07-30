@@ -21,7 +21,7 @@ final class LoginFlow: ScreenFlow {
         self.navigationController?.pushViewController(enterPhoneNumberScreen, animated: true)
     }
 
-    lazy var enterPhoneNumberScreen: EnterPhoneNumberViewController = {
+    private var enterPhoneNumberScreen: EnterPhoneNumberViewController {
         let vc = EnterPhoneNumberViewController()
         let onContinue: (String) -> Void = {
             [weak self]
@@ -39,9 +39,9 @@ final class LoginFlow: ScreenFlow {
 
         vc.onContinue = onContinue
         return vc
-    }()
+    }
 
-    lazy var enterLoginPasswordScreen: EnterLoginPasswordViewController = {
+    private var enterLoginPasswordScreen: EnterLoginPasswordViewController {
         let vc = EnterLoginPasswordViewController()
         let onContinue: (String) -> Void = {
             [weak self]
@@ -57,10 +57,10 @@ final class LoginFlow: ScreenFlow {
             strongSelf.navigationController?.pushViewController(target, animated: true)
         }
         return vc
-    }()
+    }
 
-    lazy var userScreen: UserViewController = {
+    private var userScreen: UserViewController {
         let vc = UserViewController()
         return vc
-    }()
+    }
 }
