@@ -10,9 +10,6 @@ import Foundation
 import UIKit
 
 extension UITextField {
-    
-
-    /*
 
     var leftPadding: CGFloat {
         get {
@@ -34,5 +31,5 @@ extension UITextField {
             rightView = paddingView
             rightViewMode = .always
         }
-    } */
+    }
 }
