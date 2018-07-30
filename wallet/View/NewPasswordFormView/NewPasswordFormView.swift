@@ -60,10 +60,10 @@ class NewPasswordFormView: UIView {
         self.passwordTextField?.backgroundColor = UIColor.white.withAlphaComponent(0.04)
         self.passwordConfirmationTextField?.backgroundColor = UIColor.white.withAlphaComponent(0.04)
 
-//        self.passwordTextField?.leftPadding = 24.0
-//        self.passwordTextField?.rightPadding = 24.0
-//        self.passwordConfirmationTextField?.leftPadding = 24.0
-//        self.passwordConfirmationTextField?.rightPadding = 24.0
+        self.passwordTextField?.leftPadding = 16.0
+        self.passwordTextField?.rightPadding = 16.0
+        self.passwordConfirmationTextField?.leftPadding = 16.0
+        self.passwordConfirmationTextField?.rightPadding = 16.0
 
         self.passwordTextField?.font = UIFont.systemFont(ofSize: 20, weight: .regular)
         self.passwordTextField?.textColor = .white
@@ -71,12 +71,15 @@ class NewPasswordFormView: UIView {
         self.passwordConfirmationTextField?.font = UIFont.systemFont(ofSize: 20, weight: .regular)
         self.passwordConfirmationTextField?.textColor = .white
 
-        //self.passwordTextField?.addTarget(self, action: #selector(didEndEditingPasswordTextField(_:)), for: .editingDidEnd)
-        //self.passwordConfirmationTextField?.addTarget(self, action: #selector(didEndEditingPasswordConfirmationTextField(_:)), for: .editingDidEnd)
+        self.passwordTextField?.addTarget(self, action: #selector(didEndEditingPasswordTextField(_:)), for: .editingDidEnd)
+        self.passwordConfirmationTextField?.addTarget(self, action: #selector(didEndEditingPasswordConfirmationTextField(_:)), for: .editingDidEnd)
     }
 
     @objc
     private func didEndEditingPasswordTextField(_ sender: UITextField) {
+        sender.resignFirstResponder()
+        sender.layoutIfNeeded()
+
         guard
             let password = sender.text,
             let confirmation = passwordConfirmationTextField?.text else {
@@ -90,6 +93,9 @@ class NewPasswordFormView: UIView {
 
     @objc
     private func didEndEditingPasswordConfirmationTextField(_ sender: UITextField) {
+        sender.resignFirstResponder()
+        sender.layoutIfNeeded()
+
         guard
             let confirmation = sender.text,
             let password = passwordTextField?.text else {
@@ -100,7 +106,6 @@ class NewPasswordFormView: UIView {
             delegate?.passwordsDontMatch(self, password: password, confirmation: confirmation)
         }
     }
-
 }
 
 protocol NewPasswordFormViewDelegate: class {

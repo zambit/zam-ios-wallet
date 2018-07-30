@@ -9,17 +9,23 @@
 import Foundation
 import UIKit
 
-class VerificationCodeFormView: UIView {
+class VerificationCodeFormView: UIView, UITextFieldDelegate {
 
     @IBOutlet var contentView: UIView!
     @IBOutlet var codeTextField: UITextField?
+
+    var codeMask: String = "XX XX XX"
 
     var text: String {
         guard let text = codeTextField?.text else {
             return ""
         }
 
-        return text
+        let numbers = text.filter {
+            "1234567890".contains($0)
+        }
+
+        return numbers
     }
 
     override init(frame: CGRect) {
@@ -53,13 +59,75 @@ class VerificationCodeFormView: UIView {
         self.codeTextField?.textColor = .white
 
         let placeholderColor = UIColor.white.withAlphaComponent(0.2)
-        let placeholderFont = UIFont.systemFont(ofSize: 20, weight: .bold)
+        let placeholderFont = UIFont.systemFont(ofSize: 24, weight: .bold)
         let placeholderAttributedParameters = [
             NSAttributedStringKey.font: placeholderFont,
             NSAttributedStringKey.foregroundColor: placeholderColor]
 
-        let placeholderString = NSAttributedString(string: "•• •• ••", attributes: placeholderAttributedParameters)
+        let placeholderString = NSAttributedString(string: "• •   • •   • •", attributes: placeholderAttributedParameters)
         self.codeTextField?.attributedPlaceholder = placeholderString
+
+        self.codeTextField?.textAlignment = .center
+
+        self.codeTextField?.delegate = self
+    }
+
+    // - UITextFieldDelegate
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+
+        let allowedCharacters = CharacterSet(charactersIn: "1234567890")
+        let characterSet = CharacterSet(charactersIn: string)
+
+        guard allowedCharacters.isSuperset(of: characterSet) else {
+            return false
+        }
+
+        guard let text = codeTextField?.text else {
+            return true
+        }
+
+        if let textRange = Range(range, in: text) {
+            let updatedText = text.replacingCharacters(in: textRange, with: string)
+            let maskedText = matching(text: updatedText, withMask: codeMask)
+
+            codeTextField?.text = maskedText
+            return false
+        }
+
+        return true
+    }
+
+    private func matching(text: String, withMask mask: String) -> String {
+
+        var resulting: String = ""
+        var textIndex: Int = 0
+
+        for character in mask {
+            if !(textIndex < text.count) {
+                return resulting
+            }
+
+            switch character {
+            case " ":
+                resulting.append(" ")
+
+                if text[textIndex] == " " {
+                    textIndex += 1
+                }
+
+            case "X":
+                if text[textIndex] != " " {
+                    resulting.append(text[textIndex])
+                }
+
+                textIndex += 1
+
+            default:
+                fatalError()
+            }
+        }
+
+        return resulting
     }
 
 }
