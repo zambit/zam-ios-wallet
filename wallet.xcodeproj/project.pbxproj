@@ -59,7 +59,7 @@
 		8C333D4A210B1C4300949AC0 /* TextCheckBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D49210B1C4300949AC0 /* TextCheckBoxView.swift */; };
 		8C333D4C210B1D3500949AC0 /* CheckBoxButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D4B210B1D3500949AC0 /* CheckBoxButton.swift */; };
 		8C333D4E210B272D00949AC0 /* TextCheckBoxView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C333D4D210B272D00949AC0 /* TextCheckBoxView.xib */; };
-		8C333D50210B2B6900949AC0 /* PhoneNumberFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D4F210B2B6900949AC0 /* PhoneNumberFormView.swift */; };
+		8C333D50210B2B6900949AC0 /* PhoneNumberFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D4F210B2B6900949AC0 /* PhoneNumberFormViewController.swift */; };
 		8C333D52210B2C5800949AC0 /* PhoneNumberFormView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C333D51210B2C5800949AC0 /* PhoneNumberFormView.xib */; };
 		8C333D54210B394800949AC0 /* LargeIconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D53210B394800949AC0 /* LargeIconButton.swift */; };
 		8C333D56210B4EF400949AC0 /* VerificationCodeFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D55210B4EF400949AC0 /* VerificationCodeFormView.swift */; };
@@ -68,6 +68,9 @@
 		8C333D60210B5E2900949AC0 /* NewPasswordFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D5F210B5E2900949AC0 /* NewPasswordFormView.swift */; };
 		8C333D66210B6E7600949AC0 /* UITextField+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D64210B619200949AC0 /* UITextField+Extensions.swift */; };
 		8C333D68210B72A100949AC0 /* ContinueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D67210B72A100949AC0 /* ContinueViewController.swift */; };
+		8C333D6F210F00E600949AC0 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D6E210F00E600949AC0 /* String+Extensions.swift */; };
+		8C333D71210F1F5300949AC0 /* PhoneMasks.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C333D70210F1F5300949AC0 /* PhoneMasks.plist */; };
+		8C333D77210F50E000949AC0 /* CountryIconImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D76210F50E000949AC0 /* CountryIconImageView.swift */; };
 		8C34616B20EF8FA700746724 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C34616A20EF8FA700746724 /* AppDelegate.swift */; };
 		8C34617020EF8FA700746724 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C34616E20EF8FA700746724 /* Main.storyboard */; };
 		8C34617220EF8FA900746724 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8C34617120EF8FA900746724 /* Assets.xcassets */; };
@@ -134,7 +137,7 @@
 		8C333D49210B1C4300949AC0 /* TextCheckBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextCheckBoxView.swift; sourceTree = "<group>"; };
 		8C333D4B210B1D3500949AC0 /* CheckBoxButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBoxButton.swift; sourceTree = "<group>"; };
 		8C333D4D210B272D00949AC0 /* TextCheckBoxView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextCheckBoxView.xib; sourceTree = "<group>"; };
-		8C333D4F210B2B6900949AC0 /* PhoneNumberFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberFormView.swift; sourceTree = "<group>"; };
+		8C333D4F210B2B6900949AC0 /* PhoneNumberFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberFormViewController.swift; sourceTree = "<group>"; };
 		8C333D51210B2C5800949AC0 /* PhoneNumberFormView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhoneNumberFormView.xib; sourceTree = "<group>"; };
 		8C333D53210B394800949AC0 /* LargeIconButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeIconButton.swift; sourceTree = "<group>"; };
 		8C333D55210B4EF400949AC0 /* VerificationCodeFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationCodeFormView.swift; sourceTree = "<group>"; };
@@ -143,6 +146,9 @@
 		8C333D5F210B5E2900949AC0 /* NewPasswordFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPasswordFormView.swift; sourceTree = "<group>"; };
 		8C333D64210B619200949AC0 /* UITextField+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extensions.swift"; sourceTree = "<group>"; };
 		8C333D67210B72A100949AC0 /* ContinueViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContinueViewController.swift; sourceTree = "<group>"; };
+		8C333D6E210F00E600949AC0 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
+		8C333D70210F1F5300949AC0 /* PhoneMasks.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = PhoneMasks.plist; path = ../../../Downloads/PhoneMasks.plist; sourceTree = "<group>"; };
+		8C333D76210F50E000949AC0 /* CountryIconImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryIconImageView.swift; sourceTree = "<group>"; };
 		8C34616720EF8FA700746724 /* wallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = wallet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C34616A20EF8FA700746724 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8C34616F20EF8FA700746724 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -178,6 +184,7 @@
 				8C09192C21061F3600703224 /* ControllerHelper.swift */,
 				8C333D3F210A08A600949AC0 /* UIView+Extensions.swift */,
 				8C333D64210B619200949AC0 /* UITextField+Extensions.swift */,
+				8C333D6E210F00E600949AC0 /* String+Extensions.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -185,13 +192,13 @@
 		8C0919312106205600703224 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				8C333D76210F50E000949AC0 /* CountryIconImageView.swift */,
 				8C333D61210B5E3400949AC0 /* NewPasswordFormView */,
 				8C333D59210B536E00949AC0 /* VerificationCodeFormView */,
 				8C333D5A210B537A00949AC0 /* PhoneNumberFormView */,
 				8C333D43210B001500949AC0 /* LargeTextButton.swift */,
 				8C333D53210B394800949AC0 /* LargeIconButton.swift */,
 				8C333D5B210B538700949AC0 /* TextCheckBoxView */,
-				8C333D4B210B1D3500949AC0 /* CheckBoxButton.swift */,
 				8C333D5C210B539800949AC0 /* ExampleOnboardingItem */,
 			);
 			path = View;
@@ -321,7 +328,7 @@
 		8C333D5A210B537A00949AC0 /* PhoneNumberFormView */ = {
 			isa = PBXGroup;
 			children = (
-				8C333D4F210B2B6900949AC0 /* PhoneNumberFormView.swift */,
+				8C333D4F210B2B6900949AC0 /* PhoneNumberFormViewController.swift */,
 				8C333D51210B2C5800949AC0 /* PhoneNumberFormView.xib */,
 			);
 			path = PhoneNumberFormView;
@@ -330,6 +337,7 @@
 		8C333D5B210B538700949AC0 /* TextCheckBoxView */ = {
 			isa = PBXGroup;
 			children = (
+				8C333D4B210B1D3500949AC0 /* CheckBoxButton.swift */,
 				8C333D49210B1C4300949AC0 /* TextCheckBoxView.swift */,
 				8C333D4D210B272D00949AC0 /* TextCheckBoxView.xib */,
 			);
@@ -354,6 +362,14 @@
 			path = NewPasswordFormView;
 			sourceTree = "<group>";
 		};
+		8C333D6D210EFC7900949AC0 /* Files */ = {
+			isa = PBXGroup;
+			children = (
+				8C333D70210F1F5300949AC0 /* PhoneMasks.plist */,
+			);
+			path = Files;
+			sourceTree = "<group>";
+		};
 		8C34615E20EF8FA700746724 = {
 			isa = PBXGroup;
 			children = (
@@ -376,6 +392,7 @@
 			isa = PBXGroup;
 			children = (
 				8C34616A20EF8FA700746724 /* AppDelegate.swift */,
+				8C333D6D210EFC7900949AC0 /* Files */,
 				8C09192B21061ED800703224 /* Helpers */,
 				8C091939210622AF00703224 /* NetworkLayer */,
 				8C0919792108D64E00703224 /* ScreenFlows */,
@@ -507,6 +524,7 @@
 				8C333D4E210B272D00949AC0 /* TextCheckBoxView.xib in Resources */,
 				8C333D52210B2C5800949AC0 /* PhoneNumberFormView.xib in Resources */,
 				8C34617020EF8FA700746724 /* Main.storyboard in Resources */,
+				8C333D71210F1F5300949AC0 /* PhoneMasks.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -573,7 +591,7 @@
 				8C09194D2107214300703224 /* WalletEnvironment.swift in Sources */,
 				8C333D4C210B1D3500949AC0 /* CheckBoxButton.swift in Sources */,
 				8C09192D21061F3600703224 /* ControllerHelper.swift in Sources */,
-				8C333D50210B2B6900949AC0 /* PhoneNumberFormView.swift in Sources */,
+				8C333D50210B2B6900949AC0 /* PhoneNumberFormViewController.swift in Sources */,
 				8C09196221076B7000703224 /* RecoveryProvider.swift in Sources */,
 				8C091908210605FA00703224 /* InitialRouter.swift in Sources */,
 				8CF1DE4B20F3AD210036F986 /* NewPasswordViewController.swift in Sources */,
@@ -592,6 +610,8 @@
 				8CF1DE4520EFB1A70036F986 /* HorizontalScrollView.swift in Sources */,
 				8C0919412106264200703224 /* Dispatcher.swift in Sources */,
 				8CF1DE4D20F3BDB90036F986 /* KeyboardViewController.swift in Sources */,
+				8C333D77210F50E000949AC0 /* CountryIconImageView.swift in Sources */,
+				8C333D6F210F00E600949AC0 /* String+Extensions.swift in Sources */,
 				8C09196F21089FB200703224 /* AuthProvider.swift in Sources */,
 				8CF1DE4920F3A0BB0036F986 /* PasswordRecoveryViewController.swift in Sources */,
 				8C0919832109CC2000703224 /* EnterLoginPasswordViewController.swift in Sources */,

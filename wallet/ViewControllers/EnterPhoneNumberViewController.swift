@@ -19,16 +19,39 @@ class EnterPhoneNumberViewController: ContinueViewController {
     private var termsItems: [TermItemData] = []
 
     @IBOutlet var largeTitleLabel: UILabel?
-    @IBOutlet var phoneNumberFormView: PhoneNumberFormView?
+    @IBOutlet var phoneNumberForm: PhoneNumberFormViewController?
     @IBOutlet var termsStackView: UIStackView?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        termsItems = [
+            TermItemData(text: "Test for the call to confirm the legal document"),
+            TermItemData(text: "Test for the call to confirm the legal document")
+        ]
+
+        addSubviews()
         
         setupDefaultStyle()
         hideKeyboardOnTap()
 
         setupViewControllerStyle()
+
+        // Add dictionary with phone codes to appropriate PhoneNumberFormView
+        if let path = Bundle.main.path(forResource: "PhoneMasks", ofType: "plist"),
+            let masks = NSDictionary(contentsOfFile: path) as? [String: [String: String]] {
+            phoneNumberForm?.provideDictionaryOfMasks(masks)
+        }
+    }
+
+    private func addSubviews() {
+        termsItems.forEach {
+            let termView = TextCheckBoxView(frame: CGRect.zero)
+            termView.heightAnchor.constraint(equalToConstant: 32.0).isActive = true
+            termView.configure(data: $0)
+
+            termsStackView?.addArrangedSubview(termView)
+        }
     }
 
     private func setupViewControllerStyle() {
@@ -36,11 +59,13 @@ class EnterPhoneNumberViewController: ContinueViewController {
 
         continueButton?.setImage(#imageLiteral(resourceName: "icArrowRight"), for: .normal)
         continueButton?.addTarget(self, action: #selector(continueButtonTouchUpInsideEvent(_:)), for: .touchUpInside)
+
+        termsStackView?.spacing = 32.0
     }
 
     @objc
     private func continueButtonTouchUpInsideEvent(_ sender: Any) {
-        guard let phone = phoneNumberFormView?.text else {
+        guard let phone = phoneNumberForm?.text else {
             return
         }
         print(phone)

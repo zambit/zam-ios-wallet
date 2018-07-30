@@ -24,7 +24,7 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qQ8-XH-WUs" customClass="PhoneNumberFormView" customModule="wallet" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qQ8-XH-WUs" customClass="PhoneNumberFormViewController" customModule="wallet" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="142.5" width="375" height="56"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -39,6 +39,12 @@
                                     <constraint firstAttribute="height" constant="60" id="aDH-qF-EHz"/>
                                 </constraints>
                             </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="OBf-Zh-HeM">
+                                <rect key="frame" x="16" y="233" width="215" height="200"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="215" id="DPC-1c-H2H"/>
+                                </constraints>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -47,6 +53,8 @@
                             <constraint firstItem="U4Y-RM-BPg" firstAttribute="top" secondItem="egG-wf-OqO" secondAttribute="top" constant="16" id="PVF-2c-ahe"/>
                             <constraint firstItem="egG-wf-OqO" firstAttribute="trailing" secondItem="yY4-cD-Qm1" secondAttribute="trailing" constant="24" id="UOm-zz-zKb"/>
                             <constraint firstItem="egG-wf-OqO" firstAttribute="trailing" secondItem="qQ8-XH-WUs" secondAttribute="trailing" id="ZMm-x6-qFJ"/>
+                            <constraint firstItem="OBf-Zh-HeM" firstAttribute="top" secondItem="qQ8-XH-WUs" secondAttribute="bottom" constant="42" id="p1W-L0-1T6"/>
+                            <constraint firstItem="OBf-Zh-HeM" firstAttribute="leading" secondItem="egG-wf-OqO" secondAttribute="leading" constant="16" id="pB4-4w-6zr"/>
                             <constraint firstItem="qQ8-XH-WUs" firstAttribute="leading" secondItem="egG-wf-OqO" secondAttribute="leading" id="plK-hK-eiJ"/>
                             <constraint firstItem="egG-wf-OqO" firstAttribute="bottom" secondItem="yY4-cD-Qm1" secondAttribute="bottom" constant="24" id="tw1-mZ-PDp"/>
                             <constraint firstItem="U4Y-RM-BPg" firstAttribute="leading" secondItem="egG-wf-OqO" secondAttribute="leading" constant="16" id="zz9-Kf-9xn"/>
@@ -57,7 +65,8 @@
                         <outlet property="continueButton" destination="yY4-cD-Qm1" id="biH-RX-QAM"/>
                         <outlet property="continueButtonBottomConstraint" destination="tw1-mZ-PDp" id="Xec-tN-Fzp"/>
                         <outlet property="largeTitleLabel" destination="U4Y-RM-BPg" id="Fbq-nU-Gfe"/>
-                        <outlet property="phoneNumberFormView" destination="qQ8-XH-WUs" id="q4o-aW-0v8"/>
+                        <outlet property="phoneNumberForm" destination="qQ8-XH-WUs" id="q4o-aW-0v8"/>
+                        <outlet property="termsStackView" destination="OBf-Zh-HeM" id="UKy-to-pon"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4AW-mO-z2B" userLabel="First Responder" sceneMemberID="firstResponder"/>

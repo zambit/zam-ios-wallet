@@ -32,7 +32,7 @@ class CheckBoxButton: UIButton, CheckBox {
             return self.isSelected
         }
         set {
-            self.isSelected = isChecked
+            self.isSelected = newValue
         }
     }
 

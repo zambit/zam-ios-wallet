@@ -11,9 +11,9 @@ import UIKit
 
 class TextCheckBoxView: UIView {
 
-    @IBOutlet var contentView: UIView!
-    @IBOutlet var checkBox: CheckBoxButton?
-    @IBOutlet var textLabel: UILabel?
+    @IBOutlet private var contentView: UIView!
+    @IBOutlet private var checkBox: CheckBoxButton?
+    @IBOutlet private var textLabel: UILabel?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -27,6 +27,10 @@ class TextCheckBoxView: UIView {
         setupStyle()
     }
 
+    func configure(data: TermItemData) {
+        textLabel?.text = data.text
+    }
+
     func configure(text: String) {
         textLabel?.text = text
     }
@@ -37,6 +41,9 @@ class TextCheckBoxView: UIView {
 
         contentView.frame = self.bounds
         contentView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+
+        checkBox?.isChecked = false
+        checkBox?.addTarget(self, action: #selector(changeCheckBoxState(_:)), for: .touchUpInside)
     }
 
     private func setupStyle() {
@@ -44,4 +51,12 @@ class TextCheckBoxView: UIView {
         self.contentView.backgroundColor = .clear
     }
 
+    @objc
+    private func changeCheckBoxState(_ sender: Any) {
+        guard let state = checkBox?.isChecked else {
+            return
+        }
+
+        checkBox?.isChecked = !state
+    }
 }
