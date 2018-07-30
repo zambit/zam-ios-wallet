@@ -21,7 +21,11 @@ class VerificationCodeFormView: UIView, UITextFieldDelegate {
             return ""
         }
 
-        return text
+        let numbers = text.filter {
+            "1234567890".contains($0)
+        }
+
+        return numbers
     }
 
     override init(frame: CGRect) {
