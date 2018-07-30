@@ -15,22 +15,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var mainScreenFlow: ScreenFlow?
 
-    var api: SignupAPI?
+    @objc
+    private func initialNavigationControllerBackButton(_ sender: Any) {
 
-    var authApi: AuthAPI?
+    }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        api = SignupAPI(provider: SignupProvider(environment: WalletEnvironment(), dispatcher: HTTPDispatcher()))
-
-        authApi = AuthAPI(provider: AuthProvider(environment: WalletEnvironment(), dispatcher: HTTPDispatcher()))
-
         UIApplication.shared.statusBarStyle = .lightContent
-
-        UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
-        UINavigationBar.appearance().shadowImage = UIImage()
-        UINavigationBar.appearance().backgroundColor = .clear
-        UINavigationBar.appearance().isTranslucent = true
 
         let phone = "+79136653903"
         let code = "195227"
@@ -38,7 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         print("start")
 
-        let navigationController = UINavigationController()
+        let navigationController = WalletNavigationController()
         self.mainScreenFlow = OnboardingFlow(navigationController: navigationController)
 
         self.window = UIWindow(frame: UIScreen.main.bounds)

@@ -72,6 +72,7 @@
 		8C333D71210F1F5300949AC0 /* PhoneMasks.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C333D70210F1F5300949AC0 /* PhoneMasks.plist */; };
 		8C333D77210F50E000949AC0 /* CountryIconImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D76210F50E000949AC0 /* CountryIconImageView.swift */; };
 		8C333D7B210F767100949AC0 /* FlowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D7A210F767100949AC0 /* FlowViewController.swift */; };
+		8C333D7D210F81F100949AC0 /* WalletNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D7C210F81F100949AC0 /* WalletNavigationController.swift */; };
 		8C34616B20EF8FA700746724 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C34616A20EF8FA700746724 /* AppDelegate.swift */; };
 		8C34617020EF8FA700746724 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C34616E20EF8FA700746724 /* Main.storyboard */; };
 		8C34617220EF8FA900746724 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8C34617120EF8FA900746724 /* Assets.xcassets */; };
@@ -151,6 +152,7 @@
 		8C333D70210F1F5300949AC0 /* PhoneMasks.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = PhoneMasks.plist; path = ../../../Downloads/PhoneMasks.plist; sourceTree = "<group>"; };
 		8C333D76210F50E000949AC0 /* CountryIconImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryIconImageView.swift; sourceTree = "<group>"; };
 		8C333D7A210F767100949AC0 /* FlowViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowViewController.swift; sourceTree = "<group>"; };
+		8C333D7C210F81F100949AC0 /* WalletNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletNavigationController.swift; sourceTree = "<group>"; };
 		8C34616720EF8FA700746724 /* wallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = wallet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C34616A20EF8FA700746724 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8C34616F20EF8FA700746724 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -210,6 +212,7 @@
 			isa = PBXGroup;
 			children = (
 				8C333D7A210F767100949AC0 /* FlowViewController.swift */,
+				8C333D7C210F81F100949AC0 /* WalletNavigationController.swift */,
 				8C333D67210B72A100949AC0 /* ContinueViewController.swift */,
 				8C333D45210B0D5400949AC0 /* LaunchScreenViewController.swift */,
 				8C091933210620C800703224 /* OnboardingViewController.swift */,
@@ -625,6 +628,7 @@
 				8C333D46210B0D5400949AC0 /* LaunchScreenViewController.swift in Sources */,
 				8C09197121089FBB00703224 /* AuthAPI.swift in Sources */,
 				8C09195F21076B5D00703224 /* RecoveryAPI.swift in Sources */,
+				8C333D7D210F81F100949AC0 /* WalletNavigationController.swift in Sources */,
 				8C34616B20EF8FA700746724 /* AppDelegate.swift in Sources */,
 				8C333D44210B001500949AC0 /* LargeTextButton.swift in Sources */,
 				8C333D342109F02000949AC0 /* ScreenFlow.swift in Sources */,
