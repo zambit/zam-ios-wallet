@@ -47,6 +47,8 @@ struct HTTPDispatcher: Dispatcher {
 
         let fullURLString = "\(environment.host)/\(request.path)"
 
+        print(fullURLString)
+
         guard let fullURL = URL(string: fullURLString) else {
             throw HTTPDispatcherError.badURL
         }
