@@ -253,6 +253,45 @@
             </objects>
             <point key="canvasLocation" x="32.799999999999997" y="31.934032983508249"/>
         </scene>
+        <!--User View Controller-->
+        <scene sceneID="CjJ-WR-eOy">
+            <objects>
+                <viewController storyboardIdentifier="UserViewController" id="rJP-CE-Uyn" customClass="UserViewController" customModule="wallet" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="s4F-eB-BQN">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Phone" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IBc-4V-Glf">
+                                <rect key="frame" x="146.5" y="165" width="82.5" height="36"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Token" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="64i-dB-HCl">
+                                <rect key="frame" x="173.5" y="243" width="29" height="12"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="64i-dB-HCl" firstAttribute="centerX" secondItem="IBc-4V-Glf" secondAttribute="centerX" id="RZq-RM-xIg"/>
+                            <constraint firstItem="IBc-4V-Glf" firstAttribute="centerX" secondItem="s4F-eB-BQN" secondAttribute="centerX" id="XH7-1i-e4b"/>
+                            <constraint firstItem="IBc-4V-Glf" firstAttribute="top" secondItem="oKY-uj-bnB" secondAttribute="top" constant="145" id="oRJ-7d-T7a"/>
+                            <constraint firstItem="64i-dB-HCl" firstAttribute="top" secondItem="IBc-4V-Glf" secondAttribute="bottom" constant="42" id="qaV-rh-xKv"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="oKY-uj-bnB"/>
+                    </view>
+                    <connections>
+                        <outlet property="phoneNumberLabel" destination="IBc-4V-Glf" id="G9Y-Qq-RlN"/>
+                        <outlet property="tokenLabel" destination="64i-dB-HCl" id="T1k-Qn-Lqa"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Mux-u7-Ms9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1924" y="931.48425787106453"/>
+        </scene>
         <!--Password Recovery-->
         <scene sceneID="fAw-Ea-p6r">
             <objects>
