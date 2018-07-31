@@ -9,6 +9,14 @@
 import Foundation
 import UIKit
 
+protocol NewPasswordFormViewDelegate: class {
+
+    func newPasswordFormViewController(_ newPasswordFormViewController: NewPasswordFormViewController, passwordEnteringIsCompleted: Bool)
+
+    func passwordsDontMatch(_ newPasswordFormView: NewPasswordFormViewController, password: String, confirmation: String)
+
+}
+
 class NewPasswordFormViewController: UIView {
 
     @IBOutlet var contentView: UIView!
@@ -57,6 +65,9 @@ class NewPasswordFormViewController: UIView {
         self.backgroundColor = .clear
         self.contentView.backgroundColor = .clear
 
+        self.passwordTextField?.isSecureTextEntry = true
+        self.passwordConfirmationTextField?.isSecureTextEntry = true
+
         self.passwordTextField?.backgroundColor = UIColor.white.withAlphaComponent(0.04)
         self.passwordConfirmationTextField?.backgroundColor = UIColor.white.withAlphaComponent(0.04)
 
@@ -84,45 +95,52 @@ class NewPasswordFormViewController: UIView {
         self.passwordConfirmationTextField?.font = UIFont.systemFont(ofSize: 20, weight: .regular)
         self.passwordConfirmationTextField?.textColor = .white
 
+        self.passwordTextField?.addTarget(self, action: #selector(editingChangePasswordTextField(_:)), for: .editingChanged)
+        self.passwordConfirmationTextField?.addTarget(self, action: #selector(editingChangePasswordConfirmationTextField(_:)), for: .editingChanged)
+
         self.passwordTextField?.addTarget(self, action: #selector(didEndEditingPasswordTextField(_:)), for: .editingDidEnd)
         self.passwordConfirmationTextField?.addTarget(self, action: #selector(didEndEditingPasswordConfirmationTextField(_:)), for: .editingDidEnd)
     }
 
     @objc
-    private func didEndEditingPasswordTextField(_ sender: UITextField) {
-        sender.resignFirstResponder()
-        sender.layoutIfNeeded()
-
+    private func editingChangePasswordTextField(_ sender: UITextField) {
         guard
             let password = sender.text,
             let confirmation = passwordConfirmationTextField?.text else {
-            return
+                return
         }
 
-        if password != confirmation {
-            delegate?.passwordsDontMatch(self, password: password, confirmation: confirmation)
-        }
+        checkConditions(password: password, confirmation: confirmation)
     }
 
     @objc
-    private func didEndEditingPasswordConfirmationTextField(_ sender: UITextField) {
-        sender.resignFirstResponder()
-        sender.layoutIfNeeded()
-
+    private func editingChangePasswordConfirmationTextField(_ sender: UITextField) {
         guard
             let confirmation = sender.text,
             let password = passwordTextField?.text else {
                 return
         }
 
+        checkConditions(password: password, confirmation: confirmation)
+    }
+
+    @objc
+    private func didEndEditingPasswordTextField(_ sender: UITextField) {
+        sender.resignFirstResponder()
+        sender.layoutIfNeeded()
+    }
+
+    @objc
+    private func didEndEditingPasswordConfirmationTextField(_ sender: UITextField) {
+        sender.resignFirstResponder()
+        sender.layoutIfNeeded()
+    }
+
+    private func checkConditions(password: String, confirmation: String) {
+        delegate?.newPasswordFormViewController(self, passwordEnteringIsCompleted: password == confirmation)
+
         if password != confirmation {
             delegate?.passwordsDontMatch(self, password: password, confirmation: confirmation)
         }
     }
-}
-
-protocol NewPasswordFormViewDelegate: class {
-
-    func passwordsDontMatch(_ newPasswordFormView: NewPasswordFormViewController, password: String, confirmation: String)
-
 }
