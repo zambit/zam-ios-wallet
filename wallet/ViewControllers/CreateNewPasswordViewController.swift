@@ -12,8 +12,9 @@ import UIKit
 /**
  Creating new password screen controller. Owns its model and views.
  */
-class CreateNewPasswordViewController: ContinueViewController {
+class CreateNewPasswordViewController: ContinueViewController, NewPasswordFormViewDelegate {
 
+    var userManager: WalletUserDefaultsManager?
     var signupAPI: SignupAPI?
 
     /**
@@ -34,6 +35,8 @@ class CreateNewPasswordViewController: ContinueViewController {
         hideKeyboardOnTap()
 
         setupViewControllerStyle()
+
+        newPasswordFormView?.delegate = self
     }
 
     private func setupViewControllerStyle() {
@@ -41,6 +44,14 @@ class CreateNewPasswordViewController: ContinueViewController {
 
         continueButton?.setImage(#imageLiteral(resourceName: "icArrowRight"), for: .normal)
         continueButton?.addTarget(self, action: #selector(continueButtonTouchUpInsideEvent(_:)), for: .touchUpInside)
+    }
+
+    func newPasswordFormViewController(_ newPasswordFormViewController: NewPasswordFormViewController, passwordEnteringIsCompleted: Bool) {
+        continueButton?.customAppearance.setEnabled(passwordEnteringIsCompleted)
+    }
+
+    func passwordsDontMatch(_ newPasswordFormView: NewPasswordFormViewController, password: String, confirmation: String) {
+        print("Passwords don't match")
     }
 
     /**
@@ -64,6 +75,11 @@ class CreateNewPasswordViewController: ContinueViewController {
         signupAPI?.providePassword(password, confirmation: confirmation, for: phone, signUpToken: token).done {
             [weak self]
             authToken in
+
+            self?.userManager?.save(token: authToken)
+            self?.userManager?.save(phoneNumber: phone)
+
+            self?.onContinue?(authToken)
 
             print(authToken)
         }.catch { error in
