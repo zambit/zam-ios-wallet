@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class VerificationCodeFormView: UIView, UITextFieldDelegate {
+class VerificationCodeFormViewController: UIView, UITextFieldDelegate {
 
     @IBOutlet var contentView: UIView!
     @IBOutlet var codeTextField: UITextField?

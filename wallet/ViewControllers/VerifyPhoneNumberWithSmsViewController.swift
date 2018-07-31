@@ -24,7 +24,7 @@ class VerifyPhoneNumberWithSmsViewController: ContinueViewController {
     private var phone: String?
 
     @IBOutlet var largeTitleLabel: UILabel?
-    @IBOutlet var verificationCodeFormView: VerificationCodeFormView?
+    @IBOutlet var verificationCodeFormView: VerificationCodeFormViewController?
     @IBOutlet var sendCodeAgainButton: UIButton?
 
     override func viewDidLoad() {

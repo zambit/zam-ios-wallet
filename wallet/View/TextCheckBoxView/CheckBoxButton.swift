@@ -17,7 +17,23 @@ protocol CheckBox: class {
     var isChecked: Bool { get set }
 }
 
-class CheckBoxButton: UIButton, CheckBox {
+class CheckBoxButton: UIButton, CustomUI {
+
+    struct CustomAppearance {
+        weak var parent: CheckBoxButton?
+
+        var isChecked: Bool {
+            return parent?.isSelected ?? false
+        }
+
+        func setChecked(_ checked: Bool) {
+            parent?.isSelected = checked
+        }
+    }
+
+    var customAppearance: CheckBoxButton.CustomAppearance {
+        return CustomAppearance(parent: self)
+    }
 
     var onImage: UIImage {
         return #imageLiteral(resourceName: "icCheckboxDone")
@@ -25,15 +41,6 @@ class CheckBoxButton: UIButton, CheckBox {
 
     var offImage: UIImage {
         return #imageLiteral(resourceName: "icCheckboxDo")
-    }
-
-    var isChecked: Bool {
-        get {
-            return self.isSelected
-        }
-        set {
-            self.isSelected = newValue
-        }
     }
 
     override init(frame: CGRect) {

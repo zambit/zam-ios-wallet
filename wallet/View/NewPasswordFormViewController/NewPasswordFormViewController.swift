@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class NewPasswordFormView: UIView {
+class NewPasswordFormViewController: UIView {
 
     @IBOutlet var contentView: UIView!
     @IBOutlet var passwordTextField: UITextField?
@@ -123,6 +123,6 @@ class NewPasswordFormView: UIView {
 
 protocol NewPasswordFormViewDelegate: class {
 
-    func passwordsDontMatch(_ newPasswordFormView: NewPasswordFormView, password: String, confirmation: String)
+    func passwordsDontMatch(_ newPasswordFormView: NewPasswordFormViewController, password: String, confirmation: String)
 
 }

@@ -25,7 +25,7 @@ class CreateNewPasswordViewController: ContinueViewController {
     private var signupToken: String?
 
     @IBOutlet var largeTitleLabel: UILabel?
-    @IBOutlet var newPasswordFormView: NewPasswordFormView?
+    @IBOutlet var newPasswordFormView: NewPasswordFormViewController?
 
     override func viewDidLoad() {
         super.viewDidLoad()

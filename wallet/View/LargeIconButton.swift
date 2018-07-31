@@ -12,7 +12,7 @@ import UIKit
 /**
  Button appropriates large button from Onboarding screen. Blue title on middle. Blue arrow_icon on right. Roun corners. Size defines outside class.
  */
-class LargeIconButton: UIButton {
+class LargeIconButton: UIButton, CustomUI {
 
     struct CustomAppearance {
         weak var parent: LargeIconButton?
@@ -27,14 +27,14 @@ class LargeIconButton: UIButton {
                 parent?.alpha = 0.5
             }
         }
+
+        func setLoading(_ enabled: Bool) {
+            // to do
+        }
     }
 
-    private(set) var customAppearance: CustomAppearance!
-
-    var isLoading: Bool = false {
-        didSet {
-            // change iconView state
-        }
+    var customAppearance: CustomAppearance {
+        return CustomAppearance(parent: self)
     }
 
     override func layoutSubviews() {
@@ -44,17 +44,12 @@ class LargeIconButton: UIButton {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-
         setupStyle()
-
-        customAppearance = CustomAppearance(parent: self)
     }
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setupStyle()
-
-        customAppearance = CustomAppearance(parent: self)
     }
 
     private func setupStyle() {
