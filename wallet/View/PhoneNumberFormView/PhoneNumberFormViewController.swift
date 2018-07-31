@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import FlagKit
 
 /**
  Class that controlls entreing phone number form, handles all textFields editing and defines its behaviour.
