@@ -9,6 +9,9 @@
 import Foundation
 import UIKit
 
+/**
+ Custom NavigationController that provides general style and behaviour according to design
+ */
 class WalletNavigationController: UINavigationController {
 
     override func viewDidLoad() {

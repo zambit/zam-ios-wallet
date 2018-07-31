@@ -9,11 +9,21 @@
 import Foundation
 import UIKit
 
+/**
+ Entering phone number screen controller. Owns its model and views.
+ */
 class EnterPhoneNumberViewController: ContinueViewController {
 
     var signupAPI: SignupAPI?
 
+    /**
+     Flow parameter for continue action. Needs to provide phone number for doing action
+     */
     var onContinue: ((_ phone: String) -> Void)?
+    
+    /**
+     Flow parameter for skip action
+     */
     var onSkip: (() -> Void)?
 
     private var termsItems: [TermItemData] = []
@@ -38,10 +48,12 @@ class EnterPhoneNumberViewController: ContinueViewController {
         setupViewControllerStyle()
 
         // Add dictionary with phone codes to appropriate PhoneNumberFormView
-        if let path = Bundle.main.path(forResource: "PhoneMasks", ofType: "plist"),
-            let masks = NSDictionary(contentsOfFile: path) as? [String: [String: String]] {
-            phoneNumberForm?.provideDictionaryOfMasks(masks)
+        guard let path = Bundle.main.path(forResource: "PhoneMasks", ofType: "plist"),
+            let masks = NSDictionary(contentsOfFile: path) as? [String: [String: String]] else {
+                fatalError("PhoneMasks.plist error")
         }
+
+        phoneNumberForm?.provideDictionaryOfMasks(masks)
     }
 
     private func addSubviews() {
@@ -78,6 +90,9 @@ class EnterPhoneNumberViewController: ContinueViewController {
     }
 }
 
+/**
+ Struct represents all properties needed to fill TermItem.
+ */
 struct TermItemData {
     var text: String
 }

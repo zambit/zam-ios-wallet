@@ -9,6 +9,9 @@
 import Foundation
 import UIKit
 
+/**
+ UIViewController that is a part of some ScreenFlow. Holds strong reference on its ScreenFlow
+ */
 class FlowViewController: UIViewController {
 
     var flow: ScreenFlow?

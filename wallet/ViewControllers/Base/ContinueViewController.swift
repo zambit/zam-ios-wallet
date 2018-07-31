@@ -9,6 +9,9 @@
 import Foundation
 import UIKit
 
+/**
+ UIViewController providing default continue behaviour: "Round @ContinueButton moving with keyboard during it appears"
+ */
 class ContinueViewController: FlowViewController {
 
     @IBOutlet var continueButton: LargeIconButton?

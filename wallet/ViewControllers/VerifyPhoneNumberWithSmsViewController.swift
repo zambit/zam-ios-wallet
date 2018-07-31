@@ -9,11 +9,17 @@
 import Foundation
 import UIKit
 
+/**
+ Verifying phone number screen controller. Owns its model and views.
+ */
 class VerifyPhoneNumberWithSmsViewController: ContinueViewController {
 
     var signupAPI: SignupAPI?
 
-    var onContinue: ((String, String) -> Void)?
+    /**
+     Flow parameter for continue action. Needs to provide phone number and signUpToken for doing action.
+     */
+    var onContinue: ((_ phone: String, _ signupToken: String) -> Void)?
 
     private var phone: String?
 
@@ -29,6 +35,9 @@ class VerifyPhoneNumberWithSmsViewController: ContinueViewController {
         setupViewControllerStyle()
     }
 
+    /**
+     Function for receiveing data from previous ViewController on ScreenFlow
+     */
     func prepare(phone: String) {
         self.phone = phone
     }

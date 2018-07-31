@@ -149,7 +149,7 @@
 		8C333D64210B619200949AC0 /* UITextField+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extensions.swift"; sourceTree = "<group>"; };
 		8C333D67210B72A100949AC0 /* ContinueViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContinueViewController.swift; sourceTree = "<group>"; };
 		8C333D6E210F00E600949AC0 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
-		8C333D70210F1F5300949AC0 /* PhoneMasks.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = PhoneMasks.plist; path = ../../../Downloads/PhoneMasks.plist; sourceTree = "<group>"; };
+		8C333D70210F1F5300949AC0 /* PhoneMasks.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PhoneMasks.plist; sourceTree = "<group>"; };
 		8C333D76210F50E000949AC0 /* CountryIconImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryIconImageView.swift; sourceTree = "<group>"; };
 		8C333D7A210F767100949AC0 /* FlowViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowViewController.swift; sourceTree = "<group>"; };
 		8C333D7C210F81F100949AC0 /* WalletNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletNavigationController.swift; sourceTree = "<group>"; };
@@ -183,6 +183,7 @@
 		8C09192B21061ED800703224 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				8C333D7C210F81F100949AC0 /* WalletNavigationController.swift */,
 				8C333D41210A094500949AC0 /* UIColor+Additions.swift */,
 				8C333D47210B0F3700949AC0 /* UIViewController+Extensions.swift */,
 				8C09192C21061F3600703224 /* ControllerHelper.swift */,
@@ -211,9 +212,7 @@
 		8C0919322106206100703224 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				8C333D7A210F767100949AC0 /* FlowViewController.swift */,
-				8C333D7C210F81F100949AC0 /* WalletNavigationController.swift */,
-				8C333D67210B72A100949AC0 /* ContinueViewController.swift */,
+				8C60883C21105A0F00470411 /* Base */,
 				8C333D45210B0D5400949AC0 /* LaunchScreenViewController.swift */,
 				8C091933210620C800703224 /* OnboardingViewController.swift */,
 				8C09197C2108D6F300703224 /* EnterPhoneNumberViewController.swift */,
@@ -416,6 +415,15 @@
 				8C34617620EF8FA900746724 /* Info.plist */,
 			);
 			path = wallet;
+			sourceTree = "<group>";
+		};
+		8C60883C21105A0F00470411 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				8C333D7A210F767100949AC0 /* FlowViewController.swift */,
+				8C333D67210B72A100949AC0 /* ContinueViewController.swift */,
+			);
+			path = Base;
 			sourceTree = "<group>";
 		};
 		8CF1DE4320EF9D170036F986 /* Screens */ = {

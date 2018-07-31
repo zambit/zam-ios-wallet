@@ -9,10 +9,16 @@
 import Foundation
 import UIKit
 
+/**
+ Creating new password screen controller. Owns its model and views.
+ */
 class CreateNewPasswordViewController: ContinueViewController {
 
     var signupAPI: SignupAPI?
 
+    /**
+     Flow parameter for continue action. Needs to provide authToken for doing action.
+     */
     var onContinue: ((_ authToken: String) -> Void)?
 
     private var phone: String?
@@ -37,6 +43,9 @@ class CreateNewPasswordViewController: ContinueViewController {
         continueButton?.addTarget(self, action: #selector(continueButtonTouchUpInsideEvent(_:)), for: .touchUpInside)
     }
 
+    /**
+     Function for receiveing data from previous ViewController on ScreenFlow
+     */
     func prepare(phone: String, signupToken: String) {
         self.phone = phone
         self.signupToken = signupToken
