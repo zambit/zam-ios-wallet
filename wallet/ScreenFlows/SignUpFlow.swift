@@ -97,12 +97,19 @@ final class SignUpFlow: ScreenFlow {
         }
         vc.onContinue = onContinue
         vc.signupAPI = SignupAPI(provider: SignupProvider(environment: WalletEnvironment(), dispatcher: HTTPDispatcher()))
+        vc.userManager = WalletUserDefaultsManager()
         vc.flow = self
         return vc
     }
 
     private var userScreen: UserViewController {
-        let vc = UserViewController()
+        let _vc = ControllerHelper.instantiateViewController(identifier: "UserViewController", storyboardName: "Main")
+
+        guard let vc = _vc as? UserViewController else {
+            fatalError()
+        }
+
+        vc.userManager = WalletUserDefaultsManager()
         return vc
     }
 }
