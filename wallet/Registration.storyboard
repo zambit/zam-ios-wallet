@@ -31,7 +31,7 @@
                                     <constraint firstAttribute="height" constant="56" id="w2H-ng-OF1"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yY4-cD-Qm1" customClass="LargeIconButton" customModule="wallet" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yY4-cD-Qm1" customClass="LargeIconButton" customModule="wallet" customModuleProvider="target">
                                 <rect key="frame" x="291" y="583" width="60" height="60"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -39,10 +39,11 @@
                                     <constraint firstAttribute="height" constant="60" id="aDH-qF-EHz"/>
                                 </constraints>
                             </button>
-                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="OBf-Zh-HeM">
-                                <rect key="frame" x="16" y="233" width="215" height="200"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="OBf-Zh-HeM">
+                                <rect key="frame" x="16" y="240.5" width="215" height="200"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="215" id="DPC-1c-H2H"/>
+                                    <constraint firstAttribute="height" constant="200" placeholder="YES" id="W1d-wb-Ork"/>
                                 </constraints>
                             </stackView>
                         </subviews>
@@ -81,7 +82,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What's your phone number?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5C8-LU-ILM">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Verification with sms-code" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5C8-LU-ILM">
                                 <rect key="frame" x="16" y="36" width="343" height="81.5"/>
                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="34"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -94,13 +95,17 @@
                                     <constraint firstAttribute="height" constant="56" id="RVY-1x-yy0"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fDU-AV-0sT" customClass="LargeIconButton" customModule="wallet" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fDU-AV-0sT" customClass="LargeIconButton" customModule="wallet" customModuleProvider="target">
                                 <rect key="frame" x="291" y="583" width="60" height="60"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="60" id="B9j-sb-fwq"/>
                                     <constraint firstAttribute="height" constant="60" id="uW3-MS-HW1"/>
                                 </constraints>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w2q-jJ-o6c" customClass="AdditionalTextButton" customModule="wallet" customModuleProvider="target">
+                                <rect key="frame" x="24" y="598" width="46" height="30"/>
+                                <state key="normal" title="Button"/>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -109,7 +114,9 @@
                             <constraint firstItem="5C8-LU-ILM" firstAttribute="leading" secondItem="sIn-t9-VZF" secondAttribute="leading" constant="16" id="Dl3-4W-Ppd"/>
                             <constraint firstItem="sIn-t9-VZF" firstAttribute="trailing" secondItem="fDU-AV-0sT" secondAttribute="trailing" constant="24" id="EQ8-1E-jtl"/>
                             <constraint firstItem="3FS-X7-4ZV" firstAttribute="trailing" secondItem="5C8-LU-ILM" secondAttribute="trailing" id="H2X-qz-Ccw"/>
+                            <constraint firstItem="w2q-jJ-o6c" firstAttribute="centerY" secondItem="fDU-AV-0sT" secondAttribute="centerY" id="W7y-M8-mMu"/>
                             <constraint firstItem="5C8-LU-ILM" firstAttribute="top" secondItem="sIn-t9-VZF" secondAttribute="top" constant="16" id="Z3J-Mi-LOT"/>
+                            <constraint firstItem="w2q-jJ-o6c" firstAttribute="leading" secondItem="sIn-t9-VZF" secondAttribute="leading" constant="24" id="ikK-jT-Jh7"/>
                             <constraint firstItem="sIn-t9-VZF" firstAttribute="trailing" secondItem="5C8-LU-ILM" secondAttribute="trailing" constant="16" id="kpg-Xf-sdu"/>
                             <constraint firstItem="3FS-X7-4ZV" firstAttribute="top" secondItem="5C8-LU-ILM" secondAttribute="bottom" constant="24" id="mj7-vJ-1ZF"/>
                             <constraint firstItem="3FS-X7-4ZV" firstAttribute="leading" secondItem="5C8-LU-ILM" secondAttribute="leading" id="nCf-4d-MSK"/>
@@ -120,6 +127,7 @@
                         <outlet property="continueButton" destination="fDU-AV-0sT" id="Obe-Fj-sP1"/>
                         <outlet property="continueButtonBottomConstraint" destination="0xM-Ph-g7f" id="3Vm-Cl-JaL"/>
                         <outlet property="largeTitleLabel" destination="5C8-LU-ILM" id="vjP-ph-h7k"/>
+                        <outlet property="sendVerificationCodeAgainButton" destination="w2q-jJ-o6c" id="nSc-hq-dEN"/>
                         <outlet property="verificationCodeFormView" destination="3FS-X7-4ZV" id="xoZ-i9-Hok"/>
                     </connections>
                 </viewController>
@@ -148,7 +156,7 @@
                                     <constraint firstAttribute="height" constant="146" id="o3U-HE-MCg"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VGq-BV-aTL" customClass="LargeIconButton" customModule="wallet" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VGq-BV-aTL" customClass="LargeIconButton" customModule="wallet" customModuleProvider="target">
                                 <rect key="frame" x="291" y="583" width="60" height="60"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
