@@ -9,10 +9,18 @@
 import Foundation
 import UIKit
 
+protocol VerificationCodeFormViewDelegate: class {
+
+    func verificationCodeFormViewController(_ verificationCodeFormViewController: VerificationCodeFormViewController, codeEnteringIsCompleted: Bool)
+
+}
+
 class VerificationCodeFormViewController: UIView, UITextFieldDelegate {
 
     @IBOutlet var contentView: UIView!
     @IBOutlet var codeTextField: UITextField?
+
+    weak var delegate: VerificationCodeFormViewDelegate?
 
     var codeMask: String = "XX XX XX"
 
@@ -72,6 +80,14 @@ class VerificationCodeFormViewController: UIView, UITextFieldDelegate {
         self.codeTextField?.delegate = self
     }
 
+    private func checkForComplete() -> Bool {
+        guard let codeText = codeTextField?.text else {
+                return false
+        }
+
+        return codeText.count >= codeMask.count
+    }
+
     // - UITextFieldDelegate
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
 
@@ -91,6 +107,8 @@ class VerificationCodeFormViewController: UIView, UITextFieldDelegate {
             let maskedText = matching(text: updatedText, withMask: codeMask)
 
             codeTextField?.text = maskedText
+            
+            delegate?.verificationCodeFormViewController(self, codeEnteringIsCompleted: checkForComplete())
             return false
         }
 
