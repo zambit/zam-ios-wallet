@@ -12,7 +12,7 @@ import UIKit
 /**
  Verifying phone number screen controller. Owns its model and views.
  */
-class VerifyPhoneNumberWithSmsViewController: ContinueViewController {
+class VerifyPhoneNumberWithSmsViewController: ContinueViewController, VerificationCodeFormViewDelegate {
 
     var signupAPI: SignupAPI?
 
@@ -25,7 +25,7 @@ class VerifyPhoneNumberWithSmsViewController: ContinueViewController {
 
     @IBOutlet var largeTitleLabel: UILabel?
     @IBOutlet var verificationCodeFormView: VerificationCodeFormViewController?
-    @IBOutlet var sendCodeAgainButton: UIButton?
+    @IBOutlet var sendVerificationCodeAgainButton: AdditionalTextButton?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +34,19 @@ class VerifyPhoneNumberWithSmsViewController: ContinueViewController {
         hideKeyboardOnTap()
 
         setupViewControllerStyle()
+
+        let index = String.Index(encodedOffset: 19)
+        let timerParams = AdditionalTextButtonData.TimerParameters(seconds: 60, textInactiveSecondsIndex: index)
+        let data = AdditionalTextButtonData(textActive: "Send code again", textInactive: "Send code again in ", timerParams: timerParams)
+
+        sendVerificationCodeAgainButton?.configure(data: data)
+        sendVerificationCodeAgainButton?.addTarget(self, action: #selector(additionalButtonTouchUpInsideEvent(_:)), for: .touchUpInside)
+
+        verificationCodeFormView?.delegate = self
+    }
+
+    func verificationCodeFormViewController(_ verificationCodeFormViewController: VerificationCodeFormViewController, codeEnteringIsCompleted: Bool) {
+        continueButton?.customAppearance.setEnabled(codeEnteringIsCompleted)
     }
 
     /**
@@ -61,6 +74,21 @@ class VerifyPhoneNumberWithSmsViewController: ContinueViewController {
             token in
 
             self?.onContinue?(phone, token)
+        }.catch { error in
+            print(error)
+        }
+    }
+
+    @objc
+    private func additionalButtonTouchUpInsideEvent(_ sender: AdditionalTextButton) {
+        guard let phone = self.phone else {
+            return
+        }
+
+        sender.customAppearance.setEnabled(false)
+
+        signupAPI?.sendVerificationCode(to: phone).done {
+            //
         }.catch { error in
             print(error)
         }
