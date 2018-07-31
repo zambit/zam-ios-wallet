@@ -32,6 +32,12 @@ class ContinueViewController: FlowViewController {
         NotificationCenter.default.removeObserver(self)
     }
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        continueButton?.customAppearance.setEnabled(false)
+    }
+
     @objc
     private func notifyKeyboard(_ notification: NSNotification) {
 

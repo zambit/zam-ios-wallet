@@ -14,7 +14,22 @@ import UIKit
  */
 class LargeIconButton: UIButton {
 
-    private var iconView: UIView!
+    struct CustomAppearance {
+        weak var parent: LargeIconButton?
+
+        func setEnabled(_ enabled: Bool) {
+            parent?.isUserInteractionEnabled = enabled
+
+            switch enabled {
+            case true:
+                parent?.alpha = 1
+            case false:
+                parent?.alpha = 0.5
+            }
+        }
+    }
+
+    private(set) var customAppearance: CustomAppearance!
 
     var isLoading: Bool = false {
         didSet {
@@ -29,15 +44,23 @@ class LargeIconButton: UIButton {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
+
         setupStyle()
+
+        customAppearance = CustomAppearance(parent: self)
     }
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setupStyle()
+
+        customAppearance = CustomAppearance(parent: self)
     }
 
     private func setupStyle() {
+        setImage(#imageLiteral(resourceName: "icArrowRight"), for: .disabled)
+        setImage(#imageLiteral(resourceName: "icArrowRight"), for: .normal)
+
         self.backgroundColor = .white
     }
 

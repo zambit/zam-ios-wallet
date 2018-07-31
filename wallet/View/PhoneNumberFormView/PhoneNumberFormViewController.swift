@@ -10,10 +10,23 @@ import Foundation
 import UIKit
 import FlagKit
 
+protocol PhoneNumberFormViewDelegate: class {
+
+    func phoneNumberFormViewController(_ phoneNumberFormViewController: PhoneNumberFormViewController, phoneNumberEnteringIsCompleted: Bool)
+
+}
+
 /**
  Class that controlls entreing phone number form, handles all textFields editing and defines its behaviour.
  */
 class PhoneNumberFormViewController: UIView, UITextFieldDelegate {
+
+    enum PhoneMaskKeys: String {
+        case countryId = "country_id"
+        case countryName = "country_name"
+        case phoneMask = "phone_mask"
+        case phoneCode = "phone_code"
+    }
 
     /**
      Enum providing different tasks to animate
@@ -54,6 +67,8 @@ class PhoneNumberFormViewController: UIView, UITextFieldDelegate {
         }
     }
 
+    weak var delegate: PhoneNumberFormViewDelegate?
+
     /**
      Masks dictionary
      */
@@ -65,8 +80,8 @@ class PhoneNumberFormViewController: UIView, UITextFieldDelegate {
     private var currentMask: (String, [String: String])? {
         willSet {
             let state = CountryImageAnimationTask.taskFrom(
-                oldCountryNameValue: currentMask?.1["country_name"],
-                newCountryNameValue: newValue?.1["country_name"]
+                oldCountryNameValue: currentMask?.1[PhoneMaskKeys.countryId.rawValue],
+                newCountryNameValue: newValue?.1[PhoneMaskKeys.countryId.rawValue]
             )
 
             setupCountryImageAnimationWith(state: state) {}
@@ -128,6 +143,7 @@ class PhoneNumberFormViewController: UIView, UITextFieldDelegate {
         detailPhonePartTextField?.addTarget(self, action: #selector(detailTextFieldEditingChanged(_:)), for: .editingChanged)
 
         mainPhonePartTextField?.addTarget(self, action: #selector(mainTextFieldEditingEnd(_:)), for: .editingDidEnd)
+        mainPhonePartTextField?.addTarget(self, action: #selector(mainTextFieldEditingChanged(_:)), for: .editingChanged)
     }
 
     private func setupStyle() {
@@ -153,7 +169,27 @@ class PhoneNumberFormViewController: UIView, UITextFieldDelegate {
     }
 
     func provideDictionaryOfMasks(_ masks: [String: [String: String]]) {
+        masks.forEach {
+            guard
+                let _ = $0.value[PhoneMaskKeys.phoneCode.rawValue],
+                let _ = $0.value[PhoneMaskKeys.phoneMask.rawValue],
+                let _ = $0.value[PhoneMaskKeys.countryId.rawValue],
+                let _ = $0.value[PhoneMaskKeys.countryName.rawValue] else {
+                    fatalError("Invalid format of dictionary")
+            }
+        }
+
         self.masks = masks
+    }
+
+    private func checkForComplete() -> Bool {
+        guard
+            let mask = currentMask?.1[PhoneMaskKeys.phoneMask.rawValue],
+            let mainText = mainPhonePartTextField?.text else {
+                return false
+        }
+
+        return mainText.count >= mask.count
     }
 
     // - UITextField events handlers
@@ -173,12 +209,27 @@ class PhoneNumberFormViewController: UIView, UITextFieldDelegate {
         currentMask = masks.filter {
             "+\($0.key)" == text
         }.first
+
+        // update mainTextField
+        if let mask = currentMask?.1[PhoneMaskKeys.phoneMask.rawValue],
+            let mainText = mainPhonePartTextField?.text {
+            mainPhonePartTextField?.text = matching(text: mainText, withMask: mask)
+        }
+
+        let check = checkForComplete()
+        delegate?.phoneNumberFormViewController(self, phoneNumberEnteringIsCompleted: check)
     }
 
     @objc
     private func detailTextFieldEditingEnd(_ sender: UITextField) {
         sender.resignFirstResponder()
         sender.layoutIfNeeded()
+    }
+
+    @objc
+    private func mainTextFieldEditingChanged(_ sender: UITextField) {
+        let check = checkForComplete()
+        delegate?.phoneNumberFormViewController(self, phoneNumberEnteringIsCompleted: check)
     }
 
     @objc
@@ -220,12 +271,15 @@ class PhoneNumberFormViewController: UIView, UITextFieldDelegate {
         }
 
         if let textRange = Range(range, in: text),
-            let mask = currentMask?.1["phone_mask"] {
+            let mask = currentMask?.1[PhoneMaskKeys.phoneMask.rawValue] {
 
             let updatedText = text.replacingCharacters(in: textRange, with: string)
             let maskedText = matching(text: updatedText, withMask: mask)
 
             mainPhonePartTextField?.text = maskedText
+
+            let check = checkForComplete()
+            delegate?.phoneNumberFormViewController(self, phoneNumberEnteringIsCompleted: check)
             return false
         }
 
@@ -271,9 +325,14 @@ class PhoneNumberFormViewController: UIView, UITextFieldDelegate {
     }
 
     private func setupCountryImageAnimationWith(state: CountryImageAnimationTask, completion handler: @escaping () -> Void) {
-
         switch state {
         case .show(country: let country):
+
+            if let flag = Flag(countryCode: country) {
+                let image = flag.image(style: .circle)
+                countryImageView?.setImage(image)
+            }
+
             rightLabelsToContentViewConstraint?.isActive = false
             rightImageToContentViewConstraint?.isActive = true
 
@@ -322,6 +381,10 @@ class PhoneNumberFormViewController: UIView, UITextFieldDelegate {
                     handler()
             })
         case .change(toCountry: let country):
+            if let flag = Flag(countryCode: country) {
+                let image = flag.image(style: .circle)
+                countryImageView?.setImage(image)
+            }
             handler()
         case .idle:
             handler()

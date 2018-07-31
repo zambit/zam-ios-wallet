@@ -12,7 +12,7 @@ import UIKit
 /**
  Entering phone number screen controller. Owns its model and views.
  */
-class EnterPhoneNumberViewController: ContinueViewController {
+class EnterPhoneNumberViewController: ContinueViewController, PhoneNumberFormViewDelegate {
 
     var signupAPI: SignupAPI?
 
@@ -54,6 +54,13 @@ class EnterPhoneNumberViewController: ContinueViewController {
         }
 
         phoneNumberForm?.provideDictionaryOfMasks(masks)
+        phoneNumberForm?.delegate = self
+    }
+
+    // PhoneNumberFormViewDelegate
+
+    func phoneNumberFormViewController(_ phoneNumberFormViewController: PhoneNumberFormViewController, phoneNumberEnteringIsCompleted: Bool) {
+        continueButton?.customAppearance.setEnabled(phoneNumberEnteringIsCompleted)
     }
 
     private func addSubviews() {
