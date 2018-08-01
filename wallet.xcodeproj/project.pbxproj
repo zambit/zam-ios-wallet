@@ -11,7 +11,7 @@
 		8C0918FA2105F75200703224 /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C0918F92105F75200703224 /* Onboarding.storyboard */; };
 		8C0918FC2105F75900703224 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C0918FB2105F75900703224 /* Login.storyboard */; };
 		8C0918FE2105F76200703224 /* Registration.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C0918FD2105F76200703224 /* Registration.storyboard */; };
-		8C091900210601F300703224 /* ForgotPassword.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C0918FF210601F300703224 /* ForgotPassword.storyboard */; };
+		8C091900210601F300703224 /* Recovery.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C0918FF210601F300703224 /* Recovery.storyboard */; };
 		8C091906210605AF00703224 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C091905210605AF00703224 /* Router.swift */; };
 		8C091908210605FA00703224 /* InitialRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C091907210605FA00703224 /* InitialRouter.swift */; };
 		8C09190A2106068D00703224 /* OnboardingRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0919092106068D00703224 /* OnboardingRouter.swift */; };
@@ -89,6 +89,8 @@
 		8C60885C2111F1A200470411 /* RecoveryFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C60885B2111F1A200470411 /* RecoveryFlow.swift */; };
 		8C60885E2111F28000470411 /* EnterNewPhoneNumberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C60885D2111F28000470411 /* EnterNewPhoneNumberViewController.swift */; };
 		8C6088602111F35E00470411 /* EnterPhoneNumberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C60885F2111F35E00470411 /* EnterPhoneNumberViewController.swift */; };
+		8C6088652112027300470411 /* ThreeStepsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6088642112027300470411 /* ThreeStepsAPI.swift */; };
+		8C6088672112120100470411 /* SpinningAnimationLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6088662112120100470411 /* SpinningAnimationLayer.swift */; };
 		8CF1DE4220EF98160036F986 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF1DE4120EF98160036F986 /* AuthViewController.swift */; };
 		8CF1DE4520EFB1A70036F986 /* HorizontalScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF1DE4420EFB1A70036F986 /* HorizontalScrollView.swift */; };
 		8CF1DE4720F37B5E0036F986 /* SMSConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF1DE4620F37B5E0036F986 /* SMSConfirmationViewController.swift */; };
@@ -103,7 +105,7 @@
 		8C0918F92105F75200703224 /* Onboarding.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
 		8C0918FB2105F75900703224 /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		8C0918FD2105F76200703224 /* Registration.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Registration.storyboard; sourceTree = "<group>"; };
-		8C0918FF210601F300703224 /* ForgotPassword.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ForgotPassword.storyboard; sourceTree = "<group>"; };
+		8C0918FF210601F300703224 /* Recovery.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Recovery.storyboard; sourceTree = "<group>"; };
 		8C091905210605AF00703224 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		8C091907210605FA00703224 /* InitialRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialRouter.swift; sourceTree = "<group>"; };
 		8C0919092106068D00703224 /* OnboardingRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingRouter.swift; sourceTree = "<group>"; };
@@ -183,6 +185,8 @@
 		8C60885B2111F1A200470411 /* RecoveryFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecoveryFlow.swift; sourceTree = "<group>"; };
 		8C60885D2111F28000470411 /* EnterNewPhoneNumberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterNewPhoneNumberViewController.swift; sourceTree = "<group>"; };
 		8C60885F2111F35E00470411 /* EnterPhoneNumberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterPhoneNumberViewController.swift; sourceTree = "<group>"; };
+		8C6088642112027300470411 /* ThreeStepsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeStepsAPI.swift; sourceTree = "<group>"; };
+		8C6088662112120100470411 /* SpinningAnimationLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinningAnimationLayer.swift; sourceTree = "<group>"; };
 		8CF1DE4120EF98160036F986 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		8CF1DE4420EFB1A70036F986 /* HorizontalScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalScrollView.swift; sourceTree = "<group>"; };
 		8CF1DE4620F37B5E0036F986 /* SMSConfirmationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMSConfirmationViewController.swift; sourceTree = "<group>"; };
@@ -227,7 +231,7 @@
 				8C333D76210F50E000949AC0 /* CountryIconImageView.swift */,
 				8C6088472110A75100470411 /* AdditionalTextButton.swift */,
 				8C333D43210B001500949AC0 /* LargeTextButton.swift */,
-				8C333D53210B394800949AC0 /* LargeIconButton.swift */,
+				8C6088682112176300470411 /* LargeIconButton */,
 				8C6088612111FB0A00470411 /* Components */,
 				8C333D5B210B538700949AC0 /* TextCheckBoxView */,
 				8C333D5C210B539800949AC0 /* ExampleOnboardingItem */,
@@ -241,9 +245,9 @@
 				8C333D45210B0D5400949AC0 /* LaunchScreenViewController.swift */,
 				8C60883C21105A0F00470411 /* Base */,
 				8C091933210620C800703224 /* OnboardingViewController.swift */,
-				8C09197E2108D8B600703224 /* VerifyPhoneNumberWithSmsViewController.swift */,
 				8C60885D2111F28000470411 /* EnterNewPhoneNumberViewController.swift */,
 				8C60885F2111F35E00470411 /* EnterPhoneNumberViewController.swift */,
+				8C09197E2108D8B600703224 /* VerifyPhoneNumberWithSmsViewController.swift */,
 				8C0919802108D99400703224 /* CreateNewPasswordViewController.swift */,
 				8C6088592111DCB000470411 /* EnterPhoneLoginPasswordViewController.swift */,
 				8C0919822109CC2000703224 /* EnterLoginPasswordViewController.swift */,
@@ -280,6 +284,7 @@
 			children = (
 				8C09194C2107214300703224 /* WalletEnvironment.swift */,
 				8C0919692108951F00703224 /* WalletResponseError.swift */,
+				8C6088642112027300470411 /* ThreeStepsAPI.swift */,
 				8C0919722108BC6C00703224 /* UserAPI */,
 				8C09196B21089EDF00703224 /* SigninAPI */,
 				8C09196021076B6000703224 /* RecoveryAPI */,
@@ -441,7 +446,7 @@
 				8C0918F92105F75200703224 /* Onboarding.storyboard */,
 				8C0918FB2105F75900703224 /* Login.storyboard */,
 				8C0918FD2105F76200703224 /* Registration.storyboard */,
-				8C0918FF210601F300703224 /* ForgotPassword.storyboard */,
+				8C0918FF210601F300703224 /* Recovery.storyboard */,
 				8C34617620EF8FA900746724 /* Info.plist */,
 			);
 			path = wallet;
@@ -473,13 +478,13 @@
 			path = LoginPasswordFormComponent;
 			sourceTree = "<group>";
 		};
-		8C6088542111CB7700470411 /* LoginFormViewComponent */ = {
+		8C6088542111CB7700470411 /* LoginFormComponent */ = {
 			isa = PBXGroup;
 			children = (
 				8C6088552111CB8C00470411 /* LoginFormComponent.swift */,
 				8C6088522111CB7000470411 /* LoginFormView.xib */,
 			);
-			path = LoginFormViewComponent;
+			path = LoginFormComponent;
 			sourceTree = "<group>";
 		};
 		8C6088612111FB0A00470411 /* Components */ = {
@@ -488,10 +493,19 @@
 				8C333D5A210B537A00949AC0 /* PhoneNumberFormComponent */,
 				8C333D59210B536E00949AC0 /* VerificationCodeFormComponent */,
 				8C333D61210B5E3400949AC0 /* NewPasswordFormComponent */,
-				8C6088542111CB7700470411 /* LoginFormViewComponent */,
+				8C6088542111CB7700470411 /* LoginFormComponent */,
 				8C60884F2111A23500470411 /* LoginPasswordFormComponent */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		8C6088682112176300470411 /* LargeIconButton */ = {
+			isa = PBXGroup;
+			children = (
+				8C6088662112120100470411 /* SpinningAnimationLayer.swift */,
+				8C333D53210B394800949AC0 /* LargeIconButton.swift */,
+			);
+			path = LargeIconButton;
 			sourceTree = "<group>";
 		};
 		8CF1DE4320EF9D170036F986 /* Trash */ = {
@@ -602,7 +616,7 @@
 				8C0918FC2105F75900703224 /* Login.storyboard in Resources */,
 				8C333D58210B4F7D00949AC0 /* VerificationCodeFormView.xib in Resources */,
 				8C60884E2111A22D00470411 /* LoginPasswordFormView.xib in Resources */,
-				8C091900210601F300703224 /* ForgotPassword.storyboard in Resources */,
+				8C091900210601F300703224 /* Recovery.storyboard in Resources */,
 				8C6088532111CB7000470411 /* LoginFormView.xib in Resources */,
 				8C333D5E210B5E1600949AC0 /* NewPasswordFormView.xib in Resources */,
 				8C333D4E210B272D00949AC0 /* TextCheckBoxView.xib in Resources */,
@@ -665,6 +679,7 @@
 				8C091906210605AF00703224 /* Router.swift in Sources */,
 				8C091938210622AA00703224 /* Request.swift in Sources */,
 				8C333D382109F3D500949AC0 /* OnboardingFlow.swift in Sources */,
+				8C6088652112027300470411 /* ThreeStepsAPI.swift in Sources */,
 				8C091949210714D800703224 /* NetworkService.swift in Sources */,
 				8C0919762108BE6000703224 /* UserRequest.swift in Sources */,
 				8C60885C2111F1A200470411 /* RecoveryFlow.swift in Sources */,
@@ -695,6 +710,7 @@
 				8C09190A2106068D00703224 /* OnboardingRouter.swift in Sources */,
 				8C333D60210B5E2900949AC0 /* NewPasswordFormComponent.swift in Sources */,
 				8C333D4A210B1C4300949AC0 /* TextCheckBoxView.swift in Sources */,
+				8C6088672112120100470411 /* SpinningAnimationLayer.swift in Sources */,
 				8C09197F2108D8B600703224 /* VerifyPhoneNumberWithSmsViewController.swift in Sources */,
 				8C333D40210A08A600949AC0 /* UIView+Extensions.swift in Sources */,
 				8C333D68210B72A100949AC0 /* ContinueViewController.swift in Sources */,

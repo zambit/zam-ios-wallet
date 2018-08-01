@@ -14,6 +14,8 @@ import UIKit
  */
 class LargeIconButton: UIButton, CustomUI {
 
+    private var loadingView: UIView!
+
     struct CustomAppearance {
         weak var parent: LargeIconButton?
 
@@ -29,7 +31,13 @@ class LargeIconButton: UIButton, CustomUI {
         }
 
         func setLoading(_ enabled: Bool) {
-            // to do
+            parent?.isUserInteractionEnabled = !enabled
+            if enabled {
+                parent?.setImage(#imageLiteral(resourceName: "empty_icon"), for: .normal)
+            } else {
+                parent?.setImage(#imageLiteral(resourceName: "icArrowRight"), for: .normal)
+            }
+            parent?.loadingView.isHidden = !enabled
         }
     }
 
@@ -45,11 +53,13 @@ class LargeIconButton: UIButton, CustomUI {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupStyle()
+        setupAnimationView()
     }
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setupStyle()
+        setupAnimationView()
     }
 
     private func setupStyle() {
@@ -61,5 +71,26 @@ class LargeIconButton: UIButton, CustomUI {
 
     private func setupLayouts() {
         self.layer.cornerRadius = self.bounds.width / 2
+    }
+
+    private func setupAnimationView() {
+        let side: CGFloat = min(bounds.width, bounds.height) / 100 * 55
+
+        let frame = CGRect(x: (bounds.width - side) / 2,
+                           y: (bounds.height - side) / 2,
+                           width: side,
+                           height: side)
+        self.loadingView = UIView(frame: frame)
+        self.loadingView.layer.sublayers = nil
+
+        let animationFrame = CGRect(x: 0,
+                                    y: 0,
+                                    width: side,
+                                    height: side)
+        let animation = SpinningAnimationLayer(frame: animationFrame, color: .cornflower)
+        self.loadingView.layer.addSublayer(animation)
+        self.loadingView.isHidden = true
+
+        self.addSubview(loadingView)
     }
 }
