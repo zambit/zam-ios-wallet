@@ -92,7 +92,7 @@
                                 <rect key="frame" x="16" y="142" width="343" height="56"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="56" id="RVY-1x-yy0"/>
+                                    <constraint firstAttribute="height" constant="56" placeholder="YES" id="RVY-1x-yy0"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fDU-AV-0sT" customClass="LargeIconButton" customModule="wallet" customModuleProvider="target">
@@ -153,7 +153,7 @@
                                 <rect key="frame" x="16" y="142" width="343" height="146"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="146" id="o3U-HE-MCg"/>
+                                    <constraint firstAttribute="height" constant="146" placeholder="YES" id="o3U-HE-MCg"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VGq-BV-aTL" customClass="LargeIconButton" customModule="wallet" customModuleProvider="target">

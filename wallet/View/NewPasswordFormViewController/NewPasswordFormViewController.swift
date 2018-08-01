@@ -21,12 +21,24 @@ protocol NewPasswordFormViewDelegate: class {
 
 class NewPasswordFormViewController: UIView {
 
-    @IBOutlet var contentView: UIView!
-    @IBOutlet var passwordTextField: UITextField?
-    @IBOutlet var passwordConfirmationTextField: UITextField?
-    @IBOutlet var helperTextLabel: UILabel?
+    @IBOutlet private var contentView: UIView!
+    @IBOutlet private var passwordTextField: UITextField?
+    @IBOutlet private var passwordConfirmationTextField: UITextField?
+    @IBOutlet private var helperTextLabel: UILabel?
+
+    @IBOutlet private var passwordTextFieldHeightConstraint: NSLayoutConstraint?
 
     weak var delegate: NewPasswordFormViewDelegate?
+
+    var textFieldsHeight: CGFloat {
+        get {
+            return passwordTextFieldHeightConstraint?.constant ?? 0
+        }
+
+        set {
+            passwordTextFieldHeightConstraint?.constant = newValue
+        }
+    }
 
     var password: String {
         guard let text = passwordTextField?.text else {

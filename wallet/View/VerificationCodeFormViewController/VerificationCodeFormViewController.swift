@@ -17,10 +17,22 @@ protocol VerificationCodeFormViewDelegate: class {
 
 class VerificationCodeFormViewController: UIView, UITextFieldDelegate {
 
-    @IBOutlet var contentView: UIView!
-    @IBOutlet var codeTextField: UITextField?
+    @IBOutlet private var contentView: UIView!
+    @IBOutlet private var codeTextField: UITextField?
+
+    @IBOutlet private var verificationTextFieldHeightConstraint: NSLayoutConstraint?
 
     weak var delegate: VerificationCodeFormViewDelegate?
+
+    var textFieldHeight: CGFloat {
+        get {
+            return verificationTextFieldHeightConstraint?.constant ?? 0
+        }
+
+        set {
+            verificationTextFieldHeightConstraint?.constant = newValue
+        }
+    }
 
     var codeMask: String = "XX XX XX"
 
