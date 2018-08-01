@@ -12,7 +12,7 @@ import PromiseKit
 /**
  Signing up API. Provides requests for sending verification code to phone, verifing phone and providing password.
  */
-struct SignupAPI: NetworkService {
+struct SignupAPI: NetworkService, ThreeStepsAPI {
 
     private let provider: SignupProvider
 
@@ -23,8 +23,8 @@ struct SignupAPI: NetworkService {
     /**
      Start user account creation by sending verification code via SMS.
      */
-    func sendVerificationCode(to phone: String, additional: String? = nil) -> Promise<Void> {
-        return provider.execute(.start(phone: phone, referrerPhone: additional))
+    func sendVerificationCode(to phone: String, referrerPhone: String? = nil) -> Promise<Void> {
+        return provider.execute(.start(phone: phone, referrerPhone: referrerPhone))
             .then {
                 (response: Response) -> Promise<Void> in
 
@@ -57,7 +57,7 @@ struct SignupAPI: NetworkService {
     /**
      Verifies user account by passing SMS Code which has been sent previously.
      */
-    func verifyUserAccount(passing verificationCode: String, hasBeenSentTo phone: String) -> Promise<String> {
+    func verifyPhoneNumber(_ phone: String, withCode verificationCode: String) -> Promise<String> {
         return provider.execute(.verify(phone: phone, verificationCode: verificationCode))
             .then {
                 (response: Response) -> Promise<String> in
@@ -90,8 +90,8 @@ struct SignupAPI: NetworkService {
     /**
      Finish account creation by setting user password, this request requires SignUp Token.
      */
-    func providePassword(_ password: String, confirmation: String, for phone: String, signUpToken: String) -> Promise<String> {
-        return provider.execute(.finish(phone: phone, signupToken: signUpToken, password: password, passwordConfirmation: confirmation))
+    func providePassword(_ password: String, confirmation: String, for phone: String, token: String) -> Promise<String> {
+        return provider.execute(.finish(phone: phone, signupToken: token, password: password, passwordConfirmation: confirmation))
             .then {
                 (response: Response) -> Promise<String> in
 

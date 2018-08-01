@@ -91,12 +91,33 @@ class EnterNewPhoneNumberViewController: ContinueViewController, PhoneNumberForm
         guard let phone = phoneNumberForm?.phone else {
             return
         }
-        print(phone)
+
+        continueButton?.customAppearance.setLoading(true)
         signupAPI?.sendVerificationCode(to: phone).done {
             [weak self] in
-            self?.onContinue?(phone)
-        }.catch { error in
-            print(error)
+
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                self?.continueButton?.customAppearance.setLoading(false)
+                self?.onContinue?(phone)
+            }
+        }.catch {
+            [weak self]
+            error in
+
+            if let serverError = error as? WalletResponseError {
+                switch serverError {
+                case .serverFailureResponse(errors: let fails):
+                    guard let fail = fails.first else {
+                        return
+                    }
+
+                    self?.phoneNumberForm?.helperText = fail.message
+                }
+            }
+
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                self?.continueButton?.customAppearance.setLoading(false)
+            }
         }
     }
 }

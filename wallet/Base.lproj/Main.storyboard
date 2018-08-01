@@ -262,13 +262,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Phone" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IBc-4V-Glf">
-                                <rect key="frame" x="146.5" y="165" width="82.5" height="36"/>
+                                <rect key="frame" x="146" y="165" width="82.5" height="36"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Token" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="64i-dB-HCl">
-                                <rect key="frame" x="173.5" y="243" width="29" height="12"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Token" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="64i-dB-HCl">
+                                <rect key="frame" x="16" y="243" width="343" height="12"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -278,6 +278,8 @@
                         <constraints>
                             <constraint firstItem="64i-dB-HCl" firstAttribute="centerX" secondItem="IBc-4V-Glf" secondAttribute="centerX" id="RZq-RM-xIg"/>
                             <constraint firstItem="IBc-4V-Glf" firstAttribute="centerX" secondItem="s4F-eB-BQN" secondAttribute="centerX" id="XH7-1i-e4b"/>
+                            <constraint firstItem="oKY-uj-bnB" firstAttribute="trailing" secondItem="64i-dB-HCl" secondAttribute="trailing" constant="16" id="gPU-52-IvS"/>
+                            <constraint firstItem="64i-dB-HCl" firstAttribute="leading" secondItem="oKY-uj-bnB" secondAttribute="leading" constant="16" id="o1v-xu-920"/>
                             <constraint firstItem="IBc-4V-Glf" firstAttribute="top" secondItem="oKY-uj-bnB" secondAttribute="top" constant="145" id="oRJ-7d-T7a"/>
                             <constraint firstItem="64i-dB-HCl" firstAttribute="top" secondItem="IBc-4V-Glf" secondAttribute="bottom" constant="42" id="qaV-rh-xKv"/>
                         </constraints>

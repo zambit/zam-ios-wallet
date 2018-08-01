@@ -14,8 +14,7 @@ import UIKit
  */
 class VerifyPhoneNumberWithSmsViewController: ContinueViewController, VerificationCodeFormComponentDelegate {
 
-    var recoveryAPI: RecoveryAPI?
-    var signupAPI: SignupAPI?
+    var verifyAPI: ThreeStepsAPI?
 
     /**
      Flow parameter for continue action. Needs to provide phone number and signUpToken for doing action.
@@ -70,13 +69,23 @@ class VerifyPhoneNumberWithSmsViewController: ContinueViewController, Verificati
             return
         }
 
-        signupAPI?.verifyUserAccount(passing: code, hasBeenSentTo: phone).done {
+        continueButton?.customAppearance.setLoading(true)
+        verifyAPI?.verifyPhoneNumber(phone, withCode: code).done {
             [weak self]
             token in
 
-            self?.onContinue?(phone, token)
-        }.catch { error in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                self?.continueButton?.customAppearance.setLoading(false)
+                self?.onContinue?(phone, token)
+            }
+        }.catch {
+            [weak self]
+            error in
             print(error)
+
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                self?.continueButton?.customAppearance.setLoading(false)
+            }
         }
     }
 
@@ -88,7 +97,7 @@ class VerifyPhoneNumberWithSmsViewController: ContinueViewController, Verificati
 
         sender.customAppearance.setEnabled(false)
 
-        signupAPI?.sendVerificationCode(to: phone).done {
+        verifyAPI?.sendVerificationCode(to: phone, referrerPhone: nil).done {
             //...
         }.catch { error in
             print(error)

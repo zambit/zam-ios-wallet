@@ -75,15 +75,25 @@ class EnterLoginPasswordViewController: ContinueViewController, LoginPasswordCom
                 return
         }
 
+        continueButton?.customAppearance.setLoading(true)
         authAPI?.signIn(phone: phone, password: password).done {
             [weak self]
             authToken in
+
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                self?.continueButton?.customAppearance.setLoading(false)
+                self?.onContinue?(authToken)
+            }
 
             self?.userManager?.save(token: authToken)
             self?.userManager?.save(phoneNumber: phone)
         }.catch {
             [weak self]
             error in
+
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                self?.continueButton?.customAppearance.setLoading(false)
+            }
 
             if let serverError = error as? WalletResponseError {
                 switch serverError {

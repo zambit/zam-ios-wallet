@@ -23,7 +23,7 @@ struct CodableFailure: Codable {
 
     struct Error: Codable {
         let message: String
-        let fields: [Field]
+        let fields: [Field]?
 
         private enum CodingKeys: String, CodingKey {
             case message

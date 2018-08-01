@@ -55,7 +55,6 @@ class EnterPhoneNumberViewController: ContinueViewController, PhoneNumberFormCom
     private func setupViewControllerStyle() {
         largeTitleLabel?.textColor = .white
 
-        continueButton?.setImage(#imageLiteral(resourceName: "icArrowRight"), for: .normal)
         continueButton?.addTarget(self, action: #selector(continueButtonTouchUpInsideEvent(_:)), for: .touchUpInside)
     }
 
@@ -64,12 +63,33 @@ class EnterPhoneNumberViewController: ContinueViewController, PhoneNumberFormCom
         guard let phone = phoneNumberForm?.phone else {
             return
         }
-        print(phone)
+
+        continueButton?.customAppearance.setLoading(true)
         recoveryAPI?.sendVerificationCode(to: phone).done {
             [weak self] in
-            self?.onContinue?(phone)
-        }.catch { error in
-            print(error)
+
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                self?.continueButton?.customAppearance.setLoading(false)
+                self?.onContinue?(phone)
+            }
+        }.catch {
+            [weak self]
+            error in
+
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                self?.continueButton?.customAppearance.setLoading(false)
+            }
+
+            if let serverError = error as? WalletResponseError {
+                switch serverError {
+                case .serverFailureResponse(errors: let fails):
+                    guard let fail = fails.first else {
+                        return
+                    }
+
+                    self?.phoneNumberForm?.helperText = fail.message
+                }
+            }
         }
     }
 }

@@ -64,13 +64,13 @@ final class SignUpFlow: ScreenFlow {
             }
 
             let target = strongSelf.createNewPasswordScreen
-            target.prepare(phone: phone, signupToken: signUpToken)
+            target.prepare(phone: phone, token: signUpToken)
 
             strongSelf.navigationController?.pushViewController(target, animated: true)
         }
 
         vc.onContinue = onContinue
-        vc.signupAPI = SignupAPI(provider: SignupProvider(environment: WalletEnvironment(), dispatcher: HTTPDispatcher()))
+        vc.verifyAPI = SignupAPI(provider: SignupProvider(environment: WalletEnvironment(), dispatcher: HTTPDispatcher()))
         vc.flow = self
         return vc
     }
@@ -96,7 +96,7 @@ final class SignUpFlow: ScreenFlow {
             strongSelf.navigationController?.pushViewController(target, animated: true)
         }
         vc.onContinue = onContinue
-        vc.signupAPI = SignupAPI(provider: SignupProvider(environment: WalletEnvironment(), dispatcher: HTTPDispatcher()))
+        vc.newPasswordAPI = SignupAPI(provider: SignupProvider(environment: WalletEnvironment(), dispatcher: HTTPDispatcher()))
         vc.userManager = WalletUserDefaultsManager()
         vc.flow = self
         return vc

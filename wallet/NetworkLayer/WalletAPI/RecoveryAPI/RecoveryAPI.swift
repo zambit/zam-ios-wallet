@@ -12,7 +12,7 @@ import PromiseKit
 /**
  Recovery password API. Provides requests for sending verification code to phone, verifing recovering account password and providing new password.
  */
-struct RecoveryAPI: NetworkService {
+struct RecoveryAPI: NetworkService, ThreeStepsAPI {
 
     private let provider: RecoveryProvider
 
@@ -23,7 +23,7 @@ struct RecoveryAPI: NetworkService {
     /**
      Start user password recovery by sending verification code via SMS.
      */
-    func sendVerificationCode(to phone: String) -> Promise<Void> {
+    func sendVerificationCode(to phone: String, referrerPhone: String? = nil) -> Promise<Void> {
         return provider.execute(.start(phone: phone))
             .then {
                 (response: Response) -> Promise<Void> in
@@ -57,7 +57,7 @@ struct RecoveryAPI: NetworkService {
     /**
      Verifies user password recovery by passing SMS Code which has been sent previously.
      */
-    func verifyRecoveringAccountPassword(passing verificationCode: String, hasBeenSentTo phone: String) -> Promise<String> {
+    func verifyPhoneNumber(_ phone: String, withCode verificationCode: String) -> Promise<String> {
         return provider.execute(.verify(phone: phone, verificationCode: verificationCode))
             .then {
                 (response: Response) -> Promise<String> in
@@ -90,8 +90,8 @@ struct RecoveryAPI: NetworkService {
     /**
      Finish password recovery by setting user password, this request requires Recovery Token.
      */
-    func providePassword(_ password: String, confirmation: String, for phone: String, recoveryToken: String) -> Promise<String> {
-        return provider.execute(.finish(phone: phone, recoveryToken: recoveryToken, newPassword: password, newPasswordConfirmation: confirmation))
+    func providePassword(_ password: String, confirmation: String, for phone: String, token: String) -> Promise<String> {
+        return provider.execute(.finish(phone: phone, recoveryToken: token, newPassword: password, newPasswordConfirmation: confirmation))
             .then {
                 (response: Response) -> Promise<String> in
 

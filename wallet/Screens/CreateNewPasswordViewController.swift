@@ -15,7 +15,7 @@ import UIKit
 class CreateNewPasswordViewController: ContinueViewController, NewPasswordFormComponentDelegate {
 
     var userManager: WalletUserDefaultsManager?
-    var signupAPI: SignupAPI?
+    var newPasswordAPI: ThreeStepsAPI?
 
     /**
      Flow parameter for continue action. Needs to provide authToken for doing action.
@@ -23,7 +23,7 @@ class CreateNewPasswordViewController: ContinueViewController, NewPasswordFormCo
     var onContinue: ((_ authToken: String) -> Void)?
 
     private var phone: String?
-    private var signupToken: String?
+    private var token: String?
 
     @IBOutlet var largeTitleLabel: UILabel?
     @IBOutlet var newPasswordFormComponent: NewPasswordFormComponent?
@@ -61,9 +61,9 @@ class CreateNewPasswordViewController: ContinueViewController, NewPasswordFormCo
     /**
      Function for receiveing data from previous ViewController on ScreenFlow
      */
-    func prepare(phone: String, signupToken: String) {
+    func prepare(phone: String, token: String) {
         self.phone = phone
-        self.signupToken = signupToken
+        self.token = token
     }
 
     @objc
@@ -72,22 +72,29 @@ class CreateNewPasswordViewController: ContinueViewController, NewPasswordFormCo
             let phone = self.phone,
             let password = newPasswordFormComponent?.password,
             let confirmation = newPasswordFormComponent?.confirmation,
-            let token = self.signupToken else {
+            let token = self.token else {
             return
         }
 
-        signupAPI?.providePassword(password, confirmation: confirmation, for: phone, signUpToken: token).done {
+        continueButton?.customAppearance.setLoading(true)
+        newPasswordAPI?.providePassword(password, confirmation: confirmation, for: phone, token: token).done {
             [weak self]
             authToken in
 
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                self?.continueButton?.customAppearance.setLoading(false)
+                self?.onContinue?(authToken)
+            }
+
             self?.userManager?.save(token: authToken)
             self?.userManager?.save(phoneNumber: phone)
+        }.catch {
+            [weak self]
+            error in
 
-            self?.onContinue?(authToken)
-
-            print(authToken)
-        }.catch { error in
-            print(error)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                self?.continueButton?.customAppearance.setLoading(false)
+            }
         }
     }
 }
