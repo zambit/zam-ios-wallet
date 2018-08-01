@@ -46,12 +46,17 @@ class CreateNewPasswordViewController: ContinueViewController, NewPasswordFormVi
         continueButton?.addTarget(self, action: #selector(continueButtonTouchUpInsideEvent(_:)), for: .touchUpInside)
     }
 
-    func newPasswordFormViewController(_ newPasswordFormViewController: NewPasswordFormViewController, passwordEnteringIsCompleted: Bool) {
-        continueButton?.customAppearance.setEnabled(passwordEnteringIsCompleted)
+    func newPasswordFormViewControllerEditingChange(_ newPasswordFormViewController: NewPasswordFormViewController) {
+        // ...
     }
 
-    func passwordsDontMatch(_ newPasswordFormView: NewPasswordFormViewController, password: String, confirmation: String) {
-        print("Passwords don't match")
+    func newPasswordFormViewController(_ newPasswordFormView: NewPasswordFormViewController, dontSatisfyTheCondition: PasswordsCondition) {
+        // show error
+        continueButton?.customAppearance.setEnabled(false)
+    }
+
+    func newPasswordFormViewControllerSatisfiesAllConditions(_ newPasswordFormView: NewPasswordFormViewController) {
+        continueButton?.customAppearance.setEnabled(true)
     }
 
     /**

@@ -11,9 +11,11 @@ import UIKit
 
 protocol NewPasswordFormViewDelegate: class {
 
-    func newPasswordFormViewController(_ newPasswordFormViewController: NewPasswordFormViewController, passwordEnteringIsCompleted: Bool)
+    func newPasswordFormViewControllerEditingChange(_ newPasswordFormViewController: NewPasswordFormViewController)
 
-    func passwordsDontMatch(_ newPasswordFormView: NewPasswordFormViewController, password: String, confirmation: String)
+    func newPasswordFormViewController(_ newPasswordFormView: NewPasswordFormViewController, dontSatisfyTheCondition: PasswordsCondition)
+
+    func newPasswordFormViewControllerSatisfiesAllConditions(_ newPasswordFormView: NewPasswordFormViewController)
 
 }
 
@@ -22,6 +24,7 @@ class NewPasswordFormViewController: UIView {
     @IBOutlet var contentView: UIView!
     @IBOutlet var passwordTextField: UITextField?
     @IBOutlet var passwordConfirmationTextField: UITextField?
+    @IBOutlet var helperTextLabel: UILabel?
 
     weak var delegate: NewPasswordFormViewDelegate?
 
@@ -65,6 +68,9 @@ class NewPasswordFormViewController: UIView {
         self.backgroundColor = .clear
         self.contentView.backgroundColor = .clear
 
+        self.helperTextLabel?.textColor = .error
+        self.helperTextLabel?.text = ""
+
         self.passwordTextField?.isSecureTextEntry = true
         self.passwordConfirmationTextField?.isSecureTextEntry = true
 
@@ -104,24 +110,32 @@ class NewPasswordFormViewController: UIView {
 
     @objc
     private func editingChangePasswordTextField(_ sender: UITextField) {
+        delegate?.newPasswordFormViewControllerEditingChange(self)
+
         guard
             let password = sender.text,
             let confirmation = passwordConfirmationTextField?.text else {
                 return
         }
 
-        checkConditions(password: password, confirmation: confirmation)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.checkConditions(password: password, confirmation: confirmation)
+        }
     }
 
     @objc
     private func editingChangePasswordConfirmationTextField(_ sender: UITextField) {
+        delegate?.newPasswordFormViewControllerEditingChange(self)
+
         guard
             let confirmation = sender.text,
             let password = passwordTextField?.text else {
                 return
         }
 
-        checkConditions(password: password, confirmation: confirmation)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.checkConditions(password: password, confirmation: confirmation)
+        }
     }
 
     @objc
@@ -137,10 +151,34 @@ class NewPasswordFormViewController: UIView {
     }
 
     private func checkConditions(password: String, confirmation: String) {
-        delegate?.newPasswordFormViewController(self, passwordEnteringIsCompleted: password == confirmation)
 
-        if password != confirmation {
-            delegate?.passwordsDontMatch(self, password: password, confirmation: confirmation)
+        switch (password == confirmation, password.count >= 6) {
+        case (true, true):
+            self.helperTextLabel?.text = ""
+            delegate?.newPasswordFormViewControllerSatisfiesAllConditions(self)
+        case (true, false):
+            guard password != "" else {
+                self.helperTextLabel?.text = ""
+                break
+            }
+
+            let failedCondition = PasswordsCondition.passwordMatchesSymbolsCount
+            self.helperTextLabel?.text = failedCondition.rawValue
+            delegate?.newPasswordFormViewController(self, dontSatisfyTheCondition: failedCondition)
+        case (false, true):
+            guard confirmation != "" else {
+                self.helperTextLabel?.text = ""
+                break
+            }
+
+            let failedCondition = PasswordsCondition.passwordFieldsMatch
+            self.helperTextLabel?.text = failedCondition.rawValue
+            delegate?.newPasswordFormViewController(self, dontSatisfyTheCondition: failedCondition)
+        case (false, false):
+
+            let failedCondition = PasswordsCondition.passwordMatchesSymbolsCount
+            self.helperTextLabel?.text = failedCondition.rawValue
+            delegate?.newPasswordFormViewController(self, dontSatisfyTheCondition: failedCondition)
         }
     }
 }
