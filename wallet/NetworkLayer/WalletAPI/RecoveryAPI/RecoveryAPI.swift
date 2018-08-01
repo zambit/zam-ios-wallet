@@ -99,7 +99,7 @@ struct RecoveryAPI: NetworkService, ThreeStepsAPI {
                     switch response {
                     case .data(_):
 
-                        let success: (CodableSuccessRecoveryTokenData) -> Void = { s in
+                        let success: (CodableSuccessAuthTokenData) -> Void = { s in
                             seal.fulfill(s.data.token)
                         }
 
