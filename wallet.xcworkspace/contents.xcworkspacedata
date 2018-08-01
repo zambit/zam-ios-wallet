@@ -2,9 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:/Users/me/wallet/wallet/Screens/EnterPhoneNumberViewController.swift">
-   </FileRef>
-   <FileRef
       location = "group:wallet.xcodeproj">
    </FileRef>
    <FileRef

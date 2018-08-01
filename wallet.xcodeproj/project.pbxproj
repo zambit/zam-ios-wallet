@@ -181,7 +181,7 @@
 		8C6088552111CB8C00470411 /* LoginFormComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFormComponent.swift; sourceTree = "<group>"; };
 		8C6088592111DCB000470411 /* EnterPhoneLoginPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterPhoneLoginPasswordViewController.swift; sourceTree = "<group>"; };
 		8C60885B2111F1A200470411 /* RecoveryFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecoveryFlow.swift; sourceTree = "<group>"; };
-		8C60885D2111F28000470411 /* EnterNewPhoneNumberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EnterNewPhoneNumberViewController.swift; path = /Users/me/wallet/wallet/Screens/EnterNewPhoneNumberViewController.swift; sourceTree = "<absolute>"; };
+		8C60885D2111F28000470411 /* EnterNewPhoneNumberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterNewPhoneNumberViewController.swift; sourceTree = "<group>"; };
 		8C60885F2111F35E00470411 /* EnterPhoneNumberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterPhoneNumberViewController.swift; sourceTree = "<group>"; };
 		8CF1DE4120EF98160036F986 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		8CF1DE4420EFB1A70036F986 /* HorizontalScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalScrollView.swift; sourceTree = "<group>"; };
