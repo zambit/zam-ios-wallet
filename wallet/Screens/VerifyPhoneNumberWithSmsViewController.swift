@@ -12,8 +12,9 @@ import UIKit
 /**
  Verifying phone number screen controller. Owns its model and views.
  */
-class VerifyPhoneNumberWithSmsViewController: ContinueViewController, VerificationCodeFormViewDelegate {
+class VerifyPhoneNumberWithSmsViewController: ContinueViewController, VerificationCodeFormComponentDelegate {
 
+    var recoveryAPI: RecoveryAPI?
     var signupAPI: SignupAPI?
 
     /**
@@ -24,7 +25,7 @@ class VerifyPhoneNumberWithSmsViewController: ContinueViewController, Verificati
     private var phone: String?
 
     @IBOutlet var largeTitleLabel: UILabel?
-    @IBOutlet var verificationCodeFormView: VerificationCodeFormViewController?
+    @IBOutlet var verificationCodeFormComponent: VerificationCodeFormComponent?
     @IBOutlet var sendVerificationCodeAgainButton: AdditionalTextButton?
 
     override func viewDidLoad() {
@@ -42,10 +43,10 @@ class VerifyPhoneNumberWithSmsViewController: ContinueViewController, Verificati
         sendVerificationCodeAgainButton?.configure(data: data)
         sendVerificationCodeAgainButton?.addTarget(self, action: #selector(additionalButtonTouchUpInsideEvent(_:)), for: .touchUpInside)
 
-        verificationCodeFormView?.delegate = self
+        verificationCodeFormComponent?.delegate = self
     }
 
-    func verificationCodeFormViewController(_ verificationCodeFormViewController: VerificationCodeFormViewController, codeEnteringIsCompleted: Bool) {
+    func verificationCodeFormComponent(_ verificationCodeFormViewController: VerificationCodeFormComponent, codeEnteringIsCompleted: Bool) {
         continueButton?.customAppearance.setEnabled(codeEnteringIsCompleted)
     }
 
@@ -65,7 +66,7 @@ class VerifyPhoneNumberWithSmsViewController: ContinueViewController, Verificati
 
     @objc
     private func continueButtonTouchUpInsideEvent(_ sender: Any) {
-        guard let phone = self.phone, let code = verificationCodeFormView?.text else {
+        guard let phone = self.phone, let code = verificationCodeFormComponent?.text else {
             return
         }
 
@@ -88,7 +89,7 @@ class VerifyPhoneNumberWithSmsViewController: ContinueViewController, Verificati
         sender.customAppearance.setEnabled(false)
 
         signupAPI?.sendVerificationCode(to: phone).done {
-            //
+            //...
         }.catch { error in
             print(error)
         }

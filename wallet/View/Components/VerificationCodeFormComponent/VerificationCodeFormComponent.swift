@@ -9,20 +9,20 @@
 import Foundation
 import UIKit
 
-protocol VerificationCodeFormViewDelegate: class {
+protocol VerificationCodeFormComponentDelegate: class {
 
-    func verificationCodeFormViewController(_ verificationCodeFormViewController: VerificationCodeFormViewController, codeEnteringIsCompleted: Bool)
+    func verificationCodeFormComponent(_ verificationCodeFormComponent: VerificationCodeFormComponent, codeEnteringIsCompleted: Bool)
 
 }
 
-class VerificationCodeFormViewController: UIView, UITextFieldDelegate {
+class VerificationCodeFormComponent: UIView, UITextFieldDelegate {
 
     @IBOutlet private var contentView: UIView!
     @IBOutlet private var codeTextField: UITextField?
 
     @IBOutlet private var verificationTextFieldHeightConstraint: NSLayoutConstraint?
 
-    weak var delegate: VerificationCodeFormViewDelegate?
+    weak var delegate: VerificationCodeFormComponentDelegate?
 
     var textFieldHeight: CGFloat {
         get {
@@ -120,7 +120,7 @@ class VerificationCodeFormViewController: UIView, UITextFieldDelegate {
 
             codeTextField?.text = maskedText
             
-            delegate?.verificationCodeFormViewController(self, codeEnteringIsCompleted: checkForComplete())
+            delegate?.verificationCodeFormComponent(self, codeEnteringIsCompleted: checkForComplete())
             return false
         }
 

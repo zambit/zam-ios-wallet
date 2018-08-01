@@ -9,17 +9,17 @@
 import Foundation
 import UIKit
 
-protocol NewPasswordFormViewDelegate: class {
+protocol NewPasswordFormComponentDelegate: class {
 
-    func newPasswordFormViewControllerEditingChange(_ newPasswordFormViewController: NewPasswordFormViewController)
+    func newPasswordFormComponentEditingChange(_ newPasswordFormComponent: NewPasswordFormComponent)
 
-    func newPasswordFormViewController(_ newPasswordFormView: NewPasswordFormViewController, dontSatisfyTheCondition: PasswordsCondition)
+    func newPasswordFormComponent(_ newPasswordFormComponent: NewPasswordFormComponent, dontSatisfyTheCondition: PasswordsCondition)
 
-    func newPasswordFormViewControllerSatisfiesAllConditions(_ newPasswordFormView: NewPasswordFormViewController)
+    func newPasswordFormComponentSatisfiesAllConditions(_ newPasswordFormComponent: NewPasswordFormComponent)
 
 }
 
-class NewPasswordFormViewController: UIView {
+class NewPasswordFormComponent: UIView {
 
     @IBOutlet private var contentView: UIView!
     @IBOutlet private var passwordTextField: UITextField?
@@ -28,7 +28,7 @@ class NewPasswordFormViewController: UIView {
 
     @IBOutlet private var passwordTextFieldHeightConstraint: NSLayoutConstraint?
 
-    weak var delegate: NewPasswordFormViewDelegate?
+    weak var delegate: NewPasswordFormComponentDelegate?
 
     var textFieldsHeight: CGFloat {
         get {
@@ -122,7 +122,7 @@ class NewPasswordFormViewController: UIView {
 
     @objc
     private func editingChangePasswordTextField(_ sender: UITextField) {
-        delegate?.newPasswordFormViewControllerEditingChange(self)
+        delegate?.newPasswordFormComponentEditingChange(self)
 
         guard
             let password = sender.text,
@@ -137,7 +137,7 @@ class NewPasswordFormViewController: UIView {
 
     @objc
     private func editingChangePasswordConfirmationTextField(_ sender: UITextField) {
-        delegate?.newPasswordFormViewControllerEditingChange(self)
+        delegate?.newPasswordFormComponentEditingChange(self)
 
         guard
             let confirmation = sender.text,
@@ -167,7 +167,7 @@ class NewPasswordFormViewController: UIView {
         switch (password == confirmation, password.count >= 6) {
         case (true, true):
             self.helperTextLabel?.text = ""
-            delegate?.newPasswordFormViewControllerSatisfiesAllConditions(self)
+            delegate?.newPasswordFormComponentSatisfiesAllConditions(self)
         case (true, false):
             guard password != "" else {
                 self.helperTextLabel?.text = ""
@@ -176,7 +176,7 @@ class NewPasswordFormViewController: UIView {
 
             let failedCondition = PasswordsCondition.passwordMatchesSymbolsCount
             self.helperTextLabel?.text = failedCondition.rawValue
-            delegate?.newPasswordFormViewController(self, dontSatisfyTheCondition: failedCondition)
+            delegate?.newPasswordFormComponent(self, dontSatisfyTheCondition: failedCondition)
         case (false, true):
             guard confirmation != "" else {
                 self.helperTextLabel?.text = ""
@@ -185,12 +185,12 @@ class NewPasswordFormViewController: UIView {
 
             let failedCondition = PasswordsCondition.passwordFieldsMatch
             self.helperTextLabel?.text = failedCondition.rawValue
-            delegate?.newPasswordFormViewController(self, dontSatisfyTheCondition: failedCondition)
+            delegate?.newPasswordFormComponent(self, dontSatisfyTheCondition: failedCondition)
         case (false, false):
 
             let failedCondition = PasswordsCondition.passwordMatchesSymbolsCount
             self.helperTextLabel?.text = failedCondition.rawValue
-            delegate?.newPasswordFormViewController(self, dontSatisfyTheCondition: failedCondition)
+            delegate?.newPasswordFormComponent(self, dontSatisfyTheCondition: failedCondition)
         }
     }
 }

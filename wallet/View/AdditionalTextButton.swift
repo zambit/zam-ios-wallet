@@ -19,6 +19,18 @@ struct AdditionalTextButtonData {
     var textActive: String
     var textInactive: String
     var timerParams: TimerParameters?
+
+    init(textActive: String, textInactive: String? = nil, timerParams: TimerParameters? = nil) {
+        self.textActive = textActive
+
+        if let inactive = textInactive {
+            self.textInactive = inactive
+        } else {
+            self.textInactive = textActive
+        }
+
+        self.timerParams = timerParams
+    }
 }
 
 class AdditionalTextButton: UIButton, CustomUI, CountdownTimerDelegate {
@@ -53,6 +65,8 @@ class AdditionalTextButton: UIButton, CustomUI, CountdownTimerDelegate {
     }
 
     required init?(coder aDecoder: NSCoder) {
+        print(aDecoder)
+
         super.init(coder: aDecoder)
         setupStyle()
     }
@@ -63,6 +77,8 @@ class AdditionalTextButton: UIButton, CustomUI, CountdownTimerDelegate {
 
         setTitle(textActive, for: .normal)
         setTitle(textInactive, for: .disabled)
+
+        contentHorizontalAlignment = .left
 
         if let timerParams = data.timerParams {
             self.timer = CountdownTimer(seconds: timerParams.seconds)

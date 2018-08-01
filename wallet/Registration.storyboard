@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Enter Phone Number View Controller-->
+        <!--Enter New Phone Number View Controller-->
         <scene sceneID="ahj-vz-8SG">
             <objects>
-                <viewController storyboardIdentifier="EnterPhoneNumberViewController" id="Pyg-73-OqK" customClass="EnterPhoneNumberViewController" customModule="wallet" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EnterNewPhoneNumberViewController" id="Pyg-73-OqK" customClass="EnterNewPhoneNumberViewController" customModule="wallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="tUF-U7-7TA">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -24,11 +24,11 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qQ8-XH-WUs" customClass="PhoneNumberFormViewController" customModule="wallet" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qQ8-XH-WUs" customClass="PhoneNumberFormComponent" customModule="wallet" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="142.5" width="375" height="56"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="56" id="w2H-ng-OF1"/>
+                                    <constraint firstAttribute="height" constant="56" placeholder="YES" id="w2H-ng-OF1"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yY4-cD-Qm1" customClass="LargeIconButton" customModule="wallet" customModuleProvider="target">
@@ -40,7 +40,7 @@
                                 </constraints>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="OBf-Zh-HeM">
-                                <rect key="frame" x="16" y="240.5" width="215" height="200"/>
+                                <rect key="frame" x="16" y="214.5" width="215" height="200"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="215" id="DPC-1c-H2H"/>
                                     <constraint firstAttribute="height" constant="200" placeholder="YES" id="W1d-wb-Ork"/>
@@ -54,7 +54,7 @@
                             <constraint firstItem="U4Y-RM-BPg" firstAttribute="top" secondItem="egG-wf-OqO" secondAttribute="top" constant="16" id="PVF-2c-ahe"/>
                             <constraint firstItem="egG-wf-OqO" firstAttribute="trailing" secondItem="yY4-cD-Qm1" secondAttribute="trailing" constant="24" id="UOm-zz-zKb"/>
                             <constraint firstItem="egG-wf-OqO" firstAttribute="trailing" secondItem="qQ8-XH-WUs" secondAttribute="trailing" id="ZMm-x6-qFJ"/>
-                            <constraint firstItem="OBf-Zh-HeM" firstAttribute="top" secondItem="qQ8-XH-WUs" secondAttribute="bottom" constant="42" id="p1W-L0-1T6"/>
+                            <constraint firstItem="OBf-Zh-HeM" firstAttribute="top" secondItem="qQ8-XH-WUs" secondAttribute="bottom" constant="16" id="p1W-L0-1T6"/>
                             <constraint firstItem="OBf-Zh-HeM" firstAttribute="leading" secondItem="egG-wf-OqO" secondAttribute="leading" constant="16" id="pB4-4w-6zr"/>
                             <constraint firstItem="qQ8-XH-WUs" firstAttribute="leading" secondItem="egG-wf-OqO" secondAttribute="leading" id="plK-hK-eiJ"/>
                             <constraint firstItem="egG-wf-OqO" firstAttribute="bottom" secondItem="yY4-cD-Qm1" secondAttribute="bottom" constant="24" id="tw1-mZ-PDp"/>
@@ -88,7 +88,7 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3FS-X7-4ZV" customClass="VerificationCodeFormViewController" customModule="wallet" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3FS-X7-4ZV" customClass="VerificationCodeFormComponent" customModule="wallet" customModuleProvider="target">
                                 <rect key="frame" x="16" y="142" width="343" height="56"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -103,8 +103,8 @@
                                     <constraint firstAttribute="height" constant="60" id="uW3-MS-HW1"/>
                                 </constraints>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w2q-jJ-o6c" customClass="AdditionalTextButton" customModule="wallet" customModuleProvider="target">
-                                <rect key="frame" x="24" y="598" width="46" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w2q-jJ-o6c" customClass="AdditionalTextButton" customModule="wallet" customModuleProvider="target">
+                                <rect key="frame" x="24" y="596" width="54" height="34"/>
                                 <state key="normal" title="Button"/>
                             </button>
                         </subviews>
@@ -128,7 +128,7 @@
                         <outlet property="continueButtonBottomConstraint" destination="0xM-Ph-g7f" id="3Vm-Cl-JaL"/>
                         <outlet property="largeTitleLabel" destination="5C8-LU-ILM" id="vjP-ph-h7k"/>
                         <outlet property="sendVerificationCodeAgainButton" destination="w2q-jJ-o6c" id="nSc-hq-dEN"/>
-                        <outlet property="verificationCodeFormView" destination="3FS-X7-4ZV" id="xoZ-i9-Hok"/>
+                        <outlet property="verificationCodeFormComponent" destination="3FS-X7-4ZV" id="xoZ-i9-Hok"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AVM-6k-sDh" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -149,7 +149,7 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SE1-m1-7P3" customClass="NewPasswordFormViewController" customModule="wallet" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SE1-m1-7P3" customClass="NewPasswordFormComponent" customModule="wallet" customModuleProvider="target">
                                 <rect key="frame" x="16" y="142" width="343" height="146"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -182,7 +182,7 @@
                         <outlet property="continueButton" destination="VGq-BV-aTL" id="Ydu-cX-rpD"/>
                         <outlet property="continueButtonBottomConstraint" destination="vPh-bZ-rpM" id="tP2-pH-SRc"/>
                         <outlet property="largeTitleLabel" destination="HrH-uf-gIy" id="QRO-15-eoH"/>
-                        <outlet property="newPasswordFormView" destination="SE1-m1-7P3" id="f1a-gU-Mzg"/>
+                        <outlet property="newPasswordFormComponent" destination="SE1-m1-7P3" id="f1a-gU-Mzg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m4I-7U-FOc" userLabel="First Responder" sceneMemberID="firstResponder"/>

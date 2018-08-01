@@ -10,16 +10,31 @@ import Foundation
 import UIKit
 import FlagKit
 
-protocol PhoneNumberFormViewDelegate: class {
+protocol PhoneNumberFormComponentDelegate: class {
 
-    func phoneNumberFormViewController(_ phoneNumberFormViewController: PhoneNumberFormViewController, phoneNumberEnteringIsCompleted: Bool)
+    func phoneNumberFormComponentCanChangeHelperText(_ phoneNumberFormComponent: PhoneNumberFormComponent) -> Bool
 
+    func phoneNumberFormComponentEditingChange(_ phoneNumberFormComponent: PhoneNumberFormComponent)
+
+    func phoneNumberFormComponent(_ phoneNumberFormComponent: PhoneNumberFormComponent, dontSatisfyTheCondition: PhoneCondition)
+
+    func phoneNumberFormComponentSatisfiesAllConditions(_ phoneNumberFormComponent: PhoneNumberFormComponent)
+
+}
+
+extension PhoneNumberFormComponentDelegate {
+
+    func phoneNumberFormComponentCanChangeHelperText(_ phoneNumberFormComponent: PhoneNumberFormComponent) -> Bool {
+        return true
+    }
+
+    func phoneNumberFormComponentEditingChange(_ phoneNumberFormComponent: PhoneNumberFormComponent) { }
 }
 
 /**
  Class that controlls entreing phone number form, handles all textFields editing and defines its behaviour.
  */
-class PhoneNumberFormViewController: UIView, UITextFieldDelegate {
+class PhoneNumberFormComponent: UIView, UITextFieldDelegate {
 
     enum PhoneMaskKeys: String {
         case countryId = "country_id"
@@ -67,7 +82,31 @@ class PhoneNumberFormViewController: UIView, UITextFieldDelegate {
         }
     }
 
-    weak var delegate: PhoneNumberFormViewDelegate?
+    weak var delegate: PhoneNumberFormComponentDelegate?
+
+    var helperText: String {
+        get {
+            return helperTextLabel?.text ?? ""
+        }
+
+        set {
+            helperTextLabel?.text = newValue
+        }
+    }
+
+    private var helperTextWithDelegateCheck: String {
+        get {
+            return helperTextLabel?.text ?? ""
+        }
+
+        set {
+            if let delegate = delegate, !delegate.phoneNumberFormComponentCanChangeHelperText(self) {
+                // do nothing
+            } else {
+                helperTextLabel?.text = newValue
+            }
+        }
+    }
 
     /**
      Masks dictionary
@@ -92,14 +131,40 @@ class PhoneNumberFormViewController: UIView, UITextFieldDelegate {
     @IBOutlet private var detailPhonePartTextField: UITextField?
     @IBOutlet private var mainPhonePartTextField: UITextField?
     @IBOutlet private var countryImageView: CountryView?
+    @IBOutlet private var helperTextLabel: UILabel?
 
     @IBOutlet private var rightLabelsToContentViewConstraint: NSLayoutConstraint?
     @IBOutlet private var rightImageToContentViewConstraint: NSLayoutConstraint?
 
+    @IBOutlet private var textFieldsHeightConstraint: NSLayoutConstraint?
+    @IBOutlet private var countryImageViewHeightConstraint: NSLayoutConstraint?
+
+    var textFieldsHeight: CGFloat {
+        get {
+            return textFieldsHeightConstraint?.constant ?? 0
+        }
+
+        set {
+            textFieldsHeightConstraint?.constant = newValue
+            layoutIfNeeded()
+        }
+    }
+
+    var countryImageSide: CGFloat {
+        get {
+            return countryImageViewHeightConstraint?.constant ?? 0
+        }
+
+        set {
+            countryImageViewHeightConstraint?.constant = newValue
+            layoutIfNeeded()
+        }
+    }
+
     /**
      Output concatiated text from detail and main textFields
      */
-    var text: String {
+    var phone: String {
         var result: String = ""
 
         if let detail = detailPhonePartTextField?.text {
@@ -150,6 +215,9 @@ class PhoneNumberFormViewController: UIView, UITextFieldDelegate {
         self.backgroundColor = .clear
         self.contentView.backgroundColor = .clear
 
+        self.helperTextLabel?.textColor = .error
+        self.helperTextLabel?.text = ""
+
         self.detailPhonePartTextField?.keyboardType = .phonePad
         self.mainPhonePartTextField?.keyboardType = .decimalPad
 
@@ -182,14 +250,32 @@ class PhoneNumberFormViewController: UIView, UITextFieldDelegate {
         self.masks = masks
     }
 
-    private func checkForComplete() -> Bool {
-        guard
-            let mask = currentMask?.1[PhoneMaskKeys.phoneMask.rawValue],
-            let mainText = mainPhonePartTextField?.text else {
-                return false
-        }
+    private func checkConditions(mask: String?, phoneNumberMainPart: String) {
+        if let mask = mask {
+            switch phoneNumberMainPart.count >= mask.count {
+            case true:
+                helperTextWithDelegateCheck = ""
+                delegate?.phoneNumberFormComponentSatisfiesAllConditions(self)
+            case false:
+                guard phoneNumberMainPart != "" else {
+                    helperTextWithDelegateCheck = ""
+                    break
+                }
 
-        return mainText.count >= mask.count
+                let failedCondition = PhoneCondition.phoneLengthMatchesMask
+                helperTextWithDelegateCheck = failedCondition.rawValue
+                delegate?.phoneNumberFormComponent(self, dontSatisfyTheCondition: failedCondition)
+            }
+        } else {
+            guard phoneNumberMainPart != "" else {
+                helperTextWithDelegateCheck = ""
+                return
+            }
+
+            let failedCondition = PhoneCondition.phoneNumberHaveValidCode
+            helperTextWithDelegateCheck = failedCondition.rawValue
+            delegate?.phoneNumberFormComponent(self, dontSatisfyTheCondition: failedCondition)
+        }
     }
 
     // - UITextField events handlers
@@ -216,8 +302,19 @@ class PhoneNumberFormViewController: UIView, UITextFieldDelegate {
             mainPhonePartTextField?.text = matching(text: mainText, withMask: mask)
         }
 
-        let check = checkForComplete()
-        delegate?.phoneNumberFormViewController(self, phoneNumberEnteringIsCompleted: check)
+        delegate?.phoneNumberFormComponentEditingChange(self)
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            [weak self] in
+
+            guard let strongSelf = self else {
+                return
+            }
+
+            let optionalMask = strongSelf.currentMask?.1[PhoneMaskKeys.phoneMask.rawValue]
+            let mainText = strongSelf.mainPhonePartTextField?.text ?? ""
+            strongSelf.checkConditions(mask: optionalMask, phoneNumberMainPart: mainText)
+        }
     }
 
     @objc
@@ -228,8 +325,19 @@ class PhoneNumberFormViewController: UIView, UITextFieldDelegate {
 
     @objc
     private func mainTextFieldEditingChanged(_ sender: UITextField) {
-        let check = checkForComplete()
-        delegate?.phoneNumberFormViewController(self, phoneNumberEnteringIsCompleted: check)
+        delegate?.phoneNumberFormComponentEditingChange(self)
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            [weak self] in
+
+            guard let strongSelf = self else {
+                return
+            }
+
+            let optionalMask = strongSelf.currentMask?.1[PhoneMaskKeys.phoneMask.rawValue]
+            let mainText = strongSelf.mainPhonePartTextField?.text ?? ""
+            strongSelf.checkConditions(mask: optionalMask, phoneNumberMainPart: mainText)
+        }
     }
 
     @objc
@@ -278,8 +386,19 @@ class PhoneNumberFormViewController: UIView, UITextFieldDelegate {
 
             mainPhonePartTextField?.text = maskedText
 
-            let check = checkForComplete()
-            delegate?.phoneNumberFormViewController(self, phoneNumberEnteringIsCompleted: check)
+            delegate?.phoneNumberFormComponentEditingChange(self)
+
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                [weak self] in
+
+                guard let strongSelf = self else {
+                    return
+                }
+
+                let optionalMask = strongSelf.currentMask?.1[PhoneMaskKeys.phoneMask.rawValue]
+                let mainText = strongSelf.mainPhonePartTextField?.text ?? ""
+                strongSelf.checkConditions(mask: optionalMask, phoneNumberMainPart: mainText)
+            }
             return false
         }
 

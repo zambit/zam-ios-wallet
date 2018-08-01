@@ -12,7 +12,7 @@ import UIKit
 /**
  Creating new password screen controller. Owns its model and views.
  */
-class CreateNewPasswordViewController: ContinueViewController, NewPasswordFormViewDelegate {
+class CreateNewPasswordViewController: ContinueViewController, NewPasswordFormComponentDelegate {
 
     var userManager: WalletUserDefaultsManager?
     var signupAPI: SignupAPI?
@@ -26,7 +26,7 @@ class CreateNewPasswordViewController: ContinueViewController, NewPasswordFormVi
     private var signupToken: String?
 
     @IBOutlet var largeTitleLabel: UILabel?
-    @IBOutlet var newPasswordFormView: NewPasswordFormViewController?
+    @IBOutlet var newPasswordFormComponent: NewPasswordFormComponent?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,7 +36,7 @@ class CreateNewPasswordViewController: ContinueViewController, NewPasswordFormVi
 
         setupViewControllerStyle()
 
-        newPasswordFormView?.delegate = self
+        newPasswordFormComponent?.delegate = self
     }
 
     private func setupViewControllerStyle() {
@@ -46,16 +46,15 @@ class CreateNewPasswordViewController: ContinueViewController, NewPasswordFormVi
         continueButton?.addTarget(self, action: #selector(continueButtonTouchUpInsideEvent(_:)), for: .touchUpInside)
     }
 
-    func newPasswordFormViewControllerEditingChange(_ newPasswordFormViewController: NewPasswordFormViewController) {
+    func newPasswordFormComponentEditingChange(_ newPasswordFormComponent: NewPasswordFormComponent) {
         // ...
     }
 
-    func newPasswordFormViewController(_ newPasswordFormView: NewPasswordFormViewController, dontSatisfyTheCondition: PasswordsCondition) {
-        // show error
+    func newPasswordFormComponent(_ newPasswordFormComponent: NewPasswordFormComponent, dontSatisfyTheCondition: PasswordsCondition) {
         continueButton?.customAppearance.setEnabled(false)
     }
 
-    func newPasswordFormViewControllerSatisfiesAllConditions(_ newPasswordFormView: NewPasswordFormViewController) {
+    func newPasswordFormComponentSatisfiesAllConditions(_ newPasswordFormComponent: NewPasswordFormComponent) {
         continueButton?.customAppearance.setEnabled(true)
     }
 
@@ -71,8 +70,8 @@ class CreateNewPasswordViewController: ContinueViewController, NewPasswordFormVi
     private func continueButtonTouchUpInsideEvent(_ sender: Any) {
         guard
             let phone = self.phone,
-            let password = newPasswordFormView?.password,
-            let confirmation = newPasswordFormView?.confirmation,
+            let password = newPasswordFormComponent?.password,
+            let confirmation = newPasswordFormComponent?.confirmation,
             let token = self.signupToken else {
             return
         }

@@ -1,27 +1,25 @@
 //
-//  EnterLoginPasswordViewController.swift
+//  EnterPhoneLoginPasswordViewController.swift
 //  wallet
 //
-//  Created by  me on 26/07/2018.
+//  Created by  me on 01/08/2018.
 //  Copyright © 2018 zamzam. All rights reserved.
 //
 
 import Foundation
 import UIKit
 
-class EnterLoginPasswordViewController: ContinueViewController, LoginPasswordComponentDelegate {
+class EnterPhoneLoginPasswordViewController: ContinueViewController, LoginFormComponentDelegate {
 
     var userManager: WalletUserDefaultsManager?
     var authAPI: AuthAPI?
 
     var onContinue: ((_ authToken: String) -> Void)?
     var onExit: (() -> Void)?
-    var onRecovery: ((_ phone: String) -> Void)?
-
-    private var phone: String?
+    var onRecovery: (() -> Void)?
 
     @IBOutlet var largeTitleLabel: UILabel?
-    @IBOutlet var loginPasswordFormView: LoginPasswordFormComponent?
+    @IBOutlet var loginFormView: LoginFormComponent?
     @IBOutlet var forgotPasswordButton: AdditionalTextButton?
 
     override func viewDidLoad() {
@@ -32,12 +30,19 @@ class EnterLoginPasswordViewController: ContinueViewController, LoginPasswordCom
 
         setupViewControllerStyle()
 
+        guard let path = Bundle.main.path(forResource: "PhoneMasks", ofType: "plist"),
+            let masks = NSDictionary(contentsOfFile: path) as? [String: [String: String]] else {
+                fatalError("PhoneMasks.plist error")
+        }
+
+        loginFormView?.providePhoneNumberMasksData(masks)
+
         let data = AdditionalTextButtonData(textActive: "Forgot password?")
 
         forgotPasswordButton?.configure(data: data)
         forgotPasswordButton?.addTarget(self, action: #selector(additionalButtonTouchUpInsideEvent(_:)), for: .touchUpInside)
 
-        loginPasswordFormView?.delegate = self
+        loginFormView?.delegate = self
     }
 
     private func setupViewControllerStyle() {
@@ -47,31 +52,15 @@ class EnterLoginPasswordViewController: ContinueViewController, LoginPasswordCom
         continueButton?.addTarget(self, action: #selector(continueButtonTouchUpInsideEvent(_:)), for: .touchUpInside)
     }
 
-    func loginPasswordFormComponentEditingChange(_ loginPasswordFormView: LoginPasswordFormComponent) {
-        // ...
-    }
-
-    func loginPasswordFormComponent(_ loginPasswordFormView: LoginPasswordFormComponent, dontSatisfyTheCondition: PasswordsCondition) {
-        continueButton?.customAppearance.setEnabled(true)
-    }
-
-    func loginPasswordFormComponentSatisfiesAllConditions(_ loginPasswordFormViewController: LoginPasswordFormComponent) {
-        continueButton?.customAppearance.setEnabled(false)
-    }
-
-    /**
-     Function for receiveing data from previous ViewController on ScreenFlow
-     */
-    func prepare(phone: String) {
-        self.phone = phone
-        print("Phone: \(phone)")
+    func loginFormComponent(_ loginFormComponent: LoginFormComponent, loginingCompleted: Bool) {
+        continueButton?.customAppearance.setEnabled(loginingCompleted)
     }
 
     @objc
     private func continueButtonTouchUpInsideEvent(_ sender: Any) {
         guard
-            let phone = self.phone,
-            let password = loginPasswordFormView?.password else {
+            let phone = loginFormView?.phone,
+            let password = loginFormView?.password else {
                 return
         }
 
@@ -81,6 +70,8 @@ class EnterLoginPasswordViewController: ContinueViewController, LoginPasswordCom
 
             self?.userManager?.save(token: authToken)
             self?.userManager?.save(phoneNumber: phone)
+
+            self?.onContinue?(authToken)
         }.catch {
             [weak self]
             error in
@@ -92,7 +83,7 @@ class EnterLoginPasswordViewController: ContinueViewController, LoginPasswordCom
                         return
                     }
 
-                    self?.loginPasswordFormView?.helperText = fail.message
+                    self?.loginFormView?.helperText = fail.message
                 }
             }
         }
@@ -100,12 +91,6 @@ class EnterLoginPasswordViewController: ContinueViewController, LoginPasswordCom
 
     @objc
     private func additionalButtonTouchUpInsideEvent(_ sender: AdditionalTextButton) {
-        guard let phone = self.phone else {
-            return
-        }
-
-        onRecovery?(phone)
+        onRecovery?()
     }
 }
-
-

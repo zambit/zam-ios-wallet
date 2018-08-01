@@ -2,7 +2,7 @@
 //  EnterPhoneNumberViewController.swift
 //  wallet
 //
-//  Created by  me on 01/08/2018.
+//  Created by  me on 25/07/2018.
 //  Copyright © 2018 zamzam. All rights reserved.
 //
 
@@ -10,23 +10,38 @@ import Foundation
 import UIKit
 
 /**
- Entering phone number screen controller. Owns its model and views.
+ Entering new phone number screen controller. Owns its model and views.
  */
-class EnterPhoneNumberViewController: ContinueViewController, PhoneNumberFormComponentDelegate {
+class EnterNewPhoneNumberViewController: ContinueViewController, PhoneNumberFormComponentDelegate {
 
-    var recoveryAPI: RecoveryAPI?
+    var signupAPI: SignupAPI?
 
     /**
      Flow parameter for continue action. Needs to provide phone number for doing action
      */
     var onContinue: ((_ phone: String) -> Void)?
+    
+    /**
+     Flow parameter for skip action
+     */
+    var onSkip: (() -> Void)?
+
+    private var termsItems: [TermItemData] = []
 
     @IBOutlet var largeTitleLabel: UILabel?
     @IBOutlet var phoneNumberForm: PhoneNumberFormComponent?
+    @IBOutlet var termsStackView: UIStackView?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        termsItems = [
+            TermItemData(text: "Test for the call to confirm the legal document"),
+            TermItemData(text: "Test for the call to confirm the legal document")
+        ]
+
+        addSubviews()
+        
         setupDefaultStyle()
         hideKeyboardOnTap()
 
@@ -44,12 +59,22 @@ class EnterPhoneNumberViewController: ContinueViewController, PhoneNumberFormCom
 
     // PhoneNumberFormViewDelegate
 
-    func phoneNumberFormComponent(_ phoneNumberFormComponent: PhoneNumberFormComponent, dontSatisfyTheCondition: PhoneCondition) {
+    func phoneNumberFormComponent(_ phoneNumberFormViewController: PhoneNumberFormComponent, dontSatisfyTheCondition: PhoneCondition) {
         continueButton?.customAppearance.setEnabled(false)
     }
 
-    func phoneNumberFormComponentSatisfiesAllConditions(_ phoneNumberFormComponent: PhoneNumberFormComponent) {
+    func phoneNumberFormComponentSatisfiesAllConditions(_ phoneNumberFormViewController: PhoneNumberFormComponent) {
         continueButton?.customAppearance.setEnabled(true)
+    }
+
+    private func addSubviews() {
+        termsItems.forEach {
+            let termView = TextCheckBoxView(frame: CGRect.zero)
+            termView.heightAnchor.constraint(equalToConstant: 32.0).isActive = true
+            termView.configure(data: $0)
+
+            termsStackView?.addArrangedSubview(termView)
+        }
     }
 
     private func setupViewControllerStyle() {
@@ -57,6 +82,8 @@ class EnterPhoneNumberViewController: ContinueViewController, PhoneNumberFormCom
 
         continueButton?.setImage(#imageLiteral(resourceName: "icArrowRight"), for: .normal)
         continueButton?.addTarget(self, action: #selector(continueButtonTouchUpInsideEvent(_:)), for: .touchUpInside)
+
+        termsStackView?.spacing = 32.0
     }
 
     @objc
@@ -65,11 +92,18 @@ class EnterPhoneNumberViewController: ContinueViewController, PhoneNumberFormCom
             return
         }
         print(phone)
-        recoveryAPI?.sendVerificationCode(to: phone).done {
+        signupAPI?.sendVerificationCode(to: phone).done {
             [weak self] in
             self?.onContinue?(phone)
         }.catch { error in
             print(error)
         }
     }
+}
+
+/**
+ Struct represents all properties needed to fill TermItem.
+ */
+struct TermItemData {
+    var text: String
 }

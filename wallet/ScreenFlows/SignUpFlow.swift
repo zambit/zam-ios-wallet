@@ -18,13 +18,13 @@ final class SignUpFlow: ScreenFlow {
     }
 
     func begin() {
-        self.navigationController?.pushViewController(enterPhoneNumberScreen, animated: true)
+        self.navigationController?.pushViewController(enterNewPhoneNumberScreen, animated: true)
     }
 
-    private var enterPhoneNumberScreen: EnterPhoneNumberViewController {
-        let _vc = ControllerHelper.instantiateViewController(identifier: "EnterPhoneNumberViewController", storyboardName: "Registration")
+    private var enterNewPhoneNumberScreen: EnterNewPhoneNumberViewController {
+        let _vc = ControllerHelper.instantiateViewController(identifier: "EnterNewPhoneNumberViewController", storyboardName: "Registration")
 
-        guard let vc = _vc as? EnterPhoneNumberViewController else {
+        guard let vc = _vc as? EnterNewPhoneNumberViewController else {
             fatalError()
         }
 

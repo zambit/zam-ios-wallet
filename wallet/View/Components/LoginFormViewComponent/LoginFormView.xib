@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoginFormComponent" customModule="wallet" customModuleProvider="target">
+            <connections>
+                <outlet property="contentView" destination="iN0-l3-epB" id="dPW-Fs-FUP"/>
+                <outlet property="loginPasswordFormComponent" destination="obq-kI-Fjf" id="TTz-Lb-cIt"/>
+                <outlet property="phoneNumberFormComponent" destination="Hms-7B-YqU" id="b8G-kS-gPu"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="736" height="225"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hms-7B-YqU" customClass="PhoneNumberFormComponent" customModule="wallet" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="0.0" width="736" height="56"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="56" placeholder="YES" id="CpF-VX-c5O"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="obq-kI-Fjf" customClass="LoginPasswordFormComponent" customModule="wallet" customModuleProvider="target">
+                    <rect key="frame" x="16" y="64" width="704" height="161"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+            <constraints>
+                <constraint firstItem="Hms-7B-YqU" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="49N-g9-3ED"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="obq-kI-Fjf" secondAttribute="bottom" id="F1c-bz-cho"/>
+                <constraint firstItem="Hms-7B-YqU" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="JNZ-TS-4gG"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Hms-7B-YqU" secondAttribute="trailing" id="Qea-5V-3i5"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="obq-kI-Fjf" secondAttribute="trailing" constant="16" id="bdh-OL-J03"/>
+                <constraint firstItem="obq-kI-Fjf" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="gzv-pj-Q2A"/>
+                <constraint firstItem="obq-kI-Fjf" firstAttribute="top" secondItem="Hms-7B-YqU" secondAttribute="bottom" constant="8" id="idg-Cf-kHk"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="214" y="-167.5"/>
+        </view>
+    </objects>
+</document>

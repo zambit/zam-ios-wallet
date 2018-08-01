@@ -18,31 +18,16 @@ final class LoginFlow: ScreenFlow {
     }
 
     func begin() {
-        self.navigationController?.pushViewController(enterPhoneNumberScreen, animated: true)
+        self.navigationController?.pushViewController(enterPhoneLoginPasswordScreen, animated: true)
     }
 
-    private var enterPhoneNumberScreen: EnterPhoneNumberViewController {
-        let vc = EnterPhoneNumberViewController()
-        let onContinue: (String) -> Void = {
-            [weak self]
-            phone in
+    private var enterPhoneLoginPasswordScreen: EnterPhoneLoginPasswordViewController {
+        let _vc = ControllerHelper.instantiateViewController(identifier: "EnterPhoneLoginPasswordViewController", storyboardName: "Login")
 
-            guard let strongSelf = self else {
-                return
-            }
-
-            let target = strongSelf.enterLoginPasswordScreen
-            target.prepare(phone: phone)
-
-            strongSelf.navigationController?.pushViewController(target, animated: true)
+        guard let vc = _vc as? EnterPhoneLoginPasswordViewController else {
+            fatalError()
         }
 
-        vc.onContinue = onContinue
-        return vc
-    }
-
-    private var enterLoginPasswordScreen: EnterLoginPasswordViewController {
-        let vc = EnterLoginPasswordViewController()
         let onContinue: (String) -> Void = {
             [weak self]
             authToken in
@@ -56,11 +41,42 @@ final class LoginFlow: ScreenFlow {
 
             strongSelf.navigationController?.pushViewController(target, animated: true)
         }
+
+        let onRecovery: () -> Void = {
+            [weak self] in
+
+            guard let strongSelf = self else {
+                return
+            }
+
+            strongSelf.recoveryFlow?.begin()
+        }
+        vc.onContinue = onContinue
+        vc.onRecovery = onRecovery
+        vc.authAPI = AuthAPI(provider: AuthProvider(environment: WalletEnvironment(), dispatcher: HTTPDispatcher()))
+        vc.userManager = WalletUserDefaultsManager()
+        vc.flow = self
         return vc
     }
 
     private var userScreen: UserViewController {
-        let vc = UserViewController()
+        let _vc = ControllerHelper.instantiateViewController(identifier: "UserViewController", storyboardName: "Main")
+
+        guard let vc = _vc as? UserViewController else {
+            fatalError()
+        }
+
+        vc.userManager = WalletUserDefaultsManager()
         return vc
+    }
+
+    private var recoveryFlow: RecoveryFlow? {
+        guard let navController = navigationController else {
+            print("Navigation controller not found")
+            return nil
+        }
+
+        let flow = RecoveryFlow(navigationController: navController)
+        return flow
     }
 }
