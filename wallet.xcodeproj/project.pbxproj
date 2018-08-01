@@ -410,7 +410,7 @@
 			children = (
 				8C34616A20EF8FA700746724 /* AppDelegate.swift */,
 				8C333D6D210EFC7900949AC0 /* Files */,
-				8C60883E2110632100470411 /* UserManager */,
+				8C60883E2110632100470411 /* UserDefaultsManager */,
 				8C09192B21061ED800703224 /* Helpers */,
 				8C091939210622AF00703224 /* NetworkLayer */,
 				8C0919792108D64E00703224 /* ScreenFlows */,
@@ -439,12 +439,12 @@
 			path = Base;
 			sourceTree = "<group>";
 		};
-		8C60883E2110632100470411 /* UserManager */ = {
+		8C60883E2110632100470411 /* UserDefaultsManager */ = {
 			isa = PBXGroup;
 			children = (
 				8C60883F2110634700470411 /* WalletUserDefaultsManager.swift */,
 			);
-			path = UserManager;
+			path = UserDefaultsManager;
 			sourceTree = "<group>";
 		};
 		8CF1DE4320EF9D170036F986 /* Screens */ = {
