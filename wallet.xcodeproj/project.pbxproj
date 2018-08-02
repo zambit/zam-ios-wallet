@@ -101,6 +101,9 @@
 		8CF5F92D2113206A0083B36A /* SecondEnterLoginFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF5F92B21130F860083B36A /* SecondEnterLoginFlow.swift */; };
 		8CF5F92F211327EB0083B36A /* MaskParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF5F92E211327EB0083B36A /* MaskParser.swift */; };
 		8CF5F931211345320083B36A /* UserFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF5F930211345320083B36A /* UserFlow.swift */; };
+		8CF5F93321134DBC0083B36A /* TransitionCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF5F93221134DBC0083B36A /* TransitionCoordinator.swift */; };
+		8CF5F93521134DFF0083B36A /* NavigationAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF5F93421134DFF0083B36A /* NavigationAnimator.swift */; };
+		8CF5F93821134E6D0083B36A /* CGPoint+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF5F93721134E6D0083B36A /* CGPoint+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -201,6 +204,9 @@
 		8CF5F92B21130F860083B36A /* SecondEnterLoginFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondEnterLoginFlow.swift; sourceTree = "<group>"; };
 		8CF5F92E211327EB0083B36A /* MaskParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskParser.swift; sourceTree = "<group>"; };
 		8CF5F930211345320083B36A /* UserFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFlow.swift; sourceTree = "<group>"; };
+		8CF5F93221134DBC0083B36A /* TransitionCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionCoordinator.swift; sourceTree = "<group>"; };
+		8CF5F93421134DFF0083B36A /* NavigationAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationAnimator.swift; sourceTree = "<group>"; };
+		8CF5F93721134E6D0083B36A /* CGPoint+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGPoint+Extensions.swift"; sourceTree = "<group>"; };
 		C9C98DC4F4721DB056807636 /* Pods_wallet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_wallet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -228,6 +234,7 @@
 				8C09192C21061F3600703224 /* ControllerHelper.swift */,
 				8C333D3F210A08A600949AC0 /* UIView+Extensions.swift */,
 				8C333D64210B619200949AC0 /* UITextField+Extensions.swift */,
+				8CF5F93721134E6D0083B36A /* CGPoint+Extensions.swift */,
 				8C333D6E210F00E600949AC0 /* String+Extensions.swift */,
 			);
 			path = Helpers;
@@ -555,8 +562,18 @@
 			isa = PBXGroup;
 			children = (
 				8C333D7C210F81F100949AC0 /* WalletNavigationController.swift */,
+				8CF5F93621134E070083B36A /* WalletTransitionAnimation */,
 			);
 			path = NavigationController;
+			sourceTree = "<group>";
+		};
+		8CF5F93621134E070083B36A /* WalletTransitionAnimation */ = {
+			isa = PBXGroup;
+			children = (
+				8CF5F93221134DBC0083B36A /* TransitionCoordinator.swift */,
+				8CF5F93421134DFF0083B36A /* NavigationAnimator.swift */,
+			);
+			path = WalletTransitionAnimation;
 			sourceTree = "<group>";
 		};
 		96F68B133DC137F5FC79CBFB /* Pods */ = {
@@ -702,6 +719,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8CF5F93321134DBC0083B36A /* TransitionCoordinator.swift in Sources */,
 				8C09196421076B8200703224 /* RecoveryRequest.swift in Sources */,
 				8C60884C2111A20B00470411 /* LoginPasswordFormComponent.swift in Sources */,
 				8C091906210605AF00703224 /* Router.swift in Sources */,
@@ -747,6 +765,7 @@
 				8C333D40210A08A600949AC0 /* UIView+Extensions.swift in Sources */,
 				8C333D68210B72A100949AC0 /* ContinueViewController.swift in Sources */,
 				8C09196A2108951F00703224 /* WalletResponseError.swift in Sources */,
+				8CF5F93521134DFF0083B36A /* NavigationAnimator.swift in Sources */,
 				8C6088602111F35E00470411 /* EnterPhoneNumberViewController.swift in Sources */,
 				8C6088512111A95100470411 /* Conditions.swift in Sources */,
 				8C333D302109E0B400949AC0 /* UserViewController.swift in Sources */,
@@ -776,6 +795,7 @@
 				8C6088482110A75100470411 /* AdditionalTextButton.swift in Sources */,
 				8C333D56210B4EF400949AC0 /* VerificationCodeFormComponent.swift in Sources */,
 				8C09196D21089FA700703224 /* AuthRequest.swift in Sources */,
+				8CF5F93821134E6D0083B36A /* CGPoint+Extensions.swift in Sources */,
 				8C333D3C2109FC2D00949AC0 /* ExampleOnboardingItem.swift in Sources */,
 				8C0919812108D99400703224 /* CreateNewPasswordViewController.swift in Sources */,
 				8C0919432106268900703224 /* HTTPDispatcher.swift in Sources */,

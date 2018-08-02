@@ -21,11 +21,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIApplication.shared.statusBarStyle = .lightContent
 
         let _vc = ControllerHelper.instantiateViewController(identifier: "LaunchScreenViewController", storyboardName: "Onboarding")
+
         guard let vc = _vc as? LaunchScreenViewController else {
             fatalError()
         }
 
         let navigationController = WalletNavigationController(rootViewController: vc)
+        navigationController.customTransitionCoordinator = TransitionCoordinator(animator: NavigationCustomAnimator())
 
         userDefaultsManager = WalletUserDefaultsManager(userDefaults: .standard)
         switch userDefaultsManager.isUserAuthorized {

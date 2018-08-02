@@ -9,12 +9,16 @@
 import UIKit
 
 extension UIView {
+
+    func applyDefaultGradient() {
+        self.applyGradient(colors: [.backgroundDarker, .backgroundLighter])
+    }
     
-    func applyGradient(colors: [UIColor]) -> Void {
+    func applyGradient(colors: [UIColor]) {
         self.applyGradient(colors: colors, locations: nil)
     }
 
-    func applyGradient(colors: [UIColor], locations: [NSNumber]?) -> Void {
+    func applyGradient(colors: [UIColor], locations: [NSNumber]?) {
         let gradient: CAGradientLayer = CAGradientLayer()
         gradient.frame = self.bounds
         gradient.colors = colors.map { $0.cgColor }

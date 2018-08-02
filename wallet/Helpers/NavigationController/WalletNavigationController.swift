@@ -14,6 +14,13 @@ import UIKit
  */
 class WalletNavigationController: UINavigationController {
 
+    var customTransitionCoordinator: TransitionCoordinator? {
+        didSet {
+            self.delegate = customTransitionCoordinator
+            self.transitioningDelegate = customTransitionCoordinator
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
