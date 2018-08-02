@@ -67,6 +67,12 @@ class LargeIconButton: UIButton, CustomUI {
         setImage(#imageLiteral(resourceName: "icArrowRight"), for: .normal)
 
         self.backgroundColor = .white
+
+        self.layer.masksToBounds = false
+        self.layer.shadowColor = UIColor.cornflower.cgColor
+        self.layer.shadowOffset = CGSize(width: 0.0, height: 6.0)
+        self.layer.shadowRadius = 8.0
+        self.layer.shadowOpacity = 0.3
     }
 
     private func setupLayouts() {
