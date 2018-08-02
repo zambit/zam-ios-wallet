@@ -99,7 +99,8 @@ class AdditionalTextButton: UIButton, CustomUI, CountdownTimerDelegate {
         }
 
         var text = textInactive
-        text.insert(contentsOf: "\(timeRemaining.minutes):\(timeRemaining.seconds)", at: timeIndex)
+        let seconds: String = timeRemaining.seconds < 10 ? "0\(timeRemaining.seconds)" : "\(timeRemaining.seconds)"
+        text.insert(contentsOf: "\(timeRemaining.minutes):\(seconds)", at: timeIndex)
 
 
         self.setTitle(text, for: .disabled)
