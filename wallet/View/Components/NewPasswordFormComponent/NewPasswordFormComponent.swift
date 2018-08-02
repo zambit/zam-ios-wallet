@@ -28,6 +28,12 @@ class NewPasswordFormComponent: UIView {
 
     @IBOutlet private var passwordTextFieldHeightConstraint: NSLayoutConstraint?
 
+    /**
+     Timer for performing helperText changing with some delay
+     */
+    private var helperTextDelayTimer: DelayTimer?
+    private var helperTextDelayValue: Double = 1.0
+
     weak var delegate: NewPasswordFormComponentDelegate?
 
     var textFieldsHeight: CGFloat {
@@ -74,6 +80,8 @@ class NewPasswordFormComponent: UIView {
 
         contentView.frame = bounds
         contentView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+
+        helperTextDelayTimer = DelayTimer(delay: helperTextDelayValue)
     }
 
     private func setupStyle() {
@@ -166,30 +174,48 @@ class NewPasswordFormComponent: UIView {
 
         switch (password == confirmation, password.count >= 6) {
         case (true, true):
+            helperTextDelayTimer?.fire()
+            
             self.helperTextLabel?.text = ""
             delegate?.newPasswordFormComponentSatisfiesAllConditions(self)
         case (true, false):
-            guard password != "" else {
-                self.helperTextLabel?.text = ""
-                break
-            }
-
             let failedCondition = PasswordsCondition.passwordMatchesSymbolsCount
-            self.helperTextLabel?.text = failedCondition.rawValue
+            helperTextDelayTimer?.addOperation {
+                [weak self] in
+
+                guard password != "" else {
+                    self?.helperTextLabel?.text = ""
+                    return
+                }
+
+                self?.helperTextLabel?.text = failedCondition.rawValue
+            }.fire()
+
             delegate?.newPasswordFormComponent(self, dontSatisfyTheCondition: failedCondition)
         case (false, true):
-            guard confirmation != "" else {
-                self.helperTextLabel?.text = ""
-                break
-            }
-
             let failedCondition = PasswordsCondition.passwordFieldsMatch
-            self.helperTextLabel?.text = failedCondition.rawValue
+
+            helperTextDelayTimer?.addOperation {
+                [weak self] in
+
+                guard confirmation != "" else {
+                    self?.helperTextLabel?.text = ""
+                    return
+                }
+
+                self?.helperTextLabel?.text = failedCondition.rawValue
+            }.fire()
+
             delegate?.newPasswordFormComponent(self, dontSatisfyTheCondition: failedCondition)
         case (false, false):
-
             let failedCondition = PasswordsCondition.passwordMatchesSymbolsCount
-            self.helperTextLabel?.text = failedCondition.rawValue
+
+            helperTextDelayTimer?.addOperation {
+                [weak self] in
+
+                self?.helperTextLabel?.text = failedCondition.rawValue
+            }.fire()
+
             delegate?.newPasswordFormComponent(self, dontSatisfyTheCondition: failedCondition)
         }
     }

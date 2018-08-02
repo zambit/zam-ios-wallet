@@ -8,6 +8,9 @@
 
 import Foundation
 
+/**
+ CountdownTimer delegate that provides some methods for receiving changing time event and completion event.
+ */
 protocol CountdownTimerDelegate: class {
 
     func countdownTimer(_ countdownTimer: CountdownTimer, timeRemaining: CountdownTimer.Time)
@@ -15,6 +18,9 @@ protocol CountdownTimerDelegate: class {
     func countdownTimerWasCompleted(_ countdownTimer: CountdownTimer)
 }
 
+/**
+ Timer that provides convinient interface to control and present counting down.
+ */
 class CountdownTimer {
 
     struct Time {

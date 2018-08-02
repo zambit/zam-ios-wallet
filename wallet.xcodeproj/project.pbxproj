@@ -97,6 +97,7 @@
 		8CF1DE4920F3A0BB0036F986 /* PasswordRecoveryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF1DE4820F3A0BB0036F986 /* PasswordRecoveryViewController.swift */; };
 		8CF1DE4B20F3AD210036F986 /* NewPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF1DE4A20F3AD210036F986 /* NewPasswordViewController.swift */; };
 		8CF1DE4D20F3BDB90036F986 /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF1DE4C20F3BDB90036F986 /* KeyboardViewController.swift */; };
+		8CF5F9282112FE580083B36A /* DelayTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF5F9272112FE580083B36A /* DelayTimer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -193,6 +194,7 @@
 		8CF1DE4820F3A0BB0036F986 /* PasswordRecoveryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordRecoveryViewController.swift; sourceTree = "<group>"; };
 		8CF1DE4A20F3AD210036F986 /* NewPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPasswordViewController.swift; sourceTree = "<group>"; };
 		8CF1DE4C20F3BDB90036F986 /* KeyboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardViewController.swift; sourceTree = "<group>"; };
+		8CF5F9272112FE580083B36A /* DelayTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelayTimer.swift; sourceTree = "<group>"; };
 		C9C98DC4F4721DB056807636 /* Pods_wallet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_wallet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -211,9 +213,9 @@
 		8C09192B21061ED800703224 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				8C6088492110B42A00470411 /* CountdownTimer.swift */,
+				8CF5F92A21130BB50083B36A /* NavigationController */,
+				8CF5F929211307010083B36A /* Timers */,
 				8C6088502111A95100470411 /* Conditions.swift */,
-				8C333D7C210F81F100949AC0 /* WalletNavigationController.swift */,
 				8C333D41210A094500949AC0 /* UIColor+Additions.swift */,
 				8C333D47210B0F3700949AC0 /* UIViewController+Extensions.swift */,
 				8C09192C21061F3600703224 /* ControllerHelper.swift */,
@@ -531,6 +533,23 @@
 			path = Base;
 			sourceTree = "<group>";
 		};
+		8CF5F929211307010083B36A /* Timers */ = {
+			isa = PBXGroup;
+			children = (
+				8C6088492110B42A00470411 /* CountdownTimer.swift */,
+				8CF5F9272112FE580083B36A /* DelayTimer.swift */,
+			);
+			path = Timers;
+			sourceTree = "<group>";
+		};
+		8CF5F92A21130BB50083B36A /* NavigationController */ = {
+			isa = PBXGroup;
+			children = (
+				8C333D7C210F81F100949AC0 /* WalletNavigationController.swift */,
+			);
+			path = NavigationController;
+			sourceTree = "<group>";
+		};
 		96F68B133DC137F5FC79CBFB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -692,6 +711,7 @@
 				8C60885A2111DCB000470411 /* EnterPhoneLoginPasswordViewController.swift in Sources */,
 				8C333D7B210F767100949AC0 /* FlowViewController.swift in Sources */,
 				8C091934210620C800703224 /* OnboardingViewController.swift in Sources */,
+				8CF5F9282112FE580083B36A /* DelayTimer.swift in Sources */,
 				8C6088562111CB8C00470411 /* LoginFormComponent.swift in Sources */,
 				8CF1DE4720F37B5E0036F986 /* SMSConfirmationViewController.swift in Sources */,
 				8C333D48210B0F3700949AC0 /* UIViewController+Extensions.swift in Sources */,

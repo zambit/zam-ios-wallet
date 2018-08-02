@@ -109,6 +109,12 @@ class PhoneNumberFormComponent: UIView, UITextFieldDelegate {
     }
 
     /**
+     Timer for performing helperText changing with some delay
+     */
+    private var helperTextDelayTimer: DelayTimer?
+    private var helperTextDelayValue: Double = 1.0
+
+    /**
      Masks dictionary
      */
     private var masks: [String: [String: String]] = [:]
@@ -203,6 +209,8 @@ class PhoneNumberFormComponent: UIView, UITextFieldDelegate {
         contentView.frame = bounds
         contentView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
 
+        helperTextDelayTimer = DelayTimer(delay: helperTextDelayValue)
+
         detailPhonePartTextField?.addTarget(self, action: #selector(detailTextFieldEditingEnd(_:)), for: .editingDidEnd)
         detailPhonePartTextField?.addTarget(self, action: #selector(detailTextFieldEditingBegin(_:)), for: .editingDidBegin)
         detailPhonePartTextField?.addTarget(self, action: #selector(detailTextFieldEditingChanged(_:)), for: .editingChanged)
@@ -254,26 +262,39 @@ class PhoneNumberFormComponent: UIView, UITextFieldDelegate {
         if let mask = mask {
             switch phoneNumberMainPart.count >= mask.count {
             case true:
+                helperTextDelayTimer?.fire()
                 helperTextWithDelegateCheck = ""
                 delegate?.phoneNumberFormComponentSatisfiesAllConditions(self)
             case false:
-                guard phoneNumberMainPart != "" else {
-                    helperTextWithDelegateCheck = ""
-                    break
-                }
-
                 let failedCondition = PhoneCondition.phoneLengthMatchesMask
-                helperTextWithDelegateCheck = failedCondition.rawValue
+
+                helperTextDelayTimer?.addOperation {
+                    [weak self] in
+
+                    guard phoneNumberMainPart != "" else {
+                        self?.helperTextWithDelegateCheck = ""
+                        return
+                    }
+
+                    self?.helperTextWithDelegateCheck = failedCondition.rawValue
+                }.fire()
+
                 delegate?.phoneNumberFormComponent(self, dontSatisfyTheCondition: failedCondition)
             }
         } else {
-            guard phoneNumberMainPart != "" else {
-                helperTextWithDelegateCheck = ""
-                return
-            }
-
             let failedCondition = PhoneCondition.phoneNumberHaveValidCode
-            helperTextWithDelegateCheck = failedCondition.rawValue
+
+            helperTextDelayTimer?.addOperation {
+                [weak self] in
+
+                guard phoneNumberMainPart != "" else {
+                    self?.helperTextWithDelegateCheck = ""
+                    return
+                }
+
+                self?.helperTextWithDelegateCheck = failedCondition.rawValue
+            }.fire()
+
             delegate?.phoneNumberFormComponent(self, dontSatisfyTheCondition: failedCondition)
         }
     }
@@ -304,17 +325,9 @@ class PhoneNumberFormComponent: UIView, UITextFieldDelegate {
 
         delegate?.phoneNumberFormComponentEditingChange(self)
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-            [weak self] in
-
-            guard let strongSelf = self else {
-                return
-            }
-
-            let optionalMask = strongSelf.currentMask?.1[PhoneMaskKeys.phoneMask.rawValue]
-            let mainText = strongSelf.mainPhonePartTextField?.text ?? ""
-            strongSelf.checkConditions(mask: optionalMask, phoneNumberMainPart: mainText)
-        }
+        let phoneMask = currentMask?.1[PhoneMaskKeys.phoneMask.rawValue]
+        let phoneNumberMainPart = mainPhonePartTextField?.text ?? ""
+        checkConditions(mask: phoneMask, phoneNumberMainPart: phoneNumberMainPart)
     }
 
     @objc
@@ -326,18 +339,10 @@ class PhoneNumberFormComponent: UIView, UITextFieldDelegate {
     @objc
     private func mainTextFieldEditingChanged(_ sender: UITextField) {
         delegate?.phoneNumberFormComponentEditingChange(self)
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-            [weak self] in
-
-            guard let strongSelf = self else {
-                return
-            }
-
-            let optionalMask = strongSelf.currentMask?.1[PhoneMaskKeys.phoneMask.rawValue]
-            let mainText = strongSelf.mainPhonePartTextField?.text ?? ""
-            strongSelf.checkConditions(mask: optionalMask, phoneNumberMainPart: mainText)
-        }
+        
+        let phoneMask = currentMask?.1[PhoneMaskKeys.phoneMask.rawValue]
+        let phoneNumberMainPart = mainPhonePartTextField?.text ?? ""
+        checkConditions(mask: phoneMask, phoneNumberMainPart: phoneNumberMainPart)
     }
 
     @objc
@@ -387,18 +392,10 @@ class PhoneNumberFormComponent: UIView, UITextFieldDelegate {
             mainPhonePartTextField?.text = maskedText
 
             delegate?.phoneNumberFormComponentEditingChange(self)
-
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                [weak self] in
-
-                guard let strongSelf = self else {
-                    return
-                }
-
-                let optionalMask = strongSelf.currentMask?.1[PhoneMaskKeys.phoneMask.rawValue]
-                let mainText = strongSelf.mainPhonePartTextField?.text ?? ""
-                strongSelf.checkConditions(mask: optionalMask, phoneNumberMainPart: mainText)
-            }
+            
+            let phoneMask = currentMask?.1[PhoneMaskKeys.phoneMask.rawValue]
+            let phoneNumberMainPart = mainPhonePartTextField?.text ?? ""
+            checkConditions(mask: phoneMask, phoneNumberMainPart: phoneNumberMainPart)
             return false
         }
 

@@ -40,7 +40,7 @@ class LoginPasswordFormComponent: UIView {
     @IBOutlet private var passwordTextFieldHeightConstraint: NSLayoutConstraint?
 
     weak var delegate: LoginPasswordComponentDelegate?
-
+    
     var textFieldHeight: CGFloat {
         get {
             return passwordTextFieldHeightConstraint?.constant ?? 0
@@ -84,6 +84,12 @@ class LoginPasswordFormComponent: UIView {
         }
     }
 
+    /**
+     Timer for performing helperText changing with some delay
+     */
+    private var helperTextDelayTimer: DelayTimer?
+    private var helperTextDelayValue: Double = 1.0
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         initFromNib()
@@ -102,6 +108,8 @@ class LoginPasswordFormComponent: UIView {
 
         contentView.frame = bounds
         contentView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+
+        helperTextDelayTimer = DelayTimer(delay: helperTextDelayValue)
     }
 
     private func setupStyle() {
@@ -139,16 +147,7 @@ class LoginPasswordFormComponent: UIView {
     @objc
     private func editingChangePasswordTextField(_ sender: UITextField) {
         delegate?.loginPasswordFormComponentEditingChange(self)
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            [weak self] in
-
-            guard let strongSelf = self else {
-                return
-            }
-
-            strongSelf.checkConditions(password: strongSelf.password)
-        }
+        checkConditions(password: password)
     }
 
     @objc
@@ -160,16 +159,24 @@ class LoginPasswordFormComponent: UIView {
     private func checkConditions(password: String) {
         switch password.count >= 6 {
         case true:
+            helperTextDelayTimer?.fire()
+
             helperTextWithDelegateCheck = ""
             delegate?.loginPasswordFormComponentSatisfiesAllConditions(self)
         case false:
-            guard password != "" else {
-                helperTextWithDelegateCheck = ""
-                break
+            let failedCondition = PasswordsCondition.passwordMatchesSymbolsCount
+
+            helperTextDelayTimer?.addOperation {
+                [weak self] in
+
+                guard password != "" else {
+                    self?.helperTextWithDelegateCheck = ""
+                    return
+                }
+
+                self?.helperTextWithDelegateCheck = failedCondition.rawValue
             }
 
-            let failedCondition = PasswordsCondition.passwordMatchesSymbolsCount
-            helperTextWithDelegateCheck = failedCondition.rawValue
             delegate?.loginPasswordFormComponent(self, dontSatisfyTheCondition: failedCondition)
         }
     }
