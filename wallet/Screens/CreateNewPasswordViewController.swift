@@ -21,6 +21,7 @@ class CreateNewPasswordViewController: ContinueViewController, NewPasswordFormCo
      Flow parameter for continue action. Needs to provide authToken for doing action.
      */
     var onContinue: ((_ authToken: String) -> Void)?
+    
 
     private var phone: String?
     private var token: String?
@@ -37,6 +38,8 @@ class CreateNewPasswordViewController: ContinueViewController, NewPasswordFormCo
         setupViewControllerStyle()
 
         newPasswordFormComponent?.delegate = self
+
+        //navigationItem.title = title
     }
 
     private func setupViewControllerStyle() {
