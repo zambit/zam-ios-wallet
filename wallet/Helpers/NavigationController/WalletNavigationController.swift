@@ -28,16 +28,27 @@ class WalletNavigationController: UINavigationController {
         navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
 
         navigationItem.hidesBackButton = true
-
     }
 
     override func pushViewController(_ viewController: UIViewController, animated: Bool) {
         super.pushViewController(viewController, animated: true)
 
-        guard viewControllers.count > 1 else {
+        viewController.navigationItem.hidesBackButton = true
+
+        guard viewControllers.count > 2 else {
             return
         }
 
+        showBackButton()
+    }
+
+    func pushViewControllerFromRoot(_ viewController: UIViewController, animated: Bool) {
+        self.popToRootViewController(animated: true)
+
+        super.pushViewController(viewController, animated: true)
+    }
+
+    func showBackButton() {
         let backItem = UIBarButtonItem(
             image: #imageLiteral(resourceName: "icArrowLeft"),
             style: .plain,
@@ -45,7 +56,17 @@ class WalletNavigationController: UINavigationController {
             action: #selector(backBarButtonItemTap(_:))
         )
         backItem.tintColor = .white
-        viewController.navigationItem.leftBarButtonItem = backItem
+        viewControllers.last?.navigationItem.leftBarButtonItem = backItem
+    }
+
+    func addExitButton(target: Any?, action: Selector) {
+        let exitButton = UIBarButtonItem(title: "EXIT",
+                                         style: .plain,
+                                         target: target,
+                                         action: action)
+
+        exitButton.tintColor = .skyBlue
+        viewControllers.last?.navigationItem.rightBarButtonItem = exitButton
     }
 
     @objc

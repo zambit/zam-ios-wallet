@@ -133,6 +133,13 @@ class PhoneNumberFormComponent: UIView, UITextFieldDelegate {
         }
     }
 
+    var currentMaskData: (String, Character, Character)? {
+        if let mask = currentMask?.1[PhoneMaskKeys.phoneMask.rawValue] {
+            return (mask, "X", " ")
+        }
+        return nil
+    }
+
     @IBOutlet private var contentView: UIView!
     @IBOutlet private var detailPhonePartTextField: UITextField?
     @IBOutlet private var mainPhonePartTextField: UITextField?
@@ -320,7 +327,7 @@ class PhoneNumberFormComponent: UIView, UITextFieldDelegate {
         // update mainTextField
         if let mask = currentMask?.1[PhoneMaskKeys.phoneMask.rawValue],
             let mainText = mainPhonePartTextField?.text {
-            mainPhonePartTextField?.text = matching(text: mainText, withMask: mask)
+            mainPhonePartTextField?.text = MaskParser(symbol: "X", space: " ").matchingUnstrict(text: mainText, withMask: mask)
         }
 
         delegate?.phoneNumberFormComponentEditingChange(self)
@@ -387,7 +394,7 @@ class PhoneNumberFormComponent: UIView, UITextFieldDelegate {
             let mask = currentMask?.1[PhoneMaskKeys.phoneMask.rawValue] {
 
             let updatedText = text.replacingCharacters(in: textRange, with: string)
-            let maskedText = matching(text: updatedText, withMask: mask)
+            let maskedText = MaskParser(symbol: "X", space: " ").matchingUnstrict(text: updatedText, withMask: mask)
 
             mainPhonePartTextField?.text = maskedText
 
@@ -400,44 +407,6 @@ class PhoneNumberFormComponent: UIView, UITextFieldDelegate {
         }
 
         return true
-    }
-
-    private func matching(text: String, withMask mask: String) -> String {
-
-        var resulting: String = ""
-        var textIndex: Int = 0
-
-        for character in mask {
-            if !(textIndex < text.count) {
-                return resulting
-            }
-
-            switch character {
-            case " ":
-                resulting.append(" ")
-
-                if text[textIndex] == " " {
-                    textIndex += 1
-                }
-
-            case "X":
-                if text[textIndex] != " " {
-                    resulting.append(text[textIndex])
-                }
-
-                textIndex += 1
-
-            default:
-                fatalError()
-            }
-        }
-
-        if resulting.count < text.count {
-            let remained = text[resulting.count..<text.count]
-            resulting.append(contentsOf: remained)
-        }
-
-        return resulting
     }
 
     private func setupCountryImageAnimationWith(state: CountryImageAnimationTask, completion handler: @escaping () -> Void) {

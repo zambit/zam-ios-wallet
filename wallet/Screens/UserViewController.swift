@@ -11,10 +11,14 @@ import UIKit
 
 class UserViewController: FlowViewController {
 
+    var authAPI: AuthAPI?
     var userManager: WalletUserDefaultsManager?
+
+    var onExit: (() -> Void)?
 
     @IBOutlet var tokenLabel: UILabel?
     @IBOutlet var phoneNumberLabel: UILabel?
+    @IBOutlet var logoutButton: UIButton?
 
     private var authToken: String?
 
@@ -30,11 +34,19 @@ class UserViewController: FlowViewController {
         tokenLabel?.text = authToken
 
         setupDefaultStyle()
+
+        logoutButton?.addTarget(self, action: #selector(logoutButtonTouchUpInsideEvent(_:)), for: .touchUpInside)
     }
 
     func prepare(authToken: String) {
         self.authToken = authToken
         print("Auth token: \(authToken)")
+    }
+
+    @objc
+    private func logoutButtonTouchUpInsideEvent(_ sender: Any) {
+        userManager?.clearUserData()
+        onExit?()
     }
 
 }

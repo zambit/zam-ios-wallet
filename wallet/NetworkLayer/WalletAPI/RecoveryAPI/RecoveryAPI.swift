@@ -90,17 +90,17 @@ struct RecoveryAPI: NetworkService, ThreeStepsAPI {
     /**
      Finish password recovery by setting user password, this request requires Recovery Token.
      */
-    func providePassword(_ password: String, confirmation: String, for phone: String, token: String) -> Promise<String> {
-        return provider.execute(.finish(phone: phone, recoveryToken: token, newPassword: password, newPasswordConfirmation: confirmation))
+    func providePassword(_ password: String, confirmation: String, for phone: String, recoveryToken: String) -> Promise<Void> {
+        return provider.execute(.finish(phone: phone, recoveryToken: recoveryToken, newPassword: password, newPasswordConfirmation: confirmation))
             .then {
-                (response: Response) -> Promise<String> in
+                (response: Response) -> Promise<Void> in
 
                 return Promise { seal in
                     switch response {
                     case .data(_):
 
-                        let success: (CodableSuccessAuthTokenData) -> Void = { s in
-                            seal.fulfill(s.data.token)
+                        let success: (CodableSuccessEmptyData) -> Void = { s in
+                            seal.fulfill(())
                         }
 
                         let failure: (CodableFailure) -> Void = { f in

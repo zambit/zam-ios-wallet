@@ -15,13 +15,14 @@ import UIKit
 class CreateNewPasswordViewController: ContinueViewController, NewPasswordFormComponentDelegate {
 
     var userManager: WalletUserDefaultsManager?
-    var newPasswordAPI: ThreeStepsAPI?
+
+    var recoveryAPI: RecoveryAPI?
+    var signupAPI: SignupAPI?
 
     /**
      Flow parameter for continue action. Needs to provide authToken for doing action.
      */
-    var onContinue: ((_ authToken: String) -> Void)?
-    
+    var onContinue: ((String) -> Void)?
 
     private var phone: String?
     private var token: String?
@@ -38,8 +39,6 @@ class CreateNewPasswordViewController: ContinueViewController, NewPasswordFormCo
         setupViewControllerStyle()
 
         newPasswordFormComponent?.delegate = self
-
-        //navigationItem.title = title
     }
 
     private func setupViewControllerStyle() {
@@ -80,24 +79,51 @@ class CreateNewPasswordViewController: ContinueViewController, NewPasswordFormCo
         }
 
         continueButton?.customAppearance.setLoading(true)
-        newPasswordAPI?.providePassword(password, confirmation: confirmation, for: phone, token: token).done {
-            [weak self]
-            authToken in
 
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                self?.continueButton?.customAppearance.setLoading(false)
-                self?.onContinue?(authToken)
+        switch (recoveryAPI != nil, signupAPI != nil) {
+        case (true, true):
+            print("APIs conflict, cant explicity define what API to use")
+            break
+        case (true, false):
+            recoveryAPI?.providePassword(password, confirmation: confirmation, for: phone, recoveryToken: token).done {
+                    [weak self] in
+
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        self?.continueButton?.customAppearance.setLoading(false)
+                        self?.onContinue?(phone)
+                    }
+
+                    self?.userManager?.save(phoneNumber: phone)
+                }.catch {
+                    [weak self]
+                    error in
+
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        self?.continueButton?.customAppearance.setLoading(false)
+                    }
             }
+        case (false, true):
+            signupAPI?.providePassword(password, confirmation: confirmation, for: phone, signupToken: token).done {
+                    [weak self]
+                    authToken in
 
-            self?.userManager?.save(token: authToken)
-            self?.userManager?.save(phoneNumber: phone)
-        }.catch {
-            [weak self]
-            error in
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        self?.continueButton?.customAppearance.setLoading(false)
+                        self?.onContinue?(authToken)
+                    }
 
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                self?.continueButton?.customAppearance.setLoading(false)
+                    self?.userManager?.save(token: authToken)
+                    self?.userManager?.save(phoneNumber: phone)
+                }.catch {
+                    [weak self]
+                    error in
+
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        self?.continueButton?.customAppearance.setLoading(false)
+                    }
             }
+        case (false, false):
+            break
         }
     }
 }

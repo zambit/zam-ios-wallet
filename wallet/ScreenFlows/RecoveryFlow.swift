@@ -84,33 +84,31 @@ final class RecoveryFlow: ScreenFlow {
 
         let onContinue: (String) -> Void = {
             [weak self]
-            authToken in
+            phone in
 
             guard let strongSelf = self else {
                 return
             }
 
-            let target = strongSelf.userScreen
-            target.prepare(authToken: authToken)
-
-            strongSelf.navigationController?.pushViewController(target, animated: true)
+            let target = strongSelf.secondLoginFlow
+            target?.prepare(phone: phone)
+            target?.begin()
         }
         vc.onContinue = onContinue
-        vc.newPasswordAPI = RecoveryAPI(provider: RecoveryProvider(environment: WalletEnvironment(), dispatcher: HTTPDispatcher()))
+        vc.recoveryAPI = RecoveryAPI(provider: RecoveryProvider(environment: WalletEnvironment(), dispatcher: HTTPDispatcher()))
         vc.userManager = WalletUserDefaultsManager()
         vc.title = "New password"
         vc.flow = self
         return vc
     }
 
-    private var userScreen: UserViewController {
-        let _vc = ControllerHelper.instantiateViewController(identifier: "UserViewController", storyboardName: "Main")
-
-        guard let vc = _vc as? UserViewController else {
-            fatalError()
+    private var secondLoginFlow: SecondEnterLoginFlow? {
+        guard let navController = navigationController else {
+            print("Navigation controller not found")
+            return nil
         }
 
-        vc.userManager = WalletUserDefaultsManager()
-        return vc
+        let flow = SecondEnterLoginFlow(navigationController: navController)
+        return flow
     }
 }

@@ -90,8 +90,8 @@ struct SignupAPI: NetworkService, ThreeStepsAPI {
     /**
      Finish account creation by setting user password, this request requires SignUp Token.
      */
-    func providePassword(_ password: String, confirmation: String, for phone: String, token: String) -> Promise<String> {
-        return provider.execute(.finish(phone: phone, signupToken: token, password: password, passwordConfirmation: confirmation))
+    func providePassword(_ password: String, confirmation: String, for phone: String, signupToken: String) -> Promise<String> {
+        return provider.execute(.finish(phone: phone, signupToken: signupToken, password: password, passwordConfirmation: confirmation))
             .then {
                 (response: Response) -> Promise<String> in
 

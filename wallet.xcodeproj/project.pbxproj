@@ -46,7 +46,7 @@
 		8C0919832109CC2000703224 /* EnterLoginPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0919822109CC2000703224 /* EnterLoginPasswordViewController.swift */; };
 		8C333D302109E0B400949AC0 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D2F2109E0B400949AC0 /* UserViewController.swift */; };
 		8C333D342109F02000949AC0 /* ScreenFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D332109F02000949AC0 /* ScreenFlow.swift */; };
-		8C333D362109F09800949AC0 /* LoginFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D352109F09800949AC0 /* LoginFlow.swift */; };
+		8C333D362109F09800949AC0 /* FirstEnterLoginFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D352109F09800949AC0 /* FirstEnterLoginFlow.swift */; };
 		8C333D382109F3D500949AC0 /* OnboardingFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D372109F3D500949AC0 /* OnboardingFlow.swift */; };
 		8C333D3C2109FC2D00949AC0 /* ExampleOnboardingItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D3B2109FC2D00949AC0 /* ExampleOnboardingItem.swift */; };
 		8C333D3E2109FD1000949AC0 /* ExampleOnboardingItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C333D3D2109FD1000949AC0 /* ExampleOnboardingItem.xib */; };
@@ -98,6 +98,9 @@
 		8CF1DE4B20F3AD210036F986 /* NewPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF1DE4A20F3AD210036F986 /* NewPasswordViewController.swift */; };
 		8CF1DE4D20F3BDB90036F986 /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF1DE4C20F3BDB90036F986 /* KeyboardViewController.swift */; };
 		8CF5F9282112FE580083B36A /* DelayTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF5F9272112FE580083B36A /* DelayTimer.swift */; };
+		8CF5F92D2113206A0083B36A /* SecondEnterLoginFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF5F92B21130F860083B36A /* SecondEnterLoginFlow.swift */; };
+		8CF5F92F211327EB0083B36A /* MaskParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF5F92E211327EB0083B36A /* MaskParser.swift */; };
+		8CF5F931211345320083B36A /* UserFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF5F930211345320083B36A /* UserFlow.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -141,7 +144,7 @@
 		8C0919822109CC2000703224 /* EnterLoginPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterLoginPasswordViewController.swift; sourceTree = "<group>"; };
 		8C333D2F2109E0B400949AC0 /* UserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
 		8C333D332109F02000949AC0 /* ScreenFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenFlow.swift; sourceTree = "<group>"; };
-		8C333D352109F09800949AC0 /* LoginFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFlow.swift; sourceTree = "<group>"; };
+		8C333D352109F09800949AC0 /* FirstEnterLoginFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstEnterLoginFlow.swift; sourceTree = "<group>"; };
 		8C333D372109F3D500949AC0 /* OnboardingFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFlow.swift; sourceTree = "<group>"; };
 		8C333D3B2109FC2D00949AC0 /* ExampleOnboardingItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleOnboardingItem.swift; sourceTree = "<group>"; };
 		8C333D3D2109FD1000949AC0 /* ExampleOnboardingItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExampleOnboardingItem.xib; sourceTree = "<group>"; };
@@ -195,6 +198,9 @@
 		8CF1DE4A20F3AD210036F986 /* NewPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPasswordViewController.swift; sourceTree = "<group>"; };
 		8CF1DE4C20F3BDB90036F986 /* KeyboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardViewController.swift; sourceTree = "<group>"; };
 		8CF5F9272112FE580083B36A /* DelayTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelayTimer.swift; sourceTree = "<group>"; };
+		8CF5F92B21130F860083B36A /* SecondEnterLoginFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondEnterLoginFlow.swift; sourceTree = "<group>"; };
+		8CF5F92E211327EB0083B36A /* MaskParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskParser.swift; sourceTree = "<group>"; };
+		8CF5F930211345320083B36A /* UserFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFlow.swift; sourceTree = "<group>"; };
 		C9C98DC4F4721DB056807636 /* Pods_wallet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_wallet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -216,6 +222,7 @@
 				8CF5F92A21130BB50083B36A /* NavigationController */,
 				8CF5F929211307010083B36A /* Timers */,
 				8C6088502111A95100470411 /* Conditions.swift */,
+				8CF5F92E211327EB0083B36A /* MaskParser.swift */,
 				8C333D41210A094500949AC0 /* UIColor+Additions.swift */,
 				8C333D47210B0F3700949AC0 /* UIViewController+Extensions.swift */,
 				8C09192C21061F3600703224 /* ControllerHelper.swift */,
@@ -351,8 +358,10 @@
 				8C333D332109F02000949AC0 /* ScreenFlow.swift */,
 				8C333D372109F3D500949AC0 /* OnboardingFlow.swift */,
 				8C09197A2108D66100703224 /* SignUpFlow.swift */,
-				8C333D352109F09800949AC0 /* LoginFlow.swift */,
+				8C333D352109F09800949AC0 /* FirstEnterLoginFlow.swift */,
+				8CF5F92B21130F860083B36A /* SecondEnterLoginFlow.swift */,
 				8C60885B2111F1A200470411 /* RecoveryFlow.swift */,
+				8CF5F930211345320083B36A /* UserFlow.swift */,
 			);
 			path = ScreenFlows;
 			sourceTree = "<group>";
@@ -707,8 +716,10 @@
 				8C0919742108BE5700703224 /* UserAPI.swift in Sources */,
 				8C6088402110634700470411 /* WalletUserDefaultsManager.swift in Sources */,
 				8C333D66210B6E7600949AC0 /* UITextField+Extensions.swift in Sources */,
+				8CF5F92F211327EB0083B36A /* MaskParser.swift in Sources */,
 				8C0919512107234B00703224 /* SignupAPI.swift in Sources */,
 				8C60885A2111DCB000470411 /* EnterPhoneLoginPasswordViewController.swift in Sources */,
+				8CF5F92D2113206A0083B36A /* SecondEnterLoginFlow.swift in Sources */,
 				8C333D7B210F767100949AC0 /* FlowViewController.swift in Sources */,
 				8C091934210620C800703224 /* OnboardingViewController.swift in Sources */,
 				8CF5F9282112FE580083B36A /* DelayTimer.swift in Sources */,
@@ -719,6 +730,7 @@
 				8C333D4C210B1D3500949AC0 /* CheckBoxButton.swift in Sources */,
 				8C09192D21061F3600703224 /* ControllerHelper.swift in Sources */,
 				8C333D50210B2B6900949AC0 /* PhoneNumberFormComponent.swift in Sources */,
+				8CF5F931211345320083B36A /* UserFlow.swift in Sources */,
 				8C09196221076B7000703224 /* RecoveryProvider.swift in Sources */,
 				8C6088442110A34200470411 /* CustomUI.swift in Sources */,
 				8C091908210605FA00703224 /* InitialRouter.swift in Sources */,
@@ -767,7 +779,7 @@
 				8C333D3C2109FC2D00949AC0 /* ExampleOnboardingItem.swift in Sources */,
 				8C0919812108D99400703224 /* CreateNewPasswordViewController.swift in Sources */,
 				8C0919432106268900703224 /* HTTPDispatcher.swift in Sources */,
-				8C333D362109F09800949AC0 /* LoginFlow.swift in Sources */,
+				8C333D362109F09800949AC0 /* FirstEnterLoginFlow.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

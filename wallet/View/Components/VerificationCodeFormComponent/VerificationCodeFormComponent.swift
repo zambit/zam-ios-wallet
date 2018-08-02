@@ -116,7 +116,7 @@ class VerificationCodeFormComponent: UIView, UITextFieldDelegate {
 
         if let textRange = Range(range, in: text) {
             let updatedText = text.replacingCharacters(in: textRange, with: string)
-            let maskedText = matching(text: updatedText, withMask: codeMask)
+            let maskedText = MaskParser(symbol: "X", space: " ").matchingStrict(text: updatedText, withMask: codeMask)
 
             codeTextField?.text = maskedText
             
@@ -126,38 +126,4 @@ class VerificationCodeFormComponent: UIView, UITextFieldDelegate {
 
         return true
     }
-
-    private func matching(text: String, withMask mask: String) -> String {
-
-        var resulting: String = ""
-        var textIndex: Int = 0
-
-        for character in mask {
-            if !(textIndex < text.count) {
-                return resulting
-            }
-
-            switch character {
-            case " ":
-                resulting.append(" ")
-
-                if text[textIndex] == " " {
-                    textIndex += 1
-                }
-
-            case "X":
-                if text[textIndex] != " " {
-                    resulting.append(text[textIndex])
-                }
-
-                textIndex += 1
-
-            default:
-                fatalError()
-            }
-        }
-
-        return resulting
-    }
-
 }

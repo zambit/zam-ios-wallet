@@ -56,17 +56,17 @@ struct AuthAPI: NetworkService {
     /**
      Invalidates user's current authorization session
      */
-    func signOut(token: String) -> Promise<Bool> {
+    func signOut(token: String) -> Promise<Void> {
         return provider.execute(.signOut(token: token))
             .then {
-                (response: Response) -> Promise<Bool> in
+                (response: Response) -> Promise<Void> in
 
                 return Promise { seal in
                     switch response {
                     case .data(_):
 
                         let success: (CodableSuccessEmptyData) -> Void = { _ in
-                            seal.fulfill(true)
+                            seal.fulfill(())
                         }
 
                         let failure: (CodableFailure) -> Void = { f in

@@ -71,5 +71,66 @@
             </objects>
             <point key="canvasLocation" x="1570" y="-99"/>
         </scene>
+        <!--Enter Login Password View Controller-->
+        <scene sceneID="9iz-a5-E0c">
+            <objects>
+                <viewController storyboardIdentifier="EnterLoginPasswordViewController" id="ACZ-V8-2OJ" customClass="EnterLoginPasswordViewController" customModule="wallet" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="DQo-8M-EZ5">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter your login password" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OKh-o2-0A6">
+                                <rect key="frame" x="16" y="59.999999999999993" width="343" height="81.333333333333314"/>
+                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="34"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IPD-n3-J1m" customClass="LoginPasswordFormComponent" customModule="wallet" customModuleProvider="target">
+                                <rect key="frame" x="16" y="166" width="343" height="56"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="56" placeholder="YES" id="wqh-4A-Phy"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xaL-Vw-Mch" customClass="LargeIconButton" customModule="wallet" customModuleProvider="target">
+                                <rect key="frame" x="291" y="694" width="60" height="60"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="AMd-aA-kRN"/>
+                                    <constraint firstAttribute="width" constant="60" id="ZhZ-sY-ANC"/>
+                                </constraints>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IV9-fL-7VG" customClass="AdditionalTextButton" customModule="wallet" customModuleProvider="target">
+                                <rect key="frame" x="24" y="707" width="145" height="34"/>
+                                <state key="normal" title="Forgot password?"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="IPD-n3-J1m" firstAttribute="top" secondItem="OKh-o2-0A6" secondAttribute="bottom" constant="24" id="5KE-K4-jeY"/>
+                            <constraint firstItem="OKh-o2-0A6" firstAttribute="leading" secondItem="PCZ-xW-x3n" secondAttribute="leading" constant="16" id="6rX-1R-t7A"/>
+                            <constraint firstItem="IV9-fL-7VG" firstAttribute="leading" secondItem="PCZ-xW-x3n" secondAttribute="leading" constant="24" id="Frc-6U-Aus"/>
+                            <constraint firstItem="OKh-o2-0A6" firstAttribute="top" secondItem="PCZ-xW-x3n" secondAttribute="top" constant="16" id="Ltj-ud-1Vm"/>
+                            <constraint firstItem="PCZ-xW-x3n" firstAttribute="trailing" secondItem="IPD-n3-J1m" secondAttribute="trailing" constant="16" id="NqU-p4-Pfy"/>
+                            <constraint firstItem="PCZ-xW-x3n" firstAttribute="trailing" secondItem="xaL-Vw-Mch" secondAttribute="trailing" constant="24" id="QhP-Ci-nkq"/>
+                            <constraint firstItem="IPD-n3-J1m" firstAttribute="leading" secondItem="PCZ-xW-x3n" secondAttribute="leading" constant="16" id="YLQ-LX-Ova"/>
+                            <constraint firstItem="IV9-fL-7VG" firstAttribute="centerY" secondItem="xaL-Vw-Mch" secondAttribute="centerY" id="o0r-86-cPz"/>
+                            <constraint firstItem="PCZ-xW-x3n" firstAttribute="trailing" secondItem="OKh-o2-0A6" secondAttribute="trailing" constant="16" id="pYk-0R-QiX"/>
+                            <constraint firstItem="PCZ-xW-x3n" firstAttribute="bottom" secondItem="xaL-Vw-Mch" secondAttribute="bottom" constant="24" id="r7I-E9-iyn"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="PCZ-xW-x3n"/>
+                    </view>
+                    <connections>
+                        <outlet property="continueButton" destination="xaL-Vw-Mch" id="aqm-e8-dFm"/>
+                        <outlet property="continueButtonBottomConstraint" destination="r7I-E9-iyn" id="Xvg-IY-bjG"/>
+                        <outlet property="forgotPasswordButton" destination="IV9-fL-7VG" id="zF9-K4-hi9"/>
+                        <outlet property="largeTitleLabel" destination="OKh-o2-0A6" id="Sk5-C2-Yev"/>
+                        <outlet property="loginPasswordForm" destination="IPD-n3-J1m" id="zFI-OU-V0j"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rfn-1c-CXA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2562" y="-99"/>
+        </scene>
     </scenes>
 </document>

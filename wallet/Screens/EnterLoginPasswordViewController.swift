@@ -21,7 +21,7 @@ class EnterLoginPasswordViewController: ContinueViewController, LoginPasswordCom
     private var phone: String?
 
     @IBOutlet var largeTitleLabel: UILabel?
-    @IBOutlet var loginPasswordFormView: LoginPasswordFormComponent?
+    @IBOutlet var loginPasswordForm: LoginPasswordFormComponent?
     @IBOutlet var forgotPasswordButton: AdditionalTextButton?
 
     override func viewDidLoad() {
@@ -37,7 +37,15 @@ class EnterLoginPasswordViewController: ContinueViewController, LoginPasswordCom
         forgotPasswordButton?.configure(data: data)
         forgotPasswordButton?.addTarget(self, action: #selector(additionalButtonTouchUpInsideEvent(_:)), for: .touchUpInside)
 
-        loginPasswordFormView?.delegate = self
+        loginPasswordForm?.delegate = self
+
+//        if let maskData = userManager?.getMaskData(), let phone = phone {
+//            title = MaskParser(symbol: maskData.1, space: maskData.2).matchingUnstrict(text: phone, withMask: maskData.0)
+//        }
+
+        if let navController = navigationController as? WalletNavigationController {
+            navController.addExitButton(target: self, action: #selector(exitButtonTouchEvent(_:)))
+        }
     }
 
     private func setupViewControllerStyle() {
@@ -47,16 +55,12 @@ class EnterLoginPasswordViewController: ContinueViewController, LoginPasswordCom
         continueButton?.addTarget(self, action: #selector(continueButtonTouchUpInsideEvent(_:)), for: .touchUpInside)
     }
 
-    func loginPasswordFormComponentEditingChange(_ loginPasswordFormView: LoginPasswordFormComponent) {
-        // ...
-    }
-
     func loginPasswordFormComponent(_ loginPasswordFormView: LoginPasswordFormComponent, dontSatisfyTheCondition: PasswordsCondition) {
-        continueButton?.customAppearance.setEnabled(true)
+        continueButton?.customAppearance.setEnabled(false)
     }
 
     func loginPasswordFormComponentSatisfiesAllConditions(_ loginPasswordFormViewController: LoginPasswordFormComponent) {
-        continueButton?.customAppearance.setEnabled(false)
+        continueButton?.customAppearance.setEnabled(true)
     }
 
     /**
@@ -71,7 +75,7 @@ class EnterLoginPasswordViewController: ContinueViewController, LoginPasswordCom
     private func continueButtonTouchUpInsideEvent(_ sender: Any) {
         guard
             let phone = self.phone,
-            let password = loginPasswordFormView?.password else {
+            let password = loginPasswordForm?.password else {
                 return
         }
 
@@ -102,7 +106,7 @@ class EnterLoginPasswordViewController: ContinueViewController, LoginPasswordCom
                         return
                     }
 
-                    self?.loginPasswordFormView?.helperText = fail.message
+                    self?.loginPasswordForm?.helperText = fail.message
                 }
             }
         }
@@ -115,6 +119,43 @@ class EnterLoginPasswordViewController: ContinueViewController, LoginPasswordCom
         }
 
         onRecovery?(phone)
+    }
+
+    @objc func exitButtonTouchEvent(_ sender: UIBarButtonItem) {
+        guard let token = userManager?.getToken() else {
+            userManager?.clearUserData()
+            onExit?()
+            return
+        }
+
+        continueButton?.customAppearance.setLoading(true)
+
+        authAPI?.signOut(token: token).done {
+            [weak self] in
+
+            self?.userManager?.clearUserData()
+            self?.onExit?()
+            
+        }.catch {
+            [weak self]
+            error in
+
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                self?.continueButton?.customAppearance.setLoading(false)
+            }
+
+            if let serverError = error as? WalletResponseError {
+                switch serverError {
+                case .serverFailureResponse(errors: let fails):
+                    guard let fail = fails.first else {
+                        return
+                    }
+
+                    self?.loginPasswordForm?.helperText = fail.message
+                }
+            }
+        }
+
     }
 }
 

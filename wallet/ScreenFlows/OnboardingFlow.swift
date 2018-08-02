@@ -21,6 +21,7 @@ final class OnboardingFlow: ScreenFlow {
     }
 
     func begin() {
+        self.navigationController?.popToRootViewController(animated: false)
         self.navigationController?.pushViewController(onboardingScreen, animated: true)
     }
 
@@ -67,13 +68,13 @@ final class OnboardingFlow: ScreenFlow {
         return vc
     }
 
-    private var loginFlow: LoginFlow? {
+    private var loginFlow: FirstEnterLoginFlow? {
         guard let navController = navigationController else {
             print("Navigation controller not found")
             return nil
         }
 
-        let flow = LoginFlow(navigationController: navController)
+        let flow = FirstEnterLoginFlow(navigationController: navController)
         return flow
     }
 

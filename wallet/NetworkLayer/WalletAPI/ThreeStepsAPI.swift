@@ -14,6 +14,4 @@ protocol ThreeStepsAPI {
 
     func verifyPhoneNumber(_ phone: String, withCode verificationCode: String) -> Promise<String>
 
-    func providePassword(_ password: String, confirmation: String, for phone: String, token: String) -> Promise<String>
-
 }

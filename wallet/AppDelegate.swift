@@ -13,27 +13,40 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    var mainScreenFlow: ScreenFlow?
-
-    @objc
-    private func initialNavigationControllerBackButton(_ sender: Any) {
-
-    }
+    var mainScreenFlow: ScreenFlow!
+    var userDefaultsManager: WalletUserDefaultsManager!
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         UIApplication.shared.statusBarStyle = .lightContent
 
-        print("start")
+        let _vc = ControllerHelper.instantiateViewController(identifier: "LaunchScreenViewController", storyboardName: "Onboarding")
+        guard let vc = _vc as? LaunchScreenViewController else {
+            fatalError()
+        }
 
-        let navigationController = WalletNavigationController()
-        self.mainScreenFlow = OnboardingFlow(navigationController: navigationController)
+        let navigationController = WalletNavigationController(rootViewController: vc)
+
+        userDefaultsManager = WalletUserDefaultsManager(userDefaults: .standard)
+        switch userDefaultsManager.isUserAuthorized {
+        case true:
+            guard let phone = userDefaultsManager.getPhoneNumber() else {
+                fatalError()
+            }
+
+            let screenFlow = SecondEnterLoginFlow(navigationController: navigationController)
+            screenFlow.prepare(phone: phone)
+
+            self.mainScreenFlow = screenFlow
+        case false:
+            self.mainScreenFlow = OnboardingFlow(navigationController: navigationController)
+        }
 
         self.window = UIWindow(frame: UIScreen.main.bounds)
         self.window?.rootViewController = navigationController
         self.window?.makeKeyAndVisible()
 
-        self.mainScreenFlow?.begin()
+        self.mainScreenFlow.begin()
 
         return true
     }

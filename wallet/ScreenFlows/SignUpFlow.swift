@@ -90,27 +90,22 @@ final class SignUpFlow: ScreenFlow {
                 return
             }
 
-            let target = strongSelf.userScreen
-            target.prepare(authToken: authToken)
-
-            strongSelf.navigationController?.pushViewController(target, animated: true)
+            self?.userFlow?.begin()
         }
         vc.onContinue = onContinue
-        vc.newPasswordAPI = SignupAPI(provider: SignupProvider(environment: WalletEnvironment(), dispatcher: HTTPDispatcher()))
+        vc.signupAPI = SignupAPI(provider: SignupProvider(environment: WalletEnvironment(), dispatcher: HTTPDispatcher()))
         vc.userManager = WalletUserDefaultsManager()
         vc.title = "Registration"
         vc.flow = self
         return vc
     }
 
-    private var userScreen: UserViewController {
-        let _vc = ControllerHelper.instantiateViewController(identifier: "UserViewController", storyboardName: "Main")
-
-        guard let vc = _vc as? UserViewController else {
-            fatalError()
+    private var userFlow: UserFlow? {
+        guard let navController = navigationController else {
+            print("Navigation controller not found")
+            return nil
         }
 
-        vc.userManager = WalletUserDefaultsManager()
-        return vc
-    }
-}
+        let flow = UserFlow(navigationController: navController)
+        return flow
+    }}

@@ -77,6 +77,21 @@
             </objects>
             <point key="canvasLocation" x="-74.400000000000006" y="189.90147783251231"/>
         </scene>
+        <!--Launch Screen View Controller-->
+        <scene sceneID="uNF-DM-pyF">
+            <objects>
+                <viewController storyboardIdentifier="LaunchScreenViewController" id="z6b-E4-Jo9" customClass="LaunchScreenViewController" customModule="wallet" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="xwV-hL-zmi">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="Bks-SR-UdF"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ynT-RH-OT4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="902" y="185"/>
+        </scene>
     </scenes>
     <resources>
         <image name="icArrowRight" width="32" height="32"/>

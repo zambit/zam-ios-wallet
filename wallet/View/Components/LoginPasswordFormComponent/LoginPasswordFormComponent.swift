@@ -160,7 +160,7 @@ class LoginPasswordFormComponent: UIView {
         switch password.count >= 6 {
         case true:
             helperTextDelayTimer?.fire()
-
+            
             helperTextWithDelegateCheck = ""
             delegate?.loginPasswordFormComponentSatisfiesAllConditions(self)
         case false:
@@ -175,7 +175,7 @@ class LoginPasswordFormComponent: UIView {
                 }
 
                 self?.helperTextWithDelegateCheck = failedCondition.rawValue
-            }
+            }.fire()
 
             delegate?.loginPasswordFormComponent(self, dontSatisfyTheCondition: failedCondition)
         }

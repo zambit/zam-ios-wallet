@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-final class LoginFlow: ScreenFlow {
+final class FirstEnterLoginFlow: ScreenFlow {
 
     weak var navigationController: UINavigationController?
 
@@ -32,14 +32,7 @@ final class LoginFlow: ScreenFlow {
             [weak self]
             authToken in
 
-            guard let strongSelf = self else {
-                return
-            }
-
-            let target = strongSelf.userScreen
-            target.prepare(authToken: authToken)
-
-            strongSelf.navigationController?.pushViewController(target, animated: true)
+            self?.userFlow?.begin()
         }
 
         let onRecovery: () -> Void = {
@@ -59,15 +52,14 @@ final class LoginFlow: ScreenFlow {
         return vc
     }
 
-    private var userScreen: UserViewController {
-        let _vc = ControllerHelper.instantiateViewController(identifier: "UserViewController", storyboardName: "Main")
-
-        guard let vc = _vc as? UserViewController else {
-            fatalError()
+    private var userFlow: UserFlow? {
+        guard let navController = navigationController else {
+            print("Navigation controller not found")
+            return nil
         }
 
-        vc.userManager = WalletUserDefaultsManager()
-        return vc
+        let flow = UserFlow(navigationController: navController)
+        return flow
     }
 
     private var recoveryFlow: RecoveryFlow? {
