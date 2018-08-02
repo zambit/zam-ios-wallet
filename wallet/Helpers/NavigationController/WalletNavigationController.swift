@@ -45,7 +45,7 @@ class WalletNavigationController: UINavigationController {
     func pushViewControllerFromRoot(_ viewController: UIViewController, animated: Bool) {
         self.popToRootViewController(animated: true)
 
-        super.pushViewController(viewController, animated: true)
+        super.pushViewController(viewController, animated: false)
     }
 
     func showBackButton() {

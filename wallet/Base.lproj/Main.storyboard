@@ -273,11 +273,17 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NiN-K1-hQI">
+                                <rect key="frame" x="171" y="275" width="32" height="30"/>
+                                <state key="normal" title="EXIT"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="NiN-K1-hQI" firstAttribute="top" secondItem="64i-dB-HCl" secondAttribute="bottom" constant="20" id="DMI-LY-AbP"/>
                             <constraint firstItem="64i-dB-HCl" firstAttribute="centerX" secondItem="IBc-4V-Glf" secondAttribute="centerX" id="RZq-RM-xIg"/>
                             <constraint firstItem="IBc-4V-Glf" firstAttribute="centerX" secondItem="s4F-eB-BQN" secondAttribute="centerX" id="XH7-1i-e4b"/>
+                            <constraint firstItem="NiN-K1-hQI" firstAttribute="centerX" secondItem="s4F-eB-BQN" secondAttribute="centerX" id="c3A-f4-I2k"/>
                             <constraint firstItem="oKY-uj-bnB" firstAttribute="trailing" secondItem="64i-dB-HCl" secondAttribute="trailing" constant="16" id="gPU-52-IvS"/>
                             <constraint firstItem="64i-dB-HCl" firstAttribute="leading" secondItem="oKY-uj-bnB" secondAttribute="leading" constant="16" id="o1v-xu-920"/>
                             <constraint firstItem="IBc-4V-Glf" firstAttribute="top" secondItem="oKY-uj-bnB" secondAttribute="top" constant="145" id="oRJ-7d-T7a"/>
@@ -286,6 +292,7 @@
                         <viewLayoutGuide key="safeArea" id="oKY-uj-bnB"/>
                     </view>
                     <connections>
+                        <outlet property="logoutButton" destination="NiN-K1-hQI" id="47L-km-5Wh"/>
                         <outlet property="phoneNumberLabel" destination="IBc-4V-Glf" id="G9Y-Qq-RlN"/>
                         <outlet property="tokenLabel" destination="64i-dB-HCl" id="T1k-Qn-Lqa"/>
                     </connections>
