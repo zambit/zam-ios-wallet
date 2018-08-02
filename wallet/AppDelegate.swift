@@ -24,10 +24,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         UIApplication.shared.statusBarStyle = .lightContent
 
-        let phone = "+79136653903"
-        let code = "195227"
-        let password = "a12345678b"
-
         print("start")
 
         let navigationController = WalletNavigationController()
@@ -38,52 +34,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.makeKeyAndVisible()
 
         self.mainScreenFlow?.begin()
-//        api?.sendVerificationCode(to: phone).done {
-//            print("success")
-//        }
-//        .catch { error in
-//            print(error)
-//        }
-
-
-//        api?.verifyUserAccount(passing: code, hasBeenSentTo: phone).done {
-//            [weak self]
-//            token in
-//
-//            guard let strongSelf = self else {
-//                return
-//            }
-//
-//            print("Signup token: \(token)")
-//
-//            strongSelf.api?.providePassword(password, confirmation: password, for: phone, signUpToken: token).done { authToken in
-//
-//                print("Auth token: \(authToken)")
-//            }.catch { error in
-//                print(error)
-//            }
-//        }.catch { error in
-//            print(error)
-//        }
-
-//        authApi?.signIn(phone: phone, password: password).done {
-//            [weak self]
-//            token in
-//
-//            guard let strongSelf = self else {
-//                return
-//            }
-//
-//            print("Auth token: \(token)")
-//
-//            strongSelf.authApi?.checkIfUserAuthorized(token: token).done { phone in
-//                print("User authorized with phone: \(phone)")
-//            }.catch { error in
-//                print(error)
-//            }
-//        }.catch { error in
-//            print(error)
-//        }
 
         return true
     }
