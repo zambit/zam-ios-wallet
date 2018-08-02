@@ -25,8 +25,10 @@ class WalletNavigationController: UINavigationController {
         navigationBar.shadowImage = UIImage()
         navigationBar.backgroundColor = .clear
         navigationBar.isTranslucent = true
+        navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
 
         navigationItem.hidesBackButton = true
+
     }
 
     override func pushViewController(_ viewController: UIViewController, animated: Bool) {
