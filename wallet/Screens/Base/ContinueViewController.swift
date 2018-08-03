@@ -51,10 +51,11 @@ class ContinueViewController: FlowViewController {
         let animationCurveRawNSN = userInfoNotification[UIKeyboardAnimationCurveUserInfoKey] as? NSNumber
         let animationCurveRaw = animationCurveRawNSN?.uintValue ?? UIViewAnimationOptions.curveEaseInOut.rawValue
         let animationCurve: UIViewAnimationOptions = UIViewAnimationOptions(rawValue: animationCurveRaw)
-        if endFrame!.origin.y >= UIScreen.main.bounds.size.height {
-            self.continueButtonBottomConstraint?.constant = 24.0
+        if let keyboardView = endFrame, keyboardView.origin.y < UIScreen.main.bounds.size.height {
+            self.continueButtonBottomConstraint?.constant = keyboardView.size.height + 24
+            print(self.continueButtonBottomConstraint?.constant)
         } else {
-            self.continueButtonBottomConstraint?.constant = endFrame?.size.height ?? 24
+            self.continueButtonBottomConstraint?.constant = 24.0
         }
 
         UIView.animate(withDuration: duration,

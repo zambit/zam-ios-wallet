@@ -258,8 +258,8 @@
 		8C0919322106206100703224 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				8C333D45210B0D5400949AC0 /* LaunchScreenViewController.swift */,
 				8C60883C21105A0F00470411 /* Base */,
+				8C333D45210B0D5400949AC0 /* LaunchScreenViewController.swift */,
 				8C091933210620C800703224 /* OnboardingViewController.swift */,
 				8C60885D2111F28000470411 /* EnterNewPhoneNumberViewController.swift */,
 				8C60885F2111F35E00470411 /* EnterPhoneNumberViewController.swift */,
@@ -945,7 +945,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = M5P9F3VZ7T;
+				DEVELOPMENT_TEAM = PEYKHN6GF6;
 				INFOPLIST_FILE = wallet/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -965,7 +965,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = M5P9F3VZ7T;
+				DEVELOPMENT_TEAM = PEYKHN6GF6;
 				INFOPLIST_FILE = wallet/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (

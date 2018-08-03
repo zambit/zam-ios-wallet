@@ -235,7 +235,7 @@ class PhoneNumberFormComponent: UIView, UITextFieldDelegate {
         self.helperTextLabel?.textColor = .error
         self.helperTextLabel?.text = ""
 
-        self.detailPhonePartTextField?.keyboardType = .phonePad
+        self.detailPhonePartTextField?.keyboardType = .decimalPad
         self.mainPhonePartTextField?.keyboardType = .decimalPad
 
         self.detailPhonePartTextField?.backgroundColor = UIColor.white.withAlphaComponent(0.04)
