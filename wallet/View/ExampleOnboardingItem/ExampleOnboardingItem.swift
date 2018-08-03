@@ -18,6 +18,11 @@ class ExampleOnboardingItem: UICollectionViewCell {
     @IBOutlet var titleLabel: UILabel?
     @IBOutlet var textLabel: UILabel?
 
+    @IBOutlet private var topImageToSafeAreaConstraint: NSLayoutConstraint?
+    @IBOutlet private var bottomImageToTopTitleConstraint: NSLayoutConstraint?
+    @IBOutlet private var leftImageToSafeAreaTitleConstraint: NSLayoutConstraint?
+    @IBOutlet private var rightImageToSafeAreaTitleConstraint: NSLayoutConstraint?
+
     var insets: UIEdgeInsets = UIEdgeInsets.zero {
         didSet {
             view.frame = CGRect(x: insets.left,
@@ -68,5 +73,19 @@ class ExampleOnboardingItem: UICollectionViewCell {
 
         titleLabel?.textColor = .white
         textLabel?.textColor = .silver
+
+        switch UIDevice.current.screenType {
+        case .extraSmall, .small:
+            titleLabel?.font = UIFont.systemFont(ofSize: 28.0, weight: .bold)
+        case .medium, .extra, .plus:
+            titleLabel?.font = UIFont.systemFont(ofSize: 34.0, weight: .bold)
+        case .unknown:
+            print("Error: Unknown screen")
+            break
+        }
+    }
+
+    private func setupLayouts() {
+
     }
 }

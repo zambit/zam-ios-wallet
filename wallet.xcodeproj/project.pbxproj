@@ -104,6 +104,7 @@
 		8CF5F93321134DBC0083B36A /* TransitionCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF5F93221134DBC0083B36A /* TransitionCoordinator.swift */; };
 		8CF5F93521134DFF0083B36A /* NavigationAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF5F93421134DFF0083B36A /* NavigationAnimator.swift */; };
 		8CF5F93821134E6D0083B36A /* CGPoint+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF5F93721134E6D0083B36A /* CGPoint+Extensions.swift */; };
+		8CF5F93A21144BE80083B36A /* UIDevice+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF5F93921144BE80083B36A /* UIDevice+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -207,6 +208,7 @@
 		8CF5F93221134DBC0083B36A /* TransitionCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionCoordinator.swift; sourceTree = "<group>"; };
 		8CF5F93421134DFF0083B36A /* NavigationAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationAnimator.swift; sourceTree = "<group>"; };
 		8CF5F93721134E6D0083B36A /* CGPoint+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGPoint+Extensions.swift"; sourceTree = "<group>"; };
+		8CF5F93921144BE80083B36A /* UIDevice+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+Extensions.swift"; sourceTree = "<group>"; };
 		C9C98DC4F4721DB056807636 /* Pods_wallet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_wallet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -229,13 +231,8 @@
 				8CF5F929211307010083B36A /* Timers */,
 				8C6088502111A95100470411 /* Conditions.swift */,
 				8CF5F92E211327EB0083B36A /* MaskParser.swift */,
-				8C333D41210A094500949AC0 /* UIColor+Additions.swift */,
-				8C333D47210B0F3700949AC0 /* UIViewController+Extensions.swift */,
 				8C09192C21061F3600703224 /* ControllerHelper.swift */,
-				8C333D3F210A08A600949AC0 /* UIView+Extensions.swift */,
-				8C333D64210B619200949AC0 /* UITextField+Extensions.swift */,
-				8CF5F93721134E6D0083B36A /* CGPoint+Extensions.swift */,
-				8C333D6E210F00E600949AC0 /* String+Extensions.swift */,
+				8CF5F93B21144BED0083B36A /* Extensions */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -576,6 +573,20 @@
 			path = WalletTransitionAnimation;
 			sourceTree = "<group>";
 		};
+		8CF5F93B21144BED0083B36A /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				8C333D41210A094500949AC0 /* UIColor+Additions.swift */,
+				8C333D47210B0F3700949AC0 /* UIViewController+Extensions.swift */,
+				8C333D3F210A08A600949AC0 /* UIView+Extensions.swift */,
+				8CF5F93921144BE80083B36A /* UIDevice+Extensions.swift */,
+				8C333D64210B619200949AC0 /* UITextField+Extensions.swift */,
+				8CF5F93721134E6D0083B36A /* CGPoint+Extensions.swift */,
+				8C333D6E210F00E600949AC0 /* String+Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		96F68B133DC137F5FC79CBFB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -754,6 +765,7 @@
 				8C091908210605FA00703224 /* InitialRouter.swift in Sources */,
 				8C60885E2111F28000470411 /* EnterNewPhoneNumberViewController.swift in Sources */,
 				8CF1DE4B20F3AD210036F986 /* NewPasswordViewController.swift in Sources */,
+				8CF5F93A21144BE80083B36A /* UIDevice+Extensions.swift in Sources */,
 				8C09193F210625E500703224 /* Provider.swift in Sources */,
 				8C09194F2107225700703224 /* SignupProvider.swift in Sources */,
 				8C0919782108C2B900703224 /* UserProvider.swift in Sources */,
