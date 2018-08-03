@@ -12,7 +12,7 @@ import UIKit
 /**
  UIViewController providing default continue behaviour: "Round @ContinueButton moving with keyboard during it appears"
  */
-class ContinueViewController: FlowViewController {
+class ContinueViewController: WalletViewController {
 
     @IBOutlet var continueButton: LargeIconButton?
     @IBOutlet var continueButtonBottomConstraint: NSLayoutConstraint?

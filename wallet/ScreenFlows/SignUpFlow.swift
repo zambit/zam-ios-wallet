@@ -86,10 +86,6 @@ final class SignUpFlow: ScreenFlow {
             [weak self]
             authToken in
 
-            guard let strongSelf = self else {
-                return
-            }
-
             self?.userFlow?.begin()
         }
         vc.onContinue = onContinue

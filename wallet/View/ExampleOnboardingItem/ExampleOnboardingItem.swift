@@ -11,9 +11,8 @@ import UIKit
 /**
  Page of the tutorial on Onboarding screen. This skeleton defined only by sample design. Image + Title + Text.
  */
-class ExampleOnboardingItem: UICollectionViewCell {
+class ExampleOnboardingItem: ItemComponent {
 
-    @IBOutlet var view: UIView!
     @IBOutlet var illustrationImageView: UIImageView?
     @IBOutlet var titleLabel: UILabel?
     @IBOutlet var textLabel: UILabel?
@@ -22,27 +21,6 @@ class ExampleOnboardingItem: UICollectionViewCell {
     @IBOutlet private var bottomImageToTopTitleConstraint: NSLayoutConstraint?
     @IBOutlet private var leftImageToSafeAreaTitleConstraint: NSLayoutConstraint?
     @IBOutlet private var rightImageToSafeAreaTitleConstraint: NSLayoutConstraint?
-
-    var insets: UIEdgeInsets = UIEdgeInsets.zero {
-        didSet {
-            view.frame = CGRect(x: insets.left,
-                                y: insets.top,
-                                width: bounds.width - insets.left - insets.right,
-                                height: bounds.height - insets.top - insets.bottom)
-        }
-    }
-
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        initFromNib()
-        setupStyle()
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        initFromNib()
-        setupStyle()
-    }
 
     func configure(data: OnboardingItemData) {
         illustrationImageView?.image = data.image
@@ -56,28 +34,24 @@ class ExampleOnboardingItem: UICollectionViewCell {
         textLabel?.text = text
     }
 
-    private func initFromNib() {
-        Bundle.main.loadNibNamed("ExampleOnboardingItem", owner: self, options: nil)
-        addSubview(view)
+    override func initFromNib() {
+        super.initFromNib()
 
-        view.frame = CGRect(x: insets.left,
-                            y: insets.top,
-                            width: bounds.width - insets.left - insets.right,
-                            height: bounds.height - insets.top - insets.bottom)
-        view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+
     }
 
-    private func setupStyle() {
-        self.backgroundColor = .clear
-        self.view.backgroundColor = .clear
+    override func setupStyle() {
+        super.setupStyle()
 
         titleLabel?.textColor = .white
         textLabel?.textColor = .silver
 
         switch UIDevice.current.screenType {
         case .extraSmall, .small:
+            topImageToSafeAreaConstraint?.constant = 20.0
             titleLabel?.font = UIFont.systemFont(ofSize: 28.0, weight: .bold)
         case .medium, .extra, .plus:
+            topImageToSafeAreaConstraint?.constant = 79.5
             titleLabel?.font = UIFont.systemFont(ofSize: 34.0, weight: .bold)
         case .unknown:
             print("Error: Unknown screen")

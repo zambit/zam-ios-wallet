@@ -66,8 +66,8 @@ class WalletNavigationController: UINavigationController {
         viewControllers.last?.navigationItem.leftBarButtonItem = backItem
     }
 
-    func addExitButton(target: Any?, action: Selector) {
-        let exitButton = UIBarButtonItem(title: "EXIT",
+    func addRightBarItemButton(title: String, target: Any?, action: Selector) {
+        let exitButton = UIBarButtonItem(title: title,
                                          style: .plain,
                                          target: target,
                                          action: action)

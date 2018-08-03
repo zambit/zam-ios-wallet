@@ -16,6 +16,7 @@
                 <outlet property="illustrationImageView" destination="H1k-XA-WtQ" id="Qc1-se-clx"/>
                 <outlet property="textLabel" destination="9jQ-WY-HvR" id="j88-UQ-YT0"/>
                 <outlet property="titleLabel" destination="bnQ-xA-uUR" id="50Q-Wp-m6s"/>
+                <outlet property="topImageToSafeAreaConstraint" destination="lRn-v0-4cq" id="BUx-kL-dRz"/>
                 <outlet property="view" destination="iN0-l3-epB" id="GVh-HT-YP9"/>
             </connections>
         </placeholder>
@@ -40,7 +41,7 @@ facilis est et expedita distinctiolorem ipsun</string>
                     <nil key="highlightedColor"/>
                 </label>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="H1k-XA-WtQ">
-                    <rect key="frame" x="53" y="113" width="251" height="251"/>
+                    <rect key="frame" x="53" y="123" width="251" height="251"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="H1k-XA-WtQ" secondAttribute="height" multiplier="1:1" id="aQU-KK-Txk"/>
                     </constraints>
@@ -56,7 +57,7 @@ facilis est et expedita distinctiolorem ipsun</string>
                 <constraint firstItem="bnQ-xA-uUR" firstAttribute="centerX" secondItem="H1k-XA-WtQ" secondAttribute="centerX" id="Z6R-t7-LFf"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="9jQ-WY-HvR" secondAttribute="bottom" constant="20" id="cgH-zE-Qnf"/>
                 <constraint firstItem="bnQ-xA-uUR" firstAttribute="top" secondItem="H1k-XA-WtQ" secondAttribute="bottom" priority="999" constant="56" id="ebt-EX-i78"/>
-                <constraint firstItem="H1k-XA-WtQ" firstAttribute="top" relation="greaterThanOrEqual" secondItem="vUN-kp-3ea" secondAttribute="top" constant="20" id="lRn-v0-4cq"/>
+                <constraint firstItem="H1k-XA-WtQ" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="79" id="lRn-v0-4cq"/>
                 <constraint firstItem="bnQ-xA-uUR" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="nbJ-Gm-G6c"/>
                 <constraint firstItem="9jQ-WY-HvR" firstAttribute="top" secondItem="bnQ-xA-uUR" secondAttribute="bottom" constant="16" id="top-k4-zPR"/>
             </constraints>

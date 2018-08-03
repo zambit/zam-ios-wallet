@@ -43,9 +43,7 @@ class EnterLoginPasswordViewController: ContinueViewController, LoginPasswordCom
 //            title = MaskParser(symbol: maskData.1, space: maskData.2).matchingUnstrict(text: phone, withMask: maskData.0)
 //        }
 
-        if let navController = navigationController as? WalletNavigationController {
-            navController.addExitButton(target: self, action: #selector(exitButtonTouchEvent(_:)))
-        }
+        walletNavigationController?.addRightBarItemButton(title: "EXIT", target: self, action: #selector(exitButtonTouchEvent(_:)))
     }
 
     private func setupViewControllerStyle() {
@@ -121,7 +119,8 @@ class EnterLoginPasswordViewController: ContinueViewController, LoginPasswordCom
         onRecovery?(phone)
     }
 
-    @objc func exitButtonTouchEvent(_ sender: UIBarButtonItem) {
+    @objc
+    private func exitButtonTouchEvent(_ sender: UIBarButtonItem) {
         guard let token = userManager?.getToken() else {
             userManager?.clearUserData()
             onExit?()
