@@ -48,13 +48,10 @@ class DecimalKeyboardComponent: Component {
         case .extraSmall, .small:
             //...
             break
-        case .extra, .medium:
+        case .extra, .medium, .plus:
             keyboardButtonEdge = 72.0
             keyboardButtonsHorizontalSpacing = 32.0
             keyboardButtonsVerticalSpacing = 16.0
-        case .plus:
-            //....
-            break
         case .unknown:
             break
         }
