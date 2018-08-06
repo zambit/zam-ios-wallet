@@ -13,14 +13,14 @@ final class SecondEnterLoginFlow: ScreenFlow {
 
     private var phone: String?
 
-    weak var navigationController: UINavigationController?
+    weak var navigationController: WalletNavigationController?
 
-    init(navigationController: UINavigationController) {
+    init(navigationController: WalletNavigationController) {
         self.navigationController = navigationController
     }
 
     func begin() {
-        self.navigationController?.pushViewController(enterLoginPasswordScreen, animated: true)
+        self.navigationController?.push(viewController: enterLoginPasswordScreen)
     }
 
     func prepare(phone: String) {

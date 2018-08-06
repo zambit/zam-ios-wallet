@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class UserViewController: FlowViewController {
+class UserViewController: WalletViewController {
 
     var authAPI: AuthAPI?
     var userManager: WalletUserDefaultsManager?

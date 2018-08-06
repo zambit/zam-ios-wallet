@@ -11,14 +11,14 @@ import UIKit
 
 final class FirstEnterLoginFlow: ScreenFlow {
 
-    weak var navigationController: UINavigationController?
+    weak var navigationController: WalletNavigationController?
 
-    init(navigationController: UINavigationController) {
+    init(navigationController: WalletNavigationController) {
         self.navigationController = navigationController
     }
 
     func begin() {
-        self.navigationController?.pushViewController(enterPhoneLoginPasswordScreen, animated: true)
+        self.navigationController?.push(viewController: enterPhoneLoginPasswordScreen)
     }
 
     private var enterPhoneLoginPasswordScreen: EnterPhoneLoginPasswordViewController {

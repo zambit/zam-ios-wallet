@@ -34,7 +34,7 @@ class EnterPinViewController: WalletViewController, DecimalKeyboardComponentDele
 
         setupDefaultStyle()
 
-        walletNavigationController?.addRightBarItemButton(title: "EXIT", target: self, action: #selector(exitButtonTouchEvent(_:)))
+        walletNavigationController?.addRightBarItemButton(for: self, title: "EXIT", target: self, action: #selector(exitButtonTouchEvent(_:)))
     }
 
     func prepare(phone: String) {

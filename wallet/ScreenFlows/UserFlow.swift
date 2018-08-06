@@ -11,15 +11,14 @@ import UIKit
 
 final class UserFlow: ScreenFlow {
 
-    weak var navigationController: UINavigationController?
+    weak var navigationController: WalletNavigationController?
 
-    init(navigationController: UINavigationController) {
+    init(navigationController: WalletNavigationController) {
         self.navigationController = navigationController
     }
 
     func begin() {
-        self.navigationController?.popToRootViewController(animated: false)
-        self.navigationController?.pushViewController(userScreen, animated: true)
+        self.navigationController?.pushFromRootForward(viewController: userScreen)
     }
 
     private var userScreen: UserViewController {

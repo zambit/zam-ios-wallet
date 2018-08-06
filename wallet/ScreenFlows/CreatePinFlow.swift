@@ -11,14 +11,14 @@ import UIKit
 
 final class CreatePinFlow: ScreenFlow {
 
-    weak var navigationController: UINavigationController?
+    weak var navigationController: WalletNavigationController?
 
-    init(navigationController: UINavigationController) {
+    init(navigationController: WalletNavigationController) {
         self.navigationController = navigationController
     }
 
     func begin() {
-        self.navigationController?.pushViewController(createPinScreen, animated: true)
+        self.navigationController?.push(viewController: createPinScreen)
     }
 
     private var createPinScreen: CreatePinViewController {

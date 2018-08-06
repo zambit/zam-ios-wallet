@@ -11,14 +11,14 @@ import UIKit
 
 final class SignUpFlow: ScreenFlow {
 
-    weak var navigationController: UINavigationController?
+    weak var navigationController: WalletNavigationController?
 
-    init(navigationController: UINavigationController) {
+    init(navigationController: WalletNavigationController) {
         self.navigationController = navigationController
     }
 
     func begin() {
-        self.navigationController?.pushViewController(enterNewPhoneNumberScreen, animated: true)
+        self.navigationController?.push(viewController: enterNewPhoneNumberScreen)
     }
 
     private var enterNewPhoneNumberScreen: EnterNewPhoneNumberViewController {
@@ -39,7 +39,7 @@ final class SignUpFlow: ScreenFlow {
             let target = strongSelf.verifyPhoneNumberWithSmsScreen
             target.prepare(phone: phone)
 
-            strongSelf.navigationController?.pushViewController(target, animated: true)
+            strongSelf.navigationController?.push(viewController: target)
         }
 
         vc.onContinue = onContinue
@@ -66,7 +66,7 @@ final class SignUpFlow: ScreenFlow {
             let target = strongSelf.createNewPasswordScreen
             target.prepare(phone: phone, token: signUpToken)
 
-            strongSelf.navigationController?.pushViewController(target, animated: true)
+            strongSelf.navigationController?.push(viewController: target)
         }
 
         vc.onContinue = onContinue

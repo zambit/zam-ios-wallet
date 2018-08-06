@@ -13,14 +13,14 @@ final class EnterPinFlow: ScreenFlow {
 
     private var phone: String?
 
-    weak var navigationController: UINavigationController?
+    weak var navigationController: WalletNavigationController?
 
-    init(navigationController: UINavigationController) {
+    init(navigationController: WalletNavigationController) {
         self.navigationController = navigationController
     }
 
     func begin() {
-        self.navigationController?.pushViewController(enterPinScreen, animated: true)
+        self.navigationController?.push(viewController: enterPinScreen)
     }
 
     func prepare(phone: String) {

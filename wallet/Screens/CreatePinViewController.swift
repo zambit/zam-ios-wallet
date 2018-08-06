@@ -32,8 +32,7 @@ class CreatePinViewController: WalletViewController, DecimalKeyboardComponentDel
         createPinComponent?.delegate = self
 
         setupDefaultStyle()
-
-        walletNavigationController?.addRightBarItemButton(title: "SKIP", target: self, action: #selector(skipButtonTouchEvent(_:)))
+        walletNavigationController?.addRightBarItemButton(for: self, title: "SKIP", target: self, action: #selector(skipButtonTouchEvent(_:)))
     }
 
     func decimalKeyboardComponent(_ decimalKeyboardComponent: DecimalKeyboardComponent, keyWasTapped key: DecimalKeyboardComponent.Key) {

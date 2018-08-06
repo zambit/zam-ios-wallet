@@ -1,8 +1,8 @@
 //
-//  WalletNavigationController.swift
+//  WalletNavigation.swift
 //  wallet
 //
-//  Created by  me on 30/07/2018.
+//  Created by  me on 06/08/2018.
 //  Copyright © 2018 zamzam. All rights reserved.
 //
 
@@ -10,52 +10,89 @@ import Foundation
 import UIKit
 
 /**
- Custom NavigationController that provides general style and behaviour according to design
+ Wrapper on NavigationController that provides special style and custom behaviour.
  */
-class WalletNavigationController: UINavigationController {
+class WalletNavigationController {
+
+    enum PushOrder {
+        case forward
+        case back
+    }
 
     var customTransitionCoordinator: TransitionCoordinator? {
         didSet {
-            self.delegate = customTransitionCoordinator
-            self.transitioningDelegate = customTransitionCoordinator
+            self.controller.delegate = customTransitionCoordinator
+            self.controller.transitioningDelegate = customTransitionCoordinator
         }
     }
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    private(set) var controller: UINavigationController
 
-        setupStyle()
+    init(navigationController: UINavigationController) {
+        self.controller = navigationController
+        setupStyle(for: self.controller)
     }
 
-    private func setupStyle() {
-        navigationBar.setBackgroundImage(UIImage(), for: .default)
-        navigationBar.shadowImage = UIImage()
-        navigationBar.backgroundColor = .clear
-        navigationBar.isTranslucent = true
-        navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
+    private func setupStyle(for navigationController: UINavigationController) {
+        navigationController.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController.navigationBar.shadowImage = UIImage()
+        navigationController.navigationBar.backgroundColor = .clear
+        navigationController.navigationBar.isTranslucent = true
+        navigationController.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
 
-        navigationItem.hidesBackButton = true
+        navigationController.navigationItem.hidesBackButton = true
     }
 
-    override func pushViewController(_ viewController: UIViewController, animated: Bool) {
-        super.pushViewController(viewController, animated: true)
+    func push(viewController: WalletViewController) {
+        controller.pushViewController(viewController, animated: true)
+        viewController.walletNavigationController = self
 
-        viewController.navigationItem.hidesBackButton = true
+        hideBackButton(for: viewController)
 
-        guard viewControllers.count > 2 else {
+        if controller.viewControllers.count > 2 {
+            addBackButton(for: viewController)
+        }
+    }
+
+    func pushFromRootForward(viewController: WalletViewController) {
+        guard controller.viewControllers.count > 1 else {
+            push(viewController: viewController)
             return
         }
 
-        showBackButton()
+        controller.pushViewController(viewController, animated: true)
+        viewController.walletNavigationController = self
+
+        hideBackButton(for: viewController)
+
+        guard let root = controller.viewControllers.first else {
+            return
+        }
+
+        let newHierarchy = [root, viewController]
+        controller.setViewControllers(newHierarchy, animated: false)
     }
 
-    func pushViewControllerFromRoot(_ viewController: UIViewController, animated: Bool) {
-        self.popToRootViewController(animated: true)
+    func pushFromRootBack(viewController: WalletViewController) {
+        guard controller.viewControllers.count > 1 else {
+            push(viewController: viewController)
+            return
+        }
 
-        super.pushViewController(viewController, animated: false)
+        guard let currentViewController = controller.viewControllers.last,
+            let root = controller.viewControllers.first else {
+            return
+        }
+        let newHierarchy = [root, viewController, currentViewController]
+        controller.setViewControllers(newHierarchy, animated: false)
+        controller.popViewController(animated: true)
+
+        viewController.walletNavigationController = self
+
+        hideBackButton(for: viewController)
     }
 
-    func showBackButton() {
+    func addBackButton(for viewController: WalletViewController) {
         let backItem = UIBarButtonItem(
             image: #imageLiteral(resourceName: "icArrowLeft"),
             style: .plain,
@@ -63,21 +100,30 @@ class WalletNavigationController: UINavigationController {
             action: #selector(backBarButtonItemTap(_:))
         )
         backItem.tintColor = .white
-        viewControllers.last?.navigationItem.leftBarButtonItem = backItem
+        viewController.navigationItem.leftBarButtonItem = backItem
     }
 
-    func addRightBarItemButton(title: String, target: Any?, action: Selector) {
+    func hideBackButton(for viewController: WalletViewController) {
+        let backEmptyButton = UIBarButtonItem(title: "",
+                                              style: .plain,
+                                              target: controller,
+                                              action: nil)
+        viewController.navigationItem.leftBarButtonItem = backEmptyButton
+    }
+
+    func addRightBarItemButton(for viewController: WalletViewController, title: String, target: Any?, action: Selector) {
         let exitButton = UIBarButtonItem(title: title,
                                          style: .plain,
                                          target: target,
                                          action: action)
 
         exitButton.tintColor = .skyBlue
-        viewControllers.last?.navigationItem.rightBarButtonItem = exitButton
+        viewController.navigationItem.rightBarButtonItem = exitButton
     }
 
     @objc
     private func backBarButtonItemTap(_ sender: UIBarButtonItem) {
-        self.popViewController(animated: true)
+        self.controller.popViewController(animated: true)
     }
+
 }

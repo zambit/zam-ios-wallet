@@ -14,15 +14,14 @@ import UIKit
  */
 final class OnboardingFlow: ScreenFlow {
 
-    weak var navigationController: UINavigationController?
+    weak var navigationController: WalletNavigationController?
 
-    init(navigationController: UINavigationController) {
+    init(navigationController: WalletNavigationController) {
         self.navigationController = navigationController
     }
 
     func begin() {
-        self.navigationController?.popToRootViewController(animated: false)
-        self.navigationController?.pushViewController(onboardingScreen, animated: true)
+        self.navigationController?.pushFromRootBack(viewController: onboardingScreen)
     }
 
     private var onboardingScreen: OnboardingViewController {

@@ -14,6 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     var mainScreenFlow: ScreenFlow!
+    var navigation: WalletNavigationController!
     var userDefaultsManager: WalletUserDefaultsManager!
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
@@ -29,10 +30,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let navigationController = UINavigationController(rootViewController: vc)
         let coordinator = TransitionCoordinator(animator: NavigationCustomAnimator())
 
-        let navigation = WalletNavigationController(
-            navigationController: navigationController,
-            customTransitionCoordinator: coordinator
-        )
+        navigation = WalletNavigationController(navigationController: navigationController)
+        navigation.customTransitionCoordinator = coordinator
 
         userDefaultsManager = WalletUserDefaultsManager(userDefaults: .standard)
 
@@ -42,7 +41,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 fatalError()
             }
 
-            let screenFlow = EnterPinFlow(navigationController: navigationController)
+            let screenFlow = EnterPinFlow(navigationController: navigation)
             screenFlow.prepare(phone: phone)
 
             self.mainScreenFlow = screenFlow
@@ -52,7 +51,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 fatalError()
             }
 
-            let screenFlow = SecondEnterLoginFlow(navigationController: navigationController)
+            let screenFlow = SecondEnterLoginFlow(navigationController: navigation)
             screenFlow.prepare(phone: phone)
 
             self.mainScreenFlow = screenFlow
@@ -60,7 +59,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         case (false, true):
             fatalError()
         case (false, false):
-            let screenFlow = OnboardingFlow(navigationController: navigationController)
+            let screenFlow = OnboardingFlow(navigationController: navigation)
 
             self.mainScreenFlow = screenFlow
             break
