@@ -32,7 +32,7 @@ final class FirstEnterLoginFlow: ScreenFlow {
             [weak self]
             authToken in
 
-            self?.userFlow?.begin()
+            self?.createPinFlow?.begin()
         }
 
         let onRecovery: () -> Void = {
@@ -50,6 +50,16 @@ final class FirstEnterLoginFlow: ScreenFlow {
         vc.userManager = WalletUserDefaultsManager()
         vc.flow = self
         return vc
+    }
+
+    private var createPinFlow: CreatePinFlow? {
+        guard let navController = navigationController else {
+            print("Navigation controller not found")
+            return nil
+        }
+
+        let flow = CreatePinFlow(navigationController: navController)
+        return flow
     }
 
     private var userFlow: UserFlow? {

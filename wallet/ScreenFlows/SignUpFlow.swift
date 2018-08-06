@@ -86,7 +86,7 @@ final class SignUpFlow: ScreenFlow {
             [weak self]
             authToken in
 
-            self?.userFlow?.begin()
+            self?.createPinFlow?.begin()
         }
         vc.onContinue = onContinue
         vc.signupAPI = SignupAPI(provider: SignupProvider(environment: WalletEnvironment(), dispatcher: HTTPDispatcher()))
@@ -94,6 +94,16 @@ final class SignUpFlow: ScreenFlow {
         vc.title = "Registration"
         vc.flow = self
         return vc
+    }
+
+    private var createPinFlow: CreatePinFlow? {
+        guard let navController = navigationController else {
+            print("Navigation controller not found")
+            return nil
+        }
+
+        let flow = CreatePinFlow(navigationController: navController)
+        return flow
     }
 
     private var userFlow: UserFlow? {
@@ -104,4 +114,5 @@ final class SignUpFlow: ScreenFlow {
 
         let flow = UserFlow(navigationController: navController)
         return flow
-    }}
+    }
+}

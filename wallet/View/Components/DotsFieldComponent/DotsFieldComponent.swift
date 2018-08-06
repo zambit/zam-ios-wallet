@@ -9,28 +9,28 @@
 import Foundation
 import UIKit
 
-class DotsFieldComponent: Component {
+class DotsFieldComponent: Component  {
 
     @IBOutlet private var dotsStackView: UIStackView?
 
     private var dotEdge: CGFloat = 0.0
     private var dotSpacing: CGFloat = 0.0
 
-    var dotsCount: Int = 4 {
+    var dotsMaxCount: Int = 4 {
         didSet {
             dotsStackView?.arrangedSubviews.forEach {
                 $0.removeFromSuperview()
             }
 
-            setupDots(count: dotsCount, edge: dotEdge, spacing: dotSpacing)
+            setupDots(count: dotsMaxCount, edge: dotEdge, spacing: dotSpacing)
         }
     }
 
-    private(set) var currentDotIndex: Int = 0 {
-        didSet {
-            print("Current: \(currentDotIndex)")
-        }
+    var filledCount: Int {
+        return currentDotIndex
     }
+
+    private(set) var currentDotIndex: Int = 0
 
     private var dots: [DotView] {
         guard let dotsStack = dotsStackView?.arrangedSubviews as? [DotView] else {
@@ -57,7 +57,7 @@ class DotsFieldComponent: Component {
             break
         }
 
-        setupDots(count: dotsCount, edge: dotEdge, spacing: dotSpacing)
+        setupDots(count: dotsMaxCount, edge: dotEdge, spacing: dotSpacing)
     }
 
     override func setupStyle() {
@@ -79,25 +79,39 @@ class DotsFieldComponent: Component {
         }
     }
 
-    func fillLast() {
-        guard currentDotIndex < dotsCount else {
-            return
+    @discardableResult
+    func fillLast() -> Bool {
+        guard currentDotIndex < dotsMaxCount else {
+            return false
         }
 
         dots[currentDotIndex].customAppearance.setStyle(.filled)
         currentDotIndex += 1
+
+        return true
     }
 
-    func unfillLast() {
+    @discardableResult
+    func unfillLast() -> Bool {
         guard currentDotIndex > 0 else {
-            return
+            return false
         }
 
         currentDotIndex -= 1
         dots[currentDotIndex].customAppearance.setStyle(.empty)
+
+        return true
     }
 
-    func fillGreenAll() {
+    func unfillAll() {
+        dots.forEach {
+            $0.customAppearance.setStyle(.empty)
+        }
+
+        currentDotIndex = 0
+    }
+
+    func showSuccess() {
         guard let dots = dotsStackView?.arrangedSubviews as? [DotView] else {
             fatalError()
         }
@@ -107,7 +121,7 @@ class DotsFieldComponent: Component {
         }
     }
 
-    func fillRedAll() {
+    func showFailure(completion handler: @escaping () -> Void) {
         guard let dots = dotsStackView?.arrangedSubviews as? [DotView] else {
             fatalError()
         }
@@ -115,5 +129,25 @@ class DotsFieldComponent: Component {
         dots.forEach {
             $0.customAppearance.setStyle(.red)
         }
+
+        animateFailure(completion: handler)
+    }
+
+    private func animateFailure(completion handler: @escaping () -> Void) {
+        CATransaction.begin()
+        CATransaction.setCompletionBlock(handler)
+
+        let duration: Float = 0.2
+        let repeatCount: Float = 3
+
+        let animation = CABasicAnimation(keyPath: "position")
+        animation.duration = TimeInterval(duration)/TimeInterval(repeatCount)
+        animation.repeatCount = repeatCount
+        animation.autoreverses = true
+        animation.fromValue = NSValue(cgPoint: CGPoint(x: self.center.x - 5, y: self.center.y))
+        animation.toValue = NSValue(cgPoint: CGPoint(x: self.center.x + 5, y: self.center.y))
+        self.layer.add(animation, forKey: "position")
+
+        CATransaction.commit()
     }
 }

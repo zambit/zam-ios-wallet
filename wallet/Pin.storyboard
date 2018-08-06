@@ -69,18 +69,40 @@
                                 <rect key="frame" x="47" y="310" width="281" height="380"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wKZ-NS-6YX" customClass="DotsFieldComponent" customModule="wallet" customModuleProvider="target">
+                                <rect key="frame" x="16" y="110" width="343" height="128"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="128" placeholder="YES" id="N91-ek-wdT"/>
+                                    <constraint firstAttribute="width" constant="343" placeholder="YES" id="vn5-KU-3xM"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Large Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lDL-rd-O5k">
+                                <rect key="frame" x="147" y="41" width="81" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="wKZ-NS-6YX" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="UzJ-Eo-8Mr" secondAttribute="leading" constant="16" id="5iy-VP-oSr"/>
+                            <constraint firstItem="wKZ-NS-6YX" firstAttribute="top" secondItem="lDL-rd-O5k" secondAttribute="bottom" constant="48" id="FSH-80-DxO"/>
+                            <constraint firstItem="UzJ-Eo-8Mr" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="wKZ-NS-6YX" secondAttribute="trailing" constant="16" id="MXd-UH-Jma"/>
+                            <constraint firstItem="wKZ-NS-6YX" firstAttribute="centerX" secondItem="JC3-7z-KSJ" secondAttribute="centerX" id="O50-09-e7R"/>
                             <constraint firstItem="UzJ-Eo-8Mr" firstAttribute="bottom" secondItem="ScK-7e-xxx" secondAttribute="bottom" constant="88" id="Uyv-rn-PA1"/>
                             <constraint firstItem="ScK-7e-xxx" firstAttribute="leading" secondItem="UzJ-Eo-8Mr" secondAttribute="leading" constant="47" id="Y4C-xE-4ee"/>
                             <constraint firstItem="UzJ-Eo-8Mr" firstAttribute="trailing" secondItem="ScK-7e-xxx" secondAttribute="trailing" constant="47" id="cW2-AK-1CR"/>
+                            <constraint firstItem="lDL-rd-O5k" firstAttribute="centerX" secondItem="wKZ-NS-6YX" secondAttribute="centerX" id="hFq-e4-Qzz"/>
+                            <constraint firstItem="ScK-7e-xxx" firstAttribute="top" secondItem="wKZ-NS-6YX" secondAttribute="bottom" constant="72" id="qu9-hG-nke"/>
                             <constraint firstItem="ScK-7e-xxx" firstAttribute="top" secondItem="UzJ-Eo-8Mr" secondAttribute="top" constant="266" id="s56-SF-xUT"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="UzJ-Eo-8Mr"/>
                     </view>
                     <connections>
+                        <outlet property="dotsFieldComponent" destination="wKZ-NS-6YX" id="efm-OZ-bQt"/>
                         <outlet property="keyboardComponent" destination="ScK-7e-xxx" id="73o-Kj-Mdi"/>
+                        <outlet property="titleLabel" destination="lDL-rd-O5k" id="M7L-hV-1Ye"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5wD-i2-B6y" userLabel="First Responder" sceneMemberID="firstResponder"/>

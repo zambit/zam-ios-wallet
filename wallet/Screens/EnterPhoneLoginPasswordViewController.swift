@@ -74,8 +74,7 @@ class EnterPhoneLoginPasswordViewController: ContinueViewController, LoginFormCo
                 self?.onContinue?(authToken)
             }
 
-            self?.userManager?.save(token: authToken)
-            self?.userManager?.save(phoneNumber: phone)
+            self?.userManager?.save(phone: phone, password: password, token: authToken)
 
         }.catch {
             [weak self]

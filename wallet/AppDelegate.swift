@@ -29,7 +29,37 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let navigationController = WalletNavigationController(rootViewController: vc)
         navigationController.customTransitionCoordinator = TransitionCoordinator(animator: NavigationCustomAnimator())
 
-        mainScreenFlow = EnterPinFlow(navigationController: navigationController)
+        userDefaultsManager = WalletUserDefaultsManager(userDefaults: .standard)
+
+        switch (userDefaultsManager.isPhoneVerified, userDefaultsManager.isPinCreated) {
+        case (true, true):
+            guard let phone = userDefaultsManager.getPhoneNumber() else {
+                fatalError()
+            }
+
+            let screenFlow = EnterPinFlow(navigationController: navigationController)
+            screenFlow.prepare(phone: phone)
+
+            self.mainScreenFlow = screenFlow
+            break
+        case (true, false):
+            guard let phone = userDefaultsManager.getPhoneNumber() else {
+                fatalError()
+            }
+
+            let screenFlow = SecondEnterLoginFlow(navigationController: navigationController)
+            screenFlow.prepare(phone: phone)
+
+            self.mainScreenFlow = screenFlow
+            break
+        case (false, true):
+            fatalError()
+        case (false, false):
+            let screenFlow = OnboardingFlow(navigationController: navigationController)
+
+            self.mainScreenFlow = screenFlow
+            break
+        }
 
 //        userDefaultsManager = WalletUserDefaultsManager(userDefaults: .standard)
 //        switch userDefaultsManager.isUserAuthorized {

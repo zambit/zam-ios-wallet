@@ -9,20 +9,27 @@
 import Foundation
 import UIKit
 
-class CreatePinViewController: WalletViewController, DecimalKeyboardComponentDelegate {
+class CreatePinViewController: WalletViewController, DecimalKeyboardComponentDelegate, CreatePinComponentDelegate {
 
     var userManager: WalletUserDefaultsManager?
 
-    var onContinue: ((_ authToken: String) -> Void)?
+    var onContinue: (() -> Void)?
     var onSkip: (() -> Void)?
 
     @IBOutlet var keyboardComponent: DecimalKeyboardComponent?
     @IBOutlet var createPinComponent: CreatePinComponent?
 
+    private var pinText: String = "" {
+        didSet {
+            print(pinText)
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         keyboardComponent?.delegate = self
+        createPinComponent?.delegate = self
 
         setupDefaultStyle()
 
@@ -32,14 +39,22 @@ class CreatePinViewController: WalletViewController, DecimalKeyboardComponentDel
     func decimalKeyboardComponent(_ decimalKeyboardComponent: DecimalKeyboardComponent, keyWasTapped key: DecimalKeyboardComponent.Key) {
         switch key {
         case .zero, .one, .two, .three, .four, .five, .six, .seven, .eight, .nine:
-            createPinComponent?.currentPinStage?.dotsFieldComponent?.fillLast()
+            createPinComponent?.enterTheKey(key.rawValue)
         case .remove:
-            createPinComponent?.currentPinStage?.dotsFieldComponent?.unfillLast()
+            createPinComponent?.removeLast()
         case .touchId:
             break
         }
+    }
 
-        print(key.rawValue)
+    func createPinComponent(_ createPinComponent: CreatePinComponent, succeedWithPin pin: String) {
+        userManager?.save(pin: pin)
+        onContinue?()
+    }
+
+    func createPinComponentWrongConfirmation(_ createPinComponent: CreatePinComponent) {
+        let generator = UINotificationFeedbackGenerator()
+        generator.notificationOccurred(.error)
     }
 
     @objc

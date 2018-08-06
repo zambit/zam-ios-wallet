@@ -11,6 +11,8 @@ import UIKit
 
 final class EnterPinFlow: ScreenFlow {
 
+    private var phone: String?
+
     weak var navigationController: UINavigationController?
 
     init(navigationController: UINavigationController) {
@@ -21,44 +23,36 @@ final class EnterPinFlow: ScreenFlow {
         self.navigationController?.pushViewController(enterPinScreen, animated: true)
     }
 
-    private var enterPinScreen: CreatePinViewController {
-        let _vc = ControllerHelper.instantiateViewController(identifier: "CreatePinViewController", storyboardName: "Pin")
-
-        guard let vc = _vc as? CreatePinViewController else {
-            fatalError()
-        }
-
-        vc.flow = self
-        return vc
+    func prepare(phone: String) {
+        self.phone = phone
     }
 
-    private var enterPhoneLoginPasswordScreen: EnterPhoneLoginPasswordViewController {
-        let _vc = ControllerHelper.instantiateViewController(identifier: "EnterPhoneLoginPasswordViewController", storyboardName: "Login")
+    private var enterPinScreen: EnterPinViewController {
+        let _vc = ControllerHelper.instantiateViewController(identifier: "EnterPinViewController", storyboardName: "Pin")
 
-        guard let vc = _vc as? EnterPhoneLoginPasswordViewController else {
+        guard let vc = _vc as? EnterPinViewController else {
             fatalError()
         }
 
-        let onContinue: (String) -> Void = {
-            [weak self]
-            authToken in
+        guard let phone = phone else {
+            fatalError("Phone wasn't provided")
+        }
 
+        let onContinue: () -> Void = {
+            [weak self] in
             self?.userFlow?.begin()
         }
 
-        let onRecovery: () -> Void = {
+        let onExit: () -> Void = {
             [weak self] in
-
-            guard let strongSelf = self else {
-                return
-            }
-
-            strongSelf.recoveryFlow?.begin()
+            self?.onboardingFlow?.begin()
         }
+
         vc.onContinue = onContinue
-        vc.onRecovery = onRecovery
+        vc.onExit = onExit
+        vc.userManager = WalletUserDefaultsManager(userDefaults: .standard)
         vc.authAPI = AuthAPI(provider: AuthProvider(environment: WalletEnvironment(), dispatcher: HTTPDispatcher()))
-        vc.userManager = WalletUserDefaultsManager()
+        vc.prepare(phone: phone)
         vc.flow = self
         return vc
     }
@@ -73,13 +67,13 @@ final class EnterPinFlow: ScreenFlow {
         return flow
     }
 
-    private var recoveryFlow: RecoveryFlow? {
+    private var onboardingFlow: OnboardingFlow? {
         guard let navController = navigationController else {
             print("Navigation controller not found")
             return nil
         }
 
-        let flow = RecoveryFlow(navigationController: navController)
+        let flow = OnboardingFlow(navigationController: navController)
         return flow
     }
 }

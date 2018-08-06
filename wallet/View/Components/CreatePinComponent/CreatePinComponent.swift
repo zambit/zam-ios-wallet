@@ -9,21 +9,34 @@
 import Foundation
 import UIKit
 
-class CreatePinComponent: Component, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+protocol CreatePinComponentDelegate: class {
 
-    @IBOutlet var collectionView: UICollectionView?
+    func createPinComponent(_ createPinComponent: CreatePinComponent, succeedWithPin pin: String)
 
-    var currentPinStage: CreatePinStageItem? {
-        guard let item = collectionView?.cellForItem(at: currentItemIndexPath) else {
+    func createPinComponentWrongConfirmation(_ createPinComponent: CreatePinComponent)
+
+}
+
+class CreatePinComponent: Component, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate {
+
+    @IBOutlet private var collectionView: UICollectionView?
+
+    private var pinText: String = ""
+    private var pinConfirmationText: String = ""
+
+    private var currentPinStage: CreatePinStageItem? {
+        let indexPath = IndexPath(item: 0, section: currentStageIndex)
+        guard let item = collectionView?.cellForItem(at: indexPath) else {
             return nil
         }
 
         return (item as! CreatePinStageItem)
     }
+    private var currentStageIndex: Int = 0
 
     private var createPinStages: [CreatePinStageData] = []
 
-    private var currentItemIndexPath = IndexPath(item: 0, section: 0)
+    weak var delegate: CreatePinComponentDelegate?
 
     override func initFromNib() {
         super.initFromNib()
@@ -62,10 +75,105 @@ class CreatePinComponent: Component, UICollectionViewDataSource, UICollectionVie
         collectionView?.backgroundColor = .clear
     }
 
-    func scrollToNext(animated: Bool) {
-        currentItemIndexPath.section += 1
+    private var completionActionsAfterScroll: [() -> Void] = []
 
-        collectionView?.scrollToItem(at: currentItemIndexPath, at: .centeredHorizontally, animated: animated)
+    func enterTheKey(_ key: String) {
+        guard let filled = currentPinStage?.dotsFieldComponent?.fillLast(), filled else {
+            switch currentStageIndex {
+            case 0:
+                moveToNextStage(animated: true) {
+                    [weak self] in
+                    self?.enterTheKey(key)
+                }
+                return
+            case 1:
+                return
+            default:
+                fatalError()
+            }
+        }
+
+        switch currentStageIndex {
+        case 0:
+            pinText.append(key)
+
+            if let stageDotsField = currentPinStage?.dotsFieldComponent,
+                stageDotsField.filledCount == stageDotsField.dotsMaxCount {
+
+                moveToNextStage(animated: true)
+            }
+        case 1:
+            pinConfirmationText.append(key)
+
+            if let stageDotsField = currentPinStage?.dotsFieldComponent,
+                stageDotsField.filledCount == stageDotsField.dotsMaxCount {
+
+                print(pinText)
+                print(pinConfirmationText)
+
+                if pinText == pinConfirmationText {
+                    currentPinStage?.dotsFieldComponent?.showSuccess()
+                    delegate?.createPinComponent(self, succeedWithPin: pinText)
+                } else {
+                    currentPinStage?.dotsFieldComponent?.showFailure { [weak self] in
+                        guard let strongSelf = self else {
+                            return
+                        }
+
+                        strongSelf.currentPinStage?.dotsFieldComponent?.unfillAll()
+                        strongSelf.pinConfirmationText = ""
+                        strongSelf.delegate?.createPinComponentWrongConfirmation(strongSelf)
+                    }
+                }
+            }
+        default:
+            fatalError()
+        }
+    }
+
+    func removeLast() {
+        guard let unfilled = currentPinStage?.dotsFieldComponent?.unfillLast(), unfilled else {
+            switch currentStageIndex {
+            case 0:
+                return
+            case 1:
+                moveToPreviousStage(animated: true)
+                return
+            default:
+                fatalError()
+            }
+        }
+
+        switch currentStageIndex {
+        case 0:
+            pinText.removeLast()
+        case 1:
+            pinConfirmationText.removeLast()
+        default:
+            fatalError()
+        }
+    }
+
+    func moveToNextStage(animated: Bool, completion handler: @escaping () -> Void = {}) {
+        currentStageIndex += 1
+
+        completionActionsAfterScroll.append(handler)
+
+        let indexPath = IndexPath(item: 0, section: currentStageIndex)
+
+        collectionView?.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: animated)
+    }
+
+    func moveToPreviousStage(animated: Bool) {
+        guard currentStageIndex > 0 else {
+            return
+        }
+
+        currentStageIndex -= 1
+
+        let indexPath = IndexPath(item: 0, section: currentStageIndex)
+
+        collectionView?.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: animated)
     }
 
     // UICollectionView dataSource
@@ -93,6 +201,14 @@ class CreatePinComponent: Component, UICollectionViewDataSource, UICollectionVie
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return collectionView.bounds.size
+    }
+
+    // UIScrollView delegate
+
+    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
+        completionActionsAfterScroll.forEach { _ in
+            completionActionsAfterScroll.popLast()?()
+        }
     }
 }
 

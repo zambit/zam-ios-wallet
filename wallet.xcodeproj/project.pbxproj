@@ -76,6 +76,7 @@
 		8C34617020EF8FA700746724 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C34616E20EF8FA700746724 /* Main.storyboard */; };
 		8C34617220EF8FA900746724 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8C34617120EF8FA900746724 /* Assets.xcassets */; };
 		8C34617520EF8FA900746724 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C34617320EF8FA900746724 /* LaunchScreen.storyboard */; };
+		8C4413C4211882FC00C9689C /* CreatePinFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4413C3211882FC00C9689C /* CreatePinFlow.swift */; };
 		8C6088402110634700470411 /* WalletUserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C60883F2110634700470411 /* WalletUserDefaultsManager.swift */; };
 		8C6088442110A34200470411 /* CustomUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6088432110A34200470411 /* CustomUI.swift */; };
 		8C6088482110A75100470411 /* AdditionalTextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6088472110A75100470411 /* AdditionalTextButton.swift */; };
@@ -197,6 +198,7 @@
 		8C34617120EF8FA900746724 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8C34617420EF8FA900746724 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8C34617620EF8FA900746724 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8C4413C3211882FC00C9689C /* CreatePinFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePinFlow.swift; sourceTree = "<group>"; };
 		8C60883F2110634700470411 /* WalletUserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletUserDefaultsManager.swift; sourceTree = "<group>"; };
 		8C6088432110A34200470411 /* CustomUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUI.swift; sourceTree = "<group>"; };
 		8C6088472110A75100470411 /* AdditionalTextButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalTextButton.swift; sourceTree = "<group>"; };
@@ -403,6 +405,7 @@
 				8C60885B2111F1A200470411 /* RecoveryFlow.swift */,
 				8CF5F930211345320083B36A /* UserFlow.swift */,
 				8CF5F94B21147F000083B36A /* EnterPinFlow.swift */,
+				8C4413C3211882FC00C9689C /* CreatePinFlow.swift */,
 			);
 			path = ScreenFlows;
 			sourceTree = "<group>";
@@ -870,6 +873,7 @@
 				8C09197F2108D8B600703224 /* VerifyPhoneNumberWithSmsViewController.swift in Sources */,
 				8C333D40210A08A600949AC0 /* UIView+Extensions.swift in Sources */,
 				8CF5F9542114916E0083B36A /* DotView.swift in Sources */,
+				8C4413C4211882FC00C9689C /* CreatePinFlow.swift in Sources */,
 				8C333D68210B72A100949AC0 /* ContinueViewController.swift in Sources */,
 				8C09196A2108951F00703224 /* WalletResponseError.swift in Sources */,
 				8CF5F93521134DFF0083B36A /* NavigationAnimator.swift in Sources */,

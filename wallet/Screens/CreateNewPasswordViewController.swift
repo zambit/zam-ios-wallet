@@ -93,7 +93,7 @@ class CreateNewPasswordViewController: ContinueViewController, NewPasswordFormCo
                         self?.onContinue?(phone)
                     }
 
-                    self?.userManager?.save(phoneNumber: phone)
+                    self?.userManager?.save(phone: phone, password: password)
                 }.catch {
                     [weak self]
                     error in
@@ -112,8 +112,7 @@ class CreateNewPasswordViewController: ContinueViewController, NewPasswordFormCo
                         self?.onContinue?(authToken)
                     }
 
-                    self?.userManager?.save(token: authToken)
-                    self?.userManager?.save(phoneNumber: phone)
+                    self?.userManager?.save(phone: phone, password: password, token: token)
                 }.catch {
                     [weak self]
                     error in

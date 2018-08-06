@@ -16,7 +16,7 @@ class CreatePinStageItem: ItemComponent {
 
     func configure(data: CreatePinStageData) {
         titleLabel?.text = data.title
-        dotsFieldComponent?.dotsCount = data.codeLength
+        dotsFieldComponent?.dotsMaxCount = data.codeLength
     }
 
     override func initFromNib() {
