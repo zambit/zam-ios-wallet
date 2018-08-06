@@ -71,12 +71,12 @@
 		8C333D71210F1F5300949AC0 /* PhoneMasks.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C333D70210F1F5300949AC0 /* PhoneMasks.plist */; };
 		8C333D77210F50E000949AC0 /* CountryIconImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D76210F50E000949AC0 /* CountryIconImageView.swift */; };
 		8C333D7B210F767100949AC0 /* FlowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D7A210F767100949AC0 /* FlowViewController.swift */; };
-		8C333D7D210F81F100949AC0 /* WalletNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D7C210F81F100949AC0 /* WalletNavigationController.swift */; };
 		8C34616B20EF8FA700746724 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C34616A20EF8FA700746724 /* AppDelegate.swift */; };
 		8C34617020EF8FA700746724 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C34616E20EF8FA700746724 /* Main.storyboard */; };
 		8C34617220EF8FA900746724 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8C34617120EF8FA900746724 /* Assets.xcassets */; };
 		8C34617520EF8FA900746724 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C34617320EF8FA900746724 /* LaunchScreen.storyboard */; };
 		8C4413C4211882FC00C9689C /* CreatePinFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4413C3211882FC00C9689C /* CreatePinFlow.swift */; };
+		8C4413C621188BCA00C9689C /* WalletNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4413C521188BCA00C9689C /* WalletNavigation.swift */; };
 		8C6088402110634700470411 /* WalletUserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C60883F2110634700470411 /* WalletUserDefaultsManager.swift */; };
 		8C6088442110A34200470411 /* CustomUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6088432110A34200470411 /* CustomUI.swift */; };
 		8C6088482110A75100470411 /* AdditionalTextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6088472110A75100470411 /* AdditionalTextButton.swift */; };
@@ -199,6 +199,7 @@
 		8C34617420EF8FA900746724 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8C34617620EF8FA900746724 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8C4413C3211882FC00C9689C /* CreatePinFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePinFlow.swift; sourceTree = "<group>"; };
+		8C4413C521188BCA00C9689C /* WalletNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletNavigation.swift; sourceTree = "<group>"; };
 		8C60883F2110634700470411 /* WalletUserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletUserDefaultsManager.swift; sourceTree = "<group>"; };
 		8C6088432110A34200470411 /* CustomUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUI.swift; sourceTree = "<group>"; };
 		8C6088472110A75100470411 /* AdditionalTextButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalTextButton.swift; sourceTree = "<group>"; };
@@ -606,6 +607,7 @@
 			isa = PBXGroup;
 			children = (
 				8C333D7C210F81F100949AC0 /* WalletNavigationController.swift */,
+				8C4413C521188BCA00C9689C /* WalletNavigation.swift */,
 				8CF5F93621134E070083B36A /* WalletTransitionAnimation */,
 			);
 			path = NavigationController;
@@ -895,8 +897,8 @@
 				8CF5F95B21149E460083B36A /* CreatePinComponent.swift in Sources */,
 				8C333D46210B0D5400949AC0 /* LaunchScreenViewController.swift in Sources */,
 				8C09197121089FBB00703224 /* AuthAPI.swift in Sources */,
+				8C4413C621188BCA00C9689C /* WalletNavigation.swift in Sources */,
 				8C09195F21076B5D00703224 /* RecoveryAPI.swift in Sources */,
-				8C333D7D210F81F100949AC0 /* WalletNavigationController.swift in Sources */,
 				8C34616B20EF8FA700746724 /* AppDelegate.swift in Sources */,
 				8C333D44210B001500949AC0 /* LargeTextButton.swift in Sources */,
 				8C333D342109F02000949AC0 /* ScreenFlow.swift in Sources */,

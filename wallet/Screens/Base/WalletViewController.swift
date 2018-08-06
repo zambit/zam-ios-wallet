@@ -10,8 +10,6 @@ import UIKit
 
 class WalletViewController: FlowViewController {
 
-    var walletNavigationController: WalletNavigationController? {
-        return navigationController as? WalletNavigationController
-    }
+    weak var walletNavigationController: WalletNavigationController?
 
 }
