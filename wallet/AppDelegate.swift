@@ -15,7 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var mainScreenFlow: ScreenFlow!
     var navigation: WalletNavigationController!
-    var userDefaultsManager: WalletUserDefaultsManager!
+    var userDefaultsManager: UserDataManager!
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -33,7 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         navigation = WalletNavigationController(navigationController: navigationController)
         navigation.customTransitionCoordinator = coordinator
 
-        userDefaultsManager = WalletUserDefaultsManager(userDefaults: .standard)
+        userDefaultsManager = UserDataManager(keychainConfiguration: WalletKeychainConfiguration())
 
         switch (userDefaultsManager.isPhoneVerified, userDefaultsManager.isPinCreated) {
         case (true, true):

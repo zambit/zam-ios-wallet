@@ -50,7 +50,7 @@ final class EnterPinFlow: ScreenFlow {
 
         vc.onContinue = onContinue
         vc.onExit = onExit
-        vc.userManager = WalletUserDefaultsManager(userDefaults: .standard)
+        vc.userManager = UserDataManager(keychainConfiguration: WalletKeychainConfiguration())
         vc.authAPI = AuthAPI(provider: AuthProvider(environment: WalletEnvironment(), dispatcher: HTTPDispatcher()))
         vc.prepare(phone: phone)
         vc.flow = self

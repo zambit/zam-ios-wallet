@@ -35,7 +35,7 @@ final class UserFlow: ScreenFlow {
         }
 
         vc.onExit = onExit
-        vc.userManager = WalletUserDefaultsManager()
+        vc.userManager = UserDataManager(keychainConfiguration: WalletKeychainConfiguration())
         vc.flow = self
         return vc
     }

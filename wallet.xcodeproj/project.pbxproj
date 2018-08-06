@@ -77,7 +77,10 @@
 		8C34617520EF8FA900746724 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C34617320EF8FA900746724 /* LaunchScreen.storyboard */; };
 		8C4413C4211882FC00C9689C /* CreatePinFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4413C3211882FC00C9689C /* CreatePinFlow.swift */; };
 		8C4413C621188BCA00C9689C /* WalletNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4413C521188BCA00C9689C /* WalletNavigationController.swift */; };
-		8C6088402110634700470411 /* WalletUserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C60883F2110634700470411 /* WalletUserDefaultsManager.swift */; };
+		8C4413C92118A66A00C9689C /* KeychainPasswordItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4413C72118A66A00C9689C /* KeychainPasswordItem.swift */; };
+		8C4413CA2118A66A00C9689C /* WalletKeychainConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4413C82118A66A00C9689C /* WalletKeychainConfiguration.swift */; };
+		8C4413D02118A8EC00C9689C /* KeychainConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4413CF2118A8EC00C9689C /* KeychainConfiguration.swift */; };
+		8C6088402110634700470411 /* UserDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C60883F2110634700470411 /* UserDataManager.swift */; };
 		8C6088442110A34200470411 /* CustomUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6088432110A34200470411 /* CustomUI.swift */; };
 		8C6088482110A75100470411 /* AdditionalTextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6088472110A75100470411 /* AdditionalTextButton.swift */; };
 		8C60884A2110B42A00470411 /* CountdownTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6088492110B42A00470411 /* CountdownTimer.swift */; };
@@ -199,7 +202,10 @@
 		8C34617620EF8FA900746724 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8C4413C3211882FC00C9689C /* CreatePinFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePinFlow.swift; sourceTree = "<group>"; };
 		8C4413C521188BCA00C9689C /* WalletNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletNavigationController.swift; sourceTree = "<group>"; };
-		8C60883F2110634700470411 /* WalletUserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletUserDefaultsManager.swift; sourceTree = "<group>"; };
+		8C4413C72118A66A00C9689C /* KeychainPasswordItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainPasswordItem.swift; sourceTree = "<group>"; };
+		8C4413C82118A66A00C9689C /* WalletKeychainConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletKeychainConfiguration.swift; sourceTree = "<group>"; };
+		8C4413CF2118A8EC00C9689C /* KeychainConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainConfiguration.swift; sourceTree = "<group>"; };
+		8C60883F2110634700470411 /* UserDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataManager.swift; sourceTree = "<group>"; };
 		8C6088432110A34200470411 /* CustomUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUI.swift; sourceTree = "<group>"; };
 		8C6088472110A75100470411 /* AdditionalTextButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalTextButton.swift; sourceTree = "<group>"; };
 		8C6088492110B42A00470411 /* CountdownTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownTimer.swift; sourceTree = "<group>"; };
@@ -268,6 +274,7 @@
 				8C6088502111A95100470411 /* Conditions.swift */,
 				8CF5F92E211327EB0083B36A /* MaskParser.swift */,
 				8C09192C21061F3600703224 /* ControllerHelper.swift */,
+				8C4413D12118AB9500C9689C /* Keychain */,
 				8CF5F93B21144BED0083B36A /* Extensions */,
 			);
 			path = Helpers;
@@ -508,6 +515,16 @@
 			path = wallet;
 			sourceTree = "<group>";
 		};
+		8C4413D12118AB9500C9689C /* Keychain */ = {
+			isa = PBXGroup;
+			children = (
+				8C4413CF2118A8EC00C9689C /* KeychainConfiguration.swift */,
+				8C4413C82118A66A00C9689C /* WalletKeychainConfiguration.swift */,
+				8C4413C72118A66A00C9689C /* KeychainPasswordItem.swift */,
+			);
+			path = Keychain;
+			sourceTree = "<group>";
+		};
 		8C60883C21105A0F00470411 /* Base */ = {
 			isa = PBXGroup;
 			children = (
@@ -521,7 +538,7 @@
 		8C60883E2110632100470411 /* UserDefaultsManager */ = {
 			isa = PBXGroup;
 			children = (
-				8C60883F2110634700470411 /* WalletUserDefaultsManager.swift */,
+				8C60883F2110634700470411 /* UserDataManager.swift */,
 			);
 			path = UserDefaultsManager;
 			sourceTree = "<group>";
@@ -834,9 +851,10 @@
 				8C0919762108BE6000703224 /* UserRequest.swift in Sources */,
 				8C60885C2111F1A200470411 /* RecoveryFlow.swift in Sources */,
 				8CF1DE4220EF98160036F986 /* AuthViewController.swift in Sources */,
+				8C4413CA2118A66A00C9689C /* WalletKeychainConfiguration.swift in Sources */,
 				8C09193D2106243600703224 /* Response.swift in Sources */,
 				8C0919742108BE5700703224 /* UserAPI.swift in Sources */,
-				8C6088402110634700470411 /* WalletUserDefaultsManager.swift in Sources */,
+				8C6088402110634700470411 /* UserDataManager.swift in Sources */,
 				8C333D66210B6E7600949AC0 /* UITextField+Extensions.swift in Sources */,
 				8CF5F92F211327EB0083B36A /* MaskParser.swift in Sources */,
 				8C0919512107234B00703224 /* SignupAPI.swift in Sources */,
@@ -856,6 +874,7 @@
 				8C333D50210B2B6900949AC0 /* PhoneNumberFormComponent.swift in Sources */,
 				8CF5F931211345320083B36A /* UserFlow.swift in Sources */,
 				8C09196221076B7000703224 /* RecoveryProvider.swift in Sources */,
+				8C4413C92118A66A00C9689C /* KeychainPasswordItem.swift in Sources */,
 				8C6088442110A34200470411 /* CustomUI.swift in Sources */,
 				8C091908210605FA00703224 /* InitialRouter.swift in Sources */,
 				8C60885E2111F28000470411 /* EnterNewPhoneNumberViewController.swift in Sources */,
@@ -887,6 +906,7 @@
 				8C333D6F210F00E600949AC0 /* String+Extensions.swift in Sources */,
 				8C09196F21089FB200703224 /* AuthProvider.swift in Sources */,
 				8CF1DE4920F3A0BB0036F986 /* PasswordRecoveryViewController.swift in Sources */,
+				8C4413D02118A8EC00C9689C /* KeychainConfiguration.swift in Sources */,
 				8C0919832109CC2000703224 /* EnterLoginPasswordViewController.swift in Sources */,
 				8C0919562107362300703224 /* CodableSuccess.swift in Sources */,
 				8CF5F95221148D800083B36A /* DotsFieldComponent.swift in Sources */,

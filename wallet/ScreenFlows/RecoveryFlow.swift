@@ -96,7 +96,7 @@ final class RecoveryFlow: ScreenFlow {
         }
         vc.onContinue = onContinue
         vc.recoveryAPI = RecoveryAPI(provider: RecoveryProvider(environment: WalletEnvironment(), dispatcher: HTTPDispatcher()))
-        vc.userManager = WalletUserDefaultsManager()
+        vc.userManager = UserDataManager(keychainConfiguration: WalletKeychainConfiguration())
         vc.title = "New password"
         vc.flow = self
         return vc

@@ -11,7 +11,7 @@ import UIKit
 
 class CreatePinViewController: WalletViewController, DecimalKeyboardComponentDelegate, CreatePinComponentDelegate {
 
-    var userManager: WalletUserDefaultsManager?
+    var userManager: UserDataManager?
 
     var onContinue: (() -> Void)?
     var onSkip: (() -> Void)?

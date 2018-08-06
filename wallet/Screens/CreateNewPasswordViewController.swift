@@ -14,7 +14,7 @@ import UIKit
  */
 class CreateNewPasswordViewController: ContinueViewController, NewPasswordFormComponentDelegate {
 
-    var userManager: WalletUserDefaultsManager?
+    var userManager: UserDataManager?
 
     var recoveryAPI: RecoveryAPI?
     var signupAPI: SignupAPI?
@@ -93,7 +93,11 @@ class CreateNewPasswordViewController: ContinueViewController, NewPasswordFormCo
                         self?.onContinue?(phone)
                     }
 
-                    self?.userManager?.save(phone: phone, password: password)
+                    do {
+                        try self?.userManager?.save(phone: phone, password: password)
+                    } catch let error {
+                        fatalError("Error on saving user password \(error)")
+                    }
                 }.catch {
                     [weak self]
                     error in
@@ -112,7 +116,11 @@ class CreateNewPasswordViewController: ContinueViewController, NewPasswordFormCo
                         self?.onContinue?(authToken)
                     }
 
-                    self?.userManager?.save(phone: phone, password: password, token: token)
+                    do {
+                        try self?.userManager?.save(phone: phone, password: password, token: token)
+                    } catch let error {
+                        fatalError("Error on saving user password \(error)")
+                    }
                 }.catch {
                     [weak self]
                     error in

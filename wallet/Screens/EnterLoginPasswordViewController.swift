@@ -11,7 +11,7 @@ import UIKit
 
 class EnterLoginPasswordViewController: ContinueViewController, LoginPasswordComponentDelegate {
 
-    var userManager: WalletUserDefaultsManager?
+    var userManager: UserDataManager?
     var authAPI: AuthAPI?
 
     var onContinue: ((_ authToken: String) -> Void)?
@@ -87,7 +87,11 @@ class EnterLoginPasswordViewController: ContinueViewController, LoginPasswordCom
                 self?.onContinue?(authToken)
             }
 
-            self?.userManager?.save(phone: phone, password: password, token: authToken)
+            do {
+                try self?.userManager?.save(phone: phone, password: password, token: authToken)
+            } catch let error {
+                fatalError("Error on saving user password \(error)")
+            }
         }.catch {
             [weak self]
             error in
@@ -121,7 +125,11 @@ class EnterLoginPasswordViewController: ContinueViewController, LoginPasswordCom
     @objc
     private func exitButtonTouchEvent(_ sender: UIBarButtonItem) {
         guard let token = userManager?.getToken() else {
-            userManager?.clearUserData()
+            do {
+                try userManager?.clearUserData()
+            } catch let error {
+                fatalError("Error on clearing user data: \(error)")
+            }
             onExit?()
             return
         }
@@ -131,7 +139,11 @@ class EnterLoginPasswordViewController: ContinueViewController, LoginPasswordCom
         authAPI?.signOut(token: token).done {
             [weak self] in
 
-            self?.userManager?.clearUserData()
+            do {
+                try self?.userManager?.clearUserData()
+            } catch let error {
+                fatalError("Error on clearing user data: \(error)")
+            }
             self?.onExit?()
             
         }.catch {

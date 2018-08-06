@@ -8,22 +8,23 @@
 
 import Foundation
 
-struct WalletUserDefaultsManager {
+struct UserDataManager {
 
     private enum UserDefaultsKey: String {
         case formattingMaskSpace = "formatting_mask_space"
         case formattingMaskSymbol = "formatting_mask_symbol"
         case formattingMask = "formatting_mask"
         case phoneNumber = "phone_number"
-        case password = "password"
         case token = "token"
         case pin = "pin"
     }
 
     private let userDefaults: UserDefaults
+    private let keychainConfiguration: KeychainConfiguration
 
-    init(userDefaults: UserDefaults = UserDefaults.standard) {
+    init(userDefaults: UserDefaults = UserDefaults.standard, keychainConfiguration: KeychainConfiguration) {
         self.userDefaults = userDefaults
+        self.keychainConfiguration = keychainConfiguration
     }
 
     func save(token: String) {
@@ -36,8 +37,12 @@ struct WalletUserDefaultsManager {
         print("WalletUserDefaultsManager: phone number \(phoneNumber) saved")
     }
 
-    func save(password: String) {
-        userDefaults.set(password, forKey: UserDefaultsKey.password.rawValue)
+    func save(password: String, for accountName: String) throws {
+        let passwordItem = KeychainPasswordItem(service: keychainConfiguration.serviceName,
+                                                account: accountName,
+                                                accessGroup: keychainConfiguration.accessGroup)
+
+        try passwordItem.savePassword(password)
         print("WalletUserDefaultsManager: password \(password) saved")
     }
 
@@ -46,14 +51,14 @@ struct WalletUserDefaultsManager {
         print("WalletUserDefaultsManager: pin \(pin) saved")
     }
 
-    func save(phone: String, password: String) {
+    func save(phone: String, password: String) throws {
+        try save(password: password, for: phone)
         save(phoneNumber: phone)
-        save(password: password)
     }
 
-    func save(phone: String, password: String, token: String) {
+    func save(phone: String, password: String, token: String) throws {
+        try save(password: password, for: phone)
         save(phoneNumber: phone)
-        save(password: password)
         save(token: token)
     }
 
@@ -79,8 +84,16 @@ struct WalletUserDefaultsManager {
         return userDefaults.value(forKey: UserDefaultsKey.pin.rawValue) as? String
     }
 
-    func getPassword() -> String? {
-        return userDefaults.value(forKey: UserDefaultsKey.password.rawValue) as? String
+    func getPassword() throws -> String? {
+        guard let accountName = getPhoneNumber() else {
+            return nil
+        }
+
+        let passwordItem = KeychainPasswordItem(service: keychainConfiguration.serviceName,
+                                                account: accountName,
+                                                accessGroup: keychainConfiguration.accessGroup)
+
+        return try passwordItem.readPassword()
     }
 
     func getMaskData() -> (String, Character, Character)? {
@@ -93,11 +106,18 @@ struct WalletUserDefaultsManager {
         return (mask, symbol, space)
     }
 
-    func clearUserData() {
-        userDefaults.removeObject(forKey: UserDefaultsKey.phoneNumber.rawValue)
-        userDefaults.removeObject(forKey: UserDefaultsKey.password.rawValue)
+    func clearUserData() throws {
         userDefaults.removeObject(forKey: UserDefaultsKey.token.rawValue)
         userDefaults.removeObject(forKey: UserDefaultsKey.pin.rawValue)
+
+        if let accountName = getPhoneNumber() {
+            let passwordItem = KeychainPasswordItem(service: keychainConfiguration.serviceName,
+                                                    account: accountName,
+                                                    accessGroup: keychainConfiguration.accessGroup)
+
+            try passwordItem.deleteItem()
+        }
+        userDefaults.removeObject(forKey: UserDefaultsKey.phoneNumber.rawValue)
 
         print("WalletUserDefaultsManager: user data deleted")
     }

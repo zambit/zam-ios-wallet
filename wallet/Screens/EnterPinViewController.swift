@@ -11,7 +11,7 @@ import UIKit
 
 class EnterPinViewController: WalletViewController, DecimalKeyboardComponentDelegate {
 
-    var userManager: WalletUserDefaultsManager?
+    var userManager: UserDataManager?
     var authAPI: AuthAPI?
 
     var onContinue: (() -> Void)?
@@ -55,23 +55,29 @@ class EnterPinViewController: WalletViewController, DecimalKeyboardComponentDele
 
                 switch checkPin(pin: pinText) {
                 case true:
-                    guard
-                        let phone = phone,
-                        let password = userManager?.getPassword() else {
-                            fatalError()
-                    }
+                    do {
+                        let _password = try userManager?.getPassword()
 
-                    authAPI?.signIn(phone: phone, password: password).done {
-                        [weak self]
-                        authToken in
-
-                        if let _ = self?.userManager?.save(token: authToken) {
-                            self?.onContinue?()
+                        guard
+                            let phone = phone,
+                            let password = _password else {
+                                fatalError()
                         }
-                    }.catch {
-                        [weak self]
-                        error in
-                        print(error)
+
+                        authAPI?.signIn(phone: phone, password: password).done {
+                            [weak self]
+                            authToken in
+
+                            if let _ = self?.userManager?.save(token: authToken) {
+                                self?.onContinue?()
+                            }
+                        }.catch {
+                            [weak self]
+                            error in
+                            print(error)
+                        }
+                    } catch let error {
+                        fatalError("Error on getting user password \(error)")
                     }
                 case false:
                     dotsFieldComponent?.showFailure {
@@ -103,7 +109,11 @@ class EnterPinViewController: WalletViewController, DecimalKeyboardComponentDele
 
     @objc
     private func exitButtonTouchEvent(_ sender: UIBarButtonItem) {
-        userManager?.clearUserData()
+        do {
+            try userManager?.clearUserData()
+        } catch let error {
+            fatalError("Error on clearing user data: \(error)")
+        }
         onExit?()
     }
 }

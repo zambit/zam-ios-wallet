@@ -11,7 +11,7 @@ import UIKit
 
 class EnterPhoneLoginPasswordViewController: ContinueViewController, LoginFormComponentDelegate {
 
-    var userManager: WalletUserDefaultsManager?
+    var userManager: UserDataManager?
     var authAPI: AuthAPI?
 
     var onContinue: ((_ authToken: String) -> Void)?
@@ -73,8 +73,12 @@ class EnterPhoneLoginPasswordViewController: ContinueViewController, LoginFormCo
                 self?.continueButton?.customAppearance.setLoading(false)
                 self?.onContinue?(authToken)
             }
-
-            self?.userManager?.save(phone: phone, password: password, token: authToken)
+            
+            do {
+                try self?.userManager?.save(phone: phone, password: password, token: authToken)
+            } catch let error {
+                fatalError("Error on saving user password \(error)")
+            }
 
         }.catch {
             [weak self]

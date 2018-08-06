@@ -12,7 +12,7 @@ import UIKit
 class UserViewController: WalletViewController {
 
     var authAPI: AuthAPI?
-    var userManager: WalletUserDefaultsManager?
+    var userManager: UserDataManager?
 
     var onExit: (() -> Void)?
 
@@ -45,7 +45,11 @@ class UserViewController: WalletViewController {
 
     @objc
     private func logoutButtonTouchUpInsideEvent(_ sender: Any) {
-        userManager?.clearUserData()
+        do {
+            try userManager?.clearUserData()
+        } catch let error {
+            fatalError("Error on clearing user data: \(error)")
+        }
         onExit?()
     }
 
