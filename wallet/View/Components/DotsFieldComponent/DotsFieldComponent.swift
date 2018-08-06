@@ -47,12 +47,9 @@ class DotsFieldComponent: Component  {
         case .extraSmall, .small:
             //...
             break
-        case .extra, .medium:
+        case .extra, .medium, .plus:
             dotEdge = 16.0
             dotSpacing = 24.0
-        case .plus:
-            //....
-            break
         case .unknown:
             break
         }
