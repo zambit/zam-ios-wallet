@@ -108,10 +108,13 @@ class EnterNewPhoneNumberViewController: ContinueViewController, PhoneNumberForm
                 switch serverError {
                 case .serverFailureResponse(errors: let fails):
                     guard let fail = fails.first else {
-                        return
+                        fatalError()
                     }
 
-                    self?.phoneNumberForm?.helperText = fail.message
+                    self?.phoneNumberForm?.helperText = fail.message.capitalizingFirst
+                case .undefinedServerFailureResponse:
+
+                    self?.phoneNumberForm?.helperText = "Undefined error"
                 }
             }
 

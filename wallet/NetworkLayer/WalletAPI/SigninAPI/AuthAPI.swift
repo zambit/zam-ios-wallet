@@ -37,6 +37,12 @@ struct AuthAPI: NetworkService {
                         }
 
                         let failure: (CodableFailure) -> Void = { f in
+                            guard f.errors.count > 0 else {
+                                let error = WalletResponseError.undefinedServerFailureResponse
+                                seal.reject(error)
+                                return
+                            }
+
                             let error = WalletResponseError.serverFailureResponse(errors: f.errors)
                             seal.reject(error)
                         }
@@ -70,6 +76,12 @@ struct AuthAPI: NetworkService {
                         }
 
                         let failure: (CodableFailure) -> Void = { f in
+                            guard f.errors.count > 0 else {
+                                let error = WalletResponseError.undefinedServerFailureResponse
+                                seal.reject(error)
+                                return
+                            }
+
                             let error = WalletResponseError.serverFailureResponse(errors: f.errors)
                             seal.reject(error)
                         }
@@ -104,6 +116,12 @@ struct AuthAPI: NetworkService {
                         }
 
                         let failure: (CodableFailure) -> Void = { f in
+                            guard f.errors.count > 0 else {
+                                let error = WalletResponseError.undefinedServerFailureResponse
+                                seal.reject(error)
+                                return
+                            }
+
                             let error = WalletResponseError.serverFailureResponse(errors: f.errors)
                             seal.reject(error)
                         }
@@ -138,6 +156,12 @@ struct AuthAPI: NetworkService {
                         }
 
                         let failure: (CodableFailure) -> Void = { f in
+                            guard f.errors.count > 0 else {
+                                let error = WalletResponseError.undefinedServerFailureResponse
+                                seal.reject(error)
+                                return
+                            }
+
                             let error = WalletResponseError.serverFailureResponse(errors: f.errors)
                             seal.reject(error)
                         }
@@ -172,6 +196,12 @@ struct AuthAPI: NetworkService {
                         }
 
                         let failure: (CodableFailure) -> Void = { f in
+                            guard f.errors.count > 0 else {
+                                let error = WalletResponseError.undefinedServerFailureResponse
+                                seal.reject(error)
+                                return
+                            }
+
                             let error = WalletResponseError.serverFailureResponse(errors: f.errors)
                             seal.reject(error)
                         }

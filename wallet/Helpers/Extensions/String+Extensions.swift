@@ -11,7 +11,6 @@ import Foundation
 extension String {
     /**
      Adds a given prefix to self, if the prefix itself, or another required prefix does not yet exist in self.
-     Omit `requiredPrefix` to check for the prefix itself.
      */
     mutating func addPrefixIfNeeded(_ prefix: String, requiredPrefix: String? = nil) {
         guard !self.hasPrefix(requiredPrefix ?? prefix) else {
@@ -20,13 +19,33 @@ extension String {
         self = prefix + self
     }
 
-    subscript (i: Int) -> Character {
+    /**
+     Returns characters with i-index in self.
+     */
+    subscript(i: Int) -> Character {
         return self[index(startIndex, offsetBy: i)]
     }
 
+    /**
+     Returns substring with range in self.
+     */
     subscript(_ range: CountableRange<Int>) -> String {
         let idx1 = index(startIndex, offsetBy: max(0, range.lowerBound))
         let idx2 = index(startIndex, offsetBy: min(self.count, range.upperBound))
         return String(self[idx1..<idx2])
+    }
+
+    /**
+     Returns copy of self string with capitalized first character.
+     */
+    var capitalizingFirst: String {
+        return prefix(1).capitalized + dropFirst()
+    }
+
+    /**
+     Capitalize first letter of self.
+     */
+    mutating func capitalizeFirst() {
+        self = self.capitalizingFirst
     }
 }

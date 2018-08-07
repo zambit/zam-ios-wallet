@@ -10,4 +10,5 @@ import Foundation
 
 enum WalletResponseError: Error {
     case serverFailureResponse(errors: [CodableFailure.Error])
+    case undefinedServerFailureResponse
 }

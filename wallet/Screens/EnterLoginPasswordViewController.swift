@@ -104,10 +104,13 @@ class EnterLoginPasswordViewController: ContinueViewController, LoginPasswordCom
                 switch serverError {
                 case .serverFailureResponse(errors: let fails):
                     guard let fail = fails.first else {
-                        return
+                        fatalError()
                     }
 
                     self?.loginPasswordForm?.helperText = fail.message
+                case .undefinedServerFailureResponse:
+
+                    self?.loginPasswordForm?.helperText = "Undefined error"
                 }
             }
         }
@@ -158,10 +161,13 @@ class EnterLoginPasswordViewController: ContinueViewController, LoginPasswordCom
                 switch serverError {
                 case .serverFailureResponse(errors: let fails):
                     guard let fail = fails.first else {
-                        return
+                        fatalError()
                     }
 
                     self?.loginPasswordForm?.helperText = fail.message
+                case .undefinedServerFailureResponse:
+
+                    self?.loginPasswordForm?.helperText = "Undefined error"
                 }
             }
         }

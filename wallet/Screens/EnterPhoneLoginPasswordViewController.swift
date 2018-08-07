@@ -92,10 +92,13 @@ class EnterPhoneLoginPasswordViewController: ContinueViewController, LoginFormCo
                 switch serverError {
                 case .serverFailureResponse(errors: let fails):
                     guard let fail = fails.first else {
-                        return
+                        fatalError()
                     }
 
                     self?.loginFormView?.helperText = fail.message
+                case .undefinedServerFailureResponse:
+
+                    self?.loginFormView?.helperText = "Undefined error"
                 }
             }
         }
