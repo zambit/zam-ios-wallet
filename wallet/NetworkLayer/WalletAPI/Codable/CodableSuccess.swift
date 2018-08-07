@@ -94,3 +94,31 @@ struct CodableSuccessAuthorizedPhoneData: Codable {
         }
     }
 }
+
+struct CodableSuccessWalletData: Codable {
+
+    let result: Bool
+    let data: Wallet
+
+    private enum CodingKeys: String, CodingKey {
+        case result
+        case data
+    }
+
+    struct Wallet: Codable {
+
+        let id: String
+        let coin: String
+        let name: String
+        let address: String
+        let balance: String
+
+        private enum CodingKeys: String, CodingKey {
+            case id
+            case coin
+            case name = "wallet_name"
+            case address
+            case balance
+        }
+    }
+}

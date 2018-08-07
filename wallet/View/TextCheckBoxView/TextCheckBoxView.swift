@@ -27,10 +27,6 @@ class TextCheckBoxView: UIView {
         setupStyle()
     }
 
-    func configure(data: TermItemData) {
-        textLabel?.text = data.text
-    }
-
     func configure(text: String) {
         textLabel?.text = text
     }
