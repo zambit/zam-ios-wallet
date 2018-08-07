@@ -47,7 +47,14 @@ class CreatePinViewController: WalletViewController, DecimalKeyboardComponentDel
     }
 
     func createPinComponent(_ createPinComponent: CreatePinComponent, succeedWithPin pin: String) {
-        userManager?.save(pin: pin)
+        guard let phone = userManager?.getPhoneNumber() else {
+            fatalError()
+        }
+        do {
+            try userManager?.save(pin: pin, for: phone)
+        } catch let error {
+            fatalError("Error on saving user password \(error)")
+        }
         onContinue?()
     }
 

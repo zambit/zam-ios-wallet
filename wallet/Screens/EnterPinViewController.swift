@@ -53,31 +53,23 @@ class EnterPinViewController: WalletViewController, DecimalKeyboardComponentDele
             if let dotsField = dotsFieldComponent,
                 dotsField.filledCount == dotsField.dotsMaxCount {
 
-                switch checkPin(pin: pinText) {
+                switch checkPin(pinText) {
                 case true:
-                    do {
-                        let _password = try userManager?.getPassword()
+                    guard let token = userManager?.getToken() else {
+                        fatalError()
+                    }
 
-                        guard
-                            let phone = phone,
-                            let password = _password else {
-                                fatalError()
+                    authAPI?.checkIfUserAuthorized(token: token).done {
+                        [weak self]
+                        authToken in
+
+                        if let _ = self?.userManager?.save(token: authToken) {
+                            self?.onContinue?()
                         }
-
-                        authAPI?.signIn(phone: phone, password: password).done {
-                            [weak self]
-                            authToken in
-
-                            if let _ = self?.userManager?.save(token: authToken) {
-                                self?.onContinue?()
-                            }
-                        }.catch {
-                            [weak self]
-                            error in
-                            print(error)
-                        }
-                    } catch let error {
-                        fatalError("Error on getting user password \(error)")
+                    }.catch {
+                        [weak self]
+                        error in
+                        fatalError("Error on requesting checkingIfUserAuthorized")
                     }
                 case false:
                     dotsFieldComponent?.showFailure {
@@ -99,12 +91,18 @@ class EnterPinViewController: WalletViewController, DecimalKeyboardComponentDele
         generator.notificationOccurred(.error)
     }
 
-    private func checkPin(pin: String) -> Bool {
-        guard let savedPin = userManager?.getPin() else {
-            fatalError()
+    private func checkPin(_ pin: String) -> Bool {
+        do {
+            let saved = try userManager?.getPin()
+
+            if let savedPin = saved {
+                return pin == savedPin
+            }
+        } catch let error {
+            fatalError("Error on receiving saved pin: \(error)")
         }
 
-        return pin == savedPin
+        return false
     }
 
     @objc

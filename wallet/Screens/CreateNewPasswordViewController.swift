@@ -93,11 +93,11 @@ class CreateNewPasswordViewController: ContinueViewController, NewPasswordFormCo
                         self?.onContinue?(phone)
                     }
 
-                    do {
-                        try self?.userManager?.save(phone: phone, password: password)
-                    } catch let error {
-                        fatalError("Error on saving user password \(error)")
-                    }
+//                    do {
+//                        try self?.userManager?.save(phone: phone, password: password)
+//                    } catch let error {
+//                        fatalError("Error on saving user password \(error)")
+//                    }
                 }.catch {
                     [weak self]
                     error in
@@ -116,11 +116,13 @@ class CreateNewPasswordViewController: ContinueViewController, NewPasswordFormCo
                         self?.onContinue?(authToken)
                     }
 
-                    do {
-                        try self?.userManager?.save(phone: phone, password: password, token: token)
-                    } catch let error {
-                        fatalError("Error on saving user password \(error)")
-                    }
+                    self?.userManager?.save(phone: phone, token: token)
+
+//                    do {
+//                        try self?.userManager?.save(phone: phone, password: password, token: token)
+//                    } catch let error {
+//                        fatalError("Error on saving user password \(error)")
+//                    }
                 }.catch {
                     [weak self]
                     error in

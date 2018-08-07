@@ -75,7 +75,7 @@ class EnterPhoneLoginPasswordViewController: ContinueViewController, LoginFormCo
             }
             
             do {
-                try self?.userManager?.save(phone: phone, password: password, token: authToken)
+                try self?.userManager?.save(phone: phone, token: authToken)
             } catch let error {
                 fatalError("Error on saving user password \(error)")
             }

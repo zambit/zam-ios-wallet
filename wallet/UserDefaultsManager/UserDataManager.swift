@@ -8,6 +8,10 @@
 
 import Foundation
 
+enum UserDataManagerError: Error {
+    case noSavedPhoneForRemovingPin
+}
+
 struct UserDataManager {
 
     private enum UserDefaultsKey: String {
@@ -16,7 +20,6 @@ struct UserDataManager {
         case formattingMask = "formatting_mask"
         case phoneNumber = "phone_number"
         case token = "token"
-        case pin = "pin"
     }
 
     private let userDefaults: UserDefaults
@@ -37,36 +40,28 @@ struct UserDataManager {
         print("WalletUserDefaultsManager: phone number \(phoneNumber) saved")
     }
 
-    func save(password: String, for accountName: String) throws {
+    func save(pin: String, for accountName: String) throws {
         let passwordItem = KeychainPasswordItem(service: keychainConfiguration.serviceName,
                                                 account: accountName,
                                                 accessGroup: keychainConfiguration.accessGroup)
 
-        try passwordItem.savePassword(password)
-        print("WalletUserDefaultsManager: password \(password) saved")
-    }
-
-    func save(pin: String) {
-        userDefaults.set(pin, forKey: UserDefaultsKey.pin.rawValue)
+        try passwordItem.savePassword(pin)
         print("WalletUserDefaultsManager: pin \(pin) saved")
     }
 
-    func save(phone: String, password: String) throws {
-        try save(password: password, for: phone)
-        save(phoneNumber: phone)
-    }
-
-    func save(phone: String, password: String, token: String) throws {
-        try save(password: password, for: phone)
+    func save(phone: String, token: String) {
         save(phoneNumber: phone)
         save(token: token)
     }
 
-    func save(mask: String, symbol: Character, space: Character) {
-        userDefaults.set(mask, forKey: UserDefaultsKey.formattingMask.rawValue)
-        userDefaults.set(symbol, forKey: UserDefaultsKey.formattingMaskSymbol.rawValue)
-        userDefaults.set(space, forKey: UserDefaultsKey.formattingMaskSpace.rawValue)
-        print("WalletUserDefaultsManager: mask \(mask) saved")
+    func save(phone: String, pin: String) throws {
+        try save(pin: pin, for: phone)
+        save(phoneNumber: phone)
+    }
+
+    func save(phone: String, pin: String, token: String) throws {
+        try save(pin: pin, for: phone)
+        save(phone: phone, token: token)
     }
 
     func getToken() -> String? {
@@ -79,12 +74,7 @@ struct UserDataManager {
         return userDefaults.value(forKey: UserDefaultsKey.phoneNumber.rawValue) as? String
     }
 
-    func getPin() -> String? {
-        print("WalletUserDefaultsManager: get \(userDefaults.value(forKey: UserDefaultsKey.pin.rawValue) as? String) pin")
-        return userDefaults.value(forKey: UserDefaultsKey.pin.rawValue) as? String
-    }
-
-    func getPassword() throws -> String? {
+    func getPin() throws -> String? {
         guard let accountName = getPhoneNumber() else {
             return nil
         }
@@ -107,9 +97,6 @@ struct UserDataManager {
     }
 
     func clearUserData() throws {
-        userDefaults.removeObject(forKey: UserDefaultsKey.token.rawValue)
-        userDefaults.removeObject(forKey: UserDefaultsKey.pin.rawValue)
-
         if let accountName = getPhoneNumber() {
             let passwordItem = KeychainPasswordItem(service: keychainConfiguration.serviceName,
                                                     account: accountName,
@@ -117,14 +104,22 @@ struct UserDataManager {
 
             try passwordItem.deleteItem()
         }
+        userDefaults.removeObject(forKey: UserDefaultsKey.token.rawValue)
         userDefaults.removeObject(forKey: UserDefaultsKey.phoneNumber.rawValue)
 
         print("WalletUserDefaultsManager: user data deleted")
     }
 
-    func clearPin() {
-        userDefaults.removeObject(forKey: UserDefaultsKey.pin.rawValue)
+    func clearPin() throws {
+        guard let accountName = getPhoneNumber() else {
+            throw UserDataManagerError.noSavedPhoneForRemovingPin
+        }
 
+        let passwordItem = KeychainPasswordItem(service: keychainConfiguration.serviceName,
+                                                account: accountName,
+                                                accessGroup: keychainConfiguration.accessGroup)
+
+        try passwordItem.deleteItem()
         print("WalletUserDefaultsManager: pin deleted")
     }
 
@@ -137,7 +132,12 @@ struct UserDataManager {
     }
 
     var isPinCreated: Bool {
-        return getPin() != nil
-    }
+        let flag = try? getPin()
 
+        guard let pin = flag else {
+            return false
+        }
+
+        return pin != nil
+    }
 }
