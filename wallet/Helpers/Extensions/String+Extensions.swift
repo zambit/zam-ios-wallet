@@ -9,6 +9,15 @@
 import Foundation
 
 extension String {
+
+    init?(_ value: Int?) {
+        guard let int = value else {
+            return nil
+        }
+
+        self.init(int)
+    }
+
     /**
      Adds a given prefix to self, if the prefix itself, or another required prefix does not yet exist in self.
      */
