@@ -80,6 +80,10 @@
 		8C4413C92118A66A00C9689C /* KeychainPasswordItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4413C72118A66A00C9689C /* KeychainPasswordItem.swift */; };
 		8C4413CA2118A66A00C9689C /* WalletKeychainConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4413C82118A66A00C9689C /* WalletKeychainConfiguration.swift */; };
 		8C4413D02118A8EC00C9689C /* KeychainConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4413CF2118A8EC00C9689C /* KeychainConfiguration.swift */; };
+		8C4413D4211993B400C9689C /* CoinType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4413D3211993B400C9689C /* CoinType.swift */; };
+		8C4413D621199FFC00C9689C /* Dictionary+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4413D521199FFC00C9689C /* Dictionary+Extensions.swift */; };
+		8C52FFE12119BE0400EB55EA /* WalletData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C52FFE02119BE0300EB55EA /* WalletData.swift */; };
+		8C52FFE32119C1CF00EB55EA /* TermData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C52FFE22119C1CF00EB55EA /* TermData.swift */; };
 		8C6088402110634700470411 /* UserDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C60883F2110634700470411 /* UserDataManager.swift */; };
 		8C6088442110A34200470411 /* CustomUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6088432110A34200470411 /* CustomUI.swift */; };
 		8C6088482110A75100470411 /* AdditionalTextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6088472110A75100470411 /* AdditionalTextButton.swift */; };
@@ -205,6 +209,10 @@
 		8C4413C72118A66A00C9689C /* KeychainPasswordItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainPasswordItem.swift; sourceTree = "<group>"; };
 		8C4413C82118A66A00C9689C /* WalletKeychainConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletKeychainConfiguration.swift; sourceTree = "<group>"; };
 		8C4413CF2118A8EC00C9689C /* KeychainConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainConfiguration.swift; sourceTree = "<group>"; };
+		8C4413D3211993B400C9689C /* CoinType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinType.swift; sourceTree = "<group>"; };
+		8C4413D521199FFC00C9689C /* Dictionary+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary+Extensions.swift"; sourceTree = "<group>"; };
+		8C52FFE02119BE0300EB55EA /* WalletData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletData.swift; sourceTree = "<group>"; };
+		8C52FFE22119C1CF00EB55EA /* TermData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermData.swift; sourceTree = "<group>"; };
 		8C60883F2110634700470411 /* UserDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataManager.swift; sourceTree = "<group>"; };
 		8C6088432110A34200470411 /* CustomUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUI.swift; sourceTree = "<group>"; };
 		8C6088472110A75100470411 /* AdditionalTextButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalTextButton.swift; sourceTree = "<group>"; };
@@ -496,6 +504,7 @@
 				8C333D6D210EFC7900949AC0 /* Files */,
 				8C60883E2110632100470411 /* UserDefaultsManager */,
 				8C09192B21061ED800703224 /* Helpers */,
+				8C4413D22119936100C9689C /* Model */,
 				8C091939210622AF00703224 /* NetworkLayer */,
 				8C0919792108D64E00703224 /* ScreenFlows */,
 				8C0919322106206100703224 /* Screens */,
@@ -518,11 +527,21 @@
 		8C4413D12118AB9500C9689C /* Keychain */ = {
 			isa = PBXGroup;
 			children = (
+				8C4413C72118A66A00C9689C /* KeychainPasswordItem.swift */,
 				8C4413CF2118A8EC00C9689C /* KeychainConfiguration.swift */,
 				8C4413C82118A66A00C9689C /* WalletKeychainConfiguration.swift */,
-				8C4413C72118A66A00C9689C /* KeychainPasswordItem.swift */,
 			);
 			path = Keychain;
+			sourceTree = "<group>";
+		};
+		8C4413D22119936100C9689C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8C4413D3211993B400C9689C /* CoinType.swift */,
+				8C52FFE02119BE0300EB55EA /* WalletData.swift */,
+				8C52FFE22119C1CF00EB55EA /* TermData.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		8C60883C21105A0F00470411 /* Base */ = {
@@ -647,6 +666,7 @@
 				8C333D64210B619200949AC0 /* UITextField+Extensions.swift */,
 				8CF5F93721134E6D0083B36A /* CGPoint+Extensions.swift */,
 				8C333D6E210F00E600949AC0 /* String+Extensions.swift */,
+				8C4413D521199FFC00C9689C /* Dictionary+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -855,6 +875,7 @@
 				8C09193D2106243600703224 /* Response.swift in Sources */,
 				8C0919742108BE5700703224 /* UserAPI.swift in Sources */,
 				8C6088402110634700470411 /* UserDataManager.swift in Sources */,
+				8C4413D4211993B400C9689C /* CoinType.swift in Sources */,
 				8C333D66210B6E7600949AC0 /* UITextField+Extensions.swift in Sources */,
 				8CF5F92F211327EB0083B36A /* MaskParser.swift in Sources */,
 				8C0919512107234B00703224 /* SignupAPI.swift in Sources */,
@@ -862,6 +883,7 @@
 				8CF5F92D2113206A0083B36A /* SecondEnterLoginFlow.swift in Sources */,
 				8C333D7B210F767100949AC0 /* FlowViewController.swift in Sources */,
 				8C091934210620C800703224 /* OnboardingViewController.swift in Sources */,
+				8C52FFE32119C1CF00EB55EA /* TermData.swift in Sources */,
 				8CF5F9282112FE580083B36A /* DelayTimer.swift in Sources */,
 				8CF5F94A21147C050083B36A /* WalletViewController.swift in Sources */,
 				8C6088562111CB8C00470411 /* LoginFormComponent.swift in Sources */,
@@ -884,6 +906,7 @@
 				8C09194F2107225700703224 /* SignupProvider.swift in Sources */,
 				8C0919782108C2B900703224 /* UserProvider.swift in Sources */,
 				8CF5F944211459630083B36A /* DecimalButton.swift in Sources */,
+				8C4413D621199FFC00C9689C /* Dictionary+Extensions.swift in Sources */,
 				8C09190A2106068D00703224 /* OnboardingRouter.swift in Sources */,
 				8C333D60210B5E2900949AC0 /* NewPasswordFormComponent.swift in Sources */,
 				8CF5F94E21148BD90083B36A /* EnterPinViewController.swift in Sources */,
@@ -901,6 +924,7 @@
 				8C333D302109E0B400949AC0 /* UserViewController.swift in Sources */,
 				8CF1DE4520EFB1A70036F986 /* HorizontalScrollView.swift in Sources */,
 				8C0919412106264200703224 /* Dispatcher.swift in Sources */,
+				8C52FFE12119BE0400EB55EA /* WalletData.swift in Sources */,
 				8CF1DE4D20F3BDB90036F986 /* KeyboardViewController.swift in Sources */,
 				8C333D77210F50E000949AC0 /* CountryIconImageView.swift in Sources */,
 				8C333D6F210F00E600949AC0 /* String+Extensions.swift in Sources */,

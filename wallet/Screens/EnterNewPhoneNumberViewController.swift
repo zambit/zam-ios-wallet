@@ -26,7 +26,7 @@ class EnterNewPhoneNumberViewController: ContinueViewController, PhoneNumberForm
      */
     var onSkip: (() -> Void)?
 
-    private var termsItems: [TermItemData] = []
+    private var termsItems: [TermData] = []
 
     @IBOutlet var largeTitleLabel: UILabel?
     @IBOutlet var phoneNumberForm: PhoneNumberFormComponent?
@@ -36,8 +36,8 @@ class EnterNewPhoneNumberViewController: ContinueViewController, PhoneNumberForm
         super.viewDidLoad()
 
         termsItems = [
-            TermItemData(text: "Test for the call to confirm the legal document"),
-            TermItemData(text: "Test for the call to confirm the legal document")
+            TermData(text: "Test for the call to confirm the legal document"),
+            TermData(text: "Test for the call to confirm the legal document")
         ]
 
         addSubviews()
@@ -71,7 +71,7 @@ class EnterNewPhoneNumberViewController: ContinueViewController, PhoneNumberForm
         termsItems.forEach {
             let termView = TextCheckBoxView(frame: CGRect.zero)
             termView.heightAnchor.constraint(equalToConstant: 32.0).isActive = true
-            termView.configure(data: $0)
+            termView.configure(text: $0.text)
 
             termsStackView?.addArrangedSubview(termView)
         }
@@ -123,11 +123,4 @@ class EnterNewPhoneNumberViewController: ContinueViewController, PhoneNumberForm
             }
         }
     }
-}
-
-/**
- Struct represents all properties needed to fill TermItem.
- */
-struct TermItemData {
-    var text: String
 }

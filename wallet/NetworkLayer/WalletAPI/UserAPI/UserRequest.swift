@@ -10,25 +10,30 @@ import Foundation
 
 enum UserRequest: Request {
 
-    // TODO: COMPLETE
-
     case userInfo(token: String)
-    case createUserKYCRequest(token: String, userId: String, name: String, surname: String, birthdate: String, country: String, address: String, email: String, status: String)
-    case userKYCRequestInfo(token: String)
-    case userRefferals(token: String)
-    case createWalletForCoin(token: String, coin: String, walletName: String)
-    case allUserWallets(token: String, coin: String, walletId: String, page: String, count: Int)
+
+    // Transactions
+    case sendTransaction(token: String, walletId: String, recipient: String, amount: Int)
+    case getTransactions(token: String, coin: String?, walletId: String?, recipient: String?, fromTime: String?, untilTime: String?, page: String?, count: Int?)
+    case getTransactionInfo(token: String, transactionId: String)
+
+    // Wallets
+    case createWallet(token: String, coin: String, walletName: String?)
+    case getUserWallets(token: String, coin: String?, walletId: String?, page: String?, count: Int?)
+    case getUserWalletInfo(token: String, walletId: String)
 
     var path: String {
         switch self {
         case .userInfo:
             return "user/me"
-        case .createUserKYCRequest, .userKYCRequestInfo:
-            return "user/me/verify"
-        case .userRefferals:
-            return "user/me/refferals"
-        case .createWalletForCoin, .allUserWallets:
+        case .createWallet, .getUserWallets:
             return "user/me/wallets"
+        case .getUserWalletInfo(walletId: let id):
+            return "user/me/wallets/\(id)"
+        case .sendTransaction, .getTransactions:
+            return "user/me/txs"
+        case .getTransactionInfo(transactionId: let id):
+            return "user/me/txs/\(id)"
         }
     }
 
@@ -36,24 +41,88 @@ enum UserRequest: Request {
         switch self {
         case .userInfo:
             return .get
-        case .createUserKYCRequest:
+        case .createWallet:
             return .post
-        case .userKYCRequestInfo:
+        case .getUserWallets:
             return .get
-        case .userRefferals:
+        case .getUserWalletInfo:
             return .get
-        case .createWalletForCoin:
+        case .sendTransaction:
             return .post
-        case .allUserWallets:
+        case .getTransactions:
+            return .get
+        case .getTransactionInfo:
             return .get
         }
     }
 
     var parameters: RequestParams? {
-        return nil
+        switch self {
+        case .userInfo:
+            return nil
+            
+        case let .sendTransaction(token: _, walletId: id, recipient: recipient, amount: amount):
+            let dict = [
+                "wallet_id": id,
+                "recipient": recipient,
+                "amount": String(amount)
+                ]
+
+            return RequestParams.body(dict)
+
+        case let .getTransactions(token: _, coin: coin, walletId: id, recipient: recipient, fromTime: from, untilTime: until, page: page, count: count):
+            let dict = [
+                "coin": coin,
+                "wallet_id": id,
+                "recipient": recipient,
+                "from_time": from,
+                "until_time": until,
+                "page": page,
+                "count": String(count)
+            ]
+            return RequestParams.url(dict.unwrapped())
+
+        case .getTransactionInfo:
+            return nil
+
+        case let .createWallet(token: _, coin: coin, walletName: name):
+            let dict = [
+                "coin": coin,
+                "name": name
+            ]
+
+            return RequestParams.body(dict.unwrapped())
+
+        case let .getUserWallets(token: _, coin: coin, walletId: id, page: page, count: count):
+            let dict = [
+                "coin": coin,
+                "wallet_id": id,
+                "page": page,
+                "count": String(count)
+            ]
+            return RequestParams.url(dict.unwrapped())
+
+        case .getUserWalletInfo:
+            return nil
+        }
     }
 
     var headers: [String : Any]? {
-        return nil
+        switch self {
+        case .userInfo(token: let token):
+            return ["Authorization": "Bearer \(token)"]
+        case .sendTransaction(token: let token):
+            return ["Authorization": "Bearer \(token)"]
+        case .getTransactions(token: let token):
+            return ["Authorization": "Bearer \(token)"]
+        case .getTransactionInfo(token: let token):
+            return ["Authorization": "Bearer \(token)"]
+        case .createWallet(token: let token):
+            return ["Authorization": "Bearer \(token)"]
+        case .getUserWallets(token: let token):
+            return ["Authorization": "Bearer \(token)"]
+        case .getUserWalletInfo(token: let token):
+            return ["Authorization": "Bearer \(token)"]
+        }
     }
 }
