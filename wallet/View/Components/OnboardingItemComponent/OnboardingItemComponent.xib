@@ -11,7 +11,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ExampleOnboardingItem" customModule="wallet" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OnboardingItemComponent" customModule="wallet" customModuleProvider="target">
             <connections>
                 <outlet property="illustrationImageView" destination="H1k-XA-WtQ" id="Qc1-se-clx"/>
                 <outlet property="textLabel" destination="9jQ-WY-HvR" id="j88-UQ-YT0"/>

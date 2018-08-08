@@ -48,8 +48,8 @@
 		8C333D342109F02000949AC0 /* ScreenFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D332109F02000949AC0 /* ScreenFlow.swift */; };
 		8C333D362109F09800949AC0 /* FirstEnterLoginFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D352109F09800949AC0 /* FirstEnterLoginFlow.swift */; };
 		8C333D382109F3D500949AC0 /* OnboardingFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D372109F3D500949AC0 /* OnboardingFlow.swift */; };
-		8C333D3C2109FC2D00949AC0 /* ExampleOnboardingItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D3B2109FC2D00949AC0 /* ExampleOnboardingItem.swift */; };
-		8C333D3E2109FD1000949AC0 /* ExampleOnboardingItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C333D3D2109FD1000949AC0 /* ExampleOnboardingItem.xib */; };
+		8C333D3C2109FC2D00949AC0 /* OnboardingItemComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D3B2109FC2D00949AC0 /* OnboardingItemComponent.swift */; };
+		8C333D3E2109FD1000949AC0 /* OnboardingItemComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C333D3D2109FD1000949AC0 /* OnboardingItemComponent.xib */; };
 		8C333D40210A08A600949AC0 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D3F210A08A600949AC0 /* UIView+Extensions.swift */; };
 		8C333D42210A094500949AC0 /* UIColor+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D41210A094500949AC0 /* UIColor+Additions.swift */; };
 		8C333D44210B001500949AC0 /* LargeTextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D43210B001500949AC0 /* LargeTextButton.swift */; };
@@ -82,8 +82,16 @@
 		8C4413D02118A8EC00C9689C /* KeychainConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4413CF2118A8EC00C9689C /* KeychainConfiguration.swift */; };
 		8C4413D4211993B400C9689C /* CoinType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4413D3211993B400C9689C /* CoinType.swift */; };
 		8C4413D621199FFC00C9689C /* Dictionary+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4413D521199FFC00C9689C /* Dictionary+Extensions.swift */; };
+		8C520002211B4B6400EB55EA /* DetailOffsetPresentationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C520001211B4B6400EB55EA /* DetailOffsetPresentationViewController.swift */; };
 		8C52FFE12119BE0400EB55EA /* WalletData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C52FFE02119BE0300EB55EA /* WalletData.swift */; };
 		8C52FFE32119C1CF00EB55EA /* TermData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C52FFE22119C1CF00EB55EA /* TermData.swift */; };
+		8C52FFE62119D1CC00EB55EA /* WalletItemComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C52FFE52119D1CC00EB55EA /* WalletItemComponent.swift */; };
+		8C52FFE82119D35B00EB55EA /* WalletItemComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C52FFE72119D35B00EB55EA /* WalletItemComponent.xib */; };
+		8C52FFEA2119DA2700EB55EA /* CellComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C52FFE92119DA2700EB55EA /* CellComponent.swift */; };
+		8C52FFEC2119E09200EB55EA /* WalletsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C52FFEB2119E09200EB55EA /* WalletsViewController.swift */; };
+		8C52FFF0211AE19300EB55EA /* CustomOverlappingFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C52FFEF211AE19300EB55EA /* CustomOverlappingFlowLayout.swift */; };
+		8C52FFF2211AF1FD00EB55EA /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C52FFF1211AF1FD00EB55EA /* HomeViewController.swift */; };
+		8C52FFFE211B252F00EB55EA /* InstantPanGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C52FFFD211B252F00EB55EA /* InstantPanGestureRecognizer.swift */; };
 		8C6088402110634700470411 /* UserDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C60883F2110634700470411 /* UserDataManager.swift */; };
 		8C6088442110A34200470411 /* CustomUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6088432110A34200470411 /* CustomUI.swift */; };
 		8C6088482110A75100470411 /* AdditionalTextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6088472110A75100470411 /* AdditionalTextButton.swift */; };
@@ -175,8 +183,8 @@
 		8C333D332109F02000949AC0 /* ScreenFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenFlow.swift; sourceTree = "<group>"; };
 		8C333D352109F09800949AC0 /* FirstEnterLoginFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstEnterLoginFlow.swift; sourceTree = "<group>"; };
 		8C333D372109F3D500949AC0 /* OnboardingFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFlow.swift; sourceTree = "<group>"; };
-		8C333D3B2109FC2D00949AC0 /* ExampleOnboardingItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleOnboardingItem.swift; sourceTree = "<group>"; };
-		8C333D3D2109FD1000949AC0 /* ExampleOnboardingItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExampleOnboardingItem.xib; sourceTree = "<group>"; };
+		8C333D3B2109FC2D00949AC0 /* OnboardingItemComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingItemComponent.swift; sourceTree = "<group>"; };
+		8C333D3D2109FD1000949AC0 /* OnboardingItemComponent.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OnboardingItemComponent.xib; sourceTree = "<group>"; };
 		8C333D3F210A08A600949AC0 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		8C333D41210A094500949AC0 /* UIColor+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Additions.swift"; sourceTree = "<group>"; };
 		8C333D43210B001500949AC0 /* LargeTextButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeTextButton.swift; sourceTree = "<group>"; };
@@ -211,8 +219,16 @@
 		8C4413CF2118A8EC00C9689C /* KeychainConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainConfiguration.swift; sourceTree = "<group>"; };
 		8C4413D3211993B400C9689C /* CoinType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinType.swift; sourceTree = "<group>"; };
 		8C4413D521199FFC00C9689C /* Dictionary+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary+Extensions.swift"; sourceTree = "<group>"; };
+		8C520001211B4B6400EB55EA /* DetailOffsetPresentationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailOffsetPresentationViewController.swift; sourceTree = "<group>"; };
 		8C52FFE02119BE0300EB55EA /* WalletData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletData.swift; sourceTree = "<group>"; };
 		8C52FFE22119C1CF00EB55EA /* TermData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermData.swift; sourceTree = "<group>"; };
+		8C52FFE52119D1CC00EB55EA /* WalletItemComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletItemComponent.swift; sourceTree = "<group>"; };
+		8C52FFE72119D35B00EB55EA /* WalletItemComponent.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletItemComponent.xib; sourceTree = "<group>"; };
+		8C52FFE92119DA2700EB55EA /* CellComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellComponent.swift; sourceTree = "<group>"; };
+		8C52FFEB2119E09200EB55EA /* WalletsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletsViewController.swift; sourceTree = "<group>"; };
+		8C52FFEF211AE19300EB55EA /* CustomOverlappingFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomOverlappingFlowLayout.swift; sourceTree = "<group>"; };
+		8C52FFF1211AF1FD00EB55EA /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		8C52FFFD211B252F00EB55EA /* InstantPanGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstantPanGestureRecognizer.swift; sourceTree = "<group>"; };
 		8C60883F2110634700470411 /* UserDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataManager.swift; sourceTree = "<group>"; };
 		8C6088432110A34200470411 /* CustomUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUI.swift; sourceTree = "<group>"; };
 		8C6088472110A75100470411 /* AdditionalTextButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalTextButton.swift; sourceTree = "<group>"; };
@@ -282,6 +298,8 @@
 				8C6088502111A95100470411 /* Conditions.swift */,
 				8CF5F92E211327EB0083B36A /* MaskParser.swift */,
 				8C09192C21061F3600703224 /* ControllerHelper.swift */,
+				8C52FFEF211AE19300EB55EA /* CustomOverlappingFlowLayout.swift */,
+				8C52FFFD211B252F00EB55EA /* InstantPanGestureRecognizer.swift */,
 				8C4413D12118AB9500C9689C /* Keychain */,
 				8CF5F93B21144BED0083B36A /* Extensions */,
 			);
@@ -298,7 +316,6 @@
 				8C6088682112176300470411 /* LargeIconButton */,
 				8C6088612111FB0A00470411 /* Components */,
 				8C333D5B210B538700949AC0 /* TextCheckBoxView */,
-				8C333D5C210B539800949AC0 /* ExampleOnboardingItem */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -318,6 +335,8 @@
 				8CF5F94D21148BD90083B36A /* EnterPinViewController.swift */,
 				8CF5F94721147A870083B36A /* CreatePinViewController.swift */,
 				8C333D2F2109E0B400949AC0 /* UserViewController.swift */,
+				8C52FFEB2119E09200EB55EA /* WalletsViewController.swift */,
+				8C52FFF1211AF1FD00EB55EA /* HomeViewController.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -453,13 +472,13 @@
 			path = TextCheckBoxView;
 			sourceTree = "<group>";
 		};
-		8C333D5C210B539800949AC0 /* ExampleOnboardingItem */ = {
+		8C333D5C210B539800949AC0 /* OnboardingItemComponent */ = {
 			isa = PBXGroup;
 			children = (
-				8C333D3B2109FC2D00949AC0 /* ExampleOnboardingItem.swift */,
-				8C333D3D2109FD1000949AC0 /* ExampleOnboardingItem.xib */,
+				8C333D3B2109FC2D00949AC0 /* OnboardingItemComponent.swift */,
+				8C333D3D2109FD1000949AC0 /* OnboardingItemComponent.xib */,
 			);
-			path = ExampleOnboardingItem;
+			path = OnboardingItemComponent;
 			sourceTree = "<group>";
 		};
 		8C333D61210B5E3400949AC0 /* NewPasswordFormComponent */ = {
@@ -511,8 +530,8 @@
 				8C0919312106205600703224 /* View */,
 				8CF1DE4E20F3BFC30036F986 /* Base */,
 				8CF1DE4320EF9D170036F986 /* Trash */,
-				8C34616E20EF8FA700746724 /* Main.storyboard */,
 				8C34617120EF8FA900746724 /* Assets.xcassets */,
+				8C34616E20EF8FA700746724 /* Main.storyboard */,
 				8C34617320EF8FA900746724 /* LaunchScreen.storyboard */,
 				8C0918F92105F75200703224 /* Onboarding.storyboard */,
 				8C0918FB2105F75900703224 /* Login.storyboard */,
@@ -544,12 +563,22 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		8C52FFE42119D0EF00EB55EA /* WalletItemComponent */ = {
+			isa = PBXGroup;
+			children = (
+				8C52FFE52119D1CC00EB55EA /* WalletItemComponent.swift */,
+				8C52FFE72119D35B00EB55EA /* WalletItemComponent.xib */,
+			);
+			path = WalletItemComponent;
+			sourceTree = "<group>";
+		};
 		8C60883C21105A0F00470411 /* Base */ = {
 			isa = PBXGroup;
 			children = (
 				8C333D7A210F767100949AC0 /* FlowViewController.swift */,
 				8CF5F94921147C050083B36A /* WalletViewController.swift */,
 				8C333D67210B72A100949AC0 /* ContinueViewController.swift */,
+				8C520001211B4B6400EB55EA /* DetailOffsetPresentationViewController.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -585,6 +614,8 @@
 			children = (
 				8CF5F941211457200083B36A /* Component.swift */,
 				8CF5F9622114AB000083B36A /* ItemComponent.swift */,
+				8C52FFE92119DA2700EB55EA /* CellComponent.swift */,
+				8C52FFE42119D0EF00EB55EA /* WalletItemComponent */,
 				8CF5F95C2114A4DC0083B36A /* CreatePinComponent */,
 				8CF5F9552114949D0083B36A /* DotsFieldComponent */,
 				8CF5F940211456DB0083B36A /* DecimalKeyboardComponent */,
@@ -593,6 +624,7 @@
 				8C333D61210B5E3400949AC0 /* NewPasswordFormComponent */,
 				8C6088542111CB7700470411 /* LoginFormComponent */,
 				8C60884F2111A23500470411 /* LoginPasswordFormComponent */,
+				8C333D5C210B539800949AC0 /* OnboardingItemComponent */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -787,12 +819,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8C333D3E2109FD1000949AC0 /* ExampleOnboardingItem.xib in Resources */,
+				8C333D3E2109FD1000949AC0 /* OnboardingItemComponent.xib in Resources */,
 				8C34617520EF8FA900746724 /* LaunchScreen.storyboard in Resources */,
 				8CF5F95921149E380083B36A /* CreatePinComponent.xib in Resources */,
 				8C0918FE2105F76200703224 /* Registration.storyboard in Resources */,
 				8C34617220EF8FA900746724 /* Assets.xcassets in Resources */,
 				8C0918FA2105F75200703224 /* Onboarding.storyboard in Resources */,
+				8C52FFE82119D35B00EB55EA /* WalletItemComponent.xib in Resources */,
 				8CF5F946211479830083B36A /* Pin.storyboard in Resources */,
 				8CF5F93D211456BA0083B36A /* DecimalKeyboardComponent.xib in Resources */,
 				8C0918FC2105F75900703224 /* Login.storyboard in Resources */,
@@ -861,6 +894,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8CF5F93321134DBC0083B36A /* TransitionCoordinator.swift in Sources */,
+				8C52FFEA2119DA2700EB55EA /* CellComponent.swift in Sources */,
 				8CF5F942211457200083B36A /* Component.swift in Sources */,
 				8C09196421076B8200703224 /* RecoveryRequest.swift in Sources */,
 				8CF5F95E2114A77D0083B36A /* CreatePinStageItem.swift in Sources */,
@@ -876,6 +910,7 @@
 				8C4413CA2118A66A00C9689C /* WalletKeychainConfiguration.swift in Sources */,
 				8C09193D2106243600703224 /* Response.swift in Sources */,
 				8C0919742108BE5700703224 /* UserAPI.swift in Sources */,
+				8C52FFE62119D1CC00EB55EA /* WalletItemComponent.swift in Sources */,
 				8C6088402110634700470411 /* UserDataManager.swift in Sources */,
 				8C4413D4211993B400C9689C /* CoinType.swift in Sources */,
 				8C333D66210B6E7600949AC0 /* UITextField+Extensions.swift in Sources */,
@@ -899,14 +934,17 @@
 				8CF5F931211345320083B36A /* UserFlow.swift in Sources */,
 				8C09196221076B7000703224 /* RecoveryProvider.swift in Sources */,
 				8C4413C92118A66A00C9689C /* KeychainPasswordItem.swift in Sources */,
+				8C52FFFE211B252F00EB55EA /* InstantPanGestureRecognizer.swift in Sources */,
 				8C6088442110A34200470411 /* CustomUI.swift in Sources */,
 				8C091908210605FA00703224 /* InitialRouter.swift in Sources */,
 				8C60885E2111F28000470411 /* EnterNewPhoneNumberViewController.swift in Sources */,
 				8CF1DE4B20F3AD210036F986 /* NewPasswordViewController.swift in Sources */,
 				8CF5F93A21144BE80083B36A /* UIDevice+Extensions.swift in Sources */,
 				8C09193F210625E500703224 /* Provider.swift in Sources */,
+				8C52FFF2211AF1FD00EB55EA /* HomeViewController.swift in Sources */,
 				8C09194F2107225700703224 /* SignupProvider.swift in Sources */,
 				8C0919782108C2B900703224 /* UserProvider.swift in Sources */,
+				8C52FFEC2119E09200EB55EA /* WalletsViewController.swift in Sources */,
 				8CF5F944211459630083B36A /* DecimalButton.swift in Sources */,
 				8C4413D621199FFC00C9689C /* Dictionary+Extensions.swift in Sources */,
 				8C09190A2106068D00703224 /* OnboardingRouter.swift in Sources */,
@@ -914,6 +952,7 @@
 				8CF5F94E21148BD90083B36A /* EnterPinViewController.swift in Sources */,
 				8C333D4A210B1C4300949AC0 /* TextCheckBoxView.swift in Sources */,
 				8C6088672112120100470411 /* SpinningAnimationLayer.swift in Sources */,
+				8C520002211B4B6400EB55EA /* DetailOffsetPresentationViewController.swift in Sources */,
 				8C09197F2108D8B600703224 /* VerifyPhoneNumberWithSmsViewController.swift in Sources */,
 				8C333D40210A08A600949AC0 /* UIView+Extensions.swift in Sources */,
 				8CF5F9542114916E0083B36A /* DotView.swift in Sources */,
@@ -923,6 +962,7 @@
 				8CF5F93521134DFF0083B36A /* NavigationAnimator.swift in Sources */,
 				8C6088602111F35E00470411 /* EnterPhoneNumberViewController.swift in Sources */,
 				8C6088512111A95100470411 /* Conditions.swift in Sources */,
+				8C52FFF0211AE19300EB55EA /* CustomOverlappingFlowLayout.swift in Sources */,
 				8C333D302109E0B400949AC0 /* UserViewController.swift in Sources */,
 				8CF1DE4520EFB1A70036F986 /* HorizontalScrollView.swift in Sources */,
 				8C0919412106264200703224 /* Dispatcher.swift in Sources */,
@@ -957,7 +997,7 @@
 				8C09196D21089FA700703224 /* AuthRequest.swift in Sources */,
 				8CF5F94C21147F000083B36A /* EnterPinFlow.swift in Sources */,
 				8CF5F93821134E6D0083B36A /* CGPoint+Extensions.swift in Sources */,
-				8C333D3C2109FC2D00949AC0 /* ExampleOnboardingItem.swift in Sources */,
+				8C333D3C2109FC2D00949AC0 /* OnboardingItemComponent.swift in Sources */,
 				8CF5F9632114AB000083B36A /* ItemComponent.swift in Sources */,
 				8C0919812108D99400703224 /* CreateNewPasswordViewController.swift in Sources */,
 				8C0919432106268900703224 /* HTTPDispatcher.swift in Sources */,

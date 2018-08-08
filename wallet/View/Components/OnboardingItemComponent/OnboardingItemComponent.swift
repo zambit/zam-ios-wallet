@@ -1,5 +1,5 @@
 //
-//  ExampleOnboardingItem.swift
+//  OnboardingItemComponent.swift
 //  wallet
 //
 //  Created by  me on 26/07/2018.
@@ -11,7 +11,7 @@ import UIKit
 /**
  Page of the tutorial on Onboarding screen. This skeleton defined only by sample design. Image + Title + Text.
  */
-class ExampleOnboardingItem: ItemComponent {
+class OnboardingItemComponent: ItemComponent {
 
     @IBOutlet var illustrationImageView: UIImageView?
     @IBOutlet var titleLabel: UILabel?
@@ -36,8 +36,6 @@ class ExampleOnboardingItem: ItemComponent {
 
     override func initFromNib() {
         super.initFromNib()
-
-
     }
 
     override func setupStyle() {

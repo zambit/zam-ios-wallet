@@ -48,7 +48,7 @@ class OnboardingViewController: WalletViewController, UICollectionViewDataSource
                                text: "Et harum Discription quidem rerum facilis est et expedita distinctiolorem ipsun")
         ]
 
-        pagesCollectionView?.register(ExampleOnboardingItem.self, forCellWithReuseIdentifier: "ExampleOnboardingItem")
+        pagesCollectionView?.register(OnboardingItemComponent.self, forCellWithReuseIdentifier: "OnboardingItemComponent")
         pagesCollectionView?.delegate = self
         pagesCollectionView?.dataSource = self
         pagesCollectionView?.backgroundColor = .clear
@@ -74,9 +74,9 @@ class OnboardingViewController: WalletViewController, UICollectionViewDataSource
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let _cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ExampleOnboardingItem", for: indexPath)
+        let _cell = collectionView.dequeueReusableCell(withReuseIdentifier: "OnboardingItemComponent", for: indexPath)
 
-        guard let cell = _cell as? ExampleOnboardingItem else {
+        guard let cell = _cell as? OnboardingItemComponent else {
             fatalError()
         }
 

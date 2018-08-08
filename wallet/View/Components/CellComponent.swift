@@ -1,14 +1,14 @@
 //
-//  ItemComponent.swift
+//  CellComponent.swift
 //  wallet
 //
-//  Created by  me on 03/08/2018.
+//  Created by  me on 07/08/2018.
 //  Copyright © 2018 zamzam. All rights reserved.
 //
 
 import UIKit
 
-class ItemComponent: UICollectionViewCell {
+class CellComponent: UITableViewCell {
 
     @IBOutlet var view: UIView!
 
@@ -25,15 +25,17 @@ class ItemComponent: UICollectionViewCell {
         }
     }
 
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: .default, reuseIdentifier: reuseIdentifier)
         initFromNib()
+        setupSubviews()
         setupStyle()
     }
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         initFromNib()
+        setupSubviews()
         setupStyle()
     }
 
@@ -46,11 +48,18 @@ class ItemComponent: UICollectionViewCell {
                             width: bounds.width - insets.left - insets.right,
                             height: bounds.height - insets.top - insets.bottom)
         view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+
+        detailTextLabel?.isHidden = true
+        imageView?.isHidden = true
     }
 
     func setupStyle() {
         self.backgroundColor = .clear
         self.view.backgroundColor = .clear
+    }
+
+    func setupSubviews() {
+
     }
 }
 
