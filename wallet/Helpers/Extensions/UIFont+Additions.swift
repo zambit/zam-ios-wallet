@@ -18,7 +18,21 @@ extension UIFont {
     }
 
     class func walletFont(ofSize size: CGFloat, weight: WalletWeight) -> UIFont {
-        return UIFont(name: weight.rawValue, size: size)!
+        var systemWeight: UIFont.Weight = .regular
+
+        switch weight {
+        case .regular:
+            systemWeight = .regular
+        case .medium:
+            systemWeight = .medium
+        case .bold:
+            systemWeight = .bold
+        case .black:
+            systemWeight = .black
+        }
+
+        return UIFont.systemFont(ofSize: size, weight: systemWeight)
+        //return UIFont(name: weight.rawValue, size: size)!
     }
 
     class var inputTextActive: UIFont {
