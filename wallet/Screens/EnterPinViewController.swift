@@ -61,14 +61,13 @@ class EnterPinViewController: WalletViewController, DecimalKeyboardComponentDele
 
                     authAPI?.checkIfUserAuthorized(token: token).done {
                         [weak self]
-                        authToken in
+                        phone in
 
-                        if let _ = self?.userManager?.save(token: authToken) {
-                            self?.onContinue?()
-                        }
+                        self?.onContinue?()
                     }.catch {
                         [weak self]
                         error in
+
                         fatalError("Error on requesting checkingIfUserAuthorized")
                     }
                 case false:

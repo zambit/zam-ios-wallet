@@ -10,7 +10,7 @@ import Foundation
 
 // Different templates of success responses from Wallet Remote API
 
-struct CodableSuccessEmptyData: Codable {
+struct CodableSuccessEmptyResponse: Codable {
 
     let result: Bool
 
@@ -19,7 +19,7 @@ struct CodableSuccessEmptyData: Codable {
     }
 }
 
-struct CodableSuccessAuthTokenData: Codable {
+struct CodableSuccessAuthTokenResponse: Codable {
 
     let result: Bool
     let data: Token
@@ -38,7 +38,7 @@ struct CodableSuccessAuthTokenData: Codable {
     }
 }
 
-struct CodableSuccessSignUpTokenData: Codable {
+struct CodableSuccessSignUpTokenResponse: Codable {
 
     let result: Bool
     let data: SignupToken
@@ -57,7 +57,7 @@ struct CodableSuccessSignUpTokenData: Codable {
     }
 }
 
-struct CodableSuccessRecoveryTokenData: Codable {
+struct CodableSuccessRecoveryTokenResponse: Codable {
 
     let result: Bool
     let data: RecoveryToken
@@ -76,7 +76,7 @@ struct CodableSuccessRecoveryTokenData: Codable {
     }
 }
 
-struct CodableSuccessAuthorizedPhoneData: Codable {
+struct CodableSuccessAuthorizedPhoneResponse: Codable {
 
     let result: Bool
     let data: Phone
@@ -95,30 +95,54 @@ struct CodableSuccessAuthorizedPhoneData: Codable {
     }
 }
 
-struct CodableSuccessWalletData: Codable {
+struct CodableSuccessWalletResponse: Codable {
 
     let result: Bool
-    let data: Wallet
+    let data: CodableWallet
 
     private enum CodingKeys: String, CodingKey {
         case result
         case data
     }
 
-    struct Wallet: Codable {
+}
 
-        let id: String
-        let coin: String
-        let name: String
-        let address: String
-        let balance: String
+struct CodableSuccessWalletsPageResponse: Codable {
+
+    let result: Bool
+    let data: WalletsPage
+
+    private enum CodingKeys: String, CodingKey {
+        case result
+        case data
+    }
+
+    struct WalletsPage: Codable {
+        let count: Int
+        let next: String
+        let wallets: [CodableWallet]
 
         private enum CodingKeys: String, CodingKey {
-            case id
-            case coin
-            case name = "wallet_name"
-            case address
-            case balance
+            case count
+            case next
+            case wallets
         }
+    }
+}
+
+struct CodableWallet: Codable {
+
+    let id: String
+    let coin: String
+    let name: String
+    let address: String
+    let balance: String
+
+    private enum CodingKeys: String, CodingKey {
+        case id
+        case coin
+        case name = "wallet_name"
+        case address
+        case balance
     }
 }

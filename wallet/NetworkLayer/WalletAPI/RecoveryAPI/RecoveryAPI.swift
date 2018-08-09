@@ -32,7 +32,7 @@ struct RecoveryAPI: NetworkService, ThreeStepsAPI {
                     switch response {
                     case .data(_):
 
-                        let success: (CodableSuccessEmptyData) -> Void = { _ in
+                        let success: (CodableSuccessEmptyResponse) -> Void = { _ in
                             seal.fulfill(())
                         }
 
@@ -72,7 +72,7 @@ struct RecoveryAPI: NetworkService, ThreeStepsAPI {
                     switch response {
                     case .data(_):
 
-                        let success: (CodableSuccessRecoveryTokenData) -> Void = { s in
+                        let success: (CodableSuccessRecoveryTokenResponse) -> Void = { s in
                             seal.fulfill(s.data.token)
                         }
 
@@ -111,7 +111,7 @@ struct RecoveryAPI: NetworkService, ThreeStepsAPI {
                     switch response {
                     case .data(_):
 
-                        let success: (CodableSuccessEmptyData) -> Void = { s in
+                        let success: (CodableSuccessEmptyResponse) -> Void = { s in
                             seal.fulfill(())
                         }
 

@@ -8,6 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		541C19581D5E40129C1757A8 /* Pods_wallet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9C98DC4F4721DB056807636 /* Pods_wallet.framework */; };
+		8C04BC2A211C4F4000E90090 /* UIFont+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C04BC29211C4F4000E90090 /* UIFont+Additions.swift */; };
+		8C04BC30211C4FC100E90090 /* MavenPro-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8C04BC2C211C4FC000E90090 /* MavenPro-Medium.ttf */; };
+		8C04BC31211C4FC100E90090 /* MavenPro-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8C04BC2D211C4FC000E90090 /* MavenPro-Bold.ttf */; };
+		8C04BC32211C4FC100E90090 /* MavenPro-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8C04BC2E211C4FC100E90090 /* MavenPro-Black.ttf */; };
+		8C04BC33211C4FC100E90090 /* MavenPro-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8C04BC2F211C4FC100E90090 /* MavenPro-Regular.ttf */; };
+		8C04BC35211C5AD800E90090 /* CreditCardViewComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C04BC34211C5AD800E90090 /* CreditCardViewComponent.swift */; };
+		8C04BC37211C872E00E90090 /* ContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C04BC36211C872E00E90090 /* ContainerView.swift */; };
 		8C0918FA2105F75200703224 /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C0918F92105F75200703224 /* Onboarding.storyboard */; };
 		8C0918FC2105F75900703224 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C0918FB2105F75900703224 /* Login.storyboard */; };
 		8C0918FE2105F76200703224 /* Registration.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C0918FD2105F76200703224 /* Registration.storyboard */; };
@@ -116,7 +123,7 @@
 		8CF5F9282112FE580083B36A /* DelayTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF5F9272112FE580083B36A /* DelayTimer.swift */; };
 		8CF5F92D2113206A0083B36A /* SecondEnterLoginFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF5F92B21130F860083B36A /* SecondEnterLoginFlow.swift */; };
 		8CF5F92F211327EB0083B36A /* MaskParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF5F92E211327EB0083B36A /* MaskParser.swift */; };
-		8CF5F931211345320083B36A /* UserFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF5F930211345320083B36A /* UserFlow.swift */; };
+		8CF5F931211345320083B36A /* HomeFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF5F930211345320083B36A /* HomeFlow.swift */; };
 		8CF5F93321134DBC0083B36A /* TransitionCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF5F93221134DBC0083B36A /* TransitionCoordinator.swift */; };
 		8CF5F93521134DFF0083B36A /* NavigationAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF5F93421134DFF0083B36A /* NavigationAnimator.swift */; };
 		8CF5F93821134E6D0083B36A /* CGPoint+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF5F93721134E6D0083B36A /* CGPoint+Extensions.swift */; };
@@ -143,6 +150,13 @@
 /* Begin PBXFileReference section */
 		42ABDBB88471C035425F5733 /* Pods-wallet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wallet.release.xcconfig"; path = "Pods/Target Support Files/Pods-wallet/Pods-wallet.release.xcconfig"; sourceTree = "<group>"; };
 		74C9F725CE2426EB7B82906E /* Pods-wallet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wallet.debug.xcconfig"; path = "Pods/Target Support Files/Pods-wallet/Pods-wallet.debug.xcconfig"; sourceTree = "<group>"; };
+		8C04BC29211C4F4000E90090 /* UIFont+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+Additions.swift"; sourceTree = "<group>"; };
+		8C04BC2C211C4FC000E90090 /* MavenPro-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MavenPro-Medium.ttf"; sourceTree = "<group>"; };
+		8C04BC2D211C4FC000E90090 /* MavenPro-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MavenPro-Bold.ttf"; sourceTree = "<group>"; };
+		8C04BC2E211C4FC100E90090 /* MavenPro-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MavenPro-Black.ttf"; sourceTree = "<group>"; };
+		8C04BC2F211C4FC100E90090 /* MavenPro-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MavenPro-Regular.ttf"; sourceTree = "<group>"; };
+		8C04BC34211C5AD800E90090 /* CreditCardViewComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCardViewComponent.swift; sourceTree = "<group>"; };
+		8C04BC36211C872E00E90090 /* ContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerView.swift; sourceTree = "<group>"; };
 		8C0918F92105F75200703224 /* Onboarding.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
 		8C0918FB2105F75900703224 /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		8C0918FD2105F76200703224 /* Registration.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Registration.storyboard; sourceTree = "<group>"; };
@@ -253,7 +267,7 @@
 		8CF5F9272112FE580083B36A /* DelayTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelayTimer.swift; sourceTree = "<group>"; };
 		8CF5F92B21130F860083B36A /* SecondEnterLoginFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondEnterLoginFlow.swift; sourceTree = "<group>"; };
 		8CF5F92E211327EB0083B36A /* MaskParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskParser.swift; sourceTree = "<group>"; };
-		8CF5F930211345320083B36A /* UserFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFlow.swift; sourceTree = "<group>"; };
+		8CF5F930211345320083B36A /* HomeFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFlow.swift; sourceTree = "<group>"; };
 		8CF5F93221134DBC0083B36A /* TransitionCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionCoordinator.swift; sourceTree = "<group>"; };
 		8CF5F93421134DFF0083B36A /* NavigationAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationAnimator.swift; sourceTree = "<group>"; };
 		8CF5F93721134E6D0083B36A /* CGPoint+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGPoint+Extensions.swift"; sourceTree = "<group>"; };
@@ -290,6 +304,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8C04BC2B211C4FB200E90090 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				8C04BC2E211C4FC100E90090 /* MavenPro-Black.ttf */,
+				8C04BC2D211C4FC000E90090 /* MavenPro-Bold.ttf */,
+				8C04BC2C211C4FC000E90090 /* MavenPro-Medium.ttf */,
+				8C04BC2F211C4FC100E90090 /* MavenPro-Regular.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		8C09192B21061ED800703224 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -313,6 +338,8 @@
 				8C333D76210F50E000949AC0 /* CountryIconImageView.swift */,
 				8C6088472110A75100470411 /* AdditionalTextButton.swift */,
 				8C333D43210B001500949AC0 /* LargeTextButton.swift */,
+				8C04BC34211C5AD800E90090 /* CreditCardViewComponent.swift */,
+				8C04BC36211C872E00E90090 /* ContainerView.swift */,
 				8C6088682112176300470411 /* LargeIconButton */,
 				8C6088612111FB0A00470411 /* Components */,
 				8C333D5B210B538700949AC0 /* TextCheckBoxView */,
@@ -335,8 +362,8 @@
 				8CF5F94D21148BD90083B36A /* EnterPinViewController.swift */,
 				8CF5F94721147A870083B36A /* CreatePinViewController.swift */,
 				8C333D2F2109E0B400949AC0 /* UserViewController.swift */,
-				8C52FFEB2119E09200EB55EA /* WalletsViewController.swift */,
 				8C52FFF1211AF1FD00EB55EA /* HomeViewController.swift */,
+				8C52FFEB2119E09200EB55EA /* WalletsViewController.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -437,7 +464,7 @@
 				8C333D352109F09800949AC0 /* FirstEnterLoginFlow.swift */,
 				8CF5F92B21130F860083B36A /* SecondEnterLoginFlow.swift */,
 				8C60885B2111F1A200470411 /* RecoveryFlow.swift */,
-				8CF5F930211345320083B36A /* UserFlow.swift */,
+				8CF5F930211345320083B36A /* HomeFlow.swift */,
 				8CF5F94B21147F000083B36A /* EnterPinFlow.swift */,
 				8C4413C3211882FC00C9689C /* CreatePinFlow.swift */,
 			);
@@ -520,6 +547,7 @@
 			isa = PBXGroup;
 			children = (
 				8C34616A20EF8FA700746724 /* AppDelegate.swift */,
+				8C04BC2B211C4FB200E90090 /* Fonts */,
 				8C333D6D210EFC7900949AC0 /* Files */,
 				8C60883E2110632100470411 /* UserDefaultsManager */,
 				8C09192B21061ED800703224 /* Helpers */,
@@ -691,6 +719,7 @@
 		8CF5F93B21144BED0083B36A /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				8C04BC29211C4F4000E90090 /* UIFont+Additions.swift */,
 				8C333D41210A094500949AC0 /* UIColor+Additions.swift */,
 				8C333D47210B0F3700949AC0 /* UIViewController+Extensions.swift */,
 				8C333D3F210A08A600949AC0 /* UIView+Extensions.swift */,
@@ -828,15 +857,19 @@
 				8C52FFE82119D35B00EB55EA /* WalletItemComponent.xib in Resources */,
 				8CF5F946211479830083B36A /* Pin.storyboard in Resources */,
 				8CF5F93D211456BA0083B36A /* DecimalKeyboardComponent.xib in Resources */,
+				8C04BC30211C4FC100E90090 /* MavenPro-Medium.ttf in Resources */,
 				8C0918FC2105F75900703224 /* Login.storyboard in Resources */,
 				8C333D58210B4F7D00949AC0 /* VerificationCodeFormView.xib in Resources */,
+				8C04BC31211C4FC100E90090 /* MavenPro-Bold.ttf in Resources */,
 				8C60884E2111A22D00470411 /* LoginPasswordFormView.xib in Resources */,
 				8C091900210601F300703224 /* Recovery.storyboard in Resources */,
 				8C6088532111CB7000470411 /* LoginFormView.xib in Resources */,
+				8C04BC32211C4FC100E90090 /* MavenPro-Black.ttf in Resources */,
 				8C333D5E210B5E1600949AC0 /* NewPasswordFormView.xib in Resources */,
 				8C333D4E210B272D00949AC0 /* TextCheckBoxView.xib in Resources */,
 				8CF5F95721149CD20083B36A /* DotsFieldComponent.xib in Resources */,
 				8C333D52210B2C5800949AC0 /* PhoneNumberFormView.xib in Resources */,
+				8C04BC33211C4FC100E90090 /* MavenPro-Regular.ttf in Resources */,
 				8CF5F9602114A7880083B36A /* CreatePinStageItem.xib in Resources */,
 				8C34617020EF8FA700746724 /* Main.storyboard in Resources */,
 				8C333D71210F1F5300949AC0 /* PhoneMasks.plist in Resources */,
@@ -905,6 +938,7 @@
 				8C6088652112027300470411 /* ThreeStepsAPI.swift in Sources */,
 				8C091949210714D800703224 /* NetworkService.swift in Sources */,
 				8C0919762108BE6000703224 /* UserRequest.swift in Sources */,
+				8C04BC37211C872E00E90090 /* ContainerView.swift in Sources */,
 				8C60885C2111F1A200470411 /* RecoveryFlow.swift in Sources */,
 				8CF1DE4220EF98160036F986 /* AuthViewController.swift in Sources */,
 				8C4413CA2118A66A00C9689C /* WalletKeychainConfiguration.swift in Sources */,
@@ -931,7 +965,7 @@
 				8CF5F94821147A870083B36A /* CreatePinViewController.swift in Sources */,
 				8C09192D21061F3600703224 /* ControllerHelper.swift in Sources */,
 				8C333D50210B2B6900949AC0 /* PhoneNumberFormComponent.swift in Sources */,
-				8CF5F931211345320083B36A /* UserFlow.swift in Sources */,
+				8CF5F931211345320083B36A /* HomeFlow.swift in Sources */,
 				8C09196221076B7000703224 /* RecoveryProvider.swift in Sources */,
 				8C4413C92118A66A00C9689C /* KeychainPasswordItem.swift in Sources */,
 				8C52FFFE211B252F00EB55EA /* InstantPanGestureRecognizer.swift in Sources */,
@@ -988,7 +1022,9 @@
 				8C333D342109F02000949AC0 /* ScreenFlow.swift in Sources */,
 				8C09194B210716C500703224 /* SignupRequest.swift in Sources */,
 				8C60884A2110B42A00470411 /* CountdownTimer.swift in Sources */,
+				8C04BC35211C5AD800E90090 /* CreditCardViewComponent.swift in Sources */,
 				8C0919532107320800703224 /* CodableFailure.swift in Sources */,
+				8C04BC2A211C4F4000E90090 /* UIFont+Additions.swift in Sources */,
 				8C333D42210A094500949AC0 /* UIColor+Additions.swift in Sources */,
 				8CF5F93F211456D50083B36A /* DecimalKeyboardComponent.swift in Sources */,
 				8C09193B210623F200703224 /* Environment.swift in Sources */,

@@ -17,3 +17,8 @@ class FlowViewController: UIViewController {
     var flow: ScreenFlow?
 
 }
+
+class FlowCollectionViewController: UICollectionViewController {
+
+    var flow: ScreenFlow?
+}

@@ -32,7 +32,7 @@ struct SignupAPI: NetworkService, ThreeStepsAPI {
                     switch response {
                     case .data(_):
 
-                        let success: (CodableSuccessEmptyData) -> Void = { _ in
+                        let success: (CodableSuccessEmptyResponse) -> Void = { _ in
                             seal.fulfill(())
                         }
 
@@ -72,7 +72,7 @@ struct SignupAPI: NetworkService, ThreeStepsAPI {
                     switch response {
                     case .data(_):
 
-                        let success: (CodableSuccessSignUpTokenData) -> Void = { s in
+                        let success: (CodableSuccessSignUpTokenResponse) -> Void = { s in
                             seal.fulfill(s.data.token)
                         }
 
@@ -111,7 +111,7 @@ struct SignupAPI: NetworkService, ThreeStepsAPI {
                     switch response {
                     case .data(_):
 
-                        let success: (CodableSuccessAuthTokenData) -> Void = { s in
+                        let success: (CodableSuccessAuthTokenResponse) -> Void = { s in
                             seal.fulfill(s.data.token)
                         }
 

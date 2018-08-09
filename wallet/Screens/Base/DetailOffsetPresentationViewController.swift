@@ -50,13 +50,13 @@ class DetailOffsetPresentationViewController: WalletViewController {
     }
 
     /**
-     Pan gesture recognizer that contols animation.
+     Pan gesture recognizers that contols animation.
      */
-    lazy var panRecognizer: InstantPanGestureRecognizer = {
+    var panRecognizer: InstantPanGestureRecognizer {
         let recognizer = InstantPanGestureRecognizer()
         recognizer.addTarget(self, action: #selector(panGestureEvent(recognizer:)))
         return recognizer
-    }()
+    }
 
     /**
      All of the currently running animators.

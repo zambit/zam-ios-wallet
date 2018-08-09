@@ -24,8 +24,8 @@ struct CodableFailure: Codable {
     }
 
     struct Error: Codable {
-        let name: String
-        let input: String
+        let name: String?
+        let input: String?
         let message: String
 
         private enum CodingKeys: String, CodingKey {

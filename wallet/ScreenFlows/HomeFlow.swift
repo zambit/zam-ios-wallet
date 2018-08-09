@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-final class UserFlow: ScreenFlow {
+final class HomeFlow: ScreenFlow {
 
     weak var navigationController: WalletNavigationController?
 
@@ -18,24 +18,30 @@ final class UserFlow: ScreenFlow {
     }
 
     func begin() {
-        self.navigationController?.pushFromRootForward(viewController: userScreen)
+        self.navigationController?.pushFromRootForward(viewController: homeScreen)
     }
 
-    private var userScreen: UserViewController {
-        let _vc = ControllerHelper.instantiateViewController(identifier: "UserViewController", storyboardName: "Main")
+    private var homeScreen: HomeViewController {
+        let _vc = ControllerHelper.instantiateViewController(identifier: "HomeViewController", storyboardName: "Main")
 
-        guard let vc = _vc as? UserViewController else {
+        guard let vc = _vc as? HomeViewController else {
             fatalError()
         }
 
-        let onExit: () -> Void = {
-            [weak self] in
+        vc.embededViewController = walletsScreen
+        vc.flow = self
+        return vc
+    }
 
-            self?.onboardingFlow?.begin()
+    private var walletsScreen: WalletsViewController {
+        let _vc = ControllerHelper.instantiateViewController(identifier: "WalletsViewController", storyboardName: "Main")
+
+        guard let vc = _vc as? WalletsViewController else {
+            fatalError()
         }
 
-        vc.onExit = onExit
         vc.userManager = UserDataManager(keychainConfiguration: WalletKeychainConfiguration())
+        vc.userAPI = UserAPI(provider: UserProvider(environment: WalletEnvironment(), dispatcher: HTTPDispatcher()))
         vc.flow = self
         return vc
     }

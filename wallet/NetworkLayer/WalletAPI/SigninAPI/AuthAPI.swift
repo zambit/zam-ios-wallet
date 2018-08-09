@@ -32,7 +32,7 @@ struct AuthAPI: NetworkService {
                     switch response {
                     case .data(_):
 
-                        let success: (CodableSuccessAuthTokenData) -> Void = { s in
+                        let success: (CodableSuccessAuthTokenResponse) -> Void = { s in
                             seal.fulfill(s.data.token)
                         }
 
@@ -71,7 +71,7 @@ struct AuthAPI: NetworkService {
                     switch response {
                     case .data(_):
 
-                        let success: (CodableSuccessEmptyData) -> Void = { _ in
+                        let success: (CodableSuccessEmptyResponse) -> Void = { _ in
                             seal.fulfill(())
                         }
 
@@ -111,7 +111,7 @@ struct AuthAPI: NetworkService {
                     switch response {
                     case .data(_):
                         
-                        let success: (CodableSuccessAuthorizedPhoneData) -> Void = { s in
+                        let success: (CodableSuccessAuthorizedPhoneResponse) -> Void = { s in
                             seal.fulfill(s.data.phone)
                         }
 
@@ -151,7 +151,7 @@ struct AuthAPI: NetworkService {
                     switch response {
                     case .data(_):
 
-                        let success: (CodableSuccessAuthTokenData) -> Void = { s in
+                        let success: (CodableSuccessAuthTokenResponse) -> Void = { s in
                             seal.fulfill(s.data.token)
                         }
 
@@ -191,7 +191,44 @@ struct AuthAPI: NetworkService {
                     switch response {
                     case .data(_):
 
-                        let success: (CodableSuccessAuthTokenData) -> Void = { s in
+                        let success: (CodableSuccessAuthTokenResponse) -> Void = { s in
+                            seal.fulfill(s.data.token)
+                        }
+
+                        let failure: (CodableFailure) -> Void = { f in
+                            guard f.errors.count > 0 else {
+                                let error = WalletResponseError.undefinedServerFailureResponse
+                                seal.reject(error)
+                                return
+                            }
+
+                            let error = WalletResponseError.serverFailureResponse(errors: f.errors)
+                            seal.reject(error)
+                        }
+
+                        do {
+                            try response.extractResult(success: success, failure: failure)
+                        } catch let error {
+                            seal.reject(error)
+                        }
+
+                    case .error(let error):
+                        seal.reject(error)
+                    }
+                }
+        }
+    }
+
+    func refreshToken(token: String) -> Promise<String> {
+        return provider.execute(.refreshToken(token: token))
+            .then {
+                (response: Response) -> Promise<String> in
+
+                return Promise { seal in
+                    switch response {
+                    case .data(_):
+
+                        let success: (CodableSuccessAuthTokenResponse) -> Void = { s in
                             seal.fulfill(s.data.token)
                         }
 

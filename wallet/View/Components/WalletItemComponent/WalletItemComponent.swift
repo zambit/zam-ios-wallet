@@ -15,7 +15,7 @@ class WalletItemComponent: ItemComponent {
     @IBOutlet private var iconImageView: UIImageView!
     @IBOutlet private var coinNameLabel: UILabel!
     @IBOutlet private var phoneNumberLabel: UILabel!
-    @IBOutlet private var priceLabel: UILabel!
+    @IBOutlet private var balanceLabel: UILabel!
     @IBOutlet private var actualPriceLabel: UILabel!
 
     private var coinNameLabelMainAttributes: [NSAttributedStringKey: Any] = [:]
@@ -39,7 +39,7 @@ class WalletItemComponent: ItemComponent {
     override func setupStyle() {
         super.setupStyle()
 
-        priceLabel.textColor = .darkIndigo
+        balanceLabel.textColor = .darkIndigo
         actualPriceLabel.textColor = .blueGrey
 
         phoneNumberLabel.textColor = .blueGrey
@@ -62,7 +62,7 @@ class WalletItemComponent: ItemComponent {
         self.view.layer.shadowOpacity = 0.5
     }
 
-    func configure(image: UIImage, coinName: String, coinAddit: String, phoneNumber: String, price: String) {
+    func configure(image: UIImage, coinName: String, coinAddit: String, phoneNumber: String, balance: Float, price: Float) {
         let coinNameText = NSAttributedString(string: coinName, attributes: coinNameLabelMainAttributes)
         let coinAdditText = NSAttributedString(string: " \(coinAddit)", attributes: coinNameLabelAdditAttributes)
 
@@ -73,6 +73,6 @@ class WalletItemComponent: ItemComponent {
 
         iconImageView.image = image
         phoneNumberLabel.text = phoneNumber
-        priceLabel.text = price
+        balanceLabel.text = String(describing: balance)
     }
 }

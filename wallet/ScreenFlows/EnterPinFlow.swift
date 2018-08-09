@@ -57,13 +57,13 @@ final class EnterPinFlow: ScreenFlow {
         return vc
     }
 
-    private var userFlow: UserFlow? {
+    private var userFlow: HomeFlow? {
         guard let navController = navigationController else {
             print("Navigation controller not found")
             return nil
         }
 
-        let flow = UserFlow(navigationController: navController)
+        let flow = HomeFlow(navigationController: navController)
         return flow
     }
 

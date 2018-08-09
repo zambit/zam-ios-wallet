@@ -111,17 +111,17 @@ enum UserRequest: Request {
         switch self {
         case .userInfo(token: let token):
             return ["Authorization": "Bearer \(token)"]
-        case .sendTransaction(token: let token):
+        case .sendTransaction(token: let token, walletId: _, recipient: _, amount: _):
             return ["Authorization": "Bearer \(token)"]
-        case .getTransactions(token: let token):
+        case .getTransactions(token: let token, coin: _, walletId: _, recipient: _, fromTime: _, untilTime: _, page: _, count: _):
             return ["Authorization": "Bearer \(token)"]
-        case .getTransactionInfo(token: let token):
+        case .getTransactionInfo(token: let token, transactionId: _):
             return ["Authorization": "Bearer \(token)"]
-        case .createWallet(token: let token):
+        case .createWallet(token: let token, coin: _, walletName: _):
             return ["Authorization": "Bearer \(token)"]
-        case .getUserWallets(token: let token):
+        case .getUserWallets(token: let token, coin: _, walletId: _, page: _, count: _):
             return ["Authorization": "Bearer \(token)"]
-        case .getUserWalletInfo(token: let token):
+        case .getUserWalletInfo(token: let token, walletId: _):
             return ["Authorization": "Bearer \(token)"]
         }
     }

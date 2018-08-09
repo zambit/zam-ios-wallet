@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -14,10 +10,10 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WalletItemComponent" customModule="wallet" customModuleProvider="target">
             <connections>
                 <outlet property="actualPriceLabel" destination="cMs-J2-wIM" id="FTu-lq-oFN"/>
+                <outlet property="balanceLabel" destination="y2B-iU-pHI" id="KLT-fl-Axi"/>
                 <outlet property="coinNameLabel" destination="G60-5P-Qn4" id="YkW-L9-MLl"/>
                 <outlet property="iconImageView" destination="bIt-Ay-iQX" id="i57-Uv-bHE"/>
                 <outlet property="phoneNumberLabel" destination="BUP-nS-oac" id="lyy-8Q-3Wk"/>
-                <outlet property="priceLabel" destination="y2B-iU-pHI" id="KLT-fl-Axi"/>
                 <outlet property="view" destination="iN0-l3-epB" id="r8E-gx-Tkg"/>
             </connections>
         </placeholder>

@@ -15,6 +15,7 @@ enum AuthRequest: Request {
     case checkAuthorized(token: String)
     case confirmUserPhone(token: String, confirmationId: String)
     case createNewUserFromPendingTransaction(token: String, recvInvitationId: String)
+    case refreshToken(token: String)
 
     var path: String {
         switch self {
@@ -24,6 +25,8 @@ enum AuthRequest: Request {
             return "auth/signout"
         case .checkAuthorized:
             return "auth/check"
+        case .refreshToken:
+            return "auth/refresh_token"
         case let .confirmUserPhone(confirmationId: link):
             return "auth/confirmation/\(link)"
         case let .createNewUserFromPendingTransaction(recvInvitationId: link):
@@ -38,6 +41,8 @@ enum AuthRequest: Request {
         case .signOut:
             return .delete
         case .checkAuthorized:
+            return .get
+        case .refreshToken:
             return .get
         case .confirmUserPhone:
             return .post
@@ -54,6 +59,8 @@ enum AuthRequest: Request {
             return nil
         case .checkAuthorized:
             return nil
+        case .refreshToken:
+            return nil
         case .confirmUserPhone:
             return nil
         case .createNewUserFromPendingTransaction:
@@ -69,7 +76,9 @@ enum AuthRequest: Request {
             return ["Authorization": "Bearer \(token)"]
         case .checkAuthorized(token: let token):
             return ["Authorization": "Bearer \(token)"]
-        case .confirmUserPhone(token: let token):
+        case .refreshToken(token: let token):
+            return ["Authorization": "Bearer \(token)"]
+        case .confirmUserPhone(token: let token, confirmationId: _):
             return ["Authorization": "Bearer \(token)"]
         case .createNewUserFromPendingTransaction(token: let token):
             return ["Authorization": "Bearer \(token)"]
