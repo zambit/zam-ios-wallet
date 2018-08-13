@@ -27,7 +27,6 @@ final class HomeFlow: ScreenFlow {
                                             zam: UIViewController(),
                                             contacts: UIViewController(),
                                             more: UIViewController())
-
         return tabBar
     }
 

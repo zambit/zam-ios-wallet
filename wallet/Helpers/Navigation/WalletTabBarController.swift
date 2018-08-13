@@ -12,10 +12,6 @@ import ESTabBarController_swift
 
 class WalletTabBarController {
 
-    func provide(navigationController: WalletNavigationController) {
-        home?.walletNavigationController = navigationController
-    }
-
     private(set) var controller: ESTabBarController
 
     weak var home: WalletViewController?
@@ -69,6 +65,8 @@ class LargeWalletContentView: ESTabBarItemContentView {
         iconColor = .white
         highlightIconColor = .white
         highlightEnabled = false
+
+        renderingMode = .alwaysOriginal
     }
 
     public required init?(coder aDecoder: NSCoder) {

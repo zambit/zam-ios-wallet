@@ -139,7 +139,8 @@ class NewPasswordFormComponent: UIView {
         }
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            self.checkConditions(password: password, confirmation: confirmation)
+            [weak self] in
+            self?.checkConditions(password: password, confirmation: confirmation)
         }
     }
 
@@ -154,7 +155,8 @@ class NewPasswordFormComponent: UIView {
         }
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            self.checkConditions(password: password, confirmation: confirmation)
+            [weak self] in
+            self?.checkConditions(password: password, confirmation: confirmation)
         }
     }
 

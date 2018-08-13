@@ -118,6 +118,7 @@
 		8C6088602111F35E00470411 /* EnterPhoneNumberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C60885F2111F35E00470411 /* EnterPhoneNumberViewController.swift */; };
 		8C6088652112027300470411 /* ThreeStepsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6088642112027300470411 /* ThreeStepsAPI.swift */; };
 		8C6088672112120100470411 /* SpinningAnimationLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6088662112120100470411 /* SpinningAnimationLayer.swift */; };
+		8CA2188F2121D97C0063C188 /* DecimalKeyboardComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CA2188E2121D97B0063C188 /* DecimalKeyboardComponent.xib */; };
 		8CF1DE4220EF98160036F986 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF1DE4120EF98160036F986 /* AuthViewController.swift */; };
 		8CF1DE4520EFB1A70036F986 /* HorizontalScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF1DE4420EFB1A70036F986 /* HorizontalScrollView.swift */; };
 		8CF1DE4720F37B5E0036F986 /* SMSConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF1DE4620F37B5E0036F986 /* SMSConfirmationViewController.swift */; };
@@ -132,7 +133,6 @@
 		8CF5F93521134DFF0083B36A /* NavigationAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF5F93421134DFF0083B36A /* NavigationAnimator.swift */; };
 		8CF5F93821134E6D0083B36A /* CGPoint+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF5F93721134E6D0083B36A /* CGPoint+Extensions.swift */; };
 		8CF5F93A21144BE80083B36A /* UIDevice+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF5F93921144BE80083B36A /* UIDevice+Extensions.swift */; };
-		8CF5F93D211456BA0083B36A /* DecimalKeyboardComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CF5F93C211456BA0083B36A /* DecimalKeyboardComponent.xib */; };
 		8CF5F93F211456D50083B36A /* DecimalKeyboardComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF5F93E211456D50083B36A /* DecimalKeyboardComponent.swift */; };
 		8CF5F942211457200083B36A /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF5F941211457200083B36A /* Component.swift */; };
 		8CF5F944211459630083B36A /* DecimalButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF5F943211459630083B36A /* DecimalButton.swift */; };
@@ -266,6 +266,7 @@
 		8C60885F2111F35E00470411 /* EnterPhoneNumberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterPhoneNumberViewController.swift; sourceTree = "<group>"; };
 		8C6088642112027300470411 /* ThreeStepsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeStepsAPI.swift; sourceTree = "<group>"; };
 		8C6088662112120100470411 /* SpinningAnimationLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinningAnimationLayer.swift; sourceTree = "<group>"; };
+		8CA2188E2121D97B0063C188 /* DecimalKeyboardComponent.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DecimalKeyboardComponent.xib; sourceTree = "<group>"; };
 		8CF1DE4120EF98160036F986 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		8CF1DE4420EFB1A70036F986 /* HorizontalScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalScrollView.swift; sourceTree = "<group>"; };
 		8CF1DE4620F37B5E0036F986 /* SMSConfirmationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMSConfirmationViewController.swift; sourceTree = "<group>"; };
@@ -280,7 +281,6 @@
 		8CF5F93421134DFF0083B36A /* NavigationAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationAnimator.swift; sourceTree = "<group>"; };
 		8CF5F93721134E6D0083B36A /* CGPoint+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGPoint+Extensions.swift"; sourceTree = "<group>"; };
 		8CF5F93921144BE80083B36A /* UIDevice+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+Extensions.swift"; sourceTree = "<group>"; };
-		8CF5F93C211456BA0083B36A /* DecimalKeyboardComponent.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DecimalKeyboardComponent.xib; sourceTree = "<group>"; };
 		8CF5F93E211456D50083B36A /* DecimalKeyboardComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecimalKeyboardComponent.swift; sourceTree = "<group>"; };
 		8CF5F941211457200083B36A /* Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
 		8CF5F943211459630083B36A /* DecimalButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecimalButton.swift; sourceTree = "<group>"; };
@@ -326,8 +326,7 @@
 		8C09192B21061ED800703224 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				8C04BC402121A93400E90090 /* WalletTabBarController.swift */,
-				8CF5F92A21130BB50083B36A /* NavigationController */,
+				8CF5F92A21130BB50083B36A /* Navigation */,
 				8CF5F929211307010083B36A /* Timers */,
 				8C6088502111A95100470411 /* Conditions.swift */,
 				8CF5F92E211327EB0083B36A /* MaskParser.swift */,
@@ -709,13 +708,14 @@
 			path = Timers;
 			sourceTree = "<group>";
 		};
-		8CF5F92A21130BB50083B36A /* NavigationController */ = {
+		8CF5F92A21130BB50083B36A /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
+				8C04BC402121A93400E90090 /* WalletTabBarController.swift */,
 				8C4413C521188BCA00C9689C /* WalletNavigationController.swift */,
 				8CF5F93621134E070083B36A /* WalletTransitionAnimation */,
 			);
-			path = NavigationController;
+			path = Navigation;
 			sourceTree = "<group>";
 		};
 		8CF5F93621134E070083B36A /* WalletTransitionAnimation */ = {
@@ -748,7 +748,7 @@
 			isa = PBXGroup;
 			children = (
 				8CF5F93E211456D50083B36A /* DecimalKeyboardComponent.swift */,
-				8CF5F93C211456BA0083B36A /* DecimalKeyboardComponent.xib */,
+				8CA2188E2121D97B0063C188 /* DecimalKeyboardComponent.xib */,
 				8CF5F943211459630083B36A /* DecimalButton.swift */,
 			);
 			path = DecimalKeyboardComponent;
@@ -868,7 +868,6 @@
 				8C0918FA2105F75200703224 /* Onboarding.storyboard in Resources */,
 				8C52FFE82119D35B00EB55EA /* WalletItemComponent.xib in Resources */,
 				8CF5F946211479830083B36A /* Pin.storyboard in Resources */,
-				8CF5F93D211456BA0083B36A /* DecimalKeyboardComponent.xib in Resources */,
 				8C04BC30211C4FC100E90090 /* MavenPro-Medium.ttf in Resources */,
 				8C0918FC2105F75900703224 /* Login.storyboard in Resources */,
 				8C333D58210B4F7D00949AC0 /* VerificationCodeFormView.xib in Resources */,
@@ -883,6 +882,7 @@
 				8C333D52210B2C5800949AC0 /* PhoneNumberFormView.xib in Resources */,
 				8C04BC33211C4FC100E90090 /* MavenPro-Regular.ttf in Resources */,
 				8CF5F9602114A7880083B36A /* CreatePinStageItem.xib in Resources */,
+				8CA2188F2121D97C0063C188 /* DecimalKeyboardComponent.xib in Resources */,
 				8C34617020EF8FA700746724 /* Main.storyboard in Resources */,
 				8C333D71210F1F5300949AC0 /* PhoneMasks.plist in Resources */,
 			);

@@ -28,6 +28,8 @@ class WalletNavigationController {
 
     private(set) var controller: UINavigationController
 
+    private var tabBar: WalletTabBarController?
+
     init(navigationController: UINavigationController) {
         self.controller = navigationController
         setupStyle(for: self.controller)
@@ -59,7 +61,8 @@ class WalletNavigationController {
         controller.pushViewController(tabBarController.controller, animated: true)
         controller.isNavigationBarHidden = true
 
-        tabBarController.provide(navigationController: self)
+        tabBar = tabBarController
+        tabBar?.home?.walletNavigationController = self
 
         guard
             controller.viewControllers.count > 1,
@@ -86,6 +89,7 @@ class WalletNavigationController {
             return
         }
 
+        tabBar = nil
         let newHierarchy = [root, viewController]
         controller.setViewControllers(newHierarchy, animated: false)
     }
@@ -100,6 +104,8 @@ class WalletNavigationController {
             let root = controller.viewControllers.first else {
             return
         }
+
+        tabBar = nil
         let newHierarchy = [root, viewController, currentViewController]
         controller.setViewControllers(newHierarchy, animated: false)
         controller.popViewController(animated: true)
