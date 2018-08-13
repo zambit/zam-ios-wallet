@@ -20,6 +20,7 @@ protocol CreatePinComponentDelegate: class {
 class CreatePinComponent: Component, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate {
 
     @IBOutlet private var collectionView: UICollectionView?
+    private var heightConstraint: NSLayoutConstraint?
 
     private var pinText: String = ""
     private var pinConfirmationText: String = ""
@@ -45,11 +46,8 @@ class CreatePinComponent: Component, UICollectionViewDataSource, UICollectionVie
         case .extraSmall, .small:
             //...
             break
-        case .extra, .medium:
-            //...
-            break
-        case .plus:
-            //....
+        case .extra, .medium, .plus:
+            self.heightAnchor.constraint(equalToConstant: 180.0).isActive = true
             break
         case .unknown:
             break

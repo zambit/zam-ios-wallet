@@ -64,9 +64,9 @@ class DecimalKeyboardComponent: Component {
     }
 
     private func setupKeyboard(buttonEdge: CGFloat) {
-        mainStackView?.alignment = .fill
-        mainStackView?.distribution = .equalSpacing
+        mainStackView?.alignment = .center
         mainStackView?.axis = .vertical
+        mainStackView?.distribution = .fillProportionally
         mainStackView?.spacing = keyboardButtonsVerticalSpacing
 
         let rect = CGRect(origin: .zero, size: CGSize(width: keyboardButtonEdge, height: keyboardButtonEdge))
@@ -90,9 +90,9 @@ class DecimalKeyboardComponent: Component {
             three.addTarget(self, action: #selector(buttonWasTapped(_:)), for: .touchUpInside)
 
         let firstLineStackView = UIStackView(arrangedSubviews: [one,two,three])
-            firstLineStackView.alignment = .fill
+            firstLineStackView.alignment = .center
             firstLineStackView.axis = .horizontal
-            firstLineStackView.distribution = .equalSpacing
+            firstLineStackView.distribution = .fillProportionally
             firstLineStackView.spacing = keyboardButtonsHorizontalSpacing
 
         lineStackViews.append(firstLineStackView)
@@ -116,9 +116,9 @@ class DecimalKeyboardComponent: Component {
             six.addTarget(self, action: #selector(buttonWasTapped(_:)), for: .touchUpInside)
 
         let secondLineStackView = UIStackView(arrangedSubviews: [four,five,six])
-            secondLineStackView.alignment = .fill
+            secondLineStackView.alignment = .center
             secondLineStackView.axis = .horizontal
-            secondLineStackView.distribution = .equalSpacing
+            secondLineStackView.distribution = .fillProportionally
             secondLineStackView.spacing = keyboardButtonsHorizontalSpacing
 
         lineStackViews.append(secondLineStackView)
@@ -142,9 +142,9 @@ class DecimalKeyboardComponent: Component {
             nine.addTarget(self, action: #selector(buttonWasTapped(_:)), for: .touchUpInside)
 
         let thirdLineStackView = UIStackView(arrangedSubviews: [seven,eight,nine])
-            thirdLineStackView.alignment = .fill
+            thirdLineStackView.alignment = .center
             thirdLineStackView.axis = .horizontal
-            thirdLineStackView.distribution = .equalSpacing
+            thirdLineStackView.distribution = .fillProportionally
             thirdLineStackView.spacing = keyboardButtonsHorizontalSpacing
 
         lineStackViews.append(thirdLineStackView)
@@ -167,9 +167,9 @@ class DecimalKeyboardComponent: Component {
             remove.addTarget(self, action: #selector(buttonWasTapped(_:)), for: .touchUpInside)
 
         let endLineStackView = UIStackView(arrangedSubviews: [empty,zero,remove])
-            endLineStackView.alignment = .fill
+            endLineStackView.alignment = .center
             endLineStackView.axis = .horizontal
-            endLineStackView.distribution = .equalSpacing
+            endLineStackView.distribution = .fillProportionally
             endLineStackView.spacing = keyboardButtonsHorizontalSpacing
 
         lineStackViews.append(endLineStackView)
@@ -177,6 +177,8 @@ class DecimalKeyboardComponent: Component {
         lineStackViews.forEach {
             mainStackView?.addArrangedSubview($0)
         }
+
+        mainStackView?.sizeToFit()
     }
 
     @objc

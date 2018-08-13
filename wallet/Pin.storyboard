@@ -18,11 +18,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BZ2-Ck-rOa" customClass="DecimalKeyboardComponent" customModule="wallet" customModuleProvider="target">
-                                <rect key="frame" x="35.666666666666657" y="268" width="343" height="380"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BZ2-Ck-rOa" customClass="DecimalKeyboardComponent" customModule="wallet" customModuleProvider="target">
+                                <rect key="frame" x="16" y="268" width="382" height="380"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="343" placeholder="YES" id="bU0-Q3-F3C"/>
                                     <constraint firstAttribute="height" constant="380" placeholder="YES" id="yKL-zA-eaW"/>
                                 </constraints>
                             </view>
@@ -30,19 +29,18 @@
                                 <rect key="frame" x="16" y="36" width="382" height="160"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="343" placeholder="YES" id="wHg-Ws-2rv"/>
+                                    <constraint firstAttribute="height" constant="160" placeholder="YES" id="ZN3-em-Oe3"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Gjf-Ft-3mR" firstAttribute="centerX" secondItem="ZUH-iA-1cu" secondAttribute="centerX" id="FPM-hm-Ypa"/>
-                            <constraint firstItem="28g-uU-ZNN" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="BZ2-Ck-rOa" secondAttribute="trailing" constant="16" id="JZz-rK-zJq"/>
+                            <constraint firstItem="28g-uU-ZNN" firstAttribute="trailing" secondItem="BZ2-Ck-rOa" secondAttribute="trailing" constant="16" id="JZz-rK-zJq"/>
                             <constraint firstItem="BZ2-Ck-rOa" firstAttribute="centerX" secondItem="ZUH-iA-1cu" secondAttribute="centerX" id="M1g-eH-f5o"/>
                             <constraint firstItem="Gjf-Ft-3mR" firstAttribute="top" secondItem="28g-uU-ZNN" secondAttribute="top" constant="16" id="S4J-10-e17"/>
-                            <constraint firstItem="BZ2-Ck-rOa" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="28g-uU-ZNN" secondAttribute="leading" constant="16" id="XAv-NK-N5P"/>
+                            <constraint firstItem="BZ2-Ck-rOa" firstAttribute="leading" secondItem="28g-uU-ZNN" secondAttribute="leading" constant="16" id="XAv-NK-N5P"/>
                             <constraint firstItem="Gjf-Ft-3mR" firstAttribute="leading" secondItem="28g-uU-ZNN" secondAttribute="leading" constant="16" id="afb-RH-srt"/>
-                            <constraint firstItem="28g-uU-ZNN" firstAttribute="bottom" secondItem="BZ2-Ck-rOa" secondAttribute="bottom" constant="88" id="dQE-aj-gL3"/>
                             <constraint firstItem="BZ2-Ck-rOa" firstAttribute="top" secondItem="Gjf-Ft-3mR" secondAttribute="bottom" constant="72" id="hbf-Ui-fJm"/>
                             <constraint firstItem="28g-uU-ZNN" firstAttribute="trailing" secondItem="Gjf-Ft-3mR" secondAttribute="trailing" constant="16" id="w7E-hQ-a75"/>
                         </constraints>
@@ -65,8 +63,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ScK-7e-xxx" customClass="DecimalKeyboardComponent" customModule="wallet" customModuleProvider="target">
-                                <rect key="frame" x="47" y="286" width="320" height="362"/>
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ScK-7e-xxx" customClass="DecimalKeyboardComponent" customModule="wallet" customModuleProvider="target">
+                                <rect key="frame" x="47" y="286" width="320" height="422"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wKZ-NS-6YX" customClass="DotsFieldComponent" customModule="wallet" customModuleProvider="target">
@@ -90,7 +88,6 @@
                             <constraint firstItem="wKZ-NS-6YX" firstAttribute="top" secondItem="lDL-rd-O5k" secondAttribute="bottom" constant="48" id="FSH-80-DxO"/>
                             <constraint firstItem="UzJ-Eo-8Mr" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="wKZ-NS-6YX" secondAttribute="trailing" constant="16" id="MXd-UH-Jma"/>
                             <constraint firstItem="wKZ-NS-6YX" firstAttribute="centerX" secondItem="JC3-7z-KSJ" secondAttribute="centerX" id="O50-09-e7R"/>
-                            <constraint firstItem="UzJ-Eo-8Mr" firstAttribute="bottom" secondItem="ScK-7e-xxx" secondAttribute="bottom" constant="88" id="Uyv-rn-PA1"/>
                             <constraint firstItem="ScK-7e-xxx" firstAttribute="leading" secondItem="UzJ-Eo-8Mr" secondAttribute="leading" constant="47" id="Y4C-xE-4ee"/>
                             <constraint firstItem="UzJ-Eo-8Mr" firstAttribute="trailing" secondItem="ScK-7e-xxx" secondAttribute="trailing" constant="47" id="cW2-AK-1CR"/>
                             <constraint firstItem="lDL-rd-O5k" firstAttribute="centerX" secondItem="wKZ-NS-6YX" secondAttribute="centerX" id="hFq-e4-Qzz"/>
