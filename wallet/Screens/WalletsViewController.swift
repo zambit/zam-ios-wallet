@@ -16,10 +16,13 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
 
     private var wallets: [WalletData] = []
 
-    private var phone: String = ""
-    private var token: String = ""
-
     private var refreshControl: UIRefreshControl?
+
+    private var phone: String?
+
+    var scrollView: UIScrollView? {
+        return collectionView
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,13 +31,7 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
         collectionView?.delegate = self
         collectionView?.dataSource = self
 
-//        guard let token = userManager?.getToken() else {
-//            fatalError()
-//        }
-
-        phone = "+79136653903"
-
-        token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1MzM5MTQxNDEsImlhdCI6MTUzMzgyNzc0MSwiaWQiOjgsInBlcnNpc3RLZXkiOiJkN2ZkZTBhYS03NmE1LTRlN2EtODljYi0xMTkwMWQyM2UyZDEiLCJwaG9uZSI6Iis3OTEzNjY1MzMzMyJ9.4IoBRDDNm1S22fncFhVYsfVCU18lEgMgMFrmiA7kWRU"
+        phone = userManager?.getPhoneNumber()
 
         loadData(self)
 
@@ -42,10 +39,6 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
         refreshControl?.addTarget(self, action: #selector(loadData(_:)), for: .valueChanged)
         refreshControl?.layer.zPosition = -2
         collectionView?.insertSubview(refreshControl!, at: 0)
-    }
-
-    var scrollView: UIScrollView? {
-        return collectionView
     }
 
     // UICollectionView dataSource
@@ -62,6 +55,10 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
         let _cell = collectionView.dequeueReusableCell(withReuseIdentifier: "WalletItemComponent", for: indexPath)
 
         guard let cell = _cell as? WalletItemComponent else {
+            fatalError()
+        }
+
+        guard let phone = phone else {
             fatalError()
         }
 
@@ -85,6 +82,10 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
 
     @objc
     private func loadData(_ sender: Any) {
+        guard let token = userManager?.getToken() else {
+            fatalError()
+        }
+
         userAPI?.getWallets(token: token).done {
             [weak self]
             wallets in
@@ -93,9 +94,9 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
             self?.collectionView?.reloadData()
             self?.refreshControl?.endRefreshing()
         }.catch {
-                [weak self]
-                error in
-                print(error)
+            [weak self]
+            error in
+            print(error)
         }
     }
 }
