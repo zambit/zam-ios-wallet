@@ -54,6 +54,23 @@ class WalletNavigationController {
         }
     }
 
+    func pushFromRootForward(tabBarController: WalletTabBarController) {
+
+        controller.pushViewController(tabBarController.controller, animated: true)
+        controller.isNavigationBarHidden = true
+
+        tabBarController.provide(navigationController: self)
+
+        guard
+            controller.viewControllers.count > 1,
+            let root = controller.viewControllers.first else {
+            return
+        }
+
+        let newHierarchy = [root, tabBarController.controller]
+        controller.setViewControllers(newHierarchy, animated: false)
+    }
+
     func pushFromRootForward(viewController: WalletViewController) {
         guard controller.viewControllers.count > 1 else {
             push(viewController: viewController)

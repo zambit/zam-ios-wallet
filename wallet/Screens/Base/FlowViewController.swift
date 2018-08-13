@@ -16,6 +16,8 @@ class FlowViewController: UIViewController {
 
     var flow: ScreenFlow?
 
+    var tabBar: WalletTabBarController?
+
 }
 
 class FlowCollectionViewController: UICollectionViewController {

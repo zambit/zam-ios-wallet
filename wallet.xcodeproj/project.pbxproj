@@ -16,6 +16,8 @@
 		8C04BC35211C5AD800E90090 /* CreditCardViewComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C04BC34211C5AD800E90090 /* CreditCardViewComponent.swift */; };
 		8C04BC37211C872E00E90090 /* ContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C04BC36211C872E00E90090 /* ContainerView.swift */; };
 		8C04BC3921219D0600E90090 /* Drawing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C04BC3821219D0600E90090 /* Drawing.swift */; };
+		8C04BC412121A93400E90090 /* WalletTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C04BC402121A93400E90090 /* WalletTabBarController.swift */; };
+		8C04BC432121C23200E90090 /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C04BC422121C23200E90090 /* UIImage+Extensions.swift */; };
 		8C0918FA2105F75200703224 /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C0918F92105F75200703224 /* Onboarding.storyboard */; };
 		8C0918FC2105F75900703224 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C0918FB2105F75900703224 /* Login.storyboard */; };
 		8C0918FE2105F76200703224 /* Registration.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C0918FD2105F76200703224 /* Registration.storyboard */; };
@@ -159,6 +161,8 @@
 		8C04BC34211C5AD800E90090 /* CreditCardViewComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCardViewComponent.swift; sourceTree = "<group>"; };
 		8C04BC36211C872E00E90090 /* ContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerView.swift; sourceTree = "<group>"; };
 		8C04BC3821219D0600E90090 /* Drawing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Drawing.swift; sourceTree = "<group>"; };
+		8C04BC402121A93400E90090 /* WalletTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletTabBarController.swift; sourceTree = "<group>"; };
+		8C04BC422121C23200E90090 /* UIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
 		8C0918F92105F75200703224 /* Onboarding.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
 		8C0918FB2105F75900703224 /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		8C0918FD2105F76200703224 /* Registration.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Registration.storyboard; sourceTree = "<group>"; };
@@ -320,6 +324,7 @@
 		8C09192B21061ED800703224 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				8C04BC402121A93400E90090 /* WalletTabBarController.swift */,
 				8CF5F92A21130BB50083B36A /* NavigationController */,
 				8CF5F929211307010083B36A /* Timers */,
 				8C6088502111A95100470411 /* Conditions.swift */,
@@ -467,9 +472,9 @@
 				8C333D352109F09800949AC0 /* FirstEnterLoginFlow.swift */,
 				8CF5F92B21130F860083B36A /* SecondEnterLoginFlow.swift */,
 				8C60885B2111F1A200470411 /* RecoveryFlow.swift */,
-				8CF5F930211345320083B36A /* HomeFlow.swift */,
 				8CF5F94B21147F000083B36A /* EnterPinFlow.swift */,
 				8C4413C3211882FC00C9689C /* CreatePinFlow.swift */,
+				8CF5F930211345320083B36A /* HomeFlow.swift */,
 			);
 			path = ScreenFlows;
 			sourceTree = "<group>";
@@ -726,6 +731,7 @@
 				8C333D41210A094500949AC0 /* UIColor+Additions.swift */,
 				8C333D47210B0F3700949AC0 /* UIViewController+Extensions.swift */,
 				8C333D3F210A08A600949AC0 /* UIView+Extensions.swift */,
+				8C04BC422121C23200E90090 /* UIImage+Extensions.swift */,
 				8CF5F93921144BE80083B36A /* UIDevice+Extensions.swift */,
 				8C333D64210B619200949AC0 /* UITextField+Extensions.swift */,
 				8CF5F93721134E6D0083B36A /* CGPoint+Extensions.swift */,
@@ -907,12 +913,14 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-wallet/Pods-wallet-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/ESTabBarController-swift/ESTabBarController_swift.framework",
 				"${BUILT_PRODUCTS_DIR}/FlagKit/FlagKit.framework",
 				"${BUILT_PRODUCTS_DIR}/LayoutKit/LayoutKit.framework",
 				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ESTabBarController_swift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FlagKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LayoutKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
@@ -964,6 +972,7 @@
 				8CF1DE4720F37B5E0036F986 /* SMSConfirmationViewController.swift in Sources */,
 				8C333D48210B0F3700949AC0 /* UIViewController+Extensions.swift in Sources */,
 				8C09194D2107214300703224 /* WalletEnvironment.swift in Sources */,
+				8C04BC412121A93400E90090 /* WalletTabBarController.swift in Sources */,
 				8C333D4C210B1D3500949AC0 /* CheckBoxButton.swift in Sources */,
 				8CF5F94821147A870083B36A /* CreatePinViewController.swift in Sources */,
 				8C09192D21061F3600703224 /* ControllerHelper.swift in Sources */,
@@ -1029,6 +1038,7 @@
 				8C04BC35211C5AD800E90090 /* CreditCardViewComponent.swift in Sources */,
 				8C0919532107320800703224 /* CodableFailure.swift in Sources */,
 				8C04BC2A211C4F4000E90090 /* UIFont+Additions.swift in Sources */,
+				8C04BC432121C23200E90090 /* UIImage+Extensions.swift in Sources */,
 				8C333D42210A094500949AC0 /* UIColor+Additions.swift in Sources */,
 				8CF5F93F211456D50083B36A /* DecimalKeyboardComponent.swift in Sources */,
 				8C09193B210623F200703224 /* Environment.swift in Sources */,

@@ -71,7 +71,7 @@ class HomeViewController: DetailOffsetPresentationViewController {
         setupStyle()
         setupDefaultStyle()
 
-        navigationController?.isNavigationBarHidden = true
+        tabBarController?.navigationController?.isNavigationBarHidden = true
 
         switch UIDevice.current.screenType {
         case .extraSmall:
@@ -81,7 +81,7 @@ class HomeViewController: DetailOffsetPresentationViewController {
         case .medium:
             detailViewHeight?.constant = 600.0
         case .extra:
-            detailViewHeight?.constant = 724.0
+            detailViewHeight?.constant = 641.0
         case .plus:
             detailViewHeight?.constant = 670.0
         case .unknown:
@@ -167,7 +167,6 @@ class HomeViewController: DetailOffsetPresentationViewController {
             walletsContainerView?.isUserInteractionEnabled = false
         }
     }
-
 
     override func createTransitionAnimatorsIfNeeded(to state: DetailOffsetPresentationViewController.State, duration: TimeInterval) -> [UIViewPropertyAnimator] {
 

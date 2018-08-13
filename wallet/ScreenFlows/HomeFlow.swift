@@ -18,7 +18,17 @@ final class HomeFlow: ScreenFlow {
     }
 
     func begin() {
-        self.navigationController?.pushFromRootForward(viewController: homeScreen)
+        self.navigationController?.pushFromRootForward(tabBarController: walletTabBar)
+    }
+
+    private var walletTabBar: WalletTabBarController {
+        let tabBar = WalletTabBarController(home: homeScreen,
+                                            transactions: UIViewController(),
+                                            zam: UIViewController(),
+                                            contacts: UIViewController(),
+                                            more: UIViewController())
+
+        return tabBar
     }
 
     private var homeScreen: HomeViewController {
@@ -55,5 +65,4 @@ final class HomeFlow: ScreenFlow {
         let flow = OnboardingFlow(navigationController: navController)
         return flow
     }
-
 }

@@ -10,17 +10,21 @@ import UIKit
 
 extension UIView {
 
+    func applyDefaultGradient(frame: CGRect) {
+        self.applyGradient(colors: [.backgroundDarker, .backgroundLighter], frame: frame)
+    }
+
     func applyDefaultGradient() {
         self.applyGradient(colors: [.backgroundDarker, .backgroundLighter])
     }
-    
-    func applyGradient(colors: [UIColor]) {
-        self.applyGradient(colors: colors, locations: nil)
-    }
 
-    func applyGradient(colors: [UIColor], locations: [NSNumber]?) {
+    func applyGradient(colors: [UIColor], frame: CGRect? = nil) {
+        self.applyGradient(colors: colors, locations: nil, frame: frame ?? bounds)
+    }
+    
+    func applyGradient(colors: [UIColor], locations: [NSNumber]?, frame: CGRect? = nil) {
         let gradient: CAGradientLayer = CAGradientLayer()
-        gradient.frame = self.bounds
+        gradient.frame = frame ?? bounds
         gradient.colors = colors.map { $0.cgColor }
         gradient.locations = locations
         self.layer.insertSublayer(gradient, at: 0)
