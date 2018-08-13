@@ -84,7 +84,7 @@ class WalletItemComponent: ItemComponent {
         self.view.layer.shadowOpacity = 0.5
     }
 
-    func configure(image: UIImage, coinName: String, coinAddit: String, phoneNumber: String, balance: Float, price: Float) {
+    func configure(image: UIImage, coinName: String, coinAddit: String, phoneNumber: String, balance: Float, fiatBalance: Float) {
         let coinNameText = NSAttributedString(string: coinName, attributes: coinNameLabelMainAttributes)
         let coinAdditText = NSAttributedString(string: " \(coinAddit)", attributes: coinNameLabelAdditAttributes)
 
@@ -96,5 +96,6 @@ class WalletItemComponent: ItemComponent {
         iconImageView.image = image
         phoneNumberLabel.text = phoneNumber
         balanceLabel.text = String(describing: balance)
+        fiatBalanceLabel.text = String(describing: fiatBalance)
     }
 }

@@ -18,6 +18,7 @@
 		8C04BC3921219D0600E90090 /* Drawing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C04BC3821219D0600E90090 /* Drawing.swift */; };
 		8C04BC412121A93400E90090 /* WalletTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C04BC402121A93400E90090 /* WalletTabBarController.swift */; };
 		8C04BC432121C23200E90090 /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C04BC422121C23200E90090 /* UIImage+Extensions.swift */; };
+		8C04BC452121D48E00E90090 /* BalanceData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C04BC442121D48E00E90090 /* BalanceData.swift */; };
 		8C0918FA2105F75200703224 /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C0918F92105F75200703224 /* Onboarding.storyboard */; };
 		8C0918FC2105F75900703224 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C0918FB2105F75900703224 /* Login.storyboard */; };
 		8C0918FE2105F76200703224 /* Registration.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C0918FD2105F76200703224 /* Registration.storyboard */; };
@@ -163,6 +164,7 @@
 		8C04BC3821219D0600E90090 /* Drawing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Drawing.swift; sourceTree = "<group>"; };
 		8C04BC402121A93400E90090 /* WalletTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletTabBarController.swift; sourceTree = "<group>"; };
 		8C04BC422121C23200E90090 /* UIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
+		8C04BC442121D48E00E90090 /* BalanceData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceData.swift; sourceTree = "<group>"; };
 		8C0918F92105F75200703224 /* Onboarding.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
 		8C0918FB2105F75900703224 /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		8C0918FD2105F76200703224 /* Registration.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Registration.storyboard; sourceTree = "<group>"; };
@@ -594,6 +596,7 @@
 			children = (
 				8C4413D3211993B400C9689C /* CoinType.swift */,
 				8C52FFE02119BE0300EB55EA /* WalletData.swift */,
+				8C04BC442121D48E00E90090 /* BalanceData.swift */,
 				8C52FFE22119C1CF00EB55EA /* TermData.swift */,
 			);
 			path = Model;
@@ -941,6 +944,7 @@
 				8C52FFEA2119DA2700EB55EA /* CellComponent.swift in Sources */,
 				8CF5F942211457200083B36A /* Component.swift in Sources */,
 				8C09196421076B8200703224 /* RecoveryRequest.swift in Sources */,
+				8C04BC452121D48E00E90090 /* BalanceData.swift in Sources */,
 				8CF5F95E2114A77D0083B36A /* CreatePinStageItem.swift in Sources */,
 				8C60884C2111A20B00470411 /* LoginPasswordFormComponent.swift in Sources */,
 				8C091906210605AF00703224 /* Router.swift in Sources */,

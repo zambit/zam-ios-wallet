@@ -15,7 +15,8 @@ struct WalletData {
 
     let name: String
     let coin: CoinType
-    let balance: Float
+    let balance: BalanceData
+    let address: String
 
     init(codable: CodableWallet) throws {
         self.name = codable.name
@@ -25,10 +26,8 @@ struct WalletData {
         }
 
         self.coin = coinType
-
-        let numberFormatter = NumberFormatter()
-        let number = numberFormatter.number(from: codable.balance)
-        self.balance = number?.floatValue ?? 0.0
+        self.balance = BalanceData(coin: coinType, codable: codable.balances)
+        self.address = codable.address
     }
     
 }

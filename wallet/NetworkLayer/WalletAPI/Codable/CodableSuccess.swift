@@ -136,13 +136,30 @@ struct CodableWallet: Codable {
     let coin: String
     let name: String
     let address: String
-    let balance: String
+    let balances: CodableBalance
 
     private enum CodingKeys: String, CodingKey {
         case id
         case coin
         case name = "wallet_name"
         case address
-        case balance
+        case balances
+    }
+}
+
+struct CodableBalance: Codable {
+
+    let zam: String?
+    let eth: String?
+    let btc: String?
+    let bch: String?
+    let usd: String
+
+    private enum CodingKeys: String, CodingKey {
+        case zam
+        case eth
+        case btc
+        case bch
+        case usd
     }
 }
