@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina5_9" orientation="portrait">
+    <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -15,11 +15,11 @@
             <objects>
                 <viewController storyboardIdentifier="CreatePinViewController" id="ixD-jo-jn0" customClass="CreatePinViewController" customModule="wallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ZUH-iA-1cu">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BZ2-Ck-rOa" customClass="DecimalKeyboardComponent" customModule="wallet" customModuleProvider="target">
-                                <rect key="frame" x="16" y="310" width="343" height="380"/>
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BZ2-Ck-rOa" customClass="DecimalKeyboardComponent" customModule="wallet" customModuleProvider="target">
+                                <rect key="frame" x="35.666666666666657" y="268" width="343" height="380"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="343" placeholder="YES" id="bU0-Q3-F3C"/>
@@ -27,7 +27,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gjf-Ft-3mR" customClass="CreatePinComponent" customModule="wallet" customModuleProvider="target">
-                                <rect key="frame" x="16" y="60" width="343" height="178"/>
+                                <rect key="frame" x="16" y="36" width="382" height="160"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="343" placeholder="YES" id="wHg-Ws-2rv"/>
@@ -62,15 +62,15 @@
             <objects>
                 <viewController storyboardIdentifier="EnterPinViewController" id="Mwc-0t-YQ6" customClass="EnterPinViewController" customModule="wallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="JC3-7z-KSJ">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ScK-7e-xxx" customClass="DecimalKeyboardComponent" customModule="wallet" customModuleProvider="target">
-                                <rect key="frame" x="47" y="310" width="281" height="380"/>
+                                <rect key="frame" x="47" y="286" width="320" height="362"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wKZ-NS-6YX" customClass="DotsFieldComponent" customModule="wallet" customModuleProvider="target">
-                                <rect key="frame" x="16" y="110" width="343" height="128"/>
+                                <rect key="frame" x="35.666666666666657" y="86" width="343" height="128"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="128" placeholder="YES" id="N91-ek-wdT"/>
@@ -78,7 +78,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Large Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lDL-rd-O5k">
-                                <rect key="frame" x="147" y="41" width="81" height="21"/>
+                                <rect key="frame" x="166.66666666666666" y="17" width="81" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>

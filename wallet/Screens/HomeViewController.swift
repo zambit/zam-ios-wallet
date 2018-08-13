@@ -79,11 +79,11 @@ class HomeViewController: DetailOffsetPresentationViewController {
         case .small:
             detailViewHeight?.constant = 505.0
         case .medium:
-            detailViewHeight?.constant = 600.0
+            detailViewHeight?.constant = 550.0
         case .extra:
             detailViewHeight?.constant = 641.0
         case .plus:
-            detailViewHeight?.constant = 670.0
+            detailViewHeight?.constant = 625.0
         case .unknown:
             fatalError()
         }

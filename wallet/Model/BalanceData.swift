@@ -34,7 +34,8 @@ struct BalanceData {
         let numberFormatter = NumberFormatter()
 
         guard
-            let original = numberFormatter.number(from: codable.usd)?.floatValue,
+            let strNumber = stringNumber,
+            let original = numberFormatter.number(from: strNumber)?.floatValue,
             let usd = numberFormatter.number(from: codable.usd)?.floatValue else {
             fatalError()
         }
@@ -42,5 +43,4 @@ struct BalanceData {
         self.usd = usd
         self.original = original
     }
-
 }
