@@ -106,12 +106,20 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1zt-Ku-WNK">
+                                <rect key="frame" x="16" y="63.666666666666664" width="28.666666666666671" height="13.333333333333336"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="4ZZ-gs-qSx" firstAttribute="leading" secondItem="XNU-0d-taU" secondAttribute="leading" constant="16" id="4Lv-mC-4Gb"/>
                             <constraint firstItem="XNU-0d-taU" firstAttribute="trailing" secondItem="GYg-SV-76M" secondAttribute="leading" constant="144" id="4tf-w1-Toh"/>
                             <constraint firstItem="ba8-TY-ppi" firstAttribute="leading" secondItem="XNU-0d-taU" secondAttribute="leading" id="6vF-yT-5Ui"/>
+                            <constraint firstItem="1zt-Ku-WNK" firstAttribute="leading" secondItem="XNU-0d-taU" secondAttribute="leading" constant="16" id="8j5-bK-Bc9"/>
+                            <constraint firstItem="4ZZ-gs-qSx" firstAttribute="top" secondItem="1zt-Ku-WNK" secondAttribute="bottom" constant="-2" id="BEo-Xg-H1E"/>
                             <constraint firstItem="ba8-TY-ppi" firstAttribute="bottom" secondItem="bLY-3t-y3W" secondAttribute="bottom" constant="294" id="ZbS-WU-DX3"/>
                             <constraint firstItem="4ZZ-gs-qSx" firstAttribute="top" secondItem="XNU-0d-taU" secondAttribute="top" constant="55" id="dJc-2y-tZ5"/>
                             <constraint firstItem="GKP-fm-1NX" firstAttribute="top" secondItem="4ZZ-gs-qSx" secondAttribute="bottom" id="don-NV-SDb"/>
@@ -134,6 +142,8 @@
                         <outlet property="sumBtcLeftConstraint" destination="rMh-zG-zL3" id="wGv-SE-z90"/>
                         <outlet property="sumLabel" destination="4ZZ-gs-qSx" id="FUT-YA-txd"/>
                         <outlet property="sumLeftConstraint" destination="4Lv-mC-4Gb" id="32g-bc-e4l"/>
+                        <outlet property="sumTitleLabel" destination="1zt-Ku-WNK" id="lJd-VI-sGq"/>
+                        <outlet property="sumTitleLeftConstraint" destination="8j5-bK-Bc9" id="zm4-4h-vdp"/>
                         <outlet property="sumTopConstraint" destination="dJc-2y-tZ5" id="0TF-uK-P5e"/>
                         <outlet property="walletsContainerView" destination="cQI-ZW-QpH" id="ZaK-Za-0cs"/>
                     </connections>

@@ -16,7 +16,10 @@ class WalletItemComponent: ItemComponent {
     @IBOutlet private var coinNameLabel: UILabel!
     @IBOutlet private var phoneNumberLabel: UILabel!
     @IBOutlet private var balanceLabel: UILabel!
-    @IBOutlet private var actualPriceLabel: UILabel!
+    @IBOutlet private var fiatBalanceLabel: UILabel!
+
+    @IBOutlet private var sendButton: UIButton!
+    @IBOutlet private var depositButton: UIButton!
 
     private var coinNameLabelMainAttributes: [NSAttributedStringKey: Any] = [:]
     private var coinNameLabelAdditAttributes: [NSAttributedStringKey: Any] = [:]
@@ -40,18 +43,37 @@ class WalletItemComponent: ItemComponent {
         super.setupStyle()
 
         balanceLabel.textColor = .darkIndigo
-        actualPriceLabel.textColor = .blueGrey
+        fiatBalanceLabel.textColor = .blueGrey
 
         phoneNumberLabel.textColor = .blueGrey
         phoneNumberLabel.font = UIFont.systemFont(ofSize: 14.0, weight: .medium)
 
         let mainColor = UIColor.darkIndigo
         let font = UIFont.systemFont(ofSize: 16.0, weight: .medium)
-
         coinNameLabelMainAttributes = [.foregroundColor: mainColor, .font: font]
 
         let additColor = UIColor.blueGrey
         coinNameLabelAdditAttributes = [.foregroundColor: additColor, .font: font]
+
+        sendButton.setTitle("Send", for: .normal)
+        sendButton.setImage(#imageLiteral(resourceName: "icArrowDownBlue"), for: .normal)
+        sendButton.setTitleColor(.blueGrey, for: .normal)
+        sendButton.titleLabel?.font = UIFont.walletFont(ofSize: 16.0, weight: .medium)
+        sendButton.contentHorizontalAlignment = .left
+        sendButton.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 4.0)
+        sendButton.imageEdgeInsets = UIEdgeInsetsMake(0, 8.0, 0, -8)
+        sendButton.semanticContentAttribute = UIApplication.shared
+            .userInterfaceLayoutDirection == .rightToLeft ? .forceLeftToRight : .forceRightToLeft
+
+        depositButton.setTitle("Deposit", for: .normal)
+        depositButton.setImage(#imageLiteral(resourceName: "icArrowUpGreen"), for: .normal)
+        depositButton.setTitleColor(.blueGrey, for: .normal)
+        depositButton.titleLabel?.font = UIFont.walletFont(ofSize: 16.0, weight: .medium)
+        depositButton.contentHorizontalAlignment = .left
+        depositButton.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 4.0)
+        depositButton.imageEdgeInsets = UIEdgeInsetsMake(0, 8.0, 0, -8.0)
+        depositButton.semanticContentAttribute = UIApplication.shared
+            .userInterfaceLayoutDirection == .rightToLeft ? .forceLeftToRight : .forceRightToLeft
 
         self.view.backgroundColor = .white
 

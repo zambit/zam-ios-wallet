@@ -35,6 +35,9 @@ class HomeViewController: DetailOffsetPresentationViewController {
 
     @IBOutlet var walletsContainerView: ContainerView?
 
+    @IBOutlet var sumTitleLabel: UILabel?
+    @IBOutlet var sumTitleLeftConstraint: NSLayoutConstraint?
+
     @IBOutlet var sumLabel: UILabel?
     @IBOutlet var sumLeftConstraint: NSLayoutConstraint?
     @IBOutlet var sumTopConstraint: NSLayoutConstraint?
@@ -52,6 +55,15 @@ class HomeViewController: DetailOffsetPresentationViewController {
     private var cardViewOffset: CGFloat = 0
 
     // MARK: - View Controller Lifecycle
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        if let detailTopView = detailTopGestureView {
+            let point = CGPoint(x: detailTopView.bounds.width / 2.0, y: detailTopView.bounds.height / 4.0)
+            drawIndicator(in: detailTopView, center: point)
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -97,6 +109,10 @@ class HomeViewController: DetailOffsetPresentationViewController {
 
         detailTitleLabel?.textColor = .darkIndigo
         detailTitleLabel?.text = "My accounts"
+
+        sumTitleLabel?.font = UIFont.walletFont(ofSize: 12.0, weight: .regular)
+        sumTitleLabel?.textColor = .skyBlue
+        sumTitleLabel?.text = "Total balance"
 
         sumBtcLabel?.font = UIFont.walletFont(ofSize: 14.0, weight: .regular)
         sumBtcLabel?.textColor = .skyBlue
@@ -169,7 +185,6 @@ class HomeViewController: DetailOffsetPresentationViewController {
 
         let sumLabelWidth: CGFloat = sumLabel?.bounds.width ?? 0
 
-
         // an animator for the transition
         transitionAnimator.addAnimations {
             switch state {
@@ -184,6 +199,9 @@ class HomeViewController: DetailOffsetPresentationViewController {
 
                 self.sumBtcLeftConstraint?.constant = -100
 
+                self.sumTitleLabel?.alpha = 0.0
+                self.sumTitleLeftConstraint?.constant = self.view.bounds.width / 2.0 - (sumLabelWidth / 2.0) * 0.7
+
             case .closed:
 
                 self.detailView?.layer.cornerRadius = 16.0
@@ -195,11 +213,13 @@ class HomeViewController: DetailOffsetPresentationViewController {
 
                 self.sumBtcLeftConstraint?.constant = 16.0
 
+                self.sumTitleLabel?.alpha = 1.0
+                self.sumTitleLeftConstraint?.constant = 16.0
+
                 self.embededViewController?.scrollView?.setContentOffset(embededScrollViewOffset, animated: false)
             }
             self.view.layoutIfNeeded()
         }
-
 
         // an animator for the title that is transitioning into view
         let cardAnimator = UIViewPropertyAnimator(duration: duration, curve: .easeOut, animations: {

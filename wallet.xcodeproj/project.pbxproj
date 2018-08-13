@@ -15,6 +15,7 @@
 		8C04BC33211C4FC100E90090 /* MavenPro-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8C04BC2F211C4FC100E90090 /* MavenPro-Regular.ttf */; };
 		8C04BC35211C5AD800E90090 /* CreditCardViewComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C04BC34211C5AD800E90090 /* CreditCardViewComponent.swift */; };
 		8C04BC37211C872E00E90090 /* ContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C04BC36211C872E00E90090 /* ContainerView.swift */; };
+		8C04BC3921219D0600E90090 /* Drawing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C04BC3821219D0600E90090 /* Drawing.swift */; };
 		8C0918FA2105F75200703224 /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C0918F92105F75200703224 /* Onboarding.storyboard */; };
 		8C0918FC2105F75900703224 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C0918FB2105F75900703224 /* Login.storyboard */; };
 		8C0918FE2105F76200703224 /* Registration.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C0918FD2105F76200703224 /* Registration.storyboard */; };
@@ -157,6 +158,7 @@
 		8C04BC2F211C4FC100E90090 /* MavenPro-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MavenPro-Regular.ttf"; sourceTree = "<group>"; };
 		8C04BC34211C5AD800E90090 /* CreditCardViewComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCardViewComponent.swift; sourceTree = "<group>"; };
 		8C04BC36211C872E00E90090 /* ContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerView.swift; sourceTree = "<group>"; };
+		8C04BC3821219D0600E90090 /* Drawing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Drawing.swift; sourceTree = "<group>"; };
 		8C0918F92105F75200703224 /* Onboarding.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
 		8C0918FB2105F75900703224 /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		8C0918FD2105F76200703224 /* Registration.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Registration.storyboard; sourceTree = "<group>"; };
@@ -325,6 +327,7 @@
 				8C09192C21061F3600703224 /* ControllerHelper.swift */,
 				8C52FFEF211AE19300EB55EA /* CustomOverlappingFlowLayout.swift */,
 				8C52FFFD211B252F00EB55EA /* InstantPanGestureRecognizer.swift */,
+				8C04BC3821219D0600E90090 /* Drawing.swift */,
 				8C4413D12118AB9500C9689C /* Keychain */,
 				8CF5F93B21144BED0083B36A /* Extensions */,
 			);
@@ -559,8 +562,8 @@
 				8CF1DE4E20F3BFC30036F986 /* Base */,
 				8CF1DE4320EF9D170036F986 /* Trash */,
 				8C34617120EF8FA900746724 /* Assets.xcassets */,
-				8C34616E20EF8FA700746724 /* Main.storyboard */,
 				8C34617320EF8FA900746724 /* LaunchScreen.storyboard */,
+				8C34616E20EF8FA700746724 /* Main.storyboard */,
 				8C0918F92105F75200703224 /* Onboarding.storyboard */,
 				8C0918FB2105F75900703224 /* Login.storyboard */,
 				8C0918FD2105F76200703224 /* Registration.storyboard */,
@@ -1005,6 +1008,7 @@
 				8C333D77210F50E000949AC0 /* CountryIconImageView.swift in Sources */,
 				8C333D6F210F00E600949AC0 /* String+Extensions.swift in Sources */,
 				8C09196F21089FB200703224 /* AuthProvider.swift in Sources */,
+				8C04BC3921219D0600E90090 /* Drawing.swift in Sources */,
 				8CF1DE4920F3A0BB0036F986 /* PasswordRecoveryViewController.swift in Sources */,
 				8C4413D02118A8EC00C9689C /* KeychainConfiguration.swift in Sources */,
 				8C0919832109CC2000703224 /* EnterLoginPasswordViewController.swift in Sources */,

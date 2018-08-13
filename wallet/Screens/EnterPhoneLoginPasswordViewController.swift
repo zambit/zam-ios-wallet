@@ -73,12 +73,8 @@ class EnterPhoneLoginPasswordViewController: ContinueViewController, LoginFormCo
                 self?.continueButton?.customAppearance.setLoading(false)
                 self?.onContinue?(authToken)
             }
-            
-            do {
-                try self?.userManager?.save(phone: phone, token: authToken)
-            } catch let error {
-                fatalError("Error on saving user password \(error)")
-            }
+
+            self?.userManager?.save(phone: phone, token: authToken)
 
         }.catch {
             [weak self]

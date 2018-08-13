@@ -64,7 +64,7 @@ class CreditCardViewComponent: UIView {
     }
 
     private func setupStyle() {
-        self.backgroundColor = .turquoiseBlue
+        self.backgroundColor = .skyBlue
 
         self.layer.masksToBounds = false
         self.layer.shadowColor = UIColor.niceBlue.cgColor
