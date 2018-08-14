@@ -27,6 +27,9 @@ class SendMoneyComponent: Component, SegmentedControlComponentDelegate {
         recipientTextField?.textAlignment = .center
         recipientTextField?.textColor = .white
 
+        segmentedControlComponent?.addSegment(icon: #imageLiteral(resourceName: "phoneOutgoing"), title: "Phone", iconTintColor: .paleOliveGreen, selectedTintColor: .white, backColor: .paleOliveGreen)
+        segmentedControlComponent?.addSegment(icon: #imageLiteral(resourceName: "linkTo"), title: "Address", iconTintColor: .paleOliveGreen, selectedTintColor: .white, backColor: .lightblue)
+
     }
 
     override func setupStyle() {
@@ -34,17 +37,25 @@ class SendMoneyComponent: Component, SegmentedControlComponentDelegate {
 
         toLabel?.font = UIFont.walletFont(ofSize: 22.0, weight: .bold)
         toLabel?.textColor = .darkIndigo
-
     }
 
     func segmentedControlComponent(_ segmentedControlComponent: SegmentedControlComponent, willChangeTo index: Int, withAnimatedDuration: Float, color: UIColor) {
-        print("Animation begin")
+
+        switch index {
+        case 0:
+            recipientTextField?.detailMode = .left(detailImage: #imageLiteral(resourceName: "users"), detailImageTintColor: .paleOliveGreen, imageOffset: 16.0, placeholder: "Phone number")
+            recipientTextField?.backgroundColor = color
+            recipientTextField?.text = ""
+        case 1:
+            recipientTextField?.detailMode = .right(detailImage: #imageLiteral(resourceName: "maximize"), detailImageTintColor: .white, imageOffset: 16.0, placeholder: "Address")
+            recipientTextField?.backgroundColor = color
+            recipientTextField?.text = ""
+        default:
+            fatalError()
+        }
     }
 
-
     func segmentedControlComponent(_ segmentedControlComponent: SegmentedControlComponent, currentIndexChangedTo index: Int, color: UIColor) {
-        recipientTextField?.backgroundColor = color
-        print(index)
     }
     
 }

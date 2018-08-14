@@ -11,16 +11,16 @@ import UIKit
 
 class SendMoneyViewController: UIViewController {
 
-    @IBOutlet var segmentedControlComponent: SegmentedControlComponent?
+    @IBOutlet var sendMoneyComponent: SendMoneyComponent?
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-
-        segmentedControlComponent?.addSegment(icon: #imageLiteral(resourceName: "phoneOutgoing"), title: "Phone", selectedIcon: #imageLiteral(resourceName: "phoneOutgoingWhite"), selectedTintColor: .white, backColor: .lightblue)
-        segmentedControlComponent?.addSegment(icon: #imageLiteral(resourceName: "linkTo"), title: "Address", selectedIcon: #imageLiteral(resourceName: "linkToWhite"), selectedTintColor: .white, backColor: .paleOliveGreen)
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        view.backgroundColor = .white
+        //setupDefaultStyle()
     }
 }

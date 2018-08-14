@@ -56,11 +56,11 @@ class SegmentedControlComponent: Component {
         selectedSegmentsView?.clipsToBounds = true
     }
 
-    func addSegment(icon: UIImage, title: String, selectedIcon: UIImage, selectedTintColor: UIColor, backColor: UIColor) {
-        let segmentNormal = UIButton(type: .custom)
+    func addSegment(icon: UIImage, title: String, iconTintColor: UIColor, selectedTintColor: UIColor, backColor: UIColor) {
+        let segmentNormal = UIButton(type: .system)
         segmentNormal.setTitle(title, for: .normal)
         segmentNormal.setImage(icon, for: .normal)
-        segmentNormal.setImage(icon, for: .highlighted)
+        segmentNormal.tintColor = iconTintColor
         segmentNormal.setTitleColor(.blueGrey, for: .normal)
         segmentNormal.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 8)
         segmentNormal.titleEdgeInsets = UIEdgeInsetsMake(0, 8, 0, 0)
@@ -70,9 +70,10 @@ class SegmentedControlComponent: Component {
 
         segmentNormal.addTarget(self, action: #selector(segmentTouchUpInsideEvent(_:)), for: .touchUpInside)
 
-        let segmentSelected = UIButton(type: .custom)
+        let segmentSelected = UIButton(type: .system)
         segmentSelected.setTitle(title, for: .normal)
-        segmentSelected.setImage(selectedIcon, for: .normal)
+        segmentSelected.setImage(icon, for: .normal)
+        segmentSelected.tintColor = selectedTintColor
         segmentSelected.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 8)
         segmentSelected.titleEdgeInsets = UIEdgeInsetsMake(0, 8, 0, 0)
         segmentSelected.titleLabel?.font = UIFont.walletFont(ofSize: 16.0, weight: .medium)
@@ -88,6 +89,10 @@ class SegmentedControlComponent: Component {
         segment.tag = segments.count + 1
         segment.addTo(mainView: mainView, selectedView: selectedView)
         segments.append(segment)
+
+        if segments.count == 1 {
+            selectElement(withIndex: 0)
+        }
     }
 
     func selectElement(withIndex index: Int) {
@@ -155,5 +160,11 @@ class SegmentedControlComponent: Component {
     @objc
     private func segmentTouchUpInsideEvent(_ sender: UIButton) {
         selectElement(withIndex: sender.tag - 1)
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        reloadSegments()
+        reloadBackView()
     }
 }

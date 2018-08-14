@@ -11,13 +11,13 @@ import UIKit
 class IconableTextField: UITextField {
 
     enum DetailMode {
-        case left(detailImage: UIImage, imageOffset: CGFloat, placeholder: String)
-        case right(detailImage: UIImage, imageOffset: CGFloat, placeholder: String)
+        case left(detailImage: UIImage, detailImageTintColor: UIColor, imageOffset: CGFloat, placeholder: String)
+        case right(detailImage: UIImage, detailImageTintColor: UIColor, imageOffset: CGFloat, placeholder: String)
         case empty
     }
 
-    private var leftDetailImageView: UIImageView?
-    private var rightDetailImageView: UIImageView?
+    private var leftDetailImageView: CircleImageView?
+    private var rightDetailImageView: CircleImageView?
 
     private var leftDetailOffsetConstraint: NSLayoutConstraint?
     private var rightDetailOffsetConstraint: NSLayoutConstraint?
@@ -38,16 +38,17 @@ class IconableTextField: UITextField {
                 leftDetailOffsetConstraint?.constant = 0
                 rightDetailOffsetConstraint?.constant = 0
 
-            case .left(let detailImage, let imageOffset, let placeholder):
+            case .left(let detailImage, let color, let imageOffset, let placeholder):
                 guard let leftDetail = leftDetailImageView else {
                     return
                 }
 
                 self.placeholder = placeholder
 
-                leftDetail.image = detailImage
+                leftDetail.imageView?.image = detailImage
+                leftDetail.imageView?.setImageColor(color: color)
 
-                UIView.animate(withDuration: 0.15, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.01, options: .curveEaseInOut, animations: {
+                UIView.animate(withDuration: 0.15, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.01, options: .curveEaseInOut, animations: {
                     [weak self] in
 
                     guard let strongSelf = self else {
@@ -56,18 +57,21 @@ class IconableTextField: UITextField {
 
                     strongSelf.rightDetailOffsetConstraint?.constant = 0
                     strongSelf.leftDetailOffsetConstraint?.constant = imageOffset + leftDetail.bounds.width
+
+                    strongSelf.layoutIfNeeded()
                 }, completion: nil)
 
-            case .right(let detailImage, let imageOffset, let placeholder):
+            case .right(let detailImage, let color, let imageOffset, let placeholder):
                 guard let rightDetail = rightDetailImageView else {
                     return
                 }
 
                 self.placeholder = placeholder
 
-                rightDetail.image = detailImage
+                rightDetail.imageView?.image = detailImage
+                rightDetail.imageView?.setImageColor(color: color)
 
-                UIView.animate(withDuration: 0.15, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.01, options: .curveEaseInOut, animations: {
+                UIView.animate(withDuration: 0.15, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.01, options: .curveEaseInOut, animations: {
                     [weak self] in
 
                     guard let strongSelf = self else {
@@ -75,7 +79,9 @@ class IconableTextField: UITextField {
                     }
 
                     strongSelf.leftDetailOffsetConstraint?.constant = 0
-                    strongSelf.rightDetailOffsetConstraint?.constant = imageOffset + rightDetail.bounds.width
+                    strongSelf.rightDetailOffsetConstraint?.constant = -1 * (imageOffset + rightDetail.bounds.width)
+
+                    strongSelf.layoutIfNeeded()
                 }, completion: nil)
             }
         }
@@ -95,18 +101,32 @@ class IconableTextField: UITextField {
         leftDetailImageView?.removeFromSuperview()
         rightDetailImageView?.removeFromSuperview()
 
-        leftDetailImageView = UIImageView()
+        leftDetailImageView = CircleImageView()
+        leftDetailImageView?.backgroundColor = .white
+        leftDetailImageView?.translatesAutoresizingMaskIntoConstraints = false
+
+        addSubview(leftDetailImageView!)
+
         leftDetailImageView?.heightAnchor.constraint(equalTo: leftDetailImageView!.widthAnchor).isActive = true
         leftDetailImageView?.heightAnchor.constraint(equalToConstant: leftDetailImageSide).isActive = true
 
+        leftDetailImageView?.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         leftDetailOffsetConstraint = leftDetailImageView?.rightAnchor.constraint(equalTo: leftAnchor, constant: 0)
         leftDetailOffsetConstraint?.isActive = true
 
-        rightDetailImageView = UIImageView()
+        rightDetailImageView = CircleImageView()
+        rightDetailImageView?.backgroundColor = .clear
+        rightDetailImageView?.translatesAutoresizingMaskIntoConstraints = false
+
+        addSubview(rightDetailImageView!)
+
         rightDetailImageView?.heightAnchor.constraint(equalTo: rightDetailImageView!.widthAnchor).isActive = true
         rightDetailImageView?.heightAnchor.constraint(equalToConstant: leftDetailImageSide).isActive = true
-
+        
+        rightDetailImageView?.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         rightDetailOffsetConstraint = rightDetailImageView?.leftAnchor.constraint(equalTo: rightAnchor, constant: 0)
         rightDetailOffsetConstraint?.isActive = true
+
+        layoutIfNeeded()
     }
 }
