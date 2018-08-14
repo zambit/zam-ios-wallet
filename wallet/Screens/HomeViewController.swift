@@ -103,6 +103,9 @@ class HomeViewController: DetailOffsetPresentationViewController {
     }
 
     private func setupStyle() {
+        detailView?.layer.cornerRadius = 16.0
+        detailGestureView?.layer.cornerRadius = 16.0
+
         detailView?.backgroundColor = .white
         detailGestureView?.backgroundColor = .clear
 
@@ -191,9 +194,6 @@ class HomeViewController: DetailOffsetPresentationViewController {
             switch state {
             case .open:
 
-                self.detailView?.layer.cornerRadius = 0
-                self.detailGestureView?.layer.cornerRadius = 0
-
                 self.sumLabel?.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
                 self.sumLeftConstraint?.constant = self.view.bounds.width / 2.0 - sumLabelWidth / 2.0
                 self.sumTopConstraint?.constant = 0.0
@@ -204,9 +204,6 @@ class HomeViewController: DetailOffsetPresentationViewController {
                 self.sumTitleLeftConstraint?.constant = self.view.bounds.width / 2.0 - (sumLabelWidth / 2.0) * 0.7
 
             case .closed:
-
-                self.detailView?.layer.cornerRadius = 16.0
-                self.detailGestureView?.layer.cornerRadius = 16.0
 
                 self.sumLabel?.transform = .identity
                 self.sumLeftConstraint?.constant = 16.0

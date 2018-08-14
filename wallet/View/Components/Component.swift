@@ -10,7 +10,7 @@ import UIKit
 
 class Component: UIView {
 
-    @IBOutlet private var contentView: UIView!
+    @IBOutlet var contentView: UIView!
 
     var nibName: String {
         return String(describing: type(of: self))

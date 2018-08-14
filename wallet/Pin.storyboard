@@ -22,7 +22,7 @@
                                 <rect key="frame" x="16" y="268" width="382" height="380"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="380" placeholder="YES" id="yKL-zA-eaW"/>
+                                    <constraint firstAttribute="height" constant="380" placeholder="YES" id="Che-2h-Akg"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gjf-Ft-3mR" customClass="CreatePinComponent" customModule="wallet" customModuleProvider="target">
@@ -64,9 +64,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ScK-7e-xxx" customClass="DecimalKeyboardComponent" customModule="wallet" customModuleProvider="target">
-                                <rect key="frame" x="16" y="286" width="382" height="422"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ScK-7e-xxx" customClass="DecimalKeyboardComponent" customModule="wallet" customModuleProvider="target">
+                                <rect key="frame" x="16" y="286" width="382" height="380"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="380" placeholder="YES" id="tAo-UU-OjM"/>
+                                </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wKZ-NS-6YX" customClass="DotsFieldComponent" customModule="wallet" customModuleProvider="target">
                                 <rect key="frame" x="35.666666666666657" y="86" width="343" height="128"/>

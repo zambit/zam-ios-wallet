@@ -119,6 +119,14 @@
 		8C6088652112027300470411 /* ThreeStepsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6088642112027300470411 /* ThreeStepsAPI.swift */; };
 		8C6088672112120100470411 /* SpinningAnimationLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6088662112120100470411 /* SpinningAnimationLayer.swift */; };
 		8CA2188F2121D97C0063C188 /* DecimalKeyboardComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CA2188E2121D97B0063C188 /* DecimalKeyboardComponent.xib */; };
+		8CA218922122E8D70063C188 /* SendMoneyComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CA218912122E8D70063C188 /* SendMoneyComponent.xib */; };
+		8CA218942122EAC90063C188 /* SendMoneyComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA218932122EAC90063C188 /* SendMoneyComponent.swift */; };
+		8CA218962122EAF60063C188 /* SegmentedControlComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA218952122EAF60063C188 /* SegmentedControlComponent.swift */; };
+		8CA218982122EB0F0063C188 /* SegmentedControlComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CA218972122EB0F0063C188 /* SegmentedControlComponent.xib */; };
+		8CA2189D2122EEDE0063C188 /* SegmentedControlElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA2189C2122EEDE0063C188 /* SegmentedControlElement.swift */; };
+		8CA2189F2122F9E40063C188 /* SelectingBackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA2189E2122F9E40063C188 /* SelectingBackView.swift */; };
+		8CA218A1212304590063C188 /* SendMoneyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA218A0212304590063C188 /* SendMoneyViewController.swift */; };
+		8CA218A5212333B20063C188 /* IconableTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA218A4212333B20063C188 /* IconableTextField.swift */; };
 		8CF1DE4220EF98160036F986 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF1DE4120EF98160036F986 /* AuthViewController.swift */; };
 		8CF1DE4520EFB1A70036F986 /* HorizontalScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF1DE4420EFB1A70036F986 /* HorizontalScrollView.swift */; };
 		8CF1DE4720F37B5E0036F986 /* SMSConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF1DE4620F37B5E0036F986 /* SMSConfirmationViewController.swift */; };
@@ -267,6 +275,14 @@
 		8C6088642112027300470411 /* ThreeStepsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeStepsAPI.swift; sourceTree = "<group>"; };
 		8C6088662112120100470411 /* SpinningAnimationLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinningAnimationLayer.swift; sourceTree = "<group>"; };
 		8CA2188E2121D97B0063C188 /* DecimalKeyboardComponent.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DecimalKeyboardComponent.xib; sourceTree = "<group>"; };
+		8CA218912122E8D70063C188 /* SendMoneyComponent.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SendMoneyComponent.xib; sourceTree = "<group>"; };
+		8CA218932122EAC90063C188 /* SendMoneyComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMoneyComponent.swift; sourceTree = "<group>"; };
+		8CA218952122EAF60063C188 /* SegmentedControlComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedControlComponent.swift; sourceTree = "<group>"; };
+		8CA218972122EB0F0063C188 /* SegmentedControlComponent.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SegmentedControlComponent.xib; sourceTree = "<group>"; };
+		8CA2189C2122EEDE0063C188 /* SegmentedControlElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedControlElement.swift; sourceTree = "<group>"; };
+		8CA2189E2122F9E40063C188 /* SelectingBackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectingBackView.swift; sourceTree = "<group>"; };
+		8CA218A0212304590063C188 /* SendMoneyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMoneyViewController.swift; sourceTree = "<group>"; };
+		8CA218A4212333B20063C188 /* IconableTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconableTextField.swift; sourceTree = "<group>"; };
 		8CF1DE4120EF98160036F986 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		8CF1DE4420EFB1A70036F986 /* HorizontalScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalScrollView.swift; sourceTree = "<group>"; };
 		8CF1DE4620F37B5E0036F986 /* SMSConfirmationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMSConfirmationViewController.swift; sourceTree = "<group>"; };
@@ -349,6 +365,7 @@
 				8C333D43210B001500949AC0 /* LargeTextButton.swift */,
 				8C04BC34211C5AD800E90090 /* CreditCardViewComponent.swift */,
 				8C04BC36211C872E00E90090 /* ContainerView.swift */,
+				8CA218A4212333B20063C188 /* IconableTextField.swift */,
 				8C6088682112176300470411 /* LargeIconButton */,
 				8C6088612111FB0A00470411 /* Components */,
 				8C333D5B210B538700949AC0 /* TextCheckBoxView */,
@@ -373,6 +390,7 @@
 				8C333D2F2109E0B400949AC0 /* UserViewController.swift */,
 				8C52FFF1211AF1FD00EB55EA /* HomeViewController.swift */,
 				8C52FFEB2119E09200EB55EA /* WalletsViewController.swift */,
+				8CA218A0212304590063C188 /* SendMoneyViewController.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -653,6 +671,7 @@
 				8CF5F941211457200083B36A /* Component.swift */,
 				8CF5F9622114AB000083B36A /* ItemComponent.swift */,
 				8C52FFE92119DA2700EB55EA /* CellComponent.swift */,
+				8CA218902122E8880063C188 /* SendMoneyComponent */,
 				8C52FFE42119D0EF00EB55EA /* WalletItemComponent */,
 				8CF5F95C2114A4DC0083B36A /* CreatePinComponent */,
 				8CF5F9552114949D0083B36A /* DotsFieldComponent */,
@@ -674,6 +693,43 @@
 				8C6088662112120100470411 /* SpinningAnimationLayer.swift */,
 			);
 			path = LargeIconButton;
+			sourceTree = "<group>";
+		};
+		8CA218902122E8880063C188 /* SendMoneyComponent */ = {
+			isa = PBXGroup;
+			children = (
+				8CA218932122EAC90063C188 /* SendMoneyComponent.swift */,
+				8CA218912122E8D70063C188 /* SendMoneyComponent.xib */,
+				8CA218992122EB150063C188 /* SegmentedControlComponent */,
+			);
+			path = SendMoneyComponent;
+			sourceTree = "<group>";
+		};
+		8CA218992122EB150063C188 /* SegmentedControlComponent */ = {
+			isa = PBXGroup;
+			children = (
+				8CA218952122EAF60063C188 /* SegmentedControlComponent.swift */,
+				8CA218972122EB0F0063C188 /* SegmentedControlComponent.xib */,
+				8CA218A2212325550063C188 /* SegmentedControlElement */,
+				8CA218A3212325850063C188 /* SelectedBackView */,
+			);
+			path = SegmentedControlComponent;
+			sourceTree = "<group>";
+		};
+		8CA218A2212325550063C188 /* SegmentedControlElement */ = {
+			isa = PBXGroup;
+			children = (
+				8CA2189C2122EEDE0063C188 /* SegmentedControlElement.swift */,
+			);
+			path = SegmentedControlElement;
+			sourceTree = "<group>";
+		};
+		8CA218A3212325850063C188 /* SelectedBackView */ = {
+			isa = PBXGroup;
+			children = (
+				8CA2189E2122F9E40063C188 /* SelectingBackView.swift */,
+			);
+			path = SelectedBackView;
 			sourceTree = "<group>";
 		};
 		8CF1DE4320EF9D170036F986 /* Trash */ = {
@@ -860,6 +916,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8CA218982122EB0F0063C188 /* SegmentedControlComponent.xib in Resources */,
 				8C333D3E2109FD1000949AC0 /* OnboardingItemComponent.xib in Resources */,
 				8C34617520EF8FA900746724 /* LaunchScreen.storyboard in Resources */,
 				8CF5F95921149E380083B36A /* CreatePinComponent.xib in Resources */,
@@ -883,6 +940,7 @@
 				8C04BC33211C4FC100E90090 /* MavenPro-Regular.ttf in Resources */,
 				8CF5F9602114A7880083B36A /* CreatePinStageItem.xib in Resources */,
 				8CA2188F2121D97C0063C188 /* DecimalKeyboardComponent.xib in Resources */,
+				8CA218922122E8D70063C188 /* SendMoneyComponent.xib in Resources */,
 				8C34617020EF8FA700746724 /* Main.storyboard in Resources */,
 				8C333D71210F1F5300949AC0 /* PhoneMasks.plist in Resources */,
 			);
@@ -956,11 +1014,13 @@
 				8C04BC37211C872E00E90090 /* ContainerView.swift in Sources */,
 				8C60885C2111F1A200470411 /* RecoveryFlow.swift in Sources */,
 				8CF1DE4220EF98160036F986 /* AuthViewController.swift in Sources */,
+				8CA2189D2122EEDE0063C188 /* SegmentedControlElement.swift in Sources */,
 				8C4413CA2118A66A00C9689C /* WalletKeychainConfiguration.swift in Sources */,
 				8C09193D2106243600703224 /* Response.swift in Sources */,
 				8C0919742108BE5700703224 /* UserAPI.swift in Sources */,
 				8C52FFE62119D1CC00EB55EA /* WalletItemComponent.swift in Sources */,
 				8C6088402110634700470411 /* UserDataManager.swift in Sources */,
+				8CA218A5212333B20063C188 /* IconableTextField.swift in Sources */,
 				8C4413D4211993B400C9689C /* CoinType.swift in Sources */,
 				8C333D66210B6E7600949AC0 /* UITextField+Extensions.swift in Sources */,
 				8CF5F92F211327EB0083B36A /* MaskParser.swift in Sources */,
@@ -972,6 +1032,7 @@
 				8C52FFE32119C1CF00EB55EA /* TermData.swift in Sources */,
 				8CF5F9282112FE580083B36A /* DelayTimer.swift in Sources */,
 				8CF5F94A21147C050083B36A /* WalletViewController.swift in Sources */,
+				8CA218962122EAF60063C188 /* SegmentedControlComponent.swift in Sources */,
 				8C6088562111CB8C00470411 /* LoginFormComponent.swift in Sources */,
 				8CF1DE4720F37B5E0036F986 /* SMSConfirmationViewController.swift in Sources */,
 				8C333D48210B0F3700949AC0 /* UIViewController+Extensions.swift in Sources */,
@@ -1014,6 +1075,7 @@
 				8C6088512111A95100470411 /* Conditions.swift in Sources */,
 				8C52FFF0211AE19300EB55EA /* CustomOverlappingFlowLayout.swift in Sources */,
 				8C333D302109E0B400949AC0 /* UserViewController.swift in Sources */,
+				8CA2189F2122F9E40063C188 /* SelectingBackView.swift in Sources */,
 				8CF1DE4520EFB1A70036F986 /* HorizontalScrollView.swift in Sources */,
 				8C0919412106264200703224 /* Dispatcher.swift in Sources */,
 				8C52FFE12119BE0400EB55EA /* WalletData.swift in Sources */,
@@ -1024,6 +1086,8 @@
 				8C04BC3921219D0600E90090 /* Drawing.swift in Sources */,
 				8CF1DE4920F3A0BB0036F986 /* PasswordRecoveryViewController.swift in Sources */,
 				8C4413D02118A8EC00C9689C /* KeychainConfiguration.swift in Sources */,
+				8CA218942122EAC90063C188 /* SendMoneyComponent.swift in Sources */,
+				8CA218A1212304590063C188 /* SendMoneyViewController.swift in Sources */,
 				8C0919832109CC2000703224 /* EnterLoginPasswordViewController.swift in Sources */,
 				8C0919562107362300703224 /* CodableSuccess.swift in Sources */,
 				8CF5F95221148D800083B36A /* DotsFieldComponent.swift in Sources */,
