@@ -31,16 +31,25 @@ struct BalanceData {
             stringNumber = codable.zam
         }
 
-        let numberFormatter = NumberFormatter()
+        let formatter = NumberFormatter()
+        formatter.locale = Locale(identifier: "en_US")
 
         guard
             let strNumber = stringNumber,
-            let original = numberFormatter.number(from: strNumber)?.floatValue,
-            let usd = numberFormatter.number(from: codable.usd)?.floatValue else {
+            let original = formatter.number(from: strNumber)?.floatValue,
+            let usd = formatter.number(from: codable.usd)?.floatValue else {
             fatalError()
         }
 
         self.usd = usd
         self.original = original
+    }
+
+    var formattedUsd: String {
+        return "$ \(usd)"
+    }
+
+    var formattedOriginal: String {
+        return String(original)
     }
 }
