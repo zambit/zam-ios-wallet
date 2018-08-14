@@ -49,6 +49,7 @@
                     <connections>
                         <outlet property="createPinComponent" destination="Gjf-Ft-3mR" id="0bR-1z-fRT"/>
                         <outlet property="keyboardComponent" destination="BZ2-Ck-rOa" id="56I-d1-qX6"/>
+                        <outlet property="verticalBetweenSpacingConstraint" destination="hbf-Ui-fJm" id="oWr-9T-5AW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d2X-6T-NO8" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -64,7 +65,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ScK-7e-xxx" customClass="DecimalKeyboardComponent" customModule="wallet" customModuleProvider="target">
-                                <rect key="frame" x="47" y="286" width="320" height="422"/>
+                                <rect key="frame" x="16" y="286" width="382" height="422"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wKZ-NS-6YX" customClass="DotsFieldComponent" customModule="wallet" customModuleProvider="target">
@@ -88,8 +89,8 @@
                             <constraint firstItem="wKZ-NS-6YX" firstAttribute="top" secondItem="lDL-rd-O5k" secondAttribute="bottom" constant="48" id="FSH-80-DxO"/>
                             <constraint firstItem="UzJ-Eo-8Mr" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="wKZ-NS-6YX" secondAttribute="trailing" constant="16" id="MXd-UH-Jma"/>
                             <constraint firstItem="wKZ-NS-6YX" firstAttribute="centerX" secondItem="JC3-7z-KSJ" secondAttribute="centerX" id="O50-09-e7R"/>
-                            <constraint firstItem="ScK-7e-xxx" firstAttribute="leading" secondItem="UzJ-Eo-8Mr" secondAttribute="leading" constant="47" id="Y4C-xE-4ee"/>
-                            <constraint firstItem="UzJ-Eo-8Mr" firstAttribute="trailing" secondItem="ScK-7e-xxx" secondAttribute="trailing" constant="47" id="cW2-AK-1CR"/>
+                            <constraint firstItem="ScK-7e-xxx" firstAttribute="leading" secondItem="UzJ-Eo-8Mr" secondAttribute="leading" constant="16" id="Y4C-xE-4ee"/>
+                            <constraint firstItem="UzJ-Eo-8Mr" firstAttribute="trailing" secondItem="ScK-7e-xxx" secondAttribute="trailing" constant="16" id="cW2-AK-1CR"/>
                             <constraint firstItem="lDL-rd-O5k" firstAttribute="centerX" secondItem="wKZ-NS-6YX" secondAttribute="centerX" id="hFq-e4-Qzz"/>
                             <constraint firstItem="ScK-7e-xxx" firstAttribute="top" secondItem="wKZ-NS-6YX" secondAttribute="bottom" constant="72" id="qu9-hG-nke"/>
                             <constraint firstItem="ScK-7e-xxx" firstAttribute="top" secondItem="UzJ-Eo-8Mr" secondAttribute="top" constant="266" id="s56-SF-xUT"/>
@@ -100,6 +101,8 @@
                         <outlet property="dotsFieldComponent" destination="wKZ-NS-6YX" id="efm-OZ-bQt"/>
                         <outlet property="keyboardComponent" destination="ScK-7e-xxx" id="73o-Kj-Mdi"/>
                         <outlet property="titleLabel" destination="lDL-rd-O5k" id="M7L-hV-1Ye"/>
+                        <outlet property="topConstraint" destination="s56-SF-xUT" id="cMQ-lU-KuP"/>
+                        <outlet property="verticalBetweenSpacingConstraint" destination="qu9-hG-nke" id="CEz-hc-sl6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5wD-i2-B6y" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -44,7 +44,7 @@ class CreatePinComponent: Component, UICollectionViewDataSource, UICollectionVie
 
         switch UIDevice.current.screenType {
         case .extraSmall, .small:
-            //...
+            self.heightAnchor.constraint(equalToConstant: 80.0).isActive = true
             break
         case .extra, .medium, .plus:
             self.heightAnchor.constraint(equalToConstant: 180.0).isActive = true

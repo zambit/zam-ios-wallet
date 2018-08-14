@@ -46,7 +46,9 @@ class DecimalKeyboardComponent: Component {
 
         switch UIDevice.current.screenType {
         case .extraSmall, .small:
-            //...
+            keyboardButtonEdge = 72.0
+            keyboardButtonsHorizontalSpacing = 16.0
+            keyboardButtonsVerticalSpacing = 8.0
             break
         case .extra, .medium, .plus:
             keyboardButtonEdge = 72.0

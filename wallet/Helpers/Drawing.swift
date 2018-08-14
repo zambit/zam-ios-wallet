@@ -19,7 +19,11 @@ func drawIndicator(in view: UIView, center: CGPoint) {
 
     indicator.layer.cornerRadius = height / 2
     indicator.backgroundColor = .lightPeriwinkle
+    indicator.tag = 101
 
+    if let anotherView = view.viewWithTag(101) {
+        anotherView.removeFromSuperview()
+    }
     view.addSubview(indicator)
 }
 

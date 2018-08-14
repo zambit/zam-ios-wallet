@@ -21,12 +21,29 @@ class EnterPinViewController: WalletViewController, DecimalKeyboardComponentDele
     @IBOutlet var dotsFieldComponent: DotsFieldComponent?
     @IBOutlet var keyboardComponent: DecimalKeyboardComponent?
 
+    @IBOutlet var topConstraint: NSLayoutConstraint?
+    @IBOutlet var verticalBetweenSpacingConstraint: NSLayoutConstraint?
+
     private var pinText: String = ""
 
     private var phone: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        switch UIDevice.current.screenType {
+        case .extraSmall, .small:
+            verticalBetweenSpacingConstraint?.constant = 42
+            topConstraint?.constant = 150
+        case .medium:
+            verticalBetweenSpacingConstraint?.constant = 72
+            topConstraint?.constant = 200
+        case .plus,.extra:
+            verticalBetweenSpacingConstraint?.constant = 72
+            topConstraint?.constant = 266
+        case .unknown:
+            fatalError()
+        }
 
         titleLabel?.text = phone
 

@@ -43,13 +43,18 @@ class WalletItemComponent: ItemComponent {
         super.setupStyle()
 
         balanceLabel.textColor = .darkIndigo
+        balanceLabel.font = UIFont.walletFont(ofSize: 18.0, weight: .bold)
+        balanceLabel.lineBreakMode = .byCharWrapping
+
         fiatBalanceLabel.textColor = .blueGrey
+        fiatBalanceLabel.font = UIFont.walletFont(ofSize: 14.0, weight: .regular)
+        fiatBalanceLabel.lineBreakMode = .byCharWrapping
 
         phoneNumberLabel.textColor = .blueGrey
-        phoneNumberLabel.font = UIFont.systemFont(ofSize: 14.0, weight: .medium)
+        phoneNumberLabel.font = UIFont.walletFont(ofSize: 14.0, weight: .medium)
 
         let mainColor = UIColor.darkIndigo
-        let font = UIFont.systemFont(ofSize: 16.0, weight: .medium)
+        let font = UIFont.walletFont(ofSize: 16.0, weight: .medium)
         coinNameLabelMainAttributes = [.foregroundColor: mainColor, .font: font]
 
         let additColor = UIColor.blueGrey
@@ -84,7 +89,7 @@ class WalletItemComponent: ItemComponent {
         self.view.layer.shadowOpacity = 0.5
     }
 
-    func configure(image: UIImage, coinName: String, coinAddit: String, phoneNumber: String, balance: Float, fiatBalance: Float) {
+    func configure(image: UIImage, coinName: String, coinAddit: String, phoneNumber: String, balance: String, fiatBalance: String) {
         let coinNameText = NSAttributedString(string: coinName, attributes: coinNameLabelMainAttributes)
         let coinAdditText = NSAttributedString(string: " \(coinAddit)", attributes: coinNameLabelAdditAttributes)
 

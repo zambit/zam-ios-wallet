@@ -19,6 +19,8 @@ class CreatePinViewController: WalletViewController, DecimalKeyboardComponentDel
     @IBOutlet var keyboardComponent: DecimalKeyboardComponent?
     @IBOutlet var createPinComponent: CreatePinComponent?
 
+    @IBOutlet var verticalBetweenSpacingConstraint: NSLayoutConstraint?
+
     private var pinText: String = "" {
         didSet {
             print(pinText)
@@ -27,6 +29,15 @@ class CreatePinViewController: WalletViewController, DecimalKeyboardComponentDel
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        switch UIDevice.current.screenType {
+        case .small, .extraSmall:
+            verticalBetweenSpacingConstraint?.constant = 42.0
+        case .medium, .extra, .plus:
+            verticalBetweenSpacingConstraint?.constant = 72.0
+        case .unknown:
+            fatalError()
+        }
 
         keyboardComponent?.delegate = self
         createPinComponent?.delegate = self

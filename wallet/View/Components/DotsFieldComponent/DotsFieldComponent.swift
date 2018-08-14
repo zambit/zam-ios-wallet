@@ -45,7 +45,8 @@ class DotsFieldComponent: Component  {
 
         switch UIDevice.current.screenType {
         case .extraSmall, .small:
-            //...
+            dotEdge = 16.0
+            dotSpacing = 24.0
             break
         case .extra, .medium, .plus:
             dotEdge = 16.0

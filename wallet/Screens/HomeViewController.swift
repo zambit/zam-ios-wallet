@@ -58,11 +58,6 @@ class HomeViewController: DetailOffsetPresentationViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-
-        if let detailTopView = detailTopGestureView {
-            let point = CGPoint(x: detailTopView.bounds.width / 2.0, y: detailTopView.bounds.height / 4.0)
-            drawIndicator(in: detailTopView, center: point)
-        }
     }
 
     override func viewDidLoad() {
@@ -74,10 +69,8 @@ class HomeViewController: DetailOffsetPresentationViewController {
         tabBarController?.navigationController?.isNavigationBarHidden = true
 
         switch UIDevice.current.screenType {
-        case .extraSmall:
-            detailViewHeight?.constant = 450.0
-        case .small:
-            detailViewHeight?.constant = 505.0
+        case .small, .extraSmall:
+            detailViewHeight?.constant = 465.0
         case .medium:
             detailViewHeight?.constant = 550.0
         case .extra:
@@ -97,6 +90,15 @@ class HomeViewController: DetailOffsetPresentationViewController {
 
         if let embeded = embededViewController as? UIViewController {
             walletsContainerView?.set(viewController: embeded, owner: self)
+        }
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+
+        if let detailTopView = detailTopGestureView {
+            let point = CGPoint(x: detailTopView.bounds.width / 2.0, y: detailTopView.bounds.height / 4.0)
+            drawIndicator(in: detailTopView, center: point)
         }
     }
 

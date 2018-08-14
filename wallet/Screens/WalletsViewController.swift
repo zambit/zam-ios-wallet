@@ -63,21 +63,15 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
         }
 
         let wallet = wallets[indexPath.item]
-        cell.configure(image: wallet.coin.image, coinName: wallet.coin.name, coinAddit: wallet.coin.short, phoneNumber: phone, balance: wallet.balance.original, fiatBalance: wallet.balance.usd)
+        cell.configure(image: wallet.coin.image, coinName: wallet.coin.name, coinAddit: wallet.coin.short, phoneNumber: phone, balance: wallet.balance.formattedOriginal, fiatBalance: wallet.balance.formattedUsd)
         return cell
     }
 
     // UICollectionView delegate flow layout
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        switch UIDevice.current.screenType {
-        case .extraSmall, .small:
-            return CGSize(width: collectionView.bounds.width, height: 100.0)
-        case .extra, .medium, .plus:
-            return CGSize(width: collectionView.bounds.width, height: 134.0)
-        case .unknown:
-            fatalError()
-        }
+
+        return CGSize(width: collectionView.bounds.width, height: 134.0)
     }
 
     @objc
