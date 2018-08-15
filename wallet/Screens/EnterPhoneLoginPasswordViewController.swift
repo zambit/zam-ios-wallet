@@ -30,19 +30,28 @@ class EnterPhoneLoginPasswordViewController: ContinueViewController, LoginFormCo
 
         setupViewControllerStyle()
 
-        guard let path = Bundle.main.path(forResource: "PhoneMasks", ofType: "plist"),
-            let masks = NSDictionary(contentsOfFile: path) as? [String: [String: String]] else {
-                fatalError("PhoneMasks.plist error")
-        }
-
-        loginFormView?.providePhoneNumberMasksData(masks)
-
         let data = AdditionalTextButtonData(textActive: "Forgot password?")
 
         forgotPasswordButton?.configure(data: data)
         forgotPasswordButton?.addTarget(self, action: #selector(additionalButtonTouchUpInsideEvent(_:)), for: .touchUpInside)
 
-        loginFormView?.delegate = self
+        // Add dictionary with phone codes to appropriate PhoneNumberFormView
+        guard let path = Bundle.main.path(forResource: "PhoneMasks", ofType: "plist"),
+            let masksDictionary = NSDictionary(contentsOfFile: path) as? [String: [String: String]] else {
+                fatalError("PhoneMasks.plist error")
+        }
+
+        // Convert dictionary of mask to appropriate format
+        do {
+            let masks = try masksDictionary.mapValues {
+                return try PhoneMaskData(dictionary: $0)
+            }
+
+            loginFormView?.provide(masks: masks, parser: MaskParser(symbol: "X", space: " "))
+            loginFormView?.delegate = self
+        } catch let e {
+            fatalError(e.localizedDescription)
+        }
     }
 
     private func setupViewControllerStyle() {

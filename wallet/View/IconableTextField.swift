@@ -8,11 +8,17 @@
 
 import UIKit
 
-class IconableTextField: UITextField {
+protocol IconableTextFieldDelegate: class {
+
+    func iconableTextField(_ iconableTextField: IconableTextField, detailMode: IconableTextField.DetailMode, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool
+
+}
+
+class IconableTextField: UITextField, UITextFieldDelegate {
 
     enum DetailMode {
-        case left(detailImage: UIImage, detailImageTintColor: UIColor, imageOffset: CGFloat, placeholder: String)
-        case right(detailImage: UIImage, detailImageTintColor: UIColor, imageOffset: CGFloat, placeholder: String)
+        case left(detailImage: UIImage, detailImageTintColor: UIColor, imageOffset: CGFloat)
+        case right(detailImage: UIImage, detailImageTintColor: UIColor, imageOffset: CGFloat)
         case empty
     }
 
@@ -21,6 +27,8 @@ class IconableTextField: UITextField {
 
     private var leftDetailOffsetConstraint: NSLayoutConstraint?
     private var rightDetailOffsetConstraint: NSLayoutConstraint?
+
+    weak var iconableDelegate: IconableTextFieldDelegate?
 
     var leftPlaceholder: String = ""
     var rightPlaceholder: String = ""
@@ -38,12 +46,10 @@ class IconableTextField: UITextField {
                 leftDetailOffsetConstraint?.constant = 0
                 rightDetailOffsetConstraint?.constant = 0
 
-            case .left(let detailImage, let color, let imageOffset, let placeholder):
+            case .left(let detailImage, let color, let imageOffset):
                 guard let leftDetail = leftDetailImageView else {
                     return
                 }
-
-                self.placeholder = placeholder
 
                 leftDetail.imageView?.image = detailImage
                 leftDetail.imageView?.setImageColor(color: color)
@@ -61,12 +67,10 @@ class IconableTextField: UITextField {
                     strongSelf.layoutIfNeeded()
                 }, completion: nil)
 
-            case .right(let detailImage, let color, let imageOffset, let placeholder):
+            case .right(let detailImage, let color, let imageOffset):
                 guard let rightDetail = rightDetailImageView else {
                     return
                 }
-
-                self.placeholder = placeholder
 
                 rightDetail.imageView?.image = detailImage
                 rightDetail.imageView?.setImageColor(color: color)
@@ -90,11 +94,15 @@ class IconableTextField: UITextField {
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubviews()
+
+        delegate = self
     }
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         addSubviews()
+
+        delegate = self
     }
 
     private func addSubviews() {
@@ -128,5 +136,13 @@ class IconableTextField: UITextField {
         rightDetailOffsetConstraint?.isActive = true
 
         layoutIfNeeded()
+    }
+
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard let iconable = iconableDelegate else {
+            return true
+        }
+
+        return iconable.iconableTextField(self, detailMode: detailMode, shouldChangeCharactersIn: range, replacementString: string)
     }
 }

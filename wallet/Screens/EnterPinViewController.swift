@@ -16,6 +16,7 @@ class EnterPinViewController: WalletViewController, DecimalKeyboardComponentDele
 
     var onContinue: (() -> Void)?
     var onExit: (() -> Void)?
+    var onLoginForm: ((_ phone: String) -> Void)?
 
     @IBOutlet var titleLabel: UILabel?
     @IBOutlet var dotsFieldComponent: DotsFieldComponent?
@@ -85,7 +86,11 @@ class EnterPinViewController: WalletViewController, DecimalKeyboardComponentDele
                         [weak self]
                         error in
 
-                        fatalError("Error on requesting checkingIfUserAuthorized")
+                        guard let phone = self?.phone else {
+                            fatalError("Error on catching checkingIfUserAuthorized")
+                        }
+
+                        self?.onLoginForm?(phone)
                     }
                 case false:
                     dotsFieldComponent?.showFailure {

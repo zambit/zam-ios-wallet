@@ -48,11 +48,15 @@ struct MaskParser {
                 }
 
             case symbol:
-                if text[textIndex] != space {
-                    resulting.append(text[textIndex])
+                while textIndex < text.count && text[textIndex] == space {
+                    textIndex += 1
                 }
 
-                textIndex += 1
+                if textIndex < text.count {
+                    resulting.append(text[textIndex])
+
+                    textIndex += 1
+                } 
 
             default:
                 fatalError()

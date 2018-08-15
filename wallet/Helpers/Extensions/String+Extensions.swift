@@ -19,6 +19,16 @@ extension String {
     }
 
     /**
+     Adds a given suffix to self, if the suffix itself, or another required suffix does not yet exist in self.
+     */
+    mutating func addSuffixIfNeeded(_ suffix: String, requiredSuffix: String? = nil) {
+        guard !self.hasSuffix(requiredSuffix ?? suffix) else {
+            return
+        }
+        self = self + suffix
+    }
+
+    /**
      Adds a given prefix to self, if the prefix itself, or another required prefix does not yet exist in self.
      */
     mutating func addPrefixIfNeeded(_ prefix: String, requiredPrefix: String? = nil) {

@@ -21,6 +21,7 @@ class SendMoneyViewController: UIViewController {
         super.viewDidLoad()
 
         view.backgroundColor = .white
+        hideKeyboardOnTap()
         //setupDefaultStyle()
     }
 }

@@ -48,8 +48,22 @@ final class EnterPinFlow: ScreenFlow {
             self?.onboardingFlow?.begin()
         }
 
+        let onLoginForm: (String) -> Void = {
+            [weak self]
+            phone in
+
+            guard let strongSelf = self else {
+                return
+            }
+
+            let target = strongSelf.secondLoginFlow
+            target?.prepare(phone: phone)
+            target?.begin()
+        }
+
         vc.onContinue = onContinue
         vc.onExit = onExit
+        vc.onLoginForm = onLoginForm
         vc.userManager = UserDataManager(keychainConfiguration: WalletKeychainConfiguration())
         vc.authAPI = AuthAPI(provider: AuthProvider(environment: WalletEnvironment(), dispatcher: HTTPDispatcher()))
         vc.prepare(phone: phone)
@@ -74,6 +88,16 @@ final class EnterPinFlow: ScreenFlow {
         }
 
         let flow = OnboardingFlow(navigationController: navController)
+        return flow
+    }
+
+    private var secondLoginFlow: SecondEnterLoginFlow? {
+        guard let navController = navigationController else {
+            print("Navigation controller not found")
+            return nil
+        }
+
+        let flow = SecondEnterLoginFlow(navigationController: navController)
         return flow
     }
 }

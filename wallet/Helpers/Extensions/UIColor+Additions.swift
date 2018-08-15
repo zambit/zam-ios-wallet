@@ -90,4 +90,16 @@ extension UIColor {
         return UIColor(red: 84.0 / 255.0, green: 185.0 / 255.0, blue: 243.0 / 255.0, alpha: 1.0)
     }
 
+    @nonobjc class var warmGrey: UIColor {
+        return UIColor(white: 153.0 / 255.0, alpha: 1.0)
+    }
+
+    @nonobjc class var azure: UIColor {
+        return UIColor(red: 13.0 / 255.0, green: 187.0 / 255.0, blue: 236.0 / 255.0, alpha: 1.0)
+    }
+
+    @nonobjc class var turquoiseBlueTwo: UIColor {
+        return UIColor(red: 0.0, green: 170.0 / 255.0, blue: 219.0 / 255.0, alpha: 1.0)
+    }
+
 }

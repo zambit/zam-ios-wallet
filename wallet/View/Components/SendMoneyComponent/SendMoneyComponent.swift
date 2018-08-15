@@ -9,53 +9,57 @@
 import Foundation
 import UIKit
 
-class SendMoneyComponent: Component, SegmentedControlComponentDelegate {
+class SendMoneyComponent: Component, SendMoneyAmountComponentDelegate {
 
-    @IBOutlet private var toLabel: UILabel?
-    @IBOutlet private var segmentedControlComponent: SegmentedControlComponent?
-    @IBOutlet private var recipientTextField: IconableTextField?
-    @IBOutlet private var amountTextField: UITextField?
-    @IBOutlet private var amountAltTextField: UITextField?
-    @IBOutlet private var sendButton: UIButton?
+    var userAPI: UserAPI?
+
+    @IBOutlet private var sendMoneyMethodComponent: SendMoneyMethodComponent?
+    @IBOutlet private var sendMoneyAmountComponent: SendMoneyAmountComponent?
+    @IBOutlet private var sendButton: SendMoneyButton?
+
+    private var coinType: CoinType? = .btc
 
     override func initFromNib() {
         super.initFromNib()
 
-        segmentedControlComponent?.delegate = self
+        // Add dictionary with phone codes to appropriate PhoneNumberFormView
+        guard let path = Bundle.main.path(forResource: "PhoneMasks", ofType: "plist"),
+            let masksDictionary = NSDictionary(contentsOfFile: path) as? [String: [String: String]] else {
+                fatalError("PhoneMasks.plist error")
+        }
 
-        recipientTextField?.font = UIFont.walletFont(ofSize: 16.0, weight: .medium)
-        recipientTextField?.textAlignment = .center
-        recipientTextField?.textColor = .white
+        // Convert dictionary of mask to appropriate format
+        do {
+            let phoneMasks = try masksDictionary.mapValues {
+                return try PhoneMaskData(dictionary: $0)
+            }
 
-        segmentedControlComponent?.addSegment(icon: #imageLiteral(resourceName: "phoneOutgoing"), title: "Phone", iconTintColor: .paleOliveGreen, selectedTintColor: .white, backColor: .paleOliveGreen)
-        segmentedControlComponent?.addSegment(icon: #imageLiteral(resourceName: "linkTo"), title: "Address", iconTintColor: .paleOliveGreen, selectedTintColor: .white, backColor: .lightblue)
+            sendMoneyMethodComponent?.provide(phoneMasks: phoneMasks, parser: MaskParser(symbol: "X", space: " "))
+        } catch let e {
+            fatalError(e.localizedDescription)
+        }
 
+        sendMoneyAmountComponent?.delegate = self
+
+        if let coin = coinType {
+            sendMoneyAmountComponent?.prepare(coinType: coin)
+        }
     }
 
     override func setupStyle() {
         super.setupStyle()
-
-        toLabel?.font = UIFont.walletFont(ofSize: 22.0, weight: .bold)
-        toLabel?.textColor = .darkIndigo
     }
 
-    func segmentedControlComponent(_ segmentedControlComponent: SegmentedControlComponent, willChangeTo index: Int, withAnimatedDuration: Float, color: UIColor) {
-
-        switch index {
-        case 0:
-            recipientTextField?.detailMode = .left(detailImage: #imageLiteral(resourceName: "users"), detailImageTintColor: .paleOliveGreen, imageOffset: 16.0, placeholder: "Phone number")
-            recipientTextField?.backgroundColor = color
-            recipientTextField?.text = ""
-        case 1:
-            recipientTextField?.detailMode = .right(detailImage: #imageLiteral(resourceName: "maximize"), detailImageTintColor: .white, imageOffset: 16.0, placeholder: "Address")
-            recipientTextField?.backgroundColor = color
-            recipientTextField?.text = ""
-        default:
-            fatalError()
-        }
+    func prepare(coinType: CoinType) {
+        self.coinType = coinType
     }
 
-    func segmentedControlComponent(_ segmentedControlComponent: SegmentedControlComponent, currentIndexChangedTo index: Int, color: UIColor) {
+    func sendMoneyAmountComponent(_ sendMoneyAmountComponent: SendMoneyAmountComponent, valueCorrectlyEntered value: String, detailValue: String) {
+        sendButton?.customAppearance.setEnabled(true)
+        sendButton?.customAppearance.provideData(amount: value, alternative: detailValue)
     }
-    
+
+    func sendMoneyAmountComponentValueEnteredIncorrectly(_ sendMoneyAmountComponent: SendMoneyAmountComponent) {
+        sendButton?.customAppearance.setEnabled(false)
+    }
 }

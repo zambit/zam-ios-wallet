@@ -34,12 +34,21 @@ class EnterPhoneNumberViewController: ContinueViewController, PhoneNumberFormCom
 
         // Add dictionary with phone codes to appropriate PhoneNumberFormView
         guard let path = Bundle.main.path(forResource: "PhoneMasks", ofType: "plist"),
-            let masks = NSDictionary(contentsOfFile: path) as? [String: [String: String]] else {
+            let masksDictionary = NSDictionary(contentsOfFile: path) as? [String: [String: String]] else {
                 fatalError("PhoneMasks.plist error")
         }
 
-        phoneNumberForm?.provideDictionaryOfMasks(masks)
-        phoneNumberForm?.delegate = self
+        // Convert dictionary of mask to appropriate format
+        do {
+            let masks = try masksDictionary.mapValues {
+                return try PhoneMaskData(dictionary: $0)
+            }
+
+            phoneNumberForm?.provide(masks: masks, parser: MaskParser(symbol: "X", space: " "))
+            phoneNumberForm?.delegate = self
+        } catch let e {
+            fatalError(e.localizedDescription)
+        }
     }
 
     // PhoneNumberFormViewDelegate

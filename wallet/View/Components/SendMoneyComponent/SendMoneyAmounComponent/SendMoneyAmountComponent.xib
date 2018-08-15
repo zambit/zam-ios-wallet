@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SendMoneyAmountComponent" customModule="wallet" customModuleProvider="target">
+            <connections>
+                <outlet property="altValueLabel" destination="qlR-ac-cJq" id="wbn-Qz-V8f"/>
+                <outlet property="contentView" destination="iN0-l3-epB" id="Wpj-Ru-k4t"/>
+                <outlet property="titleLabel" destination="eg3-E9-yqy" id="yOI-6f-9OQ"/>
+                <outlet property="valueTextField" destination="Q45-Zq-EGm" id="ovF-rl-S4u"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="570" height="510"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eg3-E9-yqy">
+                    <rect key="frame" x="264" y="55" width="42" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Q45-Zq-EGm">
+                    <rect key="frame" x="16" y="85" width="538" height="54"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="54" id="gJb-In-gev"/>
+                    </constraints>
+                    <nil key="textColor"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qlR-ac-cJq">
+                    <rect key="frame" x="264" y="149" width="42" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="eg3-E9-yqy" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="35" id="7kU-cK-Uky"/>
+                <constraint firstItem="Q45-Zq-EGm" firstAttribute="top" secondItem="eg3-E9-yqy" secondAttribute="bottom" constant="9" id="DAx-fa-YsA"/>
+                <constraint firstItem="qlR-ac-cJq" firstAttribute="top" secondItem="Q45-Zq-EGm" secondAttribute="bottom" constant="10" id="EAI-RW-EXA"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="qlR-ac-cJq" secondAttribute="bottom" constant="18" id="FcP-2p-RGv"/>
+                <constraint firstItem="eg3-E9-yqy" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="UUA-wZ-Wfu"/>
+                <constraint firstItem="Q45-Zq-EGm" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="YIS-iq-sJR"/>
+                <constraint firstItem="qlR-ac-cJq" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="jGa-8c-mOb"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Q45-Zq-EGm" secondAttribute="trailing" constant="16" id="z5d-Bo-wzw"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="131" y="-25"/>
+        </view>
+    </objects>
+</document>

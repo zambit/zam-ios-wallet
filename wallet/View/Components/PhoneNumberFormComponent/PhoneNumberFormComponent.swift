@@ -34,55 +34,38 @@ extension PhoneNumberFormComponentDelegate {
 /**
  Class that controlls entreing phone number form, handles all textFields editing and defines its behaviour.
  */
-class PhoneNumberFormComponent: UIView, UITextFieldDelegate {
-
-    enum PhoneMaskKeys: String {
-        case countryId = "country_id"
-        case countryName = "country_name"
-        case phoneMask = "phone_mask"
-        case phoneCode = "phone_code"
-    }
-
-    /**
-     Enum providing different tasks to animate
-     */
-    enum CountryImageAnimationTask {
-        case show(country: String)
-        case hide
-        case idle
-        case change(toCountry: String)
-
-        static func taskFrom(oldCountryNameValue: String?, newCountryNameValue: String?) -> CountryImageAnimationTask {
-
-            if let old = oldCountryNameValue {
-                // old is value
-                if let new = newCountryNameValue {
-                    // old and new are value
-                    if old != new {
-                        // old and new are value and not equal
-                        return .change(toCountry: new)
-                    }
-
-                    // old and new are value and equal
-                    return .idle
-                }
-
-                // old is value, new is nil
-                return .hide
-            }
-
-            // old is nil
-            if let new = newCountryNameValue {
-                // old is nil, new is value
-                return .show(country: new)
-            }
-
-            // old and new is nil
-            return .idle
-        }
-    }
+class PhoneNumberFormComponent: UIView, UITextFieldDelegate, PhoneNumberEnteringHandlerDelegate {
 
     weak var delegate: PhoneNumberFormComponentDelegate?
+
+    /**
+     Masks dictionary and parser for using mask
+     */
+    var masks: [String: PhoneMaskData]?
+    var parser: MaskParser?
+
+    /**
+     Timer for performing helperText changing with some delay
+     */
+    private var helperTextDelayTimer: DelayTimer?
+    private var helperTextDelayValue: Double = 1.0
+
+    /**
+     Entering phone number handler, that's responsible for entering symbols in textFields according phone number format
+     */
+    private var phoneNumberEnteringHandler: PhoneNumberEnteringHandler?
+
+    @IBOutlet private var contentView: UIView!
+    @IBOutlet private var detailPhonePartTextField: UITextField?
+    @IBOutlet private var mainPhonePartTextField: UITextField?
+    @IBOutlet private var countryImageView: CountryView?
+    @IBOutlet private var helperTextLabel: UILabel?
+
+    @IBOutlet private var rightLabelsToContentViewConstraint: NSLayoutConstraint?
+    @IBOutlet private var rightImageToContentViewConstraint: NSLayoutConstraint?
+
+    @IBOutlet private var textFieldsHeightConstraint: NSLayoutConstraint?
+    @IBOutlet private var countryImageViewHeightConstraint: NSLayoutConstraint?
 
     var helperText: String {
         get {
@@ -107,50 +90,6 @@ class PhoneNumberFormComponent: UIView, UITextFieldDelegate {
             }
         }
     }
-
-    /**
-     Timer for performing helperText changing with some delay
-     */
-    private var helperTextDelayTimer: DelayTimer?
-    private var helperTextDelayValue: Double = 1.0
-
-    /**
-     Masks dictionary
-     */
-    private var masks: [String: [String: String]] = [:]
-
-    /**
-      Current mask
-     */
-    private var currentMask: (String, [String: String])? {
-        willSet {
-            let state = CountryImageAnimationTask.taskFrom(
-                oldCountryNameValue: currentMask?.1[PhoneMaskKeys.countryId.rawValue],
-                newCountryNameValue: newValue?.1[PhoneMaskKeys.countryId.rawValue]
-            )
-
-            setupCountryImageAnimationWith(state: state) {}
-        }
-    }
-
-    var currentMaskData: (String, Character, Character)? {
-        if let mask = currentMask?.1[PhoneMaskKeys.phoneMask.rawValue] {
-            return (mask, "X", " ")
-        }
-        return nil
-    }
-
-    @IBOutlet private var contentView: UIView!
-    @IBOutlet private var detailPhonePartTextField: UITextField?
-    @IBOutlet private var mainPhonePartTextField: UITextField?
-    @IBOutlet private var countryImageView: CountryView?
-    @IBOutlet private var helperTextLabel: UILabel?
-
-    @IBOutlet private var rightLabelsToContentViewConstraint: NSLayoutConstraint?
-    @IBOutlet private var rightImageToContentViewConstraint: NSLayoutConstraint?
-
-    @IBOutlet private var textFieldsHeightConstraint: NSLayoutConstraint?
-    @IBOutlet private var countryImageViewHeightConstraint: NSLayoutConstraint?
 
     var textFieldsHeight: CGFloat {
         get {
@@ -220,12 +159,14 @@ class PhoneNumberFormComponent: UIView, UITextFieldDelegate {
 
         helperTextDelayTimer = DelayTimer(delay: helperTextDelayValue)
 
-        detailPhonePartTextField?.addTarget(self, action: #selector(detailTextFieldEditingEnd(_:)), for: .editingDidEnd)
-        detailPhonePartTextField?.addTarget(self, action: #selector(detailTextFieldEditingBegin(_:)), for: .editingDidBegin)
-        detailPhonePartTextField?.addTarget(self, action: #selector(detailTextFieldEditingChanged(_:)), for: .editingChanged)
+        if let detailTextField = detailPhonePartTextField,
+            let numberTextField = mainPhonePartTextField,
+            let masks = masks,
+            let parser = parser {
 
-        mainPhonePartTextField?.addTarget(self, action: #selector(mainTextFieldEditingEnd(_:)), for: .editingDidEnd)
-        mainPhonePartTextField?.addTarget(self, action: #selector(mainTextFieldEditingChanged(_:)), for: .editingChanged)
+            phoneNumberEnteringHandler = PhoneNumberEnteringHandler(codeTextField: detailTextField, numberTextField: numberTextField, masks: masks, maskParser: parser)
+            phoneNumberEnteringHandler?.delegate = self
+        }
     }
 
     private func setupStyle() {
@@ -256,23 +197,34 @@ class PhoneNumberFormComponent: UIView, UITextFieldDelegate {
         self.countryImageView?.setImage(#imageLiteral(resourceName: "icon_placeholder"))
     }
 
-    func provideDictionaryOfMasks(_ masks: [String: [String: String]]) {
-        masks.forEach {
-            guard
-                let _ = $0.value[PhoneMaskKeys.phoneCode.rawValue],
-                let _ = $0.value[PhoneMaskKeys.phoneMask.rawValue],
-                let _ = $0.value[PhoneMaskKeys.countryId.rawValue],
-                let _ = $0.value[PhoneMaskKeys.countryName.rawValue] else {
-                    fatalError("Invalid format of dictionary")
-            }
+    func provide(masks: [String: PhoneMaskData], parser: MaskParser) {
+        self.masks = masks
+        self.parser = parser
+
+        guard
+            let detailTextField = detailPhonePartTextField,
+            let numberTextField = mainPhonePartTextField else {
+                return
         }
 
-        self.masks = masks
+        phoneNumberEnteringHandler = PhoneNumberEnteringHandler(codeTextField: detailTextField, numberTextField: numberTextField, masks: masks, maskParser: parser)
+        phoneNumberEnteringHandler?.delegate = self
     }
 
-    private func checkConditions(mask: String?, phoneNumberMainPart: String) {
+    // MARK: - PhoneNumberEnteringHandlerDelegate
+
+    func phoneNumberMaskChanged(_ handler: PhoneNumberEnteringHandler, from oldValue: PhoneMaskData?, to newValue: PhoneMaskData?) {
+        let state = CountryImageAnimationTask.taskFrom(
+            oldCountryNameValue: oldValue?.countryId,
+            newCountryNameValue: newValue?.countryId
+        )
+
+        setupCountryImageAnimationWith(state: state) {}
+    }
+
+    func phoneNumberEditingChanged(_ handler: PhoneNumberEnteringHandler, with mask: PhoneMaskData?, phoneNumber: String) {
         if let mask = mask {
-            switch phoneNumberMainPart.count >= mask.count {
+            switch phoneNumber.count >= mask.phoneMask.count {
             case true:
                 helperTextDelayTimer?.fire()
                 helperTextWithDelegateCheck = ""
@@ -283,13 +235,13 @@ class PhoneNumberFormComponent: UIView, UITextFieldDelegate {
                 helperTextDelayTimer?.addOperation {
                     [weak self] in
 
-                    guard phoneNumberMainPart != "" else {
+                    guard phoneNumber != "" else {
                         self?.helperTextWithDelegateCheck = ""
                         return
                     }
 
                     self?.helperTextWithDelegateCheck = failedCondition.rawValue
-                }.fire()
+                    }.fire()
 
                 delegate?.phoneNumberFormComponent(self, dontSatisfyTheCondition: failedCondition)
             }
@@ -299,119 +251,158 @@ class PhoneNumberFormComponent: UIView, UITextFieldDelegate {
             helperTextDelayTimer?.addOperation {
                 [weak self] in
 
-                guard phoneNumberMainPart != "" else {
+                guard phoneNumber != "" else {
                     self?.helperTextWithDelegateCheck = ""
                     return
                 }
 
                 self?.helperTextWithDelegateCheck = failedCondition.rawValue
-            }.fire()
+                }.fire()
 
             delegate?.phoneNumberFormComponent(self, dontSatisfyTheCondition: failedCondition)
         }
     }
 
-    // - UITextField events handlers
-    @objc
-    private func detailTextFieldEditingBegin(_ sender: UITextField) {
-        sender.text?.addPrefixIfNeeded("+")
-    }
+//    // - UITextField events handlers
+//    @objc
+//    private func detailTextFieldEditingBegin(_ sender: UITextField) {
+//        sender.text?.addPrefixIfNeeded("+")
+//    }
+//
+//    @objc
+//    private func detailTextFieldEditingChanged(_ sender: UITextField) {
+//        guard let text = sender.text else {
+//            return
+//        }
+//
+//        sender.text?.addPrefixIfNeeded("+")
+//
+//        currentMask = masks.filter {
+//            "+\($0.key)" == text
+//        }.first
+//
+//        // update mainTextField
+//        if let mask = currentMask?.1[PhoneMaskKeys.phoneMask.rawValue],
+//            let mainText = mainPhonePartTextField?.text {
+//            mainPhonePartTextField?.text = MaskParser(symbol: "X", space: " ").matchingUnstrict(text: mainText, withMask: mask)
+//        }
+//
+//        delegate?.phoneNumberFormComponentEditingChange(self)
+//
+//        let phoneMask = currentMask?.1[PhoneMaskKeys.phoneMask.rawValue]
+//        let phoneNumberMainPart = mainPhonePartTextField?.text ?? ""
+//        checkConditions(mask: phoneMask, phoneNumberMainPart: phoneNumberMainPart)
+//    }
+//
+//    @objc
+//    private func detailTextFieldEditingEnd(_ sender: UITextField) {
+//        sender.resignFirstResponder()
+//        sender.layoutIfNeeded()
+//    }
+//
+//    @objc
+//    private func mainTextFieldEditingChanged(_ sender: UITextField) {
+//        delegate?.phoneNumberFormComponentEditingChange(self)
+//
+//        let phoneMask = currentMask?.1[PhoneMaskKeys.phoneMask.rawValue]
+//        let phoneNumberMainPart = mainPhonePartTextField?.text ?? ""
+//        checkConditions(mask: phoneMask, phoneNumberMainPart: phoneNumberMainPart)
+//    }
+//
+//    @objc
+//    private func mainTextFieldEditingEnd(_ sender: UITextField) {
+//        sender.resignFirstResponder()
+//        sender.layoutIfNeeded()
+//    }
+//
+//    // - UITextFieldDelegate
+//    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+//        if let detailTextField = detailPhonePartTextField, textField == detailPhonePartTextField {
+//            return detailTextFieldShouldChangeCharactersIn(range: range, replacementString: string, textField: detailTextField)
+//        }
+//
+//        if textField == mainPhonePartTextField {
+//            return mainTextFieldShouldChangeCharactersIn(range: range, replacementString: string)
+//        }
+//
+//        return true
+//    }
+//
+//    private func detailTextFieldShouldChangeCharactersIn(range: NSRange, replacementString string: String, textField: UITextField) -> Bool {
+//        let allowedCharacters = CharacterSet(charactersIn: "1234567890")
+//        let characterSet = CharacterSet(charactersIn: string)
+//        return allowedCharacters.isSuperset(of: characterSet)
+//    }
+//
+//    private func mainTextFieldShouldChangeCharactersIn(range: NSRange, replacementString string: String) -> Bool {
+//
+//        let allowedCharacters = CharacterSet(charactersIn: "1234567890")
+//        let characterSet = CharacterSet(charactersIn: string)
+//
+//        guard allowedCharacters.isSuperset(of: characterSet) else {
+//            return false
+//        }
+//
+//        guard let text = mainPhonePartTextField?.text else {
+//            return true
+//        }
+//
+//        if let textRange = Range(range, in: text),
+//            let mask = currentMask?.1[PhoneMaskKeys.phoneMask.rawValue] {
+//
+//            let updatedText = text.replacingCharacters(in: textRange, with: string)
+//            let maskedText = MaskParser(symbol: "X", space: " ").matchingUnstrict(text: updatedText, withMask: mask)
+//
+//            mainPhonePartTextField?.text = maskedText
+//
+//            delegate?.phoneNumberFormComponentEditingChange(self)
+//
+//            let phoneMask = currentMask?.1[PhoneMaskKeys.phoneMask.rawValue]
+//            let phoneNumberMainPart = mainPhonePartTextField?.text ?? ""
+//            checkConditions(mask: phoneMask, phoneNumberMainPart: phoneNumberMainPart)
+//            return false
+//        }
+//
+//        return true
+//    }
 
-    @objc
-    private func detailTextFieldEditingChanged(_ sender: UITextField) {
-        guard let text = sender.text else {
-            return
+    /**
+     Enum providing different tasks to animate
+     */
+    enum CountryImageAnimationTask {
+        case show(country: String)
+        case hide
+        case idle
+        case change(toCountry: String)
+
+        static func taskFrom(oldCountryNameValue: String?, newCountryNameValue: String?) -> CountryImageAnimationTask {
+
+            if let old = oldCountryNameValue {
+                // old is value
+                if let new = newCountryNameValue {
+                    // old and new are value
+                    if old != new {
+                        // old and new are value and not equal
+                        return .change(toCountry: new)
+                    }
+
+                    // old and new are value and equal
+                    return .idle
+                }
+
+                // old is value, new is nil
+                return .hide
+            }
+
+            // old is nil
+            if let new = newCountryNameValue {
+                // old is nil, new is value
+                return .show(country: new)
+            }
+
+            // old and new is nil
+            return .idle
         }
-
-        sender.text?.addPrefixIfNeeded("+")
-
-        currentMask = masks.filter {
-            "+\($0.key)" == text
-        }.first
-
-        // update mainTextField
-        if let mask = currentMask?.1[PhoneMaskKeys.phoneMask.rawValue],
-            let mainText = mainPhonePartTextField?.text {
-            mainPhonePartTextField?.text = MaskParser(symbol: "X", space: " ").matchingUnstrict(text: mainText, withMask: mask)
-        }
-
-        delegate?.phoneNumberFormComponentEditingChange(self)
-
-        let phoneMask = currentMask?.1[PhoneMaskKeys.phoneMask.rawValue]
-        let phoneNumberMainPart = mainPhonePartTextField?.text ?? ""
-        checkConditions(mask: phoneMask, phoneNumberMainPart: phoneNumberMainPart)
-    }
-
-    @objc
-    private func detailTextFieldEditingEnd(_ sender: UITextField) {
-        sender.resignFirstResponder()
-        sender.layoutIfNeeded()
-    }
-
-    @objc
-    private func mainTextFieldEditingChanged(_ sender: UITextField) {
-        delegate?.phoneNumberFormComponentEditingChange(self)
-        
-        let phoneMask = currentMask?.1[PhoneMaskKeys.phoneMask.rawValue]
-        let phoneNumberMainPart = mainPhonePartTextField?.text ?? ""
-        checkConditions(mask: phoneMask, phoneNumberMainPart: phoneNumberMainPart)
-    }
-
-    @objc
-    private func mainTextFieldEditingEnd(_ sender: UITextField) {
-        sender.resignFirstResponder()
-        sender.layoutIfNeeded()
-    }
-
-    // - UITextFieldDelegate
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        if let detailTextField = detailPhonePartTextField, textField == detailPhonePartTextField {
-            return detailTextFieldShouldChangeCharactersIn(range: range, replacementString: string, textField: detailTextField)
-        }
-
-        if textField == mainPhonePartTextField {
-            return mainTextFieldShouldChangeCharactersIn(range: range, replacementString: string)
-        }
-
-        return true
-    }
-
-    private func detailTextFieldShouldChangeCharactersIn(range: NSRange, replacementString string: String, textField: UITextField) -> Bool {
-        let allowedCharacters = CharacterSet(charactersIn: "1234567890")
-        let characterSet = CharacterSet(charactersIn: string)
-        return allowedCharacters.isSuperset(of: characterSet)
-    }
-
-    private func mainTextFieldShouldChangeCharactersIn(range: NSRange, replacementString string: String) -> Bool {
-
-        let allowedCharacters = CharacterSet(charactersIn: "1234567890")
-        let characterSet = CharacterSet(charactersIn: string)
-
-        guard allowedCharacters.isSuperset(of: characterSet) else {
-            return false
-        }
-
-        guard let text = mainPhonePartTextField?.text else {
-            return true
-        }
-
-        if let textRange = Range(range, in: text),
-            let mask = currentMask?.1[PhoneMaskKeys.phoneMask.rawValue] {
-
-            let updatedText = text.replacingCharacters(in: textRange, with: string)
-            let maskedText = MaskParser(symbol: "X", space: " ").matchingUnstrict(text: updatedText, withMask: mask)
-
-            mainPhonePartTextField?.text = maskedText
-
-            delegate?.phoneNumberFormComponentEditingChange(self)
-            
-            let phoneMask = currentMask?.1[PhoneMaskKeys.phoneMask.rawValue]
-            let phoneNumberMainPart = mainPhonePartTextField?.text ?? ""
-            checkConditions(mask: phoneMask, phoneNumberMainPart: phoneNumberMainPart)
-            return false
-        }
-
-        return true
     }
 
     private func setupCountryImageAnimationWith(state: CountryImageAnimationTask, completion handler: @escaping () -> Void) {
