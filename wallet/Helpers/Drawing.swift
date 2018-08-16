@@ -8,6 +8,24 @@
 
 import UIKit
 
+func drawSeparator(in view: UIView, center: CGPoint, width: CGFloat) {
+    let height: CGFloat = 1.0
+
+    let origin = CGPoint(x: center.x - width / 2, y: center.y - height / 2)
+
+    let rect = CGRect(origin: origin, size: CGSize(width: width, height: height))
+    let separator = UIView(frame: rect)
+
+    separator.backgroundColor = UIColor.warmGrey.withAlphaComponent(0.2)
+    separator.tag = 102
+
+    if let anotherView = view.viewWithTag(102) {
+        anotherView.removeFromSuperview()
+    }
+    view.addSubview(separator)
+    separator.autoresizingMask = [.flexibleWidth]
+}
+
 func drawIndicator(in view: UIView, center: CGPoint) {
     let width: CGFloat = 48.0
     let height: CGFloat = 4.0

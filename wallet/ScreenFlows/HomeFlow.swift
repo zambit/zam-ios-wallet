@@ -38,6 +38,7 @@ final class HomeFlow: ScreenFlow {
         }
 
         vc.embededViewController = walletsScreen
+        vc.embededViewController?.owner = vc
         vc.flow = self
         return vc
     }
@@ -49,8 +50,35 @@ final class HomeFlow: ScreenFlow {
             fatalError()
         }
 
+        let onSendFromWallet: (CoinType, Int, [WalletData], WalletViewController) -> Void = {
+            [weak self]
+            coin, index, wallets, owner in
+
+            guard let strongSelf = self else {
+                return
+            }
+
+            let target = strongSelf.sendMoneyScreen
+            target.prepare(coin: coin, wallets: wallets, currentIndex: index)
+
+            owner.walletNavigationController?.push(viewController: target)
+        }
+
+        vc.onSendFromWallet = onSendFromWallet
         vc.userManager = UserDataManager(keychainConfiguration: WalletKeychainConfiguration())
         vc.userAPI = UserAPI(provider: UserProvider(environment: WalletEnvironment(), dispatcher: HTTPDispatcher()))
+        vc.flow = self
+        return vc
+    }
+
+    private var sendMoneyScreen: SendMoneyViewController {
+        let _vc = ControllerHelper.instantiateViewController(identifier: "SendMoneyViewController", storyboardName: "Main")
+
+        guard let vc = _vc as? SendMoneyViewController else {
+            fatalError()
+        }
+
+        vc.title = "Send money"
         vc.flow = self
         return vc
     }

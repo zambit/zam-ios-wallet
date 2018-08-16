@@ -12,4 +12,6 @@ class WalletViewController: FlowViewController {
 
     weak var walletNavigationController: WalletNavigationController?
 
+    weak var walletTabBar: WalletTabBarController?
+
 }

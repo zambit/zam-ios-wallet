@@ -14,6 +14,8 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
     var userManager: UserDataManager?
     var userAPI: UserAPI?
 
+    var onSendFromWallet: ((CoinType, Int, [WalletData], WalletViewController) -> Void)?
+
     private var wallets: [WalletData] = []
 
     private var refreshControl: UIRefreshControl?
@@ -23,6 +25,8 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
     var scrollView: UIScrollView? {
         return collectionView
     }
+
+   weak var owner: WalletViewController?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,6 +68,15 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
 
         let wallet = wallets[indexPath.item]
         cell.configure(image: wallet.coin.image, coinName: wallet.coin.name, coinAddit: wallet.coin.short, phoneNumber: phone, balance: wallet.balance.formattedOriginal, fiatBalance: wallet.balance.formattedUsd)
+        cell.onSendButtonTap = {
+            [weak self] in
+
+            guard let strongSelf = self, let owner = strongSelf.owner else {
+                return
+            }
+
+            strongSelf.onSendFromWallet?(wallet.coin, indexPath.item, strongSelf.wallets, owner)
+        }
         return cell
     }
 

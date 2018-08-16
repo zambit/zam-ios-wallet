@@ -97,6 +97,8 @@ class EnterPinViewController: WalletViewController, DecimalKeyboardComponentDele
                         [weak self] in
                         self?.dotsFieldComponent?.unfillAll()
                     }
+
+                    pinText = ""
                 }
 
             }

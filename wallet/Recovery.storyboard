@@ -55,7 +55,7 @@
                     </view>
                     <connections>
                         <outlet property="continueButton" destination="P8R-ru-Tcx" id="IyS-uj-5i8"/>
-                        <outlet property="continueButtonBottomConstraint" destination="teI-gi-Yao" id="3FN-Cu-URn"/>
+                        <outlet property="fastenBottomConstraint" destination="teI-gi-Yao" id="dti-uq-nLU"/>
                         <outlet property="largeTitleLabel" destination="s4K-11-EeI" id="bpI-6T-T7f"/>
                         <outlet property="phoneNumberForm" destination="y5H-P7-dyB" id="VNa-4E-xLd"/>
                     </connections>

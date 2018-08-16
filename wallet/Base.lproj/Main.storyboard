@@ -44,23 +44,49 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2YV-v8-nPf" customClass="SendMoneyComponent" customModule="wallet" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="210" width="375" height="386"/>
+                                <rect key="frame" x="0.0" y="149" width="375" height="629"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Ev-QY-osr">
+                                <rect key="frame" x="16" y="65" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="gkV-cN-TUf">
+                                <rect key="frame" x="0.0" y="104" width="375" height="90"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="386" id="msr-N9-GvU"/>
+                                    <constraint firstAttribute="height" constant="90" id="clN-Zj-bsf"/>
                                 </constraints>
-                            </view>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="mns-x0-b85">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.99806826780000002" blue="0.67137100199999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
+                            <constraint firstItem="jO9-Ft-QFF" firstAttribute="bottom" secondItem="2YV-v8-nPf" secondAttribute="bottom" id="07x-Ar-vJi"/>
+                            <constraint firstItem="1Ev-QY-osr" firstAttribute="leading" secondItem="jO9-Ft-QFF" secondAttribute="leading" constant="16" id="DbJ-oq-EYk"/>
+                            <constraint firstItem="2YV-v8-nPf" firstAttribute="top" secondItem="gkV-cN-TUf" secondAttribute="bottom" constant="-45" id="E1G-50-f1p"/>
+                            <constraint firstItem="2YV-v8-nPf" firstAttribute="top" secondItem="1Ev-QY-osr" secondAttribute="bottom" constant="63" id="Gfr-de-9ZW"/>
                             <constraint firstItem="jO9-Ft-QFF" firstAttribute="trailing" secondItem="2YV-v8-nPf" secondAttribute="trailing" id="Gg2-Db-Vw8"/>
                             <constraint firstItem="2YV-v8-nPf" firstAttribute="leading" secondItem="jO9-Ft-QFF" secondAttribute="leading" id="UFf-pC-n8e"/>
-                            <constraint firstItem="2YV-v8-nPf" firstAttribute="top" secondItem="jO9-Ft-QFF" secondAttribute="top" constant="166" id="tCA-IQ-JCG"/>
+                            <constraint firstItem="2YV-v8-nPf" firstAttribute="top" secondItem="jO9-Ft-QFF" secondAttribute="top" priority="999" constant="105" id="dfX-dK-0ZH"/>
+                            <constraint firstItem="gkV-cN-TUf" firstAttribute="leading" secondItem="jO9-Ft-QFF" secondAttribute="leading" id="e2a-pN-rOq"/>
+                            <constraint firstItem="gkV-cN-TUf" firstAttribute="trailing" secondItem="jO9-Ft-QFF" secondAttribute="trailing" id="mKL-sQ-lXR"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="jO9-Ft-QFF"/>
                     </view>
                     <connections>
+                        <outlet property="fastenBottomConstraint" destination="07x-Ar-vJi" id="czr-lh-jGk"/>
                         <outlet property="sendMoneyComponent" destination="2YV-v8-nPf" id="onH-t9-CsF"/>
+                        <outlet property="titleLabel" destination="1Ev-QY-osr" id="klV-n9-A19"/>
+                        <outlet property="walletsCollectionView" destination="gkV-cN-TUf" id="XeL-A1-8Gh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kdz-jM-U2y" userLabel="First Responder" sceneMemberID="firstResponder"/>

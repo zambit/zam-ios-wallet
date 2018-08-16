@@ -11,7 +11,7 @@ import UIKit
 
 protocol SendMoneyAmountComponentDelegate: class {
 
-    func sendMoneyAmountComponent(_ sendMoneyAmountComponent: SendMoneyAmountComponent, valueCorrectlyEntered value: String, detailValue: String)
+    func sendMoneyAmountComponent(_ sendMoneyAmountComponent: SendMoneyAmountComponent, amountValueEntered value: Float, stringFormat: String)
 
     func sendMoneyAmountComponentValueEnteredIncorrectly(_ sendMoneyAmountComponent: SendMoneyAmountComponent)
 
@@ -24,6 +24,11 @@ class SendMoneyAmountComponent: Component, UITextFieldDelegate {
     @IBOutlet private var titleLabel: UILabel?
     @IBOutlet private var valueTextField: UITextField?
     @IBOutlet private var altValueLabel: UILabel?
+
+    @IBOutlet private var feeContainer: UIView?
+
+    @IBOutlet private var blockchainFee: IndentLabel?
+    @IBOutlet private var zamzamFee: IndentLabel?
 
     private var coinType: CoinType? = .btc
 
@@ -55,25 +60,54 @@ class SendMoneyAmountComponent: Component, UITextFieldDelegate {
         valueTextField?.tintColor = .darkIndigo
         valueTextField?.keyboardType = .decimalPad
         valueTextField?.attributedPlaceholder =
-            NSAttributedString(string: "\(coinPrefix) 0", attributes: [NSAttributedStringKey.foregroundColor: UIColor.darkIndigo])
+            NSAttributedString(string: "0.0", attributes: [NSAttributedStringKey.foregroundColor: UIColor.darkIndigo])
 
         altValueLabel?.font = UIFont.walletFont(ofSize: 14.0, weight: .regular)
         altValueLabel?.textAlignment = .center
         altValueLabel?.textColor = .warmGrey
-        altValueLabel?.text = "$ 0.0"
+        altValueLabel?.text = coinPrefix
+
+        blockchainFee?.font = UIFont.walletFont(ofSize: 14.0, weight: .regular)
+        blockchainFee?.textAlignment = .left
+        blockchainFee?.textColor = UIColor.warmGrey.withAlphaComponent(0.7)
+        blockchainFee?.customAppearance.setIndent("blockchain fee   ")
+        blockchainFee?.customAppearance.setText("$ 0.0")
+
+        zamzamFee?.font = UIFont.walletFont(ofSize: 14.0, weight: .regular)
+        zamzamFee?.textAlignment = .left
+        zamzamFee?.textColor = UIColor.warmGrey.withAlphaComponent(0.7)
+        zamzamFee?.customAppearance.setIndent("zamzam fee   ")
+        zamzamFee?.customAppearance.setText("$ 0.0")
+    }
+
+    private func componentDidPrepared() {
+        altValueLabel?.text = coinPrefix
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
+        if let view = feeContainer {
+            let y = CGFloat(1.0)
+            let x = view.bounds.width / 2
+            let point = CGPoint(x: x, y: y)
+
+            drawSeparator(in: view, center: point, width: view.bounds.width)
+        }
     }
 
     func prepare(coinType: CoinType) {
         self.coinType = coinType
+        self.coinPrefix = "\(coinType.short.uppercased())"
 
-        coinPrefix = "\(coinType.short.uppercased()) "
+        self.componentDidPrepared()
     }
 
     // MARK: - AmountTextField
 
     @objc
     private func valueTextFieldEditingBegin(_ sender: UITextField) {
-        sender.text?.addPrefixIfNeeded(coinPrefix)
+        //sender.text?.addPrefixIfNeeded(coinPrefix)
     }
 
     @objc
@@ -82,7 +116,8 @@ class SendMoneyAmountComponent: Component, UITextFieldDelegate {
             return
         }
 
-        let stringValue = text[coinPrefix.count..<text.count]
+        //let stringValue = text[coinPrefix.count..<text.count]
+        let stringValue = text
         let numberFormatter = NumberFormatter()
 
         let value = numberFormatter.number(from: stringValue)?.floatValue ?? 0.0
@@ -90,7 +125,7 @@ class SendMoneyAmountComponent: Component, UITextFieldDelegate {
 
         if value != amount {
             if value > 0 {
-                delegate?.sendMoneyAmountComponent(self, valueCorrectlyEntered: text, detailValue: "$ 0.0")
+                delegate?.sendMoneyAmountComponent(self, amountValueEntered: value, stringFormat: "\(String(value)) \(coinPrefix)")
             } else {
                 delegate?.sendMoneyAmountComponentValueEnteredIncorrectly(self)
             }
@@ -101,10 +136,6 @@ class SendMoneyAmountComponent: Component, UITextFieldDelegate {
     }
 
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        if string == "", range.location == coinPrefix.count - 1 {
-            return false
-        }
-
         let locale = Locale.current
         let decimalSeparator = locale.decimalSeparator ?? "."
         let nondecimalCharacters = NSCharacterSet(charactersIn: "-0123456789" + decimalSeparator).inverted

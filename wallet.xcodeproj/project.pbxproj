@@ -136,6 +136,10 @@
 		8CA218B32124837D0063C188 /* SendMoneyMethodComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CA218B22124837D0063C188 /* SendMoneyMethodComponent.xib */; };
 		8CA218B621248F510063C188 /* SendMoneyAmountComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CA218B521248F510063C188 /* SendMoneyAmountComponent.xib */; };
 		8CA218B821248FA50063C188 /* SendMoneyAmountComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA218B721248FA50063C188 /* SendMoneyAmountComponent.swift */; };
+		8CA218BB212573510063C188 /* IndentLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA218BA212573510063C188 /* IndentLabel.swift */; };
+		8CA218BD2125A34B0063C188 /* KeyboardBehaviourFollowingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA218BC2125A34B0063C188 /* KeyboardBehaviourFollowingViewController.swift */; };
+		8CA218C42125AD130063C188 /* WalletSmallItemComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA218C32125AD130063C188 /* WalletSmallItemComponent.swift */; };
+		8CA218C62125AD230063C188 /* WalletSmallItemComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CA218C52125AD230063C188 /* WalletSmallItemComponent.xib */; };
 		8CF1DE4220EF98160036F986 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF1DE4120EF98160036F986 /* AuthViewController.swift */; };
 		8CF1DE4520EFB1A70036F986 /* HorizontalScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF1DE4420EFB1A70036F986 /* HorizontalScrollView.swift */; };
 		8CF1DE4720F37B5E0036F986 /* SMSConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF1DE4620F37B5E0036F986 /* SMSConfirmationViewController.swift */; };
@@ -301,6 +305,10 @@
 		8CA218B22124837D0063C188 /* SendMoneyMethodComponent.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SendMoneyMethodComponent.xib; sourceTree = "<group>"; };
 		8CA218B521248F510063C188 /* SendMoneyAmountComponent.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SendMoneyAmountComponent.xib; sourceTree = "<group>"; };
 		8CA218B721248FA50063C188 /* SendMoneyAmountComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMoneyAmountComponent.swift; sourceTree = "<group>"; };
+		8CA218BA212573510063C188 /* IndentLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndentLabel.swift; sourceTree = "<group>"; };
+		8CA218BC2125A34B0063C188 /* KeyboardBehaviourFollowingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardBehaviourFollowingViewController.swift; sourceTree = "<group>"; };
+		8CA218C32125AD130063C188 /* WalletSmallItemComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletSmallItemComponent.swift; sourceTree = "<group>"; };
+		8CA218C52125AD230063C188 /* WalletSmallItemComponent.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletSmallItemComponent.xib; sourceTree = "<group>"; };
 		8CF1DE4120EF98160036F986 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		8CF1DE4420EFB1A70036F986 /* HorizontalScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalScrollView.swift; sourceTree = "<group>"; };
 		8CF1DE4620F37B5E0036F986 /* SMSConfirmationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMSConfirmationViewController.swift; sourceTree = "<group>"; };
@@ -385,6 +393,7 @@
 				8C04BC34211C5AD800E90090 /* CreditCardViewComponent.swift */,
 				8C04BC36211C872E00E90090 /* ContainerView.swift */,
 				8CA218A4212333B20063C188 /* IconableTextField.swift */,
+				8CA218BA212573510063C188 /* IndentLabel.swift */,
 				8C6088682112176300470411 /* LargeIconButton */,
 				8C6088612111FB0A00470411 /* Components */,
 				8C333D5B210B538700949AC0 /* TextCheckBoxView */,
@@ -655,6 +664,7 @@
 				8C333D7A210F767100949AC0 /* FlowViewController.swift */,
 				8CF5F94921147C050083B36A /* WalletViewController.swift */,
 				8C333D67210B72A100949AC0 /* ContinueViewController.swift */,
+				8CA218BC2125A34B0063C188 /* KeyboardBehaviourFollowingViewController.swift */,
 				8C520001211B4B6400EB55EA /* DetailOffsetPresentationViewController.swift */,
 			);
 			path = Base;
@@ -693,6 +703,7 @@
 				8CF5F9622114AB000083B36A /* ItemComponent.swift */,
 				8C52FFE92119DA2700EB55EA /* CellComponent.swift */,
 				8CA218902122E8880063C188 /* SendMoneyComponent */,
+				8CA218C72125AD380063C188 /* WalletSmallItemComponent */,
 				8C52FFE42119D0EF00EB55EA /* WalletItemComponent */,
 				8CF5F95C2114A4DC0083B36A /* CreatePinComponent */,
 				8CF5F9552114949D0083B36A /* DotsFieldComponent */,
@@ -772,6 +783,15 @@
 				8CA218B521248F510063C188 /* SendMoneyAmountComponent.xib */,
 			);
 			path = SendMoneyAmounComponent;
+			sourceTree = "<group>";
+		};
+		8CA218C72125AD380063C188 /* WalletSmallItemComponent */ = {
+			isa = PBXGroup;
+			children = (
+				8CA218C32125AD130063C188 /* WalletSmallItemComponent.swift */,
+				8CA218C52125AD230063C188 /* WalletSmallItemComponent.xib */,
+			);
+			path = WalletSmallItemComponent;
 			sourceTree = "<group>";
 		};
 		8CF1DE4320EF9D170036F986 /* Trash */ = {
@@ -982,6 +1002,7 @@
 				8CF5F95721149CD20083B36A /* DotsFieldComponent.xib in Resources */,
 				8C333D52210B2C5800949AC0 /* PhoneNumberFormView.xib in Resources */,
 				8C04BC33211C4FC100E90090 /* MavenPro-Regular.ttf in Resources */,
+				8CA218C62125AD230063C188 /* WalletSmallItemComponent.xib in Resources */,
 				8CF5F9602114A7880083B36A /* CreatePinStageItem.xib in Resources */,
 				8CA2188F2121D97C0063C188 /* DecimalKeyboardComponent.xib in Resources */,
 				8CA218922122E8D70063C188 /* SendMoneyComponent.xib in Resources */,
@@ -1087,6 +1108,7 @@
 				8C09194D2107214300703224 /* WalletEnvironment.swift in Sources */,
 				8C04BC412121A93400E90090 /* WalletTabBarController.swift in Sources */,
 				8C333D4C210B1D3500949AC0 /* CheckBoxButton.swift in Sources */,
+				8CA218BB212573510063C188 /* IndentLabel.swift in Sources */,
 				8CF5F94821147A870083B36A /* CreatePinViewController.swift in Sources */,
 				8C09192D21061F3600703224 /* ControllerHelper.swift in Sources */,
 				8C333D50210B2B6900949AC0 /* PhoneNumberFormComponent.swift in Sources */,
@@ -1099,6 +1121,7 @@
 				8C60885E2111F28000470411 /* EnterNewPhoneNumberViewController.swift in Sources */,
 				8CF1DE4B20F3AD210036F986 /* NewPasswordViewController.swift in Sources */,
 				8CF5F93A21144BE80083B36A /* UIDevice+Extensions.swift in Sources */,
+				8CA218C42125AD130063C188 /* WalletSmallItemComponent.swift in Sources */,
 				8C09193F210625E500703224 /* Provider.swift in Sources */,
 				8C52FFF2211AF1FD00EB55EA /* HomeViewController.swift in Sources */,
 				8C09194F2107225700703224 /* SignupProvider.swift in Sources */,
@@ -1142,6 +1165,7 @@
 				8C0919562107362300703224 /* CodableSuccess.swift in Sources */,
 				8CF5F95221148D800083B36A /* DotsFieldComponent.swift in Sources */,
 				8C09197B2108D66100703224 /* SignUpFlow.swift in Sources */,
+				8CA218BD2125A34B0063C188 /* KeyboardBehaviourFollowingViewController.swift in Sources */,
 				8C333D54210B394800949AC0 /* LargeIconButton.swift in Sources */,
 				8CF5F95B21149E460083B36A /* CreatePinComponent.swift in Sources */,
 				8C333D46210B0D5400949AC0 /* LaunchScreenViewController.swift in Sources */,

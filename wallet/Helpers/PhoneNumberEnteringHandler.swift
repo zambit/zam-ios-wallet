@@ -45,6 +45,7 @@ class PhoneNumberEnteringHandler: NSObject, UITextFieldDelegate {
 
         unitedTextField?.addTarget(self, action: #selector(unitedTextFieldEditingBegin(_:)), for: .editingDidBegin)
         unitedTextField?.addTarget(self, action: #selector(unitedTextFieldEditingChanged(_:)), for: .editingChanged)
+        unitedTextField?.addTarget(self, action: #selector(unitedTextFieldEndEditing(_:)), for: .editingDidEnd)
 
         self.unitedTextField?.delegate = self
     }
@@ -108,6 +109,15 @@ class PhoneNumberEnteringHandler: NSObject, UITextFieldDelegate {
         }
 
         delegate?.phoneNumberEditingChanged(self, with: mask, phoneNumber: text)
+    }
+
+    @objc
+    private func unitedTextFieldEndEditing(_ sender: UITextField) {
+        guard let text = sender.text, text == "+" else {
+            return
+        }
+
+        sender.text = ""
     }
 
     // MARK: - CodeTextField
@@ -197,6 +207,7 @@ class PhoneNumberEnteringHandler: NSObject, UITextFieldDelegate {
 
             numberTextField.text = maskedText
             numberTextFieldEditingChanged(numberTextField)
+            
             return false
         }
 
@@ -211,21 +222,6 @@ class PhoneNumberEnteringHandler: NSObject, UITextFieldDelegate {
         guard allowedCharacters.isSuperset(of: characterSet) else {
             return false
         }
-
-//        if let mask = mask,
-//            let codeRange = maskRangeInUnitedTextField {
-//
-//            let updatedText = text.replacingCharacters(in: textRange, with: string)
-//
-//            let codeMask = String(repeating: "X", count: codeRange.count)
-//            let unitedMask = "\(codeMask) \(mask.phoneMask)"
-//
-//            let maskedText = maskParser.matchingUnstrict(text: updatedText, withMask: unitedMask)
-//            unitedTextField.text = maskedText
-//
-//
-//            return false
-//        }
 
         return true
     }

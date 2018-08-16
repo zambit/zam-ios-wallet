@@ -12,6 +12,8 @@ import UIKit
 protocol WalletsContainerEmbededViewController: class {
 
     var scrollView: UIScrollView? { get }
+
+    var owner: WalletViewController? { get set }
 }
 
 class HomeViewController: DetailOffsetPresentationViewController {
@@ -56,8 +58,10 @@ class HomeViewController: DetailOffsetPresentationViewController {
 
     // MARK: - View Controller Lifecycle
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        navigationController?.isNavigationBarHidden = true
     }
 
     override func viewDidLoad() {
@@ -65,8 +69,6 @@ class HomeViewController: DetailOffsetPresentationViewController {
 
         setupStyle()
         setupDefaultStyle()
-
-        tabBarController?.navigationController?.isNavigationBarHidden = true
 
         switch UIDevice.current.screenType {
         case .small, .extraSmall:
@@ -91,6 +93,8 @@ class HomeViewController: DetailOffsetPresentationViewController {
         if let embeded = embededViewController as? UIViewController {
             walletsContainerView?.set(viewController: embeded, owner: self)
         }
+
+        //view.clipsToBounds = true
     }
 
     override func viewDidLayoutSubviews() {
@@ -108,9 +112,6 @@ class HomeViewController: DetailOffsetPresentationViewController {
 
         detailView?.backgroundColor = .white
         detailGestureView?.backgroundColor = .clear
-
-        detailView?.layer.cornerRadius = 16.0
-        detailGestureView?.layer.cornerRadius = 16.0
 
         detailTitleLabel?.textColor = .darkIndigo
         detailTitleLabel?.text = "My accounts"

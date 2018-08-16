@@ -29,29 +29,13 @@ class SendMoneyButton: UIButton {
                 switch enabled {
                 case true:
                     self.parent?.mainLabel?.alpha = 1
-                    self.parent?.mainLabelVerticalConstraint?.constant = -parent.bounds.height / 10
-
                     self.parent?.customEnabled = true
                 case false:
                     self.parent?.mainLabel?.alpha = 0.5
-                    self.parent?.mainLabelVerticalConstraint?.constant = 0
-
-                    self.parent?.detailLabel?.alpha = 0.0
 
                     self.parent?.customEnabled = false
 
                     self.parent?.mainLabel?.text = "SEND"
-                }
-
-                self.parent?.layoutIfNeeded()
-            })
-
-            UIView.animate(withDuration: 0.1, delay: 0.1, animations: {
-                switch enabled {
-                case true:
-                    self.parent?.detailLabel?.alpha = 1.0
-                case false:
-                    break
                 }
 
                 self.parent?.layoutIfNeeded()

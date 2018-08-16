@@ -64,7 +64,7 @@
                     </view>
                     <connections>
                         <outlet property="continueButton" destination="yY4-cD-Qm1" id="biH-RX-QAM"/>
-                        <outlet property="continueButtonBottomConstraint" destination="tw1-mZ-PDp" id="Xec-tN-Fzp"/>
+                        <outlet property="fastenBottomConstraint" destination="tw1-mZ-PDp" id="fHr-sl-L2t"/>
                         <outlet property="largeTitleLabel" destination="U4Y-RM-BPg" id="Fbq-nU-Gfe"/>
                         <outlet property="phoneNumberForm" destination="qQ8-XH-WUs" id="q4o-aW-0v8"/>
                         <outlet property="termsStackView" destination="OBf-Zh-HeM" id="UKy-to-pon"/>
@@ -125,7 +125,7 @@
                     </view>
                     <connections>
                         <outlet property="continueButton" destination="fDU-AV-0sT" id="Obe-Fj-sP1"/>
-                        <outlet property="continueButtonBottomConstraint" destination="0xM-Ph-g7f" id="3Vm-Cl-JaL"/>
+                        <outlet property="fastenBottomConstraint" destination="0xM-Ph-g7f" id="Pvt-z9-aOw"/>
                         <outlet property="largeTitleLabel" destination="5C8-LU-ILM" id="vjP-ph-h7k"/>
                         <outlet property="sendVerificationCodeAgainButton" destination="w2q-jJ-o6c" id="nSc-hq-dEN"/>
                         <outlet property="verificationCodeFormComponent" destination="3FS-X7-4ZV" id="xoZ-i9-Hok"/>
@@ -180,7 +180,7 @@
                     </view>
                     <connections>
                         <outlet property="continueButton" destination="VGq-BV-aTL" id="Ydu-cX-rpD"/>
-                        <outlet property="continueButtonBottomConstraint" destination="vPh-bZ-rpM" id="tP2-pH-SRc"/>
+                        <outlet property="fastenBottomConstraint" destination="vPh-bZ-rpM" id="aNe-UD-rMJ"/>
                         <outlet property="largeTitleLabel" destination="HrH-uf-gIy" id="QRO-15-eoH"/>
                         <outlet property="newPasswordFormComponent" destination="SE1-m1-7P3" id="f1a-gU-Mzg"/>
                     </connections>

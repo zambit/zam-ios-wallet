@@ -20,7 +20,7 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="640" height="127"/>
+            <rect key="frame" x="0.0" y="0.0" width="640" height="120"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UYB-Ne-Px6" customClass="SegmentedControlComponent" customModule="wallet" customModuleProvider="target">
@@ -41,7 +41,7 @@
                     </constraints>
                 </view>
                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bgV-8U-48N" customClass="IconableTextField" customModule="wallet" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="64" width="640" height="63"/>
+                    <rect key="frame" x="0.0" y="64" width="640" height="56"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="56" id="utt-BH-mrq"/>
                     </constraints>
@@ -62,7 +62,7 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <point key="canvasLocation" x="166" y="-216.5"/>
+            <point key="canvasLocation" x="166" y="-125"/>
         </view>
     </objects>
 </document>

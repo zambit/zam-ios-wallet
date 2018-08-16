@@ -14,7 +14,7 @@ class WalletTabBarController {
 
     private(set) var controller: ESTabBarController
 
-    weak var home: WalletViewController?
+    var home: WalletNavigationController
     weak var transactions: UIViewController?
     weak var zam: UIViewController?
     weak var contacts: UIViewController?
@@ -26,12 +26,22 @@ class WalletTabBarController {
                contacts: UIViewController,
                more: UIViewController) {
 
-        self.home = home
+        self.home = WalletTabBarController.createNavigationControllerFor(walletViewController: home)
         self.transactions = transactions
         self.zam = zam
         self.contacts = contacts
         self.more = more
 
+        self.home.controller.tabBarItem = ESTabBarItem(WalletContentView(), title: "Home", image: #imageLiteral(resourceName: "briefcaseCopy"), selectedImage: #imageLiteral(resourceName: "briefcaseCopy"))
+        transactions.tabBarItem = ESTabBarItem(WalletContentView(), title: "Transactions", image: #imageLiteral(resourceName: "transaction"))
+        zam.tabBarItem = ESTabBarItem(LargeWalletContentView(), title: nil, image: #imageLiteral(resourceName: "logo"))
+        contacts.tabBarItem = ESTabBarItem(WalletContentView(), title: "Contacts", image: #imageLiteral(resourceName: "users"))
+        more.tabBarItem = ESTabBarItem(WalletContentView(), title: "More", image: #imageLiteral(resourceName: "more"))
+
+        self.controller = WalletTabBarController.setupTabBarController(walletsController: [self.home.controller, transactions, zam, contacts, more])
+    }
+
+    private static func setupTabBarController(walletsController: [UIViewController]) -> ESTabBarController {
         let tabBarController = ESTabBarController()
 
         if let tabBar = tabBarController.tabBar as? ESTabBar {
@@ -39,14 +49,8 @@ class WalletTabBarController {
             tabBar.barTintColor = UIColor.backgroundLighter
         }
 
-        home.tabBarItem = ESTabBarItem(WalletContentView(), title: "Home", image: #imageLiteral(resourceName: "briefcaseCopy"), selectedImage: #imageLiteral(resourceName: "briefcaseCopy"))
-        transactions.tabBarItem = ESTabBarItem(WalletContentView(), title: "Transactions", image: #imageLiteral(resourceName: "transaction"))
-        zam.tabBarItem = ESTabBarItem(LargeWalletContentView(), title: nil, image: #imageLiteral(resourceName: "logo"))
-        contacts.tabBarItem = ESTabBarItem(WalletContentView(), title: "Contacts", image: #imageLiteral(resourceName: "users"))
-        more.tabBarItem = ESTabBarItem(WalletContentView(), title: "More", image: #imageLiteral(resourceName: "more"))
-
-        tabBarController.viewControllers = [home, transactions, zam, contacts, more]
-        tabBarController.tabBar.barTintColor = UIColor.backgroundLighter
+        tabBarController.viewControllers = walletsController
+        //tabBarController.tabBar.barTintColor = UIColor.backgroundLighter
         tabBarController.tabBar.clipsToBounds = true
 
         let size = UIScreen.main.bounds.size
@@ -54,7 +58,17 @@ class WalletTabBarController {
         let rect = CGRect(origin: origin, size: size)
         tabBarController.tabBar.backgroundImage = UIImage.gradientImage(colors: [.backgroundDarker, .backgroundLighter], locations: nil, frame: rect)
 
-        controller = tabBarController
+        return tabBarController
+    }
+
+    private static func createNavigationControllerFor(walletViewController: WalletViewController) -> WalletNavigationController {
+        let coordinator = TransitionCoordinator(animator: NavigationCustomAnimator())
+
+        let navigation = UINavigationController(rootViewController: walletViewController)
+        let walletNavigation = WalletNavigationController(navigationController: navigation)
+        walletNavigation.customTransitionCoordinator = coordinator
+
+        return walletNavigation
     }
 }
 

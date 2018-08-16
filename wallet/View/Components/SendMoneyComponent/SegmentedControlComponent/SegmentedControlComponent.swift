@@ -40,6 +40,7 @@ class SegmentedControlComponent: Component {
         mainSegmentsView = UIView(frame: bounds)
         contentView.addSubview(mainSegmentsView!)
         contentView.bringSubview(toFront: mainSegmentsView!)
+        mainSegmentsView?.frame = bounds
         mainSegmentsView?.autoresizingMask = [.flexibleHeight, .flexibleWidth]
 
         backView = SelectingBackView()
@@ -49,6 +50,7 @@ class SegmentedControlComponent: Component {
         selectedSegmentsView = UIView(frame: bounds)
         contentView.addSubview(selectedSegmentsView!)
         contentView.bringSubview(toFront: selectedSegmentsView!)
+        selectedSegmentsView?.frame = bounds
         selectedSegmentsView?.autoresizingMask = [.flexibleHeight, .flexibleWidth]
 
         selectedSegmentsView?.isUserInteractionEnabled = false
@@ -164,6 +166,9 @@ class SegmentedControlComponent: Component {
 
     override func layoutSubviews() {
         super.layoutSubviews()
+        mainSegmentsView?.frame = bounds
+        selectedSegmentsView?.frame = bounds
+
         reloadSegments()
         reloadBackView()
     }

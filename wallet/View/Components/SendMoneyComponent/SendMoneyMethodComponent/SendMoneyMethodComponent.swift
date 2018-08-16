@@ -10,13 +10,17 @@ import Foundation
 import UIKit
 
 enum SendMoneyMethod {
-    case phone
-    case address
+    case phone(data: String?)
+    case address(data: String?)
 }
 
 protocol SendMoneyMethodComponentDelegate: class {
 
     func sendMoneyMethodSelected(_ sendMoneyMethodComponent: SendMoneyMethodComponent, method: SendMoneyMethod)
+
+    func sendMoneyMethodComponent(_ sendMoneyMethodComponent: SendMoneyMethodComponent, methodRecipientDataEntered methodData: SendMoneyMethod)
+
+    func sendMoneyMethodComponentRecipientDataInvalid(_ sendMoneyMethodComponent: SendMoneyMethodComponent)
 
 }
 
@@ -40,21 +44,6 @@ class SendMoneyMethodComponent: Component, SegmentedControlComponentDelegate, Ph
 
         segmentedControlComponent?.addSegment(icon: #imageLiteral(resourceName: "phoneOutgoing"), title: "Phone", iconTintColor: .paleOliveGreen, selectedTintColor: .white, backColor: .paleOliveGreen)
         segmentedControlComponent?.addSegment(icon: #imageLiteral(resourceName: "linkTo"), title: "Address", iconTintColor: .paleOliveGreen, selectedTintColor: .white, backColor: .lightblue)
-
-//        // Add dictionary with phone codes to appropriate PhoneNumberFormView
-//        guard let path = Bundle.main.path(forResource: "PhoneMasks", ofType: "plist"),
-//            let masksDictionary = NSDictionary(contentsOfFile: path) as? [String: [String: String]] else {
-//                fatalError("PhoneMasks.plist error")
-//        }
-//
-//        // Convert dictionary of mask to appropriate format
-//        do {
-//            phoneMasks = try masksDictionary.mapValues {
-//                return try PhoneMaskData(dictionary: $0)
-//            }
-//        } catch let e {
-//            fatalError(e.localizedDescription)
-//        }
     }
 
     override func setupStyle() {
@@ -100,6 +89,7 @@ class SendMoneyMethodComponent: Component, SegmentedControlComponentDelegate, Ph
         textField.detailMode = .right(detailImage: #imageLiteral(resourceName: "maximize"), detailImageTintColor: .white, imageOffset: 16.0)
         textField.backgroundColor = backgroundColor
         textField.keyboardType = .default
+        textField.autocorrectionType = .no
         textField.text = ""
         textField.attributedPlaceholder =
             NSAttributedString(string: "Address",
@@ -119,7 +109,7 @@ class SendMoneyMethodComponent: Component, SegmentedControlComponentDelegate, Ph
             guard let textField = recipientTextField, let masks = phoneMasks, let parser = parser else { return }
             setPhoneNumberStyleForRecipientTextField(textField, backgroundColor: color, masks: masks, parser: parser)
 
-            delegate?.sendMoneyMethodSelected(self, method: .phone)
+            delegate?.sendMoneyMethodSelected(self, method: .phone(data: nil))
 
         case 1:
             print("Change to right detail state")
@@ -127,7 +117,7 @@ class SendMoneyMethodComponent: Component, SegmentedControlComponentDelegate, Ph
             guard let textField = recipientTextField else { return }
             setAddressStyleForRecipientTextField(textField, backgroundColor: color)
 
-            delegate?.sendMoneyMethodSelected(self, method: .address)
+            delegate?.sendMoneyMethodSelected(self, method: .address(data: nil))
         default:
             fatalError()
         }
@@ -142,6 +132,11 @@ class SendMoneyMethodComponent: Component, SegmentedControlComponentDelegate, Ph
     }
 
     func phoneNumberEditingChanged(_ handler: PhoneNumberEnteringHandler, with mask: PhoneMaskData?, phoneNumber: String) {
+        if let mask = mask, phoneNumber.count >= mask.phoneMask.count + mask.phoneCode.count + 2 {
+            delegate?.sendMoneyMethodComponent(self, methodRecipientDataEntered: .phone(data: phoneNumber))
+        } else {
+            delegate?.sendMoneyMethodComponentRecipientDataInvalid(self)
+        }
     }
 
 }

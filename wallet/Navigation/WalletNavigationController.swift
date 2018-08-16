@@ -32,6 +32,8 @@ class WalletNavigationController {
 
     init(navigationController: UINavigationController) {
         self.controller = navigationController
+
+        (navigationController.viewControllers.first as? WalletViewController)?.walletNavigationController = self
         setupStyle(for: self.controller)
     }
 
@@ -51,7 +53,7 @@ class WalletNavigationController {
 
         hideBackButton(for: viewController)
 
-        if controller.viewControllers.count > 2 {
+        if controller.tabBarController != nil || controller.viewControllers.count > 2 {
             addBackButton(for: viewController)
         }
     }
@@ -62,7 +64,7 @@ class WalletNavigationController {
         controller.isNavigationBarHidden = true
 
         tabBar = tabBarController
-        tabBar?.home?.walletNavigationController = self
+        //tabBar?.home?.walletNavigationController = self
 
         guard
             controller.viewControllers.count > 1,

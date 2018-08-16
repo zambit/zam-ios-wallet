@@ -9,7 +9,13 @@
 import Foundation
 import UIKit
 
-class SendMoneyComponent: Component, SendMoneyAmountComponentDelegate {
+struct SendMoneyDataProgress {
+    let amount: Float
+    let amountString: String
+    let method: SendMoneyMethod
+}
+
+class SendMoneyComponent: Component, SendMoneyAmountComponentDelegate, SendMoneyMethodComponentDelegate {
 
     var userAPI: UserAPI?
 
@@ -17,10 +23,41 @@ class SendMoneyComponent: Component, SendMoneyAmountComponentDelegate {
     @IBOutlet private var sendMoneyAmountComponent: SendMoneyAmountComponent?
     @IBOutlet private var sendButton: SendMoneyButton?
 
-    private var coinType: CoinType? = .btc
+    @IBOutlet private var topConstraint: NSLayoutConstraint?
+
+    var appearingAnimationBlock: () -> Void {
+        return {
+            [weak self] in
+            self?.topConstraint?.constant = 36.0
+        }
+    }
+
+    var disappearingAnimationBlock: () -> Void {
+        return {
+            [weak self] in
+            self?.topConstraint?.constant = 58.0
+        }
+    }
+
+    private var coinType: CoinType?
+
+    private var amountString: String?
+    private var amount: Float?
+    private var method: SendMoneyMethod?
+
+    private var sendMoneyDataProgress: SendMoneyDataProgress? {
+        guard let method = method, let amount = amount, let amountString = amountString else {
+            return nil
+        }
+
+        return SendMoneyDataProgress(amount: amount, amountString: amountString, method: method)
+    }
 
     override func initFromNib() {
         super.initFromNib()
+
+        sendMoneyAmountComponent?.delegate = self
+        sendMoneyMethodComponent?.delegate = self
 
         // Add dictionary with phone codes to appropriate PhoneNumberFormView
         guard let path = Bundle.main.path(forResource: "PhoneMasks", ofType: "plist"),
@@ -38,28 +75,54 @@ class SendMoneyComponent: Component, SendMoneyAmountComponentDelegate {
         } catch let e {
             fatalError(e.localizedDescription)
         }
-
-        sendMoneyAmountComponent?.delegate = self
-
-        if let coin = coinType {
-            sendMoneyAmountComponent?.prepare(coinType: coin)
-        }
     }
 
     override func setupStyle() {
         super.setupStyle()
+
+        backgroundColor = .white
     }
 
     func prepare(coinType: CoinType) {
         self.coinType = coinType
+
+        sendMoneyAmountComponent?.prepare(coinType: coinType)
     }
 
-    func sendMoneyAmountComponent(_ sendMoneyAmountComponent: SendMoneyAmountComponent, valueCorrectlyEntered value: String, detailValue: String) {
-        sendButton?.customAppearance.setEnabled(true)
-        sendButton?.customAppearance.provideData(amount: value, alternative: detailValue)
+    // MARK: - SendMoneyAmountComponentDelegate
+
+    func sendMoneyAmountComponent(_ sendMoneyAmountComponent: SendMoneyAmountComponent, amountValueEntered value: Float, stringFormat: String) {
+        self.amount = value
+        self.amountString = stringFormat
+
+        if let progressData = sendMoneyDataProgress {
+            sendButton?.customAppearance.setEnabled(true)
+            sendButton?.customAppearance.provideData(amount: progressData.amountString, alternative: "")
+        }
     }
 
     func sendMoneyAmountComponentValueEnteredIncorrectly(_ sendMoneyAmountComponent: SendMoneyAmountComponent) {
+        self.amount = nil
+        sendButton?.customAppearance.setEnabled(false)
+    }
+
+    // MARK: - SendMoneyMethodComponentDelegate
+
+    func sendMoneyMethodSelected(_ sendMoneyMethodComponent: SendMoneyMethodComponent, method: SendMoneyMethod) {
+        //...
+    }
+
+    func sendMoneyMethodComponent(_ sendMoneyMethodComponent: SendMoneyMethodComponent, methodRecipientDataEntered methodData: SendMoneyMethod) {
+        self.method = methodData
+
+        if let progressData = sendMoneyDataProgress {
+            sendButton?.customAppearance.setEnabled(true)
+            sendButton?.customAppearance.provideData(amount: progressData.amountString, alternative: "")
+        }
+    }
+
+    func sendMoneyMethodComponentRecipientDataInvalid(_ sendMoneyMethodComponent: SendMoneyMethodComponent) {
+        self.method = nil
         sendButton?.customAppearance.setEnabled(false)
     }
 }

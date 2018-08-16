@@ -32,8 +32,12 @@ class Component: UIView {
         Bundle.main.loadNibNamed(nibName, owner: self, options: nil)
         addSubview(contentView)
 
-        contentView.frame = bounds
-        contentView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+
+        contentView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        contentView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+        contentView.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        contentView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
     }
 
     func setupStyle() {
