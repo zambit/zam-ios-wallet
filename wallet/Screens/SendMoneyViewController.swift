@@ -70,7 +70,7 @@ class SendMoneyViewController: KeyboardBehaviorFollowingViewController, UICollec
         walletsCollectionView?.backgroundColor = .clear
         walletsCollectionView?.clipsToBounds = false
 
-        titleLabel?.font = UIFont.titleLargeTitle02
+        titleLabel?.font = UIFont.walletFont(ofSize: 22.0, weight: .bold)
         titleLabel?.textColor = .white
         titleLabel?.textAlignment = .left
 
