@@ -102,4 +102,13 @@ extension UIColor {
         return UIColor(red: 0.0, green: 170.0 / 255.0, blue: 219.0 / 255.0, alpha: 1.0)
     }
 
+    @nonobjc class var backgroundHorizontalLighter: UIColor {
+        return UIColor(red: 40.0 / 255.0, green: 60.0 / 255.0, blue: 148.0 / 255.0, alpha: 1.0)
+    }
+
+    @nonobjc class var backgroundHorizontalDarker: UIColor {
+        return UIColor(red: 14.0 / 255.0, green: 18.0 / 255.0, blue: 70.0 / 255.0, alpha: 1.0)
+    }
+
+
 }

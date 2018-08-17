@@ -140,6 +140,8 @@
 		8CA218BD2125A34B0063C188 /* KeyboardBehaviourFollowingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA218BC2125A34B0063C188 /* KeyboardBehaviourFollowingViewController.swift */; };
 		8CA218C42125AD130063C188 /* WalletSmallItemComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA218C32125AD130063C188 /* WalletSmallItemComponent.swift */; };
 		8CA218C62125AD230063C188 /* WalletSmallItemComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CA218C52125AD230063C188 /* WalletSmallItemComponent.xib */; };
+		8CA218C92126D4FD0063C188 /* TransactionDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA218C82126D4FD0063C188 /* TransactionDetailViewController.swift */; };
+		8CA218CB2126D5E00063C188 /* NumberFormatter+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA218CA2126D5E00063C188 /* NumberFormatter+Extensions.swift */; };
 		8CF1DE4220EF98160036F986 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF1DE4120EF98160036F986 /* AuthViewController.swift */; };
 		8CF1DE4520EFB1A70036F986 /* HorizontalScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF1DE4420EFB1A70036F986 /* HorizontalScrollView.swift */; };
 		8CF1DE4720F37B5E0036F986 /* SMSConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF1DE4620F37B5E0036F986 /* SMSConfirmationViewController.swift */; };
@@ -309,6 +311,8 @@
 		8CA218BC2125A34B0063C188 /* KeyboardBehaviourFollowingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardBehaviourFollowingViewController.swift; sourceTree = "<group>"; };
 		8CA218C32125AD130063C188 /* WalletSmallItemComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletSmallItemComponent.swift; sourceTree = "<group>"; };
 		8CA218C52125AD230063C188 /* WalletSmallItemComponent.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletSmallItemComponent.xib; sourceTree = "<group>"; };
+		8CA218C82126D4FD0063C188 /* TransactionDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailViewController.swift; sourceTree = "<group>"; };
+		8CA218CA2126D5E00063C188 /* NumberFormatter+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NumberFormatter+Extensions.swift"; sourceTree = "<group>"; };
 		8CF1DE4120EF98160036F986 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		8CF1DE4420EFB1A70036F986 /* HorizontalScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalScrollView.swift; sourceTree = "<group>"; };
 		8CF1DE4620F37B5E0036F986 /* SMSConfirmationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMSConfirmationViewController.swift; sourceTree = "<group>"; };
@@ -419,6 +423,7 @@
 				8C52FFF1211AF1FD00EB55EA /* HomeViewController.swift */,
 				8C52FFEB2119E09200EB55EA /* WalletsViewController.swift */,
 				8CA218A0212304590063C188 /* SendMoneyViewController.swift */,
+				8CA218C82126D4FD0063C188 /* TransactionDetailViewController.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -859,6 +864,7 @@
 				8CF5F93721134E6D0083B36A /* CGPoint+Extensions.swift */,
 				8C333D6E210F00E600949AC0 /* String+Extensions.swift */,
 				8C4413D521199FFC00C9689C /* Dictionary+Extensions.swift */,
+				8CA218CA2126D5E00063C188 /* NumberFormatter+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1086,6 +1092,7 @@
 				8C09193D2106243600703224 /* Response.swift in Sources */,
 				8C0919742108BE5700703224 /* UserAPI.swift in Sources */,
 				8C52FFE62119D1CC00EB55EA /* WalletItemComponent.swift in Sources */,
+				8CA218C92126D4FD0063C188 /* TransactionDetailViewController.swift in Sources */,
 				8CA218AD212421150063C188 /* PhoneMaskData.swift in Sources */,
 				8C6088402110634700470411 /* UserDataManager.swift in Sources */,
 				8CA218A5212333B20063C188 /* IconableTextField.swift in Sources */,
@@ -1155,6 +1162,7 @@
 				8CA218AB21241BF90063C188 /* PhoneNumberEnteringHandler.swift in Sources */,
 				8C333D77210F50E000949AC0 /* CountryIconImageView.swift in Sources */,
 				8C333D6F210F00E600949AC0 /* String+Extensions.swift in Sources */,
+				8CA218CB2126D5E00063C188 /* NumberFormatter+Extensions.swift in Sources */,
 				8C09196F21089FB200703224 /* AuthProvider.swift in Sources */,
 				8C04BC3921219D0600E90090 /* Drawing.swift in Sources */,
 				8CF1DE4920F3A0BB0036F986 /* PasswordRecoveryViewController.swift in Sources */,

@@ -24,7 +24,7 @@
             <rect key="frame" x="0.0" y="0.0" width="453" height="345"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2iH-nn-j9H" customClass="SendMoneyButton" customModule="wallet" customModuleProvider="target">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2iH-nn-j9H" customClass="SendMoneyButton" customModule="wallet" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="289" width="453" height="56"/>
                     <color key="backgroundColor" red="0.65068650130000005" green="0.93067540650000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     <constraints>

@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 struct SendMoneyDataProgress {
-    let amount: Float
+    let amount: Decimal
     let amountString: String
     let method: SendMoneyMethod
 }
@@ -39,10 +39,8 @@ class SendMoneyComponent: Component, SendMoneyAmountComponentDelegate, SendMoney
         }
     }
 
-    private var coinType: CoinType?
-
     private var amountString: String?
-    private var amount: Float?
+    private var amount: Decimal?
     private var method: SendMoneyMethod?
 
     private var sendMoneyDataProgress: SendMoneyDataProgress? {
@@ -84,14 +82,12 @@ class SendMoneyComponent: Component, SendMoneyAmountComponentDelegate, SendMoney
     }
 
     func prepare(coinType: CoinType) {
-        self.coinType = coinType
-
         sendMoneyAmountComponent?.prepare(coinType: coinType)
     }
 
     // MARK: - SendMoneyAmountComponentDelegate
 
-    func sendMoneyAmountComponent(_ sendMoneyAmountComponent: SendMoneyAmountComponent, amountValueEntered value: Float, stringFormat: String) {
+    func sendMoneyAmountComponent(_ sendMoneyAmountComponent: SendMoneyAmountComponent, amountValueEntered value: Decimal, stringFormat: String) {
         self.amount = value
         self.amountString = stringFormat
 

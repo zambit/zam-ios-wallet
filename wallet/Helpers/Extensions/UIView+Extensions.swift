@@ -19,7 +19,7 @@ extension UIView {
     }
 
     func applyDefaultGradientHorizontally() {
-        self.applyGradient(colors: [.backgroundDarker, .backgroundLighter], startPoint: CGPoint(x: 0.0, y: 0.5), endPoint: CGPoint(x: 1.0, y: 0.5))
+        self.applyGradient(colors: [.backgroundHorizontalDarker, .backgroundHorizontalLighter], startPoint: CGPoint(x: 0.0, y: 0.5), endPoint: CGPoint(x: 1.0, y: 0.5))
     }
     
     func applyGradient(colors: [UIColor], locations: [NSNumber]? = nil, frame: CGRect? = nil, startPoint: CGPoint? = nil, endPoint: CGPoint? = nil) {

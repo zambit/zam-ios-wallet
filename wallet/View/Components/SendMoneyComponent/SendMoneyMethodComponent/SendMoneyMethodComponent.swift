@@ -104,16 +104,12 @@ class SendMoneyMethodComponent: Component, SegmentedControlComponentDelegate, Ph
 
         switch index {
         case 0:
-            print("Change to left detail state")
-
             guard let textField = recipientTextField, let masks = phoneMasks, let parser = parser else { return }
             setPhoneNumberStyleForRecipientTextField(textField, backgroundColor: color, masks: masks, parser: parser)
 
             delegate?.sendMoneyMethodSelected(self, method: .phone(data: nil))
 
         case 1:
-            print("Change to right detail state")
-
             guard let textField = recipientTextField else { return }
             setAddressStyleForRecipientTextField(textField, backgroundColor: color)
 

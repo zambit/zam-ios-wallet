@@ -11,7 +11,7 @@ import UIKit
 
 protocol SendMoneyAmountComponentDelegate: class {
 
-    func sendMoneyAmountComponent(_ sendMoneyAmountComponent: SendMoneyAmountComponent, amountValueEntered value: Float, stringFormat: String)
+    func sendMoneyAmountComponent(_ sendMoneyAmountComponent: SendMoneyAmountComponent, amountValueEntered value: Decimal, stringFormat: String)
 
     func sendMoneyAmountComponentValueEnteredIncorrectly(_ sendMoneyAmountComponent: SendMoneyAmountComponent)
 
@@ -30,19 +30,15 @@ class SendMoneyAmountComponent: Component, UITextFieldDelegate {
     @IBOutlet private var blockchainFee: IndentLabel?
     @IBOutlet private var zamzamFee: IndentLabel?
 
-    private var coinType: CoinType? = .btc
-
     private var coinPrefix: String = ""
 
-    private(set) var amount: Float = 0
+    private(set) var amount: Decimal = 0.0
     private(set) var detail: Float = 0
 
     override func initFromNib() {
         super.initFromNib()
 
         valueTextField?.delegate = self
-
-        valueTextField?.addTarget(self, action: #selector(valueTextFieldEditingBegin(_:)), for: .editingDidBegin)
         valueTextField?.addTarget(self, action: #selector(valueTextFieldEditingChanged(_:)), for: .editingChanged)
     }
 
@@ -80,10 +76,6 @@ class SendMoneyAmountComponent: Component, UITextFieldDelegate {
         zamzamFee?.customAppearance.setText("$ 0.0")
     }
 
-    private func componentDidPrepared() {
-        altValueLabel?.text = coinPrefix
-    }
-
     override func layoutSubviews() {
         super.layoutSubviews()
 
@@ -97,18 +89,12 @@ class SendMoneyAmountComponent: Component, UITextFieldDelegate {
     }
 
     func prepare(coinType: CoinType) {
-        self.coinType = coinType
         self.coinPrefix = "\(coinType.short.uppercased())"
 
-        self.componentDidPrepared()
+        altValueLabel?.text = coinPrefix
     }
 
     // MARK: - AmountTextField
-
-    @objc
-    private func valueTextFieldEditingBegin(_ sender: UITextField) {
-        //sender.text?.addPrefixIfNeeded(coinPrefix)
-    }
 
     @objc
     private func valueTextFieldEditingChanged(_ sender: UITextField) {
@@ -117,15 +103,14 @@ class SendMoneyAmountComponent: Component, UITextFieldDelegate {
         }
 
         //let stringValue = text[coinPrefix.count..<text.count]
-        let stringValue = text
-        let numberFormatter = NumberFormatter()
 
-        let value = numberFormatter.number(from: stringValue)?.floatValue ?? 0.0
+        let value = NumberFormatter.walletAmount.number(from: text)?.decimalValue ?? 0.0
+        let stringValue = NumberFormatter.walletAmount.string(from: value as NSNumber) ?? text
         let detailValue: Float = 0.0
 
         if value != amount {
             if value > 0 {
-                delegate?.sendMoneyAmountComponent(self, amountValueEntered: value, stringFormat: "\(String(value)) \(coinPrefix)")
+                delegate?.sendMoneyAmountComponent(self, amountValueEntered: value, stringFormat: "\(stringValue) \(coinPrefix)")
             } else {
                 delegate?.sendMoneyAmountComponentValueEnteredIncorrectly(self)
             }
@@ -136,9 +121,9 @@ class SendMoneyAmountComponent: Component, UITextFieldDelegate {
     }
 
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        let locale = Locale.current
-        let decimalSeparator = locale.decimalSeparator ?? "."
-        let nondecimalCharacters = NSCharacterSet(charactersIn: "-0123456789" + decimalSeparator).inverted
+
+        let decimalSeparator = NumberFormatter.walletAmount.decimalSeparator!
+        let nondecimalCharacters = NSCharacterSet(charactersIn: "0123456789" + decimalSeparator).inverted
 
         let existingTextHasDecimalSeparator = textField.text?.range(of: decimalSeparator)
         let replacementTextHasDecimalSeparator = string.range(of: decimalSeparator)

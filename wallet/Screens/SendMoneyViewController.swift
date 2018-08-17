@@ -15,29 +15,10 @@ class SendMoneyViewController: KeyboardBehaviorFollowingViewController, UICollec
     @IBOutlet var titleLabel: UILabel?
     @IBOutlet var walletsCollectionView: UICollectionView?
 
-    private var coin: CoinType?
+    private var phone: String?
     private var wallets: [WalletData] = []
     private var currentIndex: Int? {
-        get {
-            guard let collectionView = walletsCollectionView else {
-                return nil
-            }
-
-            var visibleRect = CGRect()
-
-            visibleRect.origin = collectionView.contentOffset
-            visibleRect.size = collectionView.bounds.size
-
-            let visiblePoint = CGPoint(x: visibleRect.midX, y: visibleRect.midY)
-
-            if let indexPath = collectionView.indexPathForItem(at: visiblePoint) {
-                return indexPath.section
-            }
-
-            return nil
-        }
-
-        set {
+        didSet {
             if let currentIndex = currentIndex {
                 let indexPath = IndexPath(item: 0, section: currentIndex)
                 walletsCollectionView?.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
@@ -59,6 +40,7 @@ class SendMoneyViewController: KeyboardBehaviorFollowingViewController, UICollec
         super.viewDidLoad()
 
         hideKeyboardOnTap()
+        
         view.applyDefaultGradientHorizontally()
 
         appearingAnimationBlock = {
@@ -95,13 +77,13 @@ class SendMoneyViewController: KeyboardBehaviorFollowingViewController, UICollec
         let index = currentIndex
         self.currentIndex = index
 
-        if let coin = coin {
-            sendMoneyComponent?.prepare(coinType: coin)
+        if let index = currentIndex, wallets.count > index {
+            sendMoneyComponent?.prepare(coinType: wallets[index].coin)
         }
     }
 
-    func prepare(coin: CoinType, wallets: [WalletData], currentIndex: Int) {
-        self.coin = coin
+    func prepare(wallets: [WalletData], currentIndex: Int, phone: String) {
+        self.phone = phone
         self.wallets = wallets
         self.currentIndex = currentIndex
 
@@ -123,23 +105,37 @@ class SendMoneyViewController: KeyboardBehaviorFollowingViewController, UICollec
             fatalError()
         }
 
+        guard let phone = phone, indexPath.section < wallets.count else {
+            return UICollectionViewCell()
+        }
+
         let wallet = wallets[indexPath.section]
-        cell.configure(image: wallet.coin.image, coinName: wallet.coin.name, coinAddit: wallet.coin.short, phoneNumber: "phone", balance: wallet.balance.formattedOriginal, fiatBalance: wallet.balance.formattedUsd)
+        cell.configure(image: wallet.coin.image, coinName: wallet.coin.name, coinAddit: wallet.coin.short, phoneNumber: phone, balance: wallet.balance.formattedOriginal, fiatBalance: wallet.balance.formattedUsd)
         return cell
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-
         return collectionView.bounds.size
     }
 
 
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        guard let index = currentIndex else {
+        guard let collectionView = walletsCollectionView else {
             return
         }
 
-        let wallet = wallets[index]
+        var visibleRect = CGRect()
+
+        visibleRect.origin = collectionView.contentOffset
+        visibleRect.size = collectionView.bounds.size
+
+        let visiblePoint = CGPoint(x: visibleRect.midX, y: visibleRect.midY)
+
+        guard let indexPath = collectionView.indexPathForItem(at: visiblePoint), wallets.count > indexPath.section else {
+            return
+        }
+
+        let wallet = wallets[indexPath.section]
         self.sendMoneyComponent?.prepare(coinType: wallet.coin)
     }
 }

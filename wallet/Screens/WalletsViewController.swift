@@ -14,7 +14,7 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
     var userManager: UserDataManager?
     var userAPI: UserAPI?
 
-    var onSendFromWallet: ((CoinType, Int, [WalletData], WalletViewController) -> Void)?
+    var onSendFromWallet: ((_ index: Int, _ wallets: [WalletData], _ phone: String, _ owner: WalletViewController) -> Void)?
 
     private var wallets: [WalletData] = []
 
@@ -75,7 +75,7 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
                 return
             }
 
-            strongSelf.onSendFromWallet?(wallet.coin, indexPath.item, strongSelf.wallets, owner)
+            strongSelf.onSendFromWallet?(indexPath.item, strongSelf.wallets, phone, owner)
         }
         return cell
     }
