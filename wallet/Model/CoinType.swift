@@ -52,5 +52,9 @@ enum CoinType: String {
             return "ZAM"
         }
     }
+
+    static var standard: CoinType {
+        return .btc
+    }
 }
 

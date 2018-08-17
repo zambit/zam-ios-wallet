@@ -142,6 +142,7 @@
 		8CA218C62125AD230063C188 /* WalletSmallItemComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CA218C52125AD230063C188 /* WalletSmallItemComponent.xib */; };
 		8CA218C92126D4FD0063C188 /* TransactionDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA218C82126D4FD0063C188 /* TransactionDetailViewController.swift */; };
 		8CA218CB2126D5E00063C188 /* NumberFormatter+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA218CA2126D5E00063C188 /* NumberFormatter+Extensions.swift */; };
+		8CA218CD2126F23B0063C188 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA218CC2126F23B0063C188 /* UserData.swift */; };
 		8CF1DE4220EF98160036F986 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF1DE4120EF98160036F986 /* AuthViewController.swift */; };
 		8CF1DE4520EFB1A70036F986 /* HorizontalScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF1DE4420EFB1A70036F986 /* HorizontalScrollView.swift */; };
 		8CF1DE4720F37B5E0036F986 /* SMSConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF1DE4620F37B5E0036F986 /* SMSConfirmationViewController.swift */; };
@@ -313,6 +314,7 @@
 		8CA218C52125AD230063C188 /* WalletSmallItemComponent.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletSmallItemComponent.xib; sourceTree = "<group>"; };
 		8CA218C82126D4FD0063C188 /* TransactionDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailViewController.swift; sourceTree = "<group>"; };
 		8CA218CA2126D5E00063C188 /* NumberFormatter+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NumberFormatter+Extensions.swift"; sourceTree = "<group>"; };
+		8CA218CC2126F23B0063C188 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		8CF1DE4120EF98160036F986 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		8CF1DE4420EFB1A70036F986 /* HorizontalScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalScrollView.swift; sourceTree = "<group>"; };
 		8CF1DE4620F37B5E0036F986 /* SMSConfirmationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMSConfirmationViewController.swift; sourceTree = "<group>"; };
@@ -647,6 +649,7 @@
 			children = (
 				8C4413D3211993B400C9689C /* CoinType.swift */,
 				8C52FFE02119BE0300EB55EA /* WalletData.swift */,
+				8CA218CC2126F23B0063C188 /* UserData.swift */,
 				8CA218AC212421150063C188 /* PhoneMaskData.swift */,
 				8C04BC442121D48E00E90090 /* BalanceData.swift */,
 				8C52FFE22119C1CF00EB55EA /* TermData.swift */,
@@ -1118,6 +1121,7 @@
 				8CA218BB212573510063C188 /* IndentLabel.swift in Sources */,
 				8CF5F94821147A870083B36A /* CreatePinViewController.swift in Sources */,
 				8C09192D21061F3600703224 /* ControllerHelper.swift in Sources */,
+				8CA218CD2126F23B0063C188 /* UserData.swift in Sources */,
 				8C333D50210B2B6900949AC0 /* PhoneNumberFormComponent.swift in Sources */,
 				8CF5F931211345320083B36A /* HomeFlow.swift in Sources */,
 				8C09196221076B7000703224 /* RecoveryProvider.swift in Sources */,

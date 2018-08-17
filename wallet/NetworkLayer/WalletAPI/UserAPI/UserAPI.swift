@@ -17,6 +17,43 @@ struct UserAPI: NetworkService {
         self.provider = provider
     }
 
+    func getUserInfo(token: String, coin: CoinType?) -> Promise<UserData> {
+        return provider.execute(.userInfo(token: token, coin: coin?.rawValue))
+            .then {
+                (response: Response) -> Promise<UserData> in
+
+                return Promise { seal in
+                    switch response {
+                    case .data(_):
+
+                        let success: (CodableSuccessUserInfoResponse) -> Void = { s in
+                            let user = UserData(codable: s.data)
+                            seal.fulfill(user)
+                        }
+
+                        let failure: (CodableFailure) -> Void = { f in
+                            guard f.errors.count > 0 else {
+                                let error = WalletResponseError.undefinedServerFailureResponse
+                                seal.reject(error)
+                                return
+                            }
+
+                            let error = WalletResponseError.serverFailureResponse(errors: f.errors)
+                            seal.reject(error)
+                        }
+
+                        do {
+                            try response.extractResult(success: success, failure: failure)
+                        } catch let error {
+                            seal.reject(error)
+                        }
+                    case .error(let error):
+                        seal.reject(error)
+                    }
+                }
+        }
+    }
+
     func createWallet(token: String, coin: CoinType, walletName: String?) -> Promise<WalletData> {
         return provider.execute(.createWallet(token: token, coin: coin.rawValue, walletName: walletName))
             .then {
@@ -62,9 +99,7 @@ struct UserAPI: NetworkService {
 
                 return Promise { seal in
                     switch response {
-                    case .data(let data):
-
-                        print(String(data: data, encoding: .utf8))
+                    case .data(_):
 
                         let success: (CodableSuccessWalletsPageResponse) -> Void = { s in
                             let wallets = s.data.wallets.compactMap {

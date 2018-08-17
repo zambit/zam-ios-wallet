@@ -39,6 +39,8 @@ final class HomeFlow: ScreenFlow {
 
         vc.embededViewController = walletsScreen
         vc.embededViewController?.owner = vc
+        vc.userManager = UserDataManager(keychainConfiguration: WalletKeychainConfiguration())
+        vc.userAPI = UserAPI(provider: UserProvider(environment: WalletEnvironment(), dispatcher: HTTPDispatcher()))
         vc.flow = self
         return vc
     }

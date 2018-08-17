@@ -18,6 +18,9 @@ protocol WalletsContainerEmbededViewController: class {
 
 class HomeViewController: DetailOffsetPresentationViewController {
 
+    var userManager: UserDataManager?
+    var userAPI: UserAPI?
+
     var embededViewController: WalletsContainerEmbededViewController? {
         didSet {
             guard let embeded = embededViewController as? UIViewController else {
@@ -55,6 +58,12 @@ class HomeViewController: DetailOffsetPresentationViewController {
     @IBOutlet var detailViewHeight: NSLayoutConstraint?
 
     private var cardViewOffset: CGFloat = 0
+    private var sumLeftLabelOffset: CGFloat = 0
+    private var sumLeftTargetLabelOffset: CGFloat = 0
+
+    // MARK: - Data
+
+    private var totalBalance: BalanceData?
 
     // MARK: - View Controller Lifecycle
 
@@ -66,6 +75,8 @@ class HomeViewController: DetailOffsetPresentationViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        loadData()
 
         setupStyle()
         setupDefaultStyle()
@@ -84,6 +95,7 @@ class HomeViewController: DetailOffsetPresentationViewController {
         }
 
         cardViewOffset = cardOffsetConstraint?.constant ?? 0
+        sumLeftLabelOffset = sumLeftConstraint?.constant ?? 0
 
         detailGestureView?.addGestureRecognizer(panRecognizer)
         detailTopGestureView?.addGestureRecognizer(panRecognizer)
@@ -94,7 +106,7 @@ class HomeViewController: DetailOffsetPresentationViewController {
             walletsContainerView?.set(viewController: embeded, owner: self)
         }
 
-        //view.clipsToBounds = true
+        view.layer.masksToBounds = true
     }
 
     override func viewDidLayoutSubviews() {
@@ -120,10 +132,6 @@ class HomeViewController: DetailOffsetPresentationViewController {
         sumTitleLabel?.textColor = .skyBlue
         sumTitleLabel?.text = "Total balance"
 
-        sumBtcLabel?.font = UIFont.walletFont(ofSize: 14.0, weight: .regular)
-        sumBtcLabel?.textColor = .skyBlue
-        sumBtcLabel?.text = "28.3467 BTC"
-
         var sumSymbolFont: UIFont = UIFont()
         var sumMainFont: UIFont = UIFont()
 
@@ -138,7 +146,7 @@ class HomeViewController: DetailOffsetPresentationViewController {
             fatalError()
         }
 
-        let attributedString = NSMutableAttributedString(string: "$ 212,456.00", attributes: [
+        let attributedString = NSMutableAttributedString(string: "$ 0.00", attributes: [
             .font: sumSymbolFont,
             .foregroundColor: UIColor.white,
             .kern: -1.5
@@ -152,13 +160,98 @@ class HomeViewController: DetailOffsetPresentationViewController {
         attributedString.addAttributes([
             .font: UIFont.walletFont(ofSize: 18.0, weight: .regular),
             .foregroundColor: UIColor.skyBlue
-            ], range: NSRange(location: 10, length: 2))
-
+            ], range: NSRange(location: 4, length: 2))
         sumLabel?.attributedText = attributedString
+
+        sumBtcLabel?.font = UIFont.walletFont(ofSize: 14.0, weight: .regular)
+        sumBtcLabel?.textColor = .skyBlue
+        sumBtcLabel?.text = "0.0 BTC"
 
         detailTopGestureView?.applyGradient(colors: [.white, UIColor.white.withAlphaComponent(0.7), UIColor.white.withAlphaComponent(0.0)], locations: [0.0, 0.75, 1.0])
 
         embededViewController?.scrollView?.contentInset = UIEdgeInsetsMake(64, 0, 64, 0)
+    }
+
+    private func loadData() {
+        guard let token = userManager?.getToken() else {
+            fatalError()
+        }
+
+        userAPI?.getUserInfo(token: token, coin: nil).done {
+            [weak self]
+            info in
+
+            guard let totalBalance = info.balances.first else {
+                return
+            }
+
+            self?.totalBalance = totalBalance
+
+            self?.dataWasLoaded()
+            }.catch {
+                [weak self]
+                error in
+                print(error)
+
+        }
+    }
+
+    private func dataWasLoaded() {
+        guard
+            let totalBalance = totalBalance,
+            let separator = NumberFormatter.walletAmount.decimalSeparator!.first else {
+            return
+        }
+
+        let parts = totalBalance.formattedUsd.split(separator: separator)
+        guard parts.count == 2 else { return }
+
+        let primary = String(parts[0])
+        let fraction = String(parts[1])
+
+        let primaryRange = 2..<primary.count
+        let fractionRange = (primary.count + 1)..<(primary.count + 1 + fraction.count)
+        setupTotalBalanceLabel(text: totalBalance.formattedUsd, primaryStyleRange: primaryRange, fractionStyleRange: fractionRange)
+
+        sumBtcLabel?.text = totalBalance.formattedOriginal
+
+        sumBtcLabel?.layoutIfNeeded()
+    }
+
+    private func setupTotalBalanceLabel(text: String, primaryStyleRange: CountableRange<Int>, fractionStyleRange: CountableRange<Int>) {
+
+        var sumSymbolFont: UIFont = UIFont()
+        var sumMainFont: UIFont = UIFont()
+
+        switch UIDevice.current.screenType {
+        case .extraSmall, .small:
+            sumSymbolFont = UIFont.walletFont(ofSize: 28.0, weight: .regular)
+            sumMainFont = UIFont.walletFont(ofSize: 28.0, weight: .medium)
+        case .medium, .extra, .plus:
+            sumSymbolFont = UIFont.walletFont(ofSize: 36.0, weight: .regular)
+            sumMainFont = UIFont.walletFont(ofSize: 36.0, weight: .medium)
+        case .unknown:
+            fatalError()
+        }
+
+        let attributedString = NSMutableAttributedString(string: text, attributes: [
+            .font: sumSymbolFont,
+            .foregroundColor: UIColor.skyBlue
+            ])
+
+        attributedString.addAttributes([
+            .font: sumMainFont,
+            .foregroundColor: UIColor.white,
+            .kern: -1.5
+            ], range: NSRange(location: primaryStyleRange.lowerBound, length: primaryStyleRange.count))
+
+        attributedString.addAttributes([
+            .font: UIFont.walletFont(ofSize: 18.0, weight: .regular),
+            .foregroundColor: UIColor.skyBlue
+            ], range: NSRange(location: fractionStyleRange.lowerBound, length: fractionStyleRange.count))
+
+        sumLabel?.attributedText = attributedString
+        sumLabel?.attributedText = attributedString
     }
 
     // MARK: - Animation
@@ -199,10 +292,12 @@ class HomeViewController: DetailOffsetPresentationViewController {
                 self.sumLeftConstraint?.constant = self.view.bounds.width / 2.0 - sumLabelWidth / 2.0
                 self.sumTopConstraint?.constant = 0.0
 
-                self.sumBtcLeftConstraint?.constant = -100
+                self.sumBtcLeftConstraint?.constant = -(self.sumLabel?.bounds.width ?? 200.0)
 
                 self.sumTitleLabel?.alpha = 0.0
                 self.sumTitleLeftConstraint?.constant = self.view.bounds.width / 2.0 - (sumLabelWidth / 2.0) * 0.7
+
+                self.cardOffsetConstraint?.constant = -60
 
             case .closed:
 
@@ -216,32 +311,12 @@ class HomeViewController: DetailOffsetPresentationViewController {
                 self.sumTitleLeftConstraint?.constant = 16.0
 
                 self.embededViewController?.scrollView?.setContentOffset(embededScrollViewOffset, animated: false)
-            }
-            self.view.layoutIfNeeded()
-        }
 
-        // an animator for the title that is transitioning into view
-        let cardAnimator = UIViewPropertyAnimator(duration: duration, curve: .easeOut, animations: {
-            switch state {
-            case .open:
-                self.cardOffsetConstraint?.constant = -60
-            case .closed:
                 self.cardOffsetConstraint?.constant = self.cardViewOffset
             }
-
             self.view.layoutIfNeeded()
-        })
-
-        return [transitionAnimator, cardAnimator]
-    }
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if (segue.identifier == "TransitionToEmbededViewController"),
-            let embeded = segue.destination as? WalletsContainerEmbededViewController {
-
-            self.embededViewController = embeded
-
-            print("prepareForSegue")
         }
+
+        return [transitionAnimator]
     }
 }

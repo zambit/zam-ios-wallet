@@ -10,7 +10,7 @@ import Foundation
 
 enum UserRequest: Request {
 
-    case userInfo(token: String)
+    case userInfo(token: String, coin: String?)
 
     // Transactions
     case sendTransaction(token: String, walletId: String, recipient: String, amount: Int)
@@ -58,8 +58,12 @@ enum UserRequest: Request {
 
     var parameters: RequestParams? {
         switch self {
-        case .userInfo:
-            return nil
+        case let .userInfo(token: _, coin: coin):
+            let dict = [
+                "convert": coin
+            ]
+
+            return RequestParams.url(dict.unwrapped())
             
         case let .sendTransaction(token: _, walletId: id, recipient: recipient, amount: amount):
             let dict = [
@@ -109,7 +113,7 @@ enum UserRequest: Request {
 
     var headers: [String : Any]? {
         switch self {
-        case .userInfo(token: let token):
+        case .userInfo(token: let token, coin: _):
             return ["Authorization": "Bearer \(token)"]
         case .sendTransaction(token: let token, walletId: _, recipient: _, amount: _):
             return ["Authorization": "Bearer \(token)"]

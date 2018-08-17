@@ -12,8 +12,8 @@ struct BalanceData {
 
     let coin: CoinType
 
-    let usd: Float
-    let original: Float
+    let usd: Decimal
+    let original: Decimal
 
     init(coin: CoinType, codable: CodableBalance) {
         self.coin = coin
@@ -33,8 +33,8 @@ struct BalanceData {
 
         guard
             let strNumber = stringNumber,
-            let original = NumberFormatter.walletAmount.number(from: strNumber)?.floatValue,
-            let usd = NumberFormatter.walletAmount.number(from: codable.usd)?.floatValue else {
+            let original = NumberFormatter.walletAmount.number(from: strNumber)?.decimalValue,
+            let usd = NumberFormatter.walletAmount.number(from: codable.usd)?.decimalValue else {
             fatalError()
         }
 
@@ -43,10 +43,16 @@ struct BalanceData {
     }
 
     var formattedUsd: String {
-        return "$ \(usd)"
+        guard let formatted = NumberFormatter.walletAmount.string(from: usd as NSNumber) else {
+            fatalError()
+        }
+        return "$ \(formatted)"
     }
 
     var formattedOriginal: String {
-        return String(original)
+        guard let formatted = NumberFormatter.walletAmount.string(from: original as NSNumber) else {
+            fatalError()
+        }
+        return "\(formatted) \(coin.short.uppercased())"
     }
 }
