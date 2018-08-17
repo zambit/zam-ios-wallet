@@ -80,7 +80,34 @@ final class HomeFlow: ScreenFlow {
             fatalError()
         }
 
+        let onSend: (SendMoneyData, WalletViewController) -> Void = {
+            [weak self]
+            data, owner in
+
+            guard let strongSelf = self else {
+                return
+            }
+
+            let target = strongSelf.transactionDetailScreen
+            target.prepare(sendMoneyData: data)
+
+            owner.walletNavigationController?.controller.present(target, animated: false, completion: nil)
+        }
+
+        vc.onSend = onSend
         vc.title = "Send money"
+        vc.flow = self
+        return vc
+    }
+
+    private var transactionDetailScreen: TransactionDetailViewController {
+        let _vc = ControllerHelper.instantiateViewController(identifier: "TransactionDetailViewController", storyboardName: "Main")
+
+        guard let vc = _vc as? TransactionDetailViewController else {
+            fatalError()
+        }
+
+        vc.modalPresentationStyle = .overFullScreen
         vc.flow = self
         return vc
     }

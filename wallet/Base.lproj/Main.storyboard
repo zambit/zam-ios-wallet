@@ -94,6 +94,76 @@
             </objects>
             <point key="canvasLocation" x="-776.79999999999995" y="118.96551724137932"/>
         </scene>
+        <!--Transaction Detail View Controller-->
+        <scene sceneID="9Nq-My-7AN">
+            <objects>
+                <viewController storyboardIdentifier="TransactionDetailViewController" id="f0r-eD-IeY" customClass="TransactionDetailViewController" customModule="wallet" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="k8E-dd-Ebl">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xGR-al-sHs">
+                                <rect key="frame" x="55" y="64" width="304" height="20.333333333333329"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LI1-9g-ORJ">
+                                <rect key="frame" x="16" y="191.33333333333334" width="382" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AXt-zT-hyB">
+                                <rect key="frame" x="186" y="222.33333333333334" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rdf-Qv-8bf">
+                                <rect key="frame" x="186" y="294.33333333333331" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RmK-rZ-uuD" customClass="LargeSendButton" customModule="wallet" customModuleProvider="target">
+                                <rect key="frame" x="151" y="371.33333333333331" width="112" height="112"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="112" id="dRS-tB-msu"/>
+                                    <constraint firstAttribute="height" constant="112" id="yNs-9g-ROS"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="AXt-zT-hyB" firstAttribute="top" secondItem="LI1-9g-ORJ" secondAttribute="bottom" constant="10" id="4pZ-C8-hBT"/>
+                            <constraint firstItem="RmK-rZ-uuD" firstAttribute="centerX" secondItem="k8E-dd-Ebl" secondAttribute="centerX" id="6fq-om-zka"/>
+                            <constraint firstItem="Rdf-Qv-8bf" firstAttribute="centerX" secondItem="LI1-9g-ORJ" secondAttribute="centerX" id="HtX-Ud-Za7"/>
+                            <constraint firstItem="JQI-4g-WaW" firstAttribute="trailing" secondItem="LI1-9g-ORJ" secondAttribute="trailing" constant="16" id="Lhv-zO-NFv"/>
+                            <constraint firstItem="AXt-zT-hyB" firstAttribute="centerX" secondItem="LI1-9g-ORJ" secondAttribute="centerX" id="Prd-Et-Wcb"/>
+                            <constraint firstItem="RmK-rZ-uuD" firstAttribute="top" secondItem="Rdf-Qv-8bf" secondAttribute="bottom" constant="56" id="bG8-ua-Co0"/>
+                            <constraint firstItem="xGR-al-sHs" firstAttribute="top" secondItem="JQI-4g-WaW" secondAttribute="top" constant="44" id="dJz-O4-Dt7"/>
+                            <constraint firstItem="xGR-al-sHs" firstAttribute="leading" secondItem="JQI-4g-WaW" secondAttribute="leading" constant="55" id="eTg-dR-WKt"/>
+                            <constraint firstItem="JQI-4g-WaW" firstAttribute="trailing" secondItem="xGR-al-sHs" secondAttribute="trailing" constant="55" id="hoH-Af-58w"/>
+                            <constraint firstItem="Rdf-Qv-8bf" firstAttribute="top" secondItem="AXt-zT-hyB" secondAttribute="bottom" constant="51" id="jfx-3b-OkV"/>
+                            <constraint firstItem="LI1-9g-ORJ" firstAttribute="top" secondItem="xGR-al-sHs" secondAttribute="bottom" constant="107" id="kO0-6U-Ybi"/>
+                            <constraint firstItem="LI1-9g-ORJ" firstAttribute="leading" secondItem="JQI-4g-WaW" secondAttribute="leading" constant="16" id="yh0-hH-q5S"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="JQI-4g-WaW"/>
+                    </view>
+                    <connections>
+                        <outlet property="amountDetailLabel" destination="AXt-zT-hyB" id="UPF-2G-Qc9"/>
+                        <outlet property="amountLabel" destination="LI1-9g-ORJ" id="qUH-Jb-dpy"/>
+                        <outlet property="recipientDataLabel" destination="Rdf-Qv-8bf" id="K1C-xN-vcB"/>
+                        <outlet property="sendButton" destination="RmK-rZ-uuD" id="cN5-G2-D0F"/>
+                        <outlet property="titleLabel" destination="xGR-al-sHs" id="rpS-ze-ggA"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eSV-lz-6mj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="71" y="142"/>
+        </scene>
         <!--Home View Controller-->
         <scene sceneID="Dy4-CQ-ozQ">
             <objects>

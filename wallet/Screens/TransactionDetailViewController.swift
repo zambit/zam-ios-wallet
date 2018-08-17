@@ -21,7 +21,7 @@ class TransactionDetailViewController: WalletViewController {
     @IBOutlet private var amountLabel: UILabel?
     @IBOutlet private var amountDetailLabel: UILabel?
     @IBOutlet private var recipientDataLabel: UILabel?
-    @IBOutlet private var sendButton: UIButton?
+    @IBOutlet private var sendButton: LargeSendButton?
 
     private var sendMoneyData: SendMoneyData?
 
@@ -43,12 +43,19 @@ class TransactionDetailViewController: WalletViewController {
         recipientDataLabel?.font = UIFont.walletFont(ofSize: 12.0, weight: .medium)
         recipientDataLabel?.textAlignment = .center
         recipientDataLabel?.textColor = .blueGrey
+
+        view.backgroundColor = .clear
+
+        sendButton?.addTarget(self, action: #selector(sendButtonTouchUpInsideEvent(_:)), for: .touchUpInside)
+        dataWasLoaded()
+
+        changeDataFor(state: .confirm)
     }
 
     func prepare(sendMoneyData: SendMoneyData) {
         self.sendMoneyData = sendMoneyData
 
-        self.dataWasLoaded()
+        dataWasLoaded()
     }
 
     private func dataWasLoaded() {
@@ -65,5 +72,24 @@ class TransactionDetailViewController: WalletViewController {
         case .address(data: let adress):
             recipientDataLabel?.text = adress
         }
+    }
+
+    private func changeDataFor(state: State) {
+        switch state {
+        case .confirm:
+            titleLabel?.text = "Confirm transaction"
+
+        case .failure:
+            titleLabel?.text = "Transaction completed"
+
+        case .success:
+            titleLabel?.text = "Transaction completed"
+
+        }
+    }
+
+    @objc
+    private func sendButtonTouchUpInsideEvent(_ sender: UIButton) {
+        sendButton?.customAppearance.setLoading()
     }
 }

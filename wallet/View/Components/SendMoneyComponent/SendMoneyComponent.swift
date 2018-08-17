@@ -14,9 +14,16 @@ struct SendMoneyData {
     let method: SendMoneyMethod
 }
 
+protocol SendMoneyComponentDelegate: class {
+
+    func sendMoneyComponentRequestSending(_ sendMoneyComponent: SendMoneyComponent, sendMoneyData: SendMoneyData)
+}
+
 class SendMoneyComponent: Component, SendMoneyAmountComponentDelegate, SendMoneyMethodComponentDelegate {
 
     var userAPI: UserAPI?
+
+    weak var delegate: SendMoneyComponentDelegate?
 
     @IBOutlet private var sendMoneyMethodComponent: SendMoneyMethodComponent?
     @IBOutlet private var sendMoneyAmountComponent: SendMoneyAmountComponent?
@@ -40,6 +47,8 @@ class SendMoneyComponent: Component, SendMoneyAmountComponentDelegate, SendMoney
 
         sendMoneyAmountComponent?.delegate = self
         sendMoneyMethodComponent?.delegate = self
+
+        sendButton?.addTarget(self, action: #selector(sendButtonTouchUpInside(_:)), for: .touchUpInside)
 
         // Add dictionary with phone codes to appropriate PhoneNumberFormView
         guard let path = Bundle.main.path(forResource: "PhoneMasks", ofType: "plist"),
@@ -103,5 +112,14 @@ class SendMoneyComponent: Component, SendMoneyAmountComponentDelegate, SendMoney
     func sendMoneyMethodComponentRecipientDataInvalid(_ sendMoneyMethodComponent: SendMoneyMethodComponent) {
         self.method = nil
         sendButton?.customAppearance.setEnabled(false)
+    }
+
+    @objc
+    private func sendButtonTouchUpInside(_ sender: Any) {
+        guard let data = sendMoneyDataProgress else {
+            return
+        }
+
+        delegate?.sendMoneyComponentRequestSending(self, sendMoneyData: data)
     }
 }

@@ -9,7 +9,9 @@
 import Foundation
 import UIKit
 
-class SendMoneyViewController: KeyboardBehaviorFollowingViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class SendMoneyViewController: KeyboardBehaviorFollowingViewController, SendMoneyComponentDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+
+    var onSend: ((SendMoneyData, WalletViewController) -> Void)?
 
     @IBOutlet var sendMoneyComponent: SendMoneyComponent?
     @IBOutlet var titleLabel: UILabel?
@@ -80,6 +82,8 @@ class SendMoneyViewController: KeyboardBehaviorFollowingViewController, UICollec
 
         walletsCollectionView?.layoutIfNeeded()
         walletsCollectionView?.reloadData()
+
+        sendMoneyComponent?.delegate = self
     }
 
     func prepare(wallets: [WalletData], currentIndex: Int, phone: String) {
@@ -118,7 +122,6 @@ class SendMoneyViewController: KeyboardBehaviorFollowingViewController, UICollec
         return collectionView.bounds.size
     }
 
-
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         guard let collectionView = walletsCollectionView else {
             return
@@ -137,5 +140,31 @@ class SendMoneyViewController: KeyboardBehaviorFollowingViewController, UICollec
 
         let wallet = wallets[indexPath.section]
         self.sendMoneyComponent?.prepare(coinType: wallet.coin)
+    }
+
+    func sendMoneyComponentRequestSending(_ sendMoneyComponent: SendMoneyComponent, sendMoneyData: SendMoneyData) {
+        prepareForPresentingModalView()
+
+        onSend?(sendMoneyData, self)
+    }
+
+    private func prepareForPresentingModalView() {
+        self.definesPresentationContext = true
+        self.providesPresentationContextTransitionStyle = true
+
+        self.overlayBlurredBackgroundView()
+    }
+
+    private func overlayBlurredBackgroundView() {
+
+        let effectView = UIVisualEffectView()
+        effectView.frame = view.frame
+        effectView.backgroundColor = UIColor.backgroundLighter.withAlphaComponent(0.4)
+
+        view.addSubview(effectView)
+
+        UIView.animate(withDuration: 0.8) {
+            effectView.effect = UIBlurEffect(style: .dark)
+        }
     }
 }

@@ -12,29 +12,35 @@ import UIKit
 class LargeSendButton: UIButton, CustomUI {
 
     private var loadingView: UIView!
+    private var successView: DoneAnimationView!
+    private var failureView: UIView!
 
     struct CustomAppearance {
-        weak var parent: LargeIconButton?
+        weak var parent: LargeSendButton?
 
-        func setEnabled(_ enabled: Bool) {
-            parent?.isUserInteractionEnabled = enabled
+        func setLoading() {
+            parent?.isUserInteractionEnabled = true
 
-            switch enabled {
-            case true:
-                parent?.alpha = 1
-            case false:
-                parent?.alpha = 0.5
-            }
+            parent?.setTitle("", for: .normal)
+            parent?.setImage(#imageLiteral(resourceName: "empty_icon"), for: .normal)
+            parent?.loadingView.isHidden = false
         }
 
-        func setLoading(_ enabled: Bool) {
-            parent?.isUserInteractionEnabled = !enabled
-            if enabled {
-                parent?.setImage(#imageLiteral(resourceName: "empty_icon"), for: .normal)
-            } else {
-                parent?.setImage(#imageLiteral(resourceName: "icArrowRight"), for: .normal)
+        func setSuccess() {
+            UIView.animate(withDuration: 0.05) {
+                self.parent?.backgroundColor = .white
             }
-            parent?.loadingView.isHidden = !enabled
+            
+            parent?.loadingView.isHidden = true
+            parent?.successView.isHidden = false
+
+            parent?.successView.drawCheck(nil)
+        }
+
+        func setFailure() {
+            UIView.animate(withDuration: 0.05) {
+                self.parent?.backgroundColor = .white
+            }
         }
     }
 
@@ -60,10 +66,11 @@ class LargeSendButton: UIButton, CustomUI {
     }
 
     private func setupStyle() {
-        setImage(#imageLiteral(resourceName: "icArrowRight"), for: .disabled)
-        setImage(#imageLiteral(resourceName: "icArrowRight"), for: .normal)
+        self.setTitle("Send", for: .normal)
+        self.titleLabel?.textColor = .white
+        self.titleLabel?.font = UIFont.walletFont(ofSize: 24.0, weight: .bold)
 
-        self.backgroundColor = .white
+        self.backgroundColor = .paleOliveGreen
 
         self.layer.masksToBounds = false
         self.layer.shadowColor = UIColor.cornflower.cgColor
@@ -95,5 +102,10 @@ class LargeSendButton: UIButton, CustomUI {
         self.loadingView.isHidden = true
 
         self.addSubview(loadingView)
+
+        self.successView = DoneAnimationView(frame: frame)
+        self.successView.isHidden = true
+
+        self.addSubview(successView)
     }
 }
