@@ -33,7 +33,9 @@ class CreatePinViewController: WalletViewController, DecimalKeyboardComponentDel
         switch UIDevice.current.screenType {
         case .small, .extraSmall:
             verticalBetweenSpacingConstraint?.constant = 42.0
-        case .medium, .extra, .plus:
+        case .medium:
+            verticalBetweenSpacingConstraint?.constant = 57.0
+        case .extra, .plus:
             verticalBetweenSpacingConstraint?.constant = 72.0
         case .unknown:
             fatalError()

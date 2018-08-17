@@ -100,7 +100,8 @@ class HomeViewController: DetailOffsetPresentationViewController {
         detailGestureView?.addGestureRecognizer(panRecognizer)
         detailTopGestureView?.addGestureRecognizer(panRecognizer)
 
-        walletsContainerView?.isUserInteractionEnabled = false
+        //walletsContainerView?.isUserInteractionEnabled = false
+        walletsContainerView?.isUserInteractionEnabled = true
 
         if let embeded = embededViewController as? UIViewController {
             walletsContainerView?.set(viewController: embeded, owner: self)
@@ -260,12 +261,12 @@ class HomeViewController: DetailOffsetPresentationViewController {
     override func stateDidChange(_ state: DetailOffsetPresentationViewController.State) {
         super.stateDidChange(state)
 
-        switch state {
-        case .open:
-            walletsContainerView?.isUserInteractionEnabled = true
-        case .closed:
-            walletsContainerView?.isUserInteractionEnabled = false
-        }
+//        switch state {
+//        case .open:
+//            //walletsContainerView?.isUserInteractionEnabled = true
+//        case .closed:
+//            //walletsContainerView?.isUserInteractionEnabled = false
+//        }
     }
 
     override func createTransitionAnimatorsIfNeeded(to state: DetailOffsetPresentationViewController.State, duration: TimeInterval) -> [UIViewPropertyAnimator] {

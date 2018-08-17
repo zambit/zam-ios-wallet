@@ -24,20 +24,6 @@ class SendMoneyComponent: Component, SendMoneyAmountComponentDelegate, SendMoney
 
     @IBOutlet private var topConstraint: NSLayoutConstraint?
 
-    var appearingAnimationBlock: () -> Void {
-        return {
-            [weak self] in
-            self?.topConstraint?.constant = 36.0
-        }
-    }
-
-    var disappearingAnimationBlock: () -> Void {
-        return {
-            [weak self] in
-            self?.topConstraint?.constant = 58.0
-        }
-    }
-
     private var balanceData: BalanceData?
     private var method: SendMoneyMethod?
 

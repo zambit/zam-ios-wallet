@@ -105,7 +105,8 @@
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="eg3-E9-yqy" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="35" id="7kU-cK-Uky"/>
+                <constraint firstItem="eg3-E9-yqy" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" priority="999" constant="35" id="45A-Hb-Ovs"/>
+                <constraint firstItem="eg3-E9-yqy" firstAttribute="top" relation="greaterThanOrEqual" secondItem="vUN-kp-3ea" secondAttribute="top" constant="10" id="7kU-cK-Uky"/>
                 <constraint firstItem="Q45-Zq-EGm" firstAttribute="top" secondItem="eg3-E9-yqy" secondAttribute="bottom" constant="9" id="DAx-fa-YsA"/>
                 <constraint firstItem="qlR-ac-cJq" firstAttribute="top" secondItem="Q45-Zq-EGm" secondAttribute="bottom" constant="10" id="EAI-RW-EXA"/>
                 <constraint firstItem="eg3-E9-yqy" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="UUA-wZ-Wfu"/>

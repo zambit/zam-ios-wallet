@@ -46,7 +46,10 @@ class CreatePinComponent: Component, UICollectionViewDataSource, UICollectionVie
         case .extraSmall, .small:
             self.heightAnchor.constraint(equalToConstant: 80.0).isActive = true
             break
-        case .extra, .medium, .plus:
+        case .medium:
+            self.heightAnchor.constraint(equalToConstant: 145.0).isActive = true
+            break
+        case .extra, .plus:
             self.heightAnchor.constraint(equalToConstant: 180.0).isActive = true
             break
         case .unknown:

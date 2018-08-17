@@ -49,8 +49,6 @@ class SendMoneyViewController: KeyboardBehaviorFollowingViewController, UICollec
             self?.walletsCollectionView?.visibleCells.first?.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
             self?.walletsCollectionView?.alpha = 0.0
             self?.titleLabel?.alpha = 0.0
-
-            self?.sendMoneyComponent?.appearingAnimationBlock()
         }
 
         disappearingAnimationBlock = {
@@ -59,8 +57,6 @@ class SendMoneyViewController: KeyboardBehaviorFollowingViewController, UICollec
             self?.walletsCollectionView?.visibleCells.first?.transform = .identity
             self?.walletsCollectionView?.alpha = 1.0
             self?.titleLabel?.alpha = 1.0
-
-            self?.sendMoneyComponent?.disappearingAnimationBlock()
         }
 
         walletsCollectionView?.register(WalletSmallItemComponent.self , forCellWithReuseIdentifier: "WalletSmallItemComponent")
@@ -73,6 +69,7 @@ class SendMoneyViewController: KeyboardBehaviorFollowingViewController, UICollec
         titleLabel?.font = UIFont.walletFont(ofSize: 22.0, weight: .bold)
         titleLabel?.textColor = .white
         titleLabel?.textAlignment = .left
+        titleLabel?.text = "From"
 
         let index = currentIndex
         self.currentIndex = index
