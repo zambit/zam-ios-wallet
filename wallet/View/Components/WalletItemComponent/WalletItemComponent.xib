@@ -47,17 +47,14 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="19.3423" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y2B-iU-pHI">
-                    <rect key="frame" x="239.5" y="16" width="71.5" height="21.5"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="71.5" id="mGR-Sv-i6M"/>
-                    </constraints>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="19.3423" textAlignment="right" lineBreakMode="characterWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y2B-iU-pHI">
+                    <rect key="frame" x="231.5" y="16" width="71.5" height="21.5"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cMs-J2-wIM">
-                    <rect key="frame" x="239.5" y="43.5" width="71.5" height="17"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="characterWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cMs-J2-wIM">
+                    <rect key="frame" x="267" y="43.5" width="36" height="17"/>
                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -84,19 +81,18 @@
                 <constraint firstItem="cMs-J2-wIM" firstAttribute="top" secondItem="y2B-iU-pHI" secondAttribute="bottom" constant="6" id="BmJ-Tr-9oz"/>
                 <constraint firstItem="BUP-nS-oac" firstAttribute="top" secondItem="G60-5P-Qn4" secondAttribute="bottom" constant="8" id="ENm-Gi-dzi"/>
                 <constraint firstItem="y2B-iU-pHI" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="G60-5P-Qn4" secondAttribute="trailing" constant="6" id="EfK-gD-eSN"/>
-                <constraint firstItem="cMs-J2-wIM" firstAttribute="width" secondItem="y2B-iU-pHI" secondAttribute="width" id="FgB-iX-lZo"/>
                 <constraint firstItem="BUP-nS-oac" firstAttribute="leading" secondItem="G60-5P-Qn4" secondAttribute="leading" id="JOh-cu-XoO"/>
                 <constraint firstItem="y2B-iU-pHI" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="16" id="NAL-SQ-cN2"/>
                 <constraint firstItem="SMT-yx-UU5" firstAttribute="top" relation="greaterThanOrEqual" secondItem="BUP-nS-oac" secondAttribute="bottom" constant="15" id="SkU-Fx-NTI"/>
                 <constraint firstItem="G60-5P-Qn4" firstAttribute="leading" secondItem="bIt-Ay-iQX" secondAttribute="trailing" constant="9" id="TK6-1l-eEo"/>
                 <constraint firstItem="SMT-yx-UU5" firstAttribute="leading" secondItem="G60-5P-Qn4" secondAttribute="leading" id="bvS-WK-zi2"/>
                 <constraint firstItem="bIt-Ay-iQX" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="21" id="ekB-57-6nL"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="y2B-iU-pHI" secondAttribute="trailing" constant="12" id="grk-k9-aoW"/>
+                <constraint firstItem="cMs-J2-wIM" firstAttribute="trailing" secondItem="y2B-iU-pHI" secondAttribute="trailing" id="fSE-FX-YMb"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="y2B-iU-pHI" secondAttribute="trailing" constant="20" id="grk-k9-aoW"/>
                 <constraint firstItem="bIt-Ay-iQX" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="12" id="qBo-Ad-dUZ"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="wOa-Yn-xRM" secondAttribute="bottom" constant="13" id="s2i-gO-xhB"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="SMT-yx-UU5" secondAttribute="bottom" constant="13" id="soi-3A-7c2"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="wOa-Yn-xRM" secondAttribute="trailing" constant="45" id="uDR-Ts-xSA"/>
-                <constraint firstItem="cMs-J2-wIM" firstAttribute="leading" secondItem="y2B-iU-pHI" secondAttribute="leading" id="usB-1I-qaH"/>
                 <constraint firstItem="G60-5P-Qn4" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="17" id="vmc-8l-pIa"/>
                 <constraint firstItem="wOa-Yn-xRM" firstAttribute="top" relation="greaterThanOrEqual" secondItem="cMs-J2-wIM" secondAttribute="bottom" constant="15" id="xXy-0Y-Yef"/>
             </constraints>

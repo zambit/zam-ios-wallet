@@ -11,7 +11,7 @@ import UIKit
 
 protocol SendMoneyAmountComponentDelegate: class {
 
-    func sendMoneyAmountComponent(_ sendMoneyAmountComponent: SendMoneyAmountComponent, amountValueEntered value: Decimal, stringFormat: String)
+    func sendMoneyAmountComponent(_ sendMoneyAmountComponent: SendMoneyAmountComponent, amountDataEntered data: BalanceData)
 
     func sendMoneyAmountComponentValueEnteredIncorrectly(_ sendMoneyAmountComponent: SendMoneyAmountComponent)
 
@@ -30,7 +30,15 @@ class SendMoneyAmountComponent: Component, UITextFieldDelegate {
     @IBOutlet private var blockchainFee: IndentLabel?
     @IBOutlet private var zamzamFee: IndentLabel?
 
-    private var coinPrefix: String = ""
+    private var coin: CoinType?
+
+    private var coinPrefix: String {
+        if let coin = coin {
+            return "\(coin.short.uppercased())"
+        }
+
+        return ""
+    }
 
     private(set) var amount: Decimal = 0.0
     private(set) var detail: Float = 0
@@ -89,7 +97,7 @@ class SendMoneyAmountComponent: Component, UITextFieldDelegate {
     }
 
     func prepare(coinType: CoinType) {
-        self.coinPrefix = "\(coinType.short.uppercased())"
+        self.coin = coinType
 
         altValueLabel?.text = coinPrefix
     }
@@ -98,7 +106,7 @@ class SendMoneyAmountComponent: Component, UITextFieldDelegate {
 
     @objc
     private func valueTextFieldEditingChanged(_ sender: UITextField) {
-        guard let text = sender.text else {
+        guard let text = sender.text, let coin = coin else {
             return
         }
 
@@ -110,7 +118,8 @@ class SendMoneyAmountComponent: Component, UITextFieldDelegate {
 
         if value != amount {
             if value > 0 {
-                delegate?.sendMoneyAmountComponent(self, amountValueEntered: value, stringFormat: "\(stringValue) \(coinPrefix)")
+                let balanceData = BalanceData(coin: coin, usd: 0.0, original: value)
+                delegate?.sendMoneyAmountComponent(self, amountDataEntered: balanceData)
             } else {
                 delegate?.sendMoneyAmountComponentValueEnteredIncorrectly(self)
             }

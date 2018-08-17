@@ -67,7 +67,7 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
         }
 
         let wallet = wallets[indexPath.item]
-        cell.configure(image: wallet.coin.image, coinName: wallet.coin.name, coinAddit: wallet.coin.short, phoneNumber: phone, balance: wallet.balance.formattedOriginalShort, fiatBalance: wallet.balance.formattedUsdShort)
+        cell.configure(image: wallet.coin.image, coinName: wallet.coin.name, coinAddit: wallet.coin.short, phoneNumber: phone, balance: wallet.balance.formattedShort(currency: .original), fiatBalance: wallet.balance.description(currency: .usd))
         cell.onSendButtonTap = {
             [weak self] in
 

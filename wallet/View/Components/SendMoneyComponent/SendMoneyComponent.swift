@@ -9,9 +9,8 @@
 import Foundation
 import UIKit
 
-struct SendMoneyDataProgress {
-    let amount: Decimal
-    let amountString: String
+struct SendMoneyData {
+    let amountData: BalanceData
     let method: SendMoneyMethod
 }
 
@@ -39,16 +38,15 @@ class SendMoneyComponent: Component, SendMoneyAmountComponentDelegate, SendMoney
         }
     }
 
-    private var amountString: String?
-    private var amount: Decimal?
+    private var balanceData: BalanceData?
     private var method: SendMoneyMethod?
 
-    private var sendMoneyDataProgress: SendMoneyDataProgress? {
-        guard let method = method, let amount = amount, let amountString = amountString else {
+    private var sendMoneyDataProgress: SendMoneyData? {
+        guard let method = method, let data = balanceData else {
             return nil
         }
 
-        return SendMoneyDataProgress(amount: amount, amountString: amountString, method: method)
+        return SendMoneyData(amountData: data, method: method)
     }
 
     override func initFromNib() {
@@ -87,18 +85,17 @@ class SendMoneyComponent: Component, SendMoneyAmountComponentDelegate, SendMoney
 
     // MARK: - SendMoneyAmountComponentDelegate
 
-    func sendMoneyAmountComponent(_ sendMoneyAmountComponent: SendMoneyAmountComponent, amountValueEntered value: Decimal, stringFormat: String) {
-        self.amount = value
-        self.amountString = stringFormat
+    func sendMoneyAmountComponent(_ sendMoneyAmountComponent: SendMoneyAmountComponent, amountDataEntered data: BalanceData) {
+        self.balanceData = data
 
         if let progressData = sendMoneyDataProgress {
             sendButton?.customAppearance.setEnabled(true)
-            sendButton?.customAppearance.provideData(amount: progressData.amountString, alternative: "")
+            sendButton?.customAppearance.provideData(amount: "\(progressData.amountData.formatted(currency: .original)) \(progressData.amountData.coin.short.uppercased())", alternative: "")
         }
     }
 
     func sendMoneyAmountComponentValueEnteredIncorrectly(_ sendMoneyAmountComponent: SendMoneyAmountComponent) {
-        self.amount = nil
+        self.balanceData = nil
         sendButton?.customAppearance.setEnabled(false)
     }
 
@@ -113,7 +110,7 @@ class SendMoneyComponent: Component, SendMoneyAmountComponentDelegate, SendMoney
 
         if let progressData = sendMoneyDataProgress {
             sendButton?.customAppearance.setEnabled(true)
-            sendButton?.customAppearance.provideData(amount: progressData.amountString, alternative: "")
+            sendButton?.customAppearance.provideData(amount: "\(progressData.amountData.formatted(currency: .original)) \(progressData.amountData.coin.short.uppercased())", alternative: "")
         }
     }
 

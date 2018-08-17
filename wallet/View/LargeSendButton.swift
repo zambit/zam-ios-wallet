@@ -1,18 +1,15 @@
 //
-//  LargeIconButton.swift
+//  LargeSendButton.swift
 //  wallet
 //
-//  Created by  me on 27/07/2018.
+//  Created by Alexander Ponomarev on 17/08/2018.
 //  Copyright © 2018 zamzam. All rights reserved.
 //
 
 import Foundation
 import UIKit
 
-/**
- Button appropriates large button from Onboarding screen. Blue title on middle. Blue arrow_icon on right. Roun corners. Size defines outside class.
- */
-class LargeIconButton: UIButton, CustomUI {
+class LargeSendButton: UIButton, CustomUI {
 
     private var loadingView: UIView!
 

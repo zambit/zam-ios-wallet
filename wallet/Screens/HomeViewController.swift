@@ -161,6 +161,7 @@ class HomeViewController: DetailOffsetPresentationViewController {
             .font: UIFont.walletFont(ofSize: 18.0, weight: .regular),
             .foregroundColor: UIColor.skyBlue
             ], range: NSRange(location: 4, length: 2))
+
         sumLabel?.attributedText = attributedString
 
         sumBtcLabel?.font = UIFont.walletFont(ofSize: 14.0, weight: .regular)
@@ -192,7 +193,6 @@ class HomeViewController: DetailOffsetPresentationViewController {
                 [weak self]
                 error in
                 print(error)
-
         }
     }
 
@@ -203,7 +203,8 @@ class HomeViewController: DetailOffsetPresentationViewController {
             return
         }
 
-        let parts = totalBalance.formattedUsd.split(separator: separator)
+        let usdBalance = totalBalance.description(currency: .usd)
+        let parts = usdBalance.split(separator: separator)
         guard parts.count == 2 else { return }
 
         let primary = String(parts[0])
@@ -211,9 +212,9 @@ class HomeViewController: DetailOffsetPresentationViewController {
 
         let primaryRange = 2..<primary.count+1
         let fractionRange = (primary.count + 1)..<(primary.count + 1 + fraction.count)
-        setupTotalBalanceLabel(text: totalBalance.formattedUsd, primaryStyleRange: primaryRange, fractionStyleRange: fractionRange)
+        setupTotalBalanceLabel(text: usdBalance, primaryStyleRange: primaryRange, fractionStyleRange: fractionRange)
 
-        sumBtcLabel?.text = totalBalance.formattedOriginal
+        sumBtcLabel?.text = "\(totalBalance.formatted(currency: .original)) \(totalBalance.coin.short.uppercased())"
 
         sumBtcLabel?.layoutIfNeeded()
     }

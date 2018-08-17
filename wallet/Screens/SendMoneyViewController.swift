@@ -80,6 +80,9 @@ class SendMoneyViewController: KeyboardBehaviorFollowingViewController, UICollec
         if let index = currentIndex, wallets.count > index {
             sendMoneyComponent?.prepare(coinType: wallets[index].coin)
         }
+
+        walletsCollectionView?.layoutIfNeeded()
+        walletsCollectionView?.reloadData()
     }
 
     func prepare(wallets: [WalletData], currentIndex: Int, phone: String) {
@@ -110,7 +113,7 @@ class SendMoneyViewController: KeyboardBehaviorFollowingViewController, UICollec
         }
 
         let wallet = wallets[indexPath.section]
-        cell.configure(image: wallet.coin.image, coinName: wallet.coin.name, coinAddit: wallet.coin.short, phoneNumber: phone, balance: wallet.balance.formattedOriginalShort, fiatBalance: wallet.balance.formattedUsdShort)
+        cell.configure(image: wallet.coin.image, coinName: wallet.coin.name, coinAddit: wallet.coin.short, phoneNumber: phone, balance: wallet.balance.formattedShort(currency: .original), fiatBalance: wallet.balance.description(currency: .usd))
         return cell
     }
 

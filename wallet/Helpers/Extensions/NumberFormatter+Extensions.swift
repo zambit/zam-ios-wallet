@@ -15,9 +15,8 @@ extension NumberFormatter {
         formatter.locale = Locale(identifier: "en_US")
         formatter.numberStyle = .decimal
         formatter.alwaysShowsDecimalSeparator = true
-        formatter.usesSignificantDigits = true
-        formatter.minimumSignificantDigits = 1
-        formatter.maximumSignificantDigits = 6
+        formatter.minimumFractionDigits = 1
+        formatter.maximumFractionDigits = 2
 
         return formatter
     }
