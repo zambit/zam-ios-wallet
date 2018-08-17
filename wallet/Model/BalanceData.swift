@@ -42,11 +42,25 @@ struct BalanceData {
         self.original = original
     }
 
+    var formattedUsdShort: String {
+        guard let formatted = NumberFormatter.walletAmountShort.string(from: usd as NSNumber) else {
+            fatalError()
+        }
+        return "$ \(formatted)"
+    }
+
     var formattedUsd: String {
         guard let formatted = NumberFormatter.walletAmount.string(from: usd as NSNumber) else {
             fatalError()
         }
         return "$ \(formatted)"
+    }
+
+    var formattedOriginalShort: String {
+        guard let formatted = NumberFormatter.walletAmountShort.string(from: original as NSNumber) else {
+            fatalError()
+        }
+        return "\(formatted)"
     }
 
     var formattedOriginal: String {

@@ -110,7 +110,7 @@ class SendMoneyViewController: KeyboardBehaviorFollowingViewController, UICollec
         }
 
         let wallet = wallets[indexPath.section]
-        cell.configure(image: wallet.coin.image, coinName: wallet.coin.name, coinAddit: wallet.coin.short, phoneNumber: phone, balance: wallet.balance.formattedOriginal, fiatBalance: wallet.balance.formattedUsd)
+        cell.configure(image: wallet.coin.image, coinName: wallet.coin.name, coinAddit: wallet.coin.short, phoneNumber: phone, balance: wallet.balance.formattedOriginalShort, fiatBalance: wallet.balance.formattedUsdShort)
         return cell
     }
 

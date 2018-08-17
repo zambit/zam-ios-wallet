@@ -209,7 +209,7 @@ class HomeViewController: DetailOffsetPresentationViewController {
         let primary = String(parts[0])
         let fraction = String(parts[1])
 
-        let primaryRange = 2..<primary.count
+        let primaryRange = 2..<primary.count+1
         let fractionRange = (primary.count + 1)..<(primary.count + 1 + fraction.count)
         setupTotalBalanceLabel(text: totalBalance.formattedUsd, primaryStyleRange: primaryRange, fractionStyleRange: fractionRange)
 
