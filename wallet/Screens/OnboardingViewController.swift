@@ -30,7 +30,7 @@ class OnboardingViewController: WalletViewController, UICollectionViewDataSource
 
     @IBOutlet var pagesCollectionView: UICollectionView?
     @IBOutlet var pageControl: UIPageControl?
-    @IBOutlet var registrationButton: LargeTextButton?
+    @IBOutlet var registrationButton: OnboardingLargeButton?
     @IBOutlet var loginButton: UIButton?
 
     override func viewDidLoad() {

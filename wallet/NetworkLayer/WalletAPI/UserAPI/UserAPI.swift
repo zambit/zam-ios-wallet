@@ -92,7 +92,6 @@ struct UserAPI: NetworkService {
     }
 
     func getWallets(token: String, coin: CoinType? = nil, id: String? = nil, page: String? = nil, count: Int? = nil) -> Promise<[WalletData]> {
-        
         return provider.execute(.getUserWallets(token: token, coin: coin?.rawValue, walletId: id, page: page, count: count))
             .then {
                 (response: Response) -> Promise<[WalletData]> in
@@ -131,4 +130,48 @@ struct UserAPI: NetworkService {
                 }
         }
     }
+
+    func sendTransaction(token: String, walletId: String, recipient: String, amount: Decimal) -> Promise<WalletTransactionData>  {
+        return provider.execute(.sendTransaction(token: token, walletId: walletId, recipient: recipient, amount: amount))
+            .then {
+                (response: Response) -> Promise<WalletTransactionData> in
+
+                return Promise { seal in
+                    switch response {
+                    case .data(_):
+
+                        let success: (CodableSuccessTransactionResponse) -> Void = { s in
+                            do {
+                                let transaction = try WalletTransactionData(codable: s.data.transaction)
+                                seal.fulfill(transaction)
+                            } catch let error {
+                                seal.reject(error)
+                            }
+                        }
+
+                        let failure: (CodableFailure) -> Void = { f in
+                            guard f.errors.count > 0 else {
+                                let error = WalletResponseError.undefinedServerFailureResponse
+                                seal.reject(error)
+                                return
+                            }
+
+                            let error = WalletResponseError.serverFailureResponse(errors: f.errors)
+                            seal.reject(error)
+                        }
+
+                        do {
+                            try response.extractResult(success: success, failure: failure)
+                        } catch let error {
+                            seal.reject(error)
+                        }
+                    case .error(let error):
+                        seal.reject(error)
+                    }
+                }
+        }
+
+    }
+
+    
 }

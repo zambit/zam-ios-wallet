@@ -13,7 +13,7 @@ enum UserRequest: Request {
     case userInfo(token: String, coin: String?)
 
     // Transactions
-    case sendTransaction(token: String, walletId: String, recipient: String, amount: Int)
+    case sendTransaction(token: String, walletId: String, recipient: String, amount: Decimal)
     case getTransactions(token: String, coin: String?, walletId: String?, recipient: String?, fromTime: String?, untilTime: String?, page: String?, count: Int?)
     case getTransactionInfo(token: String, transactionId: String)
 
@@ -69,7 +69,7 @@ enum UserRequest: Request {
             let dict = [
                 "wallet_id": id,
                 "recipient": recipient,
-                "amount": String(amount)
+                "amount": amount.description
                 ]
 
             return RequestParams.body(dict)

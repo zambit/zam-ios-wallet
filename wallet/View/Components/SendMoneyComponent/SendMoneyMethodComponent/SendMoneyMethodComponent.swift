@@ -10,15 +10,20 @@ import Foundation
 import UIKit
 
 enum SendMoneyMethod {
-    case phone(data: String?)
-    case address(data: String?)
+    case phone
+    case address
+
+    enum Data {
+        case phone(data: String)
+        case address(data: String)
+    }
 }
 
 protocol SendMoneyMethodComponentDelegate: class {
 
     func sendMoneyMethodSelected(_ sendMoneyMethodComponent: SendMoneyMethodComponent, method: SendMoneyMethod)
 
-    func sendMoneyMethodComponent(_ sendMoneyMethodComponent: SendMoneyMethodComponent, methodRecipientDataEntered methodData: SendMoneyMethod)
+    func sendMoneyMethodComponent(_ sendMoneyMethodComponent: SendMoneyMethodComponent, methodRecipientDataEntered methodData: SendMoneyMethod.Data)
 
     func sendMoneyMethodComponentRecipientDataInvalid(_ sendMoneyMethodComponent: SendMoneyMethodComponent)
 
@@ -107,13 +112,13 @@ class SendMoneyMethodComponent: Component, SegmentedControlComponentDelegate, Ph
             guard let textField = recipientTextField, let masks = phoneMasks, let parser = parser else { return }
             setPhoneNumberStyleForRecipientTextField(textField, backgroundColor: color, masks: masks, parser: parser)
 
-            delegate?.sendMoneyMethodSelected(self, method: .phone(data: nil))
+            delegate?.sendMoneyMethodSelected(self, method: .phone)
 
         case 1:
             guard let textField = recipientTextField else { return }
             setAddressStyleForRecipientTextField(textField, backgroundColor: color)
 
-            delegate?.sendMoneyMethodSelected(self, method: .address(data: nil))
+            delegate?.sendMoneyMethodSelected(self, method: .address)
         default:
             fatalError()
         }

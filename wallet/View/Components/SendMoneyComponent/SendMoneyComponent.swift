@@ -11,7 +11,8 @@ import UIKit
 
 struct SendMoneyData {
     let amountData: BalanceData
-    let method: SendMoneyMethod
+    let method: SendMoneyMethod.Data
+    let walletId: String
 }
 
 protocol SendMoneyComponentDelegate: class {
@@ -32,14 +33,15 @@ class SendMoneyComponent: Component, SendMoneyAmountComponentDelegate, SendMoney
     @IBOutlet private var topConstraint: NSLayoutConstraint?
 
     private var balanceData: BalanceData?
-    private var method: SendMoneyMethod?
+    private var method: SendMoneyMethod.Data?
+    private var walletId: String?
 
     private var sendMoneyDataProgress: SendMoneyData? {
-        guard let method = method, let data = balanceData else {
+        guard let method = method, let data = balanceData, let id = walletId else {
             return nil
         }
 
-        return SendMoneyData(amountData: data, method: method)
+        return SendMoneyData(amountData: data, method: method, walletId: id)
     }
 
     override func initFromNib() {
@@ -74,7 +76,8 @@ class SendMoneyComponent: Component, SendMoneyAmountComponentDelegate, SendMoney
         backgroundColor = .white
     }
 
-    func prepare(coinType: CoinType) {
+    func prepare(coinType: CoinType, walletId: String) {
+        self.walletId = walletId
         sendMoneyAmountComponent?.prepare(coinType: coinType)
     }
 
@@ -100,7 +103,7 @@ class SendMoneyComponent: Component, SendMoneyAmountComponentDelegate, SendMoney
         //...
     }
 
-    func sendMoneyMethodComponent(_ sendMoneyMethodComponent: SendMoneyMethodComponent, methodRecipientDataEntered methodData: SendMoneyMethod) {
+    func sendMoneyMethodComponent(_ sendMoneyMethodComponent: SendMoneyMethodComponent, methodRecipientDataEntered methodData: SendMoneyMethod.Data) {
         self.method = methodData
 
         if let progressData = sendMoneyDataProgress {

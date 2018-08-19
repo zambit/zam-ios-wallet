@@ -126,7 +126,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RmK-rZ-uuD" customClass="LargeSendButton" customModule="wallet" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RmK-rZ-uuD" customClass="LargeSendButton" customModule="wallet" customModuleProvider="target">
                                 <rect key="frame" x="151" y="371.33333333333331" width="112" height="112"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="112" id="dRS-tB-msu"/>

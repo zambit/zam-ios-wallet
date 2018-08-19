@@ -12,6 +12,8 @@ import ESTabBarController_swift
 
 class WalletTabBarController {
 
+    weak var navigationController: WalletNavigationController?
+
     private(set) var controller: ESTabBarController
 
     var home: WalletNavigationController
@@ -39,6 +41,8 @@ class WalletTabBarController {
         more.tabBarItem = ESTabBarItem(WalletContentView(), title: "More", image: #imageLiteral(resourceName: "more"))
 
         self.controller = WalletTabBarController.setupTabBarController(walletsController: [self.home.controller, transactions, zam, contacts, more])
+
+        self.home.parentTabBar = self
     }
 
     private static func setupTabBarController(walletsController: [UIViewController]) -> ESTabBarController {
@@ -69,6 +73,12 @@ class WalletTabBarController {
         walletNavigation.customTransitionCoordinator = coordinator
 
         return walletNavigation
+    }
+
+    func present(viewController: WalletViewController) {
+        controller.present(viewController, animated: true, completion: nil)
+        viewController.walletNavigationController = navigationController
+        viewController.walletTabBar = self
     }
 }
 

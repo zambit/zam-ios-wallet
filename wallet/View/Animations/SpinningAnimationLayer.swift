@@ -10,32 +10,42 @@ import UIKit
 
 class SpinningAnimationLayer: CAShapeLayer {
 
-    private let size: CGSize
-    private let color: UIColor
-
-    init(frame: CGRect, color: UIColor) {
-        self.size = frame.size
-        self.color = color
-
+    init(frame: CGRect, color: UIColor, lineWidth: CGFloat = 2.0) {
         super.init()
 
         let path: UIBezierPath = UIBezierPath()
 
-        path.addArc(withCenter: CGPoint(x: size.width / 2,
-                                        y: size.height / 2),
-                    radius: size.width / 2,
+        path.addArc(withCenter: CGPoint(x: frame.size.width / 2,
+                                        y: frame.size.height / 2),
+                    radius: frame.size.width / 2,
                     startAngle: CGFloat(-3 * Double.pi / 4),
                     endAngle: CGFloat(-Double.pi / 4),
                     clockwise: false)
 
-        self.fillColor = nil
-        self.strokeColor = color.cgColor
-        self.lineWidth = 2
-
-        self.backgroundColor = nil
         self.path = path.cgPath
         self.frame = frame
 
+        self.setupStyle(strokeColor: color, lineWidth: lineWidth)
+        self.animate()
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        self.setupStyle()
+        self.animate()
+    }
+
+    private func setupStyle(strokeColor: UIColor = .cornflower, lineWidth: CGFloat = 2.0) {
+        self.fillColor = nil
+        self.backgroundColor = nil
+        self.strokeColor = strokeColor.cgColor
+        self.lineWidth = lineWidth
+
+        self.lineJoin = kCALineJoinRound
+        self.lineCap = kCALineCapRound
+    }
+
+    private func animate() {
         let duration: CFTimeInterval = 0.75
 
         // Rotate animation
@@ -56,7 +66,4 @@ class SpinningAnimationLayer: CAShapeLayer {
         self.add(animation, forKey: "animation")
     }
 
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
 }

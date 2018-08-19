@@ -91,9 +91,11 @@ final class HomeFlow: ScreenFlow {
             let target = strongSelf.transactionDetailScreen
             target.prepare(sendMoneyData: data)
 
-            owner.walletNavigationController?.controller.present(target, animated: false, completion: nil)
+            owner.walletTabBar?.present(viewController: target)
         }
 
+        vc.definesPresentationContext = true
+        vc.providesPresentationContextTransitionStyle = true
         vc.onSend = onSend
         vc.title = "Send money"
         vc.flow = self
@@ -107,6 +109,8 @@ final class HomeFlow: ScreenFlow {
             fatalError()
         }
 
+        vc.userManager = UserDataManager(keychainConfiguration: WalletKeychainConfiguration())
+        vc.userAPI = UserAPI(provider: UserProvider(environment: WalletEnvironment(), dispatcher: HTTPDispatcher()))
         vc.modalPresentationStyle = .overFullScreen
         vc.flow = self
         return vc

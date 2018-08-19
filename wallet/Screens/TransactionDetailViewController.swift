@@ -17,6 +17,9 @@ class TransactionDetailViewController: WalletViewController {
         case failure
     }
 
+    var userAPI: UserAPI?
+    var userManager: UserDataManager?
+
     @IBOutlet private var titleLabel: UILabel?
     @IBOutlet private var amountLabel: UILabel?
     @IBOutlet private var amountDetailLabel: UILabel?
@@ -24,6 +27,32 @@ class TransactionDetailViewController: WalletViewController {
     @IBOutlet private var sendButton: LargeSendButton?
 
     private var sendMoneyData: SendMoneyData?
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        titleLabel?.alpha = 0.0
+        amountLabel?.alpha = 0.0
+        amountDetailLabel?.alpha = 0.0
+        recipientDataLabel?.alpha = 0.0
+        sendButton?.alpha = 0.0
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        overlayBlurredBackgroundView()
+
+        UIView.animate(withDuration: 0.3, animations: {
+            [weak self] in
+
+            self?.titleLabel?.alpha = 1
+            self?.amountLabel?.alpha = 1
+            self?.amountDetailLabel?.alpha = 1
+            self?.recipientDataLabel?.alpha = 1
+            self?.sendButton?.alpha = 1
+        })
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -90,6 +119,54 @@ class TransactionDetailViewController: WalletViewController {
 
     @objc
     private func sendButtonTouchUpInsideEvent(_ sender: UIButton) {
+        guard let token = userManager?.getToken() else {
+            fatalError()
+        }
+
+        guard let data = sendMoneyData else {
+            return
+        }
+
+        var recipient: String
+
+        switch data.method {
+        case .phone(data: let phone):
+            recipient = phone
+        case .address(data: let address):
+            recipient = address
+        }
+
         sendButton?.customAppearance.setLoading()
+
+        userAPI?.sendTransaction(token: token, walletId: data.walletId, recipient: recipient, amount: data.amountData.original).done {
+            [weak self]
+            transaction in
+
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                self?.sendButton?.customAppearance.setSuccess()
+            }
+        }.catch {
+            [weak self]
+            error in
+
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                self?.sendButton?.customAppearance.setFailure()
+            }
+            print(error)
+        }
+    }
+
+    private func overlayBlurredBackgroundView() {
+
+        let effectView = UIVisualEffectView()
+        effectView.frame = view.frame
+        effectView.backgroundColor = UIColor.backgroundLighter.withAlphaComponent(0.4)
+
+        view.addSubview(effectView)
+        view.sendSubview(toBack: effectView)
+
+        UIView.animate(withDuration: 0.8) {
+            effectView.effect = UIBlurEffect(style: .dark)
+        }
     }
 }

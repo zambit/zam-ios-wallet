@@ -13,12 +13,14 @@ import Foundation
  */
 struct WalletData {
 
+    let id: String
     let name: String
     let coin: CoinType
     let balance: BalanceData
     let address: String
 
     init(codable: CodableWallet) throws {
+        self.id = codable.id
         self.name = codable.name
 
         guard let coinType = CoinType(rawValue: codable.coin) else {

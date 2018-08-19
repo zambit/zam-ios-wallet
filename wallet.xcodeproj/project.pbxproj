@@ -63,7 +63,7 @@
 		8C333D3E2109FD1000949AC0 /* OnboardingItemComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C333D3D2109FD1000949AC0 /* OnboardingItemComponent.xib */; };
 		8C333D40210A08A600949AC0 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D3F210A08A600949AC0 /* UIView+Extensions.swift */; };
 		8C333D42210A094500949AC0 /* UIColor+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D41210A094500949AC0 /* UIColor+Additions.swift */; };
-		8C333D44210B001500949AC0 /* LargeTextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D43210B001500949AC0 /* LargeTextButton.swift */; };
+		8C333D44210B001500949AC0 /* OnboardingLargeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D43210B001500949AC0 /* OnboardingLargeButton.swift */; };
 		8C333D46210B0D5400949AC0 /* LaunchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D45210B0D5400949AC0 /* LaunchScreenViewController.swift */; };
 		8C333D48210B0F3700949AC0 /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D47210B0F3700949AC0 /* UIViewController+Extensions.swift */; };
 		8C333D4A210B1C4300949AC0 /* TextCheckBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D49210B1C4300949AC0 /* TextCheckBoxView.swift */; };
@@ -71,7 +71,7 @@
 		8C333D4E210B272D00949AC0 /* TextCheckBoxView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C333D4D210B272D00949AC0 /* TextCheckBoxView.xib */; };
 		8C333D50210B2B6900949AC0 /* PhoneNumberFormComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D4F210B2B6900949AC0 /* PhoneNumberFormComponent.swift */; };
 		8C333D52210B2C5800949AC0 /* PhoneNumberFormView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C333D51210B2C5800949AC0 /* PhoneNumberFormView.xib */; };
-		8C333D54210B394800949AC0 /* LargeIconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D53210B394800949AC0 /* LargeIconButton.swift */; };
+		8C333D54210B394800949AC0 /* RoundContinueButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D53210B394800949AC0 /* RoundContinueButton.swift */; };
 		8C333D56210B4EF400949AC0 /* VerificationCodeFormComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D55210B4EF400949AC0 /* VerificationCodeFormComponent.swift */; };
 		8C333D58210B4F7D00949AC0 /* VerificationCodeFormView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C333D57210B4F7D00949AC0 /* VerificationCodeFormView.xib */; };
 		8C333D5E210B5E1600949AC0 /* NewPasswordFormView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C333D5D210B5E1600949AC0 /* NewPasswordFormView.xib */; };
@@ -143,8 +143,8 @@
 		8CA218C92126D4FD0063C188 /* TransactionDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA218C82126D4FD0063C188 /* TransactionDetailViewController.swift */; };
 		8CA218CB2126D5E00063C188 /* NumberFormatter+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA218CA2126D5E00063C188 /* NumberFormatter+Extensions.swift */; };
 		8CA218CD2126F23B0063C188 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA218CC2126F23B0063C188 /* UserData.swift */; };
-		8CA218D0212737210063C188 /* LargeSendButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA218CE212719990063C188 /* LargeSendButton.swift */; };
-		8CA218D2212738450063C188 /* DoneAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA218D1212738450063C188 /* DoneAnimationView.swift */; };
+		8CA218D0212737210063C188 /* ThreeStatesSendButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA218CE212719990063C188 /* ThreeStatesSendButton.swift */; };
+		8CA218D2212738450063C188 /* CheckAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA218D1212738450063C188 /* CheckAnimationView.swift */; };
 		8CF1DE4220EF98160036F986 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF1DE4120EF98160036F986 /* AuthViewController.swift */; };
 		8CF1DE4520EFB1A70036F986 /* HorizontalScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF1DE4420EFB1A70036F986 /* HorizontalScrollView.swift */; };
 		8CF1DE4720F37B5E0036F986 /* SMSConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF1DE4620F37B5E0036F986 /* SMSConfirmationViewController.swift */; };
@@ -175,6 +175,8 @@
 		8CF5F95E2114A77D0083B36A /* CreatePinStageItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF5F95D2114A77D0083B36A /* CreatePinStageItem.swift */; };
 		8CF5F9602114A7880083B36A /* CreatePinStageItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CF5F95F2114A7880083B36A /* CreatePinStageItem.xib */; };
 		8CF5F9632114AB000083B36A /* ItemComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF5F9622114AB000083B36A /* ItemComponent.swift */; };
+		9319BA852129A07A00033A7E /* WalletTransactionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9319BA842129A07A00033A7E /* WalletTransactionData.swift */; };
+		9319BAA6212A0AC200033A7E /* CrossAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9319BAA5212A0AC200033A7E /* CrossAnimationView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -235,7 +237,7 @@
 		8C333D3D2109FD1000949AC0 /* OnboardingItemComponent.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OnboardingItemComponent.xib; sourceTree = "<group>"; };
 		8C333D3F210A08A600949AC0 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		8C333D41210A094500949AC0 /* UIColor+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Additions.swift"; sourceTree = "<group>"; };
-		8C333D43210B001500949AC0 /* LargeTextButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeTextButton.swift; sourceTree = "<group>"; };
+		8C333D43210B001500949AC0 /* OnboardingLargeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingLargeButton.swift; sourceTree = "<group>"; };
 		8C333D45210B0D5400949AC0 /* LaunchScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenViewController.swift; sourceTree = "<group>"; };
 		8C333D47210B0F3700949AC0 /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
 		8C333D49210B1C4300949AC0 /* TextCheckBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextCheckBoxView.swift; sourceTree = "<group>"; };
@@ -243,7 +245,7 @@
 		8C333D4D210B272D00949AC0 /* TextCheckBoxView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextCheckBoxView.xib; sourceTree = "<group>"; };
 		8C333D4F210B2B6900949AC0 /* PhoneNumberFormComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberFormComponent.swift; sourceTree = "<group>"; };
 		8C333D51210B2C5800949AC0 /* PhoneNumberFormView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhoneNumberFormView.xib; sourceTree = "<group>"; };
-		8C333D53210B394800949AC0 /* LargeIconButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeIconButton.swift; sourceTree = "<group>"; };
+		8C333D53210B394800949AC0 /* RoundContinueButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundContinueButton.swift; sourceTree = "<group>"; };
 		8C333D55210B4EF400949AC0 /* VerificationCodeFormComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationCodeFormComponent.swift; sourceTree = "<group>"; };
 		8C333D57210B4F7D00949AC0 /* VerificationCodeFormView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VerificationCodeFormView.xib; sourceTree = "<group>"; };
 		8C333D5D210B5E1600949AC0 /* NewPasswordFormView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewPasswordFormView.xib; sourceTree = "<group>"; };
@@ -317,8 +319,8 @@
 		8CA218C82126D4FD0063C188 /* TransactionDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailViewController.swift; sourceTree = "<group>"; };
 		8CA218CA2126D5E00063C188 /* NumberFormatter+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NumberFormatter+Extensions.swift"; sourceTree = "<group>"; };
 		8CA218CC2126F23B0063C188 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
-		8CA218CE212719990063C188 /* LargeSendButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeSendButton.swift; sourceTree = "<group>"; };
-		8CA218D1212738450063C188 /* DoneAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoneAnimationView.swift; sourceTree = "<group>"; };
+		8CA218CE212719990063C188 /* ThreeStatesSendButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeStatesSendButton.swift; sourceTree = "<group>"; };
+		8CA218D1212738450063C188 /* CheckAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckAnimationView.swift; sourceTree = "<group>"; };
 		8CF1DE4120EF98160036F986 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		8CF1DE4420EFB1A70036F986 /* HorizontalScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalScrollView.swift; sourceTree = "<group>"; };
 		8CF1DE4620F37B5E0036F986 /* SMSConfirmationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMSConfirmationViewController.swift; sourceTree = "<group>"; };
@@ -349,6 +351,8 @@
 		8CF5F95D2114A77D0083B36A /* CreatePinStageItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePinStageItem.swift; sourceTree = "<group>"; };
 		8CF5F95F2114A7880083B36A /* CreatePinStageItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreatePinStageItem.xib; sourceTree = "<group>"; };
 		8CF5F9622114AB000083B36A /* ItemComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemComponent.swift; sourceTree = "<group>"; };
+		9319BA842129A07A00033A7E /* WalletTransactionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletTransactionData.swift; sourceTree = "<group>"; };
+		9319BAA5212A0AC200033A7E /* CrossAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrossAnimationView.swift; sourceTree = "<group>"; };
 		C9C98DC4F4721DB056807636 /* Pods_wallet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_wallet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -395,20 +399,19 @@
 		8C0919312106205600703224 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				8C6088432110A34200470411 /* CustomUI.swift */,
-				8C333D76210F50E000949AC0 /* CountryIconImageView.swift */,
 				8C6088472110A75100470411 /* AdditionalTextButton.swift */,
-				8C333D43210B001500949AC0 /* LargeTextButton.swift */,
 				8CA218A6212342B90063C188 /* CircleImageView.swift */,
-				8C04BC34211C5AD800E90090 /* CreditCardViewComponent.swift */,
+				8C6088612111FB0A00470411 /* Components */,
 				8C04BC36211C872E00E90090 /* ContainerView.swift */,
+				8C333D76210F50E000949AC0 /* CountryIconImageView.swift */,
+				8C04BC34211C5AD800E90090 /* CreditCardViewComponent.swift */,
+				8C6088432110A34200470411 /* CustomUI.swift */,
+				9319BA862129FA9500033A7E /* Animations */,
 				8CA218A4212333B20063C188 /* IconableTextField.swift */,
 				8CA218BA212573510063C188 /* IndentLabel.swift */,
-				8C6088662112120100470411 /* SpinningAnimationLayer.swift */,
-				8CA218D1212738450063C188 /* DoneAnimationView.swift */,
-				8CA218CE212719990063C188 /* LargeSendButton.swift */,
-				8C333D53210B394800949AC0 /* LargeIconButton.swift */,
-				8C6088612111FB0A00470411 /* Components */,
+				8CA218CE212719990063C188 /* ThreeStatesSendButton.swift */,
+				8C333D43210B001500949AC0 /* OnboardingLargeButton.swift */,
+				8C333D53210B394800949AC0 /* RoundContinueButton.swift */,
 				8C333D5B210B538700949AC0 /* TextCheckBoxView */,
 			);
 			path = View;
@@ -658,6 +661,7 @@
 				8C52FFE02119BE0300EB55EA /* WalletData.swift */,
 				8CA218CC2126F23B0063C188 /* UserData.swift */,
 				8CA218AC212421150063C188 /* PhoneMaskData.swift */,
+				9319BA842129A07A00033A7E /* WalletTransactionData.swift */,
 				8C04BC442121D48E00E90090 /* BalanceData.swift */,
 				8C52FFE22119C1CF00EB55EA /* TermData.swift */,
 			);
@@ -909,6 +913,16 @@
 			path = CreatePinStageItem;
 			sourceTree = "<group>";
 		};
+		9319BA862129FA9500033A7E /* Animations */ = {
+			isa = PBXGroup;
+			children = (
+				8CA218D1212738450063C188 /* CheckAnimationView.swift */,
+				9319BAA5212A0AC200033A7E /* CrossAnimationView.swift */,
+				8C6088662112120100470411 /* SpinningAnimationLayer.swift */,
+			);
+			path = Animations;
+			sourceTree = "<group>";
+		};
 		96F68B133DC137F5FC79CBFB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -1098,6 +1112,7 @@
 				8C6088402110634700470411 /* UserDataManager.swift in Sources */,
 				8CA218A5212333B20063C188 /* IconableTextField.swift in Sources */,
 				8C4413D4211993B400C9689C /* CoinType.swift in Sources */,
+				9319BA852129A07A00033A7E /* WalletTransactionData.swift in Sources */,
 				8C333D66210B6E7600949AC0 /* UITextField+Extensions.swift in Sources */,
 				8CF5F92F211327EB0083B36A /* MaskParser.swift in Sources */,
 				8C0919512107234B00703224 /* SignupAPI.swift in Sources */,
@@ -1111,7 +1126,7 @@
 				8CF5F94A21147C050083B36A /* WalletViewController.swift in Sources */,
 				8CA218962122EAF60063C188 /* SegmentedControlComponent.swift in Sources */,
 				8C6088562111CB8C00470411 /* LoginFormComponent.swift in Sources */,
-				8CA218D2212738450063C188 /* DoneAnimationView.swift in Sources */,
+				8CA218D2212738450063C188 /* CheckAnimationView.swift in Sources */,
 				8CF1DE4720F37B5E0036F986 /* SMSConfirmationViewController.swift in Sources */,
 				8C333D48210B0F3700949AC0 /* UIViewController+Extensions.swift in Sources */,
 				8C09194D2107214300703224 /* WalletEnvironment.swift in Sources */,
@@ -1121,7 +1136,7 @@
 				8CF5F94821147A870083B36A /* CreatePinViewController.swift in Sources */,
 				8C09192D21061F3600703224 /* ControllerHelper.swift in Sources */,
 				8CA218CD2126F23B0063C188 /* UserData.swift in Sources */,
-				8CA218D0212737210063C188 /* LargeSendButton.swift in Sources */,
+				8CA218D0212737210063C188 /* ThreeStatesSendButton.swift in Sources */,
 				8C333D50210B2B6900949AC0 /* PhoneNumberFormComponent.swift in Sources */,
 				8CF5F931211345320083B36A /* HomeFlow.swift in Sources */,
 				8C09196221076B7000703224 /* RecoveryProvider.swift in Sources */,
@@ -1157,6 +1172,7 @@
 				8C6088602111F35E00470411 /* EnterPhoneNumberViewController.swift in Sources */,
 				8C6088512111A95100470411 /* Conditions.swift in Sources */,
 				8C52FFF0211AE19300EB55EA /* CustomOverlappingFlowLayout.swift in Sources */,
+				9319BAA6212A0AC200033A7E /* CrossAnimationView.swift in Sources */,
 				8C333D302109E0B400949AC0 /* UserViewController.swift in Sources */,
 				8CA2189F2122F9E40063C188 /* SelectingBackView.swift in Sources */,
 				8CF1DE4520EFB1A70036F986 /* HorizontalScrollView.swift in Sources */,
@@ -1178,7 +1194,7 @@
 				8CF5F95221148D800083B36A /* DotsFieldComponent.swift in Sources */,
 				8C09197B2108D66100703224 /* SignUpFlow.swift in Sources */,
 				8CA218BD2125A34B0063C188 /* KeyboardBehaviourFollowingViewController.swift in Sources */,
-				8C333D54210B394800949AC0 /* LargeIconButton.swift in Sources */,
+				8C333D54210B394800949AC0 /* RoundContinueButton.swift in Sources */,
 				8CF5F95B21149E460083B36A /* CreatePinComponent.swift in Sources */,
 				8C333D46210B0D5400949AC0 /* LaunchScreenViewController.swift in Sources */,
 				8C09197121089FBB00703224 /* AuthAPI.swift in Sources */,
@@ -1186,7 +1202,7 @@
 				8C4413C621188BCA00C9689C /* WalletNavigationController.swift in Sources */,
 				8C09195F21076B5D00703224 /* RecoveryAPI.swift in Sources */,
 				8C34616B20EF8FA700746724 /* AppDelegate.swift in Sources */,
-				8C333D44210B001500949AC0 /* LargeTextButton.swift in Sources */,
+				8C333D44210B001500949AC0 /* OnboardingLargeButton.swift in Sources */,
 				8C333D342109F02000949AC0 /* ScreenFlow.swift in Sources */,
 				8C09194B210716C500703224 /* SignupRequest.swift in Sources */,
 				8C60884A2110B42A00470411 /* CountdownTimer.swift in Sources */,

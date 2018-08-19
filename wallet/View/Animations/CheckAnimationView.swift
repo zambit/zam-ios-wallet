@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-open class DoneAnimationView: UIView {
+open class CheckAnimationView: UIView {
 
     // MARK: - private variables
 
@@ -17,19 +17,24 @@ open class DoneAnimationView: UIView {
 
     // MARK: - public methods
 
+    convenience init(frame: CGRect = .zero, strokeColor: UIColor, lineWidth: CGFloat) {
+        self.init(frame: frame)
+        self.setupStyle(strokeColor: strokeColor, lineWidth: lineWidth)
+    }
+
     public init() {
         super.init(frame: CGRect.zero)
-        self.initialize()
+        self.setupStyle()
     }
 
     public override init(frame: CGRect) {
         super.init(frame: frame)
-        self.initialize()
+        self.setupStyle()
     }
 
     public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        self.initialize()
+        self.setupStyle()
     }
 
     open func drawCheck(_ completion: (() -> Void)?) {
@@ -38,6 +43,7 @@ open class DoneAnimationView: UIView {
             y: self.frame.height / 3,
             width: self.frame.width / 2,
             height: self.frame.height / 3)
+
         let path = UIBezierPath()
         path.move(
             to: CGPoint(x: canvasFrame.origin.x, y: canvasFrame.origin.y + canvasFrame.height / 2))
@@ -61,7 +67,7 @@ open class DoneAnimationView: UIView {
 
     // MARK: - private methods
 
-    fileprivate func initialize() {
+    private func setupStyle(strokeColor: UIColor = .black, lineWidth: CGFloat = 8.0) {
         // Initialize properties
         self.clipsToBounds = true
 
@@ -71,13 +77,13 @@ open class DoneAnimationView: UIView {
         self.lineLayer.lineJoin = kCALineJoinRound
         self.lineLayer.lineCap = kCALineCapRound
         self.lineLayer.contentsScale = self.layer.contentsScale
-        self.lineLayer.lineWidth = 8
-        self.lineLayer.strokeColor = UIColor.black.cgColor
+        self.lineLayer.lineWidth = lineWidth
+        self.lineLayer.strokeColor = strokeColor.cgColor
     }
 
-    fileprivate func animate(_ completion: (() -> Void)?) {
+    private func animate(_ completion: (() -> Void)?) {
         let pathAnimation = CABasicAnimation(keyPath: "strokeEnd")
-        pathAnimation.duration = 0.2
+        pathAnimation.duration = 0.3
         pathAnimation.fromValue = NSNumber(value: 0 as Float)
         pathAnimation.toValue = NSNumber(value: 1 as Float)
         CATransaction.begin()

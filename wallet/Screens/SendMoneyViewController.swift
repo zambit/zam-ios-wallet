@@ -77,7 +77,7 @@ class SendMoneyViewController: KeyboardBehaviorFollowingViewController, SendMone
         self.currentIndex = index
 
         if let index = currentIndex, wallets.count > index {
-            sendMoneyComponent?.prepare(coinType: wallets[index].coin)
+            sendMoneyComponent?.prepare(coinType: wallets[index].coin, walletId: wallets[index].id)
         }
 
         walletsCollectionView?.layoutIfNeeded()
@@ -139,32 +139,11 @@ class SendMoneyViewController: KeyboardBehaviorFollowingViewController, SendMone
         }
 
         let wallet = wallets[indexPath.section]
-        self.sendMoneyComponent?.prepare(coinType: wallet.coin)
+        self.sendMoneyComponent?.prepare(coinType: wallet.coin, walletId: wallet.id)
     }
 
     func sendMoneyComponentRequestSending(_ sendMoneyComponent: SendMoneyComponent, sendMoneyData: SendMoneyData) {
-        prepareForPresentingModalView()
 
         onSend?(sendMoneyData, self)
-    }
-
-    private func prepareForPresentingModalView() {
-        self.definesPresentationContext = true
-        self.providesPresentationContextTransitionStyle = true
-
-        self.overlayBlurredBackgroundView()
-    }
-
-    private func overlayBlurredBackgroundView() {
-
-        let effectView = UIVisualEffectView()
-        effectView.frame = view.frame
-        effectView.backgroundColor = UIColor.backgroundLighter.withAlphaComponent(0.4)
-
-        view.addSubview(effectView)
-
-        UIView.animate(withDuration: 0.8) {
-            effectView.effect = UIBlurEffect(style: .dark)
-        }
     }
 }

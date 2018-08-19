@@ -14,7 +14,7 @@ import UIKit
  */
 class ContinueViewController: KeyboardBehaviorFollowingViewController {
 
-    @IBOutlet var continueButton: LargeIconButton?
+    @IBOutlet var continueButton: RoundContinueButton?
 
     override func viewDidLoad() {
         super.viewDidLoad()

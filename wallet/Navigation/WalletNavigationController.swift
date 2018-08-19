@@ -28,7 +28,8 @@ class WalletNavigationController {
 
     private(set) var controller: UINavigationController
 
-    private var tabBar: WalletTabBarController?
+    private var childTabBar: WalletTabBarController?
+    weak var parentTabBar: WalletTabBarController?
 
     init(navigationController: UINavigationController) {
         self.controller = navigationController
@@ -50,6 +51,7 @@ class WalletNavigationController {
     func push(viewController: WalletViewController) {
         controller.pushViewController(viewController, animated: true)
         viewController.walletNavigationController = self
+        viewController.walletTabBar = parentTabBar
 
         hideBackButton(for: viewController)
 
@@ -59,11 +61,11 @@ class WalletNavigationController {
     }
 
     func pushFromRootForward(tabBarController: WalletTabBarController) {
-
         controller.pushViewController(tabBarController.controller, animated: true)
         controller.isNavigationBarHidden = true
 
-        tabBar = tabBarController
+        childTabBar = tabBarController
+        childTabBar?.navigationController = self
         //tabBar?.home?.walletNavigationController = self
 
         guard
@@ -91,7 +93,7 @@ class WalletNavigationController {
             return
         }
 
-        tabBar = nil
+        childTabBar = nil
         let newHierarchy = [root, viewController]
         controller.setViewControllers(newHierarchy, animated: false)
     }
@@ -107,12 +109,20 @@ class WalletNavigationController {
             return
         }
 
-        tabBar = nil
+        childTabBar = nil
         let newHierarchy = [root, viewController, currentViewController]
         controller.setViewControllers(newHierarchy, animated: false)
         controller.popViewController(animated: true)
 
         viewController.walletNavigationController = self
+
+        hideBackButton(for: viewController)
+    }
+
+    func present(viewController: WalletViewController) {
+        controller.present(viewController, animated: true, completion: nil)
+        viewController.walletNavigationController = self
+        viewController.walletTabBar = parentTabBar
 
         hideBackButton(for: viewController)
     }

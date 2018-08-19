@@ -139,7 +139,25 @@ struct CodableSuccessUserInfoResponse: Codable {
         case result
         case data
     }
+}
 
+struct CodableSuccessTransactionResponse: Codable {
+
+    let result: Bool
+    let data: Transaction
+
+    private enum CodingKeys: String, CodingKey {
+        case result
+        case data
+    }
+
+    struct Transaction: Codable {
+        let transaction: CodableTransaction
+
+        private enum CodingKeys: String, CodingKey {
+            case transaction
+        }
+    }
 }
 
 struct CodableWallet: Codable {
@@ -204,4 +222,21 @@ struct CodableUser: Codable {
     }
 }
 
+struct CodableTransaction: Codable {
 
+    let id: String
+    let direction: String
+    let status: String
+    let coin: String
+    let recipient: String
+    let amount: String
+
+    private enum CodingKeys: String, CodingKey {
+        case id
+        case direction
+        case status
+        case coin
+        case recipient
+        case amount
+    }
+}

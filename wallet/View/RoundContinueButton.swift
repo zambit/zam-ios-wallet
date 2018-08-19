@@ -12,12 +12,12 @@ import UIKit
 /**
  Button appropriates large button from Onboarding screen. Blue title on middle. Blue arrow_icon on right. Round corners. Size defines outside class.
  */
-class LargeIconButton: UIButton, CustomUI {
+class RoundContinueButton: UIButton, CustomUI {
 
     private var loadingView: UIView!
 
     struct CustomAppearance {
-        weak var parent: LargeIconButton?
+        weak var parent: RoundContinueButton?
 
         func setEnabled(_ enabled: Bool) {
             parent?.isUserInteractionEnabled = enabled

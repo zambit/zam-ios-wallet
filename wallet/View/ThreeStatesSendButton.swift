@@ -12,8 +12,8 @@ import UIKit
 class LargeSendButton: UIButton, CustomUI {
 
     private var loadingView: UIView!
-    private var successView: DoneAnimationView!
-    private var failureView: UIView!
+    private var successView: CheckAnimationView!
+    private var failureView: CrossAnimationView!
 
     struct CustomAppearance {
         weak var parent: LargeSendButton?
@@ -41,6 +41,11 @@ class LargeSendButton: UIButton, CustomUI {
             UIView.animate(withDuration: 0.05) {
                 self.parent?.backgroundColor = .white
             }
+
+            parent?.loadingView.isHidden = true
+            parent?.failureView.isHidden = false
+
+            parent?.failureView.drawCross(nil)
         }
     }
 
@@ -67,15 +72,15 @@ class LargeSendButton: UIButton, CustomUI {
 
     private func setupStyle() {
         self.setTitle("Send", for: .normal)
-        self.titleLabel?.textColor = .white
+        self.setTitleColor(.white, for: .normal)
         self.titleLabel?.font = UIFont.walletFont(ofSize: 24.0, weight: .bold)
 
         self.backgroundColor = .paleOliveGreen
 
         self.layer.masksToBounds = false
-        self.layer.shadowColor = UIColor.cornflower.cgColor
-        self.layer.shadowOffset = CGSize(width: 0.0, height: 6.0)
-        self.layer.shadowRadius = 8.0
+        self.layer.shadowColor = UIColor.black.cgColor
+        self.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
+        self.layer.shadowRadius = 20.0
         self.layer.shadowOpacity = 0.3
     }
 
@@ -84,7 +89,7 @@ class LargeSendButton: UIButton, CustomUI {
     }
 
     private func setupAnimationView() {
-        let side: CGFloat = min(bounds.width, bounds.height) / 100 * 55
+        let side: CGFloat = min(bounds.width, bounds.height) / 100 * 35
 
         let frame = CGRect(x: (bounds.width - side) / 2,
                            y: (bounds.height - side) / 2,
@@ -97,15 +102,20 @@ class LargeSendButton: UIButton, CustomUI {
                                     y: 0,
                                     width: side,
                                     height: side)
-        let animation = SpinningAnimationLayer(frame: animationFrame, color: .cornflower)
+        let animation = SpinningAnimationLayer(frame: animationFrame, color: .white, lineWidth: 4.0)
         self.loadingView.layer.addSublayer(animation)
         self.loadingView.isHidden = true
 
         self.addSubview(loadingView)
 
-        self.successView = DoneAnimationView(frame: frame)
+        self.successView = CheckAnimationView(frame: bounds.insetBy(dx: 20.0, dy: 20.0), strokeColor: .paleOliveGreen, lineWidth: 5.0)
         self.successView.isHidden = true
 
         self.addSubview(successView)
+
+        self.failureView = CrossAnimationView(frame: bounds.insetBy(dx: 25.0, dy: 25.0), strokeColor: .error, lineWidth: 5.0)
+        self.failureView.isHidden = true
+
+        self.addSubview(failureView)
     }
 }
