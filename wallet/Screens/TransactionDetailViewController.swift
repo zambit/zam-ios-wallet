@@ -31,6 +31,10 @@ class TransactionDetailViewController: WalletViewController {
 
     @IBOutlet private var closeButton: UIButton?
 
+    @IBOutlet private var topTitleConstraint: NSLayoutConstraint?
+    @IBOutlet private var titleAmountBetweenConstraint: NSLayoutConstraint?
+    @IBOutlet private var recipientButtonBetweenConstraint: NSLayoutConstraint?
+
     private var effectView: UIVisualEffectView?
     private var backgroundView: UIView?
 
@@ -74,6 +78,23 @@ class TransactionDetailViewController: WalletViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        switch UIDevice.current.screenType {
+        case .small, .extraSmall:
+            topTitleConstraint?.constant = 0.0
+            titleAmountBetweenConstraint?.constant = 47.0
+            recipientButtonBetweenConstraint?.constant = 16.0
+        case .medium:
+            topTitleConstraint?.constant = 7.0
+            titleAmountBetweenConstraint?.constant = 67.0
+            recipientButtonBetweenConstraint?.constant = 26.0
+        case .plus, .extra:
+            topTitleConstraint?.constant = 44.0
+            titleAmountBetweenConstraint?.constant = 107.0
+            recipientButtonBetweenConstraint?.constant = 56.0
+        case .unknown:
+            fatalError()
+        }
 
         titleLabel?.font = UIFont.walletFont(ofSize: 40.0, weight: .bold)
         titleLabel?.textAlignment = .center

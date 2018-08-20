@@ -171,9 +171,12 @@
                         <outlet property="amountLabel" destination="LI1-9g-ORJ" id="qUH-Jb-dpy"/>
                         <outlet property="closeButton" destination="GtQ-u4-AZE" id="EoN-zt-Asa"/>
                         <outlet property="errorMessageLabel" destination="PEI-Lx-5qv" id="J9l-hB-e2j"/>
+                        <outlet property="recipientButtonBetweenConstraint" destination="bG8-ua-Co0" id="bFt-Jo-IUe"/>
                         <outlet property="recipientDataLabel" destination="Rdf-Qv-8bf" id="K1C-xN-vcB"/>
                         <outlet property="sendButton" destination="RmK-rZ-uuD" id="cN5-G2-D0F"/>
+                        <outlet property="titleAmountBetweenConstraint" destination="kO0-6U-Ybi" id="rdU-cX-srJ"/>
                         <outlet property="titleLabel" destination="xGR-al-sHs" id="rpS-ze-ggA"/>
+                        <outlet property="topTitleConstraint" destination="dJz-O4-Dt7" id="Uqv-1d-aR6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eSV-lz-6mj" userLabel="First Responder" sceneMemberID="firstResponder"/>
