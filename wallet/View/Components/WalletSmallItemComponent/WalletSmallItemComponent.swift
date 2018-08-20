@@ -64,7 +64,7 @@ class WalletSmallItemComponent: ItemComponent {
 
         self.view.layer.masksToBounds = false
         self.view.layer.shadowColor = UIColor.black.withAlphaComponent(0.3).cgColor
-        self.view.layer.shadowOffset = CGSize(width: 0.0, height: 4.0)
+        self.view.layer.shadowOffset = CGSize(width: -2.0, height: 4.0)
         self.view.layer.shadowRadius = 21.0
         self.view.layer.shadowOpacity = 0.5
     }

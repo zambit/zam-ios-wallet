@@ -110,8 +110,6 @@ class SendMoneyAmountComponent: Component, UITextFieldDelegate {
             return
         }
 
-        //let stringValue = text[coinPrefix.count..<text.count]
-
         let value = NumberFormatter.walletAmount.number(from: text)?.decimalValue ?? 0.0
         //let value = Decimal(string: text) ?? 0.0
         let detailValue: Float = 0.0
@@ -145,6 +143,11 @@ class SendMoneyAmountComponent: Component, UITextFieldDelegate {
 
         // Restricting write second decimal separator
         if let _ = existingTextHasDecimalSeparator, let _ = replacementTextHasDecimalSeparator {
+            return false
+        }
+
+        if textField.text == "", string == "0" {
+            textField.text?.append("0\(NumberFormatter.walletAmount.decimalSeparator!)")
             return false
         }
 
