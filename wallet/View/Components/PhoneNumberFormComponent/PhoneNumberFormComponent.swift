@@ -121,7 +121,7 @@ class PhoneNumberFormComponent: UIView, UITextFieldDelegate, PhoneNumberEntering
 
         if let detail = detailPhonePartTextField?.text {
             let numbers = detail.filter {
-                "+1234567890".contains($0)
+                "+1234567890 ".contains($0)
             }
             result.append("\(numbers)")
             //result.append(detail)
@@ -129,9 +129,9 @@ class PhoneNumberFormComponent: UIView, UITextFieldDelegate, PhoneNumberEntering
 
         if let main = mainPhonePartTextField?.text {
             let numbers = main.filter {
-                "1234567890".contains($0)
+                "1234567890 ".contains($0)
             }
-            result.append("\(numbers)")
+            result.append(" \(numbers)")
             //result.append(main)
         }
 
