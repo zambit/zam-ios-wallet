@@ -11,6 +11,13 @@ import UIKit
 
 class LargeSendButton: UIButton, CustomUI {
 
+    enum SendState {
+        case initial
+        case loading
+        case success
+        case failure
+    }
+
     private var loadingView: UIView!
     private var successView: CheckAnimationView!
     private var failureView: CrossAnimationView!
@@ -19,16 +26,14 @@ class LargeSendButton: UIButton, CustomUI {
         weak var parent: LargeSendButton?
 
         func setLoading() {
-            parent?.isUserInteractionEnabled = false
-
             parent?.setTitle("", for: .normal)
             parent?.setImage(#imageLiteral(resourceName: "empty_icon"), for: .normal)
             parent?.loadingView.isHidden = false
+
+            parent?.sendState = .loading
         }
 
         func setSuccess() {
-            parent?.isUserInteractionEnabled = false
-
             UIView.animate(withDuration: 0.05) {
                 self.parent?.backgroundColor = .white
             }
@@ -37,11 +42,11 @@ class LargeSendButton: UIButton, CustomUI {
             parent?.successView.isHidden = false
 
             parent?.successView.drawCheck(nil)
+
+            parent?.sendState = .success
         }
 
         func setFailure() {
-            parent?.isUserInteractionEnabled = false
-
             UIView.animate(withDuration: 0.05) {
                 self.parent?.backgroundColor = .white
             }
@@ -50,12 +55,16 @@ class LargeSendButton: UIButton, CustomUI {
             parent?.failureView.isHidden = false
 
             parent?.failureView.drawCross(nil)
+
+            parent?.sendState = .failure
         }
     }
 
     var customAppearance: CustomAppearance {
         return CustomAppearance(parent: self)
     }
+
+    private(set) var sendState: SendState = .initial
 
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -109,16 +118,19 @@ class LargeSendButton: UIButton, CustomUI {
         let animation = SpinningAnimationLayer(frame: animationFrame, color: .white, lineWidth: 4.0)
         self.loadingView.layer.addSublayer(animation)
         self.loadingView.isHidden = true
+        self.loadingView.isUserInteractionEnabled = false
 
         self.addSubview(loadingView)
 
         self.successView = CheckAnimationView(frame: bounds.insetBy(dx: 20.0, dy: 20.0), strokeColor: .paleOliveGreen, lineWidth: 5.0)
         self.successView.isHidden = true
+        self.successView.isUserInteractionEnabled = false
 
         self.addSubview(successView)
 
         self.failureView = CrossAnimationView(frame: bounds.insetBy(dx: 25.0, dy: 25.0), strokeColor: .pigPink, lineWidth: 5.0)
         self.failureView.isHidden = true
+        self.failureView.isUserInteractionEnabled = false
 
         self.addSubview(failureView)
     }

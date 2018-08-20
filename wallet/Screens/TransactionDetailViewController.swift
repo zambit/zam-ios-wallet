@@ -27,6 +27,7 @@ class TransactionDetailViewController: WalletViewController {
     @IBOutlet private var amountDetailLabel: UILabel?
     @IBOutlet private var recipientDataLabel: UILabel?
     @IBOutlet private var sendButton: LargeSendButton?
+    @IBOutlet private var errorMessageLabel: UILabel?
 
     @IBOutlet private var closeButton: UIButton?
 
@@ -58,6 +59,7 @@ class TransactionDetailViewController: WalletViewController {
             self?.amountDetailLabel?.alpha = 1.0
             self?.recipientDataLabel?.alpha = 1.0
             self?.sendButton?.alpha = 1.0
+
         }, completion: {
             [weak self]
             _ in
@@ -94,6 +96,10 @@ class TransactionDetailViewController: WalletViewController {
         sendButton?.addTarget(self, action: #selector(sendButtonTouchUpInsideEvent(_:)), for: .touchUpInside)
         dataWasLoaded()
 
+        errorMessageLabel?.font = UIFont.walletFont(ofSize: 14.0, weight: .regular)
+        errorMessageLabel?.textAlignment = .center
+        errorMessageLabel?.textColor = .error
+
         closeButton?.setTitle("Close", for: .normal)
         closeButton?.setTitleColor(.white, for: .normal)
         closeButton?.titleLabel?.font = UIFont.walletFont(ofSize: 16.0, weight: .medium)
@@ -129,6 +135,8 @@ class TransactionDetailViewController: WalletViewController {
         case .confirm:
             titleLabel?.text = "Confirm transaction"
 
+            errorMessageLabel?.text = ""
+            errorMessageLabel?.sizeToFit()
             closeButton?.isHidden = true
 
         case .failure:
@@ -141,6 +149,7 @@ class TransactionDetailViewController: WalletViewController {
 
             titleLabel?.attributedText = attributedString
 
+            //errorMessageLabel?.sizeToFit()
             closeButton?.isHidden = false
 
             walletNavigationController?.hideBackButton(for: self)
@@ -156,6 +165,8 @@ class TransactionDetailViewController: WalletViewController {
             
             amountLabel?.text?.addPrefixIfNeeded("-")
 
+            errorMessageLabel?.text = ""
+            errorMessageLabel?.sizeToFit()
             closeButton?.isHidden = false
 
             walletNavigationController?.hideBackButton(for: self)
@@ -163,43 +174,63 @@ class TransactionDetailViewController: WalletViewController {
     }
 
     @objc
-    private func sendButtonTouchUpInsideEvent(_ sender: UIButton) {
-        guard let token = userManager?.getToken() else {
-            fatalError()
-        }
-
-        guard let data = sendMoneyData else {
-            return
-        }
-
-        var recipient: String
-
-        switch data.method {
-        case .phone(data: let phone):
-            recipient = phone
-        case .address(data: let address):
-            recipient = address
-        }
-
-        sendButton?.customAppearance.setLoading()
-
-        userAPI?.sendTransaction(token: token, walletId: data.walletId, recipient: recipient, amount: data.amountData.original).done {
-            [weak self]
-            transaction in
-
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                self?.sendButton?.customAppearance.setSuccess()
-                self?.changeDataFor(state: .success)
+    private func sendButtonTouchUpInsideEvent(_ sender: LargeSendButton) {
+        switch sender.sendState {
+        case .initial:
+            guard let token = userManager?.getToken() else {
+                fatalError()
             }
-        }.catch {
-            [weak self]
-            error in
 
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                self?.sendButton?.customAppearance.setFailure()
-                self?.changeDataFor(state: .failure)
+            guard let data = sendMoneyData else {
+                return
             }
-            print(error)
+
+            var recipient: String
+
+            switch data.method {
+            case .phone(data: let phone):
+                recipient = phone
+            case .address(data: let address):
+                recipient = address
+            }
+
+            sendButton?.customAppearance.setLoading()
+
+            userAPI?.sendTransaction(token: token, walletId: data.walletId, recipient: recipient, amount: data.amountData.original).done {
+                [weak self]
+                transaction in
+
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    self?.sendButton?.customAppearance.setSuccess()
+                    self?.changeDataFor(state: .success)
+                }
+                }.catch {
+                    [weak self]
+                    error in
+
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        self?.sendButton?.customAppearance.setFailure()
+                        self?.changeDataFor(state: .failure)
+
+                        if let serverError = error as? WalletResponseError {
+                            switch serverError {
+                            case .serverFailureResponse(errors: let fails):
+                                guard let fail = fails.first else {
+                                    fatalError()
+                                }
+
+                                self?.errorMessageLabel?.text = fail.message.capitalizingFirst
+                            case .undefinedServerFailureResponse:
+
+                                self?.errorMessageLabel?.text = "Undefined error"
+                            }
+                        }
+                    }
+            }
+        case .loading, .success:
+            break
+        case .failure:
+            closeButtonTouchUpInsideEvent(sender)
         }
     }
 
@@ -213,6 +244,8 @@ class TransactionDetailViewController: WalletViewController {
             self?.amountDetailLabel?.alpha = 0.0
             self?.recipientDataLabel?.alpha = 0.0
             self?.sendButton?.alpha = 0.0
+            self?.errorMessageLabel?.alpha = 0.0
+            self?.closeButton?.alpha = 0.0
 
             self?.effectView?.alpha = 0.0
             self?.backgroundView?.alpha = 0.0
@@ -235,7 +268,7 @@ class TransactionDetailViewController: WalletViewController {
         backgroundView = UIView()
         backgroundView?.frame = view.frame
         backgroundView?.alpha = 0.0
-        backgroundView?.backgroundColor = UIColor.backgroundDarker.withAlphaComponent(0.5)
+        backgroundView?.backgroundColor = UIColor.cornflower.withAlphaComponent(0.5)
 
         guard let effectView = effectView, let background = backgroundView else {
             fatalError()

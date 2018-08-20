@@ -33,7 +33,6 @@ class DetailOffsetPresentationViewController: WalletViewController {
      */
     private var detailViewOffset: CGFloat = 0
 
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -85,7 +84,7 @@ class DetailOffsetPresentationViewController: WalletViewController {
         let transitionAnimator = UIViewPropertyAnimator(duration: duration, dampingRatio: 1, animations: {
             switch state {
             case .open:
-                self.detailViewBottomConstraint?.constant = 0
+                self.detailViewBottomConstraint?.constant = 50
 
             case .closed:
                 self.detailViewBottomConstraint?.constant = self.detailViewOffset
@@ -110,7 +109,7 @@ class DetailOffsetPresentationViewController: WalletViewController {
             // manually reset the constraint positions
             switch self.currentState {
             case .open:
-                self.detailViewBottomConstraint?.constant = 0
+                self.detailViewBottomConstraint?.constant = 50
             case .closed:
                 self.detailViewBottomConstraint?.constant = self.detailViewOffset
             }

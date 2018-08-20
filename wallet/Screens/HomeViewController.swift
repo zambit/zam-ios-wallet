@@ -16,7 +16,7 @@ protocol WalletsContainerEmbededViewController: class {
     var owner: WalletViewController? { get set }
 }
 
-class HomeViewController: DetailOffsetPresentationViewController {
+class HomeViewController: DetailOffsetPresentationViewController, WalletsViewControllerDelegate {
 
     var userManager: UserDataManager?
     var userAPI: UserAPI?
@@ -83,13 +83,13 @@ class HomeViewController: DetailOffsetPresentationViewController {
 
         switch UIDevice.current.screenType {
         case .small, .extraSmall:
-            detailViewHeight?.constant = 465.0
+            detailViewHeight?.constant = 515.0
         case .medium:
-            detailViewHeight?.constant = 550.0
+            detailViewHeight?.constant = 600.0
         case .extra:
-            detailViewHeight?.constant = 641.0
+            detailViewHeight?.constant = 691.0
         case .plus:
-            detailViewHeight?.constant = 625.0
+            detailViewHeight?.constant = 675.0
         case .unknown:
             fatalError()
         }
@@ -105,6 +105,10 @@ class HomeViewController: DetailOffsetPresentationViewController {
 
         if let embeded = embededViewController as? UIViewController {
             walletsContainerView?.set(viewController: embeded, owner: self)
+        }
+
+        if let embeded = embededViewController as? WalletsViewController {
+            embeded.delegate = self
         }
 
         view.clipsToBounds = true
@@ -191,7 +195,7 @@ class HomeViewController: DetailOffsetPresentationViewController {
             self?.totalBalance = totalBalance
 
             self?.dataWasLoaded()
-            }.catch {
+        }.catch {
                 [weak self]
                 error in
                 print(error)
@@ -255,6 +259,12 @@ class HomeViewController: DetailOffsetPresentationViewController {
 
         sumLabel?.attributedText = attributedString
         sumLabel?.attributedText = attributedString
+    }
+
+    // MARK: - WalletsViewControllerDelegate
+
+    func walletsViewControllerCallsUpdateData(_ walletsViewController: WalletsViewController) {
+        loadData()
     }
 
     // MARK: - Animation

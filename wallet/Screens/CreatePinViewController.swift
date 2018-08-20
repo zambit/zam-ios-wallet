@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import AudioToolbox
 
 class CreatePinViewController: WalletViewController, DecimalKeyboardComponentDelegate, CreatePinComponentDelegate {
 
@@ -72,8 +73,7 @@ class CreatePinViewController: WalletViewController, DecimalKeyboardComponentDel
     }
 
     func createPinComponentWrongConfirmation(_ createPinComponent: CreatePinComponent) {
-        let generator = UINotificationFeedbackGenerator()
-        generator.notificationOccurred(.error)
+        AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
     }
 
     @objc

@@ -85,14 +85,29 @@ class OnboardingViewController: WalletViewController, UICollectionViewDataSource
         return cell
     }
 
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        pageControl?.currentPage = indexPath.section
-    }
-
     // UICollectionView delegate flow layout
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return collectionView.bounds.size
+    }
+
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        guard let collectionView = pagesCollectionView else {
+            return
+        }
+
+        var visibleRect = CGRect()
+
+        visibleRect.origin = collectionView.contentOffset
+        visibleRect.size = collectionView.bounds.size
+
+        let visiblePoint = CGPoint(x: visibleRect.midX, y: visibleRect.midY)
+
+        guard let indexPath = collectionView.indexPathForItem(at: visiblePoint) else {
+            return
+        }
+
+        pageControl?.currentPage = indexPath.section
     }
 
     @objc

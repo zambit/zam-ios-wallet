@@ -9,7 +9,16 @@
 import Foundation
 import UIKit
 
+protocol WalletsViewControllerDelegate: class {
+
+    func walletsViewControllerCallsUpdateData(_ walletsViewController: WalletsViewController)
+}
+
 class WalletsViewController: FlowCollectionViewController, UICollectionViewDelegateFlowLayout, WalletsContainerEmbededViewController {
+
+    weak var owner: WalletViewController?
+
+    weak var delegate: WalletsViewControllerDelegate?
 
     var userManager: UserDataManager?
     var userAPI: UserAPI?
@@ -26,8 +35,6 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
         return collectionView
     }
 
-   weak var owner: WalletViewController?
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -43,7 +50,7 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
         loadData(self)
 
         refreshControl = UIRefreshControl()
-        refreshControl?.addTarget(self, action: #selector(loadData(_:)), for: .valueChanged)
+        refreshControl?.addTarget(self, action: #selector(refreshControlValueChangedEvent(_:)), for: .valueChanged)
         refreshControl?.layer.zPosition = -2
         collectionView?.insertSubview(refreshControl!, at: 0)
     }
@@ -91,6 +98,11 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
     }
 
     @objc
+    private func refreshControlValueChangedEvent(_ sender: UIRefreshControl) {
+        delegate?.walletsViewControllerCallsUpdateData(self)
+        loadData(sender)
+    }
+
     private func loadData(_ sender: Any) {
         guard let token = userManager?.getToken() else {
             fatalError()

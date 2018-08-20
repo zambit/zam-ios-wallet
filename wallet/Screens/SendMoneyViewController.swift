@@ -38,8 +38,6 @@ class SendMoneyViewController: KeyboardBehaviorFollowingViewController, SendMone
         let index = currentIndex
         self.currentIndex = index
 
-        dismissKeyboard()
-
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
 
@@ -120,6 +118,7 @@ class SendMoneyViewController: KeyboardBehaviorFollowingViewController, SendMone
 
         let wallet = wallets[indexPath.section]
         cell.configure(image: wallet.coin.image, coinName: wallet.coin.name, coinAddit: wallet.coin.short, phoneNumber: phone, balance: wallet.balance.formatted(currency: .original), fiatBalance: wallet.balance.description(currency: .usd))
+        cell.setupPages(currentIndex: indexPath.section, count: wallets.count)
         return cell
     }
 

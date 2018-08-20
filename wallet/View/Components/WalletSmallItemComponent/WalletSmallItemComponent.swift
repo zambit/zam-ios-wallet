@@ -17,6 +17,8 @@ class WalletSmallItemComponent: ItemComponent {
     @IBOutlet private var balanceLabel: UILabel!
     @IBOutlet private var fiatBalanceLabel: UILabel!
 
+    @IBOutlet private var pageControl: UIPageControl?
+
     private var coinNameLabelMainAttributes: [NSAttributedStringKey: Any] = [:]
     private var coinNameLabelAdditAttributes: [NSAttributedStringKey: Any] = [:]
 
@@ -41,6 +43,10 @@ class WalletSmallItemComponent: ItemComponent {
 
     override func setupStyle() {
         super.setupStyle()
+
+        pageControl?.currentPageIndicatorTintColor = .blueGrey
+        pageControl?.pageIndicatorTintColor = UIColor.blueGrey.withAlphaComponent(0.4)
+        pageControl?.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
 
         balanceLabel.textColor = .darkIndigo
         balanceLabel.font = UIFont.walletFont(ofSize: 18.0, weight: .bold)
@@ -82,5 +88,10 @@ class WalletSmallItemComponent: ItemComponent {
         phoneNumberLabel.text = phoneNumber
         balanceLabel.text = String(describing: balance)
         fiatBalanceLabel.text = String(describing: fiatBalance)
+    }
+
+    func setupPages(currentIndex: Int, count: Int) {
+        pageControl?.currentPage = currentIndex
+        pageControl?.numberOfPages = count
     }
 }
