@@ -227,9 +227,9 @@ class TransactionDetailViewController: WalletViewController {
                         }
                     }
             }
-        case .loading, .success:
+        case .loading:
             break
-        case .failure:
+        case .failure, .success:
             closeButtonTouchUpInsideEvent(sender)
         }
     }
