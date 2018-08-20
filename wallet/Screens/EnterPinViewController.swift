@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import AudioToolbox
 
 class EnterPinViewController: WalletViewController, DecimalKeyboardComponentDelegate {
 
@@ -99,6 +100,7 @@ class EnterPinViewController: WalletViewController, DecimalKeyboardComponentDele
                     }
 
                     pinText = ""
+                    AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
                 }
 
             }
@@ -108,11 +110,6 @@ class EnterPinViewController: WalletViewController, DecimalKeyboardComponentDele
         case .touchId:
             break
         }
-    }
-
-    func createPinComponentWrongConfirmation(_ createPinComponent: CreatePinComponent) {
-        let generator = UINotificationFeedbackGenerator()
-        generator.notificationOccurred(.error)
     }
 
     private func checkPin(_ pin: String) -> Bool {

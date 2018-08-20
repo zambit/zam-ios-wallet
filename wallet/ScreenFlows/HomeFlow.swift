@@ -80,9 +80,9 @@ final class HomeFlow: ScreenFlow {
             fatalError()
         }
 
-        let onSend: (SendMoneyData, WalletViewController) -> Void = {
+        let onSend: (SendMoneyData) -> Void = {
             [weak self]
-            data, owner in
+            data in
 
             guard let strongSelf = self else {
                 return
@@ -91,7 +91,7 @@ final class HomeFlow: ScreenFlow {
             let target = strongSelf.transactionDetailScreen
             target.prepare(sendMoneyData: data)
 
-            owner.walletTabBar?.present(viewController: target)
+            strongSelf.navigationController?.presentWithNavBar(viewController: target)
         }
 
         vc.definesPresentationContext = true
@@ -109,6 +109,13 @@ final class HomeFlow: ScreenFlow {
             fatalError()
         }
 
+        let onClose: (WalletViewController) -> Void = {
+            owner in
+
+            owner.dismiss(animated: true, completion: nil)
+        }
+
+        vc.onClose = onClose
         vc.userManager = UserDataManager(keychainConfiguration: WalletKeychainConfiguration())
         vc.userAPI = UserAPI(provider: UserProvider(environment: WalletEnvironment(), dispatcher: HTTPDispatcher()))
         vc.modalPresentationStyle = .overFullScreen

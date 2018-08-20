@@ -119,12 +119,34 @@ class WalletNavigationController {
         hideBackButton(for: viewController)
     }
 
-    func present(viewController: WalletViewController) {
-        controller.present(viewController, animated: true, completion: nil)
+    func presentWithNavBar(viewController: WalletViewController) {
+        let navigationController = WalletNavigationController(navigationController: UINavigationController(rootViewController: viewController))
+        navigationController.controller.modalPresentationStyle = .overFullScreen
+
+        controller.present(navigationController.controller, animated: true, completion: nil)
         viewController.walletNavigationController = self
         viewController.walletTabBar = parentTabBar
 
         hideBackButton(for: viewController)
+    }
+
+    func present(viewController: WalletViewController) {
+        controller.present(viewController, animated: false, completion: nil)
+        viewController.walletNavigationController = self
+        viewController.walletTabBar = parentTabBar
+
+        hideBackButton(for: viewController)
+    }
+
+    func addBackButton(for viewController: WalletViewController, target: Any?, action: Selector) {
+        let backItem = UIBarButtonItem(
+            image: #imageLiteral(resourceName: "icArrowLeft"),
+            style: .plain,
+            target: target,
+            action: action
+        )
+        backItem.tintColor = .white
+        viewController.navigationItem.leftBarButtonItem = backItem
     }
 
     func addBackButton(for viewController: WalletViewController) {

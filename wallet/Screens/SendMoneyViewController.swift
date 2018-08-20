@@ -11,7 +11,7 @@ import UIKit
 
 class SendMoneyViewController: KeyboardBehaviorFollowingViewController, SendMoneyComponentDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
-    var onSend: ((SendMoneyData, WalletViewController) -> Void)?
+    var onSend: ((SendMoneyData) -> Void)?
 
     @IBOutlet var sendMoneyComponent: SendMoneyComponent?
     @IBOutlet var titleLabel: UILabel?
@@ -38,7 +38,9 @@ class SendMoneyViewController: KeyboardBehaviorFollowingViewController, SendMone
         let index = currentIndex
         self.currentIndex = index
 
-        navigationController?.isNavigationBarHidden = false
+        dismissKeyboard()
+
+        navigationController?.setNavigationBarHidden(false, animated: true)
     }
 
     override func viewDidLoad() {
@@ -146,6 +148,6 @@ class SendMoneyViewController: KeyboardBehaviorFollowingViewController, SendMone
     }
 
     func sendMoneyComponentRequestSending(_ sendMoneyComponent: SendMoneyComponent, sendMoneyData: SendMoneyData) {
-        onSend?(sendMoneyData, self)
+        onSend?(sendMoneyData)
     }
 }

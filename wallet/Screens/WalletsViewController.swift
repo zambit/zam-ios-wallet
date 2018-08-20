@@ -31,6 +31,9 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        view.backgroundColor = .clear
+        collectionView?.backgroundColor = .clear
+
         collectionView?.register(WalletItemComponent.self , forCellWithReuseIdentifier: "WalletItemComponent")
         collectionView?.delegate = self
         collectionView?.dataSource = self

@@ -54,7 +54,6 @@ class WalletTabBarController {
         }
 
         tabBarController.viewControllers = walletsController
-        //tabBarController.tabBar.barTintColor = UIColor.backgroundLighter
         tabBarController.tabBar.clipsToBounds = true
 
         let size = UIScreen.main.bounds.size
@@ -76,7 +75,7 @@ class WalletTabBarController {
     }
 
     func present(viewController: WalletViewController) {
-        controller.present(viewController, animated: true, completion: nil)
+        controller.present(viewController, animated: false, completion: nil)
         viewController.walletNavigationController = navigationController
         viewController.walletTabBar = self
     }

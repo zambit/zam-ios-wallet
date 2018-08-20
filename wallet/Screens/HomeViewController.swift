@@ -107,7 +107,7 @@ class HomeViewController: DetailOffsetPresentationViewController {
             walletsContainerView?.set(viewController: embeded, owner: self)
         }
 
-        view.layer.masksToBounds = true
+        view.clipsToBounds = true
     }
 
     override func viewDidLayoutSubviews() {
@@ -121,7 +121,8 @@ class HomeViewController: DetailOffsetPresentationViewController {
 
     private func setupStyle() {
         detailView?.layer.cornerRadius = 16.0
-        detailGestureView?.layer.cornerRadius = 16.0
+        detailTopGestureView?.layer.cornerRadius = 16.0
+        detailTopGestureView?.layer.masksToBounds = true
 
         detailView?.backgroundColor = .white
         detailGestureView?.backgroundColor = .clear
@@ -289,7 +290,6 @@ class HomeViewController: DetailOffsetPresentationViewController {
         transitionAnimator.addAnimations {
             switch state {
             case .open:
-
                 self.sumLabel?.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
                 self.sumLeftConstraint?.constant = self.view.bounds.width / 2.0 - sumLabelWidth / 2.0
                 self.sumTopConstraint?.constant = 0.0
@@ -302,7 +302,6 @@ class HomeViewController: DetailOffsetPresentationViewController {
                 self.cardOffsetConstraint?.constant = -60
 
             case .closed:
-
                 self.sumLabel?.transform = .identity
                 self.sumLeftConstraint?.constant = 16.0
                 self.sumTopConstraint?.constant = 55.0

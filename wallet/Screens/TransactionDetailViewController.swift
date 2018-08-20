@@ -20,6 +20,8 @@ class TransactionDetailViewController: WalletViewController {
     var userAPI: UserAPI?
     var userManager: UserDataManager?
 
+    var onClose: ((_ owner: WalletViewController) -> Void)?
+
     @IBOutlet private var titleLabel: UILabel?
     @IBOutlet private var amountLabel: UILabel?
     @IBOutlet private var amountDetailLabel: UILabel?
@@ -56,6 +58,15 @@ class TransactionDetailViewController: WalletViewController {
             self?.amountDetailLabel?.alpha = 1.0
             self?.recipientDataLabel?.alpha = 1.0
             self?.sendButton?.alpha = 1.0
+        }, completion: {
+            [weak self]
+            _ in
+
+            guard let strongSelf = self else {
+                return
+            }
+
+            strongSelf.walletNavigationController?.addBackButton(for: strongSelf, target: strongSelf, action: #selector(strongSelf.closeButtonTouchUpInsideEvent(_:)))
         })
     }
 
@@ -131,6 +142,8 @@ class TransactionDetailViewController: WalletViewController {
             titleLabel?.attributedText = attributedString
 
             closeButton?.isHidden = false
+
+            walletNavigationController?.hideBackButton(for: self)
         case .success:
             let attributedString = NSMutableAttributedString(string: "Transaction completed", attributes: [
                 .font: UIFont.walletFont(ofSize: 40.0, weight: .bold),
@@ -144,6 +157,8 @@ class TransactionDetailViewController: WalletViewController {
             amountLabel?.text?.addPrefixIfNeeded("-")
 
             closeButton?.isHidden = false
+
+            walletNavigationController?.hideBackButton(for: self)
         }
     }
 
@@ -201,9 +216,16 @@ class TransactionDetailViewController: WalletViewController {
 
             self?.effectView?.alpha = 0.0
             self?.backgroundView?.alpha = 0.0
-        })
+        }, completion: {
+            [weak self]
+            _ in
 
-        self.dismiss(animated: false, completion: nil)
+            guard let strongSelf = self else {
+                return
+            }
+
+            strongSelf.onClose?(strongSelf)
+        })
     }
 
     private func overlayBlurredBackgroundView() {
