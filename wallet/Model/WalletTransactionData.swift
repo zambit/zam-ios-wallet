@@ -28,7 +28,7 @@ struct WalletTransactionData {
         self.coin = coin
         self.recipient = codable.recipient
 
-        guard let amount = NumberFormatter.walletAmount.number(from: codable.amount)?.decimalValue else {
+        guard let amount = Decimal(string: codable.amount) else {
             throw WalletTransactionDataError.amountFormatError
         }
         self.amount = amount

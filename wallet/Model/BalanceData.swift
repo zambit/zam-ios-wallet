@@ -44,8 +44,8 @@ struct BalanceData {
 
         guard
             let strNumber = stringNumber,
-            let original = NumberFormatter.walletAmount.number(from: strNumber)?.decimalValue,
-            let usd = NumberFormatter.walletAmount.number(from: codable.usd)?.decimalValue else {
+            let original = Decimal(string: strNumber),
+            let usd = Decimal(string: codable.usd) else {
             fatalError()
         }
 

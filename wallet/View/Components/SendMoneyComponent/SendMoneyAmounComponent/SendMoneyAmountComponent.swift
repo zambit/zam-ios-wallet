@@ -113,7 +113,7 @@ class SendMoneyAmountComponent: Component, UITextFieldDelegate {
         //let stringValue = text[coinPrefix.count..<text.count]
 
         let value = NumberFormatter.walletAmount.number(from: text)?.decimalValue ?? 0.0
-        let stringValue = NumberFormatter.walletAmount.string(from: value as NSNumber) ?? text
+        //let value = Decimal(string: text) ?? 0.0
         let detailValue: Float = 0.0
 
         if value != amount {
