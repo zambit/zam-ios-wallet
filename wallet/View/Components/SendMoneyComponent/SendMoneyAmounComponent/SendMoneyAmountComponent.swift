@@ -64,7 +64,7 @@ class SendMoneyAmountComponent: Component, UITextFieldDelegate {
         valueTextField?.tintColor = .darkIndigo
         valueTextField?.keyboardType = .decimalPad
         valueTextField?.attributedPlaceholder =
-            NSAttributedString(string: "0.0", attributes: [NSAttributedStringKey.foregroundColor: UIColor.darkIndigo])
+            NSAttributedString(string: NumberFormatter.walletAmount.string(from: 0.0)!, attributes: [NSAttributedStringKey.foregroundColor: UIColor.darkIndigo])
 
         altValueLabel?.font = UIFont.walletFont(ofSize: 14.0, weight: .regular)
         altValueLabel?.textAlignment = .center
@@ -75,13 +75,13 @@ class SendMoneyAmountComponent: Component, UITextFieldDelegate {
         blockchainFee?.textAlignment = .left
         blockchainFee?.textColor = UIColor.warmGrey.withAlphaComponent(0.7)
         blockchainFee?.customAppearance.setIndent("blockchain fee   ")
-        blockchainFee?.customAppearance.setText("$ 0.0")
+        blockchainFee?.customAppearance.setText("$ \(NumberFormatter.walletAmount.string(from: 0.0)!)")
 
         zamzamFee?.font = UIFont.walletFont(ofSize: 14.0, weight: .regular)
         zamzamFee?.textAlignment = .left
         zamzamFee?.textColor = UIColor.warmGrey.withAlphaComponent(0.7)
         zamzamFee?.customAppearance.setIndent("zamzam fee   ")
-        zamzamFee?.customAppearance.setText("$ 0.0")
+        zamzamFee?.customAppearance.setText("$ \(NumberFormatter.walletAmount.string(from: 0.0)!)")
     }
 
     override func layoutSubviews() {
@@ -148,6 +148,11 @@ class SendMoneyAmountComponent: Component, UITextFieldDelegate {
 
         if textField.text == "", string == "0" {
             textField.text?.append("0\(NumberFormatter.walletAmount.decimalSeparator!)")
+            return false
+        }
+
+        if textField.text == "0.", string == "" {
+            textField.text = ""
             return false
         }
 
