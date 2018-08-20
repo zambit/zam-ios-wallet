@@ -34,8 +34,8 @@ class WalletTabBarController {
         self.contacts = contacts
         self.more = more
 
-        self.home.controller.tabBarItem = ESTabBarItem(WalletContentView(), title: "Home", image: #imageLiteral(resourceName: "briefcaseCopy"), selectedImage: #imageLiteral(resourceName: "briefcaseCopy"))
-        transactions.tabBarItem = ESTabBarItem(WalletContentView(), title: "Transactions", image: #imageLiteral(resourceName: "transaction"))
+        self.home.controller.tabBarItem = ESTabBarItem(WalletContentView(), title: "Home", image: #imageLiteral(resourceName: "briefcase"))
+        transactions.tabBarItem = ESTabBarItem(WalletContentView(), title: "Transactions", image: #imageLiteral(resourceName: "transactions"))
         zam.tabBarItem = ESTabBarItem(LargeWalletContentView(), title: nil, image: #imageLiteral(resourceName: "logo"))
         contacts.tabBarItem = ESTabBarItem(WalletContentView(), title: "Contacts", image: #imageLiteral(resourceName: "users"))
         more.tabBarItem = ESTabBarItem(WalletContentView(), title: "More", image: #imageLiteral(resourceName: "more"))
@@ -89,6 +89,7 @@ class LargeWalletContentView: ESTabBarItemContentView {
         highlightIconColor = .white
         highlightEnabled = false
 
+        itemContentMode = .alwaysOriginal
         renderingMode = .alwaysOriginal
     }
 
@@ -105,7 +106,10 @@ class WalletContentView: ESTabBarItemContentView {
         textColor = UIColor.white.withAlphaComponent(0.5)
         highlightTextColor = .white
         iconColor = UIColor.white.withAlphaComponent(0.5)
-        highlightIconColor = .white
+        highlightIconColor = .skyBlue
+
+        itemContentMode = .alwaysTemplate
+        renderingMode = .alwaysTemplate
     }
 
     public required init?(coder aDecoder: NSCoder) {
