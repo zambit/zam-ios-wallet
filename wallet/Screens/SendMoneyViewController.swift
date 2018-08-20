@@ -35,6 +35,9 @@ class SendMoneyViewController: KeyboardBehaviorFollowingViewController, SendMone
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
+        let index = currentIndex
+        self.currentIndex = index
+
         navigationController?.isNavigationBarHidden = false
     }
 
@@ -114,7 +117,7 @@ class SendMoneyViewController: KeyboardBehaviorFollowingViewController, SendMone
         }
 
         let wallet = wallets[indexPath.section]
-        cell.configure(image: wallet.coin.image, coinName: wallet.coin.name, coinAddit: wallet.coin.short, phoneNumber: phone, balance: wallet.balance.formattedShort(currency: .original), fiatBalance: wallet.balance.description(currency: .usd))
+        cell.configure(image: wallet.coin.image, coinName: wallet.coin.name, coinAddit: wallet.coin.short, phoneNumber: phone, balance: wallet.balance.formatted(currency: .original), fiatBalance: wallet.balance.description(currency: .usd))
         return cell
     }
 
@@ -143,7 +146,6 @@ class SendMoneyViewController: KeyboardBehaviorFollowingViewController, SendMone
     }
 
     func sendMoneyComponentRequestSending(_ sendMoneyComponent: SendMoneyComponent, sendMoneyData: SendMoneyData) {
-
         onSend?(sendMoneyData, self)
     }
 }

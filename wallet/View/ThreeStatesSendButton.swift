@@ -19,7 +19,7 @@ class LargeSendButton: UIButton, CustomUI {
         weak var parent: LargeSendButton?
 
         func setLoading() {
-            parent?.isUserInteractionEnabled = true
+            parent?.isUserInteractionEnabled = false
 
             parent?.setTitle("", for: .normal)
             parent?.setImage(#imageLiteral(resourceName: "empty_icon"), for: .normal)
@@ -27,6 +27,8 @@ class LargeSendButton: UIButton, CustomUI {
         }
 
         func setSuccess() {
+            parent?.isUserInteractionEnabled = false
+
             UIView.animate(withDuration: 0.05) {
                 self.parent?.backgroundColor = .white
             }
@@ -38,6 +40,8 @@ class LargeSendButton: UIButton, CustomUI {
         }
 
         func setFailure() {
+            parent?.isUserInteractionEnabled = false
+
             UIView.animate(withDuration: 0.05) {
                 self.parent?.backgroundColor = .white
             }
@@ -79,9 +83,9 @@ class LargeSendButton: UIButton, CustomUI {
 
         self.layer.masksToBounds = false
         self.layer.shadowColor = UIColor.black.cgColor
-        self.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
-        self.layer.shadowRadius = 20.0
-        self.layer.shadowOpacity = 0.3
+        self.layer.shadowOffset = CGSize(width: 0.0, height: 19.0)
+        self.layer.shadowRadius = 9.0
+        self.layer.shadowOpacity = 0.08
     }
 
     private func setupLayouts() {
@@ -113,7 +117,7 @@ class LargeSendButton: UIButton, CustomUI {
 
         self.addSubview(successView)
 
-        self.failureView = CrossAnimationView(frame: bounds.insetBy(dx: 25.0, dy: 25.0), strokeColor: .error, lineWidth: 5.0)
+        self.failureView = CrossAnimationView(frame: bounds.insetBy(dx: 25.0, dy: 25.0), strokeColor: .pigPink, lineWidth: 5.0)
         self.failureView.isHidden = true
 
         self.addSubview(failureView)

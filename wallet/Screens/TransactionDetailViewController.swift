@@ -26,6 +26,11 @@ class TransactionDetailViewController: WalletViewController {
     @IBOutlet private var recipientDataLabel: UILabel?
     @IBOutlet private var sendButton: LargeSendButton?
 
+    @IBOutlet private var closeButton: UIButton?
+
+    private var effectView: UIVisualEffectView?
+    private var backgroundView: UIView?
+
     private var sendMoneyData: SendMoneyData?
 
     override func viewWillAppear(_ animated: Bool) {
@@ -46,11 +51,11 @@ class TransactionDetailViewController: WalletViewController {
         UIView.animate(withDuration: 0.3, animations: {
             [weak self] in
 
-            self?.titleLabel?.alpha = 1
-            self?.amountLabel?.alpha = 1
-            self?.amountDetailLabel?.alpha = 1
-            self?.recipientDataLabel?.alpha = 1
-            self?.sendButton?.alpha = 1
+            self?.titleLabel?.alpha = 1.0
+            self?.amountLabel?.alpha = 1.0
+            self?.amountDetailLabel?.alpha = 1.0
+            self?.recipientDataLabel?.alpha = 1.0
+            self?.sendButton?.alpha = 1.0
         })
     }
 
@@ -77,6 +82,11 @@ class TransactionDetailViewController: WalletViewController {
 
         sendButton?.addTarget(self, action: #selector(sendButtonTouchUpInsideEvent(_:)), for: .touchUpInside)
         dataWasLoaded()
+
+        closeButton?.setTitle("Close", for: .normal)
+        closeButton?.setTitleColor(.white, for: .normal)
+        closeButton?.titleLabel?.font = UIFont.walletFont(ofSize: 16.0, weight: .medium)
+        closeButton?.addTarget(self, action: #selector(closeButtonTouchUpInsideEvent(_:)), for: .touchUpInside)
 
         changeDataFor(state: .confirm)
     }
@@ -108,12 +118,32 @@ class TransactionDetailViewController: WalletViewController {
         case .confirm:
             titleLabel?.text = "Confirm transaction"
 
+            closeButton?.isHidden = true
+
         case .failure:
-            titleLabel?.text = "Transaction completed"
+            let attributedString = NSMutableAttributedString(string: "Transaction canceled", attributes: [
+                .font: UIFont.walletFont(ofSize: 40.0, weight: .bold),
+                .foregroundColor: UIColor.white,
+                .kern: 0.0
+                ])
+            attributedString.addAttribute(.foregroundColor, value: UIColor.pigPink, range: NSRange(location: 12, length: 8))
 
+            titleLabel?.attributedText = attributedString
+
+            closeButton?.isHidden = false
         case .success:
-            titleLabel?.text = "Transaction completed"
+            let attributedString = NSMutableAttributedString(string: "Transaction completed", attributes: [
+                .font: UIFont.walletFont(ofSize: 40.0, weight: .bold),
+                .foregroundColor: UIColor.white,
+                .kern: 0.0
+                ])
+            attributedString.addAttribute(.foregroundColor, value: UIColor.paleOliveGreen, range: NSRange(location: 12, length: 9))
 
+            titleLabel?.attributedText = attributedString
+            
+            amountLabel?.text?.addPrefixIfNeeded("-")
+
+            closeButton?.isHidden = false
         }
     }
 
@@ -144,6 +174,7 @@ class TransactionDetailViewController: WalletViewController {
 
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 self?.sendButton?.customAppearance.setSuccess()
+                self?.changeDataFor(state: .success)
             }
         }.catch {
             [weak self]
@@ -151,22 +182,51 @@ class TransactionDetailViewController: WalletViewController {
 
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 self?.sendButton?.customAppearance.setFailure()
+                self?.changeDataFor(state: .failure)
             }
             print(error)
         }
     }
 
+    @objc
+    private func closeButtonTouchUpInsideEvent(_ sender: UIButton) {
+        UIView.animate(withDuration: 0.8, animations: {
+            [weak self] in
+
+            self?.titleLabel?.alpha = 0.0
+            self?.amountLabel?.alpha = 0.0
+            self?.amountDetailLabel?.alpha = 0.0
+            self?.recipientDataLabel?.alpha = 0.0
+            self?.sendButton?.alpha = 0.0
+
+            self?.effectView?.alpha = 0.0
+            self?.backgroundView?.alpha = 0.0
+        })
+
+        self.dismiss(animated: false, completion: nil)
+    }
+
     private func overlayBlurredBackgroundView() {
+        effectView = UIVisualEffectView()
+        effectView?.frame = view.frame
 
-        let effectView = UIVisualEffectView()
-        effectView.frame = view.frame
-        effectView.backgroundColor = UIColor.backgroundLighter.withAlphaComponent(0.4)
+        backgroundView = UIView()
+        backgroundView?.frame = view.frame
+        backgroundView?.alpha = 0.0
+        backgroundView?.backgroundColor = UIColor.backgroundDarker.withAlphaComponent(0.5)
 
-        view.addSubview(effectView)
-        view.sendSubview(toBack: effectView)
+        guard let effectView = effectView, let background = backgroundView else {
+            fatalError()
+        }
+
+        view.addSubview(background)
+        view.sendSubview(toBack: background)
+
+        view.insertSubview(effectView, aboveSubview: background)
 
         UIView.animate(withDuration: 0.8) {
-            effectView.effect = UIBlurEffect(style: .dark)
+            background.alpha = 1.0
+            effectView.effect = UIBlurEffect(style: UIBlurEffectStyle.dark)
         }
     }
 }
