@@ -151,7 +151,7 @@ class SendMoneyAmountComponent: Component, UITextFieldDelegate {
             return false
         }
 
-        if textField.text == "0.", string == "" {
+        if textField.text == "0\(NumberFormatter.walletAmount.decimalSeparator!)", string == "" {
             textField.text = ""
             return false
         }
