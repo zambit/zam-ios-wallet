@@ -116,6 +116,7 @@ class CreatePinComponent: Component, UICollectionViewDataSource, UICollectionVie
                     currentPinStage?.dotsFieldComponent?.showSuccess()
                     delegate?.createPinComponent(self, succeedWithPin: pinText)
                 } else {
+                    delegate?.createPinComponentWrongConfirmation(self)
                     currentPinStage?.dotsFieldComponent?.showFailure { [weak self] in
                         guard let strongSelf = self else {
                             return
@@ -123,7 +124,6 @@ class CreatePinComponent: Component, UICollectionViewDataSource, UICollectionVie
 
                         strongSelf.currentPinStage?.dotsFieldComponent?.unfillAll()
                         strongSelf.pinConfirmationText = ""
-                        strongSelf.delegate?.createPinComponentWrongConfirmation(strongSelf)
                     }
                 }
             }

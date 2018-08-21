@@ -98,9 +98,9 @@ class WalletNavigationController {
         controller.setViewControllers(newHierarchy, animated: false)
     }
 
-    func pushFromRootBack(viewController: WalletViewController) {
+    func pushFromRootBack(viewController: WalletViewController, animated: Bool = true) {
         guard controller.viewControllers.count > 1 else {
-            push(viewController: viewController)
+            push(viewController: viewController, animated: animated)
             return
         }
 

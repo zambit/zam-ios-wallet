@@ -24,6 +24,10 @@ final class OnboardingFlow: ScreenFlow {
         self.navigationController?.pushFromRootBack(viewController: onboardingScreen)
     }
 
+    func begin(animated: Bool) {
+        self.navigationController?.pushFromRootBack(viewController: onboardingScreen, animated: animated)
+    }
+
     private var onboardingScreen: OnboardingViewController {
         let _vc = ControllerHelper.instantiateViewController(identifier: "OnboardingViewController", storyboardName: "Onboarding")
 

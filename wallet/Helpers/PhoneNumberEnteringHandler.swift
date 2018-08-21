@@ -45,7 +45,7 @@ class PhoneNumberEnteringHandler: NSObject, UITextFieldDelegate {
 
         unitedTextField?.addTarget(self, action: #selector(unitedTextFieldEditingBegin(_:)), for: .editingDidBegin)
         unitedTextField?.addTarget(self, action: #selector(unitedTextFieldEditingChanged(_:)), for: .editingChanged)
-        unitedTextField?.addTarget(self, action: #selector(unitedTextFieldEndEditing(_:)), for: .editingDidEnd)
+        unitedTextField?.addTarget(self, action: #selector(codeTextFieldEditingEnd(_:)), for: .editingDidEnd)
 
         self.unitedTextField?.delegate = self
     }
@@ -59,7 +59,7 @@ class PhoneNumberEnteringHandler: NSObject, UITextFieldDelegate {
 
         super.init()
 
-        codeTextField.addTarget(self, action: #selector(textFieldEditingEnd(_:)), for: .editingDidEnd)
+        codeTextField.addTarget(self, action: #selector(codeTextFieldEditingEnd(_:)), for: .editingDidEnd)
         codeTextField.addTarget(self, action: #selector(codeTextFieldEditingBegin(_:)), for: .editingDidBegin)
         codeTextField.addTarget(self, action: #selector(codeTextFieldEditingChanged(_:)), for: .editingChanged)
 
@@ -111,15 +111,6 @@ class PhoneNumberEnteringHandler: NSObject, UITextFieldDelegate {
         delegate?.phoneNumberEditingChanged(self, with: mask, phoneNumber: text)
     }
 
-    @objc
-    private func unitedTextFieldEndEditing(_ sender: UITextField) {
-        guard let text = sender.text, text == "+" else {
-            return
-        }
-
-        sender.text = ""
-    }
-
     // MARK: - CodeTextField
 
     @objc
@@ -144,6 +135,18 @@ class PhoneNumberEnteringHandler: NSObject, UITextFieldDelegate {
         }
 
         numberTextFieldEditingChanged(sender)
+    }
+
+    @objc
+    private func codeTextFieldEditingEnd(_ sender: UITextField) {
+        sender.resignFirstResponder()
+        sender.layoutIfNeeded()
+
+        guard let text = sender.text, text == "+" else {
+            return
+        }
+
+        sender.text = ""
     }
 
     // MARK: - NumberTextField

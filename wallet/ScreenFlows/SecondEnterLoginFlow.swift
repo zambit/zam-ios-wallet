@@ -23,6 +23,10 @@ final class SecondEnterLoginFlow: ScreenFlow {
         self.navigationController?.push(viewController: enterLoginPasswordScreen)
     }
 
+    func begin(animated: Bool) {
+        self.navigationController?.push(viewController: enterLoginPasswordScreen, animated: animated)
+    }
+
     func prepare(phone: String) {
         self.phone = phone
     }

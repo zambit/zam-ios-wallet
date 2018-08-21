@@ -15,24 +15,11 @@ protocol VerificationCodeFormComponentDelegate: class {
 
 }
 
-class VerificationCodeFormComponent: UIView, UITextFieldDelegate {
+class VerificationCodeFormComponent: Component, UITextFieldDelegate {
 
-    @IBOutlet private var contentView: UIView!
     @IBOutlet private var codeTextField: UITextField?
 
-    @IBOutlet private var verificationTextFieldHeightConstraint: NSLayoutConstraint?
-
     weak var delegate: VerificationCodeFormComponentDelegate?
-
-    var textFieldHeight: CGFloat {
-        get {
-            return verificationTextFieldHeightConstraint?.constant ?? 0
-        }
-
-        set {
-            verificationTextFieldHeightConstraint?.constant = newValue
-        }
-    }
 
     var codeMask: String = "XX XX XX"
 
@@ -48,32 +35,10 @@ class VerificationCodeFormComponent: UIView, UITextFieldDelegate {
         return numbers
     }
 
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        initFromNib()
-        setupStyle()
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        initFromNib()
-        setupStyle()
-    }
-
-    private func initFromNib() {
-        Bundle.main.loadNibNamed("VerificationCodeFormView", owner: self, options: nil)
-        addSubview(contentView)
-
-        contentView.frame = bounds
-        contentView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
-    }
-
-    private func setupStyle() {
-        self.backgroundColor = .clear
-        self.contentView.backgroundColor = .clear
+    override func setupStyle() {
+        super.setupStyle()
 
         self.codeTextField?.keyboardType = .decimalPad
-
         self.codeTextField?.backgroundColor = UIColor.white.withAlphaComponent(0.04)
         self.codeTextField?.font = UIFont.systemFont(ofSize: 20, weight: .regular)
         self.codeTextField?.textColor = .white

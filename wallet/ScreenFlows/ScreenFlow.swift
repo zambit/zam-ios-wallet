@@ -17,4 +17,14 @@ protocol ScreenFlow {
 
     func begin()
 
+    func begin(animated: Bool)
+
+}
+
+extension ScreenFlow {
+
+    func begin(animated: Bool) {
+        begin()
+    }
+
 }

@@ -48,7 +48,10 @@ class OnboardingItemComponent: ItemComponent {
         case .extraSmall, .small:
             topImageToSafeAreaConstraint?.constant = 20.0
             titleLabel?.font = UIFont.systemFont(ofSize: 28.0, weight: .bold)
-        case .medium, .extra, .plus:
+        case .medium:
+            topImageToSafeAreaConstraint?.constant = 20.0
+            titleLabel?.font = UIFont.systemFont(ofSize: 34.0, weight: .bold)
+        case .extra, .plus:
             topImageToSafeAreaConstraint?.constant = 79.5
             titleLabel?.font = UIFont.systemFont(ofSize: 34.0, weight: .bold)
         case .unknown:

@@ -88,16 +88,12 @@ class CreateNewPasswordViewController: ContinueViewController, NewPasswordFormCo
             recoveryAPI?.providePassword(password, confirmation: confirmation, for: phone, recoveryToken: token).done {
                     [weak self] in
 
+                    self?.dismissKeyboard()
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                         self?.continueButton?.customAppearance.setLoading(false)
                         self?.onContinue?(phone)
                     }
 
-//                    do {
-//                        try self?.userManager?.save(phone: phone, password: password)
-//                    } catch let error {
-//                        fatalError("Error on saving user password \(error)")
-//                    }
                 }.catch {
                     [weak self]
                     error in
@@ -111,18 +107,13 @@ class CreateNewPasswordViewController: ContinueViewController, NewPasswordFormCo
                     [weak self]
                     authToken in
 
+                    self?.dismissKeyboard()
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                         self?.continueButton?.customAppearance.setLoading(false)
                         self?.onContinue?(authToken)
                     }
 
-                    self?.userManager?.save(phone: phone, token: token)
-
-//                    do {
-//                        try self?.userManager?.save(phone: phone, password: password, token: token)
-//                    } catch let error {
-//                        fatalError("Error on saving user password \(error)")
-//                    }
+                    self?.userManager?.save(phone: phone, token: authToken)
                 }.catch {
                     [weak self]
                     error in

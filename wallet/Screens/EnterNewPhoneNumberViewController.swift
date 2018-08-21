@@ -105,6 +105,8 @@ class EnterNewPhoneNumberViewController: ContinueViewController, PhoneNumberForm
         signupAPI?.sendVerificationCode(to: phone).done {
             [weak self] in
 
+            self?.dismissKeyboard()
+
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 self?.continueButton?.customAppearance.setLoading(false)
                 self?.onContinue?(phone)

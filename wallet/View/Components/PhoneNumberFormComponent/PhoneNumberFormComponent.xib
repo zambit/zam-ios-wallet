@@ -26,11 +26,11 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="411" height="79"/>
+            <rect key="frame" x="0.0" y="0.0" width="473" height="79"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4Lo-uk-YuC">
-                    <rect key="frame" x="16" y="0.0" width="80" height="30"/>
+                    <rect key="frame" x="16" y="0.0" width="80" height="53"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="80" id="Azu-dW-fKk"/>
                         <constraint firstAttribute="height" constant="56" id="Fhw-jC-nqh"/>
@@ -40,20 +40,20 @@
                     <textInputTraits key="textInputTraits" textContentType="tel"/>
                 </textField>
                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="edG-vE-9P9">
-                    <rect key="frame" x="104" y="0.0" width="291" height="30"/>
+                    <rect key="frame" x="104" y="0.0" width="353" height="53"/>
                     <nil key="textColor"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zBE-Kp-ckQ" customClass="CountryView" customModule="wallet" customModuleProvider="target">
-                    <rect key="frame" x="415" y="-7" width="44" height="44"/>
+                    <rect key="frame" x="477" y="4.5" width="44" height="44"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="i6z-6a-a8Y"/>
                         <constraint firstAttribute="width" secondItem="zBE-Kp-ckQ" secondAttribute="height" multiplier="1:1" id="lMX-3E-jd4"/>
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Heper text" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fcb-1l-le0">
-                    <rect key="frame" x="16" y="38" width="70" height="17"/>
+                    <rect key="frame" x="16" y="61" width="70" height="17"/>
                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
@@ -82,7 +82,7 @@
                     <exclude reference="g2H-do-sko"/>
                 </mask>
             </variation>
-            <point key="canvasLocation" x="-54.5" y="-211.5"/>
+            <point key="canvasLocation" x="-23.5" y="-211.5"/>
         </view>
     </objects>
 </document>

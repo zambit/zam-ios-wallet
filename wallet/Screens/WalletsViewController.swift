@@ -119,6 +119,8 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
             [weak self]
             error in
             print(error)
+
+            self?.refreshControl?.endRefreshing()
         }
     }
 }

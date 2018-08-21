@@ -25,6 +25,7 @@ class VerifyPhoneNumberWithSmsViewController: ContinueViewController, Verificati
 
     @IBOutlet var largeTitleLabel: UILabel?
     @IBOutlet var verificationCodeFormComponent: VerificationCodeFormComponent?
+    @IBOutlet var verificationCodeHelperText: UILabel?
     @IBOutlet var sendVerificationCodeAgainButton: AdditionalTextButton?
 
     override func viewDidLoad() {
@@ -59,6 +60,9 @@ class VerifyPhoneNumberWithSmsViewController: ContinueViewController, Verificati
     private func setupViewControllerStyle() {
         largeTitleLabel?.textColor = .white
 
+        verificationCodeHelperText?.textColor = .error
+        verificationCodeHelperText?.text = ""
+
         continueButton?.setImage(#imageLiteral(resourceName: "icArrowRight"), for: .normal)
         continueButton?.addTarget(self, action: #selector(continueButtonTouchUpInsideEvent(_:)), for: .touchUpInside)
     }
@@ -85,6 +89,20 @@ class VerifyPhoneNumberWithSmsViewController: ContinueViewController, Verificati
 
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 self?.continueButton?.customAppearance.setLoading(false)
+
+                if let serverError = error as? WalletResponseError {
+                    switch serverError {
+                    case .serverFailureResponse(errors: let fails):
+                        guard let fail = fails.first else {
+                            fatalError()
+                        }
+
+                        self?.verificationCodeHelperText?.text = fail.message.capitalizingFirst
+                    case .undefinedServerFailureResponse:
+
+                        self?.verificationCodeHelperText?.text = "Undefined error"
+                    }
+                }
             }
         }
     }

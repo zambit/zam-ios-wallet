@@ -39,11 +39,11 @@ class AdditionalTextButton: UIButton, CustomUI, CountdownTimerDelegate {
         weak var parent: AdditionalTextButton?
 
         func setEnabled(_ enabled: Bool) {
-            parent?.isEnabled = enabled
-
             if !enabled {
                 parent?.timer?.begin()
             }
+
+            parent?.isEnabled = enabled
         }
     }
 
@@ -90,6 +90,7 @@ class AdditionalTextButton: UIButton, CustomUI, CountdownTimerDelegate {
     private func setupStyle() {
         self.titleLabel?.font = UIFont.systemFont(ofSize: 16.0, weight: .regular)
         self.setTitleColor(UIColor.flatBlue, for: .disabled)
+        self.setTitleColor(UIColor.flatBlue, for: .highlighted)
         self.setTitleColor(UIColor.skyBlue, for: .normal)
     }
 

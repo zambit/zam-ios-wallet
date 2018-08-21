@@ -51,6 +51,9 @@ class CountdownTimer {
                                           selector: #selector(updateTimer(_:)),
                                           userInfo: nil,
                                           repeats: true)
+
+        let time = Time(seconds: secondsRemaining)
+        self.delegate?.countdownTimer(self, timeRemaining: time)
     }
 
     func stop() {

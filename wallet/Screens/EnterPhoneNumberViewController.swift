@@ -77,6 +77,8 @@ class EnterPhoneNumberViewController: ContinueViewController, PhoneNumberFormCom
         recoveryAPI?.sendVerificationCode(to: phone).done {
             [weak self] in
 
+            self?.dismissKeyboard()
+
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 self?.continueButton?.customAppearance.setLoading(false)
                 self?.onContinue?(phone)
@@ -87,19 +89,19 @@ class EnterPhoneNumberViewController: ContinueViewController, PhoneNumberFormCom
 
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 self?.continueButton?.customAppearance.setLoading(false)
-            }
 
-            if let serverError = error as? WalletResponseError {
-                switch serverError {
-                case .serverFailureResponse(errors: let fails):
-                    guard let fail = fails.first else {
-                        fatalError()
+                if let serverError = error as? WalletResponseError {
+                    switch serverError {
+                    case .serverFailureResponse(errors: let fails):
+                        guard let fail = fails.first else {
+                            fatalError()
+                        }
+
+                        self?.phoneNumberForm?.helperText = fail.message.capitalizingFirst
+                    case .undefinedServerFailureResponse:
+
+                        self?.phoneNumberForm?.helperText = "Undefined error"
                     }
-
-                    self?.phoneNumberForm?.helperText = fail.message.capitalizingFirst
-                case .undefinedServerFailureResponse:
-
-                    self?.phoneNumberForm?.helperText = "Undefined error"
                 }
             }
         }

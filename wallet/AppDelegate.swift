@@ -59,6 +59,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             screenFlow.prepare(phone: phone)
 
             self.mainScreenFlow = screenFlow
+            self.mainScreenFlow.begin(animated: false)
             break
         case (true, false):
             guard let phone = userDefaultsManager.getPhoneNumber() else {
@@ -69,6 +70,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             screenFlow.prepare(phone: phone)
 
             self.mainScreenFlow = screenFlow
+            self.mainScreenFlow.begin(animated: false)
             break
         case (false, true):
             fatalError()
@@ -76,14 +78,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let screenFlow = OnboardingFlow(navigationController: navigation)
 
             self.mainScreenFlow = screenFlow
+            self.mainScreenFlow.begin(animated: false)
             break
         }
 
         self.window = UIWindow(frame: UIScreen.main.bounds)
         self.window?.rootViewController = navigationController
         self.window?.makeKeyAndVisible()
-
-        self.mainScreenFlow.begin()
 
         return true
     }
