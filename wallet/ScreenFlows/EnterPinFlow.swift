@@ -20,7 +20,7 @@ final class EnterPinFlow: ScreenFlow {
     }
 
     func begin() {
-        self.navigationController?.push(viewController: enterPinScreen)
+        self.navigationController?.push(viewController: enterPinScreen, animated: false)
     }
 
     func prepare(phone: String) {

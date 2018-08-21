@@ -48,8 +48,8 @@ class WalletNavigationController {
         navigationController.navigationItem.hidesBackButton = true
     }
 
-    func push(viewController: WalletViewController) {
-        controller.pushViewController(viewController, animated: true)
+    func push(viewController: WalletViewController, animated: Bool = true) {
+        controller.pushViewController(viewController, animated: animated)
         viewController.walletNavigationController = self
         viewController.walletTabBar = parentTabBar
 
