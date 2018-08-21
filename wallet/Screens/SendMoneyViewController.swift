@@ -147,6 +147,7 @@ class SendMoneyViewController: KeyboardBehaviorFollowingViewController, SendMone
     }
 
     func sendMoneyComponentRequestSending(_ sendMoneyComponent: SendMoneyComponent, sendMoneyData: SendMoneyData) {
+        dismissKeyboard()
         onSend?(sendMoneyData)
     }
 }

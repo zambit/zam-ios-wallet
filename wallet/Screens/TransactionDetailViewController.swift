@@ -88,7 +88,10 @@ class TransactionDetailViewController: WalletViewController {
             topTitleConstraint?.constant = 7.0
             titleAmountBetweenConstraint?.constant = 67.0
             recipientButtonBetweenConstraint?.constant = 26.0
-        case .plus, .extra:
+        case .plus:
+            titleAmountBetweenConstraint?.constant = 97.0
+            recipientButtonBetweenConstraint?.constant = 46.0
+        case .extra:
             topTitleConstraint?.constant = 44.0
             titleAmountBetweenConstraint?.constant = 107.0
             recipientButtonBetweenConstraint?.constant = 56.0
@@ -257,6 +260,8 @@ class TransactionDetailViewController: WalletViewController {
 
     @objc
     private func closeButtonTouchUpInsideEvent(_ sender: UIButton) {
+        walletNavigationController?.hideBackButton(for: self)
+
         UIView.animate(withDuration: 0.8, animations: {
             [weak self] in
 

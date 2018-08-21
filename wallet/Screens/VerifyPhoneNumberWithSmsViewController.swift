@@ -78,6 +78,8 @@ class VerifyPhoneNumberWithSmsViewController: ContinueViewController, Verificati
             [weak self]
             token in
 
+            self?.dismissKeyboard()
+
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 self?.continueButton?.customAppearance.setLoading(false)
                 self?.onContinue?(phone, token)
