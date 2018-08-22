@@ -27,7 +27,7 @@ class LargeSendButton: UIButton, CustomUI {
 
         func setLoading() {
             parent?.setTitle("", for: .normal)
-            parent?.setImage(#imageLiteral(resourceName: "empty_icon"), for: .normal)
+            parent?.setImage(#imageLiteral(resourceName: "icEmpty"), for: .normal)
             parent?.loadingView.isHidden = false
 
             parent?.sendState = .loading

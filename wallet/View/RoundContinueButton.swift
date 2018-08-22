@@ -33,7 +33,7 @@ class RoundContinueButton: UIButton, CustomUI {
         func setLoading(_ enabled: Bool) {
             parent?.isUserInteractionEnabled = !enabled
             if enabled {
-                parent?.setImage(#imageLiteral(resourceName: "empty_icon"), for: .normal)
+                parent?.setImage(#imageLiteral(resourceName: "icEmpty"), for: .normal)
             } else {
                 parent?.setImage(#imageLiteral(resourceName: "icArrowRight"), for: .normal)
             }
