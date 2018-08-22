@@ -1,45 +1,29 @@
 //
-//  UIImageView+Extensions.swift
+//  LetterImage.swift
 //  wallet
 //
-//  Created by  me on 14/08/2018.
+//  Created by Alexander Ponomarev on 22/08/2018.
 //  Copyright © 2018 zamzam. All rights reserved.
 //
 
+import Foundation
 import UIKit
 
-extension UIImageView {
+struct LetterImage {
 
-    func setImageColor(color: UIColor) {
-        let templateImage = self.image?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
-        self.image = templateImage
-        self.tintColor = color
-    }
-    
-}
+    let bounds: CGRect
 
-extension UIImageView {
-
-    /// Sets the image property of the view based on initial text, a specified background color, custom text attributes, and a circular clipping
-    ///
-    /// - Parameters:
-    ///   - string: The string used to generate the initials. This should be a user's full name if available.
-    ///   - color: This optional paramter sets the background of the image. By default, a random color will be generated.
-    ///   - circular: This boolean will determine if the image view will be clipped to a circular shape.
-    ///   - textAttributes: This dictionary allows you to specify font, text color, shadow properties, etc.
-    open func setImage(string: String?,
+    func generate(string: String?,
                        color: UIColor? = nil,
                        circular: Bool = false,
-                       textAttributes: [NSAttributedStringKey: Any]? = nil) {
+                       textAttributes: [NSAttributedStringKey: Any]? = nil) -> UIImage? {
 
         let image = imageSnap(text: string != nil ? string?.initials : "",
                               color: color ?? .random,
                               circular: circular,
                               textAttributes:textAttributes)
 
-        if let newImage = image {
-            self.image = newImage
-        }
+        return image
     }
 
     private func imageSnap(text: String?,
@@ -49,10 +33,8 @@ extension UIImageView {
 
         let scale = Float(UIScreen.main.scale)
         var size = bounds.size
-        if contentMode == .scaleToFill || contentMode == .scaleAspectFill || contentMode == .scaleAspectFit || contentMode == .redraw {
             size.width = CGFloat(floorf((Float(size.width) * scale) / scale))
             size.height = CGFloat(floorf((Float(size.height) * scale) / scale))
-        }
 
         UIGraphicsBeginImageContextWithOptions(size, false, CGFloat(scale))
         let context = UIGraphicsGetCurrentContext()
@@ -83,4 +65,5 @@ extension UIImageView {
 
         return image
     }
+
 }
