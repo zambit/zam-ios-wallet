@@ -11,7 +11,7 @@ import UIKit
 
 class EnterPhoneLoginPasswordViewController: ContinueViewController, LoginFormComponentDelegate {
 
-    var userManager: UserDataManager?
+    var userManager: UserDefaultsManager?
     var authAPI: AuthAPI?
 
     var onContinue: ((_ authToken: String) -> Void)?

@@ -18,7 +18,8 @@ protocol WalletsContainerEmbededViewController: class {
 
 class HomeViewController: DetailOffsetPresentationViewController, WalletsViewControllerDelegate {
 
-    var userManager: UserDataManager?
+    var contactsManager: UserContactsManager?
+    var userManager: UserDefaultsManager?
     var userAPI: UserAPI?
 
     var embededViewController: WalletsContainerEmbededViewController? {
@@ -32,6 +33,8 @@ class HomeViewController: DetailOffsetPresentationViewController, WalletsViewCon
     }
 
     // MARK: - Outlets
+
+    @IBOutlet var contactsComponent: ContactsHorizontalComponent?
 
     @IBOutlet var detailGestureView: UIView?
     @IBOutlet var detailTopGestureView: UIView?
@@ -70,16 +73,18 @@ class HomeViewController: DetailOffsetPresentationViewController, WalletsViewCon
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
+        loadData()
+
         navigationController?.isNavigationBarHidden = true
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        loadData()
-
         setupStyle()
         setupDefaultStyle()
+
+        hideKeyboardOnTap()
 
         switch UIDevice.current.screenType {
         case .small, .extraSmall:
@@ -100,8 +105,10 @@ class HomeViewController: DetailOffsetPresentationViewController, WalletsViewCon
         detailGestureView?.addGestureRecognizer(panRecognizer)
         detailTopGestureView?.addGestureRecognizer(panRecognizer)
 
-        //walletsContainerView?.isUserInteractionEnabled = false
         walletsContainerView?.isUserInteractionEnabled = true
+
+        let contacts = contactsManager?.contacts ?? []
+        contactsComponent?.prepare(title: "Send by phone", contacts: contacts)
 
         if let embeded = embededViewController as? UIViewController {
             walletsContainerView?.set(viewController: embeded, owner: self)
@@ -180,8 +187,6 @@ class HomeViewController: DetailOffsetPresentationViewController, WalletsViewCon
     }
 
     private func loadData() {
-        print("LoadData")
-
         guard let token = userManager?.getToken() else {
             fatalError()
         }
@@ -293,6 +298,8 @@ class HomeViewController: DetailOffsetPresentationViewController, WalletsViewCon
             self.sumTitleLabel?.alpha = 0.0
             self.sumTitleLeftConstraint?.constant = self.view.bounds.width / 2.0 - (sumLabelWidth / 2.0) * 0.7
 
+            self.contactsComponent?.alpha = 0.0
+
             self.cardOffsetConstraint?.constant = -60
 
         case .closed:
@@ -306,6 +313,8 @@ class HomeViewController: DetailOffsetPresentationViewController, WalletsViewCon
             self.sumTitleLeftConstraint?.constant = 16.0
 
             self.embededViewController?.scrollView?.setContentOffset(embededScrollViewOffset, animated: false)
+
+            self.contactsComponent?.alpha = 1.0
 
             self.cardOffsetConstraint?.constant = self.cardViewOffset
         }
@@ -340,6 +349,8 @@ class HomeViewController: DetailOffsetPresentationViewController, WalletsViewCon
                 self.sumTitleLabel?.alpha = 0.0
                 self.sumTitleLeftConstraint?.constant = self.view.bounds.width / 2.0 - (sumLabelWidth / 2.0) * 0.7
 
+                self.contactsComponent?.alpha = 0.0
+
                 self.cardOffsetConstraint?.constant = -60
 
             case .closed:
@@ -353,6 +364,8 @@ class HomeViewController: DetailOffsetPresentationViewController, WalletsViewCon
                 self.sumTitleLeftConstraint?.constant = 16.0
 
                 self.embededViewController?.scrollView?.setContentOffset(embededScrollViewOffset, animated: false)
+
+                self.contactsComponent?.alpha = 1.0
 
                 self.cardOffsetConstraint?.constant = self.cardViewOffset
             }

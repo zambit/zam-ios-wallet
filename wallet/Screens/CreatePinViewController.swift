@@ -12,7 +12,7 @@ import AudioToolbox
 
 class CreatePinViewController: WalletViewController, DecimalKeyboardComponentDelegate, CreatePinComponentDelegate {
 
-    var userManager: UserDataManager?
+    var userManager: UserDefaultsManager?
 
     var onContinue: (() -> Void)?
     var onSkip: (() -> Void)?

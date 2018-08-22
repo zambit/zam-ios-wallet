@@ -103,7 +103,7 @@
 		8C52FFF0211AE19300EB55EA /* CustomOverlappingFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C52FFEF211AE19300EB55EA /* CustomOverlappingFlowLayout.swift */; };
 		8C52FFF2211AF1FD00EB55EA /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C52FFF1211AF1FD00EB55EA /* HomeViewController.swift */; };
 		8C52FFFE211B252F00EB55EA /* InstantPanGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C52FFFD211B252F00EB55EA /* InstantPanGestureRecognizer.swift */; };
-		8C6088402110634700470411 /* UserDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C60883F2110634700470411 /* UserDataManager.swift */; };
+		8C6088402110634700470411 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C60883F2110634700470411 /* UserDefaultsManager.swift */; };
 		8C6088442110A34200470411 /* CustomUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6088432110A34200470411 /* CustomUI.swift */; };
 		8C6088482110A75100470411 /* AdditionalTextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6088472110A75100470411 /* AdditionalTextButton.swift */; };
 		8C60884A2110B42A00470411 /* CountdownTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6088492110B42A00470411 /* CountdownTimer.swift */; };
@@ -146,6 +146,14 @@
 		8CA218D0212737210063C188 /* LargeSendButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA218CE212719990063C188 /* LargeSendButton.swift */; };
 		8CA218D2212738450063C188 /* CheckAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA218D1212738450063C188 /* CheckAnimationView.swift */; };
 		8CA218D6212D61EB0063C188 /* BiometricIDAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA218D5212D61EB0063C188 /* BiometricIDAuth.swift */; };
+		8CA218D9212D889A0063C188 /* UserContactsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA218D8212D889A0063C188 /* UserContactsManager.swift */; };
+		8CA218DB212D892A0063C188 /* ContactData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA218DA212D892A0063C188 /* ContactData.swift */; };
+		8CA218DD212D93570063C188 /* ContactsHorizontalComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA218DC212D93570063C188 /* ContactsHorizontalComponent.swift */; };
+		8CA218DF212D93670063C188 /* ContactsHorizontalComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CA218DE212D93670063C188 /* ContactsHorizontalComponent.xib */; };
+		8CA218E1212D9B990063C188 /* ContactItemComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA218E0212D9B990063C188 /* ContactItemComponent.swift */; };
+		8CA218E3212D9BA50063C188 /* ContactItemComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CA218E2212D9BA50063C188 /* ContactItemComponent.xib */; };
+		8CA218E7212DA8300063C188 /* SearchTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA218E6212DA8300063C188 /* SearchTextField.swift */; };
+		8CA218E9212DB0210063C188 /* RoundedImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA218E8212DB0210063C188 /* RoundedImageView.swift */; };
 		8CF1DE4220EF98160036F986 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF1DE4120EF98160036F986 /* AuthViewController.swift */; };
 		8CF1DE4520EFB1A70036F986 /* HorizontalScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF1DE4420EFB1A70036F986 /* HorizontalScrollView.swift */; };
 		8CF1DE4720F37B5E0036F986 /* SMSConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF1DE4620F37B5E0036F986 /* SMSConfirmationViewController.swift */; };
@@ -280,7 +288,7 @@
 		8C52FFEF211AE19300EB55EA /* CustomOverlappingFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomOverlappingFlowLayout.swift; sourceTree = "<group>"; };
 		8C52FFF1211AF1FD00EB55EA /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		8C52FFFD211B252F00EB55EA /* InstantPanGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstantPanGestureRecognizer.swift; sourceTree = "<group>"; };
-		8C60883F2110634700470411 /* UserDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataManager.swift; sourceTree = "<group>"; };
+		8C60883F2110634700470411 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		8C6088432110A34200470411 /* CustomUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUI.swift; sourceTree = "<group>"; };
 		8C6088472110A75100470411 /* AdditionalTextButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalTextButton.swift; sourceTree = "<group>"; };
 		8C6088492110B42A00470411 /* CountdownTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownTimer.swift; sourceTree = "<group>"; };
@@ -323,6 +331,14 @@
 		8CA218CE212719990063C188 /* LargeSendButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeSendButton.swift; sourceTree = "<group>"; };
 		8CA218D1212738450063C188 /* CheckAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckAnimationView.swift; sourceTree = "<group>"; };
 		8CA218D5212D61EB0063C188 /* BiometricIDAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiometricIDAuth.swift; sourceTree = "<group>"; };
+		8CA218D8212D889A0063C188 /* UserContactsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserContactsManager.swift; sourceTree = "<group>"; };
+		8CA218DA212D892A0063C188 /* ContactData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactData.swift; sourceTree = "<group>"; };
+		8CA218DC212D93570063C188 /* ContactsHorizontalComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsHorizontalComponent.swift; sourceTree = "<group>"; };
+		8CA218DE212D93670063C188 /* ContactsHorizontalComponent.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContactsHorizontalComponent.xib; sourceTree = "<group>"; };
+		8CA218E0212D9B990063C188 /* ContactItemComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactItemComponent.swift; sourceTree = "<group>"; };
+		8CA218E2212D9BA50063C188 /* ContactItemComponent.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContactItemComponent.xib; sourceTree = "<group>"; };
+		8CA218E6212DA8300063C188 /* SearchTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTextField.swift; sourceTree = "<group>"; };
+		8CA218E8212DB0210063C188 /* RoundedImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedImageView.swift; sourceTree = "<group>"; };
 		8CF1DE4120EF98160036F986 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		8CF1DE4420EFB1A70036F986 /* HorizontalScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalScrollView.swift; sourceTree = "<group>"; };
 		8CF1DE4620F37B5E0036F986 /* SMSConfirmationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMSConfirmationViewController.swift; sourceTree = "<group>"; };
@@ -403,6 +419,7 @@
 			children = (
 				8C6088472110A75100470411 /* AdditionalTextButton.swift */,
 				8CA218A6212342B90063C188 /* CircleImageView.swift */,
+				8CA218E8212DB0210063C188 /* RoundedImageView.swift */,
 				8C6088612111FB0A00470411 /* Components */,
 				8C04BC36211C872E00E90090 /* ContainerView.swift */,
 				8C333D76210F50E000949AC0 /* CountryIconImageView.swift */,
@@ -410,6 +427,7 @@
 				8C6088432110A34200470411 /* CustomUI.swift */,
 				9319BA862129FA9500033A7E /* Animations */,
 				8CA218A4212333B20063C188 /* IconableTextField.swift */,
+				8CA218E6212DA8300063C188 /* SearchTextField.swift */,
 				8CA218BA212573510063C188 /* IndentLabel.swift */,
 				8CA218CE212719990063C188 /* LargeSendButton.swift */,
 				8C333D43210B001500949AC0 /* OnboardingLargeButton.swift */,
@@ -623,7 +641,7 @@
 				8C34616A20EF8FA700746724 /* AppDelegate.swift */,
 				8C04BC2B211C4FB200E90090 /* Fonts */,
 				8C333D6D210EFC7900949AC0 /* Files */,
-				8C60883E2110632100470411 /* UserDefaultsManager */,
+				8C60883E2110632100470411 /* UserDataManager */,
 				8CF5F92A21130BB50083B36A /* Navigation */,
 				8C09192B21061ED800703224 /* Helpers */,
 				8C4413D22119936100C9689C /* Model */,
@@ -665,6 +683,7 @@
 				8CA218AC212421150063C188 /* PhoneMaskData.swift */,
 				9319BA842129A07A00033A7E /* WalletTransactionData.swift */,
 				8C04BC442121D48E00E90090 /* BalanceData.swift */,
+				8CA218DA212D892A0063C188 /* ContactData.swift */,
 				8C52FFE22119C1CF00EB55EA /* TermData.swift */,
 			);
 			path = Model;
@@ -691,12 +710,13 @@
 			path = Base;
 			sourceTree = "<group>";
 		};
-		8C60883E2110632100470411 /* UserDefaultsManager */ = {
+		8C60883E2110632100470411 /* UserDataManager */ = {
 			isa = PBXGroup;
 			children = (
-				8C60883F2110634700470411 /* UserDataManager.swift */,
+				8C60883F2110634700470411 /* UserDefaultsManager.swift */,
+				8CA218D8212D889A0063C188 /* UserContactsManager.swift */,
 			);
-			path = UserDefaultsManager;
+			path = UserDataManager;
 			sourceTree = "<group>";
 		};
 		8C60884F2111A23500470411 /* LoginPasswordFormComponent */ = {
@@ -723,6 +743,7 @@
 				8CF5F941211457200083B36A /* Component.swift */,
 				8CF5F9622114AB000083B36A /* ItemComponent.swift */,
 				8C52FFE92119DA2700EB55EA /* CellComponent.swift */,
+				8CA218E4212DA52F0063C188 /* ContactsHorizontalComponent */,
 				8CA218902122E8880063C188 /* SendMoneyComponent */,
 				8CA218C72125AD380063C188 /* WalletSmallItemComponent */,
 				8C52FFE42119D0EF00EB55EA /* WalletItemComponent */,
@@ -813,6 +834,25 @@
 				8C4413D12118AB9500C9689C /* Keychain */,
 			);
 			path = Authentication;
+			sourceTree = "<group>";
+		};
+		8CA218E4212DA52F0063C188 /* ContactsHorizontalComponent */ = {
+			isa = PBXGroup;
+			children = (
+				8CA218DC212D93570063C188 /* ContactsHorizontalComponent.swift */,
+				8CA218DE212D93670063C188 /* ContactsHorizontalComponent.xib */,
+				8CA218E5212DA5400063C188 /* ContactItemComponent */,
+			);
+			path = ContactsHorizontalComponent;
+			sourceTree = "<group>";
+		};
+		8CA218E5212DA5400063C188 /* ContactItemComponent */ = {
+			isa = PBXGroup;
+			children = (
+				8CA218E0212D9B990063C188 /* ContactItemComponent.swift */,
+				8CA218E2212D9BA50063C188 /* ContactItemComponent.xib */,
+			);
+			path = ContactItemComponent;
 			sourceTree = "<group>";
 		};
 		8CF1DE4320EF9D170036F986 /* Trash */ = {
@@ -1021,6 +1061,7 @@
 				8C0918FA2105F75200703224 /* Onboarding.storyboard in Resources */,
 				8C52FFE82119D35B00EB55EA /* WalletItemComponent.xib in Resources */,
 				8CF5F946211479830083B36A /* Pin.storyboard in Resources */,
+				8CA218DF212D93670063C188 /* ContactsHorizontalComponent.xib in Resources */,
 				8C04BC30211C4FC100E90090 /* MavenPro-Medium.ttf in Resources */,
 				8C0918FC2105F75900703224 /* Login.storyboard in Resources */,
 				8C333D58210B4F7D00949AC0 /* VerificationCodeFormComponent.xib in Resources */,
@@ -1033,6 +1074,7 @@
 				8C333D4E210B272D00949AC0 /* TextCheckBoxView.xib in Resources */,
 				8CF5F95721149CD20083B36A /* DotsFieldComponent.xib in Resources */,
 				8C333D52210B2C5800949AC0 /* PhoneNumberFormComponent.xib in Resources */,
+				8CA218E3212D9BA50063C188 /* ContactItemComponent.xib in Resources */,
 				8C04BC33211C4FC100E90090 /* MavenPro-Regular.ttf in Resources */,
 				8CA218C62125AD230063C188 /* WalletSmallItemComponent.xib in Resources */,
 				8CF5F9602114A7880083B36A /* CreatePinStageItem.xib in Resources */,
@@ -1101,6 +1143,7 @@
 				8C52FFEA2119DA2700EB55EA /* CellComponent.swift in Sources */,
 				8CF5F942211457200083B36A /* Component.swift in Sources */,
 				8C09196421076B8200703224 /* RecoveryRequest.swift in Sources */,
+				8CA218DD212D93570063C188 /* ContactsHorizontalComponent.swift in Sources */,
 				8C04BC452121D48E00E90090 /* BalanceData.swift in Sources */,
 				8CF5F95E2114A77D0083B36A /* CreatePinStageItem.swift in Sources */,
 				8C60884C2111A20B00470411 /* LoginPasswordFormComponent.swift in Sources */,
@@ -1120,7 +1163,8 @@
 				8C52FFE62119D1CC00EB55EA /* WalletItemComponent.swift in Sources */,
 				8CA218C92126D4FD0063C188 /* TransactionDetailViewController.swift in Sources */,
 				8CA218AD212421150063C188 /* PhoneMaskData.swift in Sources */,
-				8C6088402110634700470411 /* UserDataManager.swift in Sources */,
+				8CA218DB212D892A0063C188 /* ContactData.swift in Sources */,
+				8C6088402110634700470411 /* UserDefaultsManager.swift in Sources */,
 				8CA218A5212333B20063C188 /* IconableTextField.swift in Sources */,
 				8C4413D4211993B400C9689C /* CoinType.swift in Sources */,
 				9319BA852129A07A00033A7E /* WalletTransactionData.swift in Sources */,
@@ -1146,6 +1190,7 @@
 				8CA218BB212573510063C188 /* IndentLabel.swift in Sources */,
 				8CF5F94821147A870083B36A /* CreatePinViewController.swift in Sources */,
 				8C09192D21061F3600703224 /* ControllerHelper.swift in Sources */,
+				8CA218E9212DB0210063C188 /* RoundedImageView.swift in Sources */,
 				8CA218CD2126F23B0063C188 /* UserData.swift in Sources */,
 				8CA218D0212737210063C188 /* LargeSendButton.swift in Sources */,
 				8C333D50210B2B6900949AC0 /* PhoneNumberFormComponent.swift in Sources */,
@@ -1225,13 +1270,16 @@
 				8C333D42210A094500949AC0 /* UIColor+Additions.swift in Sources */,
 				8CF5F93F211456D50083B36A /* DecimalKeyboardComponent.swift in Sources */,
 				8CA218AF212479040063C188 /* SendMoneyButton.swift in Sources */,
+				8CA218E1212D9B990063C188 /* ContactItemComponent.swift in Sources */,
 				8C09193B210623F200703224 /* Environment.swift in Sources */,
 				8C6088482110A75100470411 /* AdditionalTextButton.swift in Sources */,
 				8C333D56210B4EF400949AC0 /* VerificationCodeFormComponent.swift in Sources */,
 				8C09196D21089FA700703224 /* AuthRequest.swift in Sources */,
 				8CF5F94C21147F000083B36A /* EnterPinFlow.swift in Sources */,
+				8CA218D9212D889A0063C188 /* UserContactsManager.swift in Sources */,
 				8CF5F93821134E6D0083B36A /* CGPoint+Extensions.swift in Sources */,
 				8C333D3C2109FC2D00949AC0 /* OnboardingItemComponent.swift in Sources */,
+				8CA218E7212DA8300063C188 /* SearchTextField.swift in Sources */,
 				8CF5F9632114AB000083B36A /* ItemComponent.swift in Sources */,
 				8C0919812108D99400703224 /* CreateNewPasswordViewController.swift in Sources */,
 				8C0919432106268900703224 /* HTTPDispatcher.swift in Sources */,

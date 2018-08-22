@@ -1,5 +1,5 @@
 //
-//  UserManager.swift
+//  UserDefaultsManager.swift
 //  wallet
 //
 //  Created by  me on 31/07/2018.
@@ -12,7 +12,7 @@ enum UserDataManagerError: Error {
     case noSavedPhoneForRemovingPin
 }
 
-struct UserDataManager {
+struct UserDefaultsManager {
 
     private enum UserDefaultsKey: String {
         case formattingMaskSpace = "formatting_mask_space"

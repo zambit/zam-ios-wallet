@@ -14,7 +14,7 @@ import UIKit
  */
 class CreateNewPasswordViewController: ContinueViewController, NewPasswordFormComponentDelegate {
 
-    var userManager: UserDataManager?
+    var userManager: UserDefaultsManager?
 
     var recoveryAPI: RecoveryAPI?
     var signupAPI: SignupAPI?

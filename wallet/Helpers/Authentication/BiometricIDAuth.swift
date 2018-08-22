@@ -15,7 +15,7 @@ enum BiometricType {
     case faceID
 }
 
-class BiometricIDAuth {
+struct BiometricIDAuth {
 
     let context = LAContext()
 

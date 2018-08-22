@@ -68,7 +68,7 @@ final class EnterPinFlow: ScreenFlow {
         vc.onContinue = onContinue
         vc.onExit = onExit
         vc.onLoginForm = onLoginForm
-        vc.userManager = UserDataManager(keychainConfiguration: WalletKeychainConfiguration())
+        vc.userManager = UserDefaultsManager(keychainConfiguration: WalletKeychainConfiguration())
         vc.authAPI = AuthAPI(provider: AuthProvider(environment: WalletEnvironment(), dispatcher: HTTPDispatcher()))
         vc.biometricAuth = BiometricIDAuth()
         vc.prepare(phone: phone)

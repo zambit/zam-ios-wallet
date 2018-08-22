@@ -11,7 +11,7 @@ import UIKit
 
 class CreditCardViewComponent: UIView {
 
-    var userManager: UserDataManager?
+    var userManager: UserDefaultsManager?
 
     private var titleLabel: UILabel?
     private var numberLabel: UILabel?

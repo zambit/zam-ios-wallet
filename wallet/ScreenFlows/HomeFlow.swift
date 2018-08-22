@@ -39,7 +39,8 @@ final class HomeFlow: ScreenFlow {
 
         vc.embededViewController = walletsScreen
         vc.embededViewController?.owner = vc
-        vc.userManager = UserDataManager(keychainConfiguration: WalletKeychainConfiguration())
+        vc.contactsManager = UserContactsManager(fetchKeys: [.phoneNumber, .fullName, .avatar])
+        vc.userManager = UserDefaultsManager(keychainConfiguration: WalletKeychainConfiguration())
         vc.userAPI = UserAPI(provider: UserProvider(environment: WalletEnvironment(), dispatcher: HTTPDispatcher()))
         vc.flow = self
         return vc
@@ -67,7 +68,7 @@ final class HomeFlow: ScreenFlow {
         }
 
         vc.onSendFromWallet = onSendFromWallet
-        vc.userManager = UserDataManager(keychainConfiguration: WalletKeychainConfiguration())
+        vc.userManager = UserDefaultsManager(keychainConfiguration: WalletKeychainConfiguration())
         vc.userAPI = UserAPI(provider: UserProvider(environment: WalletEnvironment(), dispatcher: HTTPDispatcher()))
         vc.flow = self
         return vc
@@ -116,7 +117,7 @@ final class HomeFlow: ScreenFlow {
         }
 
         vc.onClose = onClose
-        vc.userManager = UserDataManager(keychainConfiguration: WalletKeychainConfiguration())
+        vc.userManager = UserDefaultsManager(keychainConfiguration: WalletKeychainConfiguration())
         vc.userAPI = UserAPI(provider: UserProvider(environment: WalletEnvironment(), dispatcher: HTTPDispatcher()))
         vc.modalPresentationStyle = .overFullScreen
         vc.flow = self

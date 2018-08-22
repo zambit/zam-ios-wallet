@@ -15,7 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var mainScreenFlow: ScreenFlow!
     var navigation: WalletNavigationController!
-    var userDefaultsManager: UserDataManager!
+    var userDefaultsManager: UserDefaultsManager!
 
 //    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 //        let _vc = ControllerHelper.instantiateViewController(identifier: "SendMoneyViewController", storyboardName: "Main")
@@ -47,7 +47,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         navigation = WalletNavigationController(navigationController: navigationController)
         navigation.customTransitionCoordinator = coordinator
 
-        userDefaultsManager = UserDataManager(keychainConfiguration: WalletKeychainConfiguration())
+        userDefaultsManager = UserDefaultsManager(keychainConfiguration: WalletKeychainConfiguration())
 
         switch (userDefaultsManager.isPhoneVerified, userDefaultsManager.isPinCreated) {
         case (true, true):

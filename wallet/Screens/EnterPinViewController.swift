@@ -12,7 +12,7 @@ import AudioToolbox
 
 class EnterPinViewController: WalletViewController, DecimalKeyboardComponentDelegate {
 
-    var userManager: UserDataManager?
+    var userManager: UserDefaultsManager?
     var authAPI: AuthAPI?
     var biometricAuth: BiometricIDAuth?
 

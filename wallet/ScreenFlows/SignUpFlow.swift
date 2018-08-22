@@ -90,7 +90,7 @@ final class SignUpFlow: ScreenFlow {
         }
         vc.onContinue = onContinue
         vc.signupAPI = SignupAPI(provider: SignupProvider(environment: WalletEnvironment(), dispatcher: HTTPDispatcher()))
-        vc.userManager = UserDataManager(keychainConfiguration: WalletKeychainConfiguration())
+        vc.userManager = UserDefaultsManager(keychainConfiguration: WalletKeychainConfiguration())
         vc.title = "Registration"
         vc.flow = self
         return vc

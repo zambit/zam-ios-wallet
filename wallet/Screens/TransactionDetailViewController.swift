@@ -18,7 +18,7 @@ class TransactionDetailViewController: WalletViewController {
     }
 
     var userAPI: UserAPI?
-    var userManager: UserDataManager?
+    var userManager: UserDefaultsManager?
 
     var onClose: ((_ owner: WalletViewController) -> Void)?
 

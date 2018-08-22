@@ -20,7 +20,7 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
 
     weak var delegate: WalletsViewControllerDelegate?
 
-    var userManager: UserDataManager?
+    var userManager: UserDefaultsManager?
     var userAPI: UserAPI?
 
     var onSendFromWallet: ((_ index: Int, _ wallets: [WalletData], _ phone: String, _ owner: WalletViewController) -> Void)?

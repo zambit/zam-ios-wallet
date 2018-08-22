@@ -40,7 +40,7 @@ final class CreatePinFlow: ScreenFlow {
 
         vc.onContinue = onContinue
         vc.onSkip = onSkip
-        vc.userManager = UserDataManager(keychainConfiguration: WalletKeychainConfiguration())
+        vc.userManager = UserDefaultsManager(keychainConfiguration: WalletKeychainConfiguration())
         vc.flow = self
         return vc
     }

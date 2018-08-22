@@ -12,7 +12,7 @@ import UIKit
 class UserViewController: WalletViewController {
 
     var authAPI: AuthAPI?
-    var userManager: UserDataManager?
+    var userManager: UserDefaultsManager?
 
     var onExit: (() -> Void)?
 

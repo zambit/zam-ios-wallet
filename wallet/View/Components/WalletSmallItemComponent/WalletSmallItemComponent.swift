@@ -22,10 +22,6 @@ class WalletSmallItemComponent: ItemComponent {
     private var coinNameLabelMainAttributes: [NSAttributedStringKey: Any] = [:]
     private var coinNameLabelAdditAttributes: [NSAttributedStringKey: Any] = [:]
 
-    var minimalSize: CGSize {
-        return CGSize(width: 280.0, height: 50.0)
-    }
-
     override func initFromNib() {
         super.initFromNib()
 
