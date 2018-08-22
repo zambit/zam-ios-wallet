@@ -145,6 +145,7 @@
 		8CA218CD2126F23B0063C188 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA218CC2126F23B0063C188 /* UserData.swift */; };
 		8CA218D0212737210063C188 /* LargeSendButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA218CE212719990063C188 /* LargeSendButton.swift */; };
 		8CA218D2212738450063C188 /* CheckAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA218D1212738450063C188 /* CheckAnimationView.swift */; };
+		8CA218D6212D61EB0063C188 /* BiometricIDAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA218D5212D61EB0063C188 /* BiometricIDAuth.swift */; };
 		8CF1DE4220EF98160036F986 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF1DE4120EF98160036F986 /* AuthViewController.swift */; };
 		8CF1DE4520EFB1A70036F986 /* HorizontalScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF1DE4420EFB1A70036F986 /* HorizontalScrollView.swift */; };
 		8CF1DE4720F37B5E0036F986 /* SMSConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF1DE4620F37B5E0036F986 /* SMSConfirmationViewController.swift */; };
@@ -321,6 +322,7 @@
 		8CA218CC2126F23B0063C188 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		8CA218CE212719990063C188 /* LargeSendButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeSendButton.swift; sourceTree = "<group>"; };
 		8CA218D1212738450063C188 /* CheckAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckAnimationView.swift; sourceTree = "<group>"; };
+		8CA218D5212D61EB0063C188 /* BiometricIDAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiometricIDAuth.swift; sourceTree = "<group>"; };
 		8CF1DE4120EF98160036F986 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		8CF1DE4420EFB1A70036F986 /* HorizontalScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalScrollView.swift; sourceTree = "<group>"; };
 		8CF1DE4620F37B5E0036F986 /* SMSConfirmationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMSConfirmationViewController.swift; sourceTree = "<group>"; };
@@ -382,6 +384,7 @@
 		8C09192B21061ED800703224 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				8CA218D7212D68510063C188 /* Authentication */,
 				8C6088502111A95100470411 /* Conditions.swift */,
 				8C09192C21061F3600703224 /* ControllerHelper.swift */,
 				8C52FFEF211AE19300EB55EA /* CustomOverlappingFlowLayout.swift */,
@@ -389,7 +392,6 @@
 				8CF5F92E211327EB0083B36A /* MaskParser.swift */,
 				8C52FFFD211B252F00EB55EA /* InstantPanGestureRecognizer.swift */,
 				8CA218AA21241BF90063C188 /* PhoneNumberEnteringHandler.swift */,
-				8C4413D12118AB9500C9689C /* Keychain */,
 				8CF5F929211307010083B36A /* Timers */,
 				8CF5F93B21144BED0083B36A /* Extensions */,
 			);
@@ -804,6 +806,15 @@
 			path = WalletSmallItemComponent;
 			sourceTree = "<group>";
 		};
+		8CA218D7212D68510063C188 /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				8CA218D5212D61EB0063C188 /* BiometricIDAuth.swift */,
+				8C4413D12118AB9500C9689C /* Keychain */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
 		8CF1DE4320EF9D170036F986 /* Trash */ = {
 			isa = PBXGroup;
 			children = (
@@ -1203,6 +1214,7 @@
 				8C09195F21076B5D00703224 /* RecoveryAPI.swift in Sources */,
 				8C34616B20EF8FA700746724 /* AppDelegate.swift in Sources */,
 				8C333D44210B001500949AC0 /* OnboardingLargeButton.swift in Sources */,
+				8CA218D6212D61EB0063C188 /* BiometricIDAuth.swift in Sources */,
 				8C333D342109F02000949AC0 /* ScreenFlow.swift in Sources */,
 				8C09194B210716C500703224 /* SignupRequest.swift in Sources */,
 				8C60884A2110B42A00470411 /* CountdownTimer.swift in Sources */,

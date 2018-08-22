@@ -12,7 +12,6 @@ import UIKit
 protocol DecimalKeyboardComponentDelegate: class {
 
     func decimalKeyboardComponent(_ decimalKeyboardComponent: DecimalKeyboardComponent, keyWasTapped key: DecimalKeyboardComponent.Key)
-
 }
 
 class DecimalKeyboardComponent: Component {
@@ -30,6 +29,8 @@ class DecimalKeyboardComponent: Component {
         case zero = "0"
         case remove = "@remove"
         case touchId = "@touchId"
+        case faceId = "@faceId"
+        case empty = ""
     }
 
     weak var delegate: DecimalKeyboardComponentDelegate?
@@ -40,6 +41,8 @@ class DecimalKeyboardComponent: Component {
     private var keyboardButtonEdge: CGFloat = 0.0
     private var keyboardButtonsHorizontalSpacing: CGFloat = 0.0
     private var keyboardButtonsVerticalSpacing: CGFloat = 0.0
+
+    private(set) var detailButton: DecimalButton?
 
     override func initFromNib() {
         super.initFromNib()
@@ -63,6 +66,21 @@ class DecimalKeyboardComponent: Component {
 
     override func setupStyle() {
         super.setupStyle()
+    }
+
+    func setDetailButtonKey(_ key: Key) {
+        switch key {
+        case .one, .two, .three, .four, .five, .six, .seven, .eight, .nine, .zero:
+            detailButton?.customAppearance.setDecimal(key.rawValue)
+        case .remove:
+            detailButton?.customAppearance.setIcon(#imageLiteral(resourceName: "icDeleteKeyboard"), id: Key.remove.rawValue)
+        case .touchId:
+            detailButton?.customAppearance.setIcon(#imageLiteral(resourceName: "icTouchId"), id: Key.touchId.rawValue)
+        case .faceId:
+            break
+        case .empty:
+            detailButton?.customAppearance.setEmpty()
+        }
     }
 
     private func setupKeyboard(buttonEdge: CGFloat) {
@@ -155,6 +173,9 @@ class DecimalKeyboardComponent: Component {
             empty.customAppearance.setEmpty()
             empty.widthAnchor.constraint(equalToConstant: keyboardButtonEdge).isActive = true
             empty.heightAnchor.constraint(equalTo: empty.widthAnchor).isActive = true
+            empty.addTarget(self, action: #selector(buttonWasTapped(_:)), for: .touchUpInside)
+
+        detailButton = empty
 
         let zero = DecimalButton(frame: rect)
             zero.customAppearance.setDecimal(Key.zero.rawValue)

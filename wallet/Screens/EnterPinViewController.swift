@@ -9,11 +9,13 @@
 import Foundation
 import UIKit
 import AudioToolbox
+import LocalAuthentication
 
 class EnterPinViewController: WalletViewController, DecimalKeyboardComponentDelegate {
 
     var userManager: UserDataManager?
     var authAPI: AuthAPI?
+    var biometricAuth: BiometricIDAuth?
 
     var onContinue: (() -> Void)?
     var onExit: (() -> Void)?
@@ -30,6 +32,11 @@ class EnterPinViewController: WalletViewController, DecimalKeyboardComponentDele
 
     private var phone: String?
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        biometricAuthenticationRequest()
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -45,6 +52,17 @@ class EnterPinViewController: WalletViewController, DecimalKeyboardComponentDele
             topConstraint?.constant = 266
         case .unknown:
             fatalError()
+        }
+
+        if let biometric = biometricAuth {
+            switch biometric.biometricType() {
+            case .faceID:
+                keyboardComponent?.setDetailButtonKey(.faceId)
+            case .touchID:
+                keyboardComponent?.setDetailButtonKey(.touchId)
+            case .none:
+                break
+            }
         }
 
         titleLabel?.text = phone
@@ -74,6 +92,8 @@ class EnterPinViewController: WalletViewController, DecimalKeyboardComponentDele
 
                 switch checkPin(pinText) {
                 case true:
+                    dotsFieldComponent?.fillAll()
+
                     guard let token = userManager?.getToken() else {
                         fatalError()
                     }
@@ -108,6 +128,10 @@ class EnterPinViewController: WalletViewController, DecimalKeyboardComponentDele
             dotsFieldComponent?.unfillLast()
             pinText.removeLast()
         case .touchId:
+            biometricAuthenticationRequest()
+        case .faceId:
+            break
+        case .empty:
             break
         }
     }
@@ -124,6 +148,48 @@ class EnterPinViewController: WalletViewController, DecimalKeyboardComponentDele
         }
 
         return false
+    }
+
+    private func biometricAuthenticationRequest() {
+        biometricAuth?.authenticateUser(reason: "Please use your fingerprint to sign in", success: {
+            [weak self] in
+
+            self?.dotsFieldComponent?.fillAll()
+
+            guard let token = self?.userManager?.getToken() else {
+                fatalError()
+            }
+
+            self?.authAPI?.checkIfUserAuthorized(token: token).done {
+                phone in
+
+                self?.onContinue?()
+                }.catch {
+                    [weak self]
+                    error in
+
+                    guard let phone = self?.phone else {
+                        fatalError("Error on catching checkingIfUserAuthorized")
+                    }
+
+                    self?.onLoginForm?(phone)
+            }
+
+            }, failure: {
+                [weak self]
+                error in
+
+                guard let error = error else {
+                    return
+                }
+
+                switch error {
+                case LAError.userCancel, LAError.userFallback, LAError.authenticationFailed:
+                    break
+                default:
+                    self?.keyboardComponent?.detailButton?.isEnabled = false
+                }
+        })
     }
 
     @objc

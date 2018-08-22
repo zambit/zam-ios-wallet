@@ -223,8 +223,6 @@ class HomeViewController: DetailOffsetPresentationViewController, WalletsViewCon
         setupTotalBalanceLabel(text: usdBalance, primaryStyleRange: primaryRange, fractionStyleRange: fractionRange)
 
         sumBtcLabel?.text = "\(totalBalance.formatted(currency: .original)) \(totalBalance.coin.short.uppercased())"
-
-        //sumBtcLabel?.layoutIfNeeded()
     }
 
     private func setupTotalBalanceLabel(text: String, primaryStyleRange: CountableRange<Int>, fractionStyleRange: CountableRange<Int>) {
@@ -315,8 +313,6 @@ class HomeViewController: DetailOffsetPresentationViewController, WalletsViewCon
 
     override func createTransitionAnimatorsIfNeeded(to state: DetailOffsetPresentationViewController.State, duration: TimeInterval) -> [UIViewPropertyAnimator] {
 
-        print("StartAnimation")
-
         guard let transitionAnimator = super.createTransitionAnimatorsIfNeeded(to: state, duration: duration).first else {
             fatalError()
         }
@@ -330,30 +326,6 @@ class HomeViewController: DetailOffsetPresentationViewController, WalletsViewCon
         }
 
         let sumLabelWidth: CGFloat = sumLabel?.bounds.width ?? 0
-
-//        switch state {
-//        case .open:
-//            self.sumLeftConstraint?.constant = 16.0
-//            self.sumTopConstraint?.constant = 55.0
-//
-//            self.sumBtcLeftConstraint?.constant = 16.0
-//
-//            self.sumTitleLeftConstraint?.constant = 16.0
-//
-//            self.cardOffsetConstraint?.constant = self.cardViewOffset
-//
-//        case .closed:
-//            self.sumLeftConstraint?.constant = self.view.bounds.width / 2.0 - sumLabelWidth / 2.0
-//            self.sumTopConstraint?.constant = 0.0
-//
-//            self.sumBtcLeftConstraint?.constant = -(self.sumLabel?.bounds.width ?? 200.0)
-//
-//            self.sumTitleLeftConstraint?.constant = self.view.bounds.width / 2.0 - (sumLabelWidth / 2.0) * 0.7
-//
-//            self.embededViewController?.scrollView?.setContentOffset(embededScrollViewOffset, animated: false)
-//
-//            self.cardOffsetConstraint?.constant = -60
-//        }
 
         // an animator for the transition
         transitionAnimator.addAnimations {

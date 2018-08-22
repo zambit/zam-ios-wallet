@@ -109,6 +109,14 @@ class DotsFieldComponent: Component  {
         currentDotIndex = 0
     }
 
+    func fillAll() {
+        dots.forEach {
+            $0.customAppearance.setStyle(.filled)
+        }
+
+        currentDotIndex = dotsMaxCount - 1
+    }
+
     func showSuccess() {
         guard let dots = dotsStackView?.arrangedSubviews as? [DotView] else {
             fatalError()

@@ -57,6 +57,10 @@ class CreatePinViewController: WalletViewController, DecimalKeyboardComponentDel
             createPinComponent?.removeLast()
         case .touchId:
             break
+        case .faceId:
+            break
+        case .empty:
+            break
         }
     }
 
