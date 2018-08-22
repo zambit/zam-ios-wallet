@@ -42,7 +42,7 @@ class BiometricIDAuth {
         }
     }
 
-    func authenticateUser(reason: String, success: @escaping () -> Void, failure: @escaping (LAError?) -> Void) {
+    func authenticateUser(reason: String, success: @escaping () -> Void, failure: @escaping (BiometricIDAuthError) -> Void) {
         guard canEvaluatePolicy() else {
             return
         }
@@ -52,12 +52,19 @@ class BiometricIDAuth {
                 if succ {
                     success()
                 } else {
-                    failure(error as? LAError)
+                    switch error {
+                    case LAError.authenticationFailed?, LAError.userCancel?, LAError.userFallback?:
+                        failure(BiometricIDAuthError.userCancelBiometricAuthentication)
+                    default:
+                        failure(BiometricIDAuthError.biometricAuthenticationError)
+                    }
                 }
             }
         }
     }
+}
 
-
-
+enum BiometricIDAuthError: Error {
+    case userCancelBiometricAuthentication
+    case biometricAuthenticationError
 }

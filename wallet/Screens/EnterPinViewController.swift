@@ -9,7 +9,6 @@
 import Foundation
 import UIKit
 import AudioToolbox
-import LocalAuthentication
 
 class EnterPinViewController: WalletViewController, DecimalKeyboardComponentDelegate {
 
@@ -179,14 +178,10 @@ class EnterPinViewController: WalletViewController, DecimalKeyboardComponentDele
                 [weak self]
                 error in
 
-                guard let error = error else {
-                    return
-                }
-
                 switch error {
-                case LAError.userCancel, LAError.userFallback, LAError.authenticationFailed:
+                case .userCancelBiometricAuthentication:
                     break
-                default:
+                case .biometricAuthenticationError:
                     self?.keyboardComponent?.detailButton?.isEnabled = false
                 }
         })
