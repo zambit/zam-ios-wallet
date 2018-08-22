@@ -126,10 +126,8 @@ class EnterPinViewController: WalletViewController, DecimalKeyboardComponentDele
         case .remove:
             dotsFieldComponent?.unfillLast()
             pinText.removeLast()
-        case .touchId:
+        case .touchId, .faceId:
             biometricAuthenticationRequest()
-        case .faceId:
-            break
         case .empty:
             break
         }

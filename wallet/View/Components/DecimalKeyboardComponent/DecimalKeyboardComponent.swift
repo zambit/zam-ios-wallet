@@ -77,7 +77,7 @@ class DecimalKeyboardComponent: Component {
         case .touchId:
             detailButton?.customAppearance.setIcon(#imageLiteral(resourceName: "icTouchId"), id: Key.touchId.rawValue)
         case .faceId:
-            break
+            detailButton?.customAppearance.setIcon(#imageLiteral(resourceName: "icFaceId"), id: Key.faceId.rawValue)
         case .empty:
             detailButton?.customAppearance.setEmpty()
         }
