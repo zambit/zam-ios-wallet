@@ -19,6 +19,7 @@ extension UITextField {
             let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: newValue, height: frame.size.height))
             leftView = paddingView
             leftViewMode = .always
+            leftView?.isUserInteractionEnabled = false
         }
     }
 
@@ -30,6 +31,7 @@ extension UITextField {
             let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: newValue, height: frame.size.height))
             rightView = paddingView
             rightViewMode = .always
+            rightView?.isUserInteractionEnabled = false
         }
     }
 }

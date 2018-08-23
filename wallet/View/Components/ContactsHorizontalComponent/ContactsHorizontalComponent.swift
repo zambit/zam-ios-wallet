@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class ContactsHorizontalComponent: Component, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class ContactsHorizontalComponent: Component, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, SearchTextFieldDelegate {
 
     @IBOutlet private var titleLabel: UILabel?
     @IBOutlet private var searchTextField: SearchTextField?
@@ -26,7 +26,7 @@ class ContactsHorizontalComponent: Component, UICollectionViewDataSource, UIColl
         contactsCollectionView?.delegate = self
         contactsCollectionView?.dataSource = self
 
-        searchTextField?.addTarget(self, action: #selector(searchTextFieldEditingChanged(_:)), for: .editingChanged)
+        searchTextField?.searchDelegate = self
     }
 
     override func setupStyle() {
@@ -104,24 +104,15 @@ class ContactsHorizontalComponent: Component, UICollectionViewDataSource, UIColl
         return CGSize(width: collectionView.bounds.height - 16.0, height: collectionView.bounds.height)
     }
 
-    @objc
-    private func searchTextFieldEditingChanged(_ sender: SearchTextField) {
-        guard let searchRequest = sender.text else {
+    func searchTextFieldEditingChanged(_ searchTextField: SearchTextField, query: String) {
+        if query != "" {
+            filteredContacts = contacts.filter {
+                $0.name.split(separator: " ").contains {
+                    $0.lowercased().hasPrefix(query.lowercased())
+                }
+            }
+        } else {
             filteredContacts = contacts
-            contactsCollectionView?.reloadData()
-
-            return
-        }
-
-        guard searchRequest != "" else {
-            filteredContacts = contacts
-            contactsCollectionView?.reloadData()
-
-            return
-        }
-
-        filteredContacts = contacts.filter {
-            $0.name.lowercased().contains(searchRequest.lowercased())
         }
 
         contactsCollectionView?.performBatchUpdates({ [weak self] in
