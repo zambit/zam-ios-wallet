@@ -70,6 +70,18 @@ class PhoneNumberEnteringHandler: NSObject, UITextFieldDelegate {
         self.numberTextField?.delegate = self
     }
 
+    func explicityHandleText(_ text: String) {
+        guard let target = unitedTextField else {
+            return
+        }
+
+        let allowedCharacters = CharacterSet(charactersIn: "1234567890")
+
+        target.text = text.components(separatedBy: allowedCharacters.inverted).joined(separator: "")
+
+        unitedTextFieldEditingChanged(target)
+    }
+
     // MARK: - UnitedTextField
 
     @objc
@@ -79,11 +91,11 @@ class PhoneNumberEnteringHandler: NSObject, UITextFieldDelegate {
 
     @objc
     private func unitedTextFieldEditingChanged(_ sender: UITextField) {
+        sender.text?.addPrefixIfNeeded("+")
+
         guard let text = sender.text else {
             return
         }
-
-        sender.text?.addPrefixIfNeeded("+")
 
         guard text.count > 1 else {
             return

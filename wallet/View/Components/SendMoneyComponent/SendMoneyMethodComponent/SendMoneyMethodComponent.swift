@@ -74,7 +74,7 @@ class SendMoneyMethodComponent: Component, SegmentedControlComponentDelegate, Ph
     }
 
     func prepare(recipient: ContactData) {
-        recipientTextField?.text = "+\(recipient.phoneNumbers.first!)"
+        phoneNumberEnteringHandler?.explicityHandleText(recipient.phoneNumbers.first!)
     }
 
     // MARK: - Switching detail mode recipientTextField methods
