@@ -60,17 +60,17 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SMT-yx-UU5">
-                    <rect key="frame" x="53" y="95" width="62" height="20"/>
+                    <rect key="frame" x="53" y="85" width="62" height="30"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="62" id="JR6-IZ-ks2"/>
-                        <constraint firstAttribute="height" constant="20" id="XYK-vk-MkH"/>
+                        <constraint firstAttribute="height" constant="30" id="XYK-vk-MkH"/>
                     </constraints>
                     <state key="normal" title="Button"/>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wOa-Yn-xRM">
-                    <rect key="frame" x="200" y="95" width="78" height="20"/>
+                    <rect key="frame" x="200" y="85" width="78" height="30"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="20" id="NNg-V0-6gA"/>
+                        <constraint firstAttribute="height" constant="30" id="NNg-V0-6gA"/>
                         <constraint firstAttribute="width" constant="78" id="a41-l1-yFU"/>
                     </constraints>
                     <state key="normal" title="Button"/>
