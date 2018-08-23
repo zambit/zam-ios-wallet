@@ -76,9 +76,14 @@ class SendMoneyComponent: Component, SendMoneyAmountComponentDelegate, SendMoney
         backgroundColor = .white
     }
 
-    func prepare(coinType: CoinType, walletId: String) {
+    func prepare(recipient: ContactData? = nil, coinType: CoinType, walletId: String) {
         self.walletId = walletId
+        
         sendMoneyAmountComponent?.prepare(coinType: coinType)
+
+        if let recipient = recipient {
+            sendMoneyMethodComponent?.prepare(recipient: recipient)
+        }
     }
 
     // MARK: - SendMoneyAmountComponentDelegate

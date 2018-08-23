@@ -53,16 +53,16 @@ final class HomeFlow: ScreenFlow {
             fatalError()
         }
 
-        let onSendFromWallet: (Int, [WalletData], String, WalletViewController) -> Void = {
+        let onSendFromWallet: (Int, [WalletData], ContactData?, String, WalletViewController) -> Void = {
             [weak self]
-            index, wallets, phone, owner in
+            index, wallets, contact, phone, owner in
 
             guard let strongSelf = self else {
                 return
             }
 
             let target = strongSelf.sendMoneyScreen
-            target.prepare(wallets: wallets, currentIndex: index, phone: phone)
+            target.prepare(wallets: wallets, currentIndex: index, recipient: contact, phone: phone)
 
             owner.walletNavigationController?.push(viewController: target)
         }

@@ -17,6 +17,7 @@ class SendMoneyViewController: KeyboardBehaviorFollowingViewController, SendMone
     @IBOutlet var titleLabel: UILabel?
     @IBOutlet var walletsCollectionView: UICollectionView?
 
+    private var recipient: ContactData?
     private var phone: String?
     private var wallets: [WalletData] = []
     private var currentIndex: Int? {
@@ -80,7 +81,7 @@ class SendMoneyViewController: KeyboardBehaviorFollowingViewController, SendMone
         self.currentIndex = index
 
         if let index = currentIndex, wallets.count > index {
-            sendMoneyComponent?.prepare(coinType: wallets[index].coin, walletId: wallets[index].id)
+            sendMoneyComponent?.prepare(recipient: recipient, coinType: wallets[index].coin, walletId: wallets[index].id)
         }
 
         walletsCollectionView?.layoutIfNeeded()
@@ -89,10 +90,12 @@ class SendMoneyViewController: KeyboardBehaviorFollowingViewController, SendMone
         sendMoneyComponent?.delegate = self
     }
 
-    func prepare(wallets: [WalletData], currentIndex: Int, phone: String) {
+    func prepare(wallets: [WalletData], currentIndex: Int, recipient: ContactData? = nil, phone: String) {
         self.phone = phone
         self.wallets = wallets
         self.currentIndex = currentIndex
+
+        self.recipient = recipient
 
         walletsCollectionView?.reloadData()
     }

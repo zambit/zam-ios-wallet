@@ -9,7 +9,14 @@
 import Foundation
 import UIKit
 
+protocol ContactsHorizontalComponentDelegate: class {
+
+    func contactsHorizontalComponent(_ contactsHorizontalComponent: ContactsHorizontalComponent, itemWasTapped contactData: ContactData)
+}
+
 class ContactsHorizontalComponent: Component, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, SearchTextFieldDelegate {
+
+    weak var delegate: ContactsHorizontalComponentDelegate?
 
     @IBOutlet private var titleLabel: UILabel?
     @IBOutlet var searchTextField: SearchTextField?
@@ -79,16 +86,26 @@ class ContactsHorizontalComponent: Component, UICollectionViewDataSource, UIColl
         componentWasPrepared()
     }
 
-    func hideContent() {
+    func changeLayouts() {
         guard
             let leftOffset = titleLabel?.bounds.width,
-            let rightOffset = searchTextField?.bounds.width,
-            let contentOffset = contactsCollectionView?.contentOffset else {
+            let rightOffset = searchTextField?.bounds.width else {
             return
         }
 
         self.leftOffsetConstraint?.constant = -leftOffset
         self.rightOffsetConstraint?.constant = -rightOffset
+    }
+
+    func resetLayouts() {
+        self.leftOffsetConstraint?.constant = defaultLeftOffsetConstant
+        self.rightOffsetConstraint?.constant = defaultRightOffsetConstant
+    }
+
+    func scrollContactsToHide() {
+        guard let contentOffset = contactsCollectionView?.contentOffset else {
+            return
+        }
 
         savedContactsContentOffset = contentOffset
 
@@ -96,10 +113,7 @@ class ContactsHorizontalComponent: Component, UICollectionViewDataSource, UIColl
         self.contactsCollectionView?.setContentOffset(newContentOffset, animated: false)
     }
 
-    func resetLayouts() {
-        self.leftOffsetConstraint?.constant = defaultLeftOffsetConstant
-        self.rightOffsetConstraint?.constant = defaultRightOffsetConstant
-
+    func scrollContactsBack() {
         self.contactsCollectionView?.setContentOffset(savedContactsContentOffset, animated: false)
     }
 
@@ -134,7 +148,27 @@ class ContactsHorizontalComponent: Component, UICollectionViewDataSource, UIColl
             cell.configure(avatar: image, name: contact.name)
         }
 
+
+        cell.onTap = {
+            [weak self] in
+
+            guard let strongSelf = self else {
+                return
+            }
+
+            strongSelf.delegate?.contactsHorizontalComponent(strongSelf, itemWasTapped: contact)
+        }
+
         return cell
+    }
+
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        guard let contactCell = cell as? ContactItemComponent else {
+            fatalError()
+        }
+
+        contactCell.setupStyle()
+        contactCell.layoutIfNeeded()
     }
 
     // MARK: - UICollectionViewDelegateFlowLayout

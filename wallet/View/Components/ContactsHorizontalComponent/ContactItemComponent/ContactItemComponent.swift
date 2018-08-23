@@ -11,14 +11,10 @@ import UIKit
 
 class ContactItemComponent: ItemComponent {
 
+    var onTap: (() -> Void)?
+
     @IBOutlet private var avatarImageView: RoundedImageView!
     @IBOutlet private var fullNameLabel: UILabel!
-
-    override func prepareForReuse() {
-        super.prepareForReuse()
-
-        setupStyle()
-    }
 
     override var intrinsicContentSize: CGSize {
         return CGSize(width: 114.0 - insets.left - insets.right, height: 114.0 - insets.left - insets.right)
@@ -30,10 +26,20 @@ class ContactItemComponent: ItemComponent {
         insets = UIEdgeInsetsMake(8.0, 0.0, 8.0, 0.0)
 
         layoutIfNeeded()
+
+        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(longPressGestureEvent(_:)))
+        longPressGesture.minimumPressDuration = 0.1
+
+        view.addGestureRecognizer(longPressGesture)
     }
 
     override func layoutSubviews() {
         super.layoutSubviews()
+
+        self.view.frame = CGRect(x: insets.left,
+                            y: insets.top,
+                            width: bounds.width - insets.left - insets.right,
+                            height: bounds.height - insets.top - insets.bottom)
 
         self.view.layer.cornerRadius = 16.0
         self.view.layer.shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: 16.0).cgPath
@@ -63,5 +69,27 @@ class ContactItemComponent: ItemComponent {
     func configure(avatar: UIImage, name: String) {
         self.avatarImageView.image = avatar
         self.fullNameLabel.text = name
+    }
+
+    @objc
+    private func longPressGestureEvent(_ sender: UILongPressGestureRecognizer) {
+        switch sender.state {
+        case .began:
+            UIView.animate(withDuration: 0.25, animations: {
+                [weak self] in
+                self?.view.transform = .init(scaleX: 0.9, y: 0.9)
+            }, completion: {
+                [weak self] _ in
+
+                self?.onTap?()
+            })
+        case .ended:
+            UIView.animate(withDuration: 0.25) {
+                [weak self] in
+                self?.view.transform = .identity
+            }
+        default:
+            return
+        }
     }
 }

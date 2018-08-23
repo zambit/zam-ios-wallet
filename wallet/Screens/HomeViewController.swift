@@ -9,22 +9,15 @@
 import Foundation
 import UIKit
 
-protocol WalletsContainerEmbededViewController: class {
-
-    var scrollView: UIScrollView? { get }
-
-    var owner: WalletViewController? { get set }
-}
-
-class HomeViewController: DetailOffsetPresentationViewController, WalletsViewControllerDelegate {
+class HomeViewController: DetailOffsetPresentationViewController, WalletsViewControllerDelegate, ContactsHorizontalComponentDelegate {
 
     var contactsManager: UserContactsManager?
     var userManager: UserDefaultsManager?
     var userAPI: UserAPI?
 
-    var embededViewController: WalletsContainerEmbededViewController? {
+    var embededViewController: WalletsViewController? {
         didSet {
-            guard let embeded = embededViewController as? UIViewController else {
+            guard let embeded = embededViewController else {
                 return
             }
 
@@ -109,12 +102,10 @@ class HomeViewController: DetailOffsetPresentationViewController, WalletsViewCon
 
         let contacts = contactsManager?.contacts ?? []
         contactsComponent?.prepare(title: "Send by phone", contacts: contacts)
+        contactsComponent?.delegate = self
 
-        if let embeded = embededViewController as? UIViewController {
+        if let embeded = embededViewController {
             walletsContainerView?.set(viewController: embeded, owner: self)
-        }
-
-        if let embeded = embededViewController as? WalletsViewController {
             embeded.delegate = self
         }
 
@@ -183,7 +174,7 @@ class HomeViewController: DetailOffsetPresentationViewController, WalletsViewCon
 
         detailTopGestureView?.applyGradient(colors: [.white, UIColor.white.withAlphaComponent(0.7), UIColor.white.withAlphaComponent(0.0)], locations: [0.0, 0.75, 1.0])
 
-        embededViewController?.scrollView?.contentInset = UIEdgeInsetsMake(64, 0, 64, 0)
+        embededViewController?.collectionView?.contentInset = UIEdgeInsetsMake(64, 0, 64, 0)
     }
 
     private func loadData() {
@@ -272,18 +263,18 @@ class HomeViewController: DetailOffsetPresentationViewController, WalletsViewCon
         loadData()
     }
 
+    // MARK: - ContactsHorizontalComponentDelegate
+
+    func contactsHorizontalComponent(_ contactsHorizontalComponent: ContactsHorizontalComponent, itemWasTapped contactData: ContactData) {
+        embededViewController?.onSendWithContact(contactData)
+    }
+
     // MARK: - Animation
 
     override func stateDidChange(_ state: DetailOffsetPresentationViewController.State) {
         super.stateDidChange(state)
 
         // evaluate some values before setting animation
-
-        var embededScrollViewOffset: CGPoint = .zero
-
-        if let embededScrollViewInsets = embededViewController?.scrollView?.contentInset {
-            embededScrollViewOffset = CGPoint(x: 0, y: -embededScrollViewInsets.top)
-        }
 
         let sumLabelWidth: CGFloat = sumLabel?.bounds.width ?? 0
 
@@ -298,6 +289,8 @@ class HomeViewController: DetailOffsetPresentationViewController, WalletsViewCon
             self.sumTitleLabel?.alpha = 0.0
             self.sumTitleLeftConstraint?.constant = self.view.bounds.width / 2.0 - (sumLabelWidth / 2.0) * 0.7
 
+            self.contactsComponent?.changeLayouts()
+
             self.cardOffsetConstraint?.constant = -60
 
         case .closed:
@@ -310,7 +303,9 @@ class HomeViewController: DetailOffsetPresentationViewController, WalletsViewCon
             self.sumTitleLabel?.alpha = 1.0
             self.sumTitleLeftConstraint?.constant = 16.0
 
-            self.embededViewController?.scrollView?.setContentOffset(embededScrollViewOffset, animated: false)
+            self.embededViewController?.scrollWalletsToTop()
+
+            self.contactsComponent?.resetLayouts()
 
             self.cardOffsetConstraint?.constant = self.cardViewOffset
         }
@@ -325,12 +320,6 @@ class HomeViewController: DetailOffsetPresentationViewController, WalletsViewCon
         self.contactsComponent?.searchTextField?.resignFirstResponder()
 
         // evaluate some values before setting animation
-
-        var embededScrollViewOffset: CGPoint = .zero
-
-        if let embededScrollViewInsets = embededViewController?.scrollView?.contentInset {
-            embededScrollViewOffset = CGPoint(x: 0, y: -embededScrollViewInsets.top)
-        }
 
         let sumLabelWidth: CGFloat = sumLabel?.bounds.width ?? 0
 
@@ -347,7 +336,8 @@ class HomeViewController: DetailOffsetPresentationViewController, WalletsViewCon
                 self.sumTitleLabel?.alpha = 0.0
                 self.sumTitleLeftConstraint?.constant = self.view.bounds.width / 2.0 - (sumLabelWidth / 2.0) * 0.7
 
-                self.contactsComponent?.hideContent()
+                self.contactsComponent?.scrollContactsToHide()
+                self.contactsComponent?.changeLayouts()
 
                 self.cardOffsetConstraint?.constant = -60
 
@@ -361,8 +351,9 @@ class HomeViewController: DetailOffsetPresentationViewController, WalletsViewCon
                 self.sumTitleLabel?.alpha = 1.0
                 self.sumTitleLeftConstraint?.constant = 16.0
 
-                self.embededViewController?.scrollView?.setContentOffset(embededScrollViewOffset, animated: false)
-                
+                self.embededViewController?.scrollWalletsToTop()
+
+                self.contactsComponent?.scrollContactsBack()
                 self.contactsComponent?.resetLayouts()
 
                 self.cardOffsetConstraint?.constant = self.cardViewOffset

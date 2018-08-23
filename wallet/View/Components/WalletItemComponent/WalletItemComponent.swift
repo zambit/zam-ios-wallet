@@ -17,6 +17,15 @@ class WalletItemComponent: WalletSmallItemComponent {
     @IBOutlet private var sendButton: UIButton!
     @IBOutlet private var depositButton: UIButton!
 
+    override func initFromNib() {
+        super.initFromNib()
+
+        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(longPressGestureEvent(_:)))
+        longPressGesture.minimumPressDuration = 0.15
+
+        view.addGestureRecognizer(longPressGesture)
+    }
+
     override func setupStyle() {
         super.setupStyle()
 
@@ -35,6 +44,7 @@ class WalletItemComponent: WalletSmallItemComponent {
         depositButton.setImage(#imageLiteral(resourceName: "icArrowUpGreen"), for: .normal)
         depositButton.setTitleColor(.blueGrey, for: .normal)
         depositButton.titleLabel?.font = UIFont.walletFont(ofSize: 16.0, weight: .medium)
+        depositButton.tintColor = UIColor.blueGrey.withAlphaComponent(0.4)
         depositButton.contentHorizontalAlignment = .left
         depositButton.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 4.0)
         depositButton.imageEdgeInsets = UIEdgeInsetsMake(0, 8.0, 0, -8.0)
@@ -53,5 +63,23 @@ class WalletItemComponent: WalletSmallItemComponent {
     @objc
     private func sendButtonTouchUpInsideEvent(_ sender: UIButton) {
         onSendButtonTap?()
+    }
+
+    @objc
+    private func longPressGestureEvent(_ sender: UILongPressGestureRecognizer) {
+        switch sender.state {
+        case .began:
+            UIView.animate(withDuration: 0.5) {
+                [weak self] in
+                self?.view.transform = .init(scaleX: 0.95, y: 0.95)
+            }
+        case .ended:
+            UIView.animate(withDuration: 0.5) {
+                [weak self] in
+                self?.view.transform = .identity
+            }
+        default:
+            return
+        }
     }
 }

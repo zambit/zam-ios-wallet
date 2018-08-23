@@ -14,26 +14,27 @@ protocol WalletsViewControllerDelegate: class {
     func walletsViewControllerCallsUpdateData(_ walletsViewController: WalletsViewController)
 }
 
-class WalletsViewController: FlowCollectionViewController, UICollectionViewDelegateFlowLayout, WalletsContainerEmbededViewController {
+protocol WalletsViewControllerProtocol where Self: UIViewController {
+
+}
+
+class WalletsViewController: FlowCollectionViewController, UICollectionViewDelegateFlowLayout {
 
     weak var owner: WalletViewController?
 
     weak var delegate: WalletsViewControllerDelegate?
 
+    var onSendFromWallet: ((_ index: Int, _ wallets: [WalletData], _ recipient: ContactData?, _ phone: String, _ owner: WalletViewController) -> Void)?
+
     var userManager: UserDefaultsManager?
     var userAPI: UserAPI?
 
-    var onSendFromWallet: ((_ index: Int, _ wallets: [WalletData], _ phone: String, _ owner: WalletViewController) -> Void)?
-
     private var wallets: [WalletData] = []
+    private var phone: String?
 
     private var refreshControl: UIRefreshControl?
 
-    private var phone: String?
-
-    var scrollView: UIScrollView? {
-        return collectionView
-    }
+    private var savedWalletsContentOffset: CGPoint = .zero
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,6 +54,24 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
         refreshControl?.addTarget(self, action: #selector(refreshControlValueChangedEvent(_:)), for: .valueChanged)
         refreshControl?.layer.zPosition = -2
         collectionView?.insertSubview(refreshControl!, at: 0)
+    }
+
+    func scrollWalletsToTop() {
+        var newContentOffset: CGPoint = .zero
+
+        if let insets = collectionView?.contentInset {
+            newContentOffset = CGPoint(x: 0.0, y: -insets.top)
+        }
+
+        collectionView?.setContentOffset(newContentOffset, animated: false)
+    }
+
+    func onSendWithContact(_ contact: ContactData) {
+        guard let phone = phone, let owner = owner else {
+            return
+        }
+
+        onSendFromWallet?(0, wallets, contact, phone, owner)
     }
 
     // UICollectionView dataSource
@@ -85,7 +104,7 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
                 return
             }
 
-            strongSelf.onSendFromWallet?(indexPath.item, strongSelf.wallets, phone, owner)
+            strongSelf.onSendFromWallet?(indexPath.item, strongSelf.wallets, nil, phone, owner)
         }
         return cell
     }

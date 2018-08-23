@@ -73,6 +73,10 @@ class SendMoneyMethodComponent: Component, SegmentedControlComponentDelegate, Ph
         }
     }
 
+    func prepare(recipient: ContactData) {
+        recipientTextField?.text = "+\(recipient.phoneNumbers.first!)"
+    }
+
     // MARK: - Switching detail mode recipientTextField methods
 
     private func setPhoneNumberStyleForRecipientTextField(_ textField: IconableTextField, backgroundColor: UIColor, masks: [String: PhoneMaskData], parser: MaskParser) {
