@@ -42,6 +42,9 @@ class SendMoneyMethodComponent: Component, SegmentedControlComponentDelegate, Ph
     private var phoneMasks: [String: PhoneMaskData]?
     private var parser: MaskParser?
 
+    private var phone: String = ""
+    private var address: String = ""
+
     override func initFromNib() {
         super.initFromNib()
 
@@ -91,6 +94,8 @@ class SendMoneyMethodComponent: Component, SegmentedControlComponentDelegate, Ph
 
         phoneNumberEnteringHandler = PhoneNumberEnteringHandler(textField: textField, masks: masks, maskParser: parser)
         phoneNumberEnteringHandler?.delegate = self
+
+        phoneNumberEnteringHandler?.explicityHandleText(phone)
     }
 
     private func setAddressStyleForRecipientTextField(_ textField: IconableTextField, backgroundColor: UIColor) {
@@ -137,6 +142,8 @@ class SendMoneyMethodComponent: Component, SegmentedControlComponentDelegate, Ph
     }
 
     func phoneNumberEditingChanged(_ handler: PhoneNumberEnteringHandler, with mask: PhoneMaskData?, phoneNumber: String) {
+        self.phone = phoneNumber
+
         if let mask = mask, phoneNumber.count >= mask.phoneMask.count + mask.phoneCode.count + 2 {
             delegate?.sendMoneyMethodComponent(self, methodRecipientDataEntered: .phone(data: phoneNumber))
         } else {
