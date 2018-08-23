@@ -101,8 +101,16 @@ class HomeViewController: DetailOffsetPresentationViewController, WalletsViewCon
         walletsContainerView?.isUserInteractionEnabled = true
 
         let contacts = contactsManager?.contacts ?? []
-        contactsComponent?.prepare(title: "Send by phone", contacts: contacts)
-        contactsComponent?.delegate = self
+
+        if !contacts.isEmpty {
+            contactsComponent?.prepare(title: "Send by phone", contacts: contacts)
+            contactsComponent?.delegate = self
+            detailViewBottomConstraint?.constant = 350
+            detailViewOffset = 350
+        } else {
+            detailViewBottomConstraint?.constant = 200
+            detailViewOffset = 200
+        }
 
         if let embeded = embededViewController {
             walletsContainerView?.set(viewController: embeded, owner: self)

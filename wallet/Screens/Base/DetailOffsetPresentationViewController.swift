@@ -29,9 +29,9 @@ class DetailOffsetPresentationViewController: WalletViewController {
     @IBOutlet var detailViewBottomConstraint: NSLayoutConstraint?
 
     /**
-     Detail view intial offset.
+     Detail view initial offset.
      */
-    private var detailViewOffset: CGFloat = 0
+    var detailViewOffset: CGFloat = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
