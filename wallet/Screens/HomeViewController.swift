@@ -298,8 +298,6 @@ class HomeViewController: DetailOffsetPresentationViewController, WalletsViewCon
             self.sumTitleLabel?.alpha = 0.0
             self.sumTitleLeftConstraint?.constant = self.view.bounds.width / 2.0 - (sumLabelWidth / 2.0) * 0.7
 
-            self.contactsComponent?.alpha = 0.0
-
             self.cardOffsetConstraint?.constant = -60
 
         case .closed:
@@ -314,8 +312,6 @@ class HomeViewController: DetailOffsetPresentationViewController, WalletsViewCon
 
             self.embededViewController?.scrollView?.setContentOffset(embededScrollViewOffset, animated: false)
 
-            self.contactsComponent?.alpha = 1.0
-
             self.cardOffsetConstraint?.constant = self.cardViewOffset
         }
     }
@@ -325,6 +321,8 @@ class HomeViewController: DetailOffsetPresentationViewController, WalletsViewCon
         guard let transitionAnimator = super.createTransitionAnimatorsIfNeeded(to: state, duration: duration).first else {
             fatalError()
         }
+
+        self.contactsComponent?.searchTextField?.resignFirstResponder()
 
         // evaluate some values before setting animation
 
@@ -349,7 +347,7 @@ class HomeViewController: DetailOffsetPresentationViewController, WalletsViewCon
                 self.sumTitleLabel?.alpha = 0.0
                 self.sumTitleLeftConstraint?.constant = self.view.bounds.width / 2.0 - (sumLabelWidth / 2.0) * 0.7
 
-                self.contactsComponent?.alpha = 0.0
+                self.contactsComponent?.hideContent()
 
                 self.cardOffsetConstraint?.constant = -60
 
@@ -364,8 +362,8 @@ class HomeViewController: DetailOffsetPresentationViewController, WalletsViewCon
                 self.sumTitleLeftConstraint?.constant = 16.0
 
                 self.embededViewController?.scrollView?.setContentOffset(embededScrollViewOffset, animated: false)
-
-                self.contactsComponent?.alpha = 1.0
+                
+                self.contactsComponent?.resetLayouts()
 
                 self.cardOffsetConstraint?.constant = self.cardViewOffset
             }

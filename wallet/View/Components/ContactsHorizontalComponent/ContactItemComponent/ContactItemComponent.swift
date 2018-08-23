@@ -14,10 +14,22 @@ class ContactItemComponent: ItemComponent {
     @IBOutlet private var avatarImageView: RoundedImageView!
     @IBOutlet private var fullNameLabel: UILabel!
 
+    override func prepareForReuse() {
+        super.prepareForReuse()
+
+        setupStyle()
+    }
+
+    override var intrinsicContentSize: CGSize {
+        return CGSize(width: 114.0 - insets.left - insets.right, height: 114.0 - insets.left - insets.right)
+    }
+
     override func initFromNib() {
         super.initFromNib()
 
         insets = UIEdgeInsetsMake(8.0, 0.0, 8.0, 0.0)
+
+        layoutIfNeeded()
     }
 
     override func layoutSubviews() {

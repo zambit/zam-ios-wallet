@@ -83,8 +83,6 @@ class SearchTextField: UITextField {
 
         addSubview(editingDetailButton!)
 
-        bringSubview(toFront: editingDetailButton!)
-
         editingDetailButton?.heightAnchor.constraint(equalTo: editingDetailButton!.widthAnchor).isActive = true
         editingDetailButton?.heightAnchor.constraint(equalToConstant: 16.0).isActive = true
 

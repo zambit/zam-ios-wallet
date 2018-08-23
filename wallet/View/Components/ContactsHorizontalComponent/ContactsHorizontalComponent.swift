@@ -12,12 +12,20 @@ import UIKit
 class ContactsHorizontalComponent: Component, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, SearchTextFieldDelegate {
 
     @IBOutlet private var titleLabel: UILabel?
-    @IBOutlet private var searchTextField: SearchTextField?
+    @IBOutlet var searchTextField: SearchTextField?
     @IBOutlet private var contactsCollectionView: UICollectionView?
 
     private var contacts: [ContactData] = []
     private var filteredContacts: [ContactData] = []
     private var title: String = ""
+
+    private var defaultRightOffsetConstant: CGFloat = 8.0
+    private var defaultLeftOffsetConstant: CGFloat = 16.0
+
+    private var savedContactsContentOffset: CGPoint = .zero
+
+    @IBOutlet private(set) var rightOffsetConstraint: NSLayoutConstraint?
+    @IBOutlet private(set) var leftOffsetConstraint: NSLayoutConstraint?
 
     override func initFromNib() {
         super.initFromNib()
@@ -25,6 +33,14 @@ class ContactsHorizontalComponent: Component, UICollectionViewDataSource, UIColl
         contactsCollectionView?.register(ContactItemComponent.self , forCellWithReuseIdentifier: "ContactItemComponent")
         contactsCollectionView?.delegate = self
         contactsCollectionView?.dataSource = self
+
+        if let rightDefaultOffset = rightOffsetConstraint?.constant {
+            defaultRightOffsetConstant = rightDefaultOffset
+        }
+
+        if let leftDefaultOffset = leftOffsetConstraint?.constant {
+            defaultLeftOffsetConstant = leftDefaultOffset
+        }
 
         searchTextField?.searchDelegate = self
     }
@@ -61,6 +77,30 @@ class ContactsHorizontalComponent: Component, UICollectionViewDataSource, UIColl
         self.contacts = contacts
         self.filteredContacts = contacts
         componentWasPrepared()
+    }
+
+    func hideContent() {
+        guard
+            let leftOffset = titleLabel?.bounds.width,
+            let rightOffset = searchTextField?.bounds.width,
+            let contentOffset = contactsCollectionView?.contentOffset else {
+            return
+        }
+
+        self.leftOffsetConstraint?.constant = -leftOffset
+        self.rightOffsetConstraint?.constant = -rightOffset
+
+        savedContactsContentOffset = contentOffset
+
+        let newContentOffset = CGPoint(x: contentOffset.x + 200.0, y: contentOffset.y)
+        self.contactsCollectionView?.setContentOffset(newContentOffset, animated: false)
+    }
+
+    func resetLayouts() {
+        self.leftOffsetConstraint?.constant = defaultLeftOffsetConstant
+        self.rightOffsetConstraint?.constant = defaultRightOffsetConstant
+
+        self.contactsCollectionView?.setContentOffset(savedContactsContentOffset, animated: false)
     }
 
     private func componentWasPrepared() {

@@ -14,6 +14,8 @@
             <connections>
                 <outlet property="contactsCollectionView" destination="C4g-74-L5x" id="MtT-dG-s8W"/>
                 <outlet property="contentView" destination="iN0-l3-epB" id="TPz-Qo-KVj"/>
+                <outlet property="leftOffsetConstraint" destination="89A-7R-eIH" id="y91-VC-waM"/>
+                <outlet property="rightOffsetConstraint" destination="pPn-bd-qmF" id="dpI-Dx-bcx"/>
                 <outlet property="searchTextField" destination="cgQ-hr-vaP" id="mZ2-bK-eSE"/>
                 <outlet property="titleLabel" destination="mIx-bb-0xQ" id="sZH-dH-8zh"/>
             </connections>
@@ -54,11 +56,11 @@
             <constraints>
                 <constraint firstItem="cgQ-hr-vaP" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="5" id="1tc-We-2qR"/>
                 <constraint firstItem="mIx-bb-0xQ" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="9" id="3UP-tO-Akp"/>
+                <constraint firstItem="mIx-bb-0xQ" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="89A-7R-eIH"/>
                 <constraint firstItem="C4g-74-L5x" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="8" id="8nd-Au-pEC"/>
                 <constraint firstItem="C4g-74-L5x" firstAttribute="top" secondItem="cgQ-hr-vaP" secondAttribute="bottom" constant="2" id="BBJ-TT-y8G"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="C4g-74-L5x" secondAttribute="trailing" constant="8" id="UzI-Te-1zx"/>
                 <constraint firstItem="cgQ-hr-vaP" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="mIx-bb-0xQ" secondAttribute="trailing" constant="10" id="bUb-Ww-Lot"/>
-                <constraint firstItem="mIx-bb-0xQ" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="ccO-7t-Ttr"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="C4g-74-L5x" secondAttribute="bottom" constant="10" id="gj4-HS-cMr"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="cgQ-hr-vaP" secondAttribute="trailing" constant="8" id="pPn-bd-qmF"/>
             </constraints>
