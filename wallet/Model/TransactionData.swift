@@ -8,25 +8,57 @@
 
 import Foundation
 
+enum TransactionParticipant {
+    case sender(String)
+    case recipient(String)
+    case none
+
+    var formatted: String {
+        switch self {
+        case .sender(let sender):
+            return sender
+        case .recipient(let recipient):
+            return recipient
+        case .none:
+            return "-"
+        }
+    }
+}
+
 struct TransactionData {
 
     let id: String
-    let direction: String
-    let status: String
+    let direction: DirectionType
+    let status: TransactionStatus
     let coin: CoinType
-    let recipient: String
+    let participant: TransactionParticipant
     let amount: BalanceData
 
     init(codable: CodableTransaction) throws {
         self.id = codable.id
-        self.direction = codable.direction
-        self.status = codable.status
+
+        guard let direction = DirectionType(rawValue: codable.direction) else {
+            throw TransactionDataError.directionTypeResponseFormatError
+        }
+        self.direction = direction
+
+        guard let status = TransactionStatus(rawValue: codable.status) else {
+            throw TransactionDataError.transactionStatusResponseFormatError
+        }
+        self.status = status
 
         guard let coin = CoinType(rawValue: codable.coin) else {
             throw TransactionDataError.coinTypeReponseFormatError
         }
         self.coin = coin
-        self.recipient = codable.recipient
+
+        if let recipient = codable.recipient {
+            self.participant = .recipient(recipient)
+        } else if let sender = codable.sender{
+            self.participant = .sender(sender)
+        } else {
+            self.participant = .none
+        }
 
         do {
             let amount = try BalanceData(coin: coin, codable: codable.amount)
@@ -35,9 +67,20 @@ struct TransactionData {
             throw TransactionDataError.amountFormatError
         }
     }
+
+    var formattedAmount: BalanceData {
+        switch direction {
+        case .incoming:
+            return amount
+        case .outgoing:
+            return amount.negative
+        }
+    }
 }
 
 enum TransactionDataError: Error {
     case coinTypeReponseFormatError
     case amountFormatError
+    case transactionStatusResponseFormatError
+    case directionTypeResponseFormatError
 }

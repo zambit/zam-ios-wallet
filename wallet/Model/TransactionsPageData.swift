@@ -10,7 +10,7 @@ import Foundation
 
 struct TransactionsPageData {
 
-    let next: String
+    let next: String?
     let transactions: [TransactionData]
 
     init(codable: CodableSuccessTransactionsSearchingResponse.TransactionsPage) throws {

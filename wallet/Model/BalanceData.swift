@@ -93,6 +93,11 @@ struct BalanceData {
             return formatted
         }
     }
+
+    var negative: BalanceData {
+        let balance = BalanceData(coin: coin, usd: -usd, original: -original)
+        return balance
+    }
 }
 
 enum BalanceDataError: Error {

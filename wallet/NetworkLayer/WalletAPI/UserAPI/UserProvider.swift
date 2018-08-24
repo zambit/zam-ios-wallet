@@ -22,4 +22,8 @@ struct UserProvider: Provider {
     func execute(_ request: UserRequest) -> Promise<Response> {
         return dispatcher.dispatch(request: request, with: environment)
     }
+
+    func cancelAllTasks() {
+        dispatcher.cancelAllTasks()
+    }
 }

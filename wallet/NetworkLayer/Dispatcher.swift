@@ -15,4 +15,6 @@ import PromiseKit
 protocol Dispatcher {
 
     func dispatch(request: Request, with environment: Environment) -> Promise<Response>
+
+    func cancelAllTasks()
 }

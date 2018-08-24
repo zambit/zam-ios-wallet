@@ -23,11 +23,24 @@ final class HomeFlow: ScreenFlow {
 
     private var walletTabBar: WalletTabBarController {
         let tabBar = WalletTabBarController(home: homeScreen,
-                                            transactions: UIViewController(),
+                                            transactions: transactionsScreen,
                                             zam: UIViewController(),
                                             contacts: UIViewController(),
                                             more: UIViewController())
         return tabBar
+    }
+
+    private var transactionsScreen: TransactionsHistoryViewController {
+        let _vc = ControllerHelper.instantiateViewController(identifier: "TransactionsHistoryViewController", storyboardName: "Main")
+
+        guard let vc = _vc as? TransactionsHistoryViewController else {
+            fatalError()
+        }
+
+        vc.userManager = UserDefaultsManager(keychainConfiguration: WalletKeychainConfiguration())
+        vc.userAPI = UserAPI(provider: UserProvider(environment: WalletEnvironment(), dispatcher: HTTPDispatcher()))
+        vc.flow = self
+        return vc
     }
 
     private var homeScreen: HomeViewController {

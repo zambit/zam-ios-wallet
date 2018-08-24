@@ -17,30 +17,30 @@ class WalletTabBarController {
     private(set) var controller: ESTabBarController
 
     var home: WalletNavigationController
-    weak var transactions: UIViewController?
+    var transactions: WalletNavigationController
     weak var zam: UIViewController?
     weak var contacts: UIViewController?
     weak var more: UIViewController?
 
     init(home: WalletViewController,
-               transactions: UIViewController,
+               transactions: WalletViewController,
                zam: UIViewController,
                contacts: UIViewController,
                more: UIViewController) {
 
         self.home = WalletTabBarController.createNavigationControllerFor(walletViewController: home)
-        self.transactions = transactions
+        self.transactions = WalletTabBarController.createNavigationControllerFor(walletViewController: transactions)
         self.zam = zam
         self.contacts = contacts
         self.more = more
 
         self.home.controller.tabBarItem = ESTabBarItem(WalletContentView(), title: "Home", image: #imageLiteral(resourceName: "briefcase"))
-        transactions.tabBarItem = ESTabBarItem(WalletContentView(), title: "Transactions", image: #imageLiteral(resourceName: "transactions"))
+        self.transactions.controller.tabBarItem = ESTabBarItem(WalletContentView(), title: "Transactions", image: #imageLiteral(resourceName: "transactions"))
         zam.tabBarItem = ESTabBarItem(LargeWalletContentView(), title: nil, image: #imageLiteral(resourceName: "logo"))
         contacts.tabBarItem = ESTabBarItem(WalletContentView(), title: "Contacts", image: #imageLiteral(resourceName: "users"))
         more.tabBarItem = ESTabBarItem(WalletContentView(), title: "More", image: #imageLiteral(resourceName: "more"))
 
-        self.controller = WalletTabBarController.setupTabBarController(walletsController: [self.home.controller, transactions, zam, contacts, more])
+        self.controller = WalletTabBarController.setupTabBarController(walletsController: [self.home.controller, self.transactions.controller, zam, contacts, more])
 
         self.home.parentTabBar = self
     }

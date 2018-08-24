@@ -34,6 +34,13 @@ struct HTTPDispatcher: Dispatcher {
         }
     }
 
+    func cancelAllTasks() {
+        session.getAllTasks {
+            tasks in
+            tasks.forEach { $0.cancel() }
+        }
+    }
+
     private let session: URLSession = {
         let config = URLSessionConfiguration.default
         config.timeoutIntervalForRequest = 35.0

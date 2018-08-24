@@ -28,14 +28,12 @@ class CellComponent: UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: .default, reuseIdentifier: reuseIdentifier)
         initFromNib()
-        setupSubviews()
         setupStyle()
     }
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         initFromNib()
-        setupSubviews()
         setupStyle()
     }
 
@@ -56,10 +54,6 @@ class CellComponent: UITableViewCell {
     func setupStyle() {
         self.backgroundColor = .clear
         self.view.backgroundColor = .clear
-    }
-
-    func setupSubviews() {
-
     }
 }
 

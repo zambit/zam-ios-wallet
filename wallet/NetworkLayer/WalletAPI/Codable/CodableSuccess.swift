@@ -172,7 +172,7 @@ struct CodableSuccessTransactionsSearchingResponse: Codable {
 
     struct TransactionsPage: Codable {
         let count: Int
-        let next: String
+        let next: String?
         let transactions: [CodableTransaction]
 
         private enum CodingKeys: String, CodingKey {
@@ -259,6 +259,7 @@ struct CodableTransaction: Codable {
         case direction
         case status
         case coin
+        case sender
         case recipient
         case amount
     }
