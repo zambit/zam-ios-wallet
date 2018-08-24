@@ -186,7 +186,7 @@
 		8CF5F95E2114A77D0083B36A /* CreatePinStageItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF5F95D2114A77D0083B36A /* CreatePinStageItem.swift */; };
 		8CF5F9602114A7880083B36A /* CreatePinStageItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CF5F95F2114A7880083B36A /* CreatePinStageItem.xib */; };
 		8CF5F9632114AB000083B36A /* ItemComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF5F9622114AB000083B36A /* ItemComponent.swift */; };
-		9319BA852129A07A00033A7E /* WalletTransactionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9319BA842129A07A00033A7E /* WalletTransactionData.swift */; };
+		9319BA852129A07A00033A7E /* TransactionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9319BA842129A07A00033A7E /* TransactionData.swift */; };
 		9319BAA6212A0AC200033A7E /* CrossAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9319BAA5212A0AC200033A7E /* CrossAnimationView.swift */; };
 /* End PBXBuildFile section */
 
@@ -373,7 +373,7 @@
 		8CF5F95D2114A77D0083B36A /* CreatePinStageItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePinStageItem.swift; sourceTree = "<group>"; };
 		8CF5F95F2114A7880083B36A /* CreatePinStageItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreatePinStageItem.xib; sourceTree = "<group>"; };
 		8CF5F9622114AB000083B36A /* ItemComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemComponent.swift; sourceTree = "<group>"; };
-		9319BA842129A07A00033A7E /* WalletTransactionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletTransactionData.swift; sourceTree = "<group>"; };
+		9319BA842129A07A00033A7E /* TransactionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionData.swift; sourceTree = "<group>"; };
 		9319BAA5212A0AC200033A7E /* CrossAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrossAnimationView.swift; sourceTree = "<group>"; };
 		C9C98DC4F4721DB056807636 /* Pods_wallet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_wallet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -495,7 +495,7 @@
 				8C0919692108951F00703224 /* WalletResponseError.swift */,
 				8C6088642112027300470411 /* ThreeStepsAPI.swift */,
 				8C0919722108BC6C00703224 /* UserAPI */,
-				8C09196B21089EDF00703224 /* SigninAPI */,
+				8C09196B21089EDF00703224 /* AuthAPI */,
 				8C09196021076B6000703224 /* RecoveryAPI */,
 				8C09195D21076B0800703224 /* SignupAPI */,
 				8C0919542107347300703224 /* Codable */,
@@ -532,14 +532,14 @@
 			path = RecoveryAPI;
 			sourceTree = "<group>";
 		};
-		8C09196B21089EDF00703224 /* SigninAPI */ = {
+		8C09196B21089EDF00703224 /* AuthAPI */ = {
 			isa = PBXGroup;
 			children = (
 				8C09196E21089FB200703224 /* AuthProvider.swift */,
 				8C09196C21089FA700703224 /* AuthRequest.swift */,
 				8C09197021089FBB00703224 /* AuthAPI.swift */,
 			);
-			path = SigninAPI;
+			path = AuthAPI;
 			sourceTree = "<group>";
 		};
 		8C0919722108BC6C00703224 /* UserAPI */ = {
@@ -686,7 +686,7 @@
 				8C52FFE02119BE0300EB55EA /* WalletData.swift */,
 				8CA218CC2126F23B0063C188 /* UserData.swift */,
 				8CA218AC212421150063C188 /* PhoneMaskData.swift */,
-				9319BA842129A07A00033A7E /* WalletTransactionData.swift */,
+				9319BA842129A07A00033A7E /* TransactionData.swift */,
 				8C04BC442121D48E00E90090 /* BalanceData.swift */,
 				8CA218DA212D892A0063C188 /* ContactData.swift */,
 				8C52FFE22119C1CF00EB55EA /* TermData.swift */,
@@ -1174,7 +1174,7 @@
 				8C6088402110634700470411 /* UserDefaultsManager.swift in Sources */,
 				8CA218A5212333B20063C188 /* IconableTextField.swift in Sources */,
 				8C4413D4211993B400C9689C /* CoinType.swift in Sources */,
-				9319BA852129A07A00033A7E /* WalletTransactionData.swift in Sources */,
+				9319BA852129A07A00033A7E /* TransactionData.swift in Sources */,
 				8C333D66210B6E7600949AC0 /* UITextField+Extensions.swift in Sources */,
 				8CF5F92F211327EB0083B36A /* MaskParser.swift in Sources */,
 				8C0919512107234B00703224 /* SignupAPI.swift in Sources */,

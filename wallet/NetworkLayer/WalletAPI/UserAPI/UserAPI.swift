@@ -131,10 +131,10 @@ struct UserAPI: NetworkService {
         }
     }
 
-    func sendTransaction(token: String, walletId: String, recipient: String, amount: Decimal) -> Promise<WalletTransactionData>  {
+    func sendTransaction(token: String, walletId: String, recipient: String, amount: Decimal) -> Promise<TransactionData>  {
         return provider.execute(.sendTransaction(token: token, walletId: walletId, recipient: recipient, amount: amount))
             .then {
-                (response: Response) -> Promise<WalletTransactionData> in
+                (response: Response) -> Promise<TransactionData> in
 
                 return Promise { seal in
                     switch response {
@@ -142,7 +142,7 @@ struct UserAPI: NetworkService {
 
                         let success: (CodableSuccessTransactionResponse) -> Void = { s in
                             do {
-                                let transaction = try WalletTransactionData(codable: s.data.transaction)
+                                let transaction = try TransactionData(codable: s.data.transaction)
                                 seal.fulfill(transaction)
                             } catch let error {
                                 seal.reject(error)

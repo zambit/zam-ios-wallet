@@ -29,6 +29,8 @@ class HomeViewController: DetailOffsetPresentationViewController, WalletsViewCon
 
     @IBOutlet var contactsComponent: ContactsHorizontalComponent?
 
+    @IBOutlet var detailViewHeight: NSLayoutConstraint?
+
     @IBOutlet var detailGestureView: UIView?
     @IBOutlet var detailTopGestureView: UIView?
 
@@ -50,8 +52,6 @@ class HomeViewController: DetailOffsetPresentationViewController, WalletsViewCon
     @IBOutlet var cardOffsetConstraint: NSLayoutConstraint?
 
     // MARK: - Sizing constraints
-
-    @IBOutlet var detailViewHeight: NSLayoutConstraint?
 
     private var cardViewOffset: CGFloat = 0
     private var sumLeftLabelOffset: CGFloat = 0

@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct WalletTransactionData {
+struct TransactionData {
 
     let id: String
     let direction: String
@@ -23,19 +23,19 @@ struct WalletTransactionData {
         self.status = codable.status
 
         guard let coin = CoinType(rawValue: codable.coin) else {
-            throw WalletTransactionDataError.coinTypeReponseFormatError
+            throw TransactionDataError.coinTypeReponseFormatError
         }
         self.coin = coin
         self.recipient = codable.recipient
 
         guard let amount = Decimal(string: codable.amount) else {
-            throw WalletTransactionDataError.amountFormatError
+            throw TransactionDataError.amountFormatError
         }
         self.amount = amount
     }
 }
 
-enum WalletTransactionDataError: Error {
+enum TransactionDataError: Error {
     case coinTypeReponseFormatError
     case amountFormatError
 }
