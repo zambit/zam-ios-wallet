@@ -15,7 +15,7 @@ struct TransactionData {
     let status: String
     let coin: CoinType
     let recipient: String
-    let amount: Decimal
+    let amount: BalanceData
 
     init(codable: CodableTransaction) throws {
         self.id = codable.id
@@ -28,10 +28,12 @@ struct TransactionData {
         self.coin = coin
         self.recipient = codable.recipient
 
-        guard let amount = Decimal(string: codable.amount) else {
+        do {
+            let amount = try BalanceData(coin: coin, codable: codable.amount)
+            self.amount = amount
+        } catch {
             throw TransactionDataError.amountFormatError
         }
-        self.amount = amount
     }
 }
 

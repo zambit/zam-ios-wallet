@@ -16,11 +16,21 @@ struct UserData {
     let registeredAt: Decimal
     let balances: [BalanceData]
 
-    init(codable: CodableUser) {
+    init(codable: CodableUser) throws {
         self.id = codable.id
         self.phone = codable.phone
         self.status = codable.status
         self.registeredAt = codable.registeredAt
-        self.balances = [BalanceData(coin: CoinType.standard, codable: codable.wallets.totalBalance)]
+
+        do {
+            let totalBalance = try BalanceData(coin: CoinType.standard, codable: codable.wallets.totalBalance)
+            self.balances = [totalBalance]
+        } catch {
+            throw UserDataError.balanceFormatError
+        }
     }
+}
+
+enum UserDataError: Error {
+    case balanceFormatError
 }

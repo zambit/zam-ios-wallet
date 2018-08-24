@@ -28,13 +28,19 @@ struct WalletData {
         }
 
         self.coin = coinType
-        self.balance = BalanceData(coin: coinType, codable: codable.balances)
+        do {
+            let balance = try BalanceData(coin: coinType, codable: codable.balances)
+            self.balance = balance
+        } catch {
+            throw WalletDataError.balanceFormatError
+        }
+
         self.address = codable.address
     }
-    
 }
 
 enum WalletDataError: Error {
     case coinTypeReponseFormatError
+    case balanceFormatError
 }
 
