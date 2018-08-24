@@ -27,8 +27,12 @@ struct UserAPI: NetworkService {
                     case .data(_):
 
                         let success: (CodableSuccessUserInfoResponse) -> Void = { s in
-                            let user = UserData(codable: s.data)
-                            seal.fulfill(user)
+                            do {
+                                let user = try UserData(codable: s.data)
+                                seal.fulfill(user)
+                            } catch let error {
+                                seal.reject(error)
+                            }
                         }
 
                         let failure: (CodableFailure) -> Void = { f in

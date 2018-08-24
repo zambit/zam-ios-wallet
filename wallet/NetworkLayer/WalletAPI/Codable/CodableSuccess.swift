@@ -229,7 +229,7 @@ struct CodableTransaction: Codable {
     let status: String
     let coin: String
     let recipient: String
-    let amount: String
+    let amount: CodableBalance
 
     private enum CodingKeys: String, CodingKey {
         case id

@@ -26,7 +26,7 @@ struct BalanceData {
         self.original = original
     }
 
-    init(coin: CoinType, codable: CodableBalance) {
+    init(coin: CoinType, codable: CodableBalance) throws {
         self.coin = coin
 
         var stringNumber: String?
@@ -46,7 +46,7 @@ struct BalanceData {
             let strNumber = stringNumber,
             let original = Decimal(string: strNumber),
             let usd = Decimal(string: codable.usd) else {
-            fatalError()
+            throw BalanceDataError.decimalFormatsResponseError
         }
 
         self.usd = usd
@@ -93,4 +93,8 @@ struct BalanceData {
             return formatted
         }
     }
+}
+
+enum BalanceDataError: Error {
+    case decimalFormatsResponseError
 }
