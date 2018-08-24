@@ -160,6 +160,29 @@ struct CodableSuccessTransactionResponse: Codable {
     }
 }
 
+struct CodableSuccessTransactionsSearchingResponse: Codable {
+
+    let result: Bool
+    let data: TransactionsPage
+
+    private enum CodingKeys: String, CodingKey {
+        case result
+        case data
+    }
+
+    struct TransactionsPage: Codable {
+        let count: Int
+        let next: String
+        let transactions: [CodableTransaction]
+
+        private enum CodingKeys: String, CodingKey {
+            case count
+            case next
+            case transactions
+        }
+    }
+}
+
 struct CodableWallet: Codable {
 
     let id: String
