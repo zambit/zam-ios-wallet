@@ -19,7 +19,7 @@ class TransactionsHistoryViewController: WalletViewController, UITableViewDelega
 
     private var paginator: Paginator<TransactionData>?
 
-    private var refreshControl: UIRefreshControl?
+    private var topRefreshControl: UIRefreshControl?
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -36,10 +36,10 @@ class TransactionsHistoryViewController: WalletViewController, UITableViewDelega
 
         self.view.applyDefaultGradientHorizontally()
 
-        refreshControl = UIRefreshControl()
-        refreshControl?.addTarget(self, action: #selector(refreshControlValueChangedEvent(_:)), for: .valueChanged)
-        refreshControl?.layer.zPosition = -2
-        historyTableView?.insertSubview(refreshControl!, at: 0)
+        topRefreshControl = UIRefreshControl()
+        topRefreshControl?.addTarget(self, action: #selector(refreshControlValueChangedEvent(_:)), for: .valueChanged)
+        topRefreshControl?.layer.zPosition = -2
+        historyTableView?.insertSubview(topRefreshControl!, at: 0)
 
         self.setupTableViewFooter()
 
@@ -55,7 +55,6 @@ class TransactionsHistoryViewController: WalletViewController, UITableViewDelega
                 page in
 
                 paginator.receivedResults(results: page.transactions, next: page.next ?? "")
-                self?.refreshControl?.endRefreshing()
 
                 }.catch {
                     error in
@@ -66,11 +65,19 @@ class TransactionsHistoryViewController: WalletViewController, UITableViewDelega
 
         }, resultsHandler: {
             [weak self]
-            (paginator, results) in
+            (paginator, results, isInitial) in
+
+            self?.topRefreshControl?.endRefreshing()
 
             // update tableview footer
             self?.updateTableViewFooter()
             self?.activityIndicator.stopAnimating()
+
+            guard !isInitial else {
+                let indexSet = IndexSet(integersIn: 0...0)
+                self?.historyTableView?.reloadSections(indexSet, with: .fade)
+                return
+            }
 
             var indexPaths: [IndexPath] = []
             var i = (paginator.results.count) - results.count
@@ -81,7 +88,6 @@ class TransactionsHistoryViewController: WalletViewController, UITableViewDelega
             self?.historyTableView?.beginUpdates()
             self?.historyTableView?.insertRows(at: indexPaths, with: .fade)
             self?.historyTableView?.endUpdates()
-
         })
 
         self.paginator?.fetchFirstPage()
@@ -175,8 +181,7 @@ class TransactionsHistoryViewController: WalletViewController, UITableViewDelega
 
     @objc
     private func refreshControlValueChangedEvent(_ sender: UIRefreshControl) {
-        refreshControl?.beginRefreshing()
-        paginator?.reset()
-        paginator?.fetchFirstPage()
+        topRefreshControl?.beginRefreshing()
+        paginator?.reload()
     }
 }

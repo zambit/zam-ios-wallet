@@ -183,6 +183,29 @@ struct CodableSuccessTransactionsSearchingResponse: Codable {
     }
 }
 
+struct CodableSuccessTransactionsGroupedSearchingResponse: Codable {
+
+    let result: Bool
+    let data: GroupedTransactionsPage
+
+    private enum CodingKeys: String, CodingKey {
+        case result
+        case data
+    }
+
+    struct GroupedTransactionsPage: Codable {
+        let count: Int
+        let next: String?
+        let transactions: [CodableTransactionsGroup]
+
+        private enum CodingKeys: String, CodingKey {
+            case count
+            case next
+            case transactions = "grouped_transactions"
+        }
+    }
+}
+
 struct CodableWallet: Codable {
 
     let id: String
@@ -245,13 +268,25 @@ struct CodableUser: Codable {
     }
 }
 
+struct CodableTransactionsGroup: Codable {
+
+    let amount: CodableBalance
+    let transactions: [CodableTransaction]
+
+    private enum CodingKeys: String, CodingKey {
+        case amount = "total_amount"
+        case transactions
+    }
+}
+
 struct CodableTransaction: Codable {
 
     let id: String
     let direction: String
     let status: String
     let coin: String
-    let recipient: String
+    let sender: String?
+    let recipient: String?
     let amount: CodableBalance
 
     private enum CodingKeys: String, CodingKey {

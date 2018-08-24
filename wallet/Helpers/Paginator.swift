@@ -49,7 +49,7 @@ public class Paginator<Element> {
 
     /// Shortcuts for the block signatures
     public typealias FetchHandlerType = (_ paginator: Paginator<Element>, _ pageSize: Int, _ nextPage: String?) -> ()
-    public typealias ResultsHandler = (Paginator, [Element]) -> ()
+    public typealias ResultsHandler = (Paginator, [Element], Bool) -> ()
     public typealias ResetHandler = (Paginator) -> ()
     public typealias FailureHandler = (Paginator) -> ()
 
@@ -60,8 +60,8 @@ public class Paginator<Element> {
     public var fetchHandler: FetchHandlerType
 
     /**
-     The resultsHandler is called by `receivedResults(_:total:)`.  It contains the Array of Elements
-     for a given page.
+     The resultsHandler is called by `receivedResults(_:total:)`. It contains the Array of Elements
+     for a given page and `isInitialPage` boolean flag.
      */
     public var resultsHandler: ResultsHandler
 
@@ -122,6 +122,14 @@ public class Paginator<Element> {
     }
 
     /**
+     Reset the Paginator, clears all results and sets total and page to 0.
+     */
+    public func reload() {
+        setDefaultValues()
+        fetchFirstPage()
+    }
+
+    /**
      reachedLastPage: Bool - Boolean indicating all pages have been fetched
      */
     public var reachedLastPage: Bool {
@@ -166,7 +174,7 @@ public class Paginator<Element> {
         page += 1
         requestStatus = .Done
 
-        resultsHandler(self, results)
+        resultsHandler(self, results, page - 1 < 1)
     }
 
     /**
