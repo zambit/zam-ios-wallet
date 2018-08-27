@@ -53,6 +53,14 @@ struct BalanceData: Equatable {
         self.original = original
     }
 
+    func sum(with another: BalanceData) throws -> BalanceData {
+        guard coin == another.coin else {
+            throw BalanceDataError.sumDefferentCoinBalance
+        }
+
+        return BalanceData(coin: coin, usd: usd + another.usd, original: original + another.original)
+    }
+
     func description(currency: Currency) -> String {
         let string = formattedShort(currency: currency)
 
@@ -102,4 +110,5 @@ struct BalanceData: Equatable {
 
 enum BalanceDataError: Error {
     case decimalFormatsResponseError
+    case sumDefferentCoinBalance
 }

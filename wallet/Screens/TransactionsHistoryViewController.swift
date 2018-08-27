@@ -91,16 +91,24 @@ class TransactionsHistoryViewController: WalletViewController, UITableViewDelega
 
             // Check for intersections
             if let last = old.last, let first = new.first, last.dateInterval == first.dateInterval {
-                let concatiated = TransactionsGroupData(dateInterval: last.dateInterval, amount: last.amount, transactions: last.transactions + first.transactions)
 
-                var concatiatedResults = Array(old[0..<old.count - 1])
-                    concatiatedResults.append(concatiated)
-                    concatiatedResults.append(contentsOf: new[1..<new.count])
+                let sumAmount = try! last.amount.sum(with: first.amount)
+                let transactions = last.transactions + first.transactions
 
+                let concatiatedElement = TransactionsGroupData(dateInterval: last.dateInterval, amount: sumAmount, transactions: transactions)
+
+                let concatiatedResults = Array(old[0..<old.count - 1]) + [concatiatedElement] + Array(new[1..<new.count])
+
+                // Update results
                 paginator.results = concatiatedResults
 
-                (self?.historyTableView?.headerView(forSection: old.count - 1) as? TransactionsGroupHeaderComponent)?.set(amount: concatiated.amount.description(currency: .usd))
+                // Update header
+                guard let header = self?.historyTableView?.headerView(forSection: old.count - 1) as? TransactionsGroupHeaderComponent else {
+                    fatalError()
+                }
+                header.set(amount: concatiatedElement.amount.description(currency: .usd))
 
+                // Add rows for concatiated section
                 let section = old.count - 1
                 var row = last.transactions.count
                 for _ in first.transactions {
