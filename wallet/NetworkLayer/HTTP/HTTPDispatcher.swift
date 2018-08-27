@@ -19,6 +19,7 @@ struct HTTPDispatcher: Dispatcher {
             do {
                 let urlRequest = try prepareURLRequest(for: request, with: environment)
 
+                print(urlRequest.url)
                 print(urlRequest.allHTTPHeaderFields)
 
                 let task = self.session.dataTask(with: urlRequest) { data, response, error in

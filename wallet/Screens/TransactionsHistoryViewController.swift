@@ -17,9 +17,10 @@ class TransactionsHistoryViewController: WalletViewController, UITableViewDelega
     @IBOutlet var searchBar: UISearchBar?
     @IBOutlet var historyTableView: UITableView?
 
-    private var paginator: Paginator<TransactionData>?
+    private var paginator: Paginator<TransactionsGroupData>?
 
     private var topRefreshControl: UIRefreshControl?
+    private var bottomActivityIndicator: UIActivityIndicatorView?
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -30,6 +31,7 @@ class TransactionsHistoryViewController: WalletViewController, UITableViewDelega
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.historyTableView?.register(TransactionsGroupHeaderComponent.self, forHeaderFooterViewReuseIdentifier: "TransactionsGroupHeaderComponent")
         self.historyTableView?.register(TransactionCellComponent.self , forCellReuseIdentifier: "TransactionCellComponent")
         self.historyTableView?.delegate = self
         self.historyTableView?.dataSource = self
@@ -43,7 +45,7 @@ class TransactionsHistoryViewController: WalletViewController, UITableViewDelega
 
         self.setupTableViewFooter()
 
-        self.paginator = Paginator<TransactionData>(pageSize: 20, fetchHandler: {
+        self.paginator = Paginator<TransactionsGroupData>(pageSize: 15, fetchHandler: {
             [weak self]
             (paginator: Paginator, pageSize: Int, nextPage: String?) in
 
@@ -51,57 +53,119 @@ class TransactionsHistoryViewController: WalletViewController, UITableViewDelega
                 fatalError()
             }
 
-            self?.userAPI?.getTransactions(token: token, filter: UserAPI.GetTransactionsFilter(page: nextPage)).done {
+            self?.userAPI?.getTransactions(token: token, filter: UserAPI.TransactionsFilter(page: nextPage, count: 15)).done {
                 page in
 
                 paginator.receivedResults(results: page.transactions, next: page.next ?? "")
+            }.catch {
+                error in
 
-                }.catch {
-                    error in
-                    print(error)
-
-                    paginator.failed()
+                paginator.failed()
             }
 
         }, resultsHandler: {
             [weak self]
-            (paginator, results, isInitial) in
+            (paginator, old, new) in
 
             self?.topRefreshControl?.endRefreshing()
 
-            // update tableview footer
-            self?.updateTableViewFooter()
-            self?.activityIndicator.stopAnimating()
+            if paginator.results.isEmpty {
+                self?.setupPlaceholder()
+            } else {
+                self?.removePlaceholder()
+            }
 
-            guard !isInitial else {
-                let indexSet = IndexSet(integersIn: 0...0)
-                self?.historyTableView?.reloadSections(indexSet, with: .fade)
+            paginator.results.forEach {
+                print("\(DateInterval.walletString(from: $0.dateInterval)) \($0.transactions.count)")
+            }
+
+            if old.isEmpty {
+                self?.historyTableView?.reloadData()
+                self?.updateTableViewFooter()
                 return
             }
 
+            // Pagination
+
             var indexPaths: [IndexPath] = []
-            var i = (paginator.results.count) - results.count
-            for _ in results {
-                indexPaths.append(IndexPath(row: i, section: 0))
-                i += 1
+
+            // Check for intersections
+            if let last = old.last, let first = new.first, last.dateInterval == first.dateInterval {
+                let concatiated = TransactionsGroupData(dateInterval: last.dateInterval, amount: last.amount, transactions: last.transactions + first.transactions)
+
+                var concatiatedResults = Array(old[0..<old.count - 1])
+                    concatiatedResults.append(concatiated)
+                    concatiatedResults.append(contentsOf: new[1..<new.count])
+
+                paginator.results = concatiatedResults
+
+                (self?.historyTableView?.headerView(forSection: old.count - 1) as? TransactionsGroupHeaderComponent)?.set(amount: concatiated.amount.description(currency: .usd))
+
+                let section = old.count - 1
+                var row = last.transactions.count
+                for _ in first.transactions {
+                    let indexPath = IndexPath(row: row, section: section)
+                    indexPaths.append(indexPath)
+                    row += 1
+                }
             }
+
             self?.historyTableView?.beginUpdates()
             self?.historyTableView?.insertRows(at: indexPaths, with: .fade)
+
+            if old.count < paginator.results.count {
+                let indexSet = IndexSet(integersIn: old.count..<paginator.results.count)
+                self?.historyTableView?.insertSections(indexSet, with: .fade)
+            }
             self?.historyTableView?.endUpdates()
+
+            self?.updateTableViewFooter()
+            }, failureHandler: {
+                [weak self]
+                paginator in
+
+                self?.topRefreshControl?.endRefreshing()
+
+                self?.setupPlaceholder()
         })
 
+        self.topRefreshControl?.beginRefreshing()
         self.paginator?.fetchFirstPage()
     }
 
-    var activityIndicator: UIActivityIndicatorView!
-    var footerLabel: UILabel!
+    // MARK: - UITableViewDataSource
 
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return paginator?.results.count ?? 0
     }
 
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        guard let provider = paginator, section < provider.results.count else {
+            fatalError()
+        }
+
+        return provider.results[section].transactions.count
+    }
+
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let _header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "TransactionsGroupHeaderComponent")
+
+        guard let header = _header as? TransactionsGroupHeaderComponent else {
+            return nil
+        }
+
+        guard let provider = paginator, section < provider.results.count else {
+            return UIView()
+        }
+
+        let data = provider.results[section]
+        header.configure(date: DateInterval.walletString(from: data.dateInterval), amount: data.amount.description(currency: .usd))
+
+        return header
+    }
+
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 46.0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -111,19 +175,23 @@ class TransactionsHistoryViewController: WalletViewController, UITableViewDelega
             fatalError()
         }
 
-        guard let provider = paginator, indexPath.row < provider.results.count else {
-            fatalError()
+        guard let provider = paginator,
+            indexPath.section < provider.results.count,
+            indexPath.row < provider.results[indexPath.section].transactions.count else {
+            return UITableViewCell()
         }
 
-        let data = provider.results[indexPath.row]
+        let data = provider.results[indexPath.section].transactions[indexPath.row]
         cell.configure(image: data.coin.image, status: data.status.formatted, coinShort: data.coin.short, recipient: data.participant.formatted, amount: data.amount.formatted(currency: .original), fiatAmount: data.amount.description(currency: .usd), direction: data.direction)
 
         return cell
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 68.0
+        return 74.0
     }
+
+    // MARK: - UIScrollViewDelegate
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         //super.scrollViewDidScroll(scrollView)
@@ -135,52 +203,68 @@ class TransactionsHistoryViewController: WalletViewController, UITableViewDelega
             if let last = paginator?.reachedLastPage, last == false {
 
                 // fetch next page of results
-                paginator?.fetchNextPage()
+                self.fetchNextPage()
             }
         }
     }
 
     func fetchNextPage() {
         self.paginator?.fetchNextPage()
-        self.activityIndicator.startAnimating()
     }
 
-    func setupTableViewFooter() {
+    private func setupTableViewFooter() {
         // set up label
         let footerView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 44.0))
         footerView.backgroundColor = UIColor.clear
 
-        let label = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 44.0))
-        label.font = UIFont.boldSystemFont(ofSize: 16)
-        label.textColor = UIColor.lightGray
-        label.textAlignment = .center;
-
-        self.footerLabel = label
-        footerView.addSubview(label)
-
         // set up activity indicator
         let activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .gray)
-        activityIndicatorView.center = CGPoint(x: 40, y:22)
+        activityIndicatorView.center = CGPoint(x: self.view.frame.width/2, y:22)
         activityIndicatorView.hidesWhenStopped = true
 
-        self.activityIndicator = activityIndicatorView;
+        self.bottomActivityIndicator = activityIndicatorView
         footerView.addSubview(activityIndicatorView)
 
-        self.historyTableView?.tableFooterView = footerView;
+        self.historyTableView?.tableFooterView = footerView
     }
 
-    func updateTableViewFooter() {
-        if let provider = paginator, !provider.reachedLastPage {
-            self.footerLabel.text = "Loading..."
+    private func updateTableViewFooter() {
+        if let provider = paginator, provider.reachedLastPage {
+            self.historyTableView?.tableFooterView = nil
         } else {
-            self.footerLabel.text = ""
+            self.bottomActivityIndicator?.startAnimating()
+        }
+    }
+
+    private func setupPlaceholder() {
+        guard let tableView = historyTableView else {
+            return
         }
 
-        self.footerLabel.setNeedsDisplay()
+        tableView.viewWithTag(199)?.removeFromSuperview()
+
+        let view = IllustrationalPlaceholder(frame: tableView.bounds)
+        view.tag = 199
+        view.alpha = 0.0
+
+        tableView.addSubview(view)
+
+        UIView.animate(withDuration: 0.1, animations: {
+            view.alpha = 1.0
+        })
+    }
+
+    private func removePlaceholder() {
+        guard let tableView = historyTableView else {
+            return
+        }
+
+        tableView.viewWithTag(199)?.removeFromSuperview()
     }
 
     @objc
     private func refreshControlValueChangedEvent(_ sender: UIRefreshControl) {
+        setupTableViewFooter()
         topRefreshControl?.beginRefreshing()
         paginator?.reload()
     }

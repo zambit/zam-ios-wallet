@@ -49,7 +49,7 @@ public class Paginator<Element> {
 
     /// Shortcuts for the block signatures
     public typealias FetchHandlerType = (_ paginator: Paginator<Element>, _ pageSize: Int, _ nextPage: String?) -> ()
-    public typealias ResultsHandler = (Paginator, [Element], Bool) -> ()
+    public typealias ResultsHandler = (Paginator, [Element], [Element]) -> ()
     public typealias ResetHandler = (Paginator) -> ()
     public typealias FailureHandler = (Paginator) -> ()
 
@@ -125,7 +125,6 @@ public class Paginator<Element> {
      Reset the Paginator, clears all results and sets total and page to 0.
      */
     public func reload() {
-        setDefaultValues()
         fetchFirstPage()
     }
 
@@ -169,12 +168,14 @@ public class Paginator<Element> {
      - parameter next:   Link to the next results page. If it's empty, this page is the last.
      */
     public func receivedResults(results: [Element], next: String) {
+        let old = self.results
+
         self.results.append(contentsOf: results)
         self.next = next
         page += 1
         requestStatus = .Done
 
-        resultsHandler(self, results, page - 1 < 1)
+        resultsHandler(self, old, results)
     }
 
     /**

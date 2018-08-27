@@ -176,7 +176,7 @@ struct UserAPI: NetworkService {
         }
     }
 
-    struct GetTransactionsFilter {
+    struct TransactionsFilter {
         let coin: CoinType?
         let walletId: String?
         let recipient: String?
@@ -184,8 +184,10 @@ struct UserAPI: NetworkService {
         let untilTime: String?
         let page: String?
         let count: Int?
+        let group: GroupingType
 
-        init(coin: CoinType? = nil, walletId: String? = nil, recipient: String? = nil, fromTime: String? = nil, untilTime: String? = nil, page: String? = nil, count: Int? = nil) {
+        init(group: GroupingType = .day, coin: CoinType? = nil, walletId: String? = nil, recipient: String? = nil, fromTime: String? = nil, untilTime: String? = nil, page: String? = nil, count: Int? = nil) {
+            self.group = group
             self.coin = coin
             self.walletId = walletId
             self.recipient = recipient
@@ -196,60 +198,19 @@ struct UserAPI: NetworkService {
         }
     }
 
-    func getTransactions(token: String, filter: GetTransactionsFilter? = nil) -> Promise<TransactionsPageData>  {
-        return provider.execute(.getTransactions(token: token, coin: filter?.coin?.rawValue, walletId: filter?.walletId, recipient: filter?.recipient, fromTime: filter?.fromTime, untilTime: filter?.untilTime, page: filter?.page, count: filter?.count))
+    func getTransactions(token: String, filter: TransactionsFilter = TransactionsFilter()) -> Promise<GroupedTransactionsPageData>  {
+        return provider.execute(.getTransactions(token: token, coin: filter.coin?.rawValue, walletId: filter.walletId, recipient: filter.recipient, fromTime: filter.fromTime, untilTime: filter.untilTime, page: filter.page, count: filter.count, group: filter.group.rawValue))
             .then {
-                (response: Response) -> Promise<TransactionsPageData> in
+                (response: Response) -> Promise<GroupedTransactionsPageData> in
 
                 return Promise { seal in
                     switch response {
                     case .data(_):
 
-                        let success: (CodableSuccessTransactionsSearchingResponse) -> Void = { s in
+                        let success: (CodableSuccessTransactionsGroupedSearchingResponse) -> Void = { s in
                             do {
-                                let transaction = try TransactionsPageData(codable: s.data)
-                                seal.fulfill(transaction)
-                            } catch let error {
-                                seal.reject(error)
-                            }
-                        }
-
-                        let failure: (CodableFailure) -> Void = { f in
-                            guard f.errors.count > 0 else {
-                                let error = WalletResponseError.undefinedServerFailureResponse
-                                seal.reject(error)
-                                return
-                            }
-
-                            let error = WalletResponseError.serverFailureResponse(errors: f.errors)
-                            seal.reject(error)
-                        }
-
-                        do {
-                            try response.extractResult(success: success, failure: failure)
-                        } catch let error {
-                            seal.reject(error)
-                        }
-                    case .error(let error):
-                        seal.reject(error)
-                    }
-                }
-        }
-    }
-
-    func getGroupedTransactions(token: String, filter: GetTransactionsFilter? = nil) -> Promise<TransactionsPageData>  {
-        return provider.execute(.getTransactions(token: token, coin: filter?.coin?.rawValue, walletId: filter?.walletId, recipient: filter?.recipient, fromTime: filter?.fromTime, untilTime: filter?.untilTime, page: filter?.page, count: filter?.count))
-            .then {
-                (response: Response) -> Promise<TransactionsPageData> in
-
-                return Promise { seal in
-                    switch response {
-                    case .data(_):
-
-                        let success: (CodableSuccessTransactionsSearchingResponse) -> Void = { s in
-                            do {
-                                let transaction = try TransactionsPageData(codable: s.data)
-                                seal.fulfill(transaction)
+                                let page = try GroupedTransactionsPageData(codable: s.data)
+                                seal.fulfill(page)
                             } catch let error {
                                 seal.reject(error)
                             }

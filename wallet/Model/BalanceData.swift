@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct BalanceData {
+struct BalanceData: Equatable {
 
     enum Currency {
         case usd

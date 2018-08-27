@@ -42,6 +42,7 @@ facilis est et expedita distinctiolorem ipsun</string>
                 </label>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="H1k-XA-WtQ">
                     <rect key="frame" x="53" y="123" width="251" height="251"/>
+                    <color key="tintColor" red="0.91290211399999999" green="0.91290211399999999" blue="0.91290211399999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="H1k-XA-WtQ" secondAttribute="height" multiplier="1:1" id="aQU-KK-Txk"/>
                     </constraints>

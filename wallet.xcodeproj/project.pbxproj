@@ -164,6 +164,17 @@
 		8CA218FE21303BC30063C188 /* TransactionStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA218FD21303BC30063C188 /* TransactionStatus.swift */; };
 		8CA2190221304B730063C188 /* DirectionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA2190121304B730063C188 /* DirectionType.swift */; };
 		8CA2190421305EC00063C188 /* GroupType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA2190321305EC00063C188 /* GroupType.swift */; };
+		8CA219062133ED4E0063C188 /* GroupingType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA219052133ED4E0063C188 /* GroupingType.swift */; };
+		8CA219082133EE910063C188 /* GroupedTransactionsPageData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA219072133EE910063C188 /* GroupedTransactionsPageData.swift */; };
+		8CA2190A2133EEF40063C188 /* TransactionsGroupData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA219092133EEF40063C188 /* TransactionsGroupData.swift */; };
+		8CA2190D213420040063C188 /* TransactionsGroupHeaderComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA2190C213420040063C188 /* TransactionsGroupHeaderComponent.swift */; };
+		8CA2190F213420870063C188 /* TransactionsGroupHeaderComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CA2190E213420870063C188 /* TransactionsGroupHeaderComponent.xib */; };
+		8CA219122134259F0063C188 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA219112134259F0063C188 /* Date+Extensions.swift */; };
+		8CA2191421342ABC0063C188 /* DateInterval+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA2191321342ABC0063C188 /* DateInterval+Extensions.swift */; };
+		8CA2191621342D720063C188 /* HeaderFooterComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA2191521342D720063C188 /* HeaderFooterComponent.swift */; };
+		8CA2191821343FE10063C188 /* IllustrationalPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA2191721343FE10063C188 /* IllustrationalPlaceholder.swift */; };
+		8CA2191A213442100063C188 /* IllustrationalPlaceholder.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CA21919213442100063C188 /* IllustrationalPlaceholder.xib */; };
+		8CA2191D21344C730063C188 /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA2191C21344C730063C188 /* Array+Extensions.swift */; };
 		8CF1DE4220EF98160036F986 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF1DE4120EF98160036F986 /* AuthViewController.swift */; };
 		8CF1DE4520EFB1A70036F986 /* HorizontalScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF1DE4420EFB1A70036F986 /* HorizontalScrollView.swift */; };
 		8CF1DE4720F37B5E0036F986 /* SMSConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF1DE4620F37B5E0036F986 /* SMSConfirmationViewController.swift */; };
@@ -359,6 +370,17 @@
 		8CA218FD21303BC30063C188 /* TransactionStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionStatus.swift; sourceTree = "<group>"; };
 		8CA2190121304B730063C188 /* DirectionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionType.swift; sourceTree = "<group>"; };
 		8CA2190321305EC00063C188 /* GroupType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupType.swift; sourceTree = "<group>"; };
+		8CA219052133ED4E0063C188 /* GroupingType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupingType.swift; sourceTree = "<group>"; };
+		8CA219072133EE910063C188 /* GroupedTransactionsPageData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupedTransactionsPageData.swift; sourceTree = "<group>"; };
+		8CA219092133EEF40063C188 /* TransactionsGroupData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsGroupData.swift; sourceTree = "<group>"; };
+		8CA2190C213420040063C188 /* TransactionsGroupHeaderComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsGroupHeaderComponent.swift; sourceTree = "<group>"; };
+		8CA2190E213420870063C188 /* TransactionsGroupHeaderComponent.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransactionsGroupHeaderComponent.xib; sourceTree = "<group>"; };
+		8CA219112134259F0063C188 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
+		8CA2191321342ABC0063C188 /* DateInterval+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateInterval+Extensions.swift"; sourceTree = "<group>"; };
+		8CA2191521342D720063C188 /* HeaderFooterComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderFooterComponent.swift; sourceTree = "<group>"; };
+		8CA2191721343FE10063C188 /* IllustrationalPlaceholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IllustrationalPlaceholder.swift; sourceTree = "<group>"; };
+		8CA21919213442100063C188 /* IllustrationalPlaceholder.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IllustrationalPlaceholder.xib; sourceTree = "<group>"; };
+		8CA2191C21344C730063C188 /* Array+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
 		8CF1DE4120EF98160036F986 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		8CF1DE4420EFB1A70036F986 /* HorizontalScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalScrollView.swift; sourceTree = "<group>"; };
 		8CF1DE4620F37B5E0036F986 /* SMSConfirmationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMSConfirmationViewController.swift; sourceTree = "<group>"; };
@@ -449,6 +471,7 @@
 				8C6088432110A34200470411 /* CustomUI.swift */,
 				9319BA862129FA9500033A7E /* Animations */,
 				8CA218A4212333B20063C188 /* IconableTextField.swift */,
+				8CA2191B213442140063C188 /* IllustrationPlaceholder */,
 				8CA218E6212DA8300063C188 /* SearchTextField.swift */,
 				8CA218BA212573510063C188 /* IndentLabel.swift */,
 				8CA218CE212719990063C188 /* LargeSendButton.swift */,
@@ -703,12 +726,15 @@
 				8C4413D3211993B400C9689C /* CoinType.swift */,
 				8CA218FD21303BC30063C188 /* TransactionStatus.swift */,
 				8CA2190121304B730063C188 /* DirectionType.swift */,
+				8CA219052133ED4E0063C188 /* GroupingType.swift */,
 				8CA2190321305EC00063C188 /* GroupType.swift */,
 				8C52FFE02119BE0300EB55EA /* WalletData.swift */,
 				8CA218CC2126F23B0063C188 /* UserData.swift */,
 				8CA218AC212421150063C188 /* PhoneMaskData.swift */,
 				9319BA842129A07A00033A7E /* TransactionData.swift */,
+				8CA219092133EEF40063C188 /* TransactionsGroupData.swift */,
 				8CA218F2213007650063C188 /* TransactionsPageData.swift */,
+				8CA219072133EE910063C188 /* GroupedTransactionsPageData.swift */,
 				8C04BC442121D48E00E90090 /* BalanceData.swift */,
 				8CA218DA212D892A0063C188 /* ContactData.swift */,
 				8C52FFE22119C1CF00EB55EA /* TermData.swift */,
@@ -770,8 +796,9 @@
 				8CF5F941211457200083B36A /* Component.swift */,
 				8CF5F9622114AB000083B36A /* ItemComponent.swift */,
 				8C52FFE92119DA2700EB55EA /* CellComponent.swift */,
-				8CA218F921302BBF0063C188 /* TransactionCellComponent.swift */,
-				8CA218FB21302BD00063C188 /* TransactionCellComponent.xib */,
+				8CA2191521342D720063C188 /* HeaderFooterComponent.swift */,
+				8CA219102134208B0063C188 /* TransactionsGroupHeaderComponent */,
+				8CA2190B21341FE60063C188 /* TransactionCellComponent */,
 				8CA218E4212DA52F0063C188 /* ContactsHorizontalComponent */,
 				8CA218902122E8880063C188 /* SendMoneyComponent */,
 				8CA218C72125AD380063C188 /* WalletSmallItemComponent */,
@@ -884,6 +911,33 @@
 			path = ContactItemComponent;
 			sourceTree = "<group>";
 		};
+		8CA2190B21341FE60063C188 /* TransactionCellComponent */ = {
+			isa = PBXGroup;
+			children = (
+				8CA218F921302BBF0063C188 /* TransactionCellComponent.swift */,
+				8CA218FB21302BD00063C188 /* TransactionCellComponent.xib */,
+			);
+			path = TransactionCellComponent;
+			sourceTree = "<group>";
+		};
+		8CA219102134208B0063C188 /* TransactionsGroupHeaderComponent */ = {
+			isa = PBXGroup;
+			children = (
+				8CA2190C213420040063C188 /* TransactionsGroupHeaderComponent.swift */,
+				8CA2190E213420870063C188 /* TransactionsGroupHeaderComponent.xib */,
+			);
+			path = TransactionsGroupHeaderComponent;
+			sourceTree = "<group>";
+		};
+		8CA2191B213442140063C188 /* IllustrationPlaceholder */ = {
+			isa = PBXGroup;
+			children = (
+				8CA2191721343FE10063C188 /* IllustrationalPlaceholder.swift */,
+				8CA21919213442100063C188 /* IllustrationalPlaceholder.xib */,
+			);
+			path = IllustrationPlaceholder;
+			sourceTree = "<group>";
+		};
 		8CF1DE4320EF9D170036F986 /* Trash */ = {
 			isa = PBXGroup;
 			children = (
@@ -939,6 +993,8 @@
 			isa = PBXGroup;
 			children = (
 				8C04BC29211C4F4000E90090 /* UIFont+Additions.swift */,
+				8CA219112134259F0063C188 /* Date+Extensions.swift */,
+				8CA2191321342ABC0063C188 /* DateInterval+Extensions.swift */,
 				8C333D41210A094500949AC0 /* UIColor+Additions.swift */,
 				8CA218EA212DC2DB0063C188 /* UIColor+Extensions.swift */,
 				8C333D47210B0F3700949AC0 /* UIViewController+Extensions.swift */,
@@ -949,6 +1005,7 @@
 				8C333D64210B619200949AC0 /* UITextField+Extensions.swift */,
 				8CF5F93721134E6D0083B36A /* CGPoint+Extensions.swift */,
 				8C333D6E210F00E600949AC0 /* String+Extensions.swift */,
+				8CA2191C21344C730063C188 /* Array+Extensions.swift */,
 				8C4413D521199FFC00C9689C /* Dictionary+Extensions.swift */,
 				8CA218CA2126D5E00063C188 /* NumberFormatter+Extensions.swift */,
 			);
@@ -1086,6 +1143,7 @@
 				8C34617520EF8FA900746724 /* LaunchScreen.storyboard in Resources */,
 				8CA218B32124837D0063C188 /* SendMoneyMethodComponent.xib in Resources */,
 				8CF5F95921149E380083B36A /* CreatePinComponent.xib in Resources */,
+				8CA2190F213420870063C188 /* TransactionsGroupHeaderComponent.xib in Resources */,
 				8C0918FE2105F76200703224 /* Registration.storyboard in Resources */,
 				8C34617220EF8FA900746724 /* Assets.xcassets in Resources */,
 				8C0918FA2105F75200703224 /* Onboarding.storyboard in Resources */,
@@ -1098,6 +1156,7 @@
 				8C333D58210B4F7D00949AC0 /* VerificationCodeFormComponent.xib in Resources */,
 				8C04BC31211C4FC100E90090 /* MavenPro-Bold.ttf in Resources */,
 				8C60884E2111A22D00470411 /* LoginPasswordFormView.xib in Resources */,
+				8CA2191A213442100063C188 /* IllustrationalPlaceholder.xib in Resources */,
 				8C091900210601F300703224 /* Recovery.storyboard in Resources */,
 				8C6088532111CB7000470411 /* LoginFormView.xib in Resources */,
 				8C04BC32211C4FC100E90090 /* MavenPro-Black.ttf in Resources */,
@@ -1180,6 +1239,8 @@
 				8CF5F95E2114A77D0083B36A /* CreatePinStageItem.swift in Sources */,
 				8C60884C2111A20B00470411 /* LoginPasswordFormComponent.swift in Sources */,
 				8C091906210605AF00703224 /* Router.swift in Sources */,
+				8CA2190D213420040063C188 /* TransactionsGroupHeaderComponent.swift in Sources */,
+				8CA2191421342ABC0063C188 /* DateInterval+Extensions.swift in Sources */,
 				8C091938210622AA00703224 /* Request.swift in Sources */,
 				8C333D382109F3D500949AC0 /* OnboardingFlow.swift in Sources */,
 				8C6088652112027300470411 /* ThreeStepsAPI.swift in Sources */,
@@ -1201,12 +1262,14 @@
 				8CA2190221304B730063C188 /* DirectionType.swift in Sources */,
 				8C4413D4211993B400C9689C /* CoinType.swift in Sources */,
 				8CA218FE21303BC30063C188 /* TransactionStatus.swift in Sources */,
+				8CA2190A2133EEF40063C188 /* TransactionsGroupData.swift in Sources */,
 				9319BA852129A07A00033A7E /* TransactionData.swift in Sources */,
 				8C333D66210B6E7600949AC0 /* UITextField+Extensions.swift in Sources */,
 				8CF5F92F211327EB0083B36A /* MaskParser.swift in Sources */,
 				8C0919512107234B00703224 /* SignupAPI.swift in Sources */,
 				8C60885A2111DCB000470411 /* EnterPhoneLoginPasswordViewController.swift in Sources */,
 				8CA218B121247FF80063C188 /* SendMoneyMethodComponent.swift in Sources */,
+				8CA219062133ED4E0063C188 /* GroupingType.swift in Sources */,
 				8CF5F92D2113206A0083B36A /* SecondEnterLoginFlow.swift in Sources */,
 				8C333D7B210F767100949AC0 /* FlowViewController.swift in Sources */,
 				8C091934210620C800703224 /* OnboardingViewController.swift in Sources */,
@@ -1239,6 +1302,7 @@
 				8C60885E2111F28000470411 /* EnterNewPhoneNumberViewController.swift in Sources */,
 				8CF1DE4B20F3AD210036F986 /* NewPasswordViewController.swift in Sources */,
 				8CF5F93A21144BE80083B36A /* UIDevice+Extensions.swift in Sources */,
+				8CA219122134259F0063C188 /* Date+Extensions.swift in Sources */,
 				8CA218C42125AD130063C188 /* WalletSmallItemComponent.swift in Sources */,
 				8CA218F7213018DA0063C188 /* Paginator.swift in Sources */,
 				8C09193F210625E500703224 /* Provider.swift in Sources */,
@@ -1291,23 +1355,27 @@
 				8CA218BD2125A34B0063C188 /* KeyboardBehaviourFollowingViewController.swift in Sources */,
 				8C333D54210B394800949AC0 /* RoundContinueButton.swift in Sources */,
 				8CF5F95B21149E460083B36A /* CreatePinComponent.swift in Sources */,
+				8CA2191D21344C730063C188 /* Array+Extensions.swift in Sources */,
 				8C333D46210B0D5400949AC0 /* LaunchScreenViewController.swift in Sources */,
 				8C09197121089FBB00703224 /* AuthAPI.swift in Sources */,
 				8CA218B821248FA50063C188 /* SendMoneyAmountComponent.swift in Sources */,
 				8C4413C621188BCA00C9689C /* WalletNavigationController.swift in Sources */,
 				8C09195F21076B5D00703224 /* RecoveryAPI.swift in Sources */,
 				8C34616B20EF8FA700746724 /* AppDelegate.swift in Sources */,
+				8CA2191821343FE10063C188 /* IllustrationalPlaceholder.swift in Sources */,
 				8C333D44210B001500949AC0 /* OnboardingLargeButton.swift in Sources */,
 				8CA218D6212D61EB0063C188 /* BiometricIDAuth.swift in Sources */,
 				8CA218EF212DCC030063C188 /* LetterImage.swift in Sources */,
 				8C333D342109F02000949AC0 /* ScreenFlow.swift in Sources */,
 				8C09194B210716C500703224 /* SignupRequest.swift in Sources */,
 				8C60884A2110B42A00470411 /* CountdownTimer.swift in Sources */,
+				8CA219082133EE910063C188 /* GroupedTransactionsPageData.swift in Sources */,
 				8C04BC35211C5AD800E90090 /* CreditCardViewComponent.swift in Sources */,
 				8C0919532107320800703224 /* CodableFailure.swift in Sources */,
 				8C04BC2A211C4F4000E90090 /* UIFont+Additions.swift in Sources */,
 				8C04BC432121C23200E90090 /* UIImage+Extensions.swift in Sources */,
 				8C333D42210A094500949AC0 /* UIColor+Additions.swift in Sources */,
+				8CA2191621342D720063C188 /* HeaderFooterComponent.swift in Sources */,
 				8CF5F93F211456D50083B36A /* DecimalKeyboardComponent.swift in Sources */,
 				8CA218AF212479040063C188 /* SendMoneyButton.swift in Sources */,
 				8CA218E1212D9B990063C188 /* ContactItemComponent.swift in Sources */,

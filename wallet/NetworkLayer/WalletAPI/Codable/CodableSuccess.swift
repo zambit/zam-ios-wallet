@@ -201,7 +201,7 @@ struct CodableSuccessTransactionsGroupedSearchingResponse: Codable {
         private enum CodingKeys: String, CodingKey {
             case count
             case next
-            case transactions = "grouped_transactions"
+            case transactions
         }
     }
 }
@@ -270,12 +270,16 @@ struct CodableUser: Codable {
 
 struct CodableTransactionsGroup: Codable {
 
+    let startDate: Double
+    let endDate: Double
     let amount: CodableBalance
     let transactions: [CodableTransaction]
 
     private enum CodingKeys: String, CodingKey {
+        case startDate = "start_date"
+        case endDate = "end_date"
         case amount = "total_amount"
-        case transactions
+        case transactions = "items"
     }
 }
 
