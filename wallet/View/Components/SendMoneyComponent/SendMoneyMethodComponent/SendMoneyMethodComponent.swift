@@ -95,7 +95,9 @@ class SendMoneyMethodComponent: Component, SegmentedControlComponentDelegate, Ph
         phoneNumberEnteringHandler = PhoneNumberEnteringHandler(textField: textField, masks: masks, maskParser: parser)
         phoneNumberEnteringHandler?.delegate = self
 
-        phoneNumberEnteringHandler?.explicityHandleText(phone)
+        if !phone.isEmpty {
+            phoneNumberEnteringHandler?.explicityHandleText(phone)
+        }
     }
 
     private func setAddressStyleForRecipientTextField(_ textField: IconableTextField, backgroundColor: UIColor) {

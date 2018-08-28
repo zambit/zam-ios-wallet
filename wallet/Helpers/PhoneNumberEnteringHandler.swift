@@ -116,7 +116,7 @@ class PhoneNumberEnteringHandler: NSObject, UITextFieldDelegate {
                 sender.text = maskedText
 
                 delegate?.phoneNumberEditingChanged(self, with: curMask, phoneNumber: maskedText)
-                break
+                return
             }
         }
 
