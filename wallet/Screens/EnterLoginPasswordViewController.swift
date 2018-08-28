@@ -54,11 +54,11 @@ class EnterLoginPasswordViewController: ContinueViewController, LoginPasswordCom
     }
 
     func loginPasswordFormComponent(_ loginPasswordFormView: LoginPasswordFormComponent, dontSatisfyTheCondition: PasswordsCondition) {
-        continueButton?.customAppearance.setEnabled(false)
+        continueButton?.custom.setEnabled(false)
     }
 
     func loginPasswordFormComponentSatisfiesAllConditions(_ loginPasswordFormViewController: LoginPasswordFormComponent) {
-        continueButton?.customAppearance.setEnabled(true)
+        continueButton?.custom.setEnabled(true)
     }
 
     /**
@@ -77,13 +77,13 @@ class EnterLoginPasswordViewController: ContinueViewController, LoginPasswordCom
                 return
         }
 
-        continueButton?.customAppearance.setLoading(true)
+        continueButton?.custom.setLoading(true)
         authAPI?.signIn(phone: phone, password: password).done {
             [weak self]
             authToken in
 
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                self?.continueButton?.customAppearance.setLoading(false)
+                self?.continueButton?.custom.setLoading(false)
                 self?.onContinue?(authToken)
             }
 
@@ -93,7 +93,7 @@ class EnterLoginPasswordViewController: ContinueViewController, LoginPasswordCom
             error in
 
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                self?.continueButton?.customAppearance.setLoading(false)
+                self?.continueButton?.custom.setLoading(false)
             }
 
             if let serverError = error as? WalletResponseError {
@@ -133,7 +133,7 @@ class EnterLoginPasswordViewController: ContinueViewController, LoginPasswordCom
             return
         }
 
-        continueButton?.customAppearance.setLoading(true)
+        continueButton?.custom.setLoading(true)
 
         authAPI?.signOut(token: token).done {
             [weak self] in
@@ -150,7 +150,7 @@ class EnterLoginPasswordViewController: ContinueViewController, LoginPasswordCom
             error in
 
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                self?.continueButton?.customAppearance.setLoading(false)
+                self?.continueButton?.custom.setLoading(false)
             }
 
             if let serverError = error as? WalletResponseError {

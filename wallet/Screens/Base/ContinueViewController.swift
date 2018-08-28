@@ -19,6 +19,6 @@ class ContinueViewController: KeyboardBehaviorFollowingViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        continueButton?.customAppearance.setEnabled(false)
+        continueButton?.custom.setEnabled(false)
     }
 }

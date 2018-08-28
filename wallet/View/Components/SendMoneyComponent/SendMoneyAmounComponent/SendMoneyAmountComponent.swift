@@ -74,14 +74,14 @@ class SendMoneyAmountComponent: Component, UITextFieldDelegate {
         blockchainFee?.font = UIFont.walletFont(ofSize: 14.0, weight: .regular)
         blockchainFee?.textAlignment = .left
         blockchainFee?.textColor = UIColor.warmGrey.withAlphaComponent(0.7)
-        blockchainFee?.customAppearance.setIndent("blockchain fee   ")
-        blockchainFee?.customAppearance.setText("$ \(NumberFormatter.walletAmount.string(from: 0.0)!)")
+        blockchainFee?.custom.setIndent("blockchain fee   ")
+        blockchainFee?.custom.setText("$ \(NumberFormatter.walletAmount.string(from: 0.0)!)")
 
         zamzamFee?.font = UIFont.walletFont(ofSize: 14.0, weight: .regular)
         zamzamFee?.textAlignment = .left
         zamzamFee?.textColor = UIColor.warmGrey.withAlphaComponent(0.7)
-        zamzamFee?.customAppearance.setIndent("zamzam fee   ")
-        zamzamFee?.customAppearance.setText("$ \(NumberFormatter.walletAmount.string(from: 0.0)!)")
+        zamzamFee?.custom.setIndent("zamzam fee   ")
+        zamzamFee?.custom.setText("$ \(NumberFormatter.walletAmount.string(from: 0.0)!)")
     }
 
     override func layoutSubviews() {

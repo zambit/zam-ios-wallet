@@ -9,28 +9,15 @@
 import Foundation
 import UIKit
 
-class ContactItemComponent: ItemComponent {
+class RectItemComponent: ItemComponent {
 
     var onTap: (() -> Void)?
 
     @IBOutlet private var avatarImageView: RoundedImageView!
-    @IBOutlet private var fullNameLabel: UILabel!
+    @IBOutlet private var nameLabel: UILabel!
 
     override var intrinsicContentSize: CGSize {
-        return CGSize(width: 114.0 - insets.left - insets.right, height: 114.0 - insets.left - insets.right)
-    }
-
-    override func initFromNib() {
-        super.initFromNib()
-
-        insets = UIEdgeInsetsMake(8.0, 0.0, 8.0, 0.0)
-
-        layoutIfNeeded()
-
-        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(longPressGestureEvent(_:)))
-        longPressGesture.minimumPressDuration = 0.1
-
-        view.addGestureRecognizer(longPressGesture)
+        return CGSize(width: 88.0 + insets.left + insets.right, height: 88.0 + insets.top + insets.bottom)
     }
 
     override func layoutSubviews() {
@@ -52,10 +39,10 @@ class ContactItemComponent: ItemComponent {
         //avatarImageView.layer.borderWidth = 3.0
         //avatarImageView.layer.borderColor = UIColor.weirdGreen.cgColor
 
-        fullNameLabel.font = UIFont.walletFont(ofSize: 12, weight: .regular)
-        fullNameLabel.numberOfLines = 0
-        fullNameLabel.textAlignment = .center
-        fullNameLabel.textColor = .white
+        nameLabel.font = UIFont.walletFont(ofSize: 12, weight: .regular)
+        nameLabel.numberOfLines = 0
+        nameLabel.textAlignment = .center
+        nameLabel.textColor = .white
 
         self.view.backgroundColor = .darkSlateBlue
 
@@ -68,28 +55,8 @@ class ContactItemComponent: ItemComponent {
 
     func configure(avatar: UIImage, name: String) {
         self.avatarImageView.image = avatar
-        self.fullNameLabel.text = name
-    }
+        self.nameLabel.text = name
 
-    @objc
-    private func longPressGestureEvent(_ sender: UILongPressGestureRecognizer) {
-        switch sender.state {
-        case .began:
-            UIView.animate(withDuration: 0.25, animations: {
-                [weak self] in
-                self?.view.transform = .init(scaleX: 0.9, y: 0.9)
-            }, completion: {
-                [weak self] _ in
-
-                self?.onTap?()
-            })
-        case .ended:
-            UIView.animate(withDuration: 0.25) {
-                [weak self] in
-                self?.view.transform = .identity
-            }
-        default:
-            return
-        }
+        invalidateIntrinsicContentSize()
     }
 }

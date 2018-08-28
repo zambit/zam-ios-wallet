@@ -53,11 +53,11 @@ class CreateNewPasswordViewController: ContinueViewController, NewPasswordFormCo
     }
 
     func newPasswordFormComponent(_ newPasswordFormComponent: NewPasswordFormComponent, dontSatisfyTheCondition: PasswordsCondition) {
-        continueButton?.customAppearance.setEnabled(false)
+        continueButton?.custom.setEnabled(false)
     }
 
     func newPasswordFormComponentSatisfiesAllConditions(_ newPasswordFormComponent: NewPasswordFormComponent) {
-        continueButton?.customAppearance.setEnabled(true)
+        continueButton?.custom.setEnabled(true)
     }
 
     /**
@@ -78,7 +78,7 @@ class CreateNewPasswordViewController: ContinueViewController, NewPasswordFormCo
             return
         }
 
-        continueButton?.customAppearance.setLoading(true)
+        continueButton?.custom.setLoading(true)
 
         switch (recoveryAPI != nil, signupAPI != nil) {
         case (true, true):
@@ -90,7 +90,7 @@ class CreateNewPasswordViewController: ContinueViewController, NewPasswordFormCo
 
                     self?.dismissKeyboard()
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                        self?.continueButton?.customAppearance.setLoading(false)
+                        self?.continueButton?.custom.setLoading(false)
                         self?.onContinue?(phone)
                     }
 
@@ -99,7 +99,7 @@ class CreateNewPasswordViewController: ContinueViewController, NewPasswordFormCo
                     error in
 
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                        self?.continueButton?.customAppearance.setLoading(false)
+                        self?.continueButton?.custom.setLoading(false)
                     }
             }
         case (false, true):
@@ -109,7 +109,7 @@ class CreateNewPasswordViewController: ContinueViewController, NewPasswordFormCo
 
                     self?.dismissKeyboard()
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                        self?.continueButton?.customAppearance.setLoading(false)
+                        self?.continueButton?.custom.setLoading(false)
                         self?.onContinue?(authToken)
                     }
 
@@ -119,7 +119,7 @@ class CreateNewPasswordViewController: ContinueViewController, NewPasswordFormCo
                     error in
 
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                        self?.continueButton?.customAppearance.setLoading(false)
+                        self?.continueButton?.custom.setLoading(false)
                     }
             }
         case (false, false):

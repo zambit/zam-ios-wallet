@@ -135,7 +135,7 @@ class ContactsHorizontalComponent: Component, UICollectionViewDataSource, UIColl
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let _cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ContactItemComponent", for: indexPath)
 
-        guard let cell = _cell as? ContactItemComponent else {
+        guard let cell = _cell as? RectItemComponent else {
             fatalError()
         }
 
@@ -163,7 +163,7 @@ class ContactsHorizontalComponent: Component, UICollectionViewDataSource, UIColl
     }
 
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        guard let contactCell = cell as? ContactItemComponent else {
+        guard let contactCell = cell as? RectItemComponent else {
             fatalError()
         }
 
@@ -175,7 +175,7 @@ class ContactsHorizontalComponent: Component, UICollectionViewDataSource, UIColl
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 
-        return CGSize(width: collectionView.bounds.height - 16.0, height: collectionView.bounds.height)
+        return CGSize(width: 88.0, height: 88.0)
     }
 
     func searchTextFieldEditingChanged(_ searchTextField: SearchTextField, query: String) {

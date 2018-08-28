@@ -71,15 +71,15 @@ class DecimalKeyboardComponent: Component {
     func setDetailButtonKey(_ key: Key) {
         switch key {
         case .one, .two, .three, .four, .five, .six, .seven, .eight, .nine, .zero:
-            detailButton?.customAppearance.setDecimal(key.rawValue)
+            detailButton?.custom.setDecimal(key.rawValue)
         case .remove:
-            detailButton?.customAppearance.setIcon(#imageLiteral(resourceName: "icDeleteKeyboard"), id: Key.remove.rawValue)
+            detailButton?.custom.setIcon(#imageLiteral(resourceName: "icDeleteKeyboard"), id: Key.remove.rawValue)
         case .touchId:
-            detailButton?.customAppearance.setIcon(#imageLiteral(resourceName: "icTouchId"), id: Key.touchId.rawValue)
+            detailButton?.custom.setIcon(#imageLiteral(resourceName: "icTouchId"), id: Key.touchId.rawValue)
         case .faceId:
-            detailButton?.customAppearance.setIcon(#imageLiteral(resourceName: "icFaceId"), id: Key.faceId.rawValue)
+            detailButton?.custom.setIcon(#imageLiteral(resourceName: "icFaceId"), id: Key.faceId.rawValue)
         case .empty:
-            detailButton?.customAppearance.setEmpty()
+            detailButton?.custom.setEmpty()
         }
     }
 
@@ -92,19 +92,19 @@ class DecimalKeyboardComponent: Component {
         let rect = CGRect(origin: .zero, size: CGSize(width: keyboardButtonEdge, height: keyboardButtonEdge))
 
         let one = DecimalButton(frame: rect)
-            one.customAppearance.setDecimal(Key.one.rawValue)
+            one.custom.setDecimal(Key.one.rawValue)
             one.widthAnchor.constraint(equalToConstant: keyboardButtonEdge).isActive = true
             one.heightAnchor.constraint(equalTo: one.widthAnchor).isActive = true
             one.addTarget(self, action: #selector(buttonWasTapped(_:)), for: .touchUpInside)
 
         let two = DecimalButton(frame: rect)
-            two.customAppearance.setDecimal(Key.two.rawValue)
+            two.custom.setDecimal(Key.two.rawValue)
             two.widthAnchor.constraint(equalToConstant: keyboardButtonEdge).isActive = true
             two.heightAnchor.constraint(equalTo: two.widthAnchor).isActive = true
             two.addTarget(self, action: #selector(buttonWasTapped(_:)), for: .touchUpInside)
 
         let three = DecimalButton(frame: rect)
-            three.customAppearance.setDecimal(Key.three.rawValue)
+            three.custom.setDecimal(Key.three.rawValue)
             three.widthAnchor.constraint(equalToConstant: keyboardButtonEdge).isActive = true
             three.heightAnchor.constraint(equalTo: three.widthAnchor).isActive = true
             three.addTarget(self, action: #selector(buttonWasTapped(_:)), for: .touchUpInside)
@@ -118,19 +118,19 @@ class DecimalKeyboardComponent: Component {
         lineStackViews.append(firstLineStackView)
 
         let four = DecimalButton(frame: rect)
-            four.customAppearance.setDecimal(Key.four.rawValue)
+            four.custom.setDecimal(Key.four.rawValue)
             four.widthAnchor.constraint(equalToConstant: keyboardButtonEdge).isActive = true
             four.heightAnchor.constraint(equalTo: four.widthAnchor).isActive = true
             four.addTarget(self, action: #selector(buttonWasTapped(_:)), for: .touchUpInside)
 
         let five = DecimalButton(frame: rect)
-            five.customAppearance.setDecimal(Key.five.rawValue)
+            five.custom.setDecimal(Key.five.rawValue)
             five.widthAnchor.constraint(equalToConstant: keyboardButtonEdge).isActive = true
             five.heightAnchor.constraint(equalTo: five.widthAnchor).isActive = true
             five.addTarget(self, action: #selector(buttonWasTapped(_:)), for: .touchUpInside)
 
         let six = DecimalButton(frame: rect)
-            six.customAppearance.setDecimal(Key.six.rawValue)
+            six.custom.setDecimal(Key.six.rawValue)
             six.widthAnchor.constraint(equalToConstant: keyboardButtonEdge).isActive = true
             six.heightAnchor.constraint(equalTo: six.widthAnchor).isActive = true
             six.addTarget(self, action: #selector(buttonWasTapped(_:)), for: .touchUpInside)
@@ -144,19 +144,19 @@ class DecimalKeyboardComponent: Component {
         lineStackViews.append(secondLineStackView)
 
         let seven = DecimalButton(frame: rect)
-            seven.customAppearance.setDecimal(Key.seven.rawValue)
+            seven.custom.setDecimal(Key.seven.rawValue)
             seven.widthAnchor.constraint(equalToConstant: keyboardButtonEdge).isActive = true
             seven.heightAnchor.constraint(equalTo: seven.widthAnchor).isActive = true
             seven.addTarget(self, action: #selector(buttonWasTapped(_:)), for: .touchUpInside)
 
         let eight = DecimalButton(frame: rect)
-            eight.customAppearance.setDecimal(Key.eight.rawValue)
+            eight.custom.setDecimal(Key.eight.rawValue)
             eight.widthAnchor.constraint(equalToConstant: keyboardButtonEdge).isActive = true
             eight.heightAnchor.constraint(equalTo: eight.widthAnchor).isActive = true
             eight.addTarget(self, action: #selector(buttonWasTapped(_:)), for: .touchUpInside)
 
         let nine = DecimalButton(frame: rect)
-            nine.customAppearance.setDecimal(Key.nine.rawValue)
+            nine.custom.setDecimal(Key.nine.rawValue)
             nine.widthAnchor.constraint(equalToConstant: keyboardButtonEdge).isActive = true
             nine.heightAnchor.constraint(equalTo: nine.widthAnchor).isActive = true
             nine.addTarget(self, action: #selector(buttonWasTapped(_:)), for: .touchUpInside)
@@ -170,7 +170,7 @@ class DecimalKeyboardComponent: Component {
         lineStackViews.append(thirdLineStackView)
 
         let empty = DecimalButton(frame: rect)
-            empty.customAppearance.setEmpty()
+            empty.custom.setEmpty()
             empty.widthAnchor.constraint(equalToConstant: keyboardButtonEdge).isActive = true
             empty.heightAnchor.constraint(equalTo: empty.widthAnchor).isActive = true
             empty.addTarget(self, action: #selector(buttonWasTapped(_:)), for: .touchUpInside)
@@ -178,13 +178,13 @@ class DecimalKeyboardComponent: Component {
         detailButton = empty
 
         let zero = DecimalButton(frame: rect)
-            zero.customAppearance.setDecimal(Key.zero.rawValue)
+            zero.custom.setDecimal(Key.zero.rawValue)
             zero.widthAnchor.constraint(equalToConstant: keyboardButtonEdge).isActive = true
             zero.heightAnchor.constraint(equalTo: zero.widthAnchor).isActive = true
             zero.addTarget(self, action: #selector(buttonWasTapped(_:)), for: .touchUpInside)
 
         let remove = DecimalButton(frame: rect)
-            remove.customAppearance.setIcon(#imageLiteral(resourceName: "icDeleteKeyboard"), id: Key.remove.rawValue)
+            remove.custom.setIcon(#imageLiteral(resourceName: "icDeleteKeyboard"), id: Key.remove.rawValue)
             remove.widthAnchor.constraint(equalToConstant: keyboardButtonEdge).isActive = true
             remove.heightAnchor.constraint(equalTo: remove.widthAnchor).isActive = true
             remove.addTarget(self, action: #selector(buttonWasTapped(_:)), for: .touchUpInside)
@@ -207,7 +207,7 @@ class DecimalKeyboardComponent: Component {
     @objc
     private func buttonWasTapped(_ sender: DecimalButton) {
         guard
-            let id = sender.customAppearance.id,
+            let id = sender.custom.id,
             let key = Key(rawValue: id) else {
             return
         }

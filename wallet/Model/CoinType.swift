@@ -57,4 +57,3 @@ enum CoinType: String {
         return .btc
     }
 }
-

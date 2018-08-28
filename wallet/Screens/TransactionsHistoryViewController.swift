@@ -11,10 +11,13 @@ import UIKit
 
 class TransactionsHistoryViewController: WalletViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
 
+    var onFilter: (() -> Void)?
+
     var userManager: UserDefaultsManager?
     var userAPI: UserAPI?
 
     @IBOutlet var searchBar: UISearchBar?
+    @IBOutlet var filterButton: UIButton?
     @IBOutlet var historyTableView: UITableView?
 
     private var paginator: Paginator<TransactionsGroupData>?
@@ -30,6 +33,9 @@ class TransactionsHistoryViewController: WalletViewController, UITableViewDelega
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        self.filterButton?.setImage(#imageLiteral(resourceName: "filter"), for: .normal)
+        self.filterButton?.addTarget(self, action: #selector(filterButtonTouchUpInsideEvent(_:)), for: .touchUpInside)
 
         self.historyTableView?.register(TransactionsGroupHeaderComponent.self, forHeaderFooterViewReuseIdentifier: "TransactionsGroupHeaderComponent")
         self.historyTableView?.register(TransactionCellComponent.self , forCellReuseIdentifier: "TransactionCellComponent")
@@ -202,23 +208,19 @@ class TransactionsHistoryViewController: WalletViewController, UITableViewDelega
     // MARK: - UIScrollViewDelegate
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        //super.scrollViewDidScroll(scrollView)
 
         // when reaching bottom, load a new page
         if scrollView.contentOffset.y == scrollView.contentSize.height - scrollView.bounds.size.height {
 
             // ask next page only if we haven't reached last page
             if let last = paginator?.reachedLastPage, last == false {
-
-                // fetch next page of results
-                self.fetchNextPage()
+                self.paginator?.fetchNextPage()
             }
         }
     }
 
-    func fetchNextPage() {
-        self.paginator?.fetchNextPage()
-    }
+
+    // MARK: - Setup tableView subviews
 
     private func setupTableViewFooter() {
         // set up label
@@ -270,10 +272,18 @@ class TransactionsHistoryViewController: WalletViewController, UITableViewDelega
         tableView.viewWithTag(199)?.removeFromSuperview()
     }
 
+
+    // MARK: - UIControl events
+
     @objc
     private func refreshControlValueChangedEvent(_ sender: UIRefreshControl) {
         setupTableViewFooter()
         topRefreshControl?.beginRefreshing()
         paginator?.reload()
+    }
+
+    @objc
+    private func filterButtonTouchUpInsideEvent(_ sender: UIButton) {
+        onFilter?()
     }
 }

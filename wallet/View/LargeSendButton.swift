@@ -22,7 +22,7 @@ class LargeSendButton: UIButton, CustomUI {
     private var successView: CheckAnimationView!
     private var failureView: CrossAnimationView!
 
-    struct CustomAppearance {
+    struct CustomBehaviour {
         weak var parent: LargeSendButton?
 
         func setLoading() {
@@ -60,8 +60,8 @@ class LargeSendButton: UIButton, CustomUI {
         }
     }
 
-    var customAppearance: CustomAppearance {
-        return CustomAppearance(parent: self)
+    var custom: CustomBehaviour {
+        return CustomBehaviour(parent: self)
     }
 
     private(set) var sendState: SendState = .initial

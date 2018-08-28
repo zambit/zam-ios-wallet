@@ -218,14 +218,14 @@ class TransactionDetailViewController: WalletViewController {
                 recipient = address
             }
 
-            sendButton?.customAppearance.setLoading()
+            sendButton?.custom.setLoading()
 
             userAPI?.sendTransaction(token: token, walletId: data.walletId, recipient: recipient, amount: data.amountData.original).done {
                 [weak self]
                 transaction in
 
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                    self?.sendButton?.customAppearance.setSuccess()
+                    self?.sendButton?.custom.setSuccess()
                     self?.changeDataFor(state: .success)
                 }
                 }.catch {
@@ -233,7 +233,7 @@ class TransactionDetailViewController: WalletViewController {
                     error in
 
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                        self?.sendButton?.customAppearance.setFailure()
+                        self?.sendButton?.custom.setFailure()
                         self?.changeDataFor(state: .failure)
 
                         if let serverError = error as? WalletResponseError {

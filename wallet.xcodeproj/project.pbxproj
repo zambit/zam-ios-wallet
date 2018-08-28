@@ -150,8 +150,6 @@
 		8CA218DB212D892A0063C188 /* ContactData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA218DA212D892A0063C188 /* ContactData.swift */; };
 		8CA218DD212D93570063C188 /* ContactsHorizontalComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA218DC212D93570063C188 /* ContactsHorizontalComponent.swift */; };
 		8CA218DF212D93670063C188 /* ContactsHorizontalComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CA218DE212D93670063C188 /* ContactsHorizontalComponent.xib */; };
-		8CA218E1212D9B990063C188 /* ContactItemComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA218E0212D9B990063C188 /* ContactItemComponent.swift */; };
-		8CA218E3212D9BA50063C188 /* ContactItemComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CA218E2212D9BA50063C188 /* ContactItemComponent.xib */; };
 		8CA218E7212DA8300063C188 /* SearchTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA218E6212DA8300063C188 /* SearchTextField.swift */; };
 		8CA218E9212DB0210063C188 /* RoundedImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA218E8212DB0210063C188 /* RoundedImageView.swift */; };
 		8CA218EB212DC2DB0063C188 /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA218EA212DC2DB0063C188 /* UIColor+Extensions.swift */; };
@@ -175,12 +173,28 @@
 		8CA2191821343FE10063C188 /* IllustrationalPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA2191721343FE10063C188 /* IllustrationalPlaceholder.swift */; };
 		8CA2191A213442100063C188 /* IllustrationalPlaceholder.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CA21919213442100063C188 /* IllustrationalPlaceholder.xib */; };
 		8CA2191D21344C730063C188 /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA2191C21344C730063C188 /* Array+Extensions.swift */; };
+		8CA2191F213549DD0063C188 /* TransactionsHistoryFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA2191E213549DD0063C188 /* TransactionsHistoryFilterViewController.swift */; };
+		8CA2192221354CDF0063C188 /* TransactionsGroupingFilterComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA2192121354CDF0063C188 /* TransactionsGroupingFilterComponent.swift */; };
+		8CA2192421354D030063C188 /* TransactionsGroupingFilterComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CA2192321354D030063C188 /* TransactionsGroupingFilterComponent.xib */; };
+		8CA2192721354D370063C188 /* TransactionsDateIntervalFilterComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA2192621354D370063C188 /* TransactionsDateIntervalFilterComponent.swift */; };
+		8CA2192921354ECF0063C188 /* TransactionsDateIntervalFilterComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CA2192821354ECF0063C188 /* TransactionsDateIntervalFilterComponent.xib */; };
+		8CA2192C21355CF60063C188 /* TransactionsFeatureFilterComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA2192B21355CF60063C188 /* TransactionsFeatureFilterComponent.swift */; };
+		8CA2192E21355D0A0063C188 /* TransactionsFeatureFilterComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CA2192D21355D0A0063C188 /* TransactionsFeatureFilterComponent.xib */; };
+		8CA21931213561C70063C188 /* MultiStatableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA21930213561C70063C188 /* MultiStatableButton.swift */; };
+		8CA2193321356C010063C188 /* FeatureItemComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA2193221356C010063C188 /* FeatureItemComponent.swift */; };
+		8CA2193521356C380063C188 /* FeatureItemComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CA2193421356C380063C188 /* FeatureItemComponent.xib */; };
+		8CA21937213591BB0063C188 /* TransactionsCoinFilterComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA21936213591BB0063C188 /* TransactionsCoinFilterComponent.swift */; };
+		8CA21939213591D10063C188 /* TransactionsCoinFilterComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CA21938213591D00063C188 /* TransactionsCoinFilterComponent.xib */; };
+		8CA219402135949C0063C188 /* CoinItemComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA2193F2135949C0063C188 /* CoinItemComponent.swift */; };
 		8CF1DE4220EF98160036F986 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF1DE4120EF98160036F986 /* AuthViewController.swift */; };
 		8CF1DE4520EFB1A70036F986 /* HorizontalScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF1DE4420EFB1A70036F986 /* HorizontalScrollView.swift */; };
 		8CF1DE4720F37B5E0036F986 /* SMSConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF1DE4620F37B5E0036F986 /* SMSConfirmationViewController.swift */; };
 		8CF1DE4920F3A0BB0036F986 /* PasswordRecoveryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF1DE4820F3A0BB0036F986 /* PasswordRecoveryViewController.swift */; };
 		8CF1DE4B20F3AD210036F986 /* NewPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF1DE4A20F3AD210036F986 /* NewPasswordViewController.swift */; };
 		8CF1DE4D20F3BDB90036F986 /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF1DE4C20F3BDB90036F986 /* KeyboardViewController.swift */; };
+		8CF41D882135973F006D4FE2 /* RectItemComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CF41D862135973E006D4FE2 /* RectItemComponent.xib */; };
+		8CF41D892135973F006D4FE2 /* RectItemComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF41D872135973F006D4FE2 /* RectItemComponent.swift */; };
+		8CF41D8B21359776006D4FE2 /* ContactItemComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF41D8A21359776006D4FE2 /* ContactItemComponent.swift */; };
 		8CF5F9282112FE580083B36A /* DelayTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF5F9272112FE580083B36A /* DelayTimer.swift */; };
 		8CF5F92D2113206A0083B36A /* SecondEnterLoginFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF5F92B21130F860083B36A /* SecondEnterLoginFlow.swift */; };
 		8CF5F92F211327EB0083B36A /* MaskParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF5F92E211327EB0083B36A /* MaskParser.swift */; };
@@ -356,8 +370,6 @@
 		8CA218DA212D892A0063C188 /* ContactData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactData.swift; sourceTree = "<group>"; };
 		8CA218DC212D93570063C188 /* ContactsHorizontalComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsHorizontalComponent.swift; sourceTree = "<group>"; };
 		8CA218DE212D93670063C188 /* ContactsHorizontalComponent.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContactsHorizontalComponent.xib; sourceTree = "<group>"; };
-		8CA218E0212D9B990063C188 /* ContactItemComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactItemComponent.swift; sourceTree = "<group>"; };
-		8CA218E2212D9BA50063C188 /* ContactItemComponent.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContactItemComponent.xib; sourceTree = "<group>"; };
 		8CA218E6212DA8300063C188 /* SearchTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTextField.swift; sourceTree = "<group>"; };
 		8CA218E8212DB0210063C188 /* RoundedImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedImageView.swift; sourceTree = "<group>"; };
 		8CA218EA212DC2DB0063C188 /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
@@ -381,12 +393,28 @@
 		8CA2191721343FE10063C188 /* IllustrationalPlaceholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IllustrationalPlaceholder.swift; sourceTree = "<group>"; };
 		8CA21919213442100063C188 /* IllustrationalPlaceholder.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IllustrationalPlaceholder.xib; sourceTree = "<group>"; };
 		8CA2191C21344C730063C188 /* Array+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
+		8CA2191E213549DD0063C188 /* TransactionsHistoryFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsHistoryFilterViewController.swift; sourceTree = "<group>"; };
+		8CA2192121354CDF0063C188 /* TransactionsGroupingFilterComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsGroupingFilterComponent.swift; sourceTree = "<group>"; };
+		8CA2192321354D030063C188 /* TransactionsGroupingFilterComponent.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransactionsGroupingFilterComponent.xib; sourceTree = "<group>"; };
+		8CA2192621354D370063C188 /* TransactionsDateIntervalFilterComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsDateIntervalFilterComponent.swift; sourceTree = "<group>"; };
+		8CA2192821354ECF0063C188 /* TransactionsDateIntervalFilterComponent.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransactionsDateIntervalFilterComponent.xib; sourceTree = "<group>"; };
+		8CA2192B21355CF60063C188 /* TransactionsFeatureFilterComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsFeatureFilterComponent.swift; sourceTree = "<group>"; };
+		8CA2192D21355D0A0063C188 /* TransactionsFeatureFilterComponent.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransactionsFeatureFilterComponent.xib; sourceTree = "<group>"; };
+		8CA21930213561C70063C188 /* MultiStatableButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiStatableButton.swift; sourceTree = "<group>"; };
+		8CA2193221356C010063C188 /* FeatureItemComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureItemComponent.swift; sourceTree = "<group>"; };
+		8CA2193421356C380063C188 /* FeatureItemComponent.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeatureItemComponent.xib; sourceTree = "<group>"; };
+		8CA21936213591BB0063C188 /* TransactionsCoinFilterComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsCoinFilterComponent.swift; sourceTree = "<group>"; };
+		8CA21938213591D00063C188 /* TransactionsCoinFilterComponent.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransactionsCoinFilterComponent.xib; sourceTree = "<group>"; };
+		8CA2193F2135949C0063C188 /* CoinItemComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinItemComponent.swift; sourceTree = "<group>"; };
 		8CF1DE4120EF98160036F986 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		8CF1DE4420EFB1A70036F986 /* HorizontalScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalScrollView.swift; sourceTree = "<group>"; };
 		8CF1DE4620F37B5E0036F986 /* SMSConfirmationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMSConfirmationViewController.swift; sourceTree = "<group>"; };
 		8CF1DE4820F3A0BB0036F986 /* PasswordRecoveryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordRecoveryViewController.swift; sourceTree = "<group>"; };
 		8CF1DE4A20F3AD210036F986 /* NewPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPasswordViewController.swift; sourceTree = "<group>"; };
 		8CF1DE4C20F3BDB90036F986 /* KeyboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardViewController.swift; sourceTree = "<group>"; };
+		8CF41D862135973E006D4FE2 /* RectItemComponent.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RectItemComponent.xib; sourceTree = "<group>"; };
+		8CF41D872135973F006D4FE2 /* RectItemComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RectItemComponent.swift; sourceTree = "<group>"; };
+		8CF41D8A21359776006D4FE2 /* ContactItemComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactItemComponent.swift; sourceTree = "<group>"; };
 		8CF5F9272112FE580083B36A /* DelayTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelayTimer.swift; sourceTree = "<group>"; };
 		8CF5F92B21130F860083B36A /* SecondEnterLoginFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondEnterLoginFlow.swift; sourceTree = "<group>"; };
 		8CF5F92E211327EB0083B36A /* MaskParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskParser.swift; sourceTree = "<group>"; };
@@ -464,6 +492,7 @@
 				8C6088472110A75100470411 /* AdditionalTextButton.swift */,
 				8CA218A6212342B90063C188 /* CircleImageView.swift */,
 				8CA218E8212DB0210063C188 /* RoundedImageView.swift */,
+				8CA21930213561C70063C188 /* MultiStatableButton.swift */,
 				8C6088612111FB0A00470411 /* Components */,
 				8C04BC36211C872E00E90090 /* ContainerView.swift */,
 				8C333D76210F50E000949AC0 /* CountryIconImageView.swift */,
@@ -502,6 +531,7 @@
 				8CA218A0212304590063C188 /* SendMoneyViewController.swift */,
 				8CA218C82126D4FD0063C188 /* TransactionDetailViewController.swift */,
 				8CA218F0213002880063C188 /* TransactionsHistoryViewController.swift */,
+				8CA2191E213549DD0063C188 /* TransactionsHistoryFilterViewController.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -797,6 +827,8 @@
 				8CF5F9622114AB000083B36A /* ItemComponent.swift */,
 				8C52FFE92119DA2700EB55EA /* CellComponent.swift */,
 				8CA2191521342D720063C188 /* HeaderFooterComponent.swift */,
+				8CA218E5212DA5400063C188 /* RectItemComponent */,
+				8CA2192021354C8F0063C188 /* TransactionsFilterComponents */,
 				8CA219102134208B0063C188 /* TransactionsGroupHeaderComponent */,
 				8CA2190B21341FE60063C188 /* TransactionCellComponent */,
 				8CA218E4212DA52F0063C188 /* ContactsHorizontalComponent */,
@@ -897,18 +929,18 @@
 			children = (
 				8CA218DC212D93570063C188 /* ContactsHorizontalComponent.swift */,
 				8CA218DE212D93670063C188 /* ContactsHorizontalComponent.xib */,
-				8CA218E5212DA5400063C188 /* ContactItemComponent */,
+				8CF41D8A21359776006D4FE2 /* ContactItemComponent.swift */,
 			);
 			path = ContactsHorizontalComponent;
 			sourceTree = "<group>";
 		};
-		8CA218E5212DA5400063C188 /* ContactItemComponent */ = {
+		8CA218E5212DA5400063C188 /* RectItemComponent */ = {
 			isa = PBXGroup;
 			children = (
-				8CA218E0212D9B990063C188 /* ContactItemComponent.swift */,
-				8CA218E2212D9BA50063C188 /* ContactItemComponent.xib */,
+				8CF41D872135973F006D4FE2 /* RectItemComponent.swift */,
+				8CF41D862135973E006D4FE2 /* RectItemComponent.xib */,
 			);
-			path = ContactItemComponent;
+			path = RectItemComponent;
 			sourceTree = "<group>";
 		};
 		8CA2190B21341FE60063C188 /* TransactionCellComponent */ = {
@@ -936,6 +968,64 @@
 				8CA21919213442100063C188 /* IllustrationalPlaceholder.xib */,
 			);
 			path = IllustrationPlaceholder;
+			sourceTree = "<group>";
+		};
+		8CA2192021354C8F0063C188 /* TransactionsFilterComponents */ = {
+			isa = PBXGroup;
+			children = (
+				8CA2192521354D080063C188 /* TransactionsGroupingFilterComponent */,
+				8CA2192A21354EDA0063C188 /* TransactionsDateIntervalFilterComponent */,
+				8CA2192F21355D140063C188 /* TransactionsFeatureFilterComponent */,
+				8CA2193B213594570063C188 /* TransactionsCoinFilterComponent */,
+			);
+			path = TransactionsFilterComponents;
+			sourceTree = "<group>";
+		};
+		8CA2192521354D080063C188 /* TransactionsGroupingFilterComponent */ = {
+			isa = PBXGroup;
+			children = (
+				8CA2192121354CDF0063C188 /* TransactionsGroupingFilterComponent.swift */,
+				8CA2192321354D030063C188 /* TransactionsGroupingFilterComponent.xib */,
+			);
+			path = TransactionsGroupingFilterComponent;
+			sourceTree = "<group>";
+		};
+		8CA2192A21354EDA0063C188 /* TransactionsDateIntervalFilterComponent */ = {
+			isa = PBXGroup;
+			children = (
+				8CA2192621354D370063C188 /* TransactionsDateIntervalFilterComponent.swift */,
+				8CA2192821354ECF0063C188 /* TransactionsDateIntervalFilterComponent.xib */,
+			);
+			path = TransactionsDateIntervalFilterComponent;
+			sourceTree = "<group>";
+		};
+		8CA2192F21355D140063C188 /* TransactionsFeatureFilterComponent */ = {
+			isa = PBXGroup;
+			children = (
+				8CA2192B21355CF60063C188 /* TransactionsFeatureFilterComponent.swift */,
+				8CA2192D21355D0A0063C188 /* TransactionsFeatureFilterComponent.xib */,
+				8CA2193A213591E70063C188 /* FeatureItemComponent */,
+			);
+			path = TransactionsFeatureFilterComponent;
+			sourceTree = "<group>";
+		};
+		8CA2193A213591E70063C188 /* FeatureItemComponent */ = {
+			isa = PBXGroup;
+			children = (
+				8CA2193221356C010063C188 /* FeatureItemComponent.swift */,
+				8CA2193421356C380063C188 /* FeatureItemComponent.xib */,
+			);
+			path = FeatureItemComponent;
+			sourceTree = "<group>";
+		};
+		8CA2193B213594570063C188 /* TransactionsCoinFilterComponent */ = {
+			isa = PBXGroup;
+			children = (
+				8CA21936213591BB0063C188 /* TransactionsCoinFilterComponent.swift */,
+				8CA21938213591D00063C188 /* TransactionsCoinFilterComponent.xib */,
+				8CA2193F2135949C0063C188 /* CoinItemComponent.swift */,
+			);
+			path = TransactionsCoinFilterComponent;
 			sourceTree = "<group>";
 		};
 		8CF1DE4320EF9D170036F986 /* Trash */ = {
@@ -1149,6 +1239,7 @@
 				8C0918FA2105F75200703224 /* Onboarding.storyboard in Resources */,
 				8C52FFE82119D35B00EB55EA /* WalletItemComponent.xib in Resources */,
 				8CA218FC21302BD00063C188 /* TransactionCellComponent.xib in Resources */,
+				8CA2192921354ECF0063C188 /* TransactionsDateIntervalFilterComponent.xib in Resources */,
 				8CF5F946211479830083B36A /* Pin.storyboard in Resources */,
 				8CA218DF212D93670063C188 /* ContactsHorizontalComponent.xib in Resources */,
 				8C04BC30211C4FC100E90090 /* MavenPro-Medium.ttf in Resources */,
@@ -1163,13 +1254,17 @@
 				8C333D5E210B5E1600949AC0 /* NewPasswordFormView.xib in Resources */,
 				8C333D4E210B272D00949AC0 /* TextCheckBoxView.xib in Resources */,
 				8CF5F95721149CD20083B36A /* DotsFieldComponent.xib in Resources */,
+				8CA2192E21355D0A0063C188 /* TransactionsFeatureFilterComponent.xib in Resources */,
+				8CA2192421354D030063C188 /* TransactionsGroupingFilterComponent.xib in Resources */,
 				8C333D52210B2C5800949AC0 /* PhoneNumberFormComponent.xib in Resources */,
-				8CA218E3212D9BA50063C188 /* ContactItemComponent.xib in Resources */,
 				8C04BC33211C4FC100E90090 /* MavenPro-Regular.ttf in Resources */,
+				8CA21939213591D10063C188 /* TransactionsCoinFilterComponent.xib in Resources */,
 				8CA218C62125AD230063C188 /* WalletSmallItemComponent.xib in Resources */,
 				8CF5F9602114A7880083B36A /* CreatePinStageItem.xib in Resources */,
 				8CA2188F2121D97C0063C188 /* DecimalKeyboardComponent.xib in Resources */,
 				8CA218922122E8D70063C188 /* SendMoneyComponent.xib in Resources */,
+				8CA2193521356C380063C188 /* FeatureItemComponent.xib in Resources */,
+				8CF41D882135973F006D4FE2 /* RectItemComponent.xib in Resources */,
 				8C34617020EF8FA700746724 /* Main.storyboard in Resources */,
 				8C333D71210F1F5300949AC0 /* PhoneMasks.plist in Resources */,
 				8CA218B621248F510063C188 /* SendMoneyAmountComponent.xib in Resources */,
@@ -1229,12 +1324,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				8CF5F93321134DBC0083B36A /* TransitionCoordinator.swift in Sources */,
+				8CA21937213591BB0063C188 /* TransactionsCoinFilterComponent.swift in Sources */,
 				8CA218A7212342B90063C188 /* CircleImageView.swift in Sources */,
+				8CA2191F213549DD0063C188 /* TransactionsHistoryFilterViewController.swift in Sources */,
 				8C52FFEA2119DA2700EB55EA /* CellComponent.swift in Sources */,
 				8CF5F942211457200083B36A /* Component.swift in Sources */,
 				8CA218EB212DC2DB0063C188 /* UIColor+Extensions.swift in Sources */,
 				8C09196421076B8200703224 /* RecoveryRequest.swift in Sources */,
 				8CA218DD212D93570063C188 /* ContactsHorizontalComponent.swift in Sources */,
+				8CA2192C21355CF60063C188 /* TransactionsFeatureFilterComponent.swift in Sources */,
 				8C04BC452121D48E00E90090 /* BalanceData.swift in Sources */,
 				8CF5F95E2114A77D0083B36A /* CreatePinStageItem.swift in Sources */,
 				8C60884C2111A20B00470411 /* LoginPasswordFormComponent.swift in Sources */,
@@ -1247,6 +1345,7 @@
 				8C091949210714D800703224 /* NetworkService.swift in Sources */,
 				8C0919762108BE6000703224 /* UserRequest.swift in Sources */,
 				8C04BC37211C872E00E90090 /* ContainerView.swift in Sources */,
+				8CA2193321356C010063C188 /* FeatureItemComponent.swift in Sources */,
 				8C60885C2111F1A200470411 /* RecoveryFlow.swift in Sources */,
 				8CF1DE4220EF98160036F986 /* AuthViewController.swift in Sources */,
 				8CA2189D2122EEDE0063C188 /* SegmentedControlElement.swift in Sources */,
@@ -1291,6 +1390,7 @@
 				8CA218E9212DB0210063C188 /* RoundedImageView.swift in Sources */,
 				8CA218CD2126F23B0063C188 /* UserData.swift in Sources */,
 				8CA218D0212737210063C188 /* LargeSendButton.swift in Sources */,
+				8CF41D892135973F006D4FE2 /* RectItemComponent.swift in Sources */,
 				8C333D50210B2B6900949AC0 /* PhoneNumberFormComponent.swift in Sources */,
 				8CF5F931211345320083B36A /* HomeFlow.swift in Sources */,
 				8C09196221076B7000703224 /* RecoveryProvider.swift in Sources */,
@@ -1300,6 +1400,7 @@
 				8C6088442110A34200470411 /* CustomUI.swift in Sources */,
 				8C091908210605FA00703224 /* InitialRouter.swift in Sources */,
 				8C60885E2111F28000470411 /* EnterNewPhoneNumberViewController.swift in Sources */,
+				8CA2192721354D370063C188 /* TransactionsDateIntervalFilterComponent.swift in Sources */,
 				8CF1DE4B20F3AD210036F986 /* NewPasswordViewController.swift in Sources */,
 				8CF5F93A21144BE80083B36A /* UIDevice+Extensions.swift in Sources */,
 				8CA219122134259F0063C188 /* Date+Extensions.swift in Sources */,
@@ -1350,6 +1451,7 @@
 				8CA218A1212304590063C188 /* SendMoneyViewController.swift in Sources */,
 				8C0919832109CC2000703224 /* EnterLoginPasswordViewController.swift in Sources */,
 				8C0919562107362300703224 /* CodableSuccess.swift in Sources */,
+				8CF41D8B21359776006D4FE2 /* ContactItemComponent.swift in Sources */,
 				8CF5F95221148D800083B36A /* DotsFieldComponent.swift in Sources */,
 				8C09197B2108D66100703224 /* SignUpFlow.swift in Sources */,
 				8CA218BD2125A34B0063C188 /* KeyboardBehaviourFollowingViewController.swift in Sources */,
@@ -1364,6 +1466,7 @@
 				8C34616B20EF8FA700746724 /* AppDelegate.swift in Sources */,
 				8CA2191821343FE10063C188 /* IllustrationalPlaceholder.swift in Sources */,
 				8C333D44210B001500949AC0 /* OnboardingLargeButton.swift in Sources */,
+				8CA219402135949C0063C188 /* CoinItemComponent.swift in Sources */,
 				8CA218D6212D61EB0063C188 /* BiometricIDAuth.swift in Sources */,
 				8CA218EF212DCC030063C188 /* LetterImage.swift in Sources */,
 				8C333D342109F02000949AC0 /* ScreenFlow.swift in Sources */,
@@ -1374,14 +1477,15 @@
 				8C0919532107320800703224 /* CodableFailure.swift in Sources */,
 				8C04BC2A211C4F4000E90090 /* UIFont+Additions.swift in Sources */,
 				8C04BC432121C23200E90090 /* UIImage+Extensions.swift in Sources */,
+				8CA21931213561C70063C188 /* MultiStatableButton.swift in Sources */,
 				8C333D42210A094500949AC0 /* UIColor+Additions.swift in Sources */,
 				8CA2191621342D720063C188 /* HeaderFooterComponent.swift in Sources */,
 				8CF5F93F211456D50083B36A /* DecimalKeyboardComponent.swift in Sources */,
 				8CA218AF212479040063C188 /* SendMoneyButton.swift in Sources */,
-				8CA218E1212D9B990063C188 /* ContactItemComponent.swift in Sources */,
 				8C09193B210623F200703224 /* Environment.swift in Sources */,
 				8C6088482110A75100470411 /* AdditionalTextButton.swift in Sources */,
 				8C333D56210B4EF400949AC0 /* VerificationCodeFormComponent.swift in Sources */,
+				8CA2192221354CDF0063C188 /* TransactionsGroupingFilterComponent.swift in Sources */,
 				8C09196D21089FA700703224 /* AuthRequest.swift in Sources */,
 				8CF5F94C21147F000083B36A /* EnterPinFlow.swift in Sources */,
 				8CA218D9212D889A0063C188 /* UserContactsManager.swift in Sources */,

@@ -69,11 +69,11 @@ class EnterNewPhoneNumberViewController: ContinueViewController, PhoneNumberForm
     // PhoneNumberFormViewDelegate
 
     func phoneNumberFormComponent(_ phoneNumberFormViewController: PhoneNumberFormComponent, dontSatisfyTheCondition: PhoneCondition) {
-        continueButton?.customAppearance.setEnabled(false)
+        continueButton?.custom.setEnabled(false)
     }
 
     func phoneNumberFormComponentSatisfiesAllConditions(_ phoneNumberFormViewController: PhoneNumberFormComponent) {
-        continueButton?.customAppearance.setEnabled(true)
+        continueButton?.custom.setEnabled(true)
     }
 
     private func addSubviews() {
@@ -101,14 +101,14 @@ class EnterNewPhoneNumberViewController: ContinueViewController, PhoneNumberForm
             return
         }
 
-        continueButton?.customAppearance.setLoading(true)
+        continueButton?.custom.setLoading(true)
         signupAPI?.sendVerificationCode(to: phone).done {
             [weak self] in
 
             self?.dismissKeyboard()
 
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                self?.continueButton?.customAppearance.setLoading(false)
+                self?.continueButton?.custom.setLoading(false)
                 self?.onContinue?(phone)
             }
         }.catch {
@@ -130,7 +130,7 @@ class EnterNewPhoneNumberViewController: ContinueViewController, PhoneNumberForm
             }
 
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                self?.continueButton?.customAppearance.setLoading(false)
+                self?.continueButton?.custom.setLoading(false)
             }
         }
     }

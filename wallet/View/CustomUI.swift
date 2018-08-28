@@ -11,8 +11,8 @@ import UIKit
 
 protocol CustomUI {
 
-    associatedtype CustomAppearance
+    associatedtype CustomBehaviour
 
-    var customAppearance: CustomAppearance { get }
+    var custom: CustomBehaviour { get }
 
 }

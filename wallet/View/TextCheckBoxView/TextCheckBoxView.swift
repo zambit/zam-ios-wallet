@@ -38,7 +38,7 @@ class TextCheckBoxView: UIView {
         contentView.frame = self.bounds
         contentView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
 
-        checkBox?.customAppearance.setChecked(false)
+        checkBox?.custom.setChecked(false)
         checkBox?.addTarget(self, action: #selector(changeCheckBoxState(_:)), for: .touchUpInside)
     }
 
@@ -49,10 +49,10 @@ class TextCheckBoxView: UIView {
 
     @objc
     private func changeCheckBoxState(_ sender: Any) {
-        guard let state = checkBox?.customAppearance.isChecked else {
+        guard let state = checkBox?.custom.isChecked else {
             return
         }
 
-        checkBox?.customAppearance.setChecked(!state)
+        checkBox?.custom.setChecked(!state)
     }
 }

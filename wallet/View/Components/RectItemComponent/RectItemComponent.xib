@@ -11,10 +11,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ContactItemComponent" customModule="wallet" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RectItemComponent" customModule="wallet" customModuleProvider="target">
             <connections>
                 <outlet property="avatarImageView" destination="iz3-iy-kyX" id="Jya-cF-tqH"/>
-                <outlet property="fullNameLabel" destination="kCQ-TW-Wzr" id="M40-K5-nPp"/>
+                <outlet property="nameLabel" destination="kCQ-TW-Wzr" id="M40-K5-nPp"/>
                 <outlet property="view" destination="iN0-l3-epB" id="ksr-8x-cDI"/>
             </connections>
         </placeholder>
@@ -23,7 +23,7 @@
             <rect key="frame" x="0.0" y="0.0" width="112" height="156"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="iz3-iy-kyX" customClass="RoundedImageView" customModule="wallet" customModuleProvider="target">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="iz3-iy-kyX" customClass="RoundedImageView" customModule="wallet" customModuleProvider="target">
                     <rect key="frame" x="26" y="12" width="60" height="60"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="iz3-iy-kyX" secondAttribute="height" multiplier="1:1" id="C3k-0d-vuQ"/>

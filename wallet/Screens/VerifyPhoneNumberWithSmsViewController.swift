@@ -47,7 +47,7 @@ class VerifyPhoneNumberWithSmsViewController: ContinueViewController, Verificati
     }
 
     func verificationCodeFormComponent(_ verificationCodeFormViewController: VerificationCodeFormComponent, codeEnteringIsCompleted: Bool) {
-        continueButton?.customAppearance.setEnabled(codeEnteringIsCompleted)
+        continueButton?.custom.setEnabled(codeEnteringIsCompleted)
     }
 
     /**
@@ -73,7 +73,7 @@ class VerifyPhoneNumberWithSmsViewController: ContinueViewController, Verificati
             return
         }
 
-        continueButton?.customAppearance.setLoading(true)
+        continueButton?.custom.setLoading(true)
         verifyAPI?.verifyPhoneNumber(phone, withCode: code).done {
             [weak self]
             token in
@@ -81,7 +81,7 @@ class VerifyPhoneNumberWithSmsViewController: ContinueViewController, Verificati
             self?.dismissKeyboard()
 
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                self?.continueButton?.customAppearance.setLoading(false)
+                self?.continueButton?.custom.setLoading(false)
                 self?.onContinue?(phone, token)
             }
         }.catch {
@@ -90,7 +90,7 @@ class VerifyPhoneNumberWithSmsViewController: ContinueViewController, Verificati
             print(error)
 
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                self?.continueButton?.customAppearance.setLoading(false)
+                self?.continueButton?.custom.setLoading(false)
 
                 if let serverError = error as? WalletResponseError {
                     switch serverError {
@@ -115,7 +115,7 @@ class VerifyPhoneNumberWithSmsViewController: ContinueViewController, Verificati
             return
         }
 
-        sender.customAppearance.setEnabled(false)
+        sender.custom.setEnabled(false)
 
         verifyAPI?.sendVerificationCode(to: phone, referrerPhone: nil).done {
             //...

@@ -11,7 +11,7 @@ import UIKit
 
 class IndentLabel: UILabel, CustomUI {
 
-    struct CustomAppearance {
+    struct CustomBehaviour {
         weak var parent: IndentLabel?
 
         func setIndent(_ indent: String) {
@@ -47,8 +47,8 @@ class IndentLabel: UILabel, CustomUI {
         }
     }
 
-    var customAppearance: CustomAppearance {
-        return CustomAppearance(parent: self)
+    var custom: CustomBehaviour {
+        return CustomBehaviour(parent: self)
     }
 
 

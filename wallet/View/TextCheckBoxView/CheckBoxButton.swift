@@ -19,7 +19,7 @@ protocol CheckBox: class {
 
 class CheckBoxButton: UIButton, CustomUI {
 
-    struct CustomAppearance {
+    struct CustomBehaviour {
         weak var parent: CheckBoxButton?
 
         var isChecked: Bool {
@@ -31,8 +31,8 @@ class CheckBoxButton: UIButton, CustomUI {
         }
     }
 
-    var customAppearance: CheckBoxButton.CustomAppearance {
-        return CustomAppearance(parent: self)
+    var custom: CheckBoxButton.CustomBehaviour {
+        return CustomBehaviour(parent: self)
     }
 
     var onImage: UIImage {

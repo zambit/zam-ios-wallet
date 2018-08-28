@@ -62,7 +62,7 @@ class EnterPhoneLoginPasswordViewController: ContinueViewController, LoginFormCo
     }
 
     func loginFormComponent(_ loginFormComponent: LoginFormComponent, loginingCompleted: Bool) {
-        continueButton?.customAppearance.setEnabled(loginingCompleted)
+        continueButton?.custom.setEnabled(loginingCompleted)
     }
 
     @objc
@@ -73,13 +73,13 @@ class EnterPhoneLoginPasswordViewController: ContinueViewController, LoginFormCo
                 return
         }
 
-        continueButton?.customAppearance.setLoading(true)
+        continueButton?.custom.setLoading(true)
         authAPI?.signIn(phone: phone, password: password).done {
             [weak self]
             authToken in
 
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                self?.continueButton?.customAppearance.setLoading(false)
+                self?.continueButton?.custom.setLoading(false)
                 self?.onContinue?(authToken)
             }
 
@@ -90,7 +90,7 @@ class EnterPhoneLoginPasswordViewController: ContinueViewController, LoginFormCo
             error in
 
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                self?.continueButton?.customAppearance.setLoading(false)
+                self?.continueButton?.custom.setLoading(false)
             }
 
             if let serverError = error as? WalletResponseError {

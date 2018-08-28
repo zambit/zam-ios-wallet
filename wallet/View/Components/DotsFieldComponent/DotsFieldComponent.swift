@@ -83,7 +83,7 @@ class DotsFieldComponent: Component  {
             return false
         }
 
-        dots[currentDotIndex].customAppearance.setStyle(.filled)
+        dots[currentDotIndex].custom.setStyle(.filled)
         currentDotIndex += 1
 
         return true
@@ -96,14 +96,14 @@ class DotsFieldComponent: Component  {
         }
 
         currentDotIndex -= 1
-        dots[currentDotIndex].customAppearance.setStyle(.empty)
+        dots[currentDotIndex].custom.setStyle(.empty)
 
         return true
     }
 
     func unfillAll() {
         dots.forEach {
-            $0.customAppearance.setStyle(.empty)
+            $0.custom.setStyle(.empty)
         }
 
         currentDotIndex = 0
@@ -111,7 +111,7 @@ class DotsFieldComponent: Component  {
 
     func fillAll() {
         dots.forEach {
-            $0.customAppearance.setStyle(.filled)
+            $0.custom.setStyle(.filled)
         }
 
         currentDotIndex = dotsMaxCount - 1
@@ -123,7 +123,7 @@ class DotsFieldComponent: Component  {
         }
 
         dots.forEach {
-            $0.customAppearance.setStyle(.green)
+            $0.custom.setStyle(.green)
         }
     }
 
@@ -133,7 +133,7 @@ class DotsFieldComponent: Component  {
         }
 
         dots.forEach {
-            $0.customAppearance.setStyle(.red)
+            $0.custom.setStyle(.red)
         }
 
         animateFailure(completion: handler)

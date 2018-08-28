@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -196,23 +197,33 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                             <searchBar contentMode="redraw" searchBarStyle="minimal" translatesAutoresizingMaskIntoConstraints="NO" id="99N-Z6-auC">
-                                <rect key="frame" x="0.0" y="20" width="414" height="56"/>
+                                <rect key="frame" x="0.0" y="20" width="354" height="56"/>
                                 <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
                             </searchBar>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C61-g4-uhX">
+                                <rect key="frame" x="369" y="33" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="C61-g4-uhX" secondAttribute="height" multiplier="1:1" id="GPP-ZS-kcb"/>
+                                    <constraint firstAttribute="height" constant="30" id="qPu-91-Wl9"/>
+                                </constraints>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="iLS-eX-keO" firstAttribute="trailing" secondItem="C61-g4-uhX" secondAttribute="trailing" constant="15" id="20q-4g-S9G"/>
                             <constraint firstItem="ywp-uk-DtS" firstAttribute="trailing" secondItem="iLS-eX-keO" secondAttribute="trailing" id="Aav-Of-0wV"/>
                             <constraint firstItem="ywp-uk-DtS" firstAttribute="leading" secondItem="iLS-eX-keO" secondAttribute="leading" id="EnG-SM-qJ0"/>
                             <constraint firstItem="99N-Z6-auC" firstAttribute="top" secondItem="iLS-eX-keO" secondAttribute="top" id="GrR-lW-KCS"/>
                             <constraint firstItem="99N-Z6-auC" firstAttribute="leading" secondItem="iLS-eX-keO" secondAttribute="leading" id="I9g-9R-OA2"/>
+                            <constraint firstItem="C61-g4-uhX" firstAttribute="centerY" secondItem="99N-Z6-auC" secondAttribute="centerY" id="LC9-VU-MN2"/>
+                            <constraint firstItem="C61-g4-uhX" firstAttribute="leading" secondItem="99N-Z6-auC" secondAttribute="trailing" constant="15" id="MRn-dX-JIx"/>
                             <constraint firstItem="ywp-uk-DtS" firstAttribute="top" secondItem="99N-Z6-auC" secondAttribute="bottom" id="ebR-6j-oq8"/>
                             <constraint firstItem="ywp-uk-DtS" firstAttribute="bottom" secondItem="iLS-eX-keO" secondAttribute="bottom" id="ifs-17-3HS"/>
-                            <constraint firstItem="99N-Z6-auC" firstAttribute="trailing" secondItem="iLS-eX-keO" secondAttribute="trailing" id="jwh-aA-b56"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="iLS-eX-keO"/>
                     </view>
                     <connections>
+                        <outlet property="filterButton" destination="C61-g4-uhX" id="STw-wV-QGc"/>
                         <outlet property="historyTableView" destination="ywp-uk-DtS" id="eIw-0b-mqc"/>
                         <outlet property="searchBar" destination="99N-Z6-auC" id="WdL-F1-Zrk"/>
                     </connections>
@@ -220,6 +231,36 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nb2-cE-zTd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-4023.188405797102" y="-78.260869565217391"/>
+        </scene>
+        <!--Transactions History Filter View Controller-->
+        <scene sceneID="cJ5-YR-NGb">
+            <objects>
+                <viewController storyboardIdentifier="TransactionsHistoryFilterViewController" id="o7v-5Q-uQ7" customClass="TransactionsHistoryFilterViewController" customModule="wallet" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="6Tn-Rj-9qf">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="k6a-PT-gCn">
+                                <rect key="frame" x="0.0" y="20" width="414" height="716"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="k6a-PT-gCn" firstAttribute="leading" secondItem="Sdj-7N-8Rd" secondAttribute="leading" id="77Z-be-1FY"/>
+                            <constraint firstItem="Sdj-7N-8Rd" firstAttribute="bottom" secondItem="k6a-PT-gCn" secondAttribute="bottom" id="QPK-b7-QBk"/>
+                            <constraint firstItem="Sdj-7N-8Rd" firstAttribute="trailing" secondItem="k6a-PT-gCn" secondAttribute="trailing" id="UgO-Wd-okt"/>
+                            <constraint firstItem="k6a-PT-gCn" firstAttribute="top" secondItem="Sdj-7N-8Rd" secondAttribute="top" id="bZl-sz-INZ"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Sdj-7N-8Rd"/>
+                    </view>
+                    <connections>
+                        <outlet property="componentsTableView" destination="k6a-PT-gCn" id="iPr-b0-yfK"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="td5-Mb-mP9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-3204" y="-78"/>
         </scene>
         <!--Home View Controller-->
         <scene sceneID="Dy4-CQ-ozQ">

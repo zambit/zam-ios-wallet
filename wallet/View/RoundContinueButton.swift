@@ -16,7 +16,7 @@ class RoundContinueButton: UIButton, CustomUI {
 
     private var loadingView: UIView!
 
-    struct CustomAppearance {
+    struct CustomBehaviour {
         weak var parent: RoundContinueButton?
 
         func setEnabled(_ enabled: Bool) {
@@ -41,8 +41,8 @@ class RoundContinueButton: UIButton, CustomUI {
         }
     }
 
-    var customAppearance: CustomAppearance {
-        return CustomAppearance(parent: self)
+    var custom: CustomBehaviour {
+        return CustomBehaviour(parent: self)
     }
 
     override func layoutSubviews() {

@@ -35,7 +35,7 @@ struct AdditionalTextButtonData {
 
 class AdditionalTextButton: UIButton, CustomUI, CountdownTimerDelegate {
 
-    struct CustomAppearance {
+    struct CustomBehaviour {
         weak var parent: AdditionalTextButton?
 
         func setEnabled(_ enabled: Bool) {
@@ -47,8 +47,8 @@ class AdditionalTextButton: UIButton, CustomUI, CountdownTimerDelegate {
         }
     }
 
-    var customAppearance: CustomAppearance {
-        return CustomAppearance(parent: self)
+    var custom: CustomBehaviour {
+        return CustomBehaviour(parent: self)
     }
 
     private var textActive: String = ""
@@ -110,6 +110,6 @@ class AdditionalTextButton: UIButton, CustomUI, CountdownTimerDelegate {
 
     func countdownTimerWasCompleted(_ countdownTimer: CountdownTimer) {
         self.setTitle(textInactive, for: .disabled)
-        customAppearance.setEnabled(true)
+        custom.setEnabled(true)
     }
 }

@@ -37,8 +37,32 @@ final class HomeFlow: ScreenFlow {
             fatalError()
         }
 
+        let onFilter: () -> Void = {
+            [weak self] in
+
+            guard let strongSelf = self else {
+                return
+            }
+
+            let target = strongSelf.transactionsFilterScreen
+            vc.walletNavigationController?.push(viewController: target)
+        }
+
+        vc.onFilter = onFilter
         vc.userManager = UserDefaultsManager(keychainConfiguration: WalletKeychainConfiguration())
         vc.userAPI = UserAPI(provider: UserProvider(environment: WalletEnvironment(), dispatcher: HTTPDispatcher()))
+        vc.flow = self
+        return vc
+    }
+
+    private var transactionsFilterScreen: TransactionsHistoryFilterViewController {
+        let _vc = ControllerHelper.instantiateViewController(identifier: "TransactionsHistoryFilterViewController", storyboardName: "Main")
+
+        guard let vc = _vc as? TransactionsHistoryFilterViewController else {
+            fatalError()
+        }
+
+        vc.title = "Filter"
         vc.flow = self
         return vc
     }

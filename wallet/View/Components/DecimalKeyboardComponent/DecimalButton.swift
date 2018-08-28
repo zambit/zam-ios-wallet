@@ -11,7 +11,7 @@ import UIKit
 
 class DecimalButton: UIButton, CustomUI {
 
-    struct CustomAppearance {
+    struct CustomBehaviour {
         weak var parent: DecimalButton?
 
         var id: String? {
@@ -49,8 +49,8 @@ class DecimalButton: UIButton, CustomUI {
         }
     }
 
-    var customAppearance: CustomAppearance {
-        return CustomAppearance(parent: self)
+    var custom: CustomBehaviour {
+        return CustomBehaviour(parent: self)
     }
 
     var id: String?

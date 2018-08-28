@@ -11,7 +11,7 @@ import UIKit
 
 class DotView: UIView, CustomUI {
 
-    struct CustomAppearance {
+    struct CustomBehaviour {
 
         enum Style {
             case empty, filled, red, green
@@ -51,8 +51,8 @@ class DotView: UIView, CustomUI {
         }
     }
 
-    var customAppearance: CustomAppearance {
-        return CustomAppearance(parent: self)
+    var custom: CustomBehaviour {
+        return CustomBehaviour(parent: self)
     }
 
     override func layoutSubviews() {
@@ -74,7 +74,7 @@ class DotView: UIView, CustomUI {
         self.backgroundColor = .clear
 
         self.layer.masksToBounds = false
-        customAppearance.setStyle(.empty)
+        custom.setStyle(.empty)
     }
 
     private func setupLayouts() {
