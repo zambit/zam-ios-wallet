@@ -11,7 +11,7 @@ import UIKit
 
 class TransactionsHistoryViewController: WalletViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
 
-    var onFilter: (() -> Void)?
+    var onFilter: ((TransactionsFilterData) -> Void)?
 
     var userManager: UserDefaultsManager?
     var userAPI: UserAPI?
@@ -24,6 +24,8 @@ class TransactionsHistoryViewController: WalletViewController, UITableViewDelega
 
     private var topRefreshControl: UIRefreshControl?
     private var bottomActivityIndicator: UIActivityIndicatorView?
+
+    private var filterData: TransactionsFilterData = TransactionsFilterData()
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -55,11 +57,16 @@ class TransactionsHistoryViewController: WalletViewController, UITableViewDelega
             [weak self]
             (paginator: Paginator, pageSize: Int, nextPage: String?) in
 
-            guard let token = self?.userManager?.getToken() else {
+            guard let strongSelf = self else {
+                return
+            }
+
+            guard let token = strongSelf.userManager?.getToken() else {
                 fatalError()
             }
 
-            self?.userAPI?.getTransactions(token: token, filter: UserAPI.TransactionsFilter(page: nextPage, count: 15)).done {
+            strongSelf.filterData.page = nextPage
+            strongSelf.userAPI?.getTransactions(token: token, filter: strongSelf.filterData).done {
                 page in
 
                 paginator.receivedResults(results: page.transactions, next: page.next ?? "")
@@ -135,16 +142,20 @@ class TransactionsHistoryViewController: WalletViewController, UITableViewDelega
 
             self?.updateTableViewFooter()
             }, failureHandler: {
-                [weak self]
                 paginator in
 
-                self?.topRefreshControl?.endRefreshing()
-
-                self?.setupPlaceholder()
+                paginator.receivedResults(results: [], next: "")
         })
 
         self.topRefreshControl?.beginRefreshing()
         self.paginator?.fetchFirstPage()
+    }
+
+    func update(filterData: TransactionsFilterData) {
+        if self.filterData != filterData {
+            self.filterData = filterData
+            self.paginator?.reload()
+        }
     }
 
     // MARK: - UITableViewDataSource
@@ -240,7 +251,7 @@ class TransactionsHistoryViewController: WalletViewController, UITableViewDelega
 
     private func updateTableViewFooter() {
         if let provider = paginator, provider.reachedLastPage {
-            self.historyTableView?.tableFooterView = nil
+            self.historyTableView?.tableFooterView = UIView()
         } else {
             self.bottomActivityIndicator?.startAnimating()
         }
@@ -258,6 +269,8 @@ class TransactionsHistoryViewController: WalletViewController, UITableViewDelega
         view.alpha = 0.0
 
         tableView.addSubview(view)
+
+        view.center = CGPoint(x: tableView.bounds.width / 2, y: tableView.bounds.height / 2)
 
         UIView.animate(withDuration: 0.1, animations: {
             view.alpha = 1.0
@@ -284,6 +297,6 @@ class TransactionsHistoryViewController: WalletViewController, UITableViewDelega
 
     @objc
     private func filterButtonTouchUpInsideEvent(_ sender: UIButton) {
-        onFilter?()
+        onFilter?(filterData)
     }
 }

@@ -14,7 +14,7 @@ enum UserRequest: Request {
 
     // Transactions
     case sendTransaction(token: String, walletId: String, recipient: String, amount: Decimal)
-    case getTransactions(token: String, coin: String?, walletId: String?, recipient: String?, fromTime: String?, untilTime: String?, page: String?, count: Int?, group: String)
+    case getTransactions(token: String, coin: String?, walletId: String?, recipient: String?, direction: String?, fromTime: String?, untilTime: String?, page: String?, count: Int?, group: String)
     case getTransactionInfo(token: String, transactionId: String)
 
     // Wallets
@@ -74,11 +74,12 @@ enum UserRequest: Request {
 
             return RequestParams.body(dict)
 
-        case let .getTransactions(token: _, coin: coin, walletId: id, recipient: recipient, fromTime: from, untilTime: until, page: page, count: count, group: group):
+        case let .getTransactions(token: _, coin: coin, walletId: id, recipient: recipient, direction: direction, fromTime: from, untilTime: until, page: page, count: count, group: group):
             let dict = [
                 "coin": coin,
                 "wallet_id": id,
                 "recipient": recipient,
+                "direction": direction,
                 "from_time": from,
                 "until_time": until,
                 "page": page,
@@ -118,7 +119,7 @@ enum UserRequest: Request {
             return ["Authorization": "Bearer \(token)"]
         case .sendTransaction(token: let token, walletId: _, recipient: _, amount: _):
             return ["Authorization": "Bearer \(token)"]
-        case .getTransactions(token: let token, coin: _, walletId: _, recipient: _, fromTime: _, untilTime: _, page: _, count: _, group: _):
+        case .getTransactions(token: let token, coin: _, walletId: _, recipient: _, direction: _, fromTime: _, untilTime: _, page: _, count: _, group: _):
             return ["Authorization": "Bearer \(token)"]
         case .getTransactionInfo(token: let token, transactionId: _):
             return ["Authorization": "Bearer \(token)"]

@@ -11,4 +11,24 @@ import Foundation
 enum DirectionType: String {
     case incoming
     case outgoing
+
+    init?(formatted: String) {
+        switch formatted {
+        case "Sent":
+            self = .outgoing
+        case "Received":
+            self = .incoming
+        default:
+            return nil
+        }
+    }
+
+    var formatted: String {
+        switch self {
+        case .incoming:
+            return "Received"
+        case .outgoing:
+            return "Sent"
+        }
+    }
 }

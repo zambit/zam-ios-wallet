@@ -13,4 +13,13 @@ enum GroupingType: String {
     case day
     case week
     case month
+    case year
+
+    init?(formatted: String) {
+        self.init(rawValue: formatted.lowercased())
+    }
+
+    var formatted: String {
+        return self.rawValue.capitalizingFirst
+    }
 }

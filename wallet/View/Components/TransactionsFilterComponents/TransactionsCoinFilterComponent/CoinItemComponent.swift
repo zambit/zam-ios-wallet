@@ -11,7 +11,11 @@ import UIKit
 
 class CoinItemComponent: RectItemComponent {
 
-    private var currentStateIndex: Int = 0
+    private var currentStateIndex: Int = 0 {
+        didSet {
+            view.backgroundColor = statesColors[currentStateIndex]
+        }
+    }
     private var statesColors: [UIColor] = [.darkSlateBlue, .skyBlue]
 
     override var nibName: String {
@@ -25,6 +29,10 @@ class CoinItemComponent: RectItemComponent {
         view.addGestureRecognizer(tapGesture)
     }
 
+    func select() {
+        currentStateIndex = 1
+    }
+
     func unselect() {
         currentStateIndex = 0
     }
@@ -32,7 +40,6 @@ class CoinItemComponent: RectItemComponent {
     @objc
     private func tapGestureEvent(_ sender: UITapGestureRecognizer) {
         currentStateIndex = (currentStateIndex + 1) % statesColors.count
-        view.backgroundColor = statesColors[currentStateIndex]
 
         onTap?()
     }

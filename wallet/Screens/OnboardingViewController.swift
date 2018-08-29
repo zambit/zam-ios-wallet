@@ -37,13 +37,13 @@ class OnboardingViewController: WalletViewController, UICollectionViewDataSource
         super.viewDidLoad()
 
         onboardingItems = [
-            OnboardingItemData(image: #imageLiteral(resourceName: "illustrations_stub"),
+            OnboardingItemData(image: #imageLiteral(resourceName: "illustrationPlaceholderLight"),
                                title: "Item 1",
                                text: "Et harum Discription quidem rerum facilis est et expedita distinctiolorem ipsun"),
-            OnboardingItemData(image: #imageLiteral(resourceName: "illustrations_stub"),
+            OnboardingItemData(image: #imageLiteral(resourceName: "illustrationPlaceholderLight"),
                                title: "Item 2",
                                text: "Et harum Discription quidem rerum facilis est et expedita distinctiolorem ipsun"),
-            OnboardingItemData(image: #imageLiteral(resourceName: "illustrations_stub"),
+            OnboardingItemData(image: #imageLiteral(resourceName: "illustrationPlaceholderLight"),
                                title: "Item 3",
                                text: "Et harum Discription quidem rerum facilis est et expedita distinctiolorem ipsun")
         ]

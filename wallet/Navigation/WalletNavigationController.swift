@@ -119,6 +119,16 @@ class WalletNavigationController {
         hideBackButton(for: viewController)
     }
 
+    func popBack(nextViewController: (WalletViewController) -> Void) {
+        controller.popViewController(animated: true)
+
+        guard let next = controller.viewControllers.last as? WalletViewController else {
+            return
+        }
+        
+        return nextViewController(next)
+    }
+
     func presentWithNavBar(viewController: WalletViewController) {
         let navigationController = WalletNavigationController(navigationController: UINavigationController(rootViewController: viewController))
         navigationController.controller.modalPresentationStyle = .overFullScreen

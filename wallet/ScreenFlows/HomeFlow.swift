@@ -37,14 +37,16 @@ final class HomeFlow: ScreenFlow {
             fatalError()
         }
 
-        let onFilter: () -> Void = {
-            [weak self] in
+        let onFilter: (TransactionsFilterData) -> Void = {
+            [weak self]
+            filterData in
 
             guard let strongSelf = self else {
                 return
             }
 
             let target = strongSelf.transactionsFilterScreen
+            target.prepare(filterData: filterData)
             vc.walletNavigationController?.push(viewController: target)
         }
 
@@ -62,6 +64,22 @@ final class HomeFlow: ScreenFlow {
             fatalError()
         }
 
+        let onDone: (TransactionsFilterData) -> Void = {
+            [weak self]
+            filterData in
+
+            vc.walletNavigationController?.popBack(nextViewController: {
+                next in
+
+                guard let target = next as? TransactionsHistoryViewController else {
+                    return
+                }
+
+                target.update(filterData: filterData)
+            })
+        }
+
+        vc.onDone = onDone
         vc.title = "Filter"
         vc.flow = self
         return vc

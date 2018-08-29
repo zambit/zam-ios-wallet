@@ -17,6 +17,8 @@ protocol FeatureItemComponentDelegate: class {
 
 class FeatureItemComponent: ItemComponent {
 
+    var onTap: (() -> Void)?
+
     weak var delegate: FeatureItemComponentDelegate?
 
     @IBOutlet private var featureButton: MultiStatableButton?
@@ -51,6 +53,10 @@ class FeatureItemComponent: ItemComponent {
         invalidateIntrinsicContentSize()
     }
 
+    func select() {
+        featureButton?.custom.currentStateIndex = 1
+    }
+
     func unselect() {
         featureButton?.custom.currentStateIndex = 0
     }
@@ -58,6 +64,8 @@ class FeatureItemComponent: ItemComponent {
     @objc
     private func featureButtonTouchUpInsideEvent(_ sender: MultiStatableButton) {
         featureButton?.custom.toggle()
+
+        onTap?()
 
         guard let button = featureButton else {
             return

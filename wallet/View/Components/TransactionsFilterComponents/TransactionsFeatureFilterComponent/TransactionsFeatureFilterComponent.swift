@@ -9,7 +9,9 @@
 import Foundation
 import UIKit
 
-class TransactionsFeatureFilterComponent: CellComponent, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, FeatureItemComponentDelegate {
+class TransactionsFeatureFilterComponent: CellComponent, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+
+    var onFeatureFilterChanged: (([String]) -> Void)?
 
     @IBOutlet private var titleLabel: UILabel?
     @IBOutlet private var featuresButtonsCollectionView: UICollectionView?
@@ -17,9 +19,20 @@ class TransactionsFeatureFilterComponent: CellComponent, UICollectionViewDataSou
 
     private var features: [String] = []
 
-    private weak var selectedFeatureButton: FeatureItemComponent?
+    private var selectedItemsIndexPaths: [IndexPath] = [] {
+        didSet {
+            let selectedFeatures = features.enumerated().filter({
+                feature in
 
-    private var isMultipleSelecting: Bool = false
+                selectedItemsIndexPaths.contains { indexPath in
+                    indexPath.item == feature.offset
+                }
+            }).map { $0.element }
+            selectedFeaturesWasUpdated(selectedFeatures)
+        }
+    }
+
+    private weak var selectedFeatureButton: FeatureItemComponent?
 
     override var intrinsicContentSize: CGSize {
         return CGSize(width: 325.0, height: 105.0 + insets.top + insets.bottom)
@@ -48,9 +61,10 @@ class TransactionsFeatureFilterComponent: CellComponent, UICollectionViewDataSou
         titleLabel?.text = title
     }
 
-    func prepare(features: [String], isMultipleSelecting: Bool) {
+    func prepare(features: [String], selectedIndexes: [Int]) {
         self.features = features
-        self.isMultipleSelecting = isMultipleSelecting
+        self.selectedItemsIndexPaths = selectedIndexes.map { IndexPath(item: $0, section: 0) }
+
         featuresButtonsCollectionView?.reloadData()
 
         invalidateIntrinsicContentSize()
@@ -71,22 +85,36 @@ class TransactionsFeatureFilterComponent: CellComponent, UICollectionViewDataSou
 
         let feature = features[indexPath.item]
         cell.configure(title: feature)
-        cell.delegate = self
+        cell.onTap = {
+            [weak self] in
+
+            guard let strongSelf = self else {
+                return
+            }
+
+            if let index = strongSelf.selectedItemsIndexPaths.index(of: indexPath) {
+                strongSelf.selectedItemsIndexPaths.remove(at: index)
+            } else {
+                strongSelf.selectedItemsIndexPaths.forEach {
+                    guard let item = collectionView.cellForItem(at: $0) as? FeatureItemComponent else {
+                        fatalError()
+                    }
+                    item.unselect()
+                }
+                strongSelf.selectedItemsIndexPaths.removeAll()
+
+                strongSelf.selectedItemsIndexPaths.append(indexPath)
+            }
+        }
+
+        if selectedItemsIndexPaths.contains(indexPath) {
+            cell.select()
+        }
+        
         return cell
     }
 
-    // MARK: - FeatureItemComponentDelegate
-
-    func featureItemComponentWasSelected(_ featureItemComponent: FeatureItemComponent) {
-        if !isMultipleSelecting {
-            self.selectedFeatureButton?.unselect()
-            self.selectedFeatureButton = featureItemComponent
-        }
-    }
-
-    func featureItemComponentWasUnselected(_ featureItemComponent: FeatureItemComponent) {
-        if !isMultipleSelecting {
-            self.selectedFeatureButton = nil
-        }
+    func selectedFeaturesWasUpdated(_ features: [String]) {
+        onFeatureFilterChanged?(features)
     }
 }

@@ -176,30 +176,8 @@ struct UserAPI: NetworkService {
         }
     }
 
-    struct TransactionsFilter {
-        let coin: CoinType?
-        let walletId: String?
-        let recipient: String?
-        let fromTime: String?
-        let untilTime: String?
-        let page: String?
-        let count: Int?
-        let group: GroupingType
-
-        init(group: GroupingType = .day, coin: CoinType? = nil, walletId: String? = nil, recipient: String? = nil, fromTime: String? = nil, untilTime: String? = nil, page: String? = nil, count: Int? = nil) {
-            self.group = group
-            self.coin = coin
-            self.walletId = walletId
-            self.recipient = recipient
-            self.fromTime = fromTime
-            self.untilTime = untilTime
-            self.page = page
-            self.count = count
-        }
-    }
-
-    func getTransactions(token: String, filter: TransactionsFilter = TransactionsFilter()) -> Promise<GroupedTransactionsPageData>  {
-        return provider.execute(.getTransactions(token: token, coin: filter.coin?.rawValue, walletId: filter.walletId, recipient: filter.recipient, fromTime: filter.fromTime, untilTime: filter.untilTime, page: filter.page, count: filter.count, group: filter.group.rawValue))
+    func getTransactions(token: String, filter: TransactionsFilterData = TransactionsFilterData()) -> Promise<GroupedTransactionsPageData>  {
+        return provider.execute(.getTransactions(token: token, coin: filter.coin?.rawValue, walletId: filter.walletId, recipient: filter.recipient, direction: filter.direction?.rawValue, fromTime: filter.fromTime, untilTime: filter.untilTime, page: filter.page, count: filter.count, group: filter.group.rawValue))
             .then {
                 (response: Response) -> Promise<GroupedTransactionsPageData> in
 

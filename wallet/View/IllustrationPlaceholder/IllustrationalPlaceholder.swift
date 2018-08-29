@@ -22,7 +22,7 @@ class IllustrationalPlaceholder: Component {
         titleLabel?.textAlignment = .center
         titleLabel?.text = "No data in this period"
 
-        illustrationImageView?.image = #imageLiteral(resourceName: "illustrations_stub")
+        illustrationImageView?.image = #imageLiteral(resourceName: "illustrationPlaceholderDark")
     }
 
 }
