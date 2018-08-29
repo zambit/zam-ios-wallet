@@ -59,13 +59,6 @@ class NavigationCustomAnimator: NSObject, UIViewControllerAnimatedTransitioning 
 
         toViewController.view.frame.origin = travelPoint.inverted
 
-        if (operation == .hide) {
-            // hack
-            for subview in toViewController.view.subviews {
-                subview.clipsToBounds = false
-            }
-        }
-
         UIView.animate(withDuration: duration, delay: 0, usingSpringWithDamping: damping, initialSpringVelocity: initialSpringVelocity, options: .curveEaseInOut, animations: {
             fromViewController.view.frame.origin = travelPoint
             toViewController.view.frame.origin = CGPoint.zero

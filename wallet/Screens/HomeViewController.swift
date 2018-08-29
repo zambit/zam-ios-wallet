@@ -131,8 +131,7 @@ class HomeViewController: DetailOffsetPresentationViewController, WalletsViewCon
 
     private func setupStyle() {
         detailView?.layer.cornerRadius = 16.0
-        detailTopGestureView?.layer.cornerRadius = 16.0
-        detailTopGestureView?.layer.masksToBounds = true
+        detailView?.clipsToBounds = true
 
         detailView?.backgroundColor = .white
         detailGestureView?.backgroundColor = .clear
