@@ -8,18 +8,9 @@
 
 import UIKit
 
-protocol FeatureItemComponentDelegate: class {
-
-    func featureItemComponentWasSelected(_ featureItemComponent: FeatureItemComponent)
-
-    func featureItemComponentWasUnselected(_ featureItemComponent: FeatureItemComponent)
-}
-
 class FeatureItemComponent: ItemComponent {
 
     var onTap: (() -> Void)?
-
-    weak var delegate: FeatureItemComponentDelegate?
 
     @IBOutlet private var featureButton: MultiStatableButton?
 
@@ -66,18 +57,5 @@ class FeatureItemComponent: ItemComponent {
         featureButton?.custom.toggle()
 
         onTap?()
-
-        guard let button = featureButton else {
-            return
-        }
-
-        switch button.custom.currentStateIndex {
-        case 0:
-            delegate?.featureItemComponentWasUnselected(self)
-        case 1:
-            delegate?.featureItemComponentWasSelected(self)
-        default:
-            fatalError()
-        }
     }
 }

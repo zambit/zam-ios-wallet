@@ -196,7 +196,7 @@ struct CodableSuccessTransactionsGroupedSearchingResponse: Codable {
     struct GroupedTransactionsPage: Codable {
         let count: Int
         let next: String?
-        let transactions: [CodableTransactionsGroup]
+        let transactions: [CodableTransactionsGroup]?
 
         private enum CodingKeys: String, CodingKey {
             case count

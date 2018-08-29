@@ -16,8 +16,8 @@ struct GroupedTransactionsPageData {
     init(codable: CodableSuccessTransactionsGroupedSearchingResponse.GroupedTransactionsPage) throws {
         self.next = codable.next
 
-        self.transactions = try codable.transactions.map {
+        self.transactions = try codable.transactions?.map {
             try TransactionsGroupData(codable: $0)
-        }
+        } ?? []
     }
 }

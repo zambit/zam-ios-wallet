@@ -80,6 +80,30 @@ class TransactionsHistoryFilterViewController: WalletViewController, UITableView
         dateIntervalComponent.setTitle("Select dates")
         dateIntervalComponent.insets = UIEdgeInsetsMake(0.0, 0.0, 10.0, 0.0)
 
+        var fromDate: Date?
+        if let fromString = filterData.fromTime, let fromDouble = Double(fromString) {
+            fromDate = Date(unixTimestamp: fromDouble)
+        }
+
+        var untilDate: Date?
+        if let untilString = filterData.untilTime, let untilDouble = Double(untilString) {
+            untilDate = Date(unixTimestamp: untilDouble)
+        }
+        
+        dateIntervalComponent.prepare(from: fromDate, to: untilDate)
+        dateIntervalComponent.onFilterChanged = {
+            [weak self]
+            from, until in
+
+            if let from = from {
+                self?.filterData?.fromTime = String(Int(from.unixTimestamp))
+            }
+
+            if let until = until {
+                self?.filterData?.untilTime = String(Int(until.unixTimestamp))
+            }
+        }
+
         filterComponents.append(dateIntervalComponent)
 
         // Operation component

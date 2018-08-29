@@ -156,7 +156,7 @@ class TransactionsHistoryViewController: WalletViewController, UITableViewDelega
     func update(filterData: TransactionsFilterData) {
         if self.filterData != filterData {
             self.filterData = filterData
-            self.paginator?.reload()
+            paginator?.reload()
         }
     }
 
@@ -231,7 +231,6 @@ class TransactionsHistoryViewController: WalletViewController, UITableViewDelega
             }
         }
     }
-
 
     // MARK: - Setup tableView subviews
 
