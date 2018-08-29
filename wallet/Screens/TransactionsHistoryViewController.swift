@@ -142,9 +142,11 @@ class TransactionsHistoryViewController: WalletViewController, UITableViewDelega
 
             self?.updateTableViewFooter()
             }, failureHandler: {
+                [weak self]
                 paginator in
 
-                paginator.receivedResults(results: [], next: "")
+                paginator.reset()
+                self?.historyTableView?.reloadData()
         })
 
         self.topRefreshControl?.beginRefreshing()

@@ -24,5 +24,4 @@ class IllustrationalPlaceholder: Component {
 
         illustrationImageView?.image = #imageLiteral(resourceName: "illustrationPlaceholderDark")
     }
-
 }
