@@ -136,7 +136,7 @@ class TransactionsHistoryFilterViewController: WalletViewController, UITableView
         let coinsComponent = TransactionsCoinFilterComponent(frame: .zero)
         coinsComponent.setTitle("Coins")
 
-        let coins: [CoinType] = [.btc, .bch, .eth, .zam]
+        let coins: [CoinType] = [.btc, .bch]
         var currentCoin: [Int] = []
         if let coin = filterData.coin,
             let currentCoinIndex = coins.index(of: coin) {
