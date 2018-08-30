@@ -119,6 +119,7 @@
 		8C6088652112027300470411 /* ThreeStepsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6088642112027300470411 /* ThreeStepsAPI.swift */; };
 		8C6088672112120100470411 /* SpinningAnimationLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6088662112120100470411 /* SpinningAnimationLayer.swift */; };
 		8C713B0D2136EA9E00AC2E25 /* UIAlertController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C713B0C2136EA9E00AC2E25 /* UIAlertController+Extensions.swift */; };
+		8C713B0F2137E54100AC2E25 /* UIRefreshControl+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C713B0E2137E54100AC2E25 /* UIRefreshControl+Extensions.swift */; };
 		8CA2188F2121D97C0063C188 /* DecimalKeyboardComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CA2188E2121D97B0063C188 /* DecimalKeyboardComponent.xib */; };
 		8CA218922122E8D70063C188 /* SendMoneyComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CA218912122E8D70063C188 /* SendMoneyComponent.xib */; };
 		8CA218942122EAC90063C188 /* SendMoneyComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA218932122EAC90063C188 /* SendMoneyComponent.swift */; };
@@ -342,6 +343,7 @@
 		8C6088642112027300470411 /* ThreeStepsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeStepsAPI.swift; sourceTree = "<group>"; };
 		8C6088662112120100470411 /* SpinningAnimationLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinningAnimationLayer.swift; sourceTree = "<group>"; };
 		8C713B0C2136EA9E00AC2E25 /* UIAlertController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Extensions.swift"; sourceTree = "<group>"; };
+		8C713B0E2137E54100AC2E25 /* UIRefreshControl+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIRefreshControl+Extensions.swift"; sourceTree = "<group>"; };
 		8CA2188E2121D97B0063C188 /* DecimalKeyboardComponent.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DecimalKeyboardComponent.xib; sourceTree = "<group>"; };
 		8CA218912122E8D70063C188 /* SendMoneyComponent.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SendMoneyComponent.xib; sourceTree = "<group>"; };
 		8CA218932122EAC90063C188 /* SendMoneyComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMoneyComponent.swift; sourceTree = "<group>"; };
@@ -1091,6 +1093,7 @@
 				8C333D3F210A08A600949AC0 /* UIView+Extensions.swift */,
 				8C04BC422121C23200E90090 /* UIImage+Extensions.swift */,
 				8CA218A8212343760063C188 /* UIImageView+Extensions.swift */,
+				8C713B0E2137E54100AC2E25 /* UIRefreshControl+Extensions.swift */,
 				8CF5F93921144BE80083B36A /* UIDevice+Extensions.swift */,
 				8C333D64210B619200949AC0 /* UITextField+Extensions.swift */,
 				8CF5F93721134E6D0083B36A /* CGPoint+Extensions.swift */,
@@ -1416,6 +1419,7 @@
 				8CF5F944211459630083B36A /* DecimalButton.swift in Sources */,
 				8C4413D621199FFC00C9689C /* Dictionary+Extensions.swift in Sources */,
 				8C09190A2106068D00703224 /* OnboardingRouter.swift in Sources */,
+				8C713B0F2137E54100AC2E25 /* UIRefreshControl+Extensions.swift in Sources */,
 				8C333D60210B5E2900949AC0 /* NewPasswordFormComponent.swift in Sources */,
 				8CF5F94E21148BD90083B36A /* EnterPinViewController.swift in Sources */,
 				8C333D4A210B1C4300949AC0 /* TextCheckBoxView.swift in Sources */,

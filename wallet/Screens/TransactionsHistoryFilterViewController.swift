@@ -17,11 +17,7 @@ class TransactionsHistoryFilterViewController: WalletViewController, UITableView
 
     private var filterComponents: [CellComponent] = []
 
-    private var filterData: TransactionsFilterData? {
-        didSet {
-            print(filterData)
-        }
-    }
+    private var filterData: TransactionsFilterData?
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

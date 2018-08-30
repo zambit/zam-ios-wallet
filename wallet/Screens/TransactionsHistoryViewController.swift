@@ -66,6 +66,7 @@ class TransactionsHistoryViewController: WalletViewController, UITableViewDelega
             }
 
             strongSelf.filterData.page = nextPage
+            strongSelf.userAPI?.cancelTasks()
             strongSelf.userAPI?.getTransactions(token: token, filter: strongSelf.filterData).done {
                 page in
 
@@ -156,6 +157,11 @@ class TransactionsHistoryViewController: WalletViewController, UITableViewDelega
     func update(filterData: TransactionsFilterData) {
         if self.filterData != filterData {
             self.filterData = filterData
+
+            if let tableView = historyTableView {
+                topRefreshControl?.beginRefreshing(in: tableView)
+            }
+
             paginator?.reload()
         }
     }
