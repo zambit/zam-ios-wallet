@@ -20,14 +20,7 @@ class SendMoneyViewController: KeyboardBehaviorFollowingViewController, SendMone
     private var recipient: ContactData?
     private var phone: String?
     private var wallets: [WalletData] = []
-    private var currentIndex: Int? {
-        didSet {
-            if let currentIndex = currentIndex {
-                let indexPath = IndexPath(item: 0, section: currentIndex)
-                walletsCollectionView?.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
-            }
-        }
-    }
+    private var currentIndex: Int?
 
     override var fastenOffset: CGFloat {
         return 0
@@ -36,8 +29,7 @@ class SendMoneyViewController: KeyboardBehaviorFollowingViewController, SendMone
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        let index = currentIndex
-        self.currentIndex = index
+        scrollToCurrentWallet()
 
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
@@ -77,9 +69,6 @@ class SendMoneyViewController: KeyboardBehaviorFollowingViewController, SendMone
         titleLabel?.textAlignment = .left
         titleLabel?.text = "From"
 
-        let index = currentIndex
-        self.currentIndex = index
-
         if let index = currentIndex, wallets.count > index {
             sendMoneyComponent?.prepare(recipient: recipient, coinType: wallets[index].coin, walletId: wallets[index].id)
         }
@@ -98,6 +87,16 @@ class SendMoneyViewController: KeyboardBehaviorFollowingViewController, SendMone
         self.recipient = recipient
 
         walletsCollectionView?.reloadData()
+    }
+
+    private func scrollToCurrentWallet() {
+        guard let index = currentIndex else {
+            return
+        }
+
+        let indexPath = IndexPath(item: 0, section: index)
+
+        walletsCollectionView?.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
     }
 
     func numberOfSections(in collectionView: UICollectionView) -> Int {

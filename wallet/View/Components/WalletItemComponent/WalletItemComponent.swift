@@ -13,6 +13,7 @@ import LayoutKit
 class WalletItemComponent: WalletSmallItemComponent {
 
     var onSendButtonTap: (() -> Void)?
+    var onDepositButtonTap: (() -> Void)?
 
     @IBOutlet private var sendButton: UIButton!
     @IBOutlet private var depositButton: UIButton!
@@ -50,6 +51,7 @@ class WalletItemComponent: WalletSmallItemComponent {
         depositButton.imageEdgeInsets = UIEdgeInsetsMake(0, 8.0, 0, -8.0)
         depositButton.semanticContentAttribute = UIApplication.shared
             .userInterfaceLayoutDirection == .rightToLeft ? .forceLeftToRight : .forceRightToLeft
+        depositButton.addTarget(self, action: #selector(depositButtonTouchUpInsideEvent(_:)), for: .touchUpInside)
 
         self.view.backgroundColor = .white
 
@@ -63,6 +65,11 @@ class WalletItemComponent: WalletSmallItemComponent {
     @objc
     private func sendButtonTouchUpInsideEvent(_ sender: UIButton) {
         onSendButtonTap?()
+    }
+
+    @objc
+    private func depositButtonTouchUpInsideEvent(_ sender: UIButton) {
+        onDepositButtonTap?()
     }
 
     @objc

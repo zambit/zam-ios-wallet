@@ -120,6 +120,12 @@
 		8C6088672112120100470411 /* SpinningAnimationLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6088662112120100470411 /* SpinningAnimationLayer.swift */; };
 		8C713B0D2136EA9E00AC2E25 /* UIAlertController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C713B0C2136EA9E00AC2E25 /* UIAlertController+Extensions.swift */; };
 		8C713B0F2137E54100AC2E25 /* UIRefreshControl+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C713B0E2137E54100AC2E25 /* UIRefreshControl+Extensions.swift */; };
+		8C713B112137F95200AC2E25 /* DepositMoneyMethodComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C713B102137F95200AC2E25 /* DepositMoneyMethodComponent.swift */; };
+		8C713B132138009B00AC2E25 /* DepositMoneyMethodComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C713B122138009B00AC2E25 /* DepositMoneyMethodComponent.xib */; };
+		8C713B162138068600AC2E25 /* DepositMoneyAddressComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C713B152138068600AC2E25 /* DepositMoneyAddressComponent.swift */; };
+		8C713B1821380AE800AC2E25 /* DepositMoneyAddressComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C713B1721380AE800AC2E25 /* DepositMoneyAddressComponent.xib */; };
+		8C713B1B21380CE200AC2E25 /* DepositMoneyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C713B1A21380CE200AC2E25 /* DepositMoneyViewController.swift */; };
+		8C713B1D2138408700AC2E25 /* OutputButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C713B1C2138408700AC2E25 /* OutputButton.swift */; };
 		8CA2188F2121D97C0063C188 /* DecimalKeyboardComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CA2188E2121D97B0063C188 /* DecimalKeyboardComponent.xib */; };
 		8CA218922122E8D70063C188 /* SendMoneyComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CA218912122E8D70063C188 /* SendMoneyComponent.xib */; };
 		8CA218942122EAC90063C188 /* SendMoneyComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA218932122EAC90063C188 /* SendMoneyComponent.swift */; };
@@ -344,6 +350,12 @@
 		8C6088662112120100470411 /* SpinningAnimationLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinningAnimationLayer.swift; sourceTree = "<group>"; };
 		8C713B0C2136EA9E00AC2E25 /* UIAlertController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Extensions.swift"; sourceTree = "<group>"; };
 		8C713B0E2137E54100AC2E25 /* UIRefreshControl+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIRefreshControl+Extensions.swift"; sourceTree = "<group>"; };
+		8C713B102137F95200AC2E25 /* DepositMoneyMethodComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepositMoneyMethodComponent.swift; sourceTree = "<group>"; };
+		8C713B122138009B00AC2E25 /* DepositMoneyMethodComponent.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DepositMoneyMethodComponent.xib; sourceTree = "<group>"; };
+		8C713B152138068600AC2E25 /* DepositMoneyAddressComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepositMoneyAddressComponent.swift; sourceTree = "<group>"; };
+		8C713B1721380AE800AC2E25 /* DepositMoneyAddressComponent.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DepositMoneyAddressComponent.xib; sourceTree = "<group>"; };
+		8C713B1A21380CE200AC2E25 /* DepositMoneyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepositMoneyViewController.swift; sourceTree = "<group>"; };
+		8C713B1C2138408700AC2E25 /* OutputButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputButton.swift; sourceTree = "<group>"; };
 		8CA2188E2121D97B0063C188 /* DecimalKeyboardComponent.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DecimalKeyboardComponent.xib; sourceTree = "<group>"; };
 		8CA218912122E8D70063C188 /* SendMoneyComponent.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SendMoneyComponent.xib; sourceTree = "<group>"; };
 		8CA218932122EAC90063C188 /* SendMoneyComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMoneyComponent.swift; sourceTree = "<group>"; };
@@ -511,6 +523,7 @@
 				8CA218A4212333B20063C188 /* IconableTextField.swift */,
 				8CA2191B213442140063C188 /* IllustrationPlaceholder */,
 				8CA218E6212DA8300063C188 /* SearchTextField.swift */,
+				8C713B1C2138408700AC2E25 /* OutputButton.swift */,
 				8CA218BA212573510063C188 /* IndentLabel.swift */,
 				8CA218CE212719990063C188 /* LargeSendButton.swift */,
 				8C333D43210B001500949AC0 /* OnboardingLargeButton.swift */,
@@ -538,6 +551,7 @@
 				8C52FFF1211AF1FD00EB55EA /* HomeViewController.swift */,
 				8C52FFEB2119E09200EB55EA /* WalletsViewController.swift */,
 				8CA218A0212304590063C188 /* SendMoneyViewController.swift */,
+				8C713B1A21380CE200AC2E25 /* DepositMoneyViewController.swift */,
 				8CA218C82126D4FD0063C188 /* TransactionDetailViewController.swift */,
 				8CA218F0213002880063C188 /* TransactionsHistoryViewController.swift */,
 				8CA2191E213549DD0063C188 /* TransactionsHistoryFilterViewController.swift */,
@@ -837,12 +851,15 @@
 				8CF5F9622114AB000083B36A /* ItemComponent.swift */,
 				8C52FFE92119DA2700EB55EA /* CellComponent.swift */,
 				8CA2191521342D720063C188 /* HeaderFooterComponent.swift */,
+				8C713B1921380CC000AC2E25 /* DepositMoneyAddressComponent */,
+				8C713B14213800A000AC2E25 /* DepositMoneyMethodComponent */,
 				8CA218E5212DA5400063C188 /* RectItemComponent */,
 				8CA2192021354C8F0063C188 /* TransactionsFilterComponents */,
 				8CA219102134208B0063C188 /* TransactionsGroupHeaderComponent */,
 				8CA2190B21341FE60063C188 /* TransactionCellComponent */,
 				8CA218E4212DA52F0063C188 /* ContactsHorizontalComponent */,
 				8CA218902122E8880063C188 /* SendMoneyComponent */,
+				8CA218992122EB150063C188 /* SegmentedControlComponent */,
 				8CA218C72125AD380063C188 /* WalletSmallItemComponent */,
 				8C52FFE42119D0EF00EB55EA /* WalletItemComponent */,
 				8CF5F95C2114A4DC0083B36A /* CreatePinComponent */,
@@ -858,6 +875,24 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
+		8C713B14213800A000AC2E25 /* DepositMoneyMethodComponent */ = {
+			isa = PBXGroup;
+			children = (
+				8C713B102137F95200AC2E25 /* DepositMoneyMethodComponent.swift */,
+				8C713B122138009B00AC2E25 /* DepositMoneyMethodComponent.xib */,
+			);
+			path = DepositMoneyMethodComponent;
+			sourceTree = "<group>";
+		};
+		8C713B1921380CC000AC2E25 /* DepositMoneyAddressComponent */ = {
+			isa = PBXGroup;
+			children = (
+				8C713B152138068600AC2E25 /* DepositMoneyAddressComponent.swift */,
+				8C713B1721380AE800AC2E25 /* DepositMoneyAddressComponent.xib */,
+			);
+			path = DepositMoneyAddressComponent;
+			sourceTree = "<group>";
+		};
 		8CA218902122E8880063C188 /* SendMoneyComponent */ = {
 			isa = PBXGroup;
 			children = (
@@ -866,7 +901,6 @@
 				8CA218AE212479040063C188 /* SendMoneyButton.swift */,
 				8CA218B9212490E90063C188 /* SendMoneyAmounComponent */,
 				8CA218B4212483800063C188 /* SendMoneyMethodComponent */,
-				8CA218992122EB150063C188 /* SegmentedControlComponent */,
 			);
 			path = SendMoneyComponent;
 			sourceTree = "<group>";
@@ -1252,6 +1286,8 @@
 				8C04BC31211C4FC100E90090 /* MavenPro-Bold.ttf in Resources */,
 				8C60884E2111A22D00470411 /* LoginPasswordFormView.xib in Resources */,
 				8CA2191A213442100063C188 /* IllustrationalPlaceholder.xib in Resources */,
+				8C713B1821380AE800AC2E25 /* DepositMoneyAddressComponent.xib in Resources */,
+				8C713B132138009B00AC2E25 /* DepositMoneyMethodComponent.xib in Resources */,
 				8C091900210601F300703224 /* Recovery.storyboard in Resources */,
 				8C6088532111CB7000470411 /* LoginFormView.xib in Resources */,
 				8C04BC32211C4FC100E90090 /* MavenPro-Black.ttf in Resources */,
@@ -1342,6 +1378,7 @@
 				8C091906210605AF00703224 /* Router.swift in Sources */,
 				8CF41D8D2136A1AE006D4FE2 /* TransactionsFilterData.swift in Sources */,
 				8CA2190D213420040063C188 /* TransactionsGroupHeaderComponent.swift in Sources */,
+				8C713B1B21380CE200AC2E25 /* DepositMoneyViewController.swift in Sources */,
 				8CA2191421342ABC0063C188 /* DateInterval+Extensions.swift in Sources */,
 				8C091938210622AA00703224 /* Request.swift in Sources */,
 				8C333D382109F3D500949AC0 /* OnboardingFlow.swift in Sources */,
@@ -1366,6 +1403,7 @@
 				8C4413D4211993B400C9689C /* CoinType.swift in Sources */,
 				8CA218FE21303BC30063C188 /* TransactionStatus.swift in Sources */,
 				8CA2190A2133EEF40063C188 /* TransactionsGroupData.swift in Sources */,
+				8C713B112137F95200AC2E25 /* DepositMoneyMethodComponent.swift in Sources */,
 				9319BA852129A07A00033A7E /* TransactionData.swift in Sources */,
 				8C333D66210B6E7600949AC0 /* UITextField+Extensions.swift in Sources */,
 				8CF5F92F211327EB0083B36A /* MaskParser.swift in Sources */,
@@ -1406,6 +1444,7 @@
 				8C091908210605FA00703224 /* InitialRouter.swift in Sources */,
 				8C60885E2111F28000470411 /* EnterNewPhoneNumberViewController.swift in Sources */,
 				8CA2192721354D370063C188 /* TransactionsDateIntervalFilterComponent.swift in Sources */,
+				8C713B1D2138408700AC2E25 /* OutputButton.swift in Sources */,
 				8CF1DE4B20F3AD210036F986 /* NewPasswordViewController.swift in Sources */,
 				8CF5F93A21144BE80083B36A /* UIDevice+Extensions.swift in Sources */,
 				8CA219122134259F0063C188 /* Date+Extensions.swift in Sources */,
@@ -1471,6 +1510,7 @@
 				8CA218B821248FA50063C188 /* SendMoneyAmountComponent.swift in Sources */,
 				8C4413C621188BCA00C9689C /* WalletNavigationController.swift in Sources */,
 				8C09195F21076B5D00703224 /* RecoveryAPI.swift in Sources */,
+				8C713B162138068600AC2E25 /* DepositMoneyAddressComponent.swift in Sources */,
 				8C34616B20EF8FA700746724 /* AppDelegate.swift in Sources */,
 				8CA2191821343FE10063C188 /* IllustrationalPlaceholder.swift in Sources */,
 				8C333D44210B001500949AC0 /* OnboardingLargeButton.swift in Sources */,

@@ -202,7 +202,7 @@ class TransactionDetailViewController: WalletViewController {
         switch sender.sendState {
         case .initial:
             guard let token = userManager?.getToken() else {
-                fatalError()
+                return
             }
 
             guard let data = sendMoneyData else {

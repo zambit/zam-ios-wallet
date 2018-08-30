@@ -94,7 +94,7 @@ class EnterPinViewController: WalletViewController, DecimalKeyboardComponentDele
                     dotsFieldComponent?.fillAll()
 
                     guard let token = userManager?.getToken() else {
-                        fatalError()
+                        return
                     }
 
                     authAPI?.checkIfUserAuthorized(token: token).done {

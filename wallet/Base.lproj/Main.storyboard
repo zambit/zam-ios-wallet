@@ -262,6 +262,49 @@
             </objects>
             <point key="canvasLocation" x="-3204" y="-78"/>
         </scene>
+        <!--Deposit Money View Controller-->
+        <scene sceneID="dy5-mO-pnq">
+            <objects>
+                <viewController storyboardIdentifier="DepositMoneyViewController" id="cSy-FY-bn8" customClass="DepositMoneyViewController" customModule="wallet" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="hSw-wz-rpa">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6M8-op-lee" customClass="DepositMoneyAddressComponent" customModule="wallet" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="262" width="414" height="474"/>
+                                <color key="backgroundColor" red="0.60285807530000002" green="1" blue="0.75562033740000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" priority="998" constant="474" id="Y7G-1E-aad"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xVl-jA-onZ" customClass="DepositMoneyMethodComponent" customModule="wallet" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="20" width="414" height="242"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="0.99806826780000002" blue="0.67137100199999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <constraints>
+                            <constraint firstItem="6M8-op-lee" firstAttribute="leading" secondItem="8My-M2-mLw" secondAttribute="leading" id="8Tb-OZ-HoB"/>
+                            <constraint firstItem="6M8-op-lee" firstAttribute="top" secondItem="xVl-jA-onZ" secondAttribute="bottom" id="BGk-yj-KLP"/>
+                            <constraint firstItem="xVl-jA-onZ" firstAttribute="top" secondItem="8My-M2-mLw" secondAttribute="top" id="Oss-Ac-Z2t"/>
+                            <constraint firstItem="8My-M2-mLw" firstAttribute="trailing" secondItem="xVl-jA-onZ" secondAttribute="trailing" id="Th8-Pk-GWJ"/>
+                            <constraint firstItem="6M8-op-lee" firstAttribute="top" relation="greaterThanOrEqual" secondItem="8My-M2-mLw" secondAttribute="top" id="Zu7-GL-sbe"/>
+                            <constraint firstItem="6M8-op-lee" firstAttribute="trailing" secondItem="8My-M2-mLw" secondAttribute="trailing" id="cNW-9l-jYG"/>
+                            <constraint firstItem="6M8-op-lee" firstAttribute="bottom" secondItem="8My-M2-mLw" secondAttribute="bottom" id="rfW-Ww-aKN"/>
+                            <constraint firstItem="xVl-jA-onZ" firstAttribute="leading" secondItem="8My-M2-mLw" secondAttribute="leading" id="yAE-G8-XNM"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="8My-M2-mLw"/>
+                    </view>
+                    <connections>
+                        <outlet property="addressContentComponent" destination="6M8-op-lee" id="nTF-im-Lwi"/>
+                        <outlet property="contentHeightConstraint" destination="Y7G-1E-aad" id="45a-q9-0qi"/>
+                        <outlet property="methodControllerComponent" destination="xVl-jA-onZ" id="PFk-PV-z53"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ojk-2r-JBz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2604.3478260869565" y="-1641.0326086956522"/>
+        </scene>
         <!--Home View Controller-->
         <scene sceneID="Dy4-CQ-ozQ">
             <objects>

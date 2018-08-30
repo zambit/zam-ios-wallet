@@ -98,13 +98,20 @@ struct CodableSuccessAuthorizedPhoneResponse: Codable {
 struct CodableSuccessWalletResponse: Codable {
 
     let result: Bool
-    let data: CodableWallet
+    let data: WalletPage
 
     private enum CodingKeys: String, CodingKey {
         case result
         case data
     }
 
+    struct WalletPage: Codable {
+        let wallet: CodableWallet
+
+        private enum CodingKeys: String, CodingKey {
+            case wallet
+        }
+    }
 }
 
 struct CodableSuccessWalletsPageResponse: Codable {

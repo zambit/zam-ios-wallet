@@ -122,9 +122,47 @@ final class HomeFlow: ScreenFlow {
             owner.walletNavigationController?.push(viewController: target)
         }
 
+        let onDepositToWallet: (Int, [WalletData], String, WalletViewController) -> Void = {
+            [weak self]
+            index, wallets, phone, owner in
+
+            guard let strongSelf = self else {
+                return
+            }
+
+            let target = strongSelf.depositMoneyScreen
+            target.prepare(wallets: wallets, currentIndex: index, phone: phone)
+
+            owner.walletNavigationController?.push(viewController: target)
+        }
+
         vc.onSendFromWallet = onSendFromWallet
+        vc.onDepositToWallet = onDepositToWallet
         vc.userManager = UserDefaultsManager(keychainConfiguration: WalletKeychainConfiguration())
         vc.userAPI = UserAPI(provider: UserProvider(environment: WalletEnvironment(), dispatcher: HTTPDispatcher()))
+        vc.flow = self
+        return vc
+    }
+
+    private var depositMoneyScreen: DepositMoneyViewController {
+        let _vc = ControllerHelper.instantiateViewController(identifier: "DepositMoneyViewController", storyboardName: "Main")
+
+        guard let vc = _vc as? DepositMoneyViewController else {
+            fatalError()
+        }
+
+        let onShare: (String) -> Void = {
+            address in
+
+            let activityViewController = UIActivityViewController(activityItems: [address], applicationActivities: nil)
+
+            activityViewController.excludedActivityTypes = [ UIActivityType.airDrop, UIActivityType.postToFacebook ]
+
+            vc.present(activityViewController, animated: true, completion: nil)
+        }
+
+        vc.onShare = onShare
+        vc.title = "Deposit money"
         vc.flow = self
         return vc
     }

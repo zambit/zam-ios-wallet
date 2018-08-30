@@ -22,6 +22,12 @@ class SelectingBackView: UIView {
         }
     }
 
+    override open var bounds: CGRect {
+        didSet {
+            segmentMaskView.bounds = bounds
+        }
+    }
+
     override open var center: CGPoint {
         didSet {
             segmentMaskView.center = center

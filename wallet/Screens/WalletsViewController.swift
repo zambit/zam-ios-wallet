@@ -25,6 +25,7 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
     weak var delegate: WalletsViewControllerDelegate?
 
     var onSendFromWallet: ((_ index: Int, _ wallets: [WalletData], _ recipient: ContactData?, _ phone: String, _ owner: WalletViewController) -> Void)?
+    var onDepositToWallet: ((_ index: Int, _ wallets: [WalletData], _ phone: String, _ owner: WalletViewController) -> Void)?
 
     var userManager: UserDefaultsManager?
     var userAPI: UserAPI?
@@ -106,6 +107,15 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
 
             strongSelf.onSendFromWallet?(indexPath.item, strongSelf.wallets, nil, phone, owner)
         }
+        cell.onDepositButtonTap = {
+            [weak self] in
+
+            guard let strongSelf = self, let owner = strongSelf.owner else {
+                return
+            }
+
+            strongSelf.onDepositToWallet?(indexPath.item, strongSelf.wallets, phone, owner)
+        }
         return cell
     }
 
@@ -124,7 +134,7 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
 
     private func loadData(_ sender: Any) {
         guard let token = userManager?.getToken() else {
-            fatalError()
+            return
         }
 
         userAPI?.getWallets(token: token).done {

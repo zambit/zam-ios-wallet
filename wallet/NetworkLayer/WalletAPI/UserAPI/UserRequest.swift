@@ -28,7 +28,7 @@ enum UserRequest: Request {
             return "user/me"
         case .createWallet, .getUserWallets:
             return "user/me/wallets"
-        case .getUserWalletInfo(walletId: let id):
+        case .getUserWalletInfo(token: _, walletId: let id):
             return "user/me/wallets/\(id)"
         case .sendTransaction, .getTransactions:
             return "user/me/txs"

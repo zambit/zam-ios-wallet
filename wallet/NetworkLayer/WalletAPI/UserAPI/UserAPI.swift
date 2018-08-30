@@ -68,8 +68,12 @@ struct UserAPI: NetworkService {
                     case .data(_):
 
                         let success: (CodableSuccessWalletResponse) -> Void = { s in
-                            let wallet = try! WalletData(codable: s.data)
-                            seal.fulfill(wallet)
+                            do {
+                                let wallet = try WalletData(codable: s.data.wallet)
+                                seal.fulfill(wallet)
+                            } catch let e {
+                                seal.reject(e)
+                            }
                         }
 
                         let failure: (CodableFailure) -> Void = { f in
@@ -110,6 +114,47 @@ struct UserAPI: NetworkService {
                             }
 
                             seal.fulfill(wallets)
+                        }
+
+                        let failure: (CodableFailure) -> Void = { f in
+                            guard f.errors.count > 0 else {
+                                let error = WalletResponseError.undefinedServerFailureResponse
+                                seal.reject(error)
+                                return
+                            }
+
+                            let error = WalletResponseError.serverFailureResponse(errors: f.errors)
+                            seal.reject(error)
+                        }
+
+                        do {
+                            try response.extractResult(success: success, failure: failure)
+                        } catch let error {
+                            seal.reject(error)
+                        }
+                    case .error(let error):
+                        seal.reject(error)
+                    }
+                }
+        }
+    }
+
+    func getWalletInfo(token: String, walletId: String) -> Promise<WalletData> {
+        return provider.execute(.getUserWalletInfo(token: token, walletId: walletId))
+            .then {
+                (response: Response) -> Promise<WalletData> in
+
+                return Promise { seal in
+                    switch response {
+                    case .data(_):
+
+                        let success: (CodableSuccessWalletResponse) -> Void = { s in
+                            do {
+                                let wallet = try WalletData(codable: s.data.wallet)
+                                seal.fulfill(wallet)
+                            } catch let e {
+                                seal.reject(e)
+                            }
                         }
 
                         let failure: (CodableFailure) -> Void = { f in

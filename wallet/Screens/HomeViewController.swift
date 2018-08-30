@@ -186,7 +186,7 @@ class HomeViewController: DetailOffsetPresentationViewController, WalletsViewCon
 
     private func loadData() {
         guard let token = userManager?.getToken() else {
-            fatalError()
+            return
         }
 
         userAPI?.getUserInfo(token: token, coin: nil).done {

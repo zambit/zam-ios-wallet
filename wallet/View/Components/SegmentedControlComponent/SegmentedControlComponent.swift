@@ -112,6 +112,7 @@ class SegmentedControlComponent: Component {
                 return
             }
 
+            back.bounds.size.width = strongSelf.segments[index].normalButton.bounds.width + 30.0
             back.center = strongSelf.segments[index].center
             back.backgroundColor = strongSelf.segments[index].backColor
         }, completion: {
@@ -136,7 +137,7 @@ class SegmentedControlComponent: Component {
     private func reloadBackView() {
         let backRect = evaluateRectOfBackView(currentIndex: currentIndex,
                                               elementsCount: segments.count,
-                                              horizontalMargin: 20.0)
+                                              horizontalMargin: 15.0)
         backView?.frame = backRect
         backView?.backgroundColor = segments[currentIndex].backColor
     }

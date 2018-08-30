@@ -28,4 +28,30 @@ extension UIImage {
 
         return outputImage!
     }
+
+    static func qrCode(from string: String, size: CGSize) -> UIImage? {
+        let data = string.data(using: String.Encoding.ascii)
+
+        if let filter = CIFilter(name: "CIQRCodeGenerator") {
+            filter.setValue(data, forKey: "inputMessage")
+            filter.setValue("Q", forKey: "inputCorrectionLevel")
+            
+            guard let output = filter.outputImage else {
+                return nil
+            }
+
+            let result = UIImage(ciImage: output)
+
+            let scaleX = size.width / result.size.width
+            let scaleY = size.height / result.size.height
+
+            guard let transformedImage = result.ciImage?.transformed(by: CGAffineTransform(scaleX: scaleX, y: scaleY)) else {
+                return nil
+            }
+
+            return UIImage(ciImage: transformedImage)
+        }
+
+        return nil
+    }
 }
