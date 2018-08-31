@@ -13,7 +13,6 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DepositMoneyMethodComponent" customModule="wallet" customModuleProvider="target">
             <connections>
                 <outlet property="contentView" destination="iN0-l3-epB" id="Kqx-de-Hjh"/>
-                <outlet property="leftSegmentedControlConstraint" destination="Npg-j9-jtq" id="qrv-0W-Ta1"/>
                 <outlet property="segmentedControlComponent" destination="Gce-e4-EBU" id="70G-jO-JMw"/>
                 <outlet property="titleLabel" destination="7bj-CG-zEn" id="HQZ-Ca-JtZ"/>
                 <outlet property="walletsCollectionView" destination="uuA-7R-x5r" id="nld-yn-e1W"/>
@@ -25,7 +24,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gce-e4-EBU" customClass="SegmentedControlComponent" customModule="wallet" customModuleProvider="target">
-                    <rect key="frame" x="40" y="35" width="559" height="44"/>
+                    <rect key="frame" x="66" y="35" width="533" height="44"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="7gZ-b3-iqd"/>
@@ -52,9 +51,9 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="Gce-e4-EBU" firstAttribute="leading" secondItem="7bj-CG-zEn" secondAttribute="trailing" constant="10" id="CDz-ki-a8y"/>
                 <constraint firstItem="7bj-CG-zEn" firstAttribute="top" secondItem="Gce-e4-EBU" secondAttribute="top" constant="8" id="D58-YR-uAd"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="uuA-7R-x5r" secondAttribute="trailing" id="Lgn-TV-NK1"/>
-                <constraint firstItem="Gce-e4-EBU" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="40" id="Npg-j9-jtq"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="uuA-7R-x5r" secondAttribute="bottom" id="ZHG-2d-Met"/>
                 <constraint firstItem="uuA-7R-x5r" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="i7p-zy-C84"/>
                 <constraint firstItem="7bj-CG-zEn" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="nqz-mL-b8r"/>

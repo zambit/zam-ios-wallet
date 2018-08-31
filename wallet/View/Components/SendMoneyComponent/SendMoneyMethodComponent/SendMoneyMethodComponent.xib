@@ -23,21 +23,17 @@
             <rect key="frame" x="0.0" y="0.0" width="640" height="120"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D9Y-qd-BwG">
+                    <rect key="frame" x="16" y="8" width="18.5" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UYB-Ne-Px6" customClass="SegmentedControlComponent" customModule="wallet" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="0.0" width="640" height="44"/>
-                    <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D9Y-qd-BwG">
-                            <rect key="frame" x="16" y="8" width="18.5" height="21"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                    </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="PT3-Sv-xH8"/>
-                        <constraint firstItem="D9Y-qd-BwG" firstAttribute="top" secondItem="UYB-Ne-Px6" secondAttribute="top" constant="8" id="XRe-1b-N5P"/>
-                        <constraint firstItem="D9Y-qd-BwG" firstAttribute="leading" secondItem="UYB-Ne-Px6" secondAttribute="leading" constant="16" id="htW-cS-v7l"/>
                     </constraints>
                 </view>
                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bgV-8U-48N" customClass="IconableTextField" customModule="wallet" customModuleProvider="target">
@@ -52,10 +48,12 @@
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="UYB-Ne-Px6" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="Bcp-8b-0R4"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="UYB-Ne-Px6" secondAttribute="trailing" id="LZs-5n-5cT"/>
+                <constraint firstItem="D9Y-qd-BwG" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="8" id="XRo-eY-Vet"/>
+                <constraint firstItem="UYB-Ne-Px6" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" placeholder="YES" id="dTC-YA-WXF"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="bgV-8U-48N" secondAttribute="trailing" id="gBC-y0-caQ"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="bgV-8U-48N" secondAttribute="bottom" id="gqh-Qf-e4R"/>
+                <constraint firstItem="D9Y-qd-BwG" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="mge-xl-hhp"/>
                 <constraint firstItem="UYB-Ne-Px6" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="oE9-lq-Ny7"/>
                 <constraint firstItem="bgV-8U-48N" firstAttribute="top" secondItem="UYB-Ne-Px6" secondAttribute="bottom" constant="20" id="tc4-Qc-ZtG"/>
                 <constraint firstItem="bgV-8U-48N" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="wfd-7p-56k"/>

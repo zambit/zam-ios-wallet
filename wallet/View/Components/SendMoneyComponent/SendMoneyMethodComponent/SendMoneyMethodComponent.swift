@@ -50,6 +50,22 @@ class SendMoneyMethodComponent: Component, SegmentedControlComponentDelegate, Ph
 
         segmentedControlComponent?.delegate = self
 
+        segmentedControlComponent?.segmentsHorizontalMargin = 15.0
+        segmentedControlComponent?.segmentsHorizontalSpacing = 5.0
+
+        switch UIDevice.current.screenType {
+        case .extraSmall, .small:
+            segmentedControlComponent?.alignment = .left
+            if let label = toLabel {
+                segmentedControlComponent?.leftAnchor.constraint(equalTo: label.rightAnchor, constant: 10.0).isActive = true
+            }
+        case .medium, .plus, .extra:
+            segmentedControlComponent?.alignment = .center
+            segmentedControlComponent?.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 0.0).isActive = true
+        default:
+            fatalError()
+        }
+
         segmentedControlComponent?.addSegment(icon: #imageLiteral(resourceName: "phoneOutgoing"), title: "Phone", iconTintColor: .paleOliveGreen, selectedTintColor: .white, backColor: .paleOliveGreen)
         segmentedControlComponent?.addSegment(icon: #imageLiteral(resourceName: "linkTo"), title: "Address", iconTintColor: .paleOliveGreen, selectedTintColor: .white, backColor: .lightblue)
     }
