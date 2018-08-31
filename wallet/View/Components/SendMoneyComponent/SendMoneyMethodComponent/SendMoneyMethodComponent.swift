@@ -29,7 +29,7 @@ protocol SendMoneyMethodComponentDelegate: class {
 
 }
 
-class SendMoneyMethodComponent: Component, SegmentedControlComponentDelegate, PhoneNumberEnteringHandlerDelegate {
+class SendMoneyMethodComponent: Component, SegmentedControlComponentDelegate, PhoneNumberEnteringHandlerDelegate, IconableTextFieldDelegate {
 
     weak var delegate: SendMoneyMethodComponentDelegate?
 
@@ -47,6 +47,8 @@ class SendMoneyMethodComponent: Component, SegmentedControlComponentDelegate, Ph
 
     override func initFromNib() {
         super.initFromNib()
+
+        recipientTextField?.iconableDelegate = self
 
         segmentedControlComponent?.delegate = self
 
@@ -169,4 +171,9 @@ class SendMoneyMethodComponent: Component, SegmentedControlComponentDelegate, Ph
         }
     }
 
+    // MARK: - IconableTextFieldDelegate
+
+    func iconableTextFieldOnRightDetailTapEvent(_ iconableTextField: IconableTextField) {
+        //...
+    }
 }

@@ -12,6 +12,16 @@ protocol IconableTextFieldDelegate: class {
 
     func iconableTextField(_ iconableTextField: IconableTextField, detailMode: IconableTextField.DetailMode, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool
 
+    func iconableTextFieldOnRightDetailTapEvent(_ iconableTextField: IconableTextField)
+}
+
+extension IconableTextFieldDelegate {
+
+    func iconableTextField(_ iconableTextField: IconableTextField, detailMode: IconableTextField.DetailMode, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        return true
+    }
+
+    func iconableTextFieldOnRightDetailTapEvent(_ iconableTextField: IconableTextField) {}
 }
 
 class IconableTextField: UITextField, UITextFieldDelegate {
@@ -126,6 +136,9 @@ class IconableTextField: UITextField, UITextFieldDelegate {
         rightDetailImageView?.backgroundColor = .clear
         rightDetailImageView?.translatesAutoresizingMaskIntoConstraints = false
 
+        let rightTapGesture = UITapGestureRecognizer(target: self, action: #selector(rightDetailImageTapGestureEvent(_:)))
+        rightDetailImageView?.addGestureRecognizer(rightTapGesture)
+
         addSubview(rightDetailImageView!)
 
         rightDetailImageView?.heightAnchor.constraint(equalTo: rightDetailImageView!.widthAnchor).isActive = true
@@ -144,5 +157,10 @@ class IconableTextField: UITextField, UITextFieldDelegate {
         }
 
         return iconable.iconableTextField(self, detailMode: detailMode, shouldChangeCharactersIn: range, replacementString: string)
+    }
+
+    @objc
+    private func rightDetailImageTapGestureEvent(_ sender: UITapGestureRecognizer) {
+        iconableDelegate?.iconableTextFieldOnRightDetailTapEvent(self)
     }
 }
