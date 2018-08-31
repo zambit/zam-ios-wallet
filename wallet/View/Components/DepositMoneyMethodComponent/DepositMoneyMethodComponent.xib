@@ -13,6 +13,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DepositMoneyMethodComponent" customModule="wallet" customModuleProvider="target">
             <connections>
                 <outlet property="contentView" destination="iN0-l3-epB" id="Kqx-de-Hjh"/>
+                <outlet property="leftSegmentedControlConstraint" destination="Npg-j9-jtq" id="qrv-0W-Ta1"/>
                 <outlet property="segmentedControlComponent" destination="Gce-e4-EBU" id="70G-jO-JMw"/>
                 <outlet property="titleLabel" destination="7bj-CG-zEn" id="HQZ-Ca-JtZ"/>
                 <outlet property="walletsCollectionView" destination="uuA-7R-x5r" id="nld-yn-e1W"/>

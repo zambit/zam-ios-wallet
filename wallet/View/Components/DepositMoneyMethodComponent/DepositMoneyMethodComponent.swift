@@ -31,6 +31,8 @@ class DepositMoneyMethodComponent: Component, SegmentedControlComponentDelegate,
     @IBOutlet private var segmentedControlComponent: SegmentedControlComponent?
     @IBOutlet private var walletsCollectionView: UICollectionView?
 
+    @IBOutlet private var leftSegmentedControlConstraint: NSLayoutConstraint?
+
     private var phone: String?
     private var wallets: [WalletData] = []
     private var currentIndex: Int?
@@ -39,6 +41,17 @@ class DepositMoneyMethodComponent: Component, SegmentedControlComponentDelegate,
 
     override func initFromNib() {
         super.initFromNib()
+
+        switch UIDevice.current.screenType {
+        case .extraSmall, .small, .medium:
+            segmentedControlComponent?.segmentsHorizontalMargin = 10.0
+            leftSegmentedControlConstraint?.constant = 60.0
+        case .plus, .extra:
+            segmentedControlComponent?.segmentsHorizontalMargin = 15.0
+            leftSegmentedControlConstraint?.constant = 40.0
+        case .unknown:
+            fatalError()
+        }
 
         segmentedControlComponent?.delegate = self
 

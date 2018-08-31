@@ -16,9 +16,36 @@ protocol SegmentedControlComponentDelegate: class {
 
 }
 
+enum SegmentedControlComponentAlignment {
+    case left
+    case center
+    case right
+}
+
 class SegmentedControlComponent: Component {
 
     weak var delegate: SegmentedControlComponentDelegate?
+
+    var alignment: SegmentedControlComponentAlignment = .left {
+        didSet {
+            reloadSegments()
+            reloadBackView()
+        }
+    }
+
+    var segmentsHorizontalSpacing: CGFloat = 10.0 {
+        didSet {
+            reloadSegments()
+            reloadBackView()
+        }
+    }
+
+    var segmentsHorizontalMargin: CGFloat = 15.0 {
+        didSet {
+            reloadSegments()
+            reloadBackView()
+        }
+    }
 
     private var segments: [SegmentedControlElement] = [] {
         didSet {
@@ -68,7 +95,7 @@ class SegmentedControlComponent: Component {
         segmentNormal.titleEdgeInsets = UIEdgeInsetsMake(0, 8, 0, 0)
         segmentNormal.titleLabel?.font = UIFont.walletFont(ofSize: 16.0, weight: .medium)
         segmentNormal.sizeToFit()
-        segmentNormal.bounds = CGRect(x: 0, y: 0, width: segmentNormal.bounds.width + 16, height: segmentNormal.bounds.height)
+        segmentNormal.bounds = CGRect(x: 0, y: 0, width: segmentNormal.bounds.width + 8, height: segmentNormal.bounds.height)
 
         segmentNormal.addTarget(self, action: #selector(segmentTouchUpInsideEvent(_:)), for: .touchUpInside)
 
@@ -80,7 +107,7 @@ class SegmentedControlComponent: Component {
         segmentSelected.titleEdgeInsets = UIEdgeInsetsMake(0, 8, 0, 0)
         segmentSelected.titleLabel?.font = UIFont.walletFont(ofSize: 16.0, weight: .medium)
         segmentSelected.sizeToFit()
-        segmentSelected.bounds = CGRect(x: 0, y: 0, width: segmentSelected.bounds.width + 16, height: segmentSelected.bounds.height)
+        segmentSelected.bounds = CGRect(x: 0, y: 0, width: segmentSelected.bounds.width + 8, height: segmentSelected.bounds.height)
 
         let segment = SegmentedControlElement(selected: segmentSelected, normal: segmentNormal, backColor: backColor)    
 
@@ -112,7 +139,7 @@ class SegmentedControlComponent: Component {
                 return
             }
 
-            back.bounds.size.width = strongSelf.segments[index].normalButton.bounds.width + 30.0
+            back.bounds.size.width = strongSelf.segments[index].width + strongSelf.segmentsHorizontalMargin * 2
             back.center = strongSelf.segments[index].center
             back.backgroundColor = strongSelf.segments[index].backColor
         }, completion: {
@@ -129,32 +156,67 @@ class SegmentedControlComponent: Component {
     }
 
     private func reloadSegments() {
-        for (index, element) in segments.enumerated() {
-            element.center = evaluateCenterPositionForElement(withIndex: index, overallCount: segments.count)
+        let frames = evaluateFramesForElements(segments: segments, horizontalMargin: segmentsHorizontalMargin, horizontalSpace: segmentsHorizontalSpacing)
+
+        guard segments.count == frames.count else {
+            return
+        }
+
+        frames.enumerated().forEach {
+            segments[$0.offset].center = CGPoint(x: $0.element.origin.x + $0.element.width / 2, y: $0.element.height / 2)
         }
     }
 
     private func reloadBackView() {
+        guard segments.count > 0 else {
+            return
+        }
+
         let backRect = evaluateRectOfBackView(currentIndex: currentIndex,
-                                              elementsCount: segments.count,
-                                              horizontalMargin: 15.0)
+                                              segments: segments,
+                                              horizontalMargin: segmentsHorizontalMargin)
         backView?.frame = backRect
         backView?.backgroundColor = segments[currentIndex].backColor
     }
 
-    private func evaluateCenterPositionForElement(withIndex index: Int, overallCount: Int) -> CGPoint {
-        let distBetween = bounds.width / CGFloat(overallCount + 1)
-        let x = distBetween * CGFloat(index + 1)
-        let y = bounds.height / 2
-        return CGPoint(x: x, y: y)
+    private func evaluateFramesForElements(segments: [SegmentedControlElement], horizontalMargin: CGFloat, horizontalSpace: CGFloat) -> [CGRect] {
+
+        guard segments.count > 0 else {
+            return []
+        }
+
+        var width: CGFloat = CGFloat(segments.count) * (horizontalMargin * 2) + CGFloat(segments.count - 1) * horizontalSpace
+
+        width = segments.reduce(width, { a, b in
+            a + b.width
+        })
+
+        var offset: CGFloat
+
+        switch alignment {
+        case .center:
+            offset = (self.bounds.width - width) / 2
+        case .left:
+            offset = 0
+        case .right:
+            offset = self.bounds.width - width
+        }
+
+        var frames: [CGRect] = [CGRect(x: offset, y: bounds.height / 2, width: segments[0].width + horizontalMargin * 2 , height: bounds.height)]
+
+        for i in 1..<segments.count {
+            frames.append(CGRect(x: frames[i-1].origin.x + frames[i-1].width + horizontalSpace, y: bounds.height / 2, width: segments[i].width + horizontalMargin * 2, height: bounds.height))
+        }
+
+        return frames
     }
 
-    private func evaluateRectOfBackView(currentIndex: Int, elementsCount: Int, horizontalMargin: CGFloat) -> CGRect {
+    private func evaluateRectOfBackView(currentIndex: Int, segments: [SegmentedControlElement], horizontalMargin: CGFloat) -> CGRect {
         let width = segments[currentIndex].width + horizontalMargin * 2
         let height = bounds.height
         let size = CGSize(width: width, height: height)
 
-        let center = evaluateCenterPositionForElement(withIndex: currentIndex, overallCount: elementsCount)
+        let center = segments[currentIndex].center
         let origin = CGPoint(x: center.x - width / 2, y: center.y - height / 2 )
 
         return CGRect(origin: origin, size: size)
