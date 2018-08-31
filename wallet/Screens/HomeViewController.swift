@@ -189,6 +189,8 @@ class HomeViewController: DetailOffsetPresentationViewController, WalletsViewCon
             return
         }
 
+        dataWillLoading()
+
         userAPI?.getUserInfo(token: token, coin: nil).done {
             [weak self]
             info in
@@ -199,15 +201,22 @@ class HomeViewController: DetailOffsetPresentationViewController, WalletsViewCon
 
             self?.totalBalance = totalBalance
 
-            self?.dataWasLoaded()
+            performWithDelay {
+                self?.dataWasLoaded()
+            }
         }.catch {
-            [weak self]
             error in
             print(error)
         }
     }
 
+    private func dataWillLoading() {
+        sumLabel?.beginLoading()
+    }
+
     private func dataWasLoaded() {
+        sumLabel?.endLoading()
+
         guard
             let totalBalance = totalBalance,
             let separator = NumberFormatter.walletAmount.decimalSeparator!.first else {

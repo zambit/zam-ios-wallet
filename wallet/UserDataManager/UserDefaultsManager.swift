@@ -65,12 +65,10 @@ struct UserDefaultsManager {
     }
 
     func getToken() -> String? {
-        print("WalletUserDefaultsManager: get \(userDefaults.value(forKey: UserDefaultsKey.token.rawValue) as? String) token")
         return userDefaults.value(forKey: UserDefaultsKey.token.rawValue) as? String
     }
 
     func getPhoneNumber() -> String? {
-        print("WalletUserDefaultsManager: get \(userDefaults.value(forKey: UserDefaultsKey.phoneNumber.rawValue) as? String) phone")
         return userDefaults.value(forKey: UserDefaultsKey.phoneNumber.rawValue) as? String
     }
 
@@ -94,6 +92,12 @@ struct UserDefaultsManager {
         }
 
         return (mask, symbol, space)
+    }
+
+    func clearToken() {
+        userDefaults.removeObject(forKey: UserDefaultsKey.token.rawValue)
+
+        print("WalletUserDefaultsManager: token deleted")
     }
 
     func clearUserData() throws {

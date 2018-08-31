@@ -143,8 +143,8 @@ class EnterLoginPasswordViewController: ContinueViewController, LoginPasswordCom
             } catch let error {
                 fatalError("Error on clearing user data: \(error)")
             }
-            self?.onExit?()
             
+            self?.onExit?()
         }.catch {
             [weak self]
             error in

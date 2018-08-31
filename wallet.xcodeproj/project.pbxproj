@@ -126,6 +126,7 @@
 		8C713B1821380AE800AC2E25 /* DepositMoneyAddressComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C713B1721380AE800AC2E25 /* DepositMoneyAddressComponent.xib */; };
 		8C713B1B21380CE200AC2E25 /* DepositMoneyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C713B1A21380CE200AC2E25 /* DepositMoneyViewController.swift */; };
 		8C713B1D2138408700AC2E25 /* OutputButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C713B1C2138408700AC2E25 /* OutputButton.swift */; };
+		8C713B1F213941FF00AC2E25 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C713B1E213941FF00AC2E25 /* Networking.swift */; };
 		8CA2188F2121D97C0063C188 /* DecimalKeyboardComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CA2188E2121D97B0063C188 /* DecimalKeyboardComponent.xib */; };
 		8CA218922122E8D70063C188 /* SendMoneyComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CA218912122E8D70063C188 /* SendMoneyComponent.xib */; };
 		8CA218942122EAC90063C188 /* SendMoneyComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA218932122EAC90063C188 /* SendMoneyComponent.swift */; };
@@ -356,6 +357,7 @@
 		8C713B1721380AE800AC2E25 /* DepositMoneyAddressComponent.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DepositMoneyAddressComponent.xib; sourceTree = "<group>"; };
 		8C713B1A21380CE200AC2E25 /* DepositMoneyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepositMoneyViewController.swift; sourceTree = "<group>"; };
 		8C713B1C2138408700AC2E25 /* OutputButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputButton.swift; sourceTree = "<group>"; };
+		8C713B1E213941FF00AC2E25 /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
 		8CA2188E2121D97B0063C188 /* DecimalKeyboardComponent.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DecimalKeyboardComponent.xib; sourceTree = "<group>"; };
 		8CA218912122E8D70063C188 /* SendMoneyComponent.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SendMoneyComponent.xib; sourceTree = "<group>"; };
 		8CA218932122EAC90063C188 /* SendMoneyComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMoneyComponent.swift; sourceTree = "<group>"; };
@@ -495,6 +497,7 @@
 				8C09192C21061F3600703224 /* ControllerHelper.swift */,
 				8C52FFEF211AE19300EB55EA /* CustomOverlappingFlowLayout.swift */,
 				8C04BC3821219D0600E90090 /* Drawing.swift */,
+				8C713B1E213941FF00AC2E25 /* Networking.swift */,
 				8CF5F92E211327EB0083B36A /* MaskParser.swift */,
 				8C52FFFD211B252F00EB55EA /* InstantPanGestureRecognizer.swift */,
 				8CA218AA21241BF90063C188 /* PhoneNumberEnteringHandler.swift */,
@@ -1419,6 +1422,7 @@
 				8CF5F94A21147C050083B36A /* WalletViewController.swift in Sources */,
 				8CA218962122EAF60063C188 /* SegmentedControlComponent.swift in Sources */,
 				8C6088562111CB8C00470411 /* LoginFormComponent.swift in Sources */,
+				8C713B1F213941FF00AC2E25 /* Networking.swift in Sources */,
 				8CA218D2212738450063C188 /* CheckAnimationView.swift in Sources */,
 				8CF1DE4720F37B5E0036F986 /* SMSConfirmationViewController.swift in Sources */,
 				8C333D48210B0F3700949AC0 /* UIViewController+Extensions.swift in Sources */,

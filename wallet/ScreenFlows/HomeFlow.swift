@@ -65,7 +65,6 @@ final class HomeFlow: ScreenFlow {
         }
 
         let onDone: (TransactionsFilterData) -> Void = {
-            [weak self]
             filterData in
 
             vc.walletNavigationController?.popBack(nextViewController: {

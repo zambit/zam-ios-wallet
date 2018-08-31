@@ -62,6 +62,7 @@ struct AuthAPI: NetworkService {
     /**
      Invalidates user's current authorization session
      */
+    @discardableResult
     func signOut(token: String) -> Promise<Void> {
         return provider.execute(.signOut(token: token))
             .then {

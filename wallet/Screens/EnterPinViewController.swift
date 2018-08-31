@@ -97,20 +97,32 @@ class EnterPinViewController: WalletViewController, DecimalKeyboardComponentDele
                         return
                     }
 
+                    dotsFieldComponent?.beginLoading()
+
                     authAPI?.checkIfUserAuthorized(token: token).done {
                         [weak self]
                         phone in
 
-                        self?.onContinue?()
+                        performWithDelay {
+                            self?.dotsFieldComponent?.endLoading()
+                            self?.onContinue?()
+                        }
                     }.catch {
                         [weak self]
                         error in
 
-                        guard let phone = self?.phone else {
+                        guard let strongSelf = self else {
+                            return
+                        }
+
+                        guard let phone = strongSelf.phone else {
                             fatalError("Error on catching checkingIfUserAuthorized")
                         }
 
-                        self?.onLoginForm?(phone)
+                        performWithDelay {
+                            self?.dotsFieldComponent?.endLoading()
+                            self?.onLoginForm?(phone)
+                        }
                     }
                 case false:
                     dotsFieldComponent?.showFailure {
@@ -161,33 +173,41 @@ class EnterPinViewController: WalletViewController, DecimalKeyboardComponentDele
                 phone in
 
                 self?.onContinue?()
-                }.catch {
-                    [weak self]
-                    error in
-
-                    guard let phone = self?.phone else {
-                        fatalError("Error on catching checkingIfUserAuthorized")
-                    }
-
-                    self?.onLoginForm?(phone)
-            }
-
-            }, failure: {
-                [weak self]
+            }.catch {
                 error in
 
-                switch error {
-                case .userCancelBiometricAuthentication:
-                    break
-                case .biometricAuthenticationError:
-                    self?.keyboardComponent?.detailButton?.isEnabled = false
+                guard let strongSelf = self else {
+                    return
                 }
+
+                guard let phone = strongSelf.phone else {
+                    fatalError("Error on catching checkingIfUserAuthorized")
+                }
+
+                self?.userManager?.clearToken()
+
+                strongSelf.onLoginForm?(phone)
+            }
+        }, failure: {
+            [weak self]
+            error in
+
+            switch error {
+            case .userCancelBiometricAuthentication:
+                break
+            case .biometricAuthenticationError:
+                self?.keyboardComponent?.detailButton?.isEnabled = false
+            }
         })
     }
 
     @objc
     private func exitButtonTouchEvent(_ sender: UIBarButtonItem) {
         do {
+            if let token = userManager?.getToken() {
+                authAPI?.signOut(token: token)
+            }
+
             try userManager?.clearUserData()
         } catch let error {
             fatalError("Error on clearing user data: \(error)")

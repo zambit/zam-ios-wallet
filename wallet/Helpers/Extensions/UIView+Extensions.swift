@@ -38,6 +38,41 @@ extension UIView {
 
 extension UIView {
 
+    func beginLoading() {
+        let rect = CGRect(x: 0.0, y: 0.0, width: 20.0, height: 20.0)
+        let loadingView = UIView(frame: rect)
+
+        loadingView.center = center
+        loadingView.layer.sublayers = nil
+
+        let animationFrame = CGRect(x: 0, y: 0, width: 20.0, height: 20.0)
+        let animation = SpinningAnimationLayer(frame: animationFrame, color: .skyBlue)
+
+        loadingView.layer.addSublayer(animation)
+        loadingView.tag = 121514
+
+        alpha = 0.5
+
+        superview?.insertSubview(loadingView, aboveSubview: self)
+
+        loadingView.translatesAutoresizingMaskIntoConstraints = false
+        loadingView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        loadingView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        loadingView.heightAnchor.constraint(equalToConstant: 20.0).isActive = true
+        loadingView.widthAnchor.constraint(equalToConstant: 20.0).isActive = true
+    }
+
+    func endLoading() {
+        alpha = 1.0
+
+        let loadingView = superview?.viewWithTag(121514)
+        loadingView?.removeFromSuperview()
+    }
+
+}
+
+extension UIView {
+
     func searchVisualEffectsSubview() -> UIVisualEffectView? {
         if let visualEffectView = self as? UIVisualEffectView {
             return visualEffectView
