@@ -45,13 +45,13 @@ final class CreatePinFlow: ScreenFlow {
         return vc
     }
 
-    private var userFlow: HomeFlow? {
+    private var userFlow: MainFlow? {
         guard let navController = navigationController else {
             print("Navigation controller not found")
             return nil
         }
 
-        let flow = HomeFlow(navigationController: navController)
+        let flow = MainFlow(navigationController: navController)
         return flow
     }
 }

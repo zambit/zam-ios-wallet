@@ -9,9 +9,10 @@
 import Foundation
 import UIKit
 
-class SendMoneyViewController: KeyboardBehaviorFollowingViewController, SendMoneyComponentDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class SendMoneyViewController: KeyboardBehaviorFollowingViewController, SendMoneyComponentDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, QRCodeScannerViewControllerDelegate {
 
     var onSend: ((SendMoneyData) -> Void)?
+    var onQRScanner: (() -> Void)?
 
     @IBOutlet var sendMoneyComponent: SendMoneyComponent?
     @IBOutlet var titleLabel: UILabel?
@@ -76,6 +77,7 @@ class SendMoneyViewController: KeyboardBehaviorFollowingViewController, SendMone
         walletsCollectionView?.layoutIfNeeded()
         walletsCollectionView?.reloadData()
 
+        sendMoneyComponent?.onQRCodeScanning = onQRScanner
         sendMoneyComponent?.delegate = self
     }
 
@@ -151,5 +153,17 @@ class SendMoneyViewController: KeyboardBehaviorFollowingViewController, SendMone
     func sendMoneyComponentRequestSending(_ sendMoneyComponent: SendMoneyComponent, sendMoneyData: SendMoneyData) {
         dismissKeyboard()
         onSend?(sendMoneyData)
+    }
+
+    func qrCodeScannerViewController(_ qrCodeScannerViewController: QRCodeScannerViewController, didFindCode code: String) {
+        if let index = currentIndex, wallets.count > index {
+            sendMoneyComponent?.prepare(address: code, coinType: wallets[index].coin, walletId: wallets[index].id)
+        }
+    }
+
+    func qrCodeScannerViewControllerDidntFindCode(_ qrCodeScannerViewController: QRCodeScannerViewController) {
+        if let index = currentIndex, wallets.count > index {
+            sendMoneyComponent?.prepare(address: "", coinType: wallets[index].coin, walletId: wallets[index].id)
+        }
     }
 }

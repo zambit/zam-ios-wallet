@@ -42,10 +42,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
         let navigationController = UINavigationController(rootViewController: vc)
-        let coordinator = TransitionCoordinator(animator: NavigationCustomAnimator())
 
         navigation = WalletNavigationController(navigationController: navigationController)
-        navigation.customTransitionCoordinator = coordinator
+        navigation.transitionCoordinator = NavigationControllerTransitionCoordinator(animator: SlideTransitionAnimator())
 
         userDefaultsManager = UserDefaultsManager(keychainConfiguration: WalletKeychainConfiguration())
 

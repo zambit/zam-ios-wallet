@@ -5,4 +5,5 @@ target "wallet" do
   pod 'FlagKit', "~> 2.0.1"
   pod 'LayoutKit'
   pod "ESTabBarController-swift"
+  pod "Hero"
 end

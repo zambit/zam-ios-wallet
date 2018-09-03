@@ -10,9 +10,11 @@ import UIKit
 
 class WalletViewController: FlowViewController {
 
-    weak var walletNavigationController: WalletNavigationController?
+    weak var walletNavigationController: WalletNavigationController? {
+        didSet {
+            print(walletNavigationController)
+        }
+    }
 
     weak var walletTabBar: WalletTabBarController?
-
-
 }

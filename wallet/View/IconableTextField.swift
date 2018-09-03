@@ -10,6 +10,8 @@ import UIKit
 
 protocol IconableTextFieldDelegate: class {
 
+    func iconableTextFieldEditingChanged(_ iconableTextField: IconableTextField, currentDetailMode: IconableTextField.DetailMode)
+
     func iconableTextField(_ iconableTextField: IconableTextField, detailMode: IconableTextField.DetailMode, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool
 
     func iconableTextFieldOnRightDetailTapEvent(_ iconableTextField: IconableTextField)
@@ -73,6 +75,8 @@ class IconableTextField: UITextField, UITextFieldDelegate {
 
                     strongSelf.rightDetailOffsetConstraint?.constant = 0
                     strongSelf.leftDetailOffsetConstraint?.constant = imageOffset + leftDetail.bounds.width
+                    strongSelf.leftPadding = 50.0
+                    strongSelf.rightPadding = 10.0
 
                     strongSelf.layoutIfNeeded()
                 }, completion: nil)
@@ -94,6 +98,8 @@ class IconableTextField: UITextField, UITextFieldDelegate {
 
                     strongSelf.leftDetailOffsetConstraint?.constant = 0
                     strongSelf.rightDetailOffsetConstraint?.constant = -1 * (imageOffset + rightDetail.bounds.width)
+                    strongSelf.leftPadding = 10.0
+                    strongSelf.rightPadding = 50.0
 
                     strongSelf.layoutIfNeeded()
                 }, completion: nil)
@@ -106,6 +112,8 @@ class IconableTextField: UITextField, UITextFieldDelegate {
         addSubviews()
 
         delegate = self
+
+        addTarget(self, action: #selector(textFieldEditingChanged(_:)), for: .editingChanged)
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -113,6 +121,8 @@ class IconableTextField: UITextField, UITextFieldDelegate {
         addSubviews()
 
         delegate = self
+
+        addTarget(self, action: #selector(textFieldEditingChanged(_:)), for: .editingChanged)
     }
 
     private func addSubviews() {
@@ -150,6 +160,7 @@ class IconableTextField: UITextField, UITextFieldDelegate {
 
         layoutIfNeeded()
     }
+    
 
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         guard let iconable = iconableDelegate else {
@@ -162,5 +173,10 @@ class IconableTextField: UITextField, UITextFieldDelegate {
     @objc
     private func rightDetailImageTapGestureEvent(_ sender: UITapGestureRecognizer) {
         iconableDelegate?.iconableTextFieldOnRightDetailTapEvent(self)
+    }
+
+    @objc
+    private func textFieldEditingChanged(_ textField: UITextField) {
+        iconableDelegate?.iconableTextFieldEditingChanged(self, currentDetailMode: detailMode)
     }
 }

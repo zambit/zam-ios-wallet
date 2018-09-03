@@ -205,13 +205,19 @@ class HomeViewController: DetailOffsetPresentationViewController, WalletsViewCon
                 self?.dataWasLoaded()
             }
         }.catch {
+            [weak self]
             error in
-            print(error)
+            self?.dataWasntLoaded()
         }
     }
 
     private func dataWillLoading() {
+        sumLabel?.endLoading()
         sumLabel?.beginLoading()
+    }
+
+    private func dataWasntLoaded() {
+        sumLabel?.endLoading()
     }
 
     private func dataWasLoaded() {

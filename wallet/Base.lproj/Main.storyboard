@@ -262,6 +262,21 @@
             </objects>
             <point key="canvasLocation" x="-3204" y="-78"/>
         </scene>
+        <!--Code Scanner View Controller-->
+        <scene sceneID="02h-yt-yKB">
+            <objects>
+                <viewController storyboardIdentifier="QRCodeScannerViewController" id="gOb-eH-at0" customClass="QRCodeScannerViewController" customModule="wallet" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="e4o-Uh-Jd3">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="bZy-MI-C6f"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eqV-fE-HVq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1926" y="-1641"/>
+        </scene>
         <!--Deposit Money View Controller-->
         <scene sceneID="dy5-mO-pnq">
             <objects>

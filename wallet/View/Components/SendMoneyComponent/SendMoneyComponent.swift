@@ -22,6 +22,12 @@ protocol SendMoneyComponentDelegate: class {
 
 class SendMoneyComponent: Component, SendMoneyAmountComponentDelegate, SendMoneyMethodComponentDelegate {
 
+    var onQRCodeScanning: (() -> Void)? {
+        didSet {
+            sendMoneyMethodComponent?.onRightDetail = onQRCodeScanning
+        }
+    }
+
     var userAPI: UserAPI?
 
     weak var delegate: SendMoneyComponentDelegate?
@@ -84,6 +90,13 @@ class SendMoneyComponent: Component, SendMoneyAmountComponentDelegate, SendMoney
         if let recipient = recipient {
             sendMoneyMethodComponent?.prepare(recipient: recipient)
         }
+    }
+
+    func prepare(address: String, coinType: CoinType, walletId: String) {
+        self.walletId = walletId
+
+        sendMoneyAmountComponent?.prepare(coinType: coinType)
+        sendMoneyMethodComponent?.prepare(address: address)
     }
 
     // MARK: - SendMoneyAmountComponentDelegate

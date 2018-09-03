@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-final class HomeFlow: ScreenFlow {
+final class MainFlow: ScreenFlow {
 
     weak var navigationController: WalletNavigationController?
 
@@ -29,6 +29,8 @@ final class HomeFlow: ScreenFlow {
                                             more: UIViewController())
         return tabBar
     }
+
+    // MARK: - TransactionsTabBarItem
 
     private var transactionsScreen: TransactionsHistoryViewController {
         let _vc = ControllerHelper.instantiateViewController(identifier: "TransactionsHistoryViewController", storyboardName: "Main")
@@ -83,6 +85,8 @@ final class HomeFlow: ScreenFlow {
         vc.flow = self
         return vc
     }
+
+    // MARK: - HomeTabBarItem
 
     private var homeScreen: HomeViewController {
         let _vc = ControllerHelper.instantiateViewController(identifier: "HomeViewController", storyboardName: "Main")
@@ -184,11 +188,24 @@ final class HomeFlow: ScreenFlow {
             let target = strongSelf.transactionDetailScreen
             target.prepare(sendMoneyData: data)
 
-            strongSelf.navigationController?.presentWithNavBar(viewController: target)
+            strongSelf.navigationController?.presentWithNavBar(viewController: target, animate: false)
+        }
+
+        let onQRScanner: () -> Void = {
+            [weak self] in
+
+            guard let strongSelf = self else {
+                return
+            }
+
+            let target = strongSelf.qrScannerScreen
+            target.delegate = vc
+            strongSelf.navigationController?.presentWithNavBar(viewController: target, animate: true)
         }
 
         vc.definesPresentationContext = true
         vc.providesPresentationContextTransitionStyle = true
+        vc.onQRScanner = onQRScanner
         vc.onSend = onSend
         vc.title = "Send money"
         vc.flow = self
@@ -203,9 +220,14 @@ final class HomeFlow: ScreenFlow {
         }
 
         let onClose: (WalletViewController) -> Void = {
+            [weak self]
             owner in
 
-            owner.dismiss(animated: true, completion: nil)
+            guard let strongSelf = self else {
+                return
+            }
+
+            strongSelf.navigationController?.dismissPresentedViewController()
         }
 
         vc.onClose = onClose
@@ -216,13 +238,28 @@ final class HomeFlow: ScreenFlow {
         return vc
     }
 
-    private var onboardingFlow: OnboardingFlow? {
-        guard let navController = navigationController else {
-            print("Navigation controller not found")
-            return nil
+    private var qrScannerScreen: QRCodeScannerViewController {
+        let _vc = ControllerHelper.instantiateViewController(identifier: "QRCodeScannerViewController", storyboardName: "Main")
+
+        guard let vc = _vc as? QRCodeScannerViewController else {
+            fatalError()
         }
 
-        let flow = OnboardingFlow(navigationController: navController)
-        return flow
+        let onClose: (WalletViewController) -> Void = {
+            [weak self]
+            owner in
+
+            guard let strongSelf = self else {
+                return
+            }
+
+            strongSelf.navigationController?.dismissPresentedViewController()
+        }
+
+        vc.modalPresentationStyle = .custom
+        vc.onClose = onClose
+        vc.flow = self
+        return vc
     }
+
 }

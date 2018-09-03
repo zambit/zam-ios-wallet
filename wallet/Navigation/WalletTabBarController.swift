@@ -65,11 +65,11 @@ class WalletTabBarController {
     }
 
     private static func createNavigationControllerFor(walletViewController: WalletViewController) -> WalletNavigationController {
-        let coordinator = TransitionCoordinator(animator: NavigationCustomAnimator())
+        let coordinator = NavigationControllerTransitionCoordinator(animator: SlideTransitionAnimator())
 
         let navigation = UINavigationController(rootViewController: walletViewController)
         let walletNavigation = WalletNavigationController(navigationController: navigation)
-        walletNavigation.customTransitionCoordinator = coordinator
+        walletNavigation.transitionCoordinator = coordinator
 
         return walletNavigation
     }
@@ -96,7 +96,6 @@ class LargeWalletContentView: ESTabBarItemContentView {
     public required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
 }
 
 class WalletContentView: ESTabBarItemContentView {

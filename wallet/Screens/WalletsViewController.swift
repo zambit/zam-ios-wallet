@@ -14,10 +14,6 @@ protocol WalletsViewControllerDelegate: class {
     func walletsViewControllerCallsUpdateData(_ walletsViewController: WalletsViewController)
 }
 
-protocol WalletsViewControllerProtocol where Self: UIViewController {
-
-}
-
 class WalletsViewController: FlowCollectionViewController, UICollectionViewDelegateFlowLayout {
 
     weak var owner: WalletViewController?

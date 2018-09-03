@@ -31,6 +31,8 @@ protocol SendMoneyMethodComponentDelegate: class {
 
 class SendMoneyMethodComponent: Component, SegmentedControlComponentDelegate, PhoneNumberEnteringHandlerDelegate, IconableTextFieldDelegate {
 
+    var onRightDetail: (() -> Void)?
+
     weak var delegate: SendMoneyMethodComponentDelegate?
 
     @IBOutlet private var toLabel: UILabel?
@@ -98,11 +100,19 @@ class SendMoneyMethodComponent: Component, SegmentedControlComponentDelegate, Ph
         phoneNumberEnteringHandler?.explicityHandleText(recipient.phoneNumbers.first!)
     }
 
+    func prepare(address: String) {
+        segmentedControlComponent?.selectElement(withIndex: 1)
+        recipientTextField?.text = address
+
+        self.address = address
+        delegate?.sendMoneyMethodComponent(self, methodRecipientDataEntered: .address(data: address))
+    }
+
     // MARK: - Switching detail mode recipientTextField methods
 
     private func setPhoneNumberStyleForRecipientTextField(_ textField: IconableTextField, backgroundColor: UIColor, masks: [String: PhoneMaskData], parser: MaskParser) {
         textField.endEditing(true)
-        textField.detailMode = .left(detailImage: #imageLiteral(resourceName: "users"), detailImageTintColor: .paleOliveGreen, imageOffset: 16.0)
+        textField.detailMode = .left(detailImage: #imageLiteral(resourceName: "users"), detailImageTintColor: .paleOliveGreen, imageOffset: 8.0)
         textField.backgroundColor = backgroundColor
         textField.keyboardType = .phonePad
         textField.text = ""
@@ -120,7 +130,7 @@ class SendMoneyMethodComponent: Component, SegmentedControlComponentDelegate, Ph
 
     private func setAddressStyleForRecipientTextField(_ textField: IconableTextField, backgroundColor: UIColor) {
         textField.endEditing(true)
-        textField.detailMode = .right(detailImage: #imageLiteral(resourceName: "maximize"), detailImageTintColor: .white, imageOffset: 16.0)
+        textField.detailMode = .right(detailImage: #imageLiteral(resourceName: "maximize"), detailImageTintColor: .white, imageOffset: 8.0)
         textField.backgroundColor = backgroundColor
         textField.keyboardType = .default
         textField.autocorrectionType = .no
@@ -171,9 +181,28 @@ class SendMoneyMethodComponent: Component, SegmentedControlComponentDelegate, Ph
         }
     }
 
+    // MARK: - TextFieldEnteringHandler
+
+    func iconableTextFieldEditingChanged(_ iconableTextField: IconableTextField, currentDetailMode: IconableTextField.DetailMode) {
+        switch currentDetailMode {
+        case .left:
+            break
+        case .right:
+            self.address = iconableTextField.text ?? ""
+
+            if let address = iconableTextField.text, !address.isEmpty {
+                delegate?.sendMoneyMethodComponent(self, methodRecipientDataEntered: .address(data: address))
+            } else {
+                delegate?.sendMoneyMethodComponentRecipientDataInvalid(self)
+            }
+        case .empty:
+            break
+        }
+    }
+
     // MARK: - IconableTextFieldDelegate
 
     func iconableTextFieldOnRightDetailTapEvent(_ iconableTextField: IconableTextField) {
-        //...
+        onRightDetail?()
     }
 }

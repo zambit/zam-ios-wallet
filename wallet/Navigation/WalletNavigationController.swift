@@ -8,21 +8,16 @@
 
 import Foundation
 import UIKit
+import Hero
 
 /**
  Wrapper on NavigationController that provides special style and custom behaviour.
  */
 class WalletNavigationController {
 
-    enum PushOrder {
-        case forward
-        case back
-    }
-
-    var customTransitionCoordinator: TransitionCoordinator? {
+    var transitionCoordinator: NavigationControllerTransitionCoordinator? {
         didSet {
-            self.controller.delegate = customTransitionCoordinator
-            self.controller.transitioningDelegate = customTransitionCoordinator
+            controller.delegate = transitionCoordinator
         }
     }
 
@@ -129,23 +124,23 @@ class WalletNavigationController {
         return nextViewController(next)
     }
 
-    func presentWithNavBar(viewController: WalletViewController) {
-        let navigationController = WalletNavigationController(navigationController: UINavigationController(rootViewController: viewController))
-        navigationController.controller.modalPresentationStyle = .overFullScreen
+    var presentingController: WalletNavigationController?
 
-        controller.present(navigationController.controller, animated: true, completion: nil)
-        viewController.walletNavigationController = self
-        viewController.walletTabBar = parentTabBar
+    func presentWithNavBar(viewController: WalletViewController, animate: Bool) {
+        let childNavigationController = UINavigationController(rootViewController: viewController)
+        presentingController = WalletNavigationController(navigationController: childNavigationController)
+        presentingController!.controller.hero.isEnabled = true
+        presentingController!.controller.hero.modalAnimationType = .selectBy(presenting: .slide(direction: .left), dismissing: .slide(direction: .right))
+
+        controller.present(presentingController!.controller, animated: true, completion: nil)
 
         hideBackButton(for: viewController)
     }
 
-    func present(viewController: WalletViewController) {
-        controller.present(viewController, animated: false, completion: nil)
-        viewController.walletNavigationController = self
-        viewController.walletTabBar = parentTabBar
+    func dismissPresentedViewController() {
+        //presentingController?.popBack(nextViewController: { _ in })
 
-        hideBackButton(for: viewController)
+        self.presentingController?.controller.hero.dismissViewController(completion: { self.presentingController = nil })
     }
 
     func addBackButton(for viewController: WalletViewController, target: Any?, action: Selector) {
