@@ -47,6 +47,17 @@ class SegmentedControlElement {
         }
     }
 
+    var isEnabled: Bool {
+        get {
+            return normalButton.isEnabled
+        }
+
+        set {
+            normalButton.isEnabled = newValue
+            selectedButton.isEnabled = newValue
+        }
+    }
+
     init(selected: UIButton, normal: UIButton, backColor: UIColor) {
         self.normalButton = normal
         self.selectedButton = selected
@@ -57,14 +68,6 @@ class SegmentedControlElement {
     func addTo(mainView: UIView, selectedView: UIView) {
         selectedView.addSubview(selectedButton)
         mainView.addSubview(normalButton)
-    }
-
-    func changeStateToNormal() {
-        normalButton.isHidden = false
-    }
-
-    func changeStateToSelected() {
-        normalButton.isHidden = true
     }
 
 }

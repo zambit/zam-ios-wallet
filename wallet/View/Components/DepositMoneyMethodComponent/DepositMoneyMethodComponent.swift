@@ -47,7 +47,8 @@ class DepositMoneyMethodComponent: Component, SegmentedControlComponentDelegate,
         segmentedControlComponent?.segmentsHorizontalSpacing = 5.0
 
         segmentedControlComponent?.addSegment(icon: #imageLiteral(resourceName: "linkTo"), title: "Address", iconTintColor: .paleOliveGreen, selectedTintColor: .white, backColor: .lightblue)
-        segmentedControlComponent?.addSegment(icon: #imageLiteral(resourceName: "card"), title: "Card", iconTintColor: .paleOliveGreen, selectedTintColor: .white, backColor: .paleOliveGreen)
+
+        segmentedControlComponent?.addSegment(icon: #imageLiteral(resourceName: "card"), title: "Card", iconTintColor: .paleOliveGreen, selectedTintColor: .white, backColor: .paleOliveGreen).isEnabled = false
 
         titleLabel?.font = UIFont.walletFont(ofSize: 22.0, weight: .bold)
         titleLabel?.textColor = .darkIndigo

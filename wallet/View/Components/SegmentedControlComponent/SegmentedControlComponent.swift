@@ -85,12 +85,14 @@ class SegmentedControlComponent: Component {
         selectedSegmentsView?.clipsToBounds = true
     }
 
-    func addSegment(icon: UIImage, title: String, iconTintColor: UIColor, selectedTintColor: UIColor, backColor: UIColor) {
+    @discardableResult
+    func addSegment(icon: UIImage, title: String, iconTintColor: UIColor, selectedTintColor: UIColor, backColor: UIColor) -> SegmentedControlElement {
         let segmentNormal = UIButton(type: .system)
         segmentNormal.setTitle(title, for: .normal)
         segmentNormal.setImage(icon, for: .normal)
         segmentNormal.tintColor = iconTintColor
         segmentNormal.setTitleColor(.blueGrey, for: .normal)
+        segmentNormal.setTitleColor(UIColor.black.withAlphaComponent(0.1), for: .disabled)
         segmentNormal.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 8)
         segmentNormal.titleEdgeInsets = UIEdgeInsetsMake(0, 8, 0, 0)
         segmentNormal.titleLabel?.font = UIFont.walletFont(ofSize: 16.0, weight: .medium)
@@ -122,6 +124,8 @@ class SegmentedControlComponent: Component {
         if segments.count == 1 {
             selectElement(withIndex: 0)
         }
+
+        return segment
     }
 
     func selectElement(withIndex index: Int) {
