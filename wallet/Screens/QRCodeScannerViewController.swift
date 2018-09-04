@@ -31,6 +31,12 @@ class QRCodeScannerViewController: WalletViewController {
 
     private let supportedCodeTypes = [AVMetadataObject.ObjectType.qr]
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        setupOverlayView()
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -89,36 +95,19 @@ class QRCodeScannerViewController: WalletViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    // MARK: - Helper methods
-    func launchApp(decodedURL: String) {
+    private func setupOverlayView() {
+        let overlay = OverlayView(frame: view.frame)
+        overlay.innerFrame = CGRect(x: view.frame.width * (1 / 6), y: (view.frame.height - view.frame.width / 1.5) / 2, width: view.frame.width / 1.5, height: view.frame.width / 1.5)
+        overlay.backgroundColor = UIColor.black.withAlphaComponent(0.2)
 
-        if presentedViewController != nil {
-            return
-        }
 
-        let alertPrompt = UIAlertController(title: "Open App", message: "You're going to open \(decodedURL)", preferredStyle: .actionSheet)
-        let confirmAction = UIAlertAction(title: "Confirm", style: UIAlertActionStyle.default, handler: { (action) -> Void in
-
-            if let url = URL(string: decodedURL) {
-                if UIApplication.shared.canOpenURL(url) {
-                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
-                }
-            }
-        })
-
-        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil)
-
-        alertPrompt.addAction(confirmAction)
-        alertPrompt.addAction(cancelAction)
-
-        present(alertPrompt, animated: true, completion: nil)
+        view.addSubview(overlay)
     }
 
     @objc
     private func closeButtonTouchUpInsideEvent(_ sender: UIButton) {
         onClose?(self)
     }
-
 }
 
 extension QRCodeScannerViewController: AVCaptureMetadataOutputObjectsDelegate {
@@ -148,5 +137,31 @@ extension QRCodeScannerViewController: AVCaptureMetadataOutputObjectsDelegate {
                 //messageLabel.text = metadataObj.stringValue
             }
         }
+    }
+}
+
+class OverlayView: UIView {
+
+    var innerFrame: CGRect?
+
+    override func draw(_ rect: CGRect) {
+        super.draw(rect)
+
+        guard let innerFrame = innerFrame else {
+            return
+        }
+
+        self.backgroundColor?.setFill()
+        UIRectFill(rect)
+
+        let layer = CAShapeLayer()
+        let path = CGMutablePath()
+
+        path.addRect(innerFrame)
+        path.addRect(bounds)
+
+        layer.path = path
+        layer.fillRule = kCAFillRuleEvenOdd
+        self.layer.mask = layer
     }
 }
