@@ -102,7 +102,7 @@ class SendMoneyMethodComponent: Component, SegmentedControlComponentDelegate, Ph
 
     func prepare(address: String) {
         segmentedControlComponent?.selectElement(withIndex: 1)
-        recipientTextField?.text = address
+        recipientTextField?.setText(address)
 
         self.address = address
         delegate?.sendMoneyMethodComponent(self, methodRecipientDataEntered: .address(data: address))
