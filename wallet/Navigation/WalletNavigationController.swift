@@ -126,13 +126,20 @@ class WalletNavigationController {
 
     var presentingController: WalletNavigationController?
 
-    func presentWithNavBar(viewController: WalletViewController, animate: Bool) {
+    func present(viewController: WalletViewController, animate: Bool) {
         let childNavigationController = UINavigationController(rootViewController: viewController)
         presentingController = WalletNavigationController(navigationController: childNavigationController)
         presentingController!.controller.hero.isEnabled = true
-        presentingController!.controller.hero.modalAnimationType = .selectBy(presenting: .slide(direction: .left), dismissing: .slide(direction: .right))
+        if animate {
+            presentingController!.controller.hero.modalAnimationType = .selectBy(
+                presenting: .slide(direction: .left),
+                dismissing: .slide(direction: .right)
+            )
+        } else {
+            presentingController!.controller.hero.modalAnimationType = .none
+        }
 
-        controller.present(presentingController!.controller, animated: animate, completion: nil)
+        controller.present(presentingController!.controller, animated: true, completion: nil)
 
         hideBackButton(for: viewController)
     }

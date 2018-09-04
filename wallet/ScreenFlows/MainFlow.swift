@@ -188,7 +188,7 @@ final class MainFlow: ScreenFlow {
             let target = strongSelf.transactionDetailScreen
             target.prepare(sendMoneyData: data)
 
-            strongSelf.navigationController?.presentWithNavBar(viewController: target, animate: false)
+            strongSelf.navigationController?.present(viewController: target, animate: false)
         }
 
         let onQRScanner: () -> Void = {
@@ -200,7 +200,7 @@ final class MainFlow: ScreenFlow {
 
             let target = strongSelf.qrScannerScreen
             target.delegate = vc
-            strongSelf.navigationController?.presentWithNavBar(viewController: target, animate: true)
+            strongSelf.navigationController?.present(viewController: target, animate: true)
         }
 
         vc.definesPresentationContext = true
