@@ -22,7 +22,7 @@ class TransactionsHistoryFilterViewController: WalletViewController, UITableView
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        navigationController?.setNavigationBarHidden(false, animated: animated)
+        //navigationController?.setNavigationBarHidden(false, animated: animated)
     }
 
     override func viewDidLoad() {

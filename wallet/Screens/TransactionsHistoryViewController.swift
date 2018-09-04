@@ -30,13 +30,17 @@ class TransactionsHistoryViewController: WalletViewController, UITableViewDelega
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        navigationController?.isNavigationBarHidden = true
+        //navigationController?.isNavigationBarHidden = true
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         hideKeyboardOnTap()
+
+        let filterBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "filter"), style: .plain, target: self, action: #selector(filterButtonTouchUpInsideEvent(_:)))
+        filterBarButtonItem.tintColor = nil
+        navigationItem.setRightBarButton(filterBarButtonItem, animated: false)
 
         self.filterButton?.setImage(#imageLiteral(resourceName: "filter"), for: .normal)
         self.filterButton?.addTarget(self, action: #selector(filterButtonTouchUpInsideEvent(_:)), for: .touchUpInside)

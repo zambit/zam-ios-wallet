@@ -193,7 +193,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ywp-uk-DtS">
-                                <rect key="frame" x="0.0" y="76" width="414" height="660"/>
+                                <rect key="frame" x="0.0" y="20" width="414" height="716"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                             <searchBar contentMode="redraw" searchBarStyle="minimal" translatesAutoresizingMaskIntoConstraints="NO" id="99N-Z6-auC">
@@ -211,16 +211,22 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="iLS-eX-keO" firstAttribute="trailing" secondItem="C61-g4-uhX" secondAttribute="trailing" constant="15" id="20q-4g-S9G"/>
+                            <constraint firstItem="ywp-uk-DtS" firstAttribute="top" secondItem="iLS-eX-keO" secondAttribute="top" id="5RK-3j-d1g"/>
                             <constraint firstItem="ywp-uk-DtS" firstAttribute="trailing" secondItem="iLS-eX-keO" secondAttribute="trailing" id="Aav-Of-0wV"/>
                             <constraint firstItem="ywp-uk-DtS" firstAttribute="leading" secondItem="iLS-eX-keO" secondAttribute="leading" id="EnG-SM-qJ0"/>
                             <constraint firstItem="99N-Z6-auC" firstAttribute="top" secondItem="iLS-eX-keO" secondAttribute="top" id="GrR-lW-KCS"/>
                             <constraint firstItem="99N-Z6-auC" firstAttribute="leading" secondItem="iLS-eX-keO" secondAttribute="leading" id="I9g-9R-OA2"/>
                             <constraint firstItem="C61-g4-uhX" firstAttribute="centerY" secondItem="99N-Z6-auC" secondAttribute="centerY" id="LC9-VU-MN2"/>
                             <constraint firstItem="C61-g4-uhX" firstAttribute="leading" secondItem="99N-Z6-auC" secondAttribute="trailing" constant="15" id="MRn-dX-JIx"/>
-                            <constraint firstItem="ywp-uk-DtS" firstAttribute="top" secondItem="99N-Z6-auC" secondAttribute="bottom" id="ebR-6j-oq8"/>
                             <constraint firstItem="ywp-uk-DtS" firstAttribute="bottom" secondItem="iLS-eX-keO" secondAttribute="bottom" id="ifs-17-3HS"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="iLS-eX-keO"/>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="99N-Z6-auC"/>
+                                <exclude reference="C61-g4-uhX"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <outlet property="filterButton" destination="C61-g4-uhX" id="STw-wV-QGc"/>

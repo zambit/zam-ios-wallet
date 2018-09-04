@@ -55,6 +55,7 @@ final class MainFlow: ScreenFlow {
         vc.onFilter = onFilter
         vc.userManager = UserDefaultsManager(keychainConfiguration: WalletKeychainConfiguration())
         vc.userAPI = UserAPI(provider: UserProvider(environment: WalletEnvironment(), dispatcher: HTTPDispatcher()))
+        vc.title = "Transactions"
         vc.flow = self
         return vc
     }
