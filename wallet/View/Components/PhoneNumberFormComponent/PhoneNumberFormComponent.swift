@@ -184,7 +184,7 @@ class PhoneNumberFormComponent: Component, UITextFieldDelegate, PhoneNumberEnter
         self.countryImageView?.setImage(#imageLiteral(resourceName: "icon_placeholder"))
     }
 
-    func provide(masks: [String: PhoneMaskData], parser: MaskParser) {
+    func provide(masks: [String: PhoneMaskData], parser: MaskParser, initialCountryCode: String? = nil) {
         self.masks = masks
         self.parser = parser
 
@@ -196,6 +196,10 @@ class PhoneNumberFormComponent: Component, UITextFieldDelegate, PhoneNumberEnter
 
         phoneNumberEnteringHandler = PhoneNumberEnteringHandler(codeTextField: detailTextField, numberTextField: numberTextField, masks: masks, maskParser: parser)
         phoneNumberEnteringHandler?.delegate = self
+
+        if let code = initialCountryCode {
+            phoneNumberEnteringHandler?.explicityHandleCode(code)
+        }
     }
 
     // MARK: - PhoneNumberEnteringHandlerDelegate
@@ -294,7 +298,7 @@ class PhoneNumberFormComponent: Component, UITextFieldDelegate, PhoneNumberEnter
         case .show(country: let country):
 
             if let flag = Flag(countryCode: country) {
-                let image = flag.image(style: .circle)
+                let image = flag.originalImage
                 countryImageView?.setImage(image)
             }
 
@@ -315,6 +319,9 @@ class PhoneNumberFormComponent: Component, UITextFieldDelegate, PhoneNumberEnter
                         let rightLabel = strongSelf.mainPhonePartTextField else {
                             return
                     }
+
+                    strongSelf.rightLabelsToContentViewConstraint?.isActive = false
+                    strongSelf.rightImageToContentViewConstraint?.isActive = true
 
                     // evaluate new phone label right constraint constant
                     strongSelf.rightLabelsToContentViewConstraint?.constant = rightLabel.frame.origin.x + rightLabel.bounds.width - strongSelf.contentView.bounds.width
@@ -340,6 +347,9 @@ class PhoneNumberFormComponent: Component, UITextFieldDelegate, PhoneNumberEnter
                             return
                     }
 
+                    strongSelf.rightImageToContentViewConstraint?.isActive = false
+                    strongSelf.rightLabelsToContentViewConstraint?.isActive = true
+
                     // evaluate new image right constraint constant
                     strongSelf.rightImageToContentViewConstraint?.constant = imageView.frame.origin.x + imageView.bounds.width - strongSelf.contentView.bounds.width
 
@@ -347,7 +357,7 @@ class PhoneNumberFormComponent: Component, UITextFieldDelegate, PhoneNumberEnter
             })
         case .change(toCountry: let country):
             if let flag = Flag(countryCode: country) {
-                let image = flag.image(style: .circle)
+                let image = flag.originalImage
                 countryImageView?.setImage(image)
             }
             handler()

@@ -14,6 +14,7 @@ import UIKit
  */
 class EnterNewPhoneNumberViewController: ContinueViewController, PhoneNumberFormComponentDelegate {
 
+    var telephonyProvider: UserTelephonyInfoProvider?
     var signupAPI: SignupAPI?
 
     /**
@@ -59,8 +60,9 @@ class EnterNewPhoneNumberViewController: ContinueViewController, PhoneNumberForm
                 return try PhoneMaskData(dictionary: $0)
             }
 
-            phoneNumberForm?.provide(masks: masks, parser: MaskParser(symbol: "X", space: " "))
             phoneNumberForm?.delegate = self
+            phoneNumberForm?.provide(masks: masks, parser: MaskParser(symbol: "X", space: " "), initialCountryCode: telephonyProvider?.countryCode)
+
         } catch let e {
             fatalError(e.localizedDescription)
         }

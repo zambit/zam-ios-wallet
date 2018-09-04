@@ -43,6 +43,7 @@ final class SignUpFlow: ScreenFlow {
         }
 
         vc.onContinue = onContinue
+        vc.telephonyProvider = UserTelephonyInfoProvider()
         vc.signupAPI = SignupAPI(provider: SignupProvider(environment: WalletEnvironment(), dispatcher: HTTPDispatcher()))
         vc.flow = self
         return vc

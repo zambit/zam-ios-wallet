@@ -70,7 +70,28 @@ class PhoneNumberEnteringHandler: NSObject, UITextFieldDelegate {
         self.numberTextField?.delegate = self
     }
 
-    func explicityHandleText(_ text: String) {
+    func explicityHandleCode(_ text: String) {
+        guard let target = codeTextField, let curMask = masks.values.first(where: { $0.countryId == text }) else {
+            return
+        }
+
+        mask = curMask
+
+        target.text = curMask.phoneCode
+        target.text?.addPrefixIfNeeded("+")
+
+        if let mask = mask?.phoneMask,
+            let mainText = numberTextField?.text {
+            numberTextField?.text = maskParser.matchingUnstrict(text: mainText, withMask: mask)
+        }
+
+
+        if let numberTextField = numberTextField {
+            numberTextFieldEditingChanged(numberTextField)
+        }
+    }
+
+    func explicityHandleNumber(_ text: String) {
         guard let target = unitedTextField else {
             return
         }
@@ -146,7 +167,9 @@ class PhoneNumberEnteringHandler: NSObject, UITextFieldDelegate {
             numberTextField?.text = maskParser.matchingUnstrict(text: mainText, withMask: mask)
         }
 
-        numberTextFieldEditingChanged(sender)
+        if let numberTextField = numberTextField {
+            numberTextFieldEditingChanged(numberTextField)
+        }
     }
 
     @objc

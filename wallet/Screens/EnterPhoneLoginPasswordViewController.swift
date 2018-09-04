@@ -13,6 +13,7 @@ class EnterPhoneLoginPasswordViewController: ContinueViewController, LoginFormCo
 
     var userManager: UserDefaultsManager?
     var authAPI: AuthAPI?
+    var telephonyProvider: UserTelephonyInfoProvider?
 
     var onContinue: ((_ authToken: String) -> Void)?
     var onExit: (() -> Void)?
@@ -47,8 +48,8 @@ class EnterPhoneLoginPasswordViewController: ContinueViewController, LoginFormCo
                 return try PhoneMaskData(dictionary: $0)
             }
 
-            loginFormView?.provide(masks: masks, parser: MaskParser(symbol: "X", space: " "))
             loginFormView?.delegate = self
+            loginFormView?.provide(masks: masks, parser: MaskParser(symbol: "X", space: " "), userCountryCode: telephonyProvider?.countryCode)
         } catch let e {
             fatalError(e.localizedDescription)
         }

@@ -97,7 +97,7 @@ class SendMoneyMethodComponent: Component, SegmentedControlComponentDelegate, Ph
     }
 
     func prepare(recipient: ContactData) {
-        phoneNumberEnteringHandler?.explicityHandleText(recipient.phoneNumbers.first!)
+        phoneNumberEnteringHandler?.explicityHandleNumber(recipient.phoneNumbers.first!)
     }
 
     func prepare(address: String) {
@@ -124,7 +124,7 @@ class SendMoneyMethodComponent: Component, SegmentedControlComponentDelegate, Ph
         phoneNumberEnteringHandler?.delegate = self
 
         if !phone.isEmpty {
-            phoneNumberEnteringHandler?.explicityHandleText(phone)
+            phoneNumberEnteringHandler?.explicityHandleNumber(phone)
         }
     }
 

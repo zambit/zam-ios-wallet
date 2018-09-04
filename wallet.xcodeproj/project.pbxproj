@@ -130,6 +130,7 @@
 		8C713B212139911D00AC2E25 /* QRCodeScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C713B202139911D00AC2E25 /* QRCodeScannerViewController.swift */; };
 		8C713B23213D537200AC2E25 /* CustomViewControllerTransitionCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C713B22213D537200AC2E25 /* CustomViewControllerTransitionCoordinator.swift */; };
 		8C713B25213D541F00AC2E25 /* TransitionOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C713B24213D541F00AC2E25 /* TransitionOperation.swift */; };
+		8C713B28213EB4A000AC2E25 /* UserTelephonyInfoProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C713B27213EB4A000AC2E25 /* UserTelephonyInfoProvider.swift */; };
 		8CA2188F2121D97C0063C188 /* DecimalKeyboardComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CA2188E2121D97B0063C188 /* DecimalKeyboardComponent.xib */; };
 		8CA218922122E8D70063C188 /* SendMoneyComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CA218912122E8D70063C188 /* SendMoneyComponent.xib */; };
 		8CA218942122EAC90063C188 /* SendMoneyComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA218932122EAC90063C188 /* SendMoneyComponent.swift */; };
@@ -364,6 +365,7 @@
 		8C713B202139911D00AC2E25 /* QRCodeScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeScannerViewController.swift; sourceTree = "<group>"; };
 		8C713B22213D537200AC2E25 /* CustomViewControllerTransitionCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomViewControllerTransitionCoordinator.swift; sourceTree = "<group>"; };
 		8C713B24213D541F00AC2E25 /* TransitionOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionOperation.swift; sourceTree = "<group>"; };
+		8C713B27213EB4A000AC2E25 /* UserTelephonyInfoProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTelephonyInfoProvider.swift; sourceTree = "<group>"; };
 		8CA2188E2121D97B0063C188 /* DecimalKeyboardComponent.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DecimalKeyboardComponent.xib; sourceTree = "<group>"; };
 		8CA218912122E8D70063C188 /* SendMoneyComponent.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SendMoneyComponent.xib; sourceTree = "<group>"; };
 		8CA218932122EAC90063C188 /* SendMoneyComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMoneyComponent.swift; sourceTree = "<group>"; };
@@ -832,6 +834,7 @@
 			children = (
 				8C60883F2110634700470411 /* UserDefaultsManager.swift */,
 				8CA218D8212D889A0063C188 /* UserContactsManager.swift */,
+				8C713B27213EB4A000AC2E25 /* UserTelephonyInfoProvider.swift */,
 			);
 			path = UserDataManager;
 			sourceTree = "<group>";
@@ -1410,6 +1413,7 @@
 				8C04BC37211C872E00E90090 /* ContainerView.swift in Sources */,
 				8CA2193321356C010063C188 /* FeatureItemComponent.swift in Sources */,
 				8C60885C2111F1A200470411 /* RecoveryFlow.swift in Sources */,
+				8C713B28213EB4A000AC2E25 /* UserTelephonyInfoProvider.swift in Sources */,
 				8CF1DE4220EF98160036F986 /* AuthViewController.swift in Sources */,
 				8CA2189D2122EEDE0063C188 /* SegmentedControlElement.swift in Sources */,
 				8C4413CA2118A66A00C9689C /* WalletKeychainConfiguration.swift in Sources */,

@@ -94,8 +94,8 @@ class LoginFormComponent: UIView, PhoneNumberFormComponentDelegate, LoginPasswor
         contentView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
     }
 
-    func provide(masks: [String: PhoneMaskData], parser: MaskParser) {
-        phoneNumberFormComponent?.provide(masks: masks, parser: parser)
+    func provide(masks: [String: PhoneMaskData], parser: MaskParser, userCountryCode: String? = nil) {
+        phoneNumberFormComponent?.provide(masks: masks, parser: parser, initialCountryCode: userCountryCode)
     }
 
     private func setupStyle() {
