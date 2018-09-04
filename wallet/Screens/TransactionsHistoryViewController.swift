@@ -120,7 +120,7 @@ class TransactionsHistoryViewController: WalletViewController, UITableViewDelega
 
                 // Update header
                 guard let header = self?.historyTableView?.headerView(forSection: old.count - 1) as? TransactionsGroupHeaderComponent else {
-                    fatalError()
+                    return
                 }
                 header.set(amount: concatiatedElement.amount.description(currency: .usd))
 
