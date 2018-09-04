@@ -36,6 +36,8 @@ class TransactionsHistoryViewController: WalletViewController, UITableViewDelega
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        hideKeyboardOnTap()
+
         self.filterButton?.setImage(#imageLiteral(resourceName: "filter"), for: .normal)
         self.filterButton?.addTarget(self, action: #selector(filterButtonTouchUpInsideEvent(_:)), for: .touchUpInside)
 
