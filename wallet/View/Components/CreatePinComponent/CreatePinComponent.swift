@@ -109,21 +109,19 @@ class CreatePinComponent: Component, UICollectionViewDataSource, UICollectionVie
             if let stageDotsField = currentPinStage?.dotsFieldComponent,
                 stageDotsField.filledCount == stageDotsField.dotsMaxCount {
 
-                print(pinText)
-                print(pinConfirmationText)
+                currentPinStage?.dotsFieldComponent?.fillingEnabled = false
 
                 if pinText == pinConfirmationText {
                     currentPinStage?.dotsFieldComponent?.showSuccess()
                     delegate?.createPinComponent(self, succeedWithPin: pinText)
                 } else {
                     delegate?.createPinComponentWrongConfirmation(self)
-                    currentPinStage?.dotsFieldComponent?.showFailure { [weak self] in
-                        guard let strongSelf = self else {
-                            return
-                        }
+                    currentPinStage?.dotsFieldComponent?.showFailure {
+                        [weak self] in
 
-                        strongSelf.currentPinStage?.dotsFieldComponent?.unfillAll()
-                        strongSelf.pinConfirmationText = ""
+                        self?.pinConfirmationText = ""
+                        self?.currentPinStage?.dotsFieldComponent?.unfillAll()
+                        self?.currentPinStage?.dotsFieldComponent?.fillingEnabled = true
                     }
                 }
             }

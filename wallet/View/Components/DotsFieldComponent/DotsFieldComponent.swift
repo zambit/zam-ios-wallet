@@ -30,6 +30,8 @@ class DotsFieldComponent: Component  {
         return currentDotIndex
     }
 
+    var fillingEnabled: Bool = true
+
     private(set) var currentDotIndex: Int = 0
 
     private var dots: [DotView] {
@@ -79,7 +81,7 @@ class DotsFieldComponent: Component  {
 
     @discardableResult
     func fillLast() -> Bool {
-        guard currentDotIndex < dotsMaxCount else {
+        guard currentDotIndex < dotsMaxCount, fillingEnabled else {
             return false
         }
 
@@ -91,7 +93,7 @@ class DotsFieldComponent: Component  {
 
     @discardableResult
     func unfillLast() -> Bool {
-        guard currentDotIndex > 0 else {
+        guard currentDotIndex > 0, fillingEnabled else {
             return false
         }
 

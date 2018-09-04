@@ -92,6 +92,7 @@ class EnterPinViewController: WalletViewController, DecimalKeyboardComponentDele
                 switch checkPin(pinText) {
                 case true:
                     dotsFieldComponent?.fillAll()
+                    dotsFieldComponent?.fillingEnabled = false
 
                     guard let token = userManager?.getToken() else {
                         return
@@ -125,9 +126,11 @@ class EnterPinViewController: WalletViewController, DecimalKeyboardComponentDele
                         }
                     }
                 case false:
+                    dotsFieldComponent?.fillingEnabled = false
                     dotsFieldComponent?.showFailure {
                         [weak self] in
                         self?.dotsFieldComponent?.unfillAll()
+                        self?.dotsFieldComponent?.fillingEnabled = true
                     }
 
                     pinText = ""
