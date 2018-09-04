@@ -47,6 +47,8 @@ class TransactionsFeatureFilterComponent: CellComponent, UICollectionViewDataSou
     override func setupStyle() {
         super.setupStyle()
 
+        featuresButtonsCollectionView?.clipsToBounds = false
+
         titleLabel?.textColor = .white
         titleLabel?.font = UIFont.walletFont(ofSize: 22.0, weight: .bold)
         titleLabel?.textAlignment = .left
