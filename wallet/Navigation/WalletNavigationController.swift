@@ -132,15 +132,15 @@ class WalletNavigationController {
         presentingController!.controller.hero.isEnabled = true
         presentingController!.controller.hero.modalAnimationType = .selectBy(presenting: .slide(direction: .left), dismissing: .slide(direction: .right))
 
-        controller.present(presentingController!.controller, animated: true, completion: nil)
+        controller.present(presentingController!.controller, animated: animate, completion: nil)
 
         hideBackButton(for: viewController)
     }
 
     func dismissPresentedViewController() {
-        //presentingController?.popBack(nextViewController: { _ in })
-
-        self.presentingController?.controller.hero.dismissViewController(completion: { self.presentingController = nil })
+        self.presentingController?.controller.hero.dismissViewController(completion: {
+            self.presentingController = nil
+        })
     }
 
     func addBackButton(for viewController: WalletViewController, target: Any?, action: Selector) {
