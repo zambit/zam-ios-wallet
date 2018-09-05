@@ -16,12 +16,12 @@ protocol WalletsViewControllerDelegate: class {
 
 class WalletsViewController: FlowCollectionViewController, UICollectionViewDelegateFlowLayout {
 
-    weak var owner: WalletViewController?
+    weak var owner: ScreenWalletNavigable?
 
     weak var delegate: WalletsViewControllerDelegate?
 
-    var onSendFromWallet: ((_ index: Int, _ wallets: [WalletData], _ recipient: ContactData?, _ phone: String, _ owner: WalletViewController) -> Void)?
-    var onDepositToWallet: ((_ index: Int, _ wallets: [WalletData], _ phone: String, _ owner: WalletViewController) -> Void)?
+    var onSendFromWallet: ((_ index: Int, _ wallets: [WalletData], _ recipient: ContactData?, _ phone: String, _ owner: ScreenWalletNavigable) -> Void)?
+    var onDepositToWallet: ((_ index: Int, _ wallets: [WalletData], _ phone: String, _ owner: ScreenWalletNavigable) -> Void)?
 
     var userManager: UserDefaultsManager?
     var userAPI: UserAPI?

@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class TransactionsHistoryFilterViewController: FlowViewController, WalletViewController, UITableViewDelegate, UITableViewDataSource {
+class TransactionsHistoryFilterViewController: FlowViewController, WalletNavigable, UITableViewDelegate, UITableViewDataSource {
 
     var onDone: ((TransactionsFilterData) -> Void)?
 

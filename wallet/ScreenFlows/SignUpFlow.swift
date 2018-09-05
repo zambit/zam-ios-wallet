@@ -11,9 +11,9 @@ import UIKit
 
 final class SignUpFlow: ScreenFlow {
 
-    unowned var migratingNavigationController: MigratingWalletNavigationController
+    unowned var migratingNavigationController: WalletNavigationController
 
-    init(migratingNavigationController: MigratingWalletNavigationController) {
+    init(migratingNavigationController: WalletNavigationController) {
         self.migratingNavigationController = migratingNavigationController
     }
 

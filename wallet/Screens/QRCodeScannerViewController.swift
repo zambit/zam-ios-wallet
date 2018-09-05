@@ -18,11 +18,11 @@ protocol QRCodeScannerViewControllerDelegate: class {
 
 }
 
-class QRCodeScannerViewController: FlowViewController, WalletViewController {
+class QRCodeScannerViewController: FlowViewController, WalletNavigable {
 
     weak var delegate: QRCodeScannerViewControllerDelegate?
 
-    var onClose: ((WalletViewController) -> Void)?
+    var onClose: ((WalletNavigable) -> Void)?
 
     var captureSession = AVCaptureSession()
 

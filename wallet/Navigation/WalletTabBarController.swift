@@ -9,7 +9,7 @@
 import UIKit
 import ESTabBarController_swift
 
-class MigratingWalletTabBarController: ESTabBarController, WalletViewController {
+class WalletTabBarController: ESTabBarController, WalletNavigable {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,7 +19,7 @@ class MigratingWalletTabBarController: ESTabBarController, WalletViewController 
 
 }
 
-extension BehaviorExtension where Base: MigratingWalletTabBarController {
+extension BehaviorExtension where Base: WalletTabBarController {
 
     func setupStyle() {
         if let tabBar = base.tabBar as? ESTabBar {
@@ -38,8 +38,8 @@ extension BehaviorExtension where Base: MigratingWalletTabBarController {
     /**
      Add given viewControllers to tabBar generating own navigationController hierarchy for each item.
      */
-    func add(viewController: WalletViewControllerAlias, with item: MigratingWalletTabBarItemData) {
-        let rootItemController = MigratingWalletNavigationController(rootViewController: viewController)
+    func add(viewController: ScreenWalletNavigable, with item: WalletTabBarItemData) {
+        let rootItemController = WalletNavigationController(rootViewController: viewController)
         rootItemController.tabBarItem = ESTabBarItem(item.type.view, title: item.title, image: item.image)
 
         let viewControllers = (base.viewControllers ?? []) + [rootItemController]
@@ -51,10 +51,10 @@ extension BehaviorExtension where Base: MigratingWalletTabBarController {
 
      `RootViewController` of each given `NavigationController` is `WalletViewController` that was provided in `add(viewController:with:)` method.
      */
-    var rootViewControllers: [MigratingWalletNavigationController]? {
+    var rootViewControllers: [WalletNavigationController]? {
         get {
             return base.viewControllers?.compactMap {
-                return $0 as? MigratingWalletNavigationController
+                return $0 as? WalletNavigationController
             }
         }
 

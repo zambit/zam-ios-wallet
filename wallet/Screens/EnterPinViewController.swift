@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import AudioToolbox
 
-class EnterPinViewController: FlowViewController, WalletViewController, DecimalKeyboardComponentDelegate {
+class EnterPinViewController: FlowViewController, WalletNavigable, DecimalKeyboardComponentDelegate {
 
     var userManager: UserDefaultsManager?
     var authAPI: AuthAPI?

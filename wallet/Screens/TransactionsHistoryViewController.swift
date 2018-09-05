@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class TransactionsHistoryViewController: FlowViewController, WalletViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
+class TransactionsHistoryViewController: FlowViewController, WalletNavigable, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
 
     var onFilter: ((TransactionsFilterData) -> Void)?
 

@@ -41,7 +41,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             fatalError()
         }
 
-        let navigationController = MigratingWalletNavigationController(rootViewController: vc)
+        let navigationController = WalletNavigationController(rootViewController: vc)
 
 //        navigation = WalletNavigationController(navigationController: navigationController)
 //        navigation.transitionCoordinator = NavigationControllerTransitionCoordinator(animator: SlideTransitionAnimator())

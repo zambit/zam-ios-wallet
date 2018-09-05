@@ -11,9 +11,9 @@ import UIKit
 
 final class MainFlow: ScreenFlow {
 
-    unowned var migratingNavigationController: MigratingWalletNavigationController
+    unowned var migratingNavigationController: WalletNavigationController
 
-    init(migratingNavigationController: MigratingWalletNavigationController) {
+    init(migratingNavigationController: WalletNavigationController) {
         self.migratingNavigationController = migratingNavigationController
     }
 
@@ -21,22 +21,22 @@ final class MainFlow: ScreenFlow {
         self.migratingNavigationController.custom.pushFromRoot(viewController: walletTabBar, direction: .forward)
     }
 
-    private var walletTabBar: MigratingWalletTabBarController {
-        let tabbar = MigratingWalletTabBarController()
+    private var walletTabBar: WalletTabBarController {
+        let tabbar = WalletTabBarController()
 
-        let homeScreenItemData = MigratingWalletTabBarItemData(image: #imageLiteral(resourceName: "briefcase"), type: .normal, title: "Home")
+        let homeScreenItemData = WalletTabBarItemData(image: #imageLiteral(resourceName: "briefcase"), type: .normal, title: "Home")
         tabbar.custom.add(viewController: homeScreen, with: homeScreenItemData)
 
-        let transactionsScreenItemData = MigratingWalletTabBarItemData(image: #imageLiteral(resourceName: "transactions"), type: .normal, title: "Transactions")
+        let transactionsScreenItemData = WalletTabBarItemData(image: #imageLiteral(resourceName: "transactions"), type: .normal, title: "Transactions")
         tabbar.custom.add(viewController: transactionsScreen, with: transactionsScreenItemData)
 
-        let zamScreenItemData = MigratingWalletTabBarItemData(image: #imageLiteral(resourceName: "logo"), type: .large, title: nil)
+        let zamScreenItemData = WalletTabBarItemData(image: #imageLiteral(resourceName: "logo"), type: .large, title: nil)
         tabbar.custom.add(viewController: EmptyViewController(), with: zamScreenItemData)
 
-        let contactsScreenItemData = MigratingWalletTabBarItemData(image: #imageLiteral(resourceName: "users"), type: .normal, title: "Contacts")
+        let contactsScreenItemData = WalletTabBarItemData(image: #imageLiteral(resourceName: "users"), type: .normal, title: "Contacts")
         tabbar.custom.add(viewController: EmptyViewController(), with: contactsScreenItemData)
 
-        let moreScreenItemData = MigratingWalletTabBarItemData(image: #imageLiteral(resourceName: "more"), type: .normal, title: "More")
+        let moreScreenItemData = WalletTabBarItemData(image: #imageLiteral(resourceName: "more"), type: .normal, title: "More")
         tabbar.custom.add(viewController: EmptyViewController(), with: moreScreenItemData)
 
         return tabbar
@@ -124,7 +124,7 @@ final class MainFlow: ScreenFlow {
             fatalError()
         }
 
-        let onSendFromWallet: (Int, [WalletData], ContactData?, String, WalletViewController) -> Void = {
+        let onSendFromWallet: (Int, [WalletData], ContactData?, String, ScreenWalletNavigable) -> Void = {
             [weak self]
             index, wallets, contact, phone, owner in
 
@@ -138,7 +138,7 @@ final class MainFlow: ScreenFlow {
             owner.migratingNavigationController?.custom.push(viewController: target)
         }
 
-        let onDepositToWallet: (Int, [WalletData], String, WalletViewController) -> Void = {
+        let onDepositToWallet: (Int, [WalletData], String, ScreenWalletNavigable) -> Void = {
             [weak self]
             index, wallets, phone, owner in
 
@@ -232,7 +232,7 @@ final class MainFlow: ScreenFlow {
             fatalError()
         }
 
-        let onClose: (WalletViewController) -> Void = {
+        let onClose: (WalletNavigable) -> Void = {
             [weak self]
             owner in
 
@@ -258,7 +258,7 @@ final class MainFlow: ScreenFlow {
             fatalError()
         }
 
-        let onClose: (WalletViewController) -> Void = {
+        let onClose: (WalletNavigable) -> Void = {
             [weak self]
             owner in
 

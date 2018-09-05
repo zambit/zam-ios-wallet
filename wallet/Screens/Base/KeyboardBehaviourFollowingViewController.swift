@@ -12,7 +12,7 @@ import UIKit
 /**
  UIViewController providing default continue behaviour: "Round @ContinueButton moving with keyboard during it appears"
  */
-class KeyboardBehaviorFollowingViewController: FlowViewController, WalletViewController {
+class KeyboardBehaviorFollowingViewController: FlowViewController, WalletNavigable {
 
     var appearingAnimationBlock: () -> Void = {}
     var disappearingAnimationBlock: () -> Void = {}

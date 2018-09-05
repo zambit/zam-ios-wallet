@@ -9,7 +9,7 @@
 import UIKit
 import ESTabBarController_swift
 
-struct MigratingWalletTabBarItemData {
+struct WalletTabBarItemData {
 
     enum ContentType {
         case large

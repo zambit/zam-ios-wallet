@@ -9,7 +9,7 @@
 import UIKit
 import Hero
 
-class MigratingWalletNavigationController: UINavigationController {
+class WalletNavigationController: UINavigationController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,7 +17,7 @@ class MigratingWalletNavigationController: UINavigationController {
     }
 }
 
-extension BehaviorExtension where Base: MigratingWalletNavigationController {
+extension BehaviorExtension where Base: WalletNavigationController {
 
     enum WalletNavigationControllerAnimationDirection {
         case forward
@@ -37,7 +37,7 @@ extension BehaviorExtension where Base: MigratingWalletNavigationController {
         base.navigationItem.hidesBackButton = true
     }
 
-    func push(viewController: WalletViewControllerAlias, animated: Bool = true) {
+    func push(viewController: ScreenWalletNavigable, animated: Bool = true) {
         base.pushViewController(viewController, animated: animated)
         hideBackButton(for: viewController)
         
@@ -46,12 +46,12 @@ extension BehaviorExtension where Base: MigratingWalletNavigationController {
         }
     }
 
-    func pushFromRoot(viewController: WalletViewControllerAlias, animated: Bool = true, direction: WalletNavigationControllerAnimationDirection) {
+    func pushFromRoot(viewController: ScreenWalletNavigable, animated: Bool = true, direction: WalletNavigationControllerAnimationDirection) {
         guard base.viewControllers.count > 1 else {
             push(viewController: viewController, animated: animated)
             hideBackButton(for: viewController)
-            
-            (viewController as? MigratingWalletTabBarController)?.navigationController?.setNavigationBarHidden(true, animated: false)
+
+            (viewController as? WalletTabBarController)?.navigationController?.setNavigationBarHidden(true, animated: false)
 
             return
         }
@@ -84,21 +84,21 @@ extension BehaviorExtension where Base: MigratingWalletNavigationController {
             hideBackButton(for: viewController)
         }
 
-        (viewController as? MigratingWalletTabBarController)?.navigationController?.setNavigationBarHidden(true, animated: false)
+        (viewController as? WalletTabBarController)?.navigationController?.setNavigationBarHidden(true, animated: false)
     }
 
-    func popBack(animated: Bool = true, nextViewController: (WalletViewController) -> Void) {
+    func popBack(animated: Bool = true, nextViewController: (WalletNavigable) -> Void) {
         base.popViewController(animated: animated)
 
-        guard let next = base.viewControllers.last as? WalletViewController else {
+        guard let next = base.viewControllers.last as? WalletNavigable else {
             return
         }
 
         return nextViewController(next)
     }
 
-    func present(viewController: WalletViewControllerAlias, animate: Bool) {
-        let childNavigationController = MigratingWalletNavigationController(rootViewController: viewController)
+    func present(viewController: ScreenWalletNavigable, animate: Bool) {
+        let childNavigationController = WalletNavigationController(rootViewController: viewController)
         childNavigationController.hero.isEnabled = true
 
         if animate {
@@ -121,13 +121,13 @@ extension BehaviorExtension where Base: MigratingWalletNavigationController {
         base.presentedViewController?.hero.dismissViewController()
     }
 
-    func hideBackButton(for viewController: WalletViewControllerAlias) {
+    func hideBackButton(for viewController: ScreenWalletNavigable) {
         viewController.navigationItem.hidesBackButton = true
 
         viewController.navigationItem.leftBarButtonItem = nil
     }
 
-    func addBackButton(for viewController: WalletViewControllerAlias, target: Any?, action: Selector) {
+    func addBackButton(for viewController: ScreenWalletNavigable, target: Any?, action: Selector) {
         hideBackButton(for: viewController)
 
         let backItem = UIBarButtonItem(
@@ -140,7 +140,7 @@ extension BehaviorExtension where Base: MigratingWalletNavigationController {
         viewController.navigationItem.leftBarButtonItem = backItem
     }
 
-    func addBackButton(for viewController: WalletViewControllerAlias) {
+    func addBackButton(for viewController: ScreenWalletNavigable) {
         hideBackButton(for: viewController)
 
         let backItem = UIBarButtonItem(
@@ -153,7 +153,7 @@ extension BehaviorExtension where Base: MigratingWalletNavigationController {
         viewController.navigationItem.leftBarButtonItem = backItem
     }
 
-    func addRightBarItemButton(for viewController: WalletViewControllerAlias, title: String, target: Any?, action: Selector) {
+    func addRightBarItemButton(for viewController: ScreenWalletNavigable, title: String, target: Any?, action: Selector) {
         let exitButton = UIBarButtonItem(title: title,
                                          style: .plain,
                                          target: target,

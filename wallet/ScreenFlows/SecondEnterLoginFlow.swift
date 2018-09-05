@@ -13,9 +13,9 @@ final class SecondEnterLoginFlow: ScreenFlow {
 
     private var phone: String?
 
-    unowned var migratingNavigationController: MigratingWalletNavigationController
+    unowned var migratingNavigationController: WalletNavigationController
 
-    init(migratingNavigationController: MigratingWalletNavigationController) {
+    init(migratingNavigationController: WalletNavigationController) {
         self.migratingNavigationController = migratingNavigationController
     }
 

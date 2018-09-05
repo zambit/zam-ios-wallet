@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class TransactionDetailViewController: FlowViewController, WalletViewController {
+class TransactionDetailViewController: FlowViewController, WalletNavigable {
 
     enum State {
         case confirm
@@ -20,7 +20,7 @@ class TransactionDetailViewController: FlowViewController, WalletViewController 
     var userAPI: UserAPI?
     var userManager: UserDefaultsManager?
 
-    var onClose: ((_ owner: WalletViewController) -> Void)?
+    var onClose: ((_ owner: WalletNavigable) -> Void)?
 
     @IBOutlet private var titleLabel: UILabel?
     @IBOutlet private var amountLabel: UILabel?

@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class DetailOffsetPresentationViewController: FlowViewController, WalletViewController {
+class DetailOffsetPresentationViewController: FlowViewController, WalletNavigable {
 
     enum State {
         case closed
