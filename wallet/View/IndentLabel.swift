@@ -51,7 +51,6 @@ class IndentLabel: UILabel, CustomUI {
         return CustomBehaviour(parent: self)
     }
 
-
     private var indent: String?
 
 }

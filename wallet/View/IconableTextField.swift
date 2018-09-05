@@ -167,21 +167,31 @@ class IconableTextField: UITextField {
 
     @objc
     private func textFieldEditingChanged(_ textField: UITextField) {
-        if (textField.text ?? "").count > 9 {
-            switch detailMode {
-            case .left:
-                leftPadding = 50.0
-                rightPadding = 10.0
-            case .right:
-                leftPadding = 10.0
-                rightPadding = 50.0
-            case .empty:
-                leftPadding = 10.0
-                rightPadding = 10.0
+        resizeFontToFitWidth(minimalSize: 9.0, maximumSize: 16.0)
+
+        UIView.animate(withDuration: 0.05) {
+            [weak self] in
+
+            guard let strongSelf = self else {
+                return
             }
-        } else {
-            leftPadding = 10.0
-            rightPadding = 10.0
+
+            if (textField.text ?? "").count > 16 {
+                switch strongSelf.detailMode {
+                case .left:
+                    strongSelf.leftPadding = 50.0
+                    strongSelf.rightPadding = 10.0
+                case .right:
+                    strongSelf.leftPadding = 10.0
+                    strongSelf.rightPadding = 50.0
+                case .empty:
+                    strongSelf.leftPadding = 10.0
+                    strongSelf.rightPadding = 10.0
+                }
+            } else {
+                strongSelf.leftPadding = 10.0
+                strongSelf.rightPadding = 10.0
+            }
         }
 
         iconableDelegate?.iconableTextFieldEditingChanged(self, currentDetailMode: detailMode)
