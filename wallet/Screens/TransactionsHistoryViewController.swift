@@ -148,12 +148,18 @@ class TransactionsHistoryViewController: FlowViewController, WalletNavigable, UI
             self?.historyTableView?.endUpdates()
 
             self?.updateTableViewFooter()
-            }, failureHandler: {
-                [weak self]
-                paginator in
+        }, resetHandler: {
+            [weak self]
+            paginator in
 
-                paginator.reset()
-                self?.historyTableView?.reloadData()
+            self?.setupPlaceholder()
+            self?.topRefreshControl?.endRefreshing()
+        }, failureHandler: {
+            [weak self]
+            paginator in
+
+            paginator.reset()
+            self?.historyTableView?.reloadData()
         })
 
         self.topRefreshControl?.beginRefreshing()
