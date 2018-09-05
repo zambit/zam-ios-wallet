@@ -232,10 +232,15 @@ class TransactionsHistoryViewController: FlowViewController, WalletNavigable, UI
 
         let data = provider.results[indexPath.section].transactions[indexPath.row]
 
-        
-
         var recipient: String = data.participant.formatted
-        if let recipientContact = contactsData.first(where: { $0.phoneNumbers.contains(data.participant.formatted) }) {
+        if let recipientContact = contactsData.first(where: {
+            contact in
+
+            contact.phoneNumbers.contains(where: {
+                data.participant.formatted == "+\($0.numberString)"
+
+            })
+        }) {
             recipient = recipientContact.name
         }
 

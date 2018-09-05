@@ -13,16 +13,15 @@ struct ContactData {
 
     var name: String
     var avatarData: Data?
-    var phoneNumbers: [String] = [String]()
+    var phoneNumbers: [PhoneNumber] = []
 
     init(contact: CNContact) {
         self.name = contact.givenName + " " + contact.familyName
         self.avatarData = contact.thumbnailImageData
 
-        for phone in contact.phoneNumbers {
-            let allowedCharacters = CharacterSet(charactersIn: "+1234567890")
-            let formatted = phone.value.stringValue.components(separatedBy: allowedCharacters.inverted).joined(separator: "")
-            phoneNumbers.append(formatted)
+        phoneNumbers = contact.phoneNumbers.compactMap {
+            let phoneNumber = PhoneNumberFormatter($0.value.stringValue)
+            return phoneNumber.completed
         }
     }
 }

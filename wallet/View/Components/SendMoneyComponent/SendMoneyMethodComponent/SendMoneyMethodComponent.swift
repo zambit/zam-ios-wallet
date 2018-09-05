@@ -97,7 +97,7 @@ class SendMoneyMethodComponent: Component, SegmentedControlComponentDelegate, Ph
     }
 
     func prepare(recipient: ContactData) {
-        phoneNumberEnteringHandler?.explicityHandleNumber(recipient.phoneNumbers.first!)
+        phoneNumberEnteringHandler?.explicityHandleNumber(recipient.phoneNumbers.first!.formattedString)
     }
 
     func prepare(address: String) {
