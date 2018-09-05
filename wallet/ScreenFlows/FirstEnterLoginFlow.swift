@@ -11,14 +11,14 @@ import UIKit
 
 final class FirstEnterLoginFlow: ScreenFlow {
 
-    weak var navigationController: WalletNavigationController?
+    unowned var migratingNavigationController: MigratingWalletNavigationController
 
-    init(navigationController: WalletNavigationController) {
-        self.navigationController = navigationController
+    init(migratingNavigationController: MigratingWalletNavigationController) {
+        self.migratingNavigationController = migratingNavigationController
     }
 
     func begin() {
-        self.navigationController?.push(viewController: enterPhoneLoginPasswordScreen)
+        self.migratingNavigationController.custom.push(viewController: enterPhoneLoginPasswordScreen)
     }
 
     private var enterPhoneLoginPasswordScreen: EnterPhoneLoginPasswordViewController {
@@ -54,32 +54,17 @@ final class FirstEnterLoginFlow: ScreenFlow {
     }
 
     private var createPinFlow: CreatePinFlow? {
-        guard let navController = navigationController else {
-            print("Navigation controller not found")
-            return nil
-        }
-
-        let flow = CreatePinFlow(navigationController: navController)
+        let flow = CreatePinFlow(migratingNavigationController: migratingNavigationController)
         return flow
     }
 
     private var userFlow: MainFlow? {
-        guard let navController = navigationController else {
-            print("Navigation controller not found")
-            return nil
-        }
-
-        let flow = MainFlow(navigationController: navController)
+        let flow = MainFlow(migratingNavigationController: migratingNavigationController)
         return flow
     }
 
     private var recoveryFlow: RecoveryFlow? {
-        guard let navController = navigationController else {
-            print("Navigation controller not found")
-            return nil
-        }
-
-        let flow = RecoveryFlow(navigationController: navController)
+        let flow = RecoveryFlow(migratingNavigationController: migratingNavigationController)
         return flow
     }
 }

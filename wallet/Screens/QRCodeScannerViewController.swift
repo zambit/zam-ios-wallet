@@ -18,7 +18,7 @@ protocol QRCodeScannerViewControllerDelegate: class {
 
 }
 
-class QRCodeScannerViewController: WalletViewController {
+class QRCodeScannerViewController: FlowViewController, WalletViewController {
 
     weak var delegate: QRCodeScannerViewControllerDelegate?
 
@@ -40,7 +40,7 @@ class QRCodeScannerViewController: WalletViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        walletNavigationController?.addBackButton(for: self, target: self, action: #selector(closeButtonTouchUpInsideEvent(_:)))
+        migratingNavigationController?.custom.addBackButton(for: self, target: self, action: #selector(closeButtonTouchUpInsideEvent(_:)))
 
         // Get the back-facing camera for capturing videos
         guard let captureDevice = AVCaptureDevice.default(for: .video) else {

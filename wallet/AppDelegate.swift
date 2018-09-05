@@ -14,7 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     var mainScreenFlow: ScreenFlow!
-    var navigation: WalletNavigationController!
+    //var navigation: WalletNavigationController!
     var userDefaultsManager: UserDefaultsManager!
 
 //    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
@@ -41,10 +41,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             fatalError()
         }
 
-        let navigationController = UINavigationController(rootViewController: vc)
+        let navigationController = MigratingWalletNavigationController(rootViewController: vc)
 
-        navigation = WalletNavigationController(navigationController: navigationController)
-        navigation.transitionCoordinator = NavigationControllerTransitionCoordinator(animator: SlideTransitionAnimator())
+//        navigation = WalletNavigationController(navigationController: navigationController)
+//        navigation.transitionCoordinator = NavigationControllerTransitionCoordinator(animator: SlideTransitionAnimator())
 
         userDefaultsManager = UserDefaultsManager(keychainConfiguration: WalletKeychainConfiguration())
 
@@ -54,7 +54,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 fatalError()
             }
 
-            let screenFlow = EnterPinFlow(navigationController: navigation)
+            let screenFlow = EnterPinFlow(migratingNavigationController: navigationController)
             screenFlow.prepare(phone: phone)
 
             self.mainScreenFlow = screenFlow
@@ -65,7 +65,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 fatalError()
             }
 
-            let screenFlow = SecondEnterLoginFlow(navigationController: navigation)
+            let screenFlow = SecondEnterLoginFlow(migratingNavigationController: navigationController)
             screenFlow.prepare(phone: phone)
 
             self.mainScreenFlow = screenFlow
@@ -74,8 +74,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         case (false, true):
             fatalError()
         case (false, false):
-            let screenFlow = OnboardingFlow(navigationController: navigation)
+            //let screenFlow = OnboardingFlow(navigationController: navigation)
 
+            let screenFlow = OnboardingFlow(migratingNavigationController: navigationController)
             self.mainScreenFlow = screenFlow
             self.mainScreenFlow.begin(animated: false)
             break

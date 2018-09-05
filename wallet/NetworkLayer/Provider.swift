@@ -13,6 +13,7 @@ import PromiseKit
  Protocol defines object, uniting corresponding Request and Environment objects for easily executing requests in right environment.
  */
 protocol Provider {
+    
 
     associatedtype ProviderRequest: Request
 

@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class TransactionsHistoryFilterViewController: WalletViewController, UITableViewDelegate, UITableViewDataSource {
+class TransactionsHistoryFilterViewController: FlowViewController, WalletViewController, UITableViewDelegate, UITableViewDataSource {
 
     var onDone: ((TransactionsFilterData) -> Void)?
 
@@ -39,7 +39,7 @@ class TransactionsHistoryFilterViewController: WalletViewController, UITableView
         componentsTableView?.delegate = self
         componentsTableView?.dataSource = self
 
-        walletNavigationController?.addRightBarItemButton(for: self, title: "DONE", target: self, action: #selector(doneButtonTouchEvent(_:)))
+        migratingNavigationController?.custom.addRightBarItemButton(for: self, title: "DONE", target: self, action: #selector(doneButtonTouchEvent(_:)))
     }
 
     private func setupComponents(filterData: TransactionsFilterData) {

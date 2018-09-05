@@ -13,7 +13,7 @@ import UIKit
  */
 protocol ScreenFlow {
 
-    init(navigationController: WalletNavigationController)
+    init(migratingNavigationController: MigratingWalletNavigationController)
 
     func begin()
 

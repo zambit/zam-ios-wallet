@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class DepositMoneyViewController: WalletViewController, DepositMoneyMethodComponentDelegate {
+class DepositMoneyViewController: FlowViewController, WalletViewController, DepositMoneyMethodComponentDelegate {
 
     var onShare: ((String) -> Void)?
 

@@ -8,13 +8,22 @@
 
 import UIKit
 
-class WalletViewController: FlowViewController {
+typealias WalletViewControllerAlias = UIViewController & WalletViewController
 
-    weak var walletNavigationController: WalletNavigationController? {
-        didSet {
-            print(walletNavigationController)
-        }
+protocol WalletViewController: AnyObject where Self: UIViewController {
+    
+    var migratingNavigationController: MigratingWalletNavigationController? { get }
+
+    var migratingTabBarController: MigratingWalletTabBarController? { get }
+}
+
+extension WalletViewController {
+
+    weak var migratingNavigationController: MigratingWalletNavigationController? {
+        return navigationController as? MigratingWalletNavigationController
     }
 
-    weak var walletTabBar: WalletTabBarController?
+    weak var migratingTabBarController: MigratingWalletTabBarController? {
+        return tabBarController as? MigratingWalletTabBarController
+    }
 }

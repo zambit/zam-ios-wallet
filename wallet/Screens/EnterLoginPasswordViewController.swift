@@ -43,7 +43,7 @@ class EnterLoginPasswordViewController: ContinueViewController, LoginPasswordCom
 //            title = MaskParser(symbol: maskData.1, space: maskData.2).matchingUnstrict(text: phone, withMask: maskData.0)
 //        }
 
-        walletNavigationController?.addRightBarItemButton(for: self, title: "EXIT", target: self, action: #selector(exitButtonTouchEvent(_:)))
+        migratingNavigationController?.custom.addRightBarItemButton(for: self, title: "EXIT", target: self, action: #selector(exitButtonTouchEvent(_:)))
     }
 
     private func setupViewControllerStyle() {

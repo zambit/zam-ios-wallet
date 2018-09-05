@@ -12,7 +12,7 @@ import UIKit
 /**
  Onboarding screen.
  */
-class OnboardingViewController: WalletViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class OnboardingViewController: FlowViewController, WalletViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     /**
      Flow parameter for moving to login flow

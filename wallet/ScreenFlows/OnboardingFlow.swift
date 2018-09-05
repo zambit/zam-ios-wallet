@@ -14,18 +14,18 @@ import UIKit
  */
 final class OnboardingFlow: ScreenFlow {
 
-    weak var navigationController: WalletNavigationController?
+    unowned var migratingNavigationController: MigratingWalletNavigationController
 
-    init(navigationController: WalletNavigationController) {
-        self.navigationController = navigationController
+    init(migratingNavigationController: MigratingWalletNavigationController) {
+        self.migratingNavigationController = migratingNavigationController
     }
 
     func begin() {
-        self.navigationController?.pushFromRootBack(viewController: onboardingScreen)
+        self.migratingNavigationController.custom.pushFromRoot(viewController: onboardingScreen, direction: .back)
     }
 
     func begin(animated: Bool) {
-        self.navigationController?.pushFromRootBack(viewController: onboardingScreen, animated: animated)
+        self.migratingNavigationController.custom.pushFromRoot(viewController: onboardingScreen, animated: animated, direction: .back)
     }
 
     private var onboardingScreen: OnboardingViewController {
@@ -42,12 +42,7 @@ final class OnboardingFlow: ScreenFlow {
                 return
             }
 
-            guard let _ = strongSelf.navigationController else {
-                print("Navigation controller not found")
-                return
-            }
-
-            strongSelf.loginFlow?.begin()
+            strongSelf.loginFlow.begin()
         }
 
         let onSignup: () -> Void = {
@@ -57,12 +52,7 @@ final class OnboardingFlow: ScreenFlow {
                 return
             }
 
-            guard let _ = strongSelf.navigationController else {
-                print("Navigation controller not found")
-                return
-            }
-
-            strongSelf.signupFlow?.begin()
+            strongSelf.signupFlow.begin()
         }
 
         vc.onLogin = onLogin
@@ -71,23 +61,13 @@ final class OnboardingFlow: ScreenFlow {
         return vc
     }
 
-    private var loginFlow: FirstEnterLoginFlow? {
-        guard let navController = navigationController else {
-            print("Navigation controller not found")
-            return nil
-        }
-
-        let flow = FirstEnterLoginFlow(navigationController: navController)
+    private var loginFlow: FirstEnterLoginFlow {
+        let flow = FirstEnterLoginFlow(migratingNavigationController: migratingNavigationController)
         return flow
     }
 
-    private var signupFlow: SignUpFlow? {
-        guard let navController = navigationController else {
-            print("Navigation controller not found")
-            return nil
-        }
-
-        let flow = SignUpFlow(navigationController: navController)
+    private var signupFlow: SignUpFlow {
+        let flow = SignUpFlow(migratingNavigationController: migratingNavigationController)
         return flow
     }
 

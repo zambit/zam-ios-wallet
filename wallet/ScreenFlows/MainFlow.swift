@@ -11,23 +11,35 @@ import UIKit
 
 final class MainFlow: ScreenFlow {
 
-    weak var navigationController: WalletNavigationController?
+    unowned var migratingNavigationController: MigratingWalletNavigationController
 
-    init(navigationController: WalletNavigationController) {
-        self.navigationController = navigationController
+    init(migratingNavigationController: MigratingWalletNavigationController) {
+        self.migratingNavigationController = migratingNavigationController
     }
 
     func begin() {
-        self.navigationController?.pushFromRootForward(tabBarController: walletTabBar)
+        self.migratingNavigationController.custom.pushFromRoot(viewController: walletTabBar, direction: .forward)
     }
 
-    private var walletTabBar: WalletTabBarController {
-        let tabBar = WalletTabBarController(home: homeScreen,
-                                            transactions: transactionsScreen,
-                                            zam: UIViewController(),
-                                            contacts: UIViewController(),
-                                            more: UIViewController())
-        return tabBar
+    private var walletTabBar: MigratingWalletTabBarController {
+        let tabbar = MigratingWalletTabBarController()
+
+        let homeScreenItemData = MigratingWalletTabBarItemData(image: #imageLiteral(resourceName: "briefcase"), type: .normal, title: "Home")
+        tabbar.custom.add(viewController: homeScreen, with: homeScreenItemData)
+
+        let transactionsScreenItemData = MigratingWalletTabBarItemData(image: #imageLiteral(resourceName: "transactions"), type: .normal, title: "Transactions")
+        tabbar.custom.add(viewController: transactionsScreen, with: transactionsScreenItemData)
+
+        let zamScreenItemData = MigratingWalletTabBarItemData(image: #imageLiteral(resourceName: "logo"), type: .large, title: nil)
+        tabbar.custom.add(viewController: EmptyViewController(), with: zamScreenItemData)
+
+        let contactsScreenItemData = MigratingWalletTabBarItemData(image: #imageLiteral(resourceName: "users"), type: .normal, title: "Contacts")
+        tabbar.custom.add(viewController: EmptyViewController(), with: contactsScreenItemData)
+
+        let moreScreenItemData = MigratingWalletTabBarItemData(image: #imageLiteral(resourceName: "more"), type: .normal, title: "More")
+        tabbar.custom.add(viewController: EmptyViewController(), with: moreScreenItemData)
+
+        return tabbar
     }
 
     // MARK: - TransactionsTabBarItem
@@ -49,7 +61,7 @@ final class MainFlow: ScreenFlow {
 
             let target = strongSelf.transactionsFilterScreen
             target.prepare(filterData: filterData)
-            vc.walletNavigationController?.push(viewController: target)
+            vc.migratingNavigationController?.custom.push(viewController: target)
         }
 
         vc.onFilter = onFilter
@@ -70,7 +82,7 @@ final class MainFlow: ScreenFlow {
         let onDone: (TransactionsFilterData) -> Void = {
             filterData in
 
-            vc.walletNavigationController?.popBack(nextViewController: {
+            vc.migratingNavigationController?.custom.popBack(nextViewController: {
                 next in
 
                 guard let target = next as? TransactionsHistoryViewController else {
@@ -123,7 +135,7 @@ final class MainFlow: ScreenFlow {
             let target = strongSelf.sendMoneyScreen
             target.prepare(wallets: wallets, currentIndex: index, recipient: contact, phone: phone)
 
-            owner.walletNavigationController?.push(viewController: target)
+            owner.migratingNavigationController?.custom.push(viewController: target)
         }
 
         let onDepositToWallet: (Int, [WalletData], String, WalletViewController) -> Void = {
@@ -137,7 +149,7 @@ final class MainFlow: ScreenFlow {
             let target = strongSelf.depositMoneyScreen
             target.prepare(wallets: wallets, currentIndex: index, phone: phone)
 
-            owner.walletNavigationController?.push(viewController: target)
+            owner.migratingNavigationController?.custom.push(viewController: target)
         }
 
         vc.onSendFromWallet = onSendFromWallet
@@ -189,7 +201,7 @@ final class MainFlow: ScreenFlow {
             let target = strongSelf.transactionDetailScreen
             target.prepare(sendMoneyData: data)
 
-            strongSelf.navigationController?.present(viewController: target, animate: false)
+            strongSelf.migratingNavigationController.custom.present(viewController: target, animate: false)
         }
 
         let onQRScanner: () -> Void = {
@@ -201,7 +213,7 @@ final class MainFlow: ScreenFlow {
 
             let target = strongSelf.qrScannerScreen
             target.delegate = vc
-            strongSelf.navigationController?.present(viewController: target, animate: true)
+            strongSelf.migratingNavigationController.custom.present(viewController: target, animate: true)
         }
 
         vc.definesPresentationContext = true
@@ -228,7 +240,7 @@ final class MainFlow: ScreenFlow {
                 return
             }
 
-            strongSelf.navigationController?.dismissPresentedViewController()
+            strongSelf.migratingNavigationController.custom.dismissPresentedViewController()
         }
 
         vc.onClose = onClose
@@ -254,7 +266,7 @@ final class MainFlow: ScreenFlow {
                 return
             }
 
-            strongSelf.navigationController?.dismissPresentedViewController()
+            strongSelf.migratingNavigationController.custom.dismissPresentedViewController()
         }
 
         vc.modalPresentationStyle = .custom

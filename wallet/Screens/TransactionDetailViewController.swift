@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class TransactionDetailViewController: WalletViewController {
+class TransactionDetailViewController: FlowViewController, WalletViewController {
 
     enum State {
         case confirm
@@ -72,7 +72,7 @@ class TransactionDetailViewController: WalletViewController {
                 return
             }
 
-            strongSelf.walletNavigationController?.addBackButton(for: strongSelf, target: strongSelf, action: #selector(strongSelf.closeButtonTouchUpInsideEvent(_:)))
+            strongSelf.migratingNavigationController?.custom.addBackButton(for: strongSelf, target: strongSelf, action: #selector(strongSelf.closeButtonTouchUpInsideEvent(_:)))
         })
     }
 
@@ -176,7 +176,7 @@ class TransactionDetailViewController: WalletViewController {
             //errorMessageLabel?.sizeToFit()
             closeButton?.isHidden = false
 
-            walletNavigationController?.hideBackButton(for: self)
+            migratingNavigationController?.custom.hideBackButton(for: self)
         case .success:
             let attributedString = NSMutableAttributedString(string: "Transaction completed", attributes: [
                 .font: UIFont.walletFont(ofSize: 40.0, weight: .bold),
@@ -193,7 +193,7 @@ class TransactionDetailViewController: WalletViewController {
             errorMessageLabel?.sizeToFit()
             closeButton?.isHidden = false
 
-            walletNavigationController?.hideBackButton(for: self)
+            migratingNavigationController?.custom.hideBackButton(for: self)
         }
     }
 
@@ -260,7 +260,7 @@ class TransactionDetailViewController: WalletViewController {
 
     @objc
     private func closeButtonTouchUpInsideEvent(_ sender: UIButton) {
-        walletNavigationController?.hideBackButton(for: self)
+        migratingNavigationController?.custom.hideBackButton(for: self)
 
         UIView.animate(withDuration: 0.8, animations: {
             [weak self] in

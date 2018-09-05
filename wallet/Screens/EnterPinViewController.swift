@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import AudioToolbox
 
-class EnterPinViewController: WalletViewController, DecimalKeyboardComponentDelegate {
+class EnterPinViewController: FlowViewController, WalletViewController, DecimalKeyboardComponentDelegate {
 
     var userManager: UserDefaultsManager?
     var authAPI: AuthAPI?
@@ -70,7 +70,7 @@ class EnterPinViewController: WalletViewController, DecimalKeyboardComponentDele
 
         setupDefaultStyle()
 
-        walletNavigationController?.addRightBarItemButton(for: self, title: "EXIT", target: self, action: #selector(exitButtonTouchEvent(_:)))
+        migratingNavigationController?.custom.addRightBarItemButton(for: self, title: "EXIT", target: self, action: #selector(exitButtonTouchEvent(_:)))
     }
 
     func prepare(phone: String) {

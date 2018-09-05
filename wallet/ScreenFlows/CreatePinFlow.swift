@@ -11,14 +11,14 @@ import UIKit
 
 final class CreatePinFlow: ScreenFlow {
 
-    weak var navigationController: WalletNavigationController?
+    unowned var migratingNavigationController: MigratingWalletNavigationController
 
-    init(navigationController: WalletNavigationController) {
-        self.navigationController = navigationController
+    init(migratingNavigationController: MigratingWalletNavigationController) {
+        self.migratingNavigationController = migratingNavigationController
     }
 
     func begin() {
-        self.navigationController?.push(viewController: createPinScreen)
+        self.migratingNavigationController.custom.push(viewController: createPinScreen)
     }
 
     private var createPinScreen: CreatePinViewController {
@@ -46,12 +46,7 @@ final class CreatePinFlow: ScreenFlow {
     }
 
     private var userFlow: MainFlow? {
-        guard let navController = navigationController else {
-            print("Navigation controller not found")
-            return nil
-        }
-
-        let flow = MainFlow(navigationController: navController)
+        let flow = MainFlow(migratingNavigationController: migratingNavigationController)
         return flow
     }
 }

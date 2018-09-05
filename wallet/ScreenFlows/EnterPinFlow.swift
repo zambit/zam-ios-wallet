@@ -13,18 +13,18 @@ final class EnterPinFlow: ScreenFlow {
 
     private var phone: String?
 
-    weak var navigationController: WalletNavigationController?
+    unowned var migratingNavigationController: MigratingWalletNavigationController
 
-    init(navigationController: WalletNavigationController) {
-        self.navigationController = navigationController
+    init(migratingNavigationController: MigratingWalletNavigationController) {
+        self.migratingNavigationController = migratingNavigationController
     }
 
     func begin() {
-        self.navigationController?.push(viewController: enterPinScreen, animated: false)
+        self.migratingNavigationController.custom.pushFromRoot(viewController: enterPinScreen, direction: .forward)
     }
 
     func begin(animated: Bool) {
-        self.navigationController?.push(viewController: enterPinScreen, animated: animated)
+        self.migratingNavigationController.custom.pushFromRoot(viewController: enterPinScreen, animated: animated, direction: .forward)
     }
 
     func prepare(phone: String) {
@@ -44,12 +44,12 @@ final class EnterPinFlow: ScreenFlow {
 
         let onContinue: () -> Void = {
             [weak self] in
-            self?.userFlow?.begin()
+            self?.userFlow.begin()
         }
 
         let onExit: () -> Void = {
             [weak self] in
-            self?.onboardingFlow?.begin()
+            self?.onboardingFlow.begin()
         }
 
         let onLoginForm: (String) -> Void = {
@@ -76,33 +76,18 @@ final class EnterPinFlow: ScreenFlow {
         return vc
     }
 
-    private var userFlow: MainFlow? {
-        guard let navController = navigationController else {
-            print("Navigation controller not found")
-            return nil
-        }
-
-        let flow = MainFlow(navigationController: navController)
+    private var userFlow: MainFlow {
+        let flow = MainFlow(migratingNavigationController: migratingNavigationController)
         return flow
     }
 
-    private var onboardingFlow: OnboardingFlow? {
-        guard let navController = navigationController else {
-            print("Navigation controller not found")
-            return nil
-        }
-
-        let flow = OnboardingFlow(navigationController: navController)
+    private var onboardingFlow: OnboardingFlow {
+        let flow = OnboardingFlow(migratingNavigationController: migratingNavigationController)
         return flow
     }
 
     private var secondLoginFlow: SecondEnterLoginFlow? {
-        guard let navController = navigationController else {
-            print("Navigation controller not found")
-            return nil
-        }
-
-        let flow = SecondEnterLoginFlow(navigationController: navController)
+        let flow = SecondEnterLoginFlow(migratingNavigationController: migratingNavigationController)
         return flow
     }
 }

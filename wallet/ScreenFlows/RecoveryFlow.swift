@@ -11,14 +11,14 @@ import UIKit
 
 final class RecoveryFlow: ScreenFlow {
 
-    weak var navigationController: WalletNavigationController?
+    unowned var migratingNavigationController: MigratingWalletNavigationController
 
-    init(navigationController: WalletNavigationController) {
-        self.navigationController = navigationController
+    init(migratingNavigationController: MigratingWalletNavigationController) {
+        self.migratingNavigationController = migratingNavigationController
     }
 
     func begin() {
-        self.navigationController?.push(viewController: enterPhoneNumberScreen)
+        self.migratingNavigationController.custom.push(viewController: enterPhoneNumberScreen)
     }
 
     private var enterPhoneNumberScreen: EnterPhoneNumberViewController {
@@ -39,7 +39,7 @@ final class RecoveryFlow: ScreenFlow {
             let target = strongSelf.verifyPhoneNumberWithSmsScreen
             target.prepare(phone: phone)
 
-            strongSelf.navigationController?.push(viewController: target)
+            strongSelf.migratingNavigationController.custom.push(viewController: target)
         }
 
         vc.telephonyProvider = UserTelephonyInfoProvider()
@@ -67,7 +67,7 @@ final class RecoveryFlow: ScreenFlow {
             let target = strongSelf.createNewPasswordScreen
             target.prepare(phone: phone, token: recoveryToken)
 
-            strongSelf.navigationController?.push(viewController: target)
+            strongSelf.migratingNavigationController.custom.push(viewController: target)
         }
 
         vc.onContinue = onContinue
@@ -92,8 +92,8 @@ final class RecoveryFlow: ScreenFlow {
             }
 
             let target = strongSelf.secondLoginFlow
-            target?.prepare(phone: phone)
-            target?.begin()
+            target.prepare(phone: phone)
+            target.begin()
         }
         vc.onContinue = onContinue
         vc.recoveryAPI = RecoveryAPI(provider: RecoveryProvider(environment: WalletEnvironment(), dispatcher: HTTPDispatcher()))
@@ -103,13 +103,8 @@ final class RecoveryFlow: ScreenFlow {
         return vc
     }
 
-    private var secondLoginFlow: SecondEnterLoginFlow? {
-        guard let navController = navigationController else {
-            print("Navigation controller not found")
-            return nil
-        }
-
-        let flow = SecondEnterLoginFlow(navigationController: navController)
+    private var secondLoginFlow: SecondEnterLoginFlow {
+        let flow = SecondEnterLoginFlow(migratingNavigationController: migratingNavigationController)
         return flow
     }
 }

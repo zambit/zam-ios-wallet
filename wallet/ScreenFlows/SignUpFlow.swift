@@ -11,14 +11,14 @@ import UIKit
 
 final class SignUpFlow: ScreenFlow {
 
-    weak var navigationController: WalletNavigationController?
+    unowned var migratingNavigationController: MigratingWalletNavigationController
 
-    init(navigationController: WalletNavigationController) {
-        self.navigationController = navigationController
+    init(migratingNavigationController: MigratingWalletNavigationController) {
+        self.migratingNavigationController = migratingNavigationController
     }
 
     func begin() {
-        self.navigationController?.push(viewController: enterNewPhoneNumberScreen)
+        self.migratingNavigationController.custom.push(viewController: enterNewPhoneNumberScreen)
     }
 
     private var enterNewPhoneNumberScreen: EnterNewPhoneNumberViewController {
@@ -39,7 +39,7 @@ final class SignUpFlow: ScreenFlow {
             let target = strongSelf.verifyPhoneNumberWithSmsScreen
             target.prepare(phone: phone)
 
-            strongSelf.navigationController?.push(viewController: target)
+            strongSelf.migratingNavigationController.custom.push(viewController: target)
         }
 
         vc.onContinue = onContinue
@@ -67,7 +67,7 @@ final class SignUpFlow: ScreenFlow {
             let target = strongSelf.createNewPasswordScreen
             target.prepare(phone: phone, token: signUpToken)
 
-            strongSelf.navigationController?.push(viewController: target)
+            strongSelf.migratingNavigationController.custom.push(viewController: target)
         }
 
         vc.onContinue = onContinue
@@ -87,7 +87,7 @@ final class SignUpFlow: ScreenFlow {
             [weak self]
             authToken in
 
-            self?.createPinFlow?.begin()
+            self?.createPinFlow.begin()
         }
         vc.onContinue = onContinue
         vc.signupAPI = SignupAPI(provider: SignupProvider(environment: WalletEnvironment(), dispatcher: HTTPDispatcher()))
@@ -97,23 +97,13 @@ final class SignUpFlow: ScreenFlow {
         return vc
     }
 
-    private var createPinFlow: CreatePinFlow? {
-        guard let navController = navigationController else {
-            print("Navigation controller not found")
-            return nil
-        }
-
-        let flow = CreatePinFlow(navigationController: navController)
+    private var createPinFlow: CreatePinFlow {
+        let flow = CreatePinFlow(migratingNavigationController: migratingNavigationController)
         return flow
     }
 
     private var userFlow: MainFlow? {
-        guard let navController = navigationController else {
-            print("Navigation controller not found")
-            return nil
-        }
-
-        let flow = MainFlow(navigationController: navController)
+        let flow = MainFlow(migratingNavigationController: migratingNavigationController)
         return flow
     }
 }

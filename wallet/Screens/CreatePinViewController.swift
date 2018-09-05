@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import AudioToolbox
 
-class CreatePinViewController: WalletViewController, DecimalKeyboardComponentDelegate, CreatePinComponentDelegate {
+class CreatePinViewController: FlowViewController, WalletViewController, DecimalKeyboardComponentDelegate, CreatePinComponentDelegate {
 
     var userManager: UserDefaultsManager?
 
@@ -46,7 +46,7 @@ class CreatePinViewController: WalletViewController, DecimalKeyboardComponentDel
         createPinComponent?.delegate = self
 
         setupDefaultStyle()
-        walletNavigationController?.addRightBarItemButton(for: self, title: "SKIP", target: self, action: #selector(skipButtonTouchEvent(_:)))
+        migratingNavigationController?.custom.addRightBarItemButton(for: self, title: "SKIP", target: self, action: #selector(skipButtonTouchEvent(_:)))
     }
 
     func decimalKeyboardComponent(_ decimalKeyboardComponent: DecimalKeyboardComponent, keyWasTapped key: DecimalKeyboardComponent.Key) {
