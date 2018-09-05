@@ -98,7 +98,7 @@
 		8C52FFE82119D35B00EB55EA /* WalletItemComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C52FFE72119D35B00EB55EA /* WalletItemComponent.xib */; };
 		8C52FFEA2119DA2700EB55EA /* CellComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C52FFE92119DA2700EB55EA /* CellComponent.swift */; };
 		8C52FFEC2119E09200EB55EA /* WalletsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C52FFEB2119E09200EB55EA /* WalletsViewController.swift */; };
-		8C52FFF0211AE19300EB55EA /* CustomOverlappingFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C52FFEF211AE19300EB55EA /* CustomOverlappingFlowLayout.swift */; };
+		8C52FFF0211AE19300EB55EA /* OverlappingFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C52FFEF211AE19300EB55EA /* OverlappingFlowLayout.swift */; };
 		8C52FFF2211AF1FD00EB55EA /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C52FFF1211AF1FD00EB55EA /* HomeViewController.swift */; };
 		8C52FFFE211B252F00EB55EA /* InstantPanGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C52FFFD211B252F00EB55EA /* InstantPanGestureRecognizer.swift */; };
 		8C6088402110634700470411 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C60883F2110634700470411 /* UserDefaultsManager.swift */; };
@@ -332,7 +332,7 @@
 		8C52FFE72119D35B00EB55EA /* WalletItemComponent.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletItemComponent.xib; sourceTree = "<group>"; };
 		8C52FFE92119DA2700EB55EA /* CellComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellComponent.swift; sourceTree = "<group>"; };
 		8C52FFEB2119E09200EB55EA /* WalletsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletsViewController.swift; sourceTree = "<group>"; };
-		8C52FFEF211AE19300EB55EA /* CustomOverlappingFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomOverlappingFlowLayout.swift; sourceTree = "<group>"; };
+		8C52FFEF211AE19300EB55EA /* OverlappingFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlappingFlowLayout.swift; sourceTree = "<group>"; };
 		8C52FFF1211AF1FD00EB55EA /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		8C52FFFD211B252F00EB55EA /* InstantPanGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstantPanGestureRecognizer.swift; sourceTree = "<group>"; };
 		8C60883F2110634700470411 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
@@ -502,7 +502,7 @@
 				8C6088502111A95100470411 /* Conditions.swift */,
 				8C09192C21061F3600703224 /* ControllerHelper.swift */,
 				8C713B2B213EC77500AC2E25 /* CustomBehavioral.swift */,
-				8C52FFEF211AE19300EB55EA /* CustomOverlappingFlowLayout.swift */,
+				8C52FFEF211AE19300EB55EA /* OverlappingFlowLayout.swift */,
 				8C04BC3821219D0600E90090 /* Drawing.swift */,
 				8C713B1E213941FF00AC2E25 /* Networking.swift */,
 				8CF5F92E211327EB0083B36A /* MaskParser.swift */,
@@ -548,6 +548,7 @@
 			children = (
 				8C60883C21105A0F00470411 /* Base */,
 				8C333D45210B0D5400949AC0 /* LaunchScreenViewController.swift */,
+				8C713B31213FE33600AC2E25 /* EmptyViewController.swift */,
 				8C091933210620C800703224 /* OnboardingViewController.swift */,
 				8C60885D2111F28000470411 /* EnterNewPhoneNumberViewController.swift */,
 				8C60885F2111F35E00470411 /* EnterPhoneNumberViewController.swift */,
@@ -566,7 +567,6 @@
 				8CA218F0213002880063C188 /* TransactionsHistoryViewController.swift */,
 				8CA2191E213549DD0063C188 /* TransactionsHistoryFilterViewController.swift */,
 				8C713B202139911D00AC2E25 /* QRCodeScannerViewController.swift */,
-				8C713B31213FE33600AC2E25 /* EmptyViewController.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -1487,7 +1487,7 @@
 				8CA218A9212343760063C188 /* UIImageView+Extensions.swift in Sources */,
 				8C6088602111F35E00470411 /* EnterPhoneNumberViewController.swift in Sources */,
 				8C6088512111A95100470411 /* Conditions.swift in Sources */,
-				8C52FFF0211AE19300EB55EA /* CustomOverlappingFlowLayout.swift in Sources */,
+				8C52FFF0211AE19300EB55EA /* OverlappingFlowLayout.swift in Sources */,
 				9319BAA6212A0AC200033A7E /* CrossAnimationView.swift in Sources */,
 				8C333D302109E0B400949AC0 /* UserViewController.swift in Sources */,
 				8CA2189F2122F9E40063C188 /* SelectingBackView.swift in Sources */,

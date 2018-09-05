@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class CustomOverlappingFlowLayout: UICollectionViewFlowLayout {
+class OverlappingFlowLayout: UICollectionViewFlowLayout {
 
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         let layoutAttributes = super.layoutAttributesForElements(in: rect)

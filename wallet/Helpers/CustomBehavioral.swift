@@ -29,4 +29,6 @@ public class BehaviorExtension<Base: AnyObject> {
     }
 }
 
+extension UIView: CustomBehavioral {}
+
 extension UIViewController: CustomBehavioral {}
