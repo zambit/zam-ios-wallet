@@ -65,6 +65,7 @@ final class MainFlow: ScreenFlow {
         }
 
         vc.onFilter = onFilter
+        vc.contactsManager = UserContactsManager(fetchKeys: [.fullName, .phoneNumber, .avatar])
         vc.userManager = UserDefaultsManager(keychainConfiguration: WalletKeychainConfiguration())
         vc.userAPI = UserAPI(provider: UserProvider(environment: WalletEnvironment(), dispatcher: HTTPDispatcher()))
         vc.title = "Transactions"

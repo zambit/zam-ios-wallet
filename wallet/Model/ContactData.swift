@@ -20,7 +20,9 @@ struct ContactData {
         self.avatarData = contact.thumbnailImageData
 
         for phone in contact.phoneNumbers {
-            phoneNumbers.append(phone.value.stringValue)
+            let allowedCharacters = CharacterSet(charactersIn: "+1234567890")
+            let formatted = phone.value.stringValue.components(separatedBy: allowedCharacters.inverted).joined(separator: "")
+            phoneNumbers.append(formatted)
         }
     }
 }

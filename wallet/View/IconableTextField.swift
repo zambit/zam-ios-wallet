@@ -87,6 +87,7 @@ class IconableTextField: UITextField {
                     [weak self] in
 
                     guard let strongSelf = self else {
+                        
                         return
                     }
 

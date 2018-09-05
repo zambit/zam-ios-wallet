@@ -13,6 +13,7 @@ class TransactionsHistoryViewController: FlowViewController, WalletNavigable, UI
 
     var onFilter: ((TransactionsFilterData) -> Void)?
 
+    var contactsManager: UserContactsManager?
     var userManager: UserDefaultsManager?
     var userAPI: UserAPI?
 
@@ -24,6 +25,8 @@ class TransactionsHistoryViewController: FlowViewController, WalletNavigable, UI
 
     private var topRefreshControl: UIRefreshControl?
     private var bottomActivityIndicator: UIActivityIndicatorView?
+
+    private var contactsData: [ContactData] = []
 
     private var filterData: TransactionsFilterData = TransactionsFilterData()
 
@@ -37,6 +40,8 @@ class TransactionsHistoryViewController: FlowViewController, WalletNavigable, UI
         super.viewDidLoad()
 
         hideKeyboardOnTap()
+
+        contactsData = contactsManager?.contacts ?? []
 
         let filterBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "filter"), style: .plain, target: self, action: #selector(filterButtonTouchUpInsideEvent(_:)))
         filterBarButtonItem.tintColor = nil
@@ -148,18 +153,17 @@ class TransactionsHistoryViewController: FlowViewController, WalletNavigable, UI
             self?.historyTableView?.endUpdates()
 
             self?.updateTableViewFooter()
-        }, resetHandler: {
-            [weak self]
-            paginator in
-
-            self?.setupPlaceholder()
-            self?.topRefreshControl?.endRefreshing()
         }, failureHandler: {
             [weak self]
             paginator in
 
-            paginator.reset()
-            self?.historyTableView?.reloadData()
+            performWithDelay {
+                paginator.reset()
+                self?.historyTableView?.reloadData()
+
+                self?.setupPlaceholder()
+                self?.topRefreshControl?.endRefreshing()
+            }
         })
 
         self.topRefreshControl?.beginRefreshing()
@@ -227,7 +231,15 @@ class TransactionsHistoryViewController: FlowViewController, WalletNavigable, UI
         }
 
         let data = provider.results[indexPath.section].transactions[indexPath.row]
-        cell.configure(image: data.coin.image, status: data.status.formatted, coinShort: data.coin.short, recipient: data.participant.formatted, amount: data.amount.formatted(currency: .original), fiatAmount: data.amount.description(currency: .usd), direction: data.direction)
+
+        
+
+        var recipient: String = data.participant.formatted
+        if let recipientContact = contactsData.first(where: { $0.phoneNumbers.contains(data.participant.formatted) }) {
+            recipient = recipientContact.name
+        }
+
+        cell.configure(image: data.coin.image, status: data.status.formatted, coinShort: data.coin.short, recipient: recipient, amount: data.amount.formatted(currency: .original), fiatAmount: data.amount.description(currency: .usd), direction: data.direction)
 
         return cell
     }

@@ -140,7 +140,9 @@ class EnterPinViewController: FlowViewController, WalletNavigable, DecimalKeyboa
             }
         case .remove:
             dotsFieldComponent?.unfillLast()
-            pinText.removeLast()
+            if !pinText.isEmpty {
+                pinText.removeLast()
+            }
         case .touchId, .faceId:
             biometricAuthenticationRequest()
         case .empty:
