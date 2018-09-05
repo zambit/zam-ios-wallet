@@ -13,7 +13,7 @@ extension UITextField {
 
     var leftPadding: CGFloat {
         get {
-            return leftView!.frame.size.width
+            return leftView?.frame.size.width ?? 0.0
         }
         set {
             let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: frame.size.height))
@@ -26,7 +26,7 @@ extension UITextField {
 
     var rightPadding: CGFloat {
         get {
-            return rightView!.frame.size.width
+            return rightView?.frame.size.width ?? 0.0
         }
         set {
             let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: frame.size.height))
@@ -53,7 +53,7 @@ extension UITextField {
         var widthOfFrame = self.frame.size.width
 
         // increase font size until it fits or reach maximumSize
-        while widthOfFrame - 5 >= widthOfText, font.pointSize <= maximumSize {
+        while widthOfFrame - leftPadding - rightPadding >= widthOfText, font.pointSize <= maximumSize {
             let fontSize = font.pointSize
             font = font.withSize(fontSize + 0.5)
             widthOfText = textString.size(withAttributes: [.font : font]).width
@@ -61,7 +61,7 @@ extension UITextField {
         }
 
         // decrease font size until it fits or reach minimumSize
-        while widthOfFrame - 5 < widthOfText, font.pointSize >= minimalSize {
+        while widthOfFrame - leftPadding - rightPadding < widthOfText, font.pointSize >= minimalSize {
             let fontSize = font.pointSize
             font = font.withSize(fontSize - 0.5)
             widthOfText = textString.size(withAttributes: [.font : font]).width

@@ -167,7 +167,7 @@ class IconableTextField: UITextField {
 
     @objc
     private func textFieldEditingChanged(_ textField: UITextField) {
-        resizeFontToFitWidth(minimalSize: 9.0, maximumSize: 16.0)
+        resizeFontToFitWidth(minimalSize: 11.0, maximumSize: 16.0)
 
         UIView.animate(withDuration: 0.05) {
             [weak self] in
@@ -179,7 +179,7 @@ class IconableTextField: UITextField {
             if (textField.text ?? "").count > 16 {
                 switch strongSelf.detailMode {
                 case .left:
-                    strongSelf.leftPadding = 50.0
+                    strongSelf.leftPadding = 70.0
                     strongSelf.rightPadding = 10.0
                 case .right:
                     strongSelf.leftPadding = 10.0

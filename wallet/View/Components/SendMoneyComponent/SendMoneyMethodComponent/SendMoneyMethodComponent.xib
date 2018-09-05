@@ -36,7 +36,7 @@
                         <constraint firstAttribute="height" constant="44" id="PT3-Sv-xH8"/>
                     </constraints>
                 </view>
-                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="bgV-8U-48N" customClass="IconableTextField" customModule="wallet" customModuleProvider="target">
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="11" translatesAutoresizingMaskIntoConstraints="NO" id="bgV-8U-48N" customClass="IconableTextField" customModule="wallet" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="64" width="640" height="56"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="56" id="utt-BH-mrq"/>
