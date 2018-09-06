@@ -92,7 +92,10 @@ class SendMoneyViewController: KeyboardBehaviorFollowingViewController, SendMone
     }
 
     private func scrollToCurrentWallet() {
-        guard let index = currentIndex else {
+        guard
+            let index = currentIndex,
+            let sectionsCount = walletsCollectionView?.numberOfSections,
+            sectionsCount > index else {
             return
         }
 

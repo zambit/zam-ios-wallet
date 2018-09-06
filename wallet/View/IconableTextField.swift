@@ -158,7 +158,7 @@ class IconableTextField: UITextField {
     func setText(_ text: String) {
         clearsOnInsertion = true
         insertText(text)
-        textFieldEditingChanged(self)
+        sendActions(for: .editingChanged)
     }
 
     @objc
