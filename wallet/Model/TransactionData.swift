@@ -14,13 +14,23 @@ enum TransactionParticipant {
     case none
 
     var formatted: String {
+        var data: String
+
         switch self {
         case .sender(let sender):
-            return sender
+            data = sender
         case .recipient(let recipient):
-            return recipient
+            data = recipient
         case .none:
             return "-"
+        }
+
+        let phone = PhoneNumberFormatter(data)
+
+        if phone.isValid {
+            return phone.formatted
+        } else {
+            return data
         }
     }
 }
@@ -54,7 +64,7 @@ struct TransactionData {
 
         if let recipient = codable.recipient {
             self.participant = .recipient(recipient)
-        } else if let sender = codable.sender{
+        } else if let sender = codable.sender {
             self.participant = .sender(sender)
         } else {
             self.participant = .none

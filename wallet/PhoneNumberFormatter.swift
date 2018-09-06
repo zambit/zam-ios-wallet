@@ -46,6 +46,10 @@ class PhoneNumberFormatter {
                            region: formatter.mainCountry(forCode: object.countryCode))
     }
 
+    var isValid: Bool {
+        return completed != nil
+    }
+
     var number: String? {
         get {
             let separated = _number?.components(separatedBy: allowedCharacters.inverted)
