@@ -53,6 +53,10 @@ struct BalanceData: Equatable {
         self.original = original
     }
 
+    static func empty(coin: CoinType) -> BalanceData {
+        return BalanceData(coin: coin, usd: 0.0, original: 0.0)
+    }
+
     func sum(with another: BalanceData) throws -> BalanceData {
         guard coin == another.coin else {
             throw BalanceDataError.sumDefferentCoinBalance

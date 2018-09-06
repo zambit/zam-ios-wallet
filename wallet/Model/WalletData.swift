@@ -37,6 +37,14 @@ struct WalletData {
 
         self.address = codable.address
     }
+
+    init(id: String, name: String, coin: CoinType, balance: BalanceData, address: String) {
+        self.id = id
+        self.name = name
+        self.coin = coin
+        self.balance = balance
+        self.address = address
+    }
 }
 
 enum WalletDataError: Error {

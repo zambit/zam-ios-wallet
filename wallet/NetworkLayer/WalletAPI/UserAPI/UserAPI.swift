@@ -109,9 +109,18 @@ struct UserAPI: NetworkService {
                     case .data(_):
 
                         let success: (CodableSuccessWalletsPageResponse) -> Void = { s in
-                            let wallets = s.data.wallets.compactMap {
+                            var wallets = s.data.wallets.compactMap {
                                 return try? WalletData(codable: $0)
                             }
+
+                            // stub eth and zam
+
+                            let eth = WalletData(id: "t1", name: "Personal", coin: .eth, balance: BalanceData.empty(coin: .eth), address: "afa34f2erq3r122rwd1w1e")
+
+                            let zam = WalletData(id: "t2", name: "Personal", coin: .zam, balance: BalanceData.empty(coin: .zam), address: "afa34f2erq3r122rwd1w1e")
+
+                            wallets.append(eth)
+                            wallets.append(zam)
 
                             seal.fulfill(wallets)
                         }
