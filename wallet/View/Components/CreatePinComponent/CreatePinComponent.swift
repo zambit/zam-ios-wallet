@@ -153,6 +153,14 @@ class CreatePinComponent: Component, UICollectionViewDataSource, UICollectionVie
         }
     }
 
+    func beginDotsLoading() {
+        currentPinStage?.dotsFieldComponent?.beginLoading()
+    }
+
+    func endDotsLoading() {
+        currentPinStage?.dotsFieldComponent?.endLoading()
+    }
+
     func moveToNextStage(animated: Bool, completion handler: @escaping () -> Void = {}) {
         currentStageIndex += 1
 

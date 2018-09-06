@@ -105,8 +105,12 @@ class EnterPinViewController: FlowViewController, WalletNavigable, DecimalKeyboa
                         phone in
 
                         performWithDelay {
-                            self?.dotsFieldComponent?.endLoading()
-                            self?.onContinue?()
+                            DispatchQueue.global(qos: .default).async {
+                                UserContactsManager.default.fetchContacts({ _ in
+                                    self?.dotsFieldComponent?.endLoading()
+                                    self?.onContinue?()
+                                })
+                            }
                         }
                     }.catch {
                         [weak self]
@@ -126,6 +130,7 @@ class EnterPinViewController: FlowViewController, WalletNavigable, DecimalKeyboa
                         }
                     }
                 case false:
+                    dotsFieldComponent?.endLoading()
                     dotsFieldComponent?.fillingEnabled = false
                     dotsFieldComponent?.showFailure {
                         [weak self] in
@@ -171,14 +176,24 @@ class EnterPinViewController: FlowViewController, WalletNavigable, DecimalKeyboa
             self?.dotsFieldComponent?.fillAll()
 
             guard let token = self?.userManager?.getToken() else {
-                fatalError()
+                return
             }
+
+            self?.dotsFieldComponent?.beginLoading()
 
             self?.authAPI?.checkIfUserAuthorized(token: token).done {
                 phone in
 
-                self?.onContinue?()
+                performWithDelay {
+                    DispatchQueue.global(qos: .default).async {
+                        UserContactsManager.default.fetchContacts({ _ in
+                            self?.dotsFieldComponent?.endLoading()
+                            self?.onContinue?()
+                        })
+                    }
+                }
             }.catch {
+                [weak self]
                 error in
 
                 guard let strongSelf = self else {
@@ -189,9 +204,12 @@ class EnterPinViewController: FlowViewController, WalletNavigable, DecimalKeyboa
                     fatalError("Error on catching checkingIfUserAuthorized")
                 }
 
-                self?.userManager?.clearToken()
+                strongSelf.userManager?.clearToken()
 
-                strongSelf.onLoginForm?(phone)
+                performWithDelay {
+                    self?.dotsFieldComponent?.endLoading()
+                    self?.onLoginForm?(phone)
+                }
             }
         }, failure: {
             [weak self]

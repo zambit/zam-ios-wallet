@@ -65,7 +65,7 @@ final class MainFlow: ScreenFlow {
         }
 
         vc.onFilter = onFilter
-        vc.contactsManager = UserContactsManager(fetchKeys: [.fullName, .phoneNumber, .avatar], phoneNumberFormatter: PhoneNumberFormatter())
+        vc.contactsManager = UserContactsManager.default
         vc.userManager = UserDefaultsManager(keychainConfiguration: WalletKeychainConfiguration())
         vc.userAPI = UserAPI(provider: UserProvider(environment: WalletEnvironment(), dispatcher: HTTPDispatcher()))
         vc.title = "Transactions"
@@ -111,7 +111,7 @@ final class MainFlow: ScreenFlow {
 
         vc.embededViewController = walletsScreen
         vc.embededViewController?.owner = vc
-        vc.contactsManager = UserContactsManager(fetchKeys: [.phoneNumber, .fullName, .avatar], phoneNumberFormatter: PhoneNumberFormatter())
+        vc.contactsManager = UserContactsManager.default
         vc.userManager = UserDefaultsManager(keychainConfiguration: WalletKeychainConfiguration())
         vc.userAPI = UserAPI(provider: UserProvider(environment: WalletEnvironment(), dispatcher: HTTPDispatcher()))
         vc.flow = self

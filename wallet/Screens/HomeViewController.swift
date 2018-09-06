@@ -61,6 +61,8 @@ class HomeViewController: DetailOffsetPresentationViewController, WalletsViewCon
 
     private var totalBalance: BalanceData?
 
+    private var contactsData: [ContactData] = []
+
     // MARK: - View Controller Lifecycle
 
     override func viewWillAppear(_ animated: Bool) {
@@ -91,30 +93,48 @@ class HomeViewController: DetailOffsetPresentationViewController, WalletsViewCon
 
         hideKeyboardOnTap()
 
-        isContactsLoading = true
+        contactsData = contactsManager?.contacts ?? []
 
-        contactsManager?.fetchContacts {
-            [weak self]
-            contacts in
+        if !contactsData.isEmpty {
+            self.contactsComponent?.delegate = self
+            self.contactsComponent?.contactsCollectionView?.endLoading()
+            self.contactsComponent?.prepare(contacts: contactsData)
+            self.detailViewOffset = 350
 
-            self?.isContactsLoading = false
+        } else {
 
-            if !contacts.isEmpty {
-                self?.contactsComponent?.delegate = self
-                self?.contactsComponent?.contactsCollectionView?.endLoading()
-                self?.contactsComponent?.prepare(contacts: contacts)
-                self?.detailViewOffset = 350
+            self.contactsComponent?.contactsCollectionView?.endLoading()
+            self.detailViewOffset = 200
 
-            } else {
-
-                self?.contactsComponent?.contactsCollectionView?.endLoading()
-                self?.detailViewOffset = 200
-
-                if self?.currentState == .closed {
-                    self?.animate(to: .closed)
-                }
+            if self.currentState == .closed {
+                self.animate(to: .closed)
             }
         }
+
+//        isContactsLoading = true
+//
+//        contactsManager?.fetchContacts {
+//            [weak self]
+//            contacts in
+//
+//            self?.isContactsLoading = false
+//
+//            if !contacts.isEmpty {
+//                self?.contactsComponent?.delegate = self
+//                self?.contactsComponent?.contactsCollectionView?.endLoading()
+//                self?.contactsComponent?.prepare(contacts: contacts)
+//                self?.detailViewOffset = 350
+//
+//            } else {
+//
+//                self?.contactsComponent?.contactsCollectionView?.endLoading()
+//                self?.detailViewOffset = 200
+//
+//                if self?.currentState == .closed {
+//                    self?.animate(to: .closed)
+//                }
+//            }
+//        }
 
         switch UIDevice.current.screenType {
         case .small, .extraSmall:

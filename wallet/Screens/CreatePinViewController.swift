@@ -73,7 +73,19 @@ class CreatePinViewController: FlowViewController, WalletNavigable, DecimalKeybo
         } catch let error {
             fatalError("Error on saving user password \(error)")
         }
-        onContinue?()
+
+        createPinComponent.beginDotsLoading()
+
+        performWithDelay {
+            [weak self] in
+
+            DispatchQueue.global(qos: .default).async {
+                UserContactsManager.default.fetchContacts({ _ in
+                    createPinComponent.endDotsLoading()
+                    self?.onContinue?()
+                })
+            }
+        }
     }
 
     func createPinComponentWrongConfirmation(_ createPinComponent: CreatePinComponent) {
@@ -82,6 +94,17 @@ class CreatePinViewController: FlowViewController, WalletNavigable, DecimalKeybo
 
     @objc
     private func skipButtonTouchEvent(_ sender: UIBarButtonItem) {
-        onSkip?()
+        createPinComponent?.beginDotsLoading()
+
+        performWithDelay {
+            [weak self] in
+
+            DispatchQueue.global(qos: .default).async {
+                UserContactsManager.default.fetchContacts({ _ in
+                    self?.createPinComponent?.endDotsLoading()
+                    self?.onSkip?()
+                })
+            }
+        }
     }
 }

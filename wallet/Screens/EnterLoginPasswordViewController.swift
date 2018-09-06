@@ -82,9 +82,13 @@ class EnterLoginPasswordViewController: ContinueViewController, LoginPasswordCom
             [weak self]
             authToken in
 
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                self?.continueButton?.custom.setLoading(false)
-                self?.onContinue?(authToken)
+            performWithDelay {
+                DispatchQueue.global(qos: .default).async {
+                    UserContactsManager.default.fetchContacts({ _ in
+                        self?.continueButton?.custom.setLoading(false)
+                        self?.onContinue?(authToken)
+                    })
+                }
             }
 
             self?.userManager?.save(phone: phone, token: authToken)
@@ -92,7 +96,7 @@ class EnterLoginPasswordViewController: ContinueViewController, LoginPasswordCom
             [weak self]
             error in
 
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            performWithDelay {
                 self?.continueButton?.custom.setLoading(false)
             }
 

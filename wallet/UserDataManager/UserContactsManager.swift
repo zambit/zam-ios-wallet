@@ -26,11 +26,25 @@ enum UserContactFetchKey {
     }
 }
 
-struct UserContactsManager {
+class UserContactsManager {
+
+    private(set) static var `default`: UserContactsManager = UserContactsManager(fetchKeys: [.fullName, .phoneNumber, .avatar],
+                                                                 phoneNumberFormatter: PhoneNumberFormatter())
+
+    var contacts: [ContactData] = []
 
     let contactStore = CNContactStore()
     let fetchKeys: [UserContactFetchKey]
     let phoneNumberFormatter: PhoneNumberFormatter
+
+    static var isAvailable: Bool {
+        return CNContactStore.authorizationStatus(for: CNEntityType.contacts) == .authorized
+    }
+
+    init(fetchKeys: [UserContactFetchKey], phoneNumberFormatter: PhoneNumberFormatter) {
+        self.fetchKeys = fetchKeys
+        self.phoneNumberFormatter = phoneNumberFormatter
+    }
 
     func fetchContacts(_ completion: @escaping ([ContactData]) -> Void) {
         guard let contacts = try? getContacts() else {
@@ -45,12 +59,15 @@ struct UserContactsManager {
         }
 
         phoneNumberFormatter.getCompleted(from: phones) {
+            [weak self]
             formattedPhones in
 
             let result = contacts.enumerated().map { arg -> ContactData in
                 let name = arg.element.givenName + " " + arg.element.familyName
                 return ContactData(name: name, avatar: arg.element.thumbnailImageData, phoneNumbers: formattedPhones[arg.offset].compactMap({$0}))
             }
+
+            self?.contacts = result
 
             completion(result)
         }

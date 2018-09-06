@@ -61,13 +61,6 @@ class TransactionsHistoryViewController: FlowViewController, WalletNavigable, UI
         historyTableView?.insertSubview(topRefreshControl!, at: 0)
 
         topRefreshControl?.beginRefreshing()
-        contactsManager?.fetchContacts {
-            [weak self]
-            contacts in
-
-            self?.contactsData = contacts
-            self?.paginator?.fetchFirstPage()
-        }
 
         self.setupTableViewFooter()
 
@@ -174,6 +167,21 @@ class TransactionsHistoryViewController: FlowViewController, WalletNavigable, UI
                 self?.topRefreshControl?.endRefreshing()
             }
         })
+
+        if let contacts = contactsManager?.contacts {
+            if contacts.count == 0 {
+                contactsManager?.fetchContacts {
+                    [weak self]
+                    contacts in
+
+                    self?.contactsData = contacts
+                    self?.paginator?.fetchFirstPage()
+                }
+            } else {
+                self.contactsData = contacts
+                self.paginator?.fetchFirstPage()
+            }
+        }
     }
 
     func update(filterData: TransactionsFilterData) {
