@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import PromiseKit
 
 struct TransactionsGroupData {
 
@@ -30,4 +31,5 @@ struct TransactionsGroupData {
         self.transactions = transactions
     }
 
+    
 }

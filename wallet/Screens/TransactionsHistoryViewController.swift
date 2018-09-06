@@ -26,7 +26,6 @@ class TransactionsHistoryViewController: FlowViewController, WalletNavigable, UI
     private var topRefreshControl: UIRefreshControl?
     private var bottomActivityIndicator: UIActivityIndicatorView?
 
-    private var contactsLoaded: Bool = false
     private var contactsData: [ContactData] = []
 
     private var filterData: TransactionsFilterData = TransactionsFilterData()
@@ -41,14 +40,6 @@ class TransactionsHistoryViewController: FlowViewController, WalletNavigable, UI
         super.viewDidLoad()
 
         hideKeyboardOnTap()
-
-        contactsManager?.fetchContacts {
-            [weak self]
-            contacts in
-
-            self?.contactsData = contacts
-            self?.contactsLoaded = true
-        }
 
         let filterBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "filter"), style: .plain, target: self, action: #selector(filterButtonTouchUpInsideEvent(_:)))
         filterBarButtonItem.tintColor = nil
@@ -69,7 +60,18 @@ class TransactionsHistoryViewController: FlowViewController, WalletNavigable, UI
         topRefreshControl?.layer.zPosition = -2
         historyTableView?.insertSubview(topRefreshControl!, at: 0)
 
+        topRefreshControl?.beginRefreshing()
+        contactsManager?.fetchContacts {
+            [weak self]
+            contacts in
+
+            self?.contactsData = contacts
+            self?.paginator?.fetchFirstPage()
+        }
+
         self.setupTableViewFooter()
+
+        let formatter = PhoneNumberFormatter()
 
         self.paginator = Paginator<TransactionsGroupData>(pageSize: 15, fetchHandler: {
             [weak self]
@@ -85,7 +87,7 @@ class TransactionsHistoryViewController: FlowViewController, WalletNavigable, UI
 
             strongSelf.filterData.page = nextPage
             strongSelf.userAPI?.cancelTasks()
-            strongSelf.userAPI?.getTransactions(token: token, filter: strongSelf.filterData).done {
+            strongSelf.userAPI?.getTransactions(token: token, filter: strongSelf.filterData, phoneNumberFormatter: formatter, localContacts: strongSelf.contactsData).done {
                 page in
 
                 paginator.receivedResults(results: page.transactions, next: page.next ?? "")
@@ -172,9 +174,6 @@ class TransactionsHistoryViewController: FlowViewController, WalletNavigable, UI
                 self?.topRefreshControl?.endRefreshing()
             }
         })
-
-        self.topRefreshControl?.beginRefreshing()
-        self.paginator?.fetchFirstPage()
     }
 
     func update(filterData: TransactionsFilterData) {
@@ -239,7 +238,15 @@ class TransactionsHistoryViewController: FlowViewController, WalletNavigable, UI
 
         let data = provider.results[indexPath.section].transactions[indexPath.row]
 
-        var recipient: String = ""
+        var recipient: String = data.participant
+
+        if let number = data.participantPhoneNumber {
+            recipient = number.formattedString
+        }
+
+        if let contact = data.contact {
+            recipient = contact.name
+        }
 
 //        if let phone = data.participant.phone {
 //            recipient = phone.formattedString
@@ -254,7 +261,7 @@ class TransactionsHistoryViewController: FlowViewController, WalletNavigable, UI
 //            recipient = data.participant.address ?? ""
 //        }
 
-        cell.configure(image: data.coin.image, status: data.status.formatted, coinShort: data.coin.short, recipient: data.participant.formatted, amount: data.amount.formatted(currency: .original), fiatAmount: data.amount.description(currency: .usd), direction: data.direction)
+        cell.configure(image: data.coin.image, status: data.status.formatted, coinShort: data.coin.short, recipient: recipient, amount: data.amount.formatted(currency: .original), fiatAmount: data.amount.description(currency: .usd), direction: data.direction)
 
         return cell
     }

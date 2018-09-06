@@ -32,7 +32,37 @@ class PhoneNumberFormatter {
         self.number = number
     }
 
-    func getCompleted(from array: [[String]], completion: @escaping ([[PhoneNumber]]) -> Void ){
+    func getCompleted(from array: [String], completion: @escaping ([PhoneNumber?]) -> Void) {
+        DispatchQueue.global(qos: .background).async {
+            [weak self] in
+
+            guard let strongSelf = self else {
+                return
+            }
+
+            let parsed = strongSelf.formatter.parse(array, ignoreType: true, shouldReturnFailedEmptyNumbers: true)
+            let result: [PhoneNumber?] = parsed.map {
+                if $0.notParsed() {
+                    return nil
+                } else {
+                    let united = String($0.countryCode) + String($0.nationalNumber)
+                    let unitedFormatted = PhoneNumberFormatter(united).formatted
+
+                    let object = PhoneNumber(numberString: united,
+                                             formattedString: unitedFormatted,
+                                             code: $0.countryCode,
+                                             region: strongSelf.formatter.mainCountry(forCode: $0.countryCode))
+                    return object
+                }
+            }
+
+            DispatchQueue.main.async {
+                completion(result)
+            }
+        }
+    }
+
+    func getCompleted(from array: [[String]], completion: @escaping ([[PhoneNumber?]]) -> Void) {
         DispatchQueue.global(qos: .background).async {
             [weak self] in
 
@@ -51,7 +81,7 @@ class PhoneNumberFormatter {
             }
 
             let parsed = strongSelf.formatter.parse(prepared, ignoreType: true, shouldReturnFailedEmptyNumbers: true)
-            var result = [[PhoneNumber]](repeating: [], count: array.count)
+            var result = [[PhoneNumber?]](repeating: [], count: array.count)
 
             for i in parsed.enumerated() {
                 let index = counters[i.offset]!
@@ -65,6 +95,8 @@ class PhoneNumberFormatter {
                                              code: element.countryCode,
                                              region: strongSelf.formatter.mainCountry(forCode: element.countryCode))
                     result[index].append(object)
+                } else {
+                    result[index].append(nil)
                 }
             }
 

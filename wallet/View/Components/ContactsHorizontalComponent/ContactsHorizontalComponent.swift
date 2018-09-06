@@ -112,7 +112,10 @@ class ContactsHorizontalComponent: Component, UICollectionViewDataSource, UIColl
 
     private func componentWasPrepared() {
         titleLabel?.text = title
-        contactsCollectionView?.reloadData()
+        contactsCollectionView?.performBatchUpdates({ [weak self] in
+            let indexSet = IndexSet(integersIn: 0...0)
+            self?.contactsCollectionView?.reloadSections(indexSet)
+        }, completion: nil)
     }
 
     // MARK: - UICollectionViewDataSource

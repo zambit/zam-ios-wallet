@@ -68,29 +68,20 @@ class HomeViewController: DetailOffsetPresentationViewController, WalletsViewCon
 
         loadData()
 
-        contactsComponent?.contactsCollectionView?.beginLoading()
-        contactsManager?.fetchContacts {
-            [weak self]
-            contacts in
-
-            if !contacts.isEmpty {
-
-                self?.contactsComponent?.delegate = self
-                self?.contactsComponent?.contactsCollectionView?.endLoading()
-                self?.contactsComponent?.prepare(contacts: contacts)
-                self?.detailViewOffset = 350
-
-            } else {
-                self?.detailViewOffset = 200
-
-                if self?.currentState == .closed {
-                    self?.animate(to: .closed)
-                }
-            }
-        }
-
         navigationController?.isNavigationBarHidden = true
     }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        if isContactsLoading {
+            contactsComponent?.contactsCollectionView?.beginLoading()
+        } else {
+            contactsComponent?.contactsCollectionView?.endLoading()
+        }
+    }
+
+    private var isContactsLoading: Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -99,6 +90,31 @@ class HomeViewController: DetailOffsetPresentationViewController, WalletsViewCon
         setupDefaultStyle()
 
         hideKeyboardOnTap()
+
+        isContactsLoading = true
+
+        contactsManager?.fetchContacts {
+            [weak self]
+            contacts in
+
+            self?.isContactsLoading = false
+
+            if !contacts.isEmpty {
+                self?.contactsComponent?.delegate = self
+                self?.contactsComponent?.contactsCollectionView?.endLoading()
+                self?.contactsComponent?.prepare(contacts: contacts)
+                self?.detailViewOffset = 350
+
+            } else {
+
+                self?.contactsComponent?.contactsCollectionView?.endLoading()
+                self?.detailViewOffset = 200
+
+                if self?.currentState == .closed {
+                    self?.animate(to: .closed)
+                }
+            }
+        }
 
         switch UIDevice.current.screenType {
         case .small, .extraSmall:

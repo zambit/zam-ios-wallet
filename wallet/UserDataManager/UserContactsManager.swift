@@ -32,7 +32,6 @@ struct UserContactsManager {
     let fetchKeys: [UserContactFetchKey]
     let phoneNumberFormatter: PhoneNumberFormatter
 
-
     func fetchContacts(_ completion: @escaping ([ContactData]) -> Void) {
         guard let contacts = try? getContacts() else {
             return completion([])
@@ -50,7 +49,7 @@ struct UserContactsManager {
 
             let result = contacts.enumerated().map { arg -> ContactData in
                 let name = arg.element.givenName + " " + arg.element.familyName
-                return ContactData(name: name, avatar: arg.element.thumbnailImageData, phoneNumbers: formattedPhones[arg.offset])
+                return ContactData(name: name, avatar: arg.element.thumbnailImageData, phoneNumbers: formattedPhones[arg.offset].compactMap({$0}))
             }
 
             completion(result)
