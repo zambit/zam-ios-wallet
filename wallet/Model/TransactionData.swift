@@ -14,15 +14,23 @@ enum TransactionParticipant {
     case none
 
     var formatted: String {
-        if let phone = phone {
-            return phone.formattedString
+        switch self {
+        case .sender(let sender):
+            return sender
+        case .recipient(let recipient):
+            return recipient
+        case .none:
+            return "-"
         }
-
-        if let address = address {
-            return address
-        }
-
-        return "-"
+//        if let phone = phone {
+//            return phone.formattedString
+//        }
+//
+//        if let address = address {
+//            return address
+//        }
+//
+//        return "-"
     }
 
     var phone: PhoneNumber? {
@@ -65,6 +73,15 @@ struct TransactionData {
     let coin: CoinType
     let participant: TransactionParticipant
     let amount: BalanceData
+
+    init(id: String, direction: DirectionType, status: TransactionStatus, coin: CoinType, participant: TransactionParticipant, amount: BalanceData) {
+        self.id = id
+        self.direction = direction
+        self.status = status
+        self.coin = coin
+        self.participant = participant
+        self.amount = amount
+    }
 
     init(codable: CodableTransaction) throws {
         self.id = codable.id

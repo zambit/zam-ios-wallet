@@ -39,6 +39,8 @@ extension UIView {
 extension UIView {
 
     func beginLoading() {
+        endLoading()
+
         let rect = CGRect(x: 0.0, y: 0.0, width: 20.0, height: 20.0)
         let loadingView = UIView(frame: rect)
 

@@ -26,6 +26,7 @@ class TransactionsHistoryViewController: FlowViewController, WalletNavigable, UI
     private var topRefreshControl: UIRefreshControl?
     private var bottomActivityIndicator: UIActivityIndicatorView?
 
+    private var contactsLoaded: Bool = false
     private var contactsData: [ContactData] = []
 
     private var filterData: TransactionsFilterData = TransactionsFilterData()
@@ -41,7 +42,13 @@ class TransactionsHistoryViewController: FlowViewController, WalletNavigable, UI
 
         hideKeyboardOnTap()
 
-        //self.contactsData = contactsManager?.contacts ?? []
+        contactsManager?.fetchContacts {
+            [weak self]
+            contacts in
+
+            self?.contactsData = contacts
+            self?.contactsLoaded = true
+        }
 
         let filterBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "filter"), style: .plain, target: self, action: #selector(filterButtonTouchUpInsideEvent(_:)))
         filterBarButtonItem.tintColor = nil
@@ -232,7 +239,7 @@ class TransactionsHistoryViewController: FlowViewController, WalletNavigable, UI
 
         let data = provider.results[indexPath.section].transactions[indexPath.row]
 
-        //var recipient: String = data.participant.formatted
+        var recipient: String = ""
 
 //        if let phone = data.participant.phone {
 //            recipient = phone.formattedString
@@ -243,9 +250,11 @@ class TransactionsHistoryViewController: FlowViewController, WalletNavigable, UI
 //            }) {
 //                recipient = recipientContact.name
 //            }
+//        } else {
+//            recipient = data.participant.address ?? ""
 //        }
 
-        cell.configure(image: data.coin.image, status: data.status.formatted, coinShort: data.coin.short, recipient: "", amount: data.amount.formatted(currency: .original), fiatAmount: data.amount.description(currency: .usd), direction: data.direction)
+        cell.configure(image: data.coin.image, status: data.status.formatted, coinShort: data.coin.short, recipient: data.participant.formatted, amount: data.amount.formatted(currency: .original), fiatAmount: data.amount.description(currency: .usd), direction: data.direction)
 
         return cell
     }

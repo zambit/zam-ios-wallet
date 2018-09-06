@@ -68,6 +68,27 @@ class HomeViewController: DetailOffsetPresentationViewController, WalletsViewCon
 
         loadData()
 
+        contactsComponent?.contactsCollectionView?.beginLoading()
+        contactsManager?.fetchContacts {
+            [weak self]
+            contacts in
+
+            if !contacts.isEmpty {
+
+                self?.contactsComponent?.delegate = self
+                self?.contactsComponent?.contactsCollectionView?.endLoading()
+                self?.contactsComponent?.prepare(contacts: contacts)
+                self?.detailViewOffset = 350
+
+            } else {
+                self?.detailViewOffset = 200
+
+                if self?.currentState == .closed {
+                    self?.animate(to: .closed)
+                }
+            }
+        }
+
         navigationController?.isNavigationBarHidden = true
     }
 
@@ -99,18 +120,6 @@ class HomeViewController: DetailOffsetPresentationViewController, WalletsViewCon
         detailTopGestureView?.addGestureRecognizer(panRecognizer)
 
         walletsContainerView?.isUserInteractionEnabled = true
-
-        let contacts = contactsManager?.contacts ?? []
-
-        if !contacts.isEmpty {
-            contactsComponent?.prepare(title: "Send by phone", contacts: contacts)
-            contactsComponent?.delegate = self
-            detailViewBottomConstraint?.constant = 350
-            detailViewOffset = 350
-        } else {
-            detailViewBottomConstraint?.constant = 200
-            detailViewOffset = 200
-        }
 
         if let embeded = embededViewController {
             walletsContainerView?.set(viewController: embeded, owner: self)

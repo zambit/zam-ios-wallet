@@ -67,6 +67,10 @@ class DetailOffsetPresentationViewController: FlowViewController, WalletNavigabl
      */
     private var animationProgress: [CGFloat] = []
 
+    func animate(to state: State) {
+        let animators = createTransitionAnimatorsIfNeeded(to: state, duration: 1)
+        animateTransitionsIfNeeded(animators)
+    }
 
     /**
      State changing event handler. Provide access for observing currentState property.
