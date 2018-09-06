@@ -47,29 +47,50 @@ class UserContactsManager {
     }
 
     func fetchContacts(_ completion: @escaping ([ContactData]) -> Void) {
-        guard let contacts = try? getContacts() else {
-            return completion([])
-        }
+        let success: () -> Void = {
+            [weak self] in
 
-        let phones = contacts.map {
-            contact in
-            contact.phoneNumbers.compactMap {
-                $0.value.stringValue
+            guard let strongSelf = self else {
+                return
+            }
+
+            guard let contacts = try? strongSelf.getContacts() else {
+                return completion([])
+            }
+
+            let phones = contacts.map {
+                contact in
+                contact.phoneNumbers.compactMap {
+                    $0.value.stringValue
+                }
+            }
+
+            strongSelf.phoneNumberFormatter.getCompleted(from: phones) {
+                formattedPhones in
+
+                let result = contacts.enumerated().map { arg -> ContactData in
+                    let name = arg.element.givenName + " " + arg.element.familyName
+                    return ContactData(name: name, avatar: arg.element.thumbnailImageData, phoneNumbers: formattedPhones[arg.offset].compactMap({$0}))
+                }
+
+                strongSelf.contacts = result
+
+                completion(result)
             }
         }
 
-        phoneNumberFormatter.getCompleted(from: phones) {
-            [weak self]
-            formattedPhones in
-
-            let result = contacts.enumerated().map { arg -> ContactData in
-                let name = arg.element.givenName + " " + arg.element.familyName
-                return ContactData(name: name, avatar: arg.element.thumbnailImageData, phoneNumbers: formattedPhones[arg.offset].compactMap({$0}))
+        if !UserContactsManager.isAvailable {
+            contactStore.requestAccess(for: CNEntityType.contacts) {
+                [weak self]
+                (access, accessError) in
+                if access {
+                    success()
+                }
+                else {
+                    self?.contacts = []
+                    completion([])
+                }
             }
-
-            self?.contacts = result
-
-            completion(result)
         }
     }
 
