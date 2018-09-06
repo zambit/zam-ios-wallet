@@ -36,8 +36,18 @@ struct UserContactsManager {
             return []
         }
 
-        return contacts.map {
-            ContactData(contact: $0)
+        let phones = contacts.map {
+            contact in
+            contact.phoneNumbers.compactMap {
+                $0.value.stringValue
+            }
+        }
+
+        let formattedPhones = PhoneNumberFormatter().getCompleted(from: phones)
+
+        return contacts.enumerated().map { (index, contact) in
+            let name = contact.givenName + " " + contact.familyName
+            return ContactData(name: name, avatar: contact.thumbnailImageData, phoneNumbers: formattedPhones[index])
         }
     }
 

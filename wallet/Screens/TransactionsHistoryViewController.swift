@@ -41,7 +41,7 @@ class TransactionsHistoryViewController: FlowViewController, WalletNavigable, UI
 
         hideKeyboardOnTap()
 
-        contactsData = contactsManager?.contacts ?? []
+        //self.contactsData = contactsManager?.contacts ?? []
 
         let filterBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "filter"), style: .plain, target: self, action: #selector(filterButtonTouchUpInsideEvent(_:)))
         filterBarButtonItem.tintColor = nil
@@ -232,19 +232,20 @@ class TransactionsHistoryViewController: FlowViewController, WalletNavigable, UI
 
         let data = provider.results[indexPath.section].transactions[indexPath.row]
 
-        var recipient: String = data.participant.formatted
-        if let recipientContact = contactsData.first(where: {
-            contact in
+        //var recipient: String = data.participant.formatted
 
-            contact.phoneNumbers.contains(where: {
-                data.participant.formatted == "+\($0.numberString)"
+//        if let phone = data.participant.phone {
+//            recipient = phone.formattedString
+//
+//            if let recipientContact = contactsData.first(where: {
+//                contact in
+//                contact.phoneNumbers.contains(phone)
+//            }) {
+//                recipient = recipientContact.name
+//            }
+//        }
 
-            })
-        }) {
-            recipient = recipientContact.name
-        }
-
-        cell.configure(image: data.coin.image, status: data.status.formatted, coinShort: data.coin.short, recipient: recipient, amount: data.amount.formatted(currency: .original), fiatAmount: data.amount.description(currency: .usd), direction: data.direction)
+        cell.configure(image: data.coin.image, status: data.status.formatted, coinShort: data.coin.short, recipient: "", amount: data.amount.formatted(currency: .original), fiatAmount: data.amount.description(currency: .usd), direction: data.direction)
 
         return cell
     }

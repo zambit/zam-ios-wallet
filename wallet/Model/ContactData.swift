@@ -24,4 +24,10 @@ struct ContactData {
             return phoneNumber.completed
         }
     }
+
+    init(name: String, avatar: Data?, phoneNumbers: [PhoneNumber]) {
+        self.name = name
+        self.avatarData = avatar
+        self.phoneNumbers = phoneNumbers
+    }
 }

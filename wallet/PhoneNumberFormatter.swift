@@ -9,11 +9,11 @@
 import Foundation
 import PhoneNumberKit
 
-struct PhoneNumber {
-    public let numberString: String
-    public let formattedString: String
-    public let code: UInt64
-    public let region: String?
+struct PhoneNumber: Equatable {
+    let numberString: String
+    let formattedString: String
+    let code: UInt64
+    let region: String?
 }
 
 class PhoneNumberFormatter {
@@ -24,12 +24,44 @@ class PhoneNumberFormatter {
 
     private var _number: String?
 
-    init(_ number: String, withPrefix: Bool = true) {
+    init(_ number: String? = nil, withPrefix: Bool = true) {
         self.formatter = PhoneNumberKit()
         self.partialFormatter = PartialFormatter(phoneNumberKit: formatter, withPrefix: withPrefix)
         self.allowedCharacters = CharacterSet(charactersIn: "1234567890")
 
         self.number = number
+    }
+
+    func getCompleted(from array: [[String]]) -> [[PhoneNumber]] {
+        var counters: [Int: Int] = [:]
+        var prepared: [String] = []
+
+        for i in array.enumerated() {
+            for j in i.element {
+                prepared.append(j)
+                counters[prepared.count - 1] = i.offset
+            }
+        }
+
+        let parsed = formatter.parse(prepared, ignoreType: true, shouldReturnFailedEmptyNumbers: true)
+        var result = [[PhoneNumber]](repeating: [], count: array.count)
+
+        for i in parsed.enumerated() {
+            let index = counters[i.offset]!
+            let element = i.element
+            if !element.notParsed() {
+                let united = String(element.countryCode) + String(element.nationalNumber)
+                let unitedFormatted = PhoneNumberFormatter(united).formatted
+
+                let object = PhoneNumber(numberString: united,
+                                         formattedString: unitedFormatted,
+                                         code: element.countryCode,
+                                         region: formatter.mainCountry(forCode: element.countryCode))
+                result[index].append(object)
+            }
+        }
+
+        return result
     }
 
     var completed: PhoneNumber? {

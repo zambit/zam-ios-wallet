@@ -14,6 +14,18 @@ enum TransactionParticipant {
     case none
 
     var formatted: String {
+        if let phone = phone {
+            return phone.formattedString
+        }
+
+        if let address = address {
+            return address
+        }
+
+        return "-"
+    }
+
+    var phone: PhoneNumber? {
         var data: String
 
         switch self {
@@ -22,15 +34,25 @@ enum TransactionParticipant {
         case .recipient(let recipient):
             data = recipient
         case .none:
-            return "-"
+            return nil
         }
 
-        let phone = PhoneNumberFormatter(data)
+        let phone = PhoneNumberFormatter(data).completed
+        return phone
+    }
 
-        if phone.isValid {
-            return phone.formatted
-        } else {
-            return data
+    var address: String? {
+        guard phone == nil else {
+            return nil
+        }
+
+        switch self {
+        case .sender(let sender):
+            return sender
+        case .recipient(let recipient):
+            return recipient
+        case .none:
+            return "-"
         }
     }
 }
