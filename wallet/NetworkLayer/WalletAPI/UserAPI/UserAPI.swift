@@ -221,7 +221,7 @@ struct UserAPI: NetworkService {
         }
     }
 
-    func getTransactions(token: String, filter: TransactionsFilterData = TransactionsFilterData()) -> Promise<GroupedTransactionsPageData>  {
+    func getTransactions(token: String, filter: TransactionsFilterData = TransactionsFilterData(), phoneNumberFormatter: PhoneNumberFormatter? = nil, localContacts: [ContactData]? = nil) -> Promise<GroupedTransactionsPageData>  {
         return provider.execute(.getTransactions(token: token, coin: filter.coin?.rawValue, walletId: filter.walletId, recipient: filter.recipient, direction: filter.direction?.rawValue, fromTime: filter.fromTime, untilTime: filter.untilTime, page: filter.page, count: filter.count, group: filter.group.rawValue))
             .then {
                 (response: Response) -> Promise<GroupedTransactionsPageData> in
@@ -233,7 +233,58 @@ struct UserAPI: NetworkService {
                         let success: (CodableSuccessTransactionsGroupedSearchingResponse) -> Void = { s in
                             do {
                                 let page = try GroupedTransactionsPageData(codable: s.data)
-                                seal.fulfill(page)
+
+                                guard let phoneNumberFormatter = phoneNumberFormatter else {
+                                    seal.fulfill(page)
+                                    return
+                                }
+
+                                DispatchQueue.global(qos: .default).async {
+
+                                    let input: [[String]] = page.transactions.map {
+                                        group in
+                                        group.transactions.map {
+                                            $0.participant
+                                        }
+                                    }
+
+                                    phoneNumberFormatter.getCompleted(from: input) {
+                                        parsed in
+
+                                        var newGroups: [TransactionsGroupData] = []
+
+                                        for (i, phones) in parsed.enumerated() {
+
+                                            var newTransactions: [TransactionData] = []
+
+                                            for (j, phone) in phones.enumerated() {
+                                                var newTransaction = page.transactions[i].transactions[j]
+                                                newTransaction.participantPhoneNumber = phone
+
+                                                if let phone = phone,
+                                                    let contacts = localContacts,
+                                                    let phoneContact = contacts.first(where: {
+                                                        $0.phoneNumbers.contains(phone)
+                                                    }) {
+                                                    newTransaction.contact = phoneContact
+                                                }
+
+                                                newTransactions.append(newTransaction)
+                                            }
+
+                                            let newGroup = TransactionsGroupData(dateInterval: page.transactions[i].dateInterval,
+                                                                                 amount: page.transactions[i].amount,
+                                                                                 transactions: newTransactions)
+                                            newGroups.append(newGroup)
+                                        }
+
+                                        let newPage = GroupedTransactionsPageData(next: page.next, transactions: newGroups)
+
+                                        DispatchQueue.main.async {
+                                            seal.fulfill(newPage)
+                                        }
+                                    }
+                                }
                             } catch let error {
                                 seal.reject(error)
                             }

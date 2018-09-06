@@ -8,21 +8,10 @@
 
 import Foundation
 
-enum TransactionParticipant {
-    case sender(String)
-    case recipient(String)
+enum TransactionParticipantType {
+    case sender
+    case recipient
     case none
-
-    var formatted: String {
-        switch self {
-        case .sender(let sender):
-            return sender
-        case .recipient(let recipient):
-            return recipient
-        case .none:
-            return "-"
-        }
-    }
 }
 
 struct TransactionData {
@@ -31,8 +20,22 @@ struct TransactionData {
     let direction: DirectionType
     let status: TransactionStatus
     let coin: CoinType
-    let participant: TransactionParticipant
+    let participantType: TransactionParticipantType
+    let participant: String
     let amount: BalanceData
+
+    var participantPhoneNumber: PhoneNumber?
+    var contact: ContactData?
+
+    init(id: String, direction: DirectionType, status: TransactionStatus, coin: CoinType, participantType: TransactionParticipantType, participant: String, amount: BalanceData) {
+        self.id = id
+        self.direction = direction
+        self.status = status
+        self.coin = coin
+        self.participantType = participantType
+        self.participant = participant
+        self.amount = amount
+    }
 
     init(codable: CodableTransaction) throws {
         self.id = codable.id
@@ -53,11 +56,14 @@ struct TransactionData {
         self.coin = coin
 
         if let recipient = codable.recipient {
-            self.participant = .recipient(recipient)
-        } else if let sender = codable.sender{
-            self.participant = .sender(sender)
+            self.participantType = .recipient
+            self.participant = recipient
+        } else if let sender = codable.sender {
+            self.participantType = .sender
+            self.participant = sender
         } else {
-            self.participant = .none
+            self.participantType = .none
+            self.participant = "-"
         }
 
         do {

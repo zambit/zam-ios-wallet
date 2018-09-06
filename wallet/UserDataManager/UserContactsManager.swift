@@ -30,14 +30,29 @@ struct UserContactsManager {
 
     let contactStore = CNContactStore()
     let fetchKeys: [UserContactFetchKey]
+    let phoneNumberFormatter: PhoneNumberFormatter
 
-    var contacts: [ContactData] {
+    func fetchContacts(_ completion: @escaping ([ContactData]) -> Void) {
         guard let contacts = try? getContacts() else {
-            return []
+            return completion([])
         }
 
-        return contacts.map {
-            ContactData(contact: $0)
+        let phones = contacts.map {
+            contact in
+            contact.phoneNumbers.compactMap {
+                $0.value.stringValue
+            }
+        }
+
+        phoneNumberFormatter.getCompleted(from: phones) {
+            formattedPhones in
+
+            let result = contacts.enumerated().map { arg -> ContactData in
+                let name = arg.element.givenName + " " + arg.element.familyName
+                return ContactData(name: name, avatar: arg.element.thumbnailImageData, phoneNumbers: formattedPhones[arg.offset].compactMap({$0}))
+            }
+
+            completion(result)
         }
     }
 

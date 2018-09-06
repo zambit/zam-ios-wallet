@@ -132,6 +132,8 @@
 		8C713B2E213FCF1D00AC2E25 /* WalletTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C713B2D213FCF1D00AC2E25 /* WalletTabBarController.swift */; };
 		8C713B30213FD4A500AC2E25 /* WalletTabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C713B2F213FD4A500AC2E25 /* WalletTabBarItem.swift */; };
 		8C713B32213FE33600AC2E25 /* EmptyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C713B31213FE33600AC2E25 /* EmptyViewController.swift */; };
+		8C713B34214024CE00AC2E25 /* PhoneNumberFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C713B33214024CE00AC2E25 /* PhoneNumberFormatter.swift */; };
+		8C713B362140327600AC2E25 /* StringProtocol+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C713B352140327600AC2E25 /* StringProtocol+Extensions.swift */; };
 		8CA2188F2121D97C0063C188 /* DecimalKeyboardComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CA2188E2121D97B0063C188 /* DecimalKeyboardComponent.xib */; };
 		8CA218922122E8D70063C188 /* SendMoneyComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CA218912122E8D70063C188 /* SendMoneyComponent.xib */; };
 		8CA218942122EAC90063C188 /* SendMoneyComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA218932122EAC90063C188 /* SendMoneyComponent.swift */; };
@@ -366,6 +368,8 @@
 		8C713B2D213FCF1D00AC2E25 /* WalletTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletTabBarController.swift; sourceTree = "<group>"; };
 		8C713B2F213FD4A500AC2E25 /* WalletTabBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletTabBarItem.swift; sourceTree = "<group>"; };
 		8C713B31213FE33600AC2E25 /* EmptyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyViewController.swift; sourceTree = "<group>"; };
+		8C713B33214024CE00AC2E25 /* PhoneNumberFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberFormatter.swift; sourceTree = "<group>"; };
+		8C713B352140327600AC2E25 /* StringProtocol+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StringProtocol+Extensions.swift"; sourceTree = "<group>"; };
 		8CA2188E2121D97B0063C188 /* DecimalKeyboardComponent.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DecimalKeyboardComponent.xib; sourceTree = "<group>"; };
 		8CA218912122E8D70063C188 /* SendMoneyComponent.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SendMoneyComponent.xib; sourceTree = "<group>"; };
 		8CA218932122EAC90063C188 /* SendMoneyComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMoneyComponent.swift; sourceTree = "<group>"; };
@@ -750,6 +754,7 @@
 			isa = PBXGroup;
 			children = (
 				8C34616A20EF8FA700746724 /* AppDelegate.swift */,
+				8C713B33214024CE00AC2E25 /* PhoneNumberFormatter.swift */,
 				8C04BC2B211C4FB200E90090 /* Fonts */,
 				8C333D6D210EFC7900949AC0 /* Files */,
 				8C60883E2110632100470411 /* UserDataManager */,
@@ -1126,6 +1131,7 @@
 				8CA219112134259F0063C188 /* Date+Extensions.swift */,
 				8CA2191321342ABC0063C188 /* DateInterval+Extensions.swift */,
 				8C333D41210A094500949AC0 /* UIColor+Additions.swift */,
+				8C713B352140327600AC2E25 /* StringProtocol+Extensions.swift */,
 				8CA218EA212DC2DB0063C188 /* UIColor+Extensions.swift */,
 				8C333D47210B0F3700949AC0 /* UIViewController+Extensions.swift */,
 				8C333D3F210A08A600949AC0 /* UIView+Extensions.swift */,
@@ -1345,7 +1351,7 @@
 				"${BUILT_PRODUCTS_DIR}/ESTabBarController-swift/ESTabBarController_swift.framework",
 				"${BUILT_PRODUCTS_DIR}/FlagKit/FlagKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Hero/Hero.framework",
-				"${BUILT_PRODUCTS_DIR}/LayoutKit/LayoutKit.framework",
+				"${BUILT_PRODUCTS_DIR}/PhoneNumberKit/PhoneNumberKit.framework",
 				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -1353,7 +1359,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ESTabBarController_swift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FlagKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Hero.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LayoutKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PhoneNumberKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1443,6 +1449,7 @@
 				8CF5F94821147A870083B36A /* CreatePinViewController.swift in Sources */,
 				8C09192D21061F3600703224 /* ControllerHelper.swift in Sources */,
 				8CA218E9212DB0210063C188 /* RoundedImageView.swift in Sources */,
+				8C713B34214024CE00AC2E25 /* PhoneNumberFormatter.swift in Sources */,
 				8CA218CD2126F23B0063C188 /* UserData.swift in Sources */,
 				8CA218D0212737210063C188 /* LargeSendButton.swift in Sources */,
 				8CF41D892135973F006D4FE2 /* RectItemComponent.swift in Sources */,
@@ -1521,6 +1528,7 @@
 				8CA218B821248FA50063C188 /* SendMoneyAmountComponent.swift in Sources */,
 				8C09195F21076B5D00703224 /* RecoveryAPI.swift in Sources */,
 				8C713B162138068600AC2E25 /* DepositMoneyAddressComponent.swift in Sources */,
+				8C713B362140327600AC2E25 /* StringProtocol+Extensions.swift in Sources */,
 				8C34616B20EF8FA700746724 /* AppDelegate.swift in Sources */,
 				8CA2191821343FE10063C188 /* IllustrationalPlaceholder.swift in Sources */,
 				8C333D44210B001500949AC0 /* OnboardingLargeButton.swift in Sources */,

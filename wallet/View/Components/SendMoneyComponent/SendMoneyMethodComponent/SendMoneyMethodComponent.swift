@@ -100,8 +100,7 @@ class SendMoneyMethodComponent: Component, SegmentedControlComponentDelegate, Ph
         guard let phone = recipient.phoneNumbers.first else {
             return
         }
-        
-        phoneNumberEnteringHandler?.explicityHandleNumber(phone)
+        phoneNumberEnteringHandler?.explicityHandleNumber(phone.formattedString)
     }
 
     func prepare(address: String) {

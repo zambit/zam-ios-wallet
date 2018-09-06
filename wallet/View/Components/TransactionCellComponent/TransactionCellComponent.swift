@@ -70,4 +70,8 @@ class TransactionCellComponent: CellComponent {
         fiatAmountLabel.text = String(describing: fiatAmount)
     }
 
+    func update(recipient: String) {
+        recipientLabel.text = recipient
+    }
+
 }

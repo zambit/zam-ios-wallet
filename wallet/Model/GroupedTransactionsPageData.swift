@@ -20,4 +20,9 @@ struct GroupedTransactionsPageData {
             try TransactionsGroupData(codable: $0)
         } ?? []
     }
+
+    init(next: String?, transactions: [TransactionsGroupData]) {
+        self.next = next
+        self.transactions = transactions
+    }
 }

@@ -20,11 +20,11 @@ class ContactsHorizontalComponent: Component, UICollectionViewDataSource, UIColl
 
     @IBOutlet private var titleLabel: UILabel?
     @IBOutlet var searchTextField: SearchTextField?
-    @IBOutlet private var contactsCollectionView: UICollectionView?
+    @IBOutlet var contactsCollectionView: UICollectionView?
 
     private var contacts: [ContactData] = []
     private var filteredContacts: [ContactData] = []
-    private var title: String = ""
+    private var title: String = "Send by phone"
 
     private var defaultRightOffsetConstant: CGFloat = 8.0
     private var defaultLeftOffsetConstant: CGFloat = 16.0
@@ -73,13 +73,6 @@ class ContactsHorizontalComponent: Component, UICollectionViewDataSource, UIColl
         contactsCollectionView?.clipsToBounds = false
     }
 
-    func prepare(title: String, contacts: [ContactData]) {
-        prepare(contacts: contacts)
-
-        self.title = title
-        componentWasPrepared()
-    }
-
     func prepare(contacts: [ContactData]) {
         self.contacts = contacts
         self.filteredContacts = contacts
@@ -119,7 +112,10 @@ class ContactsHorizontalComponent: Component, UICollectionViewDataSource, UIColl
 
     private func componentWasPrepared() {
         titleLabel?.text = title
-        contactsCollectionView?.reloadData()
+        contactsCollectionView?.performBatchUpdates({ [weak self] in
+            let indexSet = IndexSet(integersIn: 0...0)
+            self?.contactsCollectionView?.reloadSections(indexSet)
+        }, completion: nil)
     }
 
     // MARK: - UICollectionViewDataSource

@@ -71,6 +71,18 @@ class HomeViewController: DetailOffsetPresentationViewController, WalletsViewCon
         navigationController?.isNavigationBarHidden = true
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        if isContactsLoading {
+            contactsComponent?.contactsCollectionView?.beginLoading()
+        } else {
+            contactsComponent?.contactsCollectionView?.endLoading()
+        }
+    }
+
+    private var isContactsLoading: Bool = false
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -78,6 +90,31 @@ class HomeViewController: DetailOffsetPresentationViewController, WalletsViewCon
         setupDefaultStyle()
 
         hideKeyboardOnTap()
+
+        isContactsLoading = true
+
+        contactsManager?.fetchContacts {
+            [weak self]
+            contacts in
+
+            self?.isContactsLoading = false
+
+            if !contacts.isEmpty {
+                self?.contactsComponent?.delegate = self
+                self?.contactsComponent?.contactsCollectionView?.endLoading()
+                self?.contactsComponent?.prepare(contacts: contacts)
+                self?.detailViewOffset = 350
+
+            } else {
+
+                self?.contactsComponent?.contactsCollectionView?.endLoading()
+                self?.detailViewOffset = 200
+
+                if self?.currentState == .closed {
+                    self?.animate(to: .closed)
+                }
+            }
+        }
 
         switch UIDevice.current.screenType {
         case .small, .extraSmall:
@@ -99,18 +136,6 @@ class HomeViewController: DetailOffsetPresentationViewController, WalletsViewCon
         detailTopGestureView?.addGestureRecognizer(panRecognizer)
 
         walletsContainerView?.isUserInteractionEnabled = true
-
-        let contacts = contactsManager?.contacts ?? []
-
-        if !contacts.isEmpty {
-            contactsComponent?.prepare(title: "Send by phone", contacts: contacts)
-            contactsComponent?.delegate = self
-            detailViewBottomConstraint?.constant = 350
-            detailViewOffset = 350
-        } else {
-            detailViewBottomConstraint?.constant = 200
-            detailViewOffset = 200
-        }
 
         if let embeded = embededViewController {
             walletsContainerView?.set(viewController: embeded, owner: self)

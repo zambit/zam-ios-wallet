@@ -41,8 +41,6 @@ class TransactionsHistoryViewController: FlowViewController, WalletNavigable, UI
 
         hideKeyboardOnTap()
 
-        contactsData = contactsManager?.contacts ?? []
-
         let filterBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "filter"), style: .plain, target: self, action: #selector(filterButtonTouchUpInsideEvent(_:)))
         filterBarButtonItem.tintColor = nil
         navigationItem.setRightBarButton(filterBarButtonItem, animated: false)
@@ -62,7 +60,18 @@ class TransactionsHistoryViewController: FlowViewController, WalletNavigable, UI
         topRefreshControl?.layer.zPosition = -2
         historyTableView?.insertSubview(topRefreshControl!, at: 0)
 
+        topRefreshControl?.beginRefreshing()
+        contactsManager?.fetchContacts {
+            [weak self]
+            contacts in
+
+            self?.contactsData = contacts
+            self?.paginator?.fetchFirstPage()
+        }
+
         self.setupTableViewFooter()
+
+        let formatter = PhoneNumberFormatter()
 
         self.paginator = Paginator<TransactionsGroupData>(pageSize: 15, fetchHandler: {
             [weak self]
@@ -78,7 +87,7 @@ class TransactionsHistoryViewController: FlowViewController, WalletNavigable, UI
 
             strongSelf.filterData.page = nextPage
             strongSelf.userAPI?.cancelTasks()
-            strongSelf.userAPI?.getTransactions(token: token, filter: strongSelf.filterData).done {
+            strongSelf.userAPI?.getTransactions(token: token, filter: strongSelf.filterData, phoneNumberFormatter: formatter, localContacts: strongSelf.contactsData).done {
                 page in
 
                 paginator.receivedResults(results: page.transactions, next: page.next ?? "")
@@ -165,9 +174,6 @@ class TransactionsHistoryViewController: FlowViewController, WalletNavigable, UI
                 self?.topRefreshControl?.endRefreshing()
             }
         })
-
-        self.topRefreshControl?.beginRefreshing()
-        self.paginator?.fetchFirstPage()
     }
 
     func update(filterData: TransactionsFilterData) {
@@ -232,12 +238,28 @@ class TransactionsHistoryViewController: FlowViewController, WalletNavigable, UI
 
         let data = provider.results[indexPath.section].transactions[indexPath.row]
 
-        
+        var recipient: String = data.participant
 
-        var recipient: String = data.participant.formatted
-        if let recipientContact = contactsData.first(where: { $0.phoneNumbers.contains(data.participant.formatted) }) {
-            recipient = recipientContact.name
+        if let number = data.participantPhoneNumber {
+            recipient = number.formattedString
         }
+
+        if let contact = data.contact {
+            recipient = contact.name
+        }
+
+//        if let phone = data.participant.phone {
+//            recipient = phone.formattedString
+//
+//            if let recipientContact = contactsData.first(where: {
+//                contact in
+//                contact.phoneNumbers.contains(phone)
+//            }) {
+//                recipient = recipientContact.name
+//            }
+//        } else {
+//            recipient = data.participant.address ?? ""
+//        }
 
         cell.configure(image: data.coin.image, status: data.status.formatted, coinShort: data.coin.short, recipient: recipient, amount: data.amount.formatted(currency: .original), fiatAmount: data.amount.description(currency: .usd), direction: data.direction)
 
