@@ -11,7 +11,7 @@ import Foundation
 struct WalletEnvironment: Environment {
 
     var host: String {
-        return "http://api-test.zam.io/api/v1"
+        return "http://api-stage.zam.io/api/v1"
     }
 
     var headers: [String : Any] {
