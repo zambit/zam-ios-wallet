@@ -325,15 +325,17 @@ class TransactionsHistoryViewController: FlowViewController, WalletNavigable, UI
 
         tableView.viewWithTag(199)?.removeFromSuperview()
 
-        let view = IllustrationalPlaceholder(frame: tableView.bounds)
+        let rect = CGRect(x: 0.0, y: 0.0, width: 250, height: 250)
+
+        let view = IllustrationalPlaceholder(frame: rect)
         view.tag = 199
         view.alpha = 0.0
 
         tableView.addSubview(view)
 
-        view.center = CGPoint(x: tableView.bounds.width / 2, y: tableView.bounds.height / 2)
+        view.center = CGPoint(x: tableView.bounds.width / 2, y: tableView.bounds.height / 3)
 
-        UIView.animate(withDuration: 0.1, animations: {
+        UIView.animate(withDuration: 0.2, animations: {
             view.alpha = 1.0
         })
     }

@@ -17,11 +17,33 @@ class IllustrationalPlaceholder: Component {
     override func setupStyle() {
         super.setupStyle()
 
-        titleLabel?.font = UIFont.systemFont(ofSize: 16.0, weight: .semibold)
+        titleLabel?.font = UIFont.systemFont(ofSize: 14.0, weight: .medium)
         titleLabel?.textColor = .blueGrey
         titleLabel?.textAlignment = .center
         titleLabel?.text = "No data in this period"
+        titleLabel?.sizeToFit()
 
         illustrationImageView?.image = #imageLiteral(resourceName: "illustrationPlaceholderDark")
+    }
+
+    var text: String? {
+        get {
+            return titleLabel?.text
+        }
+        set {
+            titleLabel?.text = newValue
+            titleLabel?.sizeToFit()
+            layoutIfNeeded()
+        }
+    }
+
+    var textColor: UIColor? {
+        get {
+            return titleLabel?.textColor
+        }
+
+        set {
+            titleLabel?.textColor = newValue
+        }
     }
 }

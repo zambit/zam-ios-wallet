@@ -134,6 +134,9 @@
 		8C713B32213FE33600AC2E25 /* EmptyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C713B31213FE33600AC2E25 /* EmptyViewController.swift */; };
 		8C713B34214024CE00AC2E25 /* PhoneNumberFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C713B33214024CE00AC2E25 /* PhoneNumberFormatter.swift */; };
 		8C713B362140327600AC2E25 /* StringProtocol+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C713B352140327600AC2E25 /* StringProtocol+Extensions.swift */; };
+		8C7C33442142913000EC6C96 /* KycFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C33432142913000EC6C96 /* KycFlow.swift */; };
+		8C7C33472142924D00EC6C96 /* KYCMainScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C33462142924D00EC6C96 /* KYCMainScreenViewController.swift */; };
+		8C7C33492142973C00EC6C96 /* StageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C33482142973C00EC6C96 /* StageButton.swift */; };
 		8CA2188F2121D97C0063C188 /* DecimalKeyboardComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CA2188E2121D97B0063C188 /* DecimalKeyboardComponent.xib */; };
 		8CA218922122E8D70063C188 /* SendMoneyComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CA218912122E8D70063C188 /* SendMoneyComponent.xib */; };
 		8CA218942122EAC90063C188 /* SendMoneyComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA218932122EAC90063C188 /* SendMoneyComponent.swift */; };
@@ -370,6 +373,9 @@
 		8C713B31213FE33600AC2E25 /* EmptyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyViewController.swift; sourceTree = "<group>"; };
 		8C713B33214024CE00AC2E25 /* PhoneNumberFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberFormatter.swift; sourceTree = "<group>"; };
 		8C713B352140327600AC2E25 /* StringProtocol+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StringProtocol+Extensions.swift"; sourceTree = "<group>"; };
+		8C7C33432142913000EC6C96 /* KycFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KycFlow.swift; sourceTree = "<group>"; };
+		8C7C33462142924D00EC6C96 /* KYCMainScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KYCMainScreenViewController.swift; sourceTree = "<group>"; };
+		8C7C33482142973C00EC6C96 /* StageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageButton.swift; sourceTree = "<group>"; };
 		8CA2188E2121D97B0063C188 /* DecimalKeyboardComponent.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DecimalKeyboardComponent.xib; sourceTree = "<group>"; };
 		8CA218912122E8D70063C188 /* SendMoneyComponent.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SendMoneyComponent.xib; sourceTree = "<group>"; };
 		8CA218932122EAC90063C188 /* SendMoneyComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMoneyComponent.swift; sourceTree = "<group>"; };
@@ -548,6 +554,7 @@
 				8C7C333D2142904900EC6C96 /* Authorization */,
 				8C7C333E2142905F00EC6C96 /* Home */,
 				8C7C333F2142906D00EC6C96 /* Transactions */,
+				8C7C33452142922000EC6C96 /* KYC */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -651,6 +658,7 @@
 				8CF5F94B21147F000083B36A /* EnterPinFlow.swift */,
 				8C4413C3211882FC00C9689C /* CreatePinFlow.swift */,
 				8CF5F930211345320083B36A /* MainFlow.swift */,
+				8C7C33432142913000EC6C96 /* KycFlow.swift */,
 			);
 			path = ScreenFlows;
 			sourceTree = "<group>";
@@ -945,6 +953,7 @@
 				8CA218CE212719990063C188 /* LargeSendButton.swift */,
 				8C333D43210B001500949AC0 /* OnboardingLargeButton.swift */,
 				8C333D53210B394800949AC0 /* RoundContinueButton.swift */,
+				8C7C33482142973C00EC6C96 /* StageButton.swift */,
 			);
 			path = Buttons;
 			sourceTree = "<group>";
@@ -957,6 +966,14 @@
 				8C333D76210F50E000949AC0 /* CountryIconImageView.swift */,
 			);
 			path = ImageViews;
+			sourceTree = "<group>";
+		};
+		8C7C33452142922000EC6C96 /* KYC */ = {
+			isa = PBXGroup;
+			children = (
+				8C7C33462142924D00EC6C96 /* KYCMainScreenViewController.swift */,
+			);
+			path = KYC;
 			sourceTree = "<group>";
 		};
 		8CA218902122E8880063C188 /* SendMoneyComponent */ = {
@@ -1514,6 +1531,7 @@
 				8C713B1D2138408700AC2E25 /* OutputButton.swift in Sources */,
 				8CF1DE4B20F3AD210036F986 /* NewPasswordViewController.swift in Sources */,
 				8CF5F93A21144BE80083B36A /* UIDevice+Extensions.swift in Sources */,
+				8C7C33442142913000EC6C96 /* KycFlow.swift in Sources */,
 				8CA219122134259F0063C188 /* Date+Extensions.swift in Sources */,
 				8CA218C42125AD130063C188 /* WalletSmallItemComponent.swift in Sources */,
 				8CA218F7213018DA0063C188 /* Paginator.swift in Sources */,
@@ -1537,6 +1555,7 @@
 				8CF5F9542114916E0083B36A /* DotView.swift in Sources */,
 				8C4413C4211882FC00C9689C /* CreatePinFlow.swift in Sources */,
 				8CA2190421305EC00063C188 /* GroupType.swift in Sources */,
+				8C7C33492142973C00EC6C96 /* StageButton.swift in Sources */,
 				8C333D68210B72A100949AC0 /* ContinueViewController.swift in Sources */,
 				8C09196A2108951F00703224 /* WalletResponseError.swift in Sources */,
 				8CA218A9212343760063C188 /* UIImageView+Extensions.swift in Sources */,
@@ -1544,6 +1563,7 @@
 				8C6088512111A95100470411 /* Conditions.swift in Sources */,
 				8C52FFF0211AE19300EB55EA /* OverlappingFlowLayout.swift in Sources */,
 				9319BAA6212A0AC200033A7E /* CrossAnimationView.swift in Sources */,
+				8C7C33472142924D00EC6C96 /* KYCMainScreenViewController.swift in Sources */,
 				8C333D302109E0B400949AC0 /* UserViewController.swift in Sources */,
 				8CA2189F2122F9E40063C188 /* SelectingBackView.swift in Sources */,
 				8CF1DE4520EFB1A70036F986 /* HorizontalScrollView.swift in Sources */,

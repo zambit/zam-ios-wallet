@@ -27,19 +27,33 @@ final class MainFlow: ScreenFlow {
         let homeScreenItemData = WalletTabBarItemData(image: #imageLiteral(resourceName: "briefcase"), type: .normal, title: "Home")
         tabbar.custom.add(viewController: homeScreen, with: homeScreenItemData)
 
-        let transactionsScreenItemData = WalletTabBarItemData(image: #imageLiteral(resourceName: "transactions"), type: .normal, title: "Transactions")
+        let transactionsScreenItemData = WalletTabBarItemData(image: #imageLiteral(resourceName: "transactions"), type: .normal, title: "History")
         tabbar.custom.add(viewController: transactionsScreen, with: transactionsScreenItemData)
 
         let zamScreenItemData = WalletTabBarItemData(image: #imageLiteral(resourceName: "logo"), type: .large, title: nil)
         tabbar.custom.add(viewController: EmptyViewController(), with: zamScreenItemData)
 
-        let contactsScreenItemData = WalletTabBarItemData(image: #imageLiteral(resourceName: "users"), type: .normal, title: "Contacts")
-        tabbar.custom.add(viewController: EmptyViewController(), with: contactsScreenItemData)
+        let contactsScreenItemData = WalletTabBarItemData(image: #imageLiteral(resourceName: "users"), type: .normal, title: "Verify")
+        tabbar.custom.add(viewController: mainKYCScreen, with: contactsScreenItemData)
 
         let moreScreenItemData = WalletTabBarItemData(image: #imageLiteral(resourceName: "more"), type: .normal, title: "More")
         tabbar.custom.add(viewController: EmptyViewController(), with: moreScreenItemData)
 
         return tabbar
+    }
+
+    // MARK: - KYCTabBarItem
+
+    private var mainKYCScreen: KYCMainScreenViewController {
+        let _vc = ControllerHelper.instantiateViewController(identifier: "KYCMainScreenViewController", storyboardName: "Main")
+
+        guard let vc = _vc as? KYCMainScreenViewController else {
+            fatalError()
+        }
+
+        vc.title = "Identify verification"
+        vc.flow = self
+        return vc
     }
 
     // MARK: - TransactionsTabBarItem

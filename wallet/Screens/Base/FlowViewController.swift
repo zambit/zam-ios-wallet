@@ -16,6 +16,12 @@ class FlowViewController: UIViewController {
 
     var flow: ScreenFlow?
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        view.setNeedsLayout()
+    }
+
 }
 
 class FlowCollectionViewController: UICollectionViewController {
