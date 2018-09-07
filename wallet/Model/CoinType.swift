@@ -34,9 +34,9 @@ enum CoinType: String {
         case .btc:
             return "Bitcoin"
         case .eth:
-            return "Etherium"
+            return "Ethereum"
         case .zam:
-            return "Zam"
+            return "ZAM"
         }
     }
 
