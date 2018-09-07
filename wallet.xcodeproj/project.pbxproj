@@ -524,24 +524,16 @@
 		8C0919312106205600703224 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				8C6088472110A75100470411 /* AdditionalTextButton.swift */,
-				8CA218A6212342B90063C188 /* CircleImageView.swift */,
-				8CA218E8212DB0210063C188 /* RoundedImageView.swift */,
-				8CA21930213561C70063C188 /* MultiStatableButton.swift */,
+				8C7C3341214290AB00EC6C96 /* Buttons */,
+				8C7C3342214290BD00EC6C96 /* ImageViews */,
 				8C6088612111FB0A00470411 /* Components */,
 				8C04BC36211C872E00E90090 /* ContainerView.swift */,
-				8C333D76210F50E000949AC0 /* CountryIconImageView.swift */,
 				8C6088432110A34200470411 /* CustomUI.swift */,
 				8C04BC34211C5AD800E90090 /* CreditCardViewComponent.swift */,
 				9319BA862129FA9500033A7E /* Animations */,
-				8CA218A4212333B20063C188 /* IconableTextField.swift */,
+				8C7C33402142909200EC6C96 /* TextFields */,
 				8CA2191B213442140063C188 /* IllustrationPlaceholder */,
-				8CA218E6212DA8300063C188 /* SearchTextField.swift */,
-				8C713B1C2138408700AC2E25 /* OutputButton.swift */,
 				8CA218BA212573510063C188 /* IndentLabel.swift */,
-				8CA218CE212719990063C188 /* LargeSendButton.swift */,
-				8C333D43210B001500949AC0 /* OnboardingLargeButton.swift */,
-				8C333D53210B394800949AC0 /* RoundContinueButton.swift */,
 				8C333D5B210B538700949AC0 /* TextCheckBoxView */,
 			);
 			path = View;
@@ -553,24 +545,9 @@
 				8C60883C21105A0F00470411 /* Base */,
 				8C333D45210B0D5400949AC0 /* LaunchScreenViewController.swift */,
 				8C713B31213FE33600AC2E25 /* EmptyViewController.swift */,
-				8C091933210620C800703224 /* OnboardingViewController.swift */,
-				8C60885D2111F28000470411 /* EnterNewPhoneNumberViewController.swift */,
-				8C60885F2111F35E00470411 /* EnterPhoneNumberViewController.swift */,
-				8C09197E2108D8B600703224 /* VerifyPhoneNumberWithSmsViewController.swift */,
-				8C0919802108D99400703224 /* CreateNewPasswordViewController.swift */,
-				8C6088592111DCB000470411 /* EnterPhoneLoginPasswordViewController.swift */,
-				8C0919822109CC2000703224 /* EnterLoginPasswordViewController.swift */,
-				8CF5F94D21148BD90083B36A /* EnterPinViewController.swift */,
-				8CF5F94721147A870083B36A /* CreatePinViewController.swift */,
-				8C333D2F2109E0B400949AC0 /* UserViewController.swift */,
-				8C52FFF1211AF1FD00EB55EA /* HomeViewController.swift */,
-				8C52FFEB2119E09200EB55EA /* WalletsViewController.swift */,
-				8CA218A0212304590063C188 /* SendMoneyViewController.swift */,
-				8C713B1A21380CE200AC2E25 /* DepositMoneyViewController.swift */,
-				8CA218C82126D4FD0063C188 /* TransactionDetailViewController.swift */,
-				8CA218F0213002880063C188 /* TransactionsHistoryViewController.swift */,
-				8CA2191E213549DD0063C188 /* TransactionsHistoryFilterViewController.swift */,
-				8C713B202139911D00AC2E25 /* QRCodeScannerViewController.swift */,
+				8C7C333D2142904900EC6C96 /* Authorization */,
+				8C7C333E2142905F00EC6C96 /* Home */,
+				8C7C333F2142906D00EC6C96 /* Transactions */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -909,6 +886,77 @@
 				8C713B1721380AE800AC2E25 /* DepositMoneyAddressComponent.xib */,
 			);
 			path = DepositMoneyAddressComponent;
+			sourceTree = "<group>";
+		};
+		8C7C333D2142904900EC6C96 /* Authorization */ = {
+			isa = PBXGroup;
+			children = (
+				8C091933210620C800703224 /* OnboardingViewController.swift */,
+				8C60885D2111F28000470411 /* EnterNewPhoneNumberViewController.swift */,
+				8C60885F2111F35E00470411 /* EnterPhoneNumberViewController.swift */,
+				8C09197E2108D8B600703224 /* VerifyPhoneNumberWithSmsViewController.swift */,
+				8C0919802108D99400703224 /* CreateNewPasswordViewController.swift */,
+				8C6088592111DCB000470411 /* EnterPhoneLoginPasswordViewController.swift */,
+				8C0919822109CC2000703224 /* EnterLoginPasswordViewController.swift */,
+				8CF5F94D21148BD90083B36A /* EnterPinViewController.swift */,
+				8CF5F94721147A870083B36A /* CreatePinViewController.swift */,
+			);
+			path = Authorization;
+			sourceTree = "<group>";
+		};
+		8C7C333E2142905F00EC6C96 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				8C333D2F2109E0B400949AC0 /* UserViewController.swift */,
+				8C52FFF1211AF1FD00EB55EA /* HomeViewController.swift */,
+				8C52FFEB2119E09200EB55EA /* WalletsViewController.swift */,
+				8CA218A0212304590063C188 /* SendMoneyViewController.swift */,
+				8C713B1A21380CE200AC2E25 /* DepositMoneyViewController.swift */,
+				8CA218C82126D4FD0063C188 /* TransactionDetailViewController.swift */,
+				8C713B202139911D00AC2E25 /* QRCodeScannerViewController.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		8C7C333F2142906D00EC6C96 /* Transactions */ = {
+			isa = PBXGroup;
+			children = (
+				8CA218F0213002880063C188 /* TransactionsHistoryViewController.swift */,
+				8CA2191E213549DD0063C188 /* TransactionsHistoryFilterViewController.swift */,
+			);
+			path = Transactions;
+			sourceTree = "<group>";
+		};
+		8C7C33402142909200EC6C96 /* TextFields */ = {
+			isa = PBXGroup;
+			children = (
+				8CA218A4212333B20063C188 /* IconableTextField.swift */,
+				8CA218E6212DA8300063C188 /* SearchTextField.swift */,
+			);
+			path = TextFields;
+			sourceTree = "<group>";
+		};
+		8C7C3341214290AB00EC6C96 /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				8C6088472110A75100470411 /* AdditionalTextButton.swift */,
+				8CA21930213561C70063C188 /* MultiStatableButton.swift */,
+				8C713B1C2138408700AC2E25 /* OutputButton.swift */,
+				8CA218CE212719990063C188 /* LargeSendButton.swift */,
+				8C333D43210B001500949AC0 /* OnboardingLargeButton.swift */,
+				8C333D53210B394800949AC0 /* RoundContinueButton.swift */,
+			);
+			path = Buttons;
+			sourceTree = "<group>";
+		};
+		8C7C3342214290BD00EC6C96 /* ImageViews */ = {
+			isa = PBXGroup;
+			children = (
+				8CA218A6212342B90063C188 /* CircleImageView.swift */,
+				8CA218E8212DB0210063C188 /* RoundedImageView.swift */,
+				8C333D76210F50E000949AC0 /* CountryIconImageView.swift */,
+			);
+			path = ImageViews;
 			sourceTree = "<group>";
 		};
 		8CA218902122E8880063C188 /* SendMoneyComponent */ = {
