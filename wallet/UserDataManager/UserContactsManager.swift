@@ -31,7 +31,7 @@ class UserContactsManager {
     private(set) static var `default`: UserContactsManager = UserContactsManager(fetchKeys: [.fullName, .phoneNumber, .avatar],
                                                                  phoneNumberFormatter: PhoneNumberFormatter())
 
-    var contacts: [ContactData] = []
+    private(set) var contacts: [ContactData] = []
 
     let contactStore = CNContactStore()
     let fetchKeys: [UserContactFetchKey]
@@ -54,28 +54,20 @@ class UserContactsManager {
                 return
             }
 
-            guard let contacts = try? strongSelf.getContacts() else {
-                return completion([])
-            }
-
-            let phones = contacts.map {
-                contact in
-                contact.phoneNumbers.compactMap {
-                    $0.value.stringValue
-                }
-            }
-
-            strongSelf.phoneNumberFormatter.getCompleted(from: phones) {
-                formattedPhones in
-
-                let result = contacts.enumerated().map { arg -> ContactData in
-                    let name = arg.element.givenName + " " + arg.element.familyName
-                    return ContactData(name: name, avatar: arg.element.thumbnailImageData, phoneNumbers: formattedPhones[arg.offset].compactMap({$0}))
+            DispatchQueue.global(qos: .default).async {
+                guard let contacts = try? strongSelf.getContacts() else {
+                    DispatchQueue.main.async {
+                        completion([])
+                    }
+                    return
                 }
 
+                let result = contacts.map { ContactData(contact: $0) }
                 strongSelf.contacts = result
 
-                completion(result)
+                DispatchQueue.main.async {
+                    completion(result)
+                }
             }
         }
 
@@ -91,6 +83,8 @@ class UserContactsManager {
                     completion([])
                 }
             }
+        } else {
+            success()
         }
     }
 

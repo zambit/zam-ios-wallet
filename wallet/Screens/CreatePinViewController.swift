@@ -79,12 +79,10 @@ class CreatePinViewController: FlowViewController, WalletNavigable, DecimalKeybo
         performWithDelay {
             [weak self] in
 
-            DispatchQueue.global(qos: .default).async {
-                UserContactsManager.default.fetchContacts({ _ in
-                    createPinComponent.endDotsLoading()
-                    self?.onContinue?()
-                })
-            }
+            UserContactsManager.default.fetchContacts({ _ in
+                createPinComponent.endDotsLoading()
+                self?.onContinue?()
+            })
         }
     }
 
@@ -99,12 +97,10 @@ class CreatePinViewController: FlowViewController, WalletNavigable, DecimalKeybo
         performWithDelay {
             [weak self] in
 
-            DispatchQueue.global(qos: .default).async {
-                UserContactsManager.default.fetchContacts({ _ in
-                    self?.createPinComponent?.endDotsLoading()
-                    self?.onSkip?()
-                })
-            }
+            UserContactsManager.default.fetchContacts({ _ in
+                self?.createPinComponent?.endDotsLoading()
+                self?.onSkip?()
+            })
         }
     }
 }

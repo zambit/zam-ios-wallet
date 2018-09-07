@@ -83,12 +83,10 @@ class EnterLoginPasswordViewController: ContinueViewController, LoginPasswordCom
             authToken in
 
             performWithDelay {
-                DispatchQueue.global(qos: .default).async {
-                    UserContactsManager.default.fetchContacts({ _ in
-                        self?.continueButton?.custom.setLoading(false)
-                        self?.onContinue?(authToken)
-                    })
-                }
+                UserContactsManager.default.fetchContacts({ _ in
+                    self?.continueButton?.custom.setLoading(false)
+                    self?.onContinue?(authToken)
+                })
             }
 
             self?.userManager?.save(phone: phone, token: authToken)

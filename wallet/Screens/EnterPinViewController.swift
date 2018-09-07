@@ -105,12 +105,10 @@ class EnterPinViewController: FlowViewController, WalletNavigable, DecimalKeyboa
                         phone in
 
                         performWithDelay {
-                            DispatchQueue.global(qos: .default).async {
-                                UserContactsManager.default.fetchContacts({ _ in
-                                    self?.dotsFieldComponent?.endLoading()
-                                    self?.onContinue?()
-                                })
-                            }
+                            UserContactsManager.default.fetchContacts({ _ in
+                                self?.dotsFieldComponent?.endLoading()
+                                self?.onContinue?()
+                            })
                         }
                     }.catch {
                         [weak self]
@@ -185,12 +183,10 @@ class EnterPinViewController: FlowViewController, WalletNavigable, DecimalKeyboa
                 phone in
 
                 performWithDelay {
-                    DispatchQueue.global(qos: .default).async {
-                        UserContactsManager.default.fetchContacts({ _ in
-                            self?.dotsFieldComponent?.endLoading()
-                            self?.onContinue?()
-                        })
-                    }
+                    UserContactsManager.default.fetchContacts({ _ in
+                        self?.dotsFieldComponent?.endLoading()
+                        self?.onContinue?()
+                    })
                 }
             }.catch {
                 [weak self]

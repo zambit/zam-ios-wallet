@@ -13,19 +13,19 @@ struct ContactData {
 
     var name: String
     var avatarData: Data?
-    var phoneNumbers: [PhoneNumber] = []
+    var phoneNumbers: [String] = []
 
     init(contact: CNContact) {
         self.name = contact.givenName + " " + contact.familyName
         self.avatarData = contact.thumbnailImageData
 
         phoneNumbers = contact.phoneNumbers.compactMap {
-            let phoneNumber = PhoneNumberFormatter($0.value.stringValue)
-            return phoneNumber.completed
+            let phoneNumber = PhoneNumberFormatter.trivialString(from: $0.value.stringValue)
+            return phoneNumber
         }
     }
 
-    init(name: String, avatar: Data?, phoneNumbers: [PhoneNumber]) {
+    init(name: String, avatar: Data?, phoneNumbers: [String]) {
         self.name = name
         self.avatarData = avatar
         self.phoneNumbers = phoneNumbers

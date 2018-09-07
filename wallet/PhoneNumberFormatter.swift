@@ -18,6 +18,12 @@ struct PhoneNumber: Equatable {
 
 class PhoneNumberFormatter {
 
+    static func trivialString(from formatted: String) -> String {
+        let allowedCharacters = CharacterSet(charactersIn: "1234567890")
+        let separated = formatted.components(separatedBy: allowedCharacters.inverted)
+        return separated.joined(separator: "")
+    }
+
     private let formatter: PhoneNumberKit
     private let partialFormatter: PartialFormatter
     private let allowedCharacters: CharacterSet

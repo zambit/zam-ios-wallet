@@ -273,7 +273,7 @@ struct UserAPI: NetworkService {
                                                 if let phone = phone,
                                                     let contacts = localContacts,
                                                     let phoneContact = contacts.first(where: {
-                                                        $0.phoneNumbers.contains(phone)
+                                                        $0.phoneNumbers.contains(phone.numberString)
                                                     }) {
                                                     newTransaction.contact = phoneContact
                                                 }
