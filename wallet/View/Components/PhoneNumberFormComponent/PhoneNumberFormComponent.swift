@@ -305,7 +305,7 @@ class PhoneNumberFormComponent: Component, UITextFieldDelegate, PhoneNumberEnter
             rightLabelsToContentViewConstraint?.isActive = false
             rightImageToContentViewConstraint?.isActive = true
 
-            UIView.animate(withDuration: 0.15, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.01, options: .curveEaseInOut, animations: {
+            UIView.animate(withDuration: 0.2, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.01, options: .curveEaseInOut, animations: {
                 [weak self] in
 
                 self?.rightImageToContentViewConstraint?.constant = -20.0
@@ -332,7 +332,7 @@ class PhoneNumberFormComponent: Component, UITextFieldDelegate, PhoneNumberEnter
             rightImageToContentViewConstraint?.isActive = false
             rightLabelsToContentViewConstraint?.isActive = true
 
-            UIView.animate(withDuration: 0.15, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.01, options: .curveEaseInOut, animations: {
+            UIView.animate(withDuration: 0.2, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.01, options: .curveEaseInOut, animations: {
                 [weak self] in
 
                 self?.rightLabelsToContentViewConstraint?.constant = 16.0

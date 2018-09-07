@@ -38,6 +38,7 @@ extension BehaviorExtension where Base: WalletNavigationController {
     }
 
     func push(viewController: ScreenWalletNavigable, animated: Bool = true) {
+        viewController.dismissKeyboard()
         base.pushViewController(viewController, animated: animated)
         hideBackButton(for: viewController)
         
@@ -47,6 +48,8 @@ extension BehaviorExtension where Base: WalletNavigationController {
     }
 
     func pushFromRoot(viewController: ScreenWalletNavigable, animated: Bool = true, direction: WalletNavigationControllerAnimationDirection) {
+        viewController.dismissKeyboard()
+
         guard base.viewControllers.count > 1 else {
             push(viewController: viewController, animated: animated)
             hideBackButton(for: viewController)
@@ -88,6 +91,7 @@ extension BehaviorExtension where Base: WalletNavigationController {
     }
 
     func popBack(animated: Bool = true, nextViewController: (WalletNavigable) -> Void) {
+        base.viewControllers.last?.dismissKeyboard()
         base.popViewController(animated: animated)
 
         guard let next = base.viewControllers.last as? WalletNavigable else {
@@ -112,6 +116,7 @@ extension BehaviorExtension where Base: WalletNavigationController {
 
         childNavigationController.modalPresentationStyle = .overFullScreen
 
+        base.viewControllers.last?.dismissKeyboard()
         base.present(childNavigationController, animated: true, completion: nil)
 
         hideBackButton(for: viewController)

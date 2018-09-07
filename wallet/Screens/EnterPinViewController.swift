@@ -31,6 +31,12 @@ class EnterPinViewController: FlowViewController, WalletNavigable, DecimalKeyboa
 
     private var phone: String?
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        migratingNavigationController?.custom.addRightBarItemButton(for: self, title: "EXIT", target: self, action: #selector(exitButtonTouchEvent(_:)))
+    }
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         biometricAuthenticationRequest()
@@ -69,8 +75,6 @@ class EnterPinViewController: FlowViewController, WalletNavigable, DecimalKeyboa
         keyboardComponent?.delegate = self
 
         setupDefaultStyle()
-
-        migratingNavigationController?.custom.addRightBarItemButton(for: self, title: "EXIT", target: self, action: #selector(exitButtonTouchEvent(_:)))
     }
 
     func prepare(phone: String) {
