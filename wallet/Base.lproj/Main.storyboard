@@ -305,6 +305,7 @@
                         <viewLayoutGuide key="safeArea" id="AjE-vB-HQP"/>
                     </view>
                     <connections>
+                        <outlet property="backgroundView" destination="wTa-tO-a5W" id="oiC-Hl-u5U"/>
                         <outlet property="bottomPlaceholderLabel" destination="0jg-iP-FvN" id="4Q2-Ha-xCr"/>
                         <outlet property="kyc0Button" destination="Fj6-TG-G0N" id="hGu-tL-R2l"/>
                         <outlet property="kyc1Button" destination="HVf-FQ-IAQ" id="hPs-yd-yjq"/>
@@ -580,6 +581,36 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mux-u7-Ms9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2377" y="1103"/>
+        </scene>
+        <!--Personal Info View Controller-->
+        <scene sceneID="IW0-CT-9TG">
+            <objects>
+                <viewController storyboardIdentifier="KYCPersonalInfoViewController" id="rTM-Gz-NuH" customClass="KYCPersonalInfoViewController" customModule="wallet" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="F9q-U7-jU4">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="Pea-UB-nru">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Pea-UB-nru" firstAttribute="leading" secondItem="oTS-hp-O4j" secondAttribute="leading" id="EqG-UR-dRw"/>
+                            <constraint firstItem="Pea-UB-nru" firstAttribute="top" secondItem="oTS-hp-O4j" secondAttribute="top" id="N99-DG-w4w"/>
+                            <constraint firstItem="oTS-hp-O4j" firstAttribute="trailing" secondItem="Pea-UB-nru" secondAttribute="trailing" id="ZIu-2i-Dfx"/>
+                            <constraint firstItem="oTS-hp-O4j" firstAttribute="bottom" secondItem="Pea-UB-nru" secondAttribute="bottom" id="dOi-XQ-Vlv"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="oTS-hp-O4j"/>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="Pea-UB-nru" id="7Cy-EY-CpE"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="21N-kg-KXr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-3204" y="666"/>
         </scene>
     </scenes>
 </document>

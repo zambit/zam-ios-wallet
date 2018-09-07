@@ -51,7 +51,31 @@ final class MainFlow: ScreenFlow {
             fatalError()
         }
 
+        let onKyc0: () -> Void = {
+            [weak self] in
+
+            guard let strongSelf = self else {
+                return
+            }
+
+            let target = strongSelf.personalInfoScreen
+            vc.migratingNavigationController?.custom.push(viewController: target)
+        }
+
+        vc.onKyc0 = onKyc0
         vc.title = "Identify verification"
+        vc.flow = self
+        return vc
+    }
+
+    private var personalInfoScreen: KYCPersonalInfoViewController {
+        let _vc = ControllerHelper.instantiateViewController(identifier: "KYCPersonalInfoViewController", storyboardName: "Main")
+
+        guard let vc = _vc as? KYCPersonalInfoViewController else {
+            fatalError()
+        }
+
+        vc.title = "KYC0"
         vc.flow = self
         return vc
     }
