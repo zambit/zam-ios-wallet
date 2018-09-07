@@ -101,7 +101,7 @@ class EnterPhoneLoginPasswordViewController: ContinueViewController, LoginFormCo
                         fatalError()
                     }
 
-                    self?.loginFormView?.helperText = fail.message
+                    self?.loginFormView?.helperText = fail.message.capitalizingFirst
                 case .undefinedServerFailureResponse:
 
                     self?.loginFormView?.helperText = "Undefined error"
