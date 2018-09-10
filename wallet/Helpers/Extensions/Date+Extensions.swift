@@ -80,7 +80,19 @@ extension Date {
         return dateFormatter.string(from: self)
     }
 
-    static func walletString(from date: Date) -> String {
+    func year() -> String {
+        let dateFormatter = DateFormatter()
+        let format = "yyyy"
+
+        dateFormatter.setLocalizedDateFormatFromTemplate(format)
+        return dateFormatter.string(from: self)
+    }
+
+    static func walletShortString(from date: Date) -> String {
         return "\(date.dayNumber()) \(date.monthName(ofStyle: .threeLetters)), \(date.dayName(ofStyle: .twoLetters))"
+    }
+
+    static func walletLongString(from date: Date) -> String {
+        return "\(date.dayNumber()) \(date.monthName(ofStyle: .threeLetters)), \(date.year())"
     }
 }

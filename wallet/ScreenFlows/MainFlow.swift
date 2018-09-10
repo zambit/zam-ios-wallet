@@ -51,7 +51,142 @@ final class MainFlow: ScreenFlow {
             fatalError()
         }
 
+        let onKyc0: () -> Void = {
+            [weak self] in
+
+            guard let strongSelf = self else {
+                return
+            }
+
+            let target = strongSelf.personalInfoScreen
+            vc.migratingNavigationController?.custom.push(viewController: target)
+        }
+
+        let onKyc1: () -> Void = {
+            [weak self] in
+
+            guard let strongSelf = self else {
+                return
+            }
+
+            let target = strongSelf.uploadDocumentsMenuScreen
+            vc.migratingNavigationController?.custom.push(viewController: target)
+        }
+
+        vc.onKyc0 = onKyc0
+        vc.onKyc1 = onKyc1
         vc.title = "Identify verification"
+        vc.flow = self
+        return vc
+    }
+
+    private var personalInfoScreen: KYCPersonalInfoViewController {
+        let _vc = ControllerHelper.instantiateViewController(identifier: "KYCPersonalInfoViewController", storyboardName: "Main")
+
+        guard let vc = _vc as? KYCPersonalInfoViewController else {
+            fatalError()
+        }
+
+        let onSend: (KYCApprovingState) -> Void = {
+            state in
+
+            vc.migratingNavigationController?.custom.popBack(nextViewController: {
+                next in
+
+                guard let back = next as? KYCMainScreenViewController else {
+                    fatalError()
+                }
+
+                back.updateKYC0State(state)
+            })
+        }
+
+        vc.onSend = onSend
+        vc.title = "KYC0"
+        vc.flow = self
+        return vc
+    }
+
+    private var uploadDocumentsMenuScreen: KYCUploadDocumentsMenuViewController {
+        let _vc = ControllerHelper.instantiateViewController(identifier: "KYCUploadDocumentsMenuViewController", storyboardName: "Main")
+
+        guard let vc = _vc as? KYCUploadDocumentsMenuViewController else {
+            fatalError()
+        }
+
+        let onFirstDocument: () -> Void = {
+            [weak self] in
+
+            guard let strongSelf = self else {
+                return
+            }
+
+            let target = strongSelf.uploadPrivateDocumentScreen
+            vc.migratingNavigationController?.custom.push(viewController: target)
+        }
+
+        let onSecondDocument: () -> Void = {
+            [weak self] in
+
+            guard let strongSelf = self else {
+                return
+            }
+
+            let target = strongSelf.uploadSelfieScreen
+            vc.migratingNavigationController?.custom.push(viewController: target)
+        }
+
+        let onThirdDocument: () -> Void = {
+            [weak self] in
+
+            guard let strongSelf = self else {
+                return
+            }
+
+            let target = strongSelf.uploadAddressDocumentScreen
+            vc.migratingNavigationController?.custom.push(viewController: target)
+        }
+
+        vc.onFirstDocument = onFirstDocument
+        vc.onSecondDocument = onSecondDocument
+        vc.onThirdDocument = onThirdDocument
+        vc.title = "Upload document KYC1"
+        vc.flow = self
+        return vc
+    }
+
+    private var uploadPrivateDocumentScreen: KYCUploadPrivateDocumentViewController {
+        let _vc = ControllerHelper.instantiateViewController(identifier: "KYCUploadPrivateDocumentViewController", storyboardName: "Main")
+
+        guard let vc = _vc as? KYCUploadPrivateDocumentViewController else {
+            fatalError()
+        }
+
+        vc.title = "01/KYC1"
+        vc.flow = self
+        return vc
+    }
+
+    private var uploadSelfieScreen: KYCUploadSelfieViewController {
+        let _vc = ControllerHelper.instantiateViewController(identifier: "KYCUploadSelfieViewController", storyboardName: "Main")
+
+        guard let vc = _vc as? KYCUploadSelfieViewController else {
+            fatalError()
+        }
+
+        vc.title = "02/KYC1"
+        vc.flow = self
+        return vc
+    }
+
+    private var uploadAddressDocumentScreen: KYCUploadAddressDocumentViewController {
+        let _vc = ControllerHelper.instantiateViewController(identifier: "KYCUploadAddressDocumentViewController", storyboardName: "Main")
+
+        guard let vc = _vc as? KYCUploadAddressDocumentViewController else {
+            fatalError()
+        }
+
+        vc.title = "03/KYC1"
         vc.flow = self
         return vc
     }

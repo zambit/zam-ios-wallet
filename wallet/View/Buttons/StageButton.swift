@@ -9,8 +9,14 @@
 import Foundation
 import UIKit
 
+enum StageButtonType {
+    case large
+    case medium
+    case small
+}
+
 struct StageDescription {
-    let id: String
+    let id: String?
     let idTextColor: UIColor?
 
     let description: String
@@ -20,6 +26,8 @@ struct StageDescription {
 }
 
 class StageButton: UIButton {
+
+    var type: StageButtonType?
 
     var idLabel: UILabel?
     var describingLabel: UILabel?
@@ -61,6 +69,11 @@ extension BehaviorExtension where Base: StageButton {
         return base.stages.count
     }
 
+    func setup(type: StageButtonType, stages: [StageDescription]) {
+        base.type = type
+        setupStages(stages)
+    }
+
     func changeState(to index: Int, indicatorBlock: (UIImageView) -> Void) {
         base.currentStateIndex = index
 
@@ -72,7 +85,9 @@ extension BehaviorExtension where Base: StageButton {
     func setupStages(_ stages: [StageDescription]) {
         base.stages = stages
 
-        setupSubviews()
+        if let type = base.type {
+            setupSubviews(type: type)
+        }
     }
 
     func setupStyle() {
@@ -86,57 +101,105 @@ extension BehaviorExtension where Base: StageButton {
     }
 
     func setupLayouts() {
-        base.layer.cornerRadius = 12.0
+        if let type = base.type {
+            switch type {
+            case .large, .medium:
+                base.layer.cornerRadius = 12
+            case .small:
+                base.layer.cornerRadius = base.bounds.height / 2
+            }
+        }
     }
 
-    func setupSubviews() {
+    func setupSubviews(type: StageButtonType) {
         base.viewWithTag(9419)?.removeFromSuperview()
         base.viewWithTag(4519319)?.removeFromSuperview()
         base.viewWithTag(9144919)?.removeFromSuperview()
 
-        let idLabel = UILabel()
-        idLabel.font = UIFont.walletFont(ofSize: 20, weight: .medium)
-        idLabel.tag = 9419
+        switch type {
+        case .large, .medium:
+            let idLabel = UILabel()
+            idLabel.font = UIFont.walletFont(ofSize: 20, weight: .medium)
+            idLabel.tag = 9419
 
-        base.addSubview(idLabel)
+            base.addSubview(idLabel)
 
-        idLabel.translatesAutoresizingMaskIntoConstraints = false
-        idLabel.leftAnchor.constraint(equalTo: base.leftAnchor, constant: 18.0).isActive = true
-        idLabel.topAnchor.constraint(greaterThanOrEqualTo: base.topAnchor, constant: 4.0).isActive = true
-        idLabel.bottomAnchor.constraint(lessThanOrEqualTo: base.bottomAnchor, constant: 4.0).isActive = true
-        idLabel.centerYAnchor.constraint(equalTo: base.centerYAnchor).isActive = true
-        idLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+            idLabel.translatesAutoresizingMaskIntoConstraints = false
+            idLabel.leftAnchor.constraint(equalTo: base.leftAnchor, constant: 18.0).isActive = true
+            idLabel.topAnchor.constraint(greaterThanOrEqualTo: base.topAnchor, constant: 4.0).isActive = true
+            idLabel.bottomAnchor.constraint(lessThanOrEqualTo: base.bottomAnchor, constant: 4.0).isActive = true
+            idLabel.centerYAnchor.constraint(equalTo: base.centerYAnchor).isActive = true
+            idLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+            idLabel.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
 
-        base.idLabel = idLabel
+            base.idLabel = idLabel
 
-        let describingLabel = UILabel()
-        describingLabel.font = UIFont.walletFont(ofSize: 16.0, weight: .medium)
-        describingLabel.tag = 4519319
+            let describingLabel = UILabel()
+            if type == .medium {
+                describingLabel.font = UIFont.walletFont(ofSize: 14.0, weight: .medium)
+                describingLabel.numberOfLines = 0
+            } else {
+                describingLabel.font = UIFont.walletFont(ofSize: 16.0, weight: .medium)
+            }
+            describingLabel.tag = 4519319
 
-        base.addSubview(describingLabel)
+            base.addSubview(describingLabel)
 
-        describingLabel.translatesAutoresizingMaskIntoConstraints = false
-        describingLabel.leftAnchor.constraint(equalTo: idLabel.rightAnchor, constant: 24.0).isActive = true
-        describingLabel.topAnchor.constraint(greaterThanOrEqualTo: base.topAnchor, constant: 4.0).isActive = true
-        describingLabel.bottomAnchor.constraint(lessThanOrEqualTo: base.bottomAnchor, constant: 4.0).isActive = true
-        describingLabel.centerYAnchor.constraint(equalTo: base.centerYAnchor).isActive = true
+            describingLabel.translatesAutoresizingMaskIntoConstraints = false
+            describingLabel.leftAnchor.constraint(equalTo: idLabel.rightAnchor, constant: 24.0).isActive = true
+            describingLabel.topAnchor.constraint(greaterThanOrEqualTo: base.topAnchor, constant: 4.0).isActive = true
+            describingLabel.bottomAnchor.constraint(lessThanOrEqualTo: base.bottomAnchor, constant: 4.0).isActive = true
+            describingLabel.centerYAnchor.constraint(equalTo: base.centerYAnchor).isActive = true
+            describingLabel.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
 
-        base.describingLabel = describingLabel
+            base.describingLabel = describingLabel
 
 
-        let indicatorImageView = UIImageView()
-        indicatorImageView.tag = 9144919
+            let indicatorImageView = UIImageView()
+            indicatorImageView.tag = 9144919
 
-        base.addSubview(indicatorImageView)
+            base.addSubview(indicatorImageView)
 
-        indicatorImageView.translatesAutoresizingMaskIntoConstraints = false
-        indicatorImageView.leftAnchor.constraint(equalTo: describingLabel.rightAnchor, constant: 18.0).isActive = true
-        indicatorImageView.rightAnchor.constraint(equalTo: base.rightAnchor, constant: -12.0).isActive = true
-        indicatorImageView.heightAnchor.constraint(equalTo: indicatorImageView.widthAnchor).isActive = true
-        indicatorImageView.heightAnchor.constraint(equalToConstant: 24.0).isActive = true
-        indicatorImageView.centerYAnchor.constraint(equalTo: base.centerYAnchor).isActive = true
+            indicatorImageView.translatesAutoresizingMaskIntoConstraints = false
+            indicatorImageView.leftAnchor.constraint(equalTo: describingLabel.rightAnchor, constant: 18.0).isActive = true
+            indicatorImageView.rightAnchor.constraint(equalTo: base.rightAnchor, constant: -16.0).isActive = true
+            indicatorImageView.heightAnchor.constraint(equalTo: indicatorImageView.widthAnchor).isActive = true
+            indicatorImageView.heightAnchor.constraint(equalToConstant: 20.0).isActive = true
+            indicatorImageView.centerYAnchor.constraint(equalTo: base.centerYAnchor).isActive = true
 
-        base.indicatorImageView = indicatorImageView
+            base.indicatorImageView = indicatorImageView
+
+        case .small:
+
+            let describingLabel = UILabel()
+            describingLabel.font = UIFont.walletFont(ofSize: 16.0, weight: .bold)
+            describingLabel.textAlignment = .center
+            describingLabel.numberOfLines = 1
+            describingLabel.tag = 4519319
+
+            base.addSubview(describingLabel)
+
+            describingLabel.translatesAutoresizingMaskIntoConstraints = false
+            describingLabel.topAnchor.constraint(greaterThanOrEqualTo: base.topAnchor, constant: 4.0).isActive = true
+            describingLabel.bottomAnchor.constraint(lessThanOrEqualTo: base.bottomAnchor, constant: 4.0).isActive = true
+            describingLabel.centerYAnchor.constraint(equalTo: base.centerYAnchor).isActive = true
+            describingLabel.centerXAnchor.constraint(equalTo: base.centerXAnchor).isActive = true
+
+            base.describingLabel = describingLabel
+
+            let indicatorImageView = UIImageView()
+            indicatorImageView.tag = 9144919
+
+            base.addSubview(indicatorImageView)
+
+            indicatorImageView.translatesAutoresizingMaskIntoConstraints = false
+            indicatorImageView.leftAnchor.constraint(equalTo: describingLabel.rightAnchor, constant: 8.0).isActive = true
+            indicatorImageView.heightAnchor.constraint(equalTo: indicatorImageView.widthAnchor).isActive = true
+            indicatorImageView.heightAnchor.constraint(equalToConstant: 20.0).isActive = true
+            indicatorImageView.centerYAnchor.constraint(equalTo: base.centerYAnchor).isActive = true
+
+            base.indicatorImageView = indicatorImageView
+        }
 
         setupCurrentState()
     }
@@ -157,5 +220,10 @@ extension BehaviorExtension where Base: StageButton {
         base.idLabel?.textColor = currentStage.idTextColor ?? currentStage.descriptionTextColor
 
         base.backgroundColor = currentStage.backgroundColor
+    }
+
+    func setEnabled(_ enabled: Bool) {
+        base.isUserInteractionEnabled = enabled
+        base.alpha = enabled ? 1.0 : 0.3
     }
 }

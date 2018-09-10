@@ -22,9 +22,9 @@ extension DateInterval {
 
         switch time/3600 > 24 {
         case true:
-            return "\(Date.walletString(from: interval.start)) - \(Date.walletString(from: interval.end))"
+            return "\(Date.walletShortString(from: interval.start)) - \(Date.walletShortString(from: interval.end))"
         case false:
-            return Date.walletString(from: interval.start)
+            return Date.walletShortString(from: interval.start)
         }
 
 
