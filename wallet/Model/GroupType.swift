@@ -6,8 +6,6 @@
 //  Copyright © 2018 zamzam. All rights reserved.
 //
 
-import Foundation
-
 enum GroupType: String {
     case hour
     case day

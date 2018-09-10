@@ -94,11 +94,11 @@ extension BehaviorExtension where Base: WalletNavigationController {
         (viewController as? WalletTabBarController)?.navigationController?.setNavigationBarHidden(true, animated: false)
     }
 
-    func popBack(animated: Bool = true, nextViewController: (WalletNavigable) -> Void) {
+    func popBack(animated: Bool = true, nextViewController: (ScreenWalletNavigable) -> Void) {
         base.viewControllers.last?.dismissKeyboard()
         base.popViewController(animated: animated)
 
-        guard let next = base.viewControllers.last as? WalletNavigable else {
+        guard let next = base.viewControllers.last as? ScreenWalletNavigable else {
             return
         }
 

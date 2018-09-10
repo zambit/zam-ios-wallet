@@ -9,7 +9,11 @@
 import Foundation
 import UIKit
 
-class TextFieldCell: UITableViewCell {
+class TextFieldCell: UITableViewCell, UITextFieldDelegate {
+
+    private var onTap: ((UITextField) -> Void)?
+    private var onEditing: ((UITextField) -> Void)?
+    private var onBegin: ((UITextField) -> Void)?
 
     private(set) var textField: UITextField!
 
@@ -44,5 +48,43 @@ class TextFieldCell: UITableViewCell {
         textField.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8.0).isActive = true
     }
 
+    func configure(with data: TextFieldCellData) {
+        textField.placeholder = data.placeholder
 
+        if let action = data.action {
+            switch action {
+            case .tap(action: let onTap):
+                self.onTap = onTap
+                self.onEditing = nil
+
+            case .editingChanged(action: let onEditing):
+                self.onEditing = onEditing
+                self.onTap = nil
+                textField.addTarget(self, action: #selector(onEditingEvent(_:)), for: .editingChanged)
+            }
+        }
+
+        self.onBegin = data.beginEditingAction
+        textField.delegate = self
+    }
+
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        if let onTap = onTap {
+            onTap(textField)
+            return false
+        }
+
+        onBegin?(textField)
+        return true
+    }
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+
+    @objc
+    private func onEditingEvent(_ sender: UITextField) {
+        onEditing?(sender)
+    }
 }

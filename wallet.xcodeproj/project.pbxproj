@@ -140,6 +140,18 @@
 		8C7C334D2142C15100EC6C96 /* KYCPersonalInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C334C2142C15100EC6C96 /* KYCPersonalInfoViewController.swift */; };
 		8C7C334F2142C2F500EC6C96 /* TextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C334E2142C2F500EC6C96 /* TextFieldCell.swift */; };
 		8C7C33512142C73900EC6C96 /* FloatTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C33502142C73900EC6C96 /* FloatTextField.swift */; };
+		8C7C3356214662CF00EC6C96 /* TextFieldCellData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C3355214662CF00EC6C96 /* TextFieldCellData.swift */; };
+		8C7C335821466E5800EC6C96 /* GenderType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C335721466E5800EC6C96 /* GenderType.swift */; };
+		8C7C335A21468F5A00EC6C96 /* KYCPersonalInfoProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C335921468F5A00EC6C96 /* KYCPersonalInfoProgress.swift */; };
+		8C7C335D2146A49A00EC6C96 /* KeyboardAvoiding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C335B2146A49900EC6C96 /* KeyboardAvoiding.swift */; };
+		8C7C335E2146A49A00EC6C96 /* KeyboardDismissingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C335C2146A49A00EC6C96 /* KeyboardDismissingView.swift */; };
+		8C7C33602146ACBE00EC6C96 /* KYCUploadDocumentsMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C335F2146ACBE00EC6C96 /* KYCUploadDocumentsMenuViewController.swift */; };
+		8C7C33622146B11000EC6C96 /* KYCApprovingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C33612146B11000EC6C96 /* KYCApprovingState.swift */; };
+		8C7C33642146C47000EC6C96 /* KYCUploadDocumentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C33632146C47000EC6C96 /* KYCUploadDocumentViewController.swift */; };
+		8C7C33662146C62200EC6C96 /* KYCUploadPrivateDocumentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C33652146C62200EC6C96 /* KYCUploadPrivateDocumentViewController.swift */; };
+		8C7C33682146C9B000EC6C96 /* PhotoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C33672146C9B000EC6C96 /* PhotoButton.swift */; };
+		8C7C336A2146D65800EC6C96 /* KYCUploadSelfieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C33692146D65800EC6C96 /* KYCUploadSelfieViewController.swift */; };
+		8C7C336C2146D6A700EC6C96 /* KYCUploadAddressDocumentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C336B2146D6A700EC6C96 /* KYCUploadAddressDocumentViewController.swift */; };
 		8CA2188F2121D97C0063C188 /* DecimalKeyboardComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CA2188E2121D97B0063C188 /* DecimalKeyboardComponent.xib */; };
 		8CA218922122E8D70063C188 /* SendMoneyComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CA218912122E8D70063C188 /* SendMoneyComponent.xib */; };
 		8CA218942122EAC90063C188 /* SendMoneyComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA218932122EAC90063C188 /* SendMoneyComponent.swift */; };
@@ -382,6 +394,18 @@
 		8C7C334C2142C15100EC6C96 /* KYCPersonalInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KYCPersonalInfoViewController.swift; sourceTree = "<group>"; };
 		8C7C334E2142C2F500EC6C96 /* TextFieldCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldCell.swift; sourceTree = "<group>"; };
 		8C7C33502142C73900EC6C96 /* FloatTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatTextField.swift; sourceTree = "<group>"; };
+		8C7C3355214662CF00EC6C96 /* TextFieldCellData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldCellData.swift; sourceTree = "<group>"; };
+		8C7C335721466E5800EC6C96 /* GenderType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderType.swift; sourceTree = "<group>"; };
+		8C7C335921468F5A00EC6C96 /* KYCPersonalInfoProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KYCPersonalInfoProgress.swift; sourceTree = "<group>"; };
+		8C7C335B2146A49900EC6C96 /* KeyboardAvoiding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardAvoiding.swift; sourceTree = "<group>"; };
+		8C7C335C2146A49A00EC6C96 /* KeyboardDismissingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardDismissingView.swift; sourceTree = "<group>"; };
+		8C7C335F2146ACBE00EC6C96 /* KYCUploadDocumentsMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KYCUploadDocumentsMenuViewController.swift; sourceTree = "<group>"; };
+		8C7C33612146B11000EC6C96 /* KYCApprovingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KYCApprovingState.swift; sourceTree = "<group>"; };
+		8C7C33632146C47000EC6C96 /* KYCUploadDocumentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KYCUploadDocumentViewController.swift; sourceTree = "<group>"; };
+		8C7C33652146C62200EC6C96 /* KYCUploadPrivateDocumentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KYCUploadPrivateDocumentViewController.swift; sourceTree = "<group>"; };
+		8C7C33672146C9B000EC6C96 /* PhotoButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoButton.swift; sourceTree = "<group>"; };
+		8C7C33692146D65800EC6C96 /* KYCUploadSelfieViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KYCUploadSelfieViewController.swift; sourceTree = "<group>"; };
+		8C7C336B2146D6A700EC6C96 /* KYCUploadAddressDocumentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KYCUploadAddressDocumentViewController.swift; sourceTree = "<group>"; };
 		8CA2188E2121D97B0063C188 /* DecimalKeyboardComponent.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DecimalKeyboardComponent.xib; sourceTree = "<group>"; };
 		8CA218912122E8D70063C188 /* SendMoneyComponent.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SendMoneyComponent.xib; sourceTree = "<group>"; };
 		8CA218932122EAC90063C188 /* SendMoneyComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMoneyComponent.swift; sourceTree = "<group>"; };
@@ -526,6 +550,8 @@
 				8CA218AA21241BF90063C188 /* PhoneNumberEnteringHandler.swift */,
 				8CF41EA32136E48A006D4FE2 /* DatePickerViewController.swift */,
 				8CA218EE212DCC030063C188 /* LetterImage.swift */,
+				8C7C335B2146A49900EC6C96 /* KeyboardAvoiding.swift */,
+				8C7C335C2146A49A00EC6C96 /* KeyboardDismissingView.swift */,
 				8CA218F6213018DA0063C188 /* Paginator.swift */,
 				8CF5F929211307010083B36A /* Timers */,
 				8CF5F93B21144BED0083B36A /* Extensions */,
@@ -538,6 +564,7 @@
 			children = (
 				8C7C3341214290AB00EC6C96 /* Buttons */,
 				8C7C3342214290BD00EC6C96 /* ImageViews */,
+				8C7C3352214661C300EC6C96 /* FormCells */,
 				8C6088612111FB0A00470411 /* Components */,
 				8C04BC36211C872E00E90090 /* ContainerView.swift */,
 				8C6088432110A34200470411 /* CustomUI.swift */,
@@ -789,6 +816,7 @@
 				8CA2190121304B730063C188 /* DirectionType.swift */,
 				8CA219052133ED4E0063C188 /* GroupingType.swift */,
 				8CA2190321305EC00063C188 /* GroupType.swift */,
+				8C7C335721466E5800EC6C96 /* GenderType.swift */,
 				8C52FFE02119BE0300EB55EA /* WalletData.swift */,
 				8CF41D8C2136A1AE006D4FE2 /* TransactionsFilterData.swift */,
 				8CA218CC2126F23B0063C188 /* UserData.swift */,
@@ -800,6 +828,7 @@
 				8C04BC442121D48E00E90090 /* BalanceData.swift */,
 				8CA218DA212D892A0063C188 /* ContactData.swift */,
 				8C52FFE22119C1CF00EB55EA /* TermData.swift */,
+				8C7C33612146B11000EC6C96 /* KYCApprovingState.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -860,7 +889,6 @@
 				8CF5F9622114AB000083B36A /* ItemComponent.swift */,
 				8C52FFE92119DA2700EB55EA /* CellComponent.swift */,
 				8CA2191521342D720063C188 /* HeaderFooterComponent.swift */,
-				8C7C334E2142C2F500EC6C96 /* TextFieldCell.swift */,
 				8C713B1921380CC000AC2E25 /* DepositMoneyAddressComponent */,
 				8C713B14213800A000AC2E25 /* DepositMoneyMethodComponent */,
 				8CA218E5212DA5400063C188 /* RectItemComponent */,
@@ -962,6 +990,7 @@
 				8C333D43210B001500949AC0 /* OnboardingLargeButton.swift */,
 				8C333D53210B394800949AC0 /* RoundContinueButton.swift */,
 				8C7C33482142973C00EC6C96 /* StageButton.swift */,
+				8C7C33672146C9B000EC6C96 /* PhotoButton.swift */,
 			);
 			path = Buttons;
 			sourceTree = "<group>";
@@ -981,8 +1010,23 @@
 			children = (
 				8C7C33462142924D00EC6C96 /* KYCMainScreenViewController.swift */,
 				8C7C334C2142C15100EC6C96 /* KYCPersonalInfoViewController.swift */,
+				8C7C335921468F5A00EC6C96 /* KYCPersonalInfoProgress.swift */,
+				8C7C335F2146ACBE00EC6C96 /* KYCUploadDocumentsMenuViewController.swift */,
+				8C7C33632146C47000EC6C96 /* KYCUploadDocumentViewController.swift */,
+				8C7C33652146C62200EC6C96 /* KYCUploadPrivateDocumentViewController.swift */,
+				8C7C33692146D65800EC6C96 /* KYCUploadSelfieViewController.swift */,
+				8C7C336B2146D6A700EC6C96 /* KYCUploadAddressDocumentViewController.swift */,
 			);
 			path = KYC;
+			sourceTree = "<group>";
+		};
+		8C7C3352214661C300EC6C96 /* FormCells */ = {
+			isa = PBXGroup;
+			children = (
+				8C7C334E2142C2F500EC6C96 /* TextFieldCell.swift */,
+				8C7C3355214662CF00EC6C96 /* TextFieldCellData.swift */,
+			);
+			path = FormCells;
 			sourceTree = "<group>";
 		};
 		8CA218902122E8880063C188 /* SendMoneyComponent */ = {
@@ -1458,6 +1502,7 @@
 				8CA218DD212D93570063C188 /* ContactsHorizontalComponent.swift in Sources */,
 				8CA2192C21355CF60063C188 /* TransactionsFeatureFilterComponent.swift in Sources */,
 				8C04BC452121D48E00E90090 /* BalanceData.swift in Sources */,
+				8C7C33682146C9B000EC6C96 /* PhotoButton.swift in Sources */,
 				8CF5F95E2114A77D0083B36A /* CreatePinStageItem.swift in Sources */,
 				8C60884C2111A20B00470411 /* LoginPasswordFormComponent.swift in Sources */,
 				8C091906210605AF00703224 /* Router.swift in Sources */,
@@ -1468,6 +1513,7 @@
 				8C713B1B21380CE200AC2E25 /* DepositMoneyViewController.swift in Sources */,
 				8CA2191421342ABC0063C188 /* DateInterval+Extensions.swift in Sources */,
 				8C091938210622AA00703224 /* Request.swift in Sources */,
+				8C7C33622146B11000EC6C96 /* KYCApprovingState.swift in Sources */,
 				8C333D382109F3D500949AC0 /* OnboardingFlow.swift in Sources */,
 				8C6088652112027300470411 /* ThreeStepsAPI.swift in Sources */,
 				8C091949210714D800703224 /* NetworkService.swift in Sources */,
@@ -1499,6 +1545,7 @@
 				8C333D66210B6E7600949AC0 /* UITextField+Extensions.swift in Sources */,
 				8CF5F92F211327EB0083B36A /* MaskParser.swift in Sources */,
 				8C0919512107234B00703224 /* SignupAPI.swift in Sources */,
+				8C7C336C2146D6A700EC6C96 /* KYCUploadAddressDocumentViewController.swift in Sources */,
 				8C60885A2111DCB000470411 /* EnterPhoneLoginPasswordViewController.swift in Sources */,
 				8CA218B121247FF80063C188 /* SendMoneyMethodComponent.swift in Sources */,
 				8CA219062133ED4E0063C188 /* GroupingType.swift in Sources */,
@@ -1508,6 +1555,7 @@
 				8C52FFE32119C1CF00EB55EA /* TermData.swift in Sources */,
 				8CF5F9282112FE580083B36A /* DelayTimer.swift in Sources */,
 				8CF5F94A21147C050083B36A /* WalletNavigable.swift in Sources */,
+				8C7C335A21468F5A00EC6C96 /* KYCPersonalInfoProgress.swift in Sources */,
 				8CA218962122EAF60063C188 /* SegmentedControlComponent.swift in Sources */,
 				8C6088562111CB8C00470411 /* LoginFormComponent.swift in Sources */,
 				8C713B32213FE33600AC2E25 /* EmptyViewController.swift in Sources */,
@@ -1519,7 +1567,9 @@
 				8C09194D2107214300703224 /* WalletEnvironment.swift in Sources */,
 				8CF41F112136E750006D4FE2 /* DatePickerViewController.swift in Sources */,
 				8C713B2C213EC77500AC2E25 /* CustomBehavioral.swift in Sources */,
+				8C7C33642146C47000EC6C96 /* KYCUploadDocumentViewController.swift in Sources */,
 				8C333D4C210B1D3500949AC0 /* CheckBoxButton.swift in Sources */,
+				8C7C335D2146A49A00EC6C96 /* KeyboardAvoiding.swift in Sources */,
 				8CA218BB212573510063C188 /* IndentLabel.swift in Sources */,
 				8CF5F94821147A870083B36A /* CreatePinViewController.swift in Sources */,
 				8C09192D21061F3600703224 /* ControllerHelper.swift in Sources */,
@@ -1546,6 +1596,7 @@
 				8CA218C42125AD130063C188 /* WalletSmallItemComponent.swift in Sources */,
 				8CA218F7213018DA0063C188 /* Paginator.swift in Sources */,
 				8C09193F210625E500703224 /* Provider.swift in Sources */,
+				8C7C335821466E5800EC6C96 /* GenderType.swift in Sources */,
 				8C52FFF2211AF1FD00EB55EA /* HomeViewController.swift in Sources */,
 				8C09194F2107225700703224 /* SignupProvider.swift in Sources */,
 				8C0919782108C2B900703224 /* UserProvider.swift in Sources */,
@@ -1556,6 +1607,7 @@
 				8C713B0F2137E54100AC2E25 /* UIRefreshControl+Extensions.swift in Sources */,
 				8C333D60210B5E2900949AC0 /* NewPasswordFormComponent.swift in Sources */,
 				8CF5F94E21148BD90083B36A /* EnterPinViewController.swift in Sources */,
+				8C7C336A2146D65800EC6C96 /* KYCUploadSelfieViewController.swift in Sources */,
 				8C333D4A210B1C4300949AC0 /* TextCheckBoxView.swift in Sources */,
 				8C6088672112120100470411 /* SpinningAnimationLayer.swift in Sources */,
 				8C520002211B4B6400EB55EA /* DetailOffsetPresentationViewController.swift in Sources */,
@@ -1567,6 +1619,7 @@
 				8CA2190421305EC00063C188 /* GroupType.swift in Sources */,
 				8C7C33492142973C00EC6C96 /* StageButton.swift in Sources */,
 				8C333D68210B72A100949AC0 /* ContinueViewController.swift in Sources */,
+				8C7C33662146C62200EC6C96 /* KYCUploadPrivateDocumentViewController.swift in Sources */,
 				8C09196A2108951F00703224 /* WalletResponseError.swift in Sources */,
 				8CA218A9212343760063C188 /* UIImageView+Extensions.swift in Sources */,
 				8C6088602111F35E00470411 /* EnterPhoneNumberViewController.swift in Sources */,
@@ -1600,6 +1653,7 @@
 				8C7C334D2142C15100EC6C96 /* KYCPersonalInfoViewController.swift in Sources */,
 				8CA218BD2125A34B0063C188 /* KeyboardBehaviourFollowingViewController.swift in Sources */,
 				8C333D54210B394800949AC0 /* RoundContinueButton.swift in Sources */,
+				8C7C335E2146A49A00EC6C96 /* KeyboardDismissingView.swift in Sources */,
 				8CF5F95B21149E460083B36A /* CreatePinComponent.swift in Sources */,
 				8CA2191D21344C730063C188 /* Array+Extensions.swift in Sources */,
 				8C333D46210B0D5400949AC0 /* LaunchScreenViewController.swift in Sources */,
@@ -1630,6 +1684,7 @@
 				8CA218AF212479040063C188 /* SendMoneyButton.swift in Sources */,
 				8C09193B210623F200703224 /* Environment.swift in Sources */,
 				8C6088482110A75100470411 /* AdditionalTextButton.swift in Sources */,
+				8C7C33602146ACBE00EC6C96 /* KYCUploadDocumentsMenuViewController.swift in Sources */,
 				8C333D56210B4EF400949AC0 /* VerificationCodeFormComponent.swift in Sources */,
 				8C09196D21089FA700703224 /* AuthRequest.swift in Sources */,
 				8CF5F94C21147F000083B36A /* EnterPinFlow.swift in Sources */,
@@ -1637,6 +1692,7 @@
 				8CF5F93821134E6D0083B36A /* CGPoint+Extensions.swift in Sources */,
 				8C333D3C2109FC2D00949AC0 /* OnboardingItemComponent.swift in Sources */,
 				8CA218E7212DA8300063C188 /* SearchTextField.swift in Sources */,
+				8C7C3356214662CF00EC6C96 /* TextFieldCellData.swift in Sources */,
 				8CF5F9632114AB000083B36A /* ItemComponent.swift in Sources */,
 				8C7C334F2142C2F500EC6C96 /* TextFieldCell.swift in Sources */,
 				8C0919812108D99400703224 /* CreateNewPasswordViewController.swift in Sources */,
