@@ -28,6 +28,12 @@ class CreatePinViewController: FlowViewController, WalletNavigable, DecimalKeybo
         }
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        migratingNavigationController?.custom.addRightBarItemButton(for: self, title: "SKIP", target: self, action: #selector(skipButtonTouchEvent(_:)))
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -46,7 +52,6 @@ class CreatePinViewController: FlowViewController, WalletNavigable, DecimalKeybo
         createPinComponent?.delegate = self
 
         setupDefaultStyle()
-        migratingNavigationController?.custom.addRightBarItemButton(for: self, title: "SKIP", target: self, action: #selector(skipButtonTouchEvent(_:)))
     }
 
     func decimalKeyboardComponent(_ decimalKeyboardComponent: DecimalKeyboardComponent, keyWasTapped key: DecimalKeyboardComponent.Key) {

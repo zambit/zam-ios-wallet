@@ -24,6 +24,12 @@ class EnterLoginPasswordViewController: ContinueViewController, LoginPasswordCom
     @IBOutlet var loginPasswordForm: LoginPasswordFormComponent?
     @IBOutlet var forgotPasswordButton: AdditionalTextButton?
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        migratingNavigationController?.custom.addRightBarItemButton(for: self, title: "EXIT", target: self, action: #selector(exitButtonTouchEvent(_:)))
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -43,7 +49,7 @@ class EnterLoginPasswordViewController: ContinueViewController, LoginPasswordCom
 //            title = MaskParser(symbol: maskData.1, space: maskData.2).matchingUnstrict(text: phone, withMask: maskData.0)
 //        }
 
-        migratingNavigationController?.custom.addRightBarItemButton(for: self, title: "EXIT", target: self, action: #selector(exitButtonTouchEvent(_:)))
+
     }
 
     private func setupViewControllerStyle() {

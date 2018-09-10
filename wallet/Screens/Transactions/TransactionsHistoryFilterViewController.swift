@@ -22,7 +22,7 @@ class TransactionsHistoryFilterViewController: FlowViewController, WalletNavigab
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        //navigationController?.setNavigationBarHidden(false, animated: animated)
+        migratingNavigationController?.custom.addRightBarItemButton(for: self, title: "DONE", target: self, action: #selector(doneButtonTouchEvent(_:)))
     }
 
     override func viewDidLoad() {
@@ -38,8 +38,6 @@ class TransactionsHistoryFilterViewController: FlowViewController, WalletNavigab
         componentsTableView?.alwaysBounceVertical = false
         componentsTableView?.delegate = self
         componentsTableView?.dataSource = self
-
-        migratingNavigationController?.custom.addRightBarItemButton(for: self, title: "DONE", target: self, action: #selector(doneButtonTouchEvent(_:)))
     }
 
     private func setupComponents(filterData: TransactionsFilterData) {
