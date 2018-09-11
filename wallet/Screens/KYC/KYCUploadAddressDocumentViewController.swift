@@ -25,7 +25,6 @@ class KYCUploadAddressDocumentViewController: KYCUploadDocumentViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
     }
 }
 

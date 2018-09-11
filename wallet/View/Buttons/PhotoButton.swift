@@ -80,8 +80,8 @@ extension BehaviorExtension where Base: PhotoButton {
         base.layer.borderWidth = 1.0
     }
 
-
     func setupStyle() {
+        base.maskToBounds = true
         base.backgroundColor = .white
     }
 

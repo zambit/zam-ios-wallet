@@ -25,7 +25,5 @@ class KYCUploadPrivateDocumentViewController: KYCUploadDocumentViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-
     }
 }

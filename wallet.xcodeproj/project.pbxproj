@@ -152,6 +152,16 @@
 		8C7C33682146C9B000EC6C96 /* PhotoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C33672146C9B000EC6C96 /* PhotoButton.swift */; };
 		8C7C336A2146D65800EC6C96 /* KYCUploadSelfieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C33692146D65800EC6C96 /* KYCUploadSelfieViewController.swift */; };
 		8C7C336C2146D6A700EC6C96 /* KYCUploadAddressDocumentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C336B2146D6A700EC6C96 /* KYCUploadAddressDocumentViewController.swift */; };
+		8C7C33712147C47000EC6C96 /* PickersAssets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C336F2147C47000EC6C96 /* PickersAssets.swift */; };
+		8C7C33732147C67C00EC6C96 /* ItemWithImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C33722147C67C00EC6C96 /* ItemWithImage.swift */; };
+		8C7C33752147C7EA00EC6C96 /* UIApplication+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C33742147C7EA00EC6C96 /* UIApplication+Extensions.swift */; };
+		8C7C33772147E3B500EC6C96 /* CurrencyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C33762147E3B500EC6C96 /* CurrencyCell.swift */; };
+		8C7C33792147E60200EC6C96 /* PHAsset+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C33782147E60200EC6C96 /* PHAsset+Extensions.swift */; };
+		8C7C337B2147EF1D00EC6C96 /* MediaSheetPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C337A2147EF1D00EC6C96 /* MediaSheetPickerViewController.swift */; };
+		8C7C337D2147EF6400EC6C96 /* LikeButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C337C2147EF6400EC6C96 /* LikeButtonCell.swift */; };
+		8C7C337F2147EF9800EC6C96 /* PhotoLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C337E2147EF9800EC6C96 /* PhotoLayout.swift */; };
+		8C7C33812147EFFB00EC6C96 /* ItemWithPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C33802147EFFB00EC6C96 /* ItemWithPhoto.swift */; };
+		8C7C338521480AA300EC6C96 /* CAGradientLayer+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C338421480AA300EC6C96 /* CAGradientLayer+Extensions.swift */; };
 		8CA2188F2121D97C0063C188 /* DecimalKeyboardComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CA2188E2121D97B0063C188 /* DecimalKeyboardComponent.xib */; };
 		8CA218922122E8D70063C188 /* SendMoneyComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CA218912122E8D70063C188 /* SendMoneyComponent.xib */; };
 		8CA218942122EAC90063C188 /* SendMoneyComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA218932122EAC90063C188 /* SendMoneyComponent.swift */; };
@@ -406,6 +416,16 @@
 		8C7C33672146C9B000EC6C96 /* PhotoButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoButton.swift; sourceTree = "<group>"; };
 		8C7C33692146D65800EC6C96 /* KYCUploadSelfieViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KYCUploadSelfieViewController.swift; sourceTree = "<group>"; };
 		8C7C336B2146D6A700EC6C96 /* KYCUploadAddressDocumentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KYCUploadAddressDocumentViewController.swift; sourceTree = "<group>"; };
+		8C7C336F2147C47000EC6C96 /* PickersAssets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickersAssets.swift; sourceTree = "<group>"; };
+		8C7C33722147C67C00EC6C96 /* ItemWithImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemWithImage.swift; sourceTree = "<group>"; };
+		8C7C33742147C7EA00EC6C96 /* UIApplication+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extensions.swift"; sourceTree = "<group>"; };
+		8C7C33762147E3B500EC6C96 /* CurrencyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyCell.swift; sourceTree = "<group>"; };
+		8C7C33782147E60200EC6C96 /* PHAsset+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PHAsset+Extensions.swift"; sourceTree = "<group>"; };
+		8C7C337A2147EF1D00EC6C96 /* MediaSheetPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaSheetPickerViewController.swift; sourceTree = "<group>"; };
+		8C7C337C2147EF6400EC6C96 /* LikeButtonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeButtonCell.swift; sourceTree = "<group>"; };
+		8C7C337E2147EF9800EC6C96 /* PhotoLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLayout.swift; sourceTree = "<group>"; };
+		8C7C33802147EFFB00EC6C96 /* ItemWithPhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemWithPhoto.swift; sourceTree = "<group>"; };
+		8C7C338421480AA300EC6C96 /* CAGradientLayer+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CAGradientLayer+Extensions.swift"; sourceTree = "<group>"; };
 		8CA2188E2121D97B0063C188 /* DecimalKeyboardComponent.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DecimalKeyboardComponent.xib; sourceTree = "<group>"; };
 		8CA218912122E8D70063C188 /* SendMoneyComponent.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SendMoneyComponent.xib; sourceTree = "<group>"; };
 		8CA218932122EAC90063C188 /* SendMoneyComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMoneyComponent.swift; sourceTree = "<group>"; };
@@ -548,7 +568,7 @@
 				8CF5F92E211327EB0083B36A /* MaskParser.swift */,
 				8C52FFFD211B252F00EB55EA /* InstantPanGestureRecognizer.swift */,
 				8CA218AA21241BF90063C188 /* PhoneNumberEnteringHandler.swift */,
-				8CF41EA32136E48A006D4FE2 /* DatePickerViewController.swift */,
+				8C7C336D2147C43800EC6C96 /* Pickers */,
 				8CA218EE212DCC030063C188 /* LetterImage.swift */,
 				8C7C335B2146A49900EC6C96 /* KeyboardAvoiding.swift */,
 				8C7C335C2146A49A00EC6C96 /* KeyboardDismissingView.swift */,
@@ -1029,6 +1049,37 @@
 			path = FormCells;
 			sourceTree = "<group>";
 		};
+		8C7C336D2147C43800EC6C96 /* Pickers */ = {
+			isa = PBXGroup;
+			children = (
+				8CF41EA32136E48A006D4FE2 /* DatePickerViewController.swift */,
+				8C7C336F2147C47000EC6C96 /* PickersAssets.swift */,
+				8C7C3386214816A000EC6C96 /* MediaPickerSheetViewController */,
+			);
+			path = Pickers;
+			sourceTree = "<group>";
+		};
+		8C7C3386214816A000EC6C96 /* MediaPickerSheetViewController */ = {
+			isa = PBXGroup;
+			children = (
+				8C7C337A2147EF1D00EC6C96 /* MediaSheetPickerViewController.swift */,
+				8C7C3387214816D800EC6C96 /* Images */,
+				8C7C337E2147EF9800EC6C96 /* PhotoLayout.swift */,
+			);
+			path = MediaPickerSheetViewController;
+			sourceTree = "<group>";
+		};
+		8C7C3387214816D800EC6C96 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				8C7C33722147C67C00EC6C96 /* ItemWithImage.swift */,
+				8C7C33762147E3B500EC6C96 /* CurrencyCell.swift */,
+				8C7C337C2147EF6400EC6C96 /* LikeButtonCell.swift */,
+				8C7C33802147EFFB00EC6C96 /* ItemWithPhoto.swift */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
 		8CA218902122E8880063C188 /* SendMoneyComponent */ = {
 			isa = PBXGroup;
 			children = (
@@ -1245,25 +1296,28 @@
 		8CF5F93B21144BED0083B36A /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				8C04BC29211C4F4000E90090 /* UIFont+Additions.swift */,
+				8CA2191C21344C730063C188 /* Array+Extensions.swift */,
+				8CF5F93721134E6D0083B36A /* CGPoint+Extensions.swift */,
+				8C7C338421480AA300EC6C96 /* CAGradientLayer+Extensions.swift */,
 				8CA219112134259F0063C188 /* Date+Extensions.swift */,
 				8CA2191321342ABC0063C188 /* DateInterval+Extensions.swift */,
-				8C333D41210A094500949AC0 /* UIColor+Additions.swift */,
+				8C4413D521199FFC00C9689C /* Dictionary+Extensions.swift */,
+				8CA218CA2126D5E00063C188 /* NumberFormatter+Extensions.swift */,
+				8C7C33782147E60200EC6C96 /* PHAsset+Extensions.swift */,
+				8C333D6E210F00E600949AC0 /* String+Extensions.swift */,
 				8C713B352140327600AC2E25 /* StringProtocol+Extensions.swift */,
+				8C713B0C2136EA9E00AC2E25 /* UIAlertController+Extensions.swift */,
+				8C7C33742147C7EA00EC6C96 /* UIApplication+Extensions.swift */,
+				8C333D41210A094500949AC0 /* UIColor+Additions.swift */,
 				8CA218EA212DC2DB0063C188 /* UIColor+Extensions.swift */,
-				8C333D47210B0F3700949AC0 /* UIViewController+Extensions.swift */,
-				8C333D3F210A08A600949AC0 /* UIView+Extensions.swift */,
+				8CF5F93921144BE80083B36A /* UIDevice+Extensions.swift */,
+				8C04BC29211C4F4000E90090 /* UIFont+Additions.swift */,
 				8C04BC422121C23200E90090 /* UIImage+Extensions.swift */,
 				8CA218A8212343760063C188 /* UIImageView+Extensions.swift */,
 				8C713B0E2137E54100AC2E25 /* UIRefreshControl+Extensions.swift */,
-				8CF5F93921144BE80083B36A /* UIDevice+Extensions.swift */,
 				8C333D64210B619200949AC0 /* UITextField+Extensions.swift */,
-				8CF5F93721134E6D0083B36A /* CGPoint+Extensions.swift */,
-				8C333D6E210F00E600949AC0 /* String+Extensions.swift */,
-				8CA2191C21344C730063C188 /* Array+Extensions.swift */,
-				8C4413D521199FFC00C9689C /* Dictionary+Extensions.swift */,
-				8CA218CA2126D5E00063C188 /* NumberFormatter+Extensions.swift */,
-				8C713B0C2136EA9E00AC2E25 /* UIAlertController+Extensions.swift */,
+				8C333D3F210A08A600949AC0 /* UIView+Extensions.swift */,
+				8C333D47210B0F3700949AC0 /* UIViewController+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1513,6 +1567,7 @@
 				8C713B1B21380CE200AC2E25 /* DepositMoneyViewController.swift in Sources */,
 				8CA2191421342ABC0063C188 /* DateInterval+Extensions.swift in Sources */,
 				8C091938210622AA00703224 /* Request.swift in Sources */,
+				8C7C337F2147EF9800EC6C96 /* PhotoLayout.swift in Sources */,
 				8C7C33622146B11000EC6C96 /* KYCApprovingState.swift in Sources */,
 				8C333D382109F3D500949AC0 /* OnboardingFlow.swift in Sources */,
 				8C6088652112027300470411 /* ThreeStepsAPI.swift in Sources */,
@@ -1550,6 +1605,7 @@
 				8CA218B121247FF80063C188 /* SendMoneyMethodComponent.swift in Sources */,
 				8CA219062133ED4E0063C188 /* GroupingType.swift in Sources */,
 				8CF5F92D2113206A0083B36A /* SecondEnterLoginFlow.swift in Sources */,
+				8C7C337D2147EF6400EC6C96 /* LikeButtonCell.swift in Sources */,
 				8C333D7B210F767100949AC0 /* FlowViewController.swift in Sources */,
 				8C091934210620C800703224 /* OnboardingViewController.swift in Sources */,
 				8C52FFE32119C1CF00EB55EA /* TermData.swift in Sources */,
@@ -1621,18 +1677,23 @@
 				8C333D68210B72A100949AC0 /* ContinueViewController.swift in Sources */,
 				8C7C33662146C62200EC6C96 /* KYCUploadPrivateDocumentViewController.swift in Sources */,
 				8C09196A2108951F00703224 /* WalletResponseError.swift in Sources */,
+				8C7C338521480AA300EC6C96 /* CAGradientLayer+Extensions.swift in Sources */,
 				8CA218A9212343760063C188 /* UIImageView+Extensions.swift in Sources */,
 				8C6088602111F35E00470411 /* EnterPhoneNumberViewController.swift in Sources */,
 				8C6088512111A95100470411 /* Conditions.swift in Sources */,
 				8C52FFF0211AE19300EB55EA /* OverlappingFlowLayout.swift in Sources */,
+				8C7C33792147E60200EC6C96 /* PHAsset+Extensions.swift in Sources */,
 				9319BAA6212A0AC200033A7E /* CrossAnimationView.swift in Sources */,
 				8C7C33472142924D00EC6C96 /* KYCMainScreenViewController.swift in Sources */,
 				8C333D302109E0B400949AC0 /* UserViewController.swift in Sources */,
 				8CA2189F2122F9E40063C188 /* SelectingBackView.swift in Sources */,
+				8C7C33712147C47000EC6C96 /* PickersAssets.swift in Sources */,
 				8CF1DE4520EFB1A70036F986 /* HorizontalScrollView.swift in Sources */,
+				8C7C33752147C7EA00EC6C96 /* UIApplication+Extensions.swift in Sources */,
 				8C0919412106264200703224 /* Dispatcher.swift in Sources */,
 				8C52FFE12119BE0400EB55EA /* WalletData.swift in Sources */,
 				8CA218F82130192E0063C188 /* TransactionsHistoryViewController.swift in Sources */,
+				8C7C33812147EFFB00EC6C96 /* ItemWithPhoto.swift in Sources */,
 				8CF1DE4D20F3BDB90036F986 /* KeyboardViewController.swift in Sources */,
 				8CA218AB21241BF90063C188 /* PhoneNumberEnteringHandler.swift in Sources */,
 				8C333D77210F50E000949AC0 /* CountryIconImageView.swift in Sources */,
@@ -1646,6 +1707,7 @@
 				8CA218A1212304590063C188 /* SendMoneyViewController.swift in Sources */,
 				8C0919832109CC2000703224 /* EnterLoginPasswordViewController.swift in Sources */,
 				8C713B0D2136EA9E00AC2E25 /* UIAlertController+Extensions.swift in Sources */,
+				8C7C33732147C67C00EC6C96 /* ItemWithImage.swift in Sources */,
 				8C0919562107362300703224 /* CodableSuccess.swift in Sources */,
 				8CF41D8B21359776006D4FE2 /* ContactItemComponent.swift in Sources */,
 				8CF5F95221148D800083B36A /* DotsFieldComponent.swift in Sources */,
@@ -1676,6 +1738,7 @@
 				8C0919532107320800703224 /* CodableFailure.swift in Sources */,
 				8C04BC2A211C4F4000E90090 /* UIFont+Additions.swift in Sources */,
 				8C04BC432121C23200E90090 /* UIImage+Extensions.swift in Sources */,
+				8C7C33772147E3B500EC6C96 /* CurrencyCell.swift in Sources */,
 				8CF41D8F2136B842006D4FE2 /* TransactionsDirectionFilterComponent.swift in Sources */,
 				8CA21931213561C70063C188 /* MultiStatableButton.swift in Sources */,
 				8C333D42210A094500949AC0 /* UIColor+Additions.swift in Sources */,
@@ -1698,6 +1761,7 @@
 				8C0919812108D99400703224 /* CreateNewPasswordViewController.swift in Sources */,
 				8C0919432106268900703224 /* HTTPDispatcher.swift in Sources */,
 				8C333D362109F09800949AC0 /* FirstEnterLoginFlow.swift in Sources */,
+				8C7C337B2147EF1D00EC6C96 /* MediaSheetPickerViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -21,7 +21,7 @@ class KYCPersonalInfoViewController: FlowViewController, WalletNavigable, UITabl
     private var forms: [(String, [TextFieldCellData])] = []
     private var progress: KYCPersonalInfoProgress = KYCPersonalInfoProgress()
 
-    private var state: KYCApprovingState = .initial
+    private var approvingState: KYCApprovingState = .initial
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -184,7 +184,7 @@ class KYCPersonalInfoViewController: FlowViewController, WalletNavigable, UITabl
     }
 
     func prepare(state: KYCApprovingState) {
-        self.state = state
+        self.approvingState = state
 
         switch state {
         case .initial:

@@ -105,7 +105,25 @@ extension BehaviorExtension where Base: WalletNavigationController {
         return nextViewController(next)
     }
 
-    func present(viewController: ScreenWalletNavigable, animate: Bool) {
+    func present(viewController: UIViewController, animate: Bool) {
+        viewController.hero.isEnabled = true
+
+        if animate {
+            viewController.hero.modalAnimationType = .selectBy(
+                presenting: .slide(direction: .left),
+                dismissing: .slide(direction: .right)
+            )
+        } else {
+            viewController.hero.modalAnimationType = .none
+        }
+
+        viewController.modalPresentationStyle = .overFullScreen
+
+        base.viewControllers.last?.dismissKeyboard()
+        base.present(viewController, animated: true, completion: nil)
+    }
+
+    func presentNavigable(viewController: ScreenWalletNavigable, animate: Bool) {
         let childNavigationController = WalletNavigationController(rootViewController: viewController)
         childNavigationController.hero.isEnabled = true
 
@@ -130,7 +148,7 @@ extension BehaviorExtension where Base: WalletNavigationController {
         base.presentedViewController?.hero.dismissViewController()
     }
 
-    func hideBackButton(for viewController: ScreenWalletNavigable) {
+    func hideBackButton(for viewController: UIViewController) {
         viewController.navigationItem.hidesBackButton = true
 
         viewController.navigationItem.leftBarButtonItem = nil
