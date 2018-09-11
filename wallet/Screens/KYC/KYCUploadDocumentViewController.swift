@@ -13,6 +13,10 @@ class KYCUploadDocumentViewController: FlowViewController, WalletNavigable {
 
     var onSend: ((KYCApprovingState) -> Void)?
 
+    private(set) var documentsImages: [UIImage?] = []
+
+    private var approvingState: KYCApprovingState = .initial
+
     @IBOutlet private var backgroundView: UIView?
 
     @IBOutlet private var topPlaceholderComponent: IllustrationalPlaceholder?
@@ -38,6 +42,8 @@ class KYCUploadDocumentViewController: FlowViewController, WalletNavigable {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        documentsImages = [UIImage?](repeating: nil, count: documentButtonsCount)
 
         backgroundView?.backgroundColor = .white
         view.applyDefaultGradientHorizontally()
@@ -71,19 +77,142 @@ class KYCUploadDocumentViewController: FlowViewController, WalletNavigable {
     private func setupDocumentButtons(count: Int) {
         documentButtonsStackView?.subviews.forEach { $0.removeFromSuperview() }
 
-        for _ in 0..<count {
+        for i in 0..<count {
             let documentButton = PhotoButton(type: .custom)
+
+            documentButton.tag = 1680 + i
 
             documentButton.translatesAutoresizingMaskIntoConstraints = false
             documentButton.heightAnchor.constraint(equalTo: documentButton.widthAnchor).isActive = true
             documentButton.heightAnchor.constraint(equalToConstant: 90.0).isActive = true
+            documentButton.addTarget(self, action: #selector(documentButtonTouchUpInsideEvent(_:)), for: .touchUpInside)
 
             documentButtonsStackView?.addArrangedSubview(documentButton)
         }
     }
 
+    func prepare(state: KYCApprovingState) {
+        self.approvingState = state
+
+        switch state {
+        case .initial:
+            sendButton?.custom.changeState(to: 0, indicatorBlock: { imageView in
+                imageView.image = #imageLiteral(resourceName: "chevronRight")
+                imageView.tintColor = .darkIndigo
+            })
+        case .onVerification:
+            sendButton?.custom.changeState(to: 1, indicatorBlock: { imageView in
+                imageView.image = #imageLiteral(resourceName: "icTime")
+                imageView.tintColor = .white
+            })
+        case .verified:
+            sendButton?.custom.changeState(to: 2, indicatorBlock: { imageView in
+                imageView.image = #imageLiteral(resourceName: "icCheck")
+                imageView.tintColor = .white
+            })
+        }
+    }
+
     @objc
     func sendButtonTouchUpInsideEvent(_ sender: StageButton) {
-        //onSend?(.onVerification)
+        onSend?(.onVerification)
+    }
+
+    @objc
+    private func documentButtonTouchUpInsideEvent(_ sender: PhotoButton) {
+        addPhoto(for: sender, index: sender.tag % 10)
+    }
+
+    private var currentProceedDocumentIndex: Int?
+    private weak var currentProceedDocumentButton: PhotoButton?
+
+    private func addPhoto(for button: PhotoButton, index: Int) {
+        let alert = UIAlertController(style: .actionSheet)
+        alert.addMediaSheetPicker {
+            [weak self]
+            result in
+
+            switch result {
+            case .cameraLibraryRequest:
+                guard UIImagePickerController.isSourceTypeAvailable(.camera) else {
+                    return
+                }
+
+                self?.currentProceedDocumentIndex = index
+                self?.currentProceedDocumentButton = button
+
+                let photoLibraryPickerController = UIImagePickerController()
+                photoLibraryPickerController.delegate = self;
+                photoLibraryPickerController.sourceType = .camera
+                self?.present(photoLibraryPickerController, animated: true, completion: nil)
+
+            case .photosLibraryRequest:
+                guard UIImagePickerController.isSourceTypeAvailable(.photoLibrary) else {
+                    return
+                }
+
+                self?.currentProceedDocumentIndex = index
+                self?.currentProceedDocumentButton = button
+
+                let photoLibraryPickerController = UIImagePickerController()
+                photoLibraryPickerController.delegate = self;
+                photoLibraryPickerController.sourceType = .photoLibrary
+                self?.present(photoLibraryPickerController, animated: true, completion: nil)
+
+            case .photos(let assets):
+
+                guard let strongSelf = self else {
+                    return
+                }
+
+                let image = assets.first?.thumbnailImage
+                strongSelf.documentsImages[index] = image
+                strongSelf.documentsImagesChanged(strongSelf.documentsImages)
+                if let img = image {
+                    button.custom.setup(photo: img)
+                }
+            }
+        }
+
+        alert.addAction(title: "Cancel", style: .cancel)
+        alert.show()
+    }
+
+    func documentsImagesChanged(_ documentsImages: [UIImage?]) {
+        let unwrapped: [UIImage] = documentsImages.compactMap { return $0 }
+
+        sendButton?.custom.setEnabled(unwrapped.count == documentButtonsCount)
+    }
+}
+
+extension KYCUploadDocumentViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+
+    // MARK: - UIImagePickerControllerDelegate
+
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        self.dismiss(animated: true, completion: {
+            [weak self] in
+            self?.currentProceedDocumentIndex = nil
+            self?.currentProceedDocumentButton = nil
+        })
+    }
+
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage,
+            let index = currentProceedDocumentIndex,
+            let button = currentProceedDocumentButton {
+
+            self.documentsImages[index] = image
+            self.documentsImagesChanged(self.documentsImages)
+            button.custom.setup(photo: image)
+        } else {
+            print("Something went wrong")
+        }
+
+        self.dismiss(animated: true, completion: {
+            [weak self] in
+            self?.currentProceedDocumentIndex = nil
+            self?.currentProceedDocumentButton = nil
+        })
     }
 }

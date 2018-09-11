@@ -162,6 +162,21 @@ final class MainFlow: ScreenFlow {
             fatalError()
         }
 
+        let onSend: (KYCApprovingState) -> Void = {
+            state in
+
+            vc.migratingNavigationController?.custom.popBack(nextViewController: {
+                next in
+
+                guard let back = next as? KYCUploadDocumentsMenuViewController else {
+                    fatalError()
+                }
+
+                back.updatePrivateDocumentApprovingState(state)
+            })
+        }
+
+        vc.onSend = onSend
         vc.title = "01/KYC1"
         vc.flow = self
         return vc
@@ -174,6 +189,21 @@ final class MainFlow: ScreenFlow {
             fatalError()
         }
 
+        let onSend: (KYCApprovingState) -> Void = {
+            state in
+
+            vc.migratingNavigationController?.custom.popBack(nextViewController: {
+                next in
+
+                guard let back = next as? KYCUploadDocumentsMenuViewController  else {
+                    fatalError()
+                }
+
+                back.updateSelfieApprovingState(state)
+            })
+        }
+
+        vc.onSend = onSend
         vc.title = "02/KYC1"
         vc.flow = self
         return vc
@@ -186,6 +216,21 @@ final class MainFlow: ScreenFlow {
             fatalError()
         }
 
+        let onSend: (KYCApprovingState) -> Void = {
+            state in
+
+            vc.migratingNavigationController?.custom.popBack(nextViewController: {
+                next in
+
+                guard let back = next as? KYCUploadDocumentsMenuViewController  else {
+                    fatalError()
+                }
+
+                back.updateAddressDocumentApprovingState(state)
+            })
+        }
+
+        vc.onSend = onSend
         vc.title = "03/KYC1"
         vc.flow = self
         return vc
@@ -351,7 +396,7 @@ final class MainFlow: ScreenFlow {
             let target = strongSelf.transactionDetailScreen
             target.prepare(sendMoneyData: data)
 
-            strongSelf.migratingNavigationController.custom.present(viewController: target, animate: false)
+            strongSelf.migratingNavigationController.custom.presentNavigable(viewController: target, animate: false)
         }
 
         let onQRScanner: () -> Void = {
@@ -363,7 +408,7 @@ final class MainFlow: ScreenFlow {
 
             let target = strongSelf.qrScannerScreen
             target.delegate = vc
-            strongSelf.migratingNavigationController.custom.present(viewController: target, animate: true)
+            strongSelf.migratingNavigationController.custom.presentNavigable(viewController: target, animate: true)
         }
 
         vc.definesPresentationContext = true

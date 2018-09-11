@@ -11,18 +11,12 @@ import UIKit
 
 class CountryView: UIView {
 
-    var borderWidth: CGFloat = 4.0 {
-        didSet {
-            layoutIfNeeded()
-        }
-    }
-
     private var innerImageView: UIImageView!
 
     override func layoutSubviews() {
         super.layoutSubviews()
 
-        innerImageView.frame = bounds.insetBy(dx: borderWidth, dy: borderWidth)
+        innerImageView.frame = bounds.insetBy(dx: 4.0, dy: 4.0)
 
         let minimalSide = min(bounds.width, bounds.height)
         layer.cornerRadius = minimalSide / 2

@@ -9,6 +9,10 @@
 import UIKit
 
 extension UIViewController {
+    
+}
+
+extension UIViewController {
 
     func setupDefaultStyle() {
         self.view.applyGradient(colors: [.backgroundDarker, .backgroundLighter])
@@ -27,6 +31,14 @@ extension UIViewController {
     @objc func dismissKeyboard()
     {
         view.endEditing(true)
+    }
+}
+
+extension UIViewController {
+
+    var alertController: UIAlertController? {
+        guard let alert = UIApplication.topViewController() as? UIAlertController else { return nil }
+        return alert
     }
 }
 
