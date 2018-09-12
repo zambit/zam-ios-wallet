@@ -22,9 +22,6 @@
 		8C0918FC2105F75900703224 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C0918FB2105F75900703224 /* Login.storyboard */; };
 		8C0918FE2105F76200703224 /* Registration.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C0918FD2105F76200703224 /* Registration.storyboard */; };
 		8C091900210601F300703224 /* Recovery.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C0918FF210601F300703224 /* Recovery.storyboard */; };
-		8C091906210605AF00703224 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C091905210605AF00703224 /* Router.swift */; };
-		8C091908210605FA00703224 /* InitialRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C091907210605FA00703224 /* InitialRouter.swift */; };
-		8C09190A2106068D00703224 /* OnboardingRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0919092106068D00703224 /* OnboardingRouter.swift */; };
 		8C09192D21061F3600703224 /* ControllerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C09192C21061F3600703224 /* ControllerHelper.swift */; };
 		8C091934210620C800703224 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C091933210620C800703224 /* OnboardingViewController.swift */; };
 		8C091938210622AA00703224 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C091937210622AA00703224 /* Request.swift */; };
@@ -231,12 +228,6 @@
 		8CA21937213591BB0063C188 /* TransactionsCoinFilterComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA21936213591BB0063C188 /* TransactionsCoinFilterComponent.swift */; };
 		8CA21939213591D10063C188 /* TransactionsCoinFilterComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CA21938213591D00063C188 /* TransactionsCoinFilterComponent.xib */; };
 		8CA219402135949C0063C188 /* CoinItemComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA2193F2135949C0063C188 /* CoinItemComponent.swift */; };
-		8CF1DE4220EF98160036F986 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF1DE4120EF98160036F986 /* AuthViewController.swift */; };
-		8CF1DE4520EFB1A70036F986 /* HorizontalScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF1DE4420EFB1A70036F986 /* HorizontalScrollView.swift */; };
-		8CF1DE4720F37B5E0036F986 /* SMSConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF1DE4620F37B5E0036F986 /* SMSConfirmationViewController.swift */; };
-		8CF1DE4920F3A0BB0036F986 /* PasswordRecoveryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF1DE4820F3A0BB0036F986 /* PasswordRecoveryViewController.swift */; };
-		8CF1DE4B20F3AD210036F986 /* NewPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF1DE4A20F3AD210036F986 /* NewPasswordViewController.swift */; };
-		8CF1DE4D20F3BDB90036F986 /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF1DE4C20F3BDB90036F986 /* KeyboardViewController.swift */; };
 		8CF41D882135973F006D4FE2 /* RectItemComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CF41D862135973E006D4FE2 /* RectItemComponent.xib */; };
 		8CF41D892135973F006D4FE2 /* RectItemComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF41D872135973F006D4FE2 /* RectItemComponent.swift */; };
 		8CF41D8B21359776006D4FE2 /* ContactItemComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF41D8A21359776006D4FE2 /* ContactItemComponent.swift */; };
@@ -287,9 +278,6 @@
 		8C0918FB2105F75900703224 /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		8C0918FD2105F76200703224 /* Registration.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Registration.storyboard; sourceTree = "<group>"; };
 		8C0918FF210601F300703224 /* Recovery.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Recovery.storyboard; sourceTree = "<group>"; };
-		8C091905210605AF00703224 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
-		8C091907210605FA00703224 /* InitialRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialRouter.swift; sourceTree = "<group>"; };
-		8C0919092106068D00703224 /* OnboardingRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingRouter.swift; sourceTree = "<group>"; };
 		8C09192C21061F3600703224 /* ControllerHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControllerHelper.swift; sourceTree = "<group>"; };
 		8C091933210620C800703224 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		8C091937210622AA00703224 /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
@@ -498,12 +486,6 @@
 		8CA21936213591BB0063C188 /* TransactionsCoinFilterComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsCoinFilterComponent.swift; sourceTree = "<group>"; };
 		8CA21938213591D00063C188 /* TransactionsCoinFilterComponent.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransactionsCoinFilterComponent.xib; sourceTree = "<group>"; };
 		8CA2193F2135949C0063C188 /* CoinItemComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinItemComponent.swift; sourceTree = "<group>"; };
-		8CF1DE4120EF98160036F986 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
-		8CF1DE4420EFB1A70036F986 /* HorizontalScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalScrollView.swift; sourceTree = "<group>"; };
-		8CF1DE4620F37B5E0036F986 /* SMSConfirmationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMSConfirmationViewController.swift; sourceTree = "<group>"; };
-		8CF1DE4820F3A0BB0036F986 /* PasswordRecoveryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordRecoveryViewController.swift; sourceTree = "<group>"; };
-		8CF1DE4A20F3AD210036F986 /* NewPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPasswordViewController.swift; sourceTree = "<group>"; };
-		8CF1DE4C20F3BDB90036F986 /* KeyboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardViewController.swift; sourceTree = "<group>"; };
 		8CF41D862135973E006D4FE2 /* RectItemComponent.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RectItemComponent.xib; sourceTree = "<group>"; };
 		8CF41D872135973F006D4FE2 /* RectItemComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RectItemComponent.swift; sourceTree = "<group>"; };
 		8CF41D8A21359776006D4FE2 /* ContactItemComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactItemComponent.swift; sourceTree = "<group>"; };
@@ -809,8 +791,6 @@
 				8C0919792108D64E00703224 /* ScreenFlows */,
 				8C0919322106206100703224 /* Screens */,
 				8C0919312106205600703224 /* View */,
-				8CF1DE4E20F3BFC30036F986 /* Base */,
-				8CF1DE4320EF9D170036F986 /* Trash */,
 				8C34617120EF8FA900746724 /* Assets.xcassets */,
 				8C34617320EF8FA900746724 /* LaunchScreen.storyboard */,
 				8C34616E20EF8FA700746724 /* Main.storyboard */,
@@ -1260,29 +1240,6 @@
 			path = TransactionsCoinFilterComponent;
 			sourceTree = "<group>";
 		};
-		8CF1DE4320EF9D170036F986 /* Trash */ = {
-			isa = PBXGroup;
-			children = (
-				8CF1DE4120EF98160036F986 /* AuthViewController.swift */,
-				8CF1DE4620F37B5E0036F986 /* SMSConfirmationViewController.swift */,
-				8C091905210605AF00703224 /* Router.swift */,
-				8C091907210605FA00703224 /* InitialRouter.swift */,
-				8C0919092106068D00703224 /* OnboardingRouter.swift */,
-				8CF1DE4A20F3AD210036F986 /* NewPasswordViewController.swift */,
-				8CF1DE4820F3A0BB0036F986 /* PasswordRecoveryViewController.swift */,
-			);
-			path = Trash;
-			sourceTree = "<group>";
-		};
-		8CF1DE4E20F3BFC30036F986 /* Base */ = {
-			isa = PBXGroup;
-			children = (
-				8CF1DE4C20F3BDB90036F986 /* KeyboardViewController.swift */,
-				8CF1DE4420EFB1A70036F986 /* HorizontalScrollView.swift */,
-			);
-			path = Base;
-			sourceTree = "<group>";
-		};
 		8CF5F929211307010083B36A /* Timers */ = {
 			isa = PBXGroup;
 			children = (
@@ -1568,7 +1525,6 @@
 				8C7C33682146C9B000EC6C96 /* PhotoButton.swift in Sources */,
 				8CF5F95E2114A77D0083B36A /* CreatePinStageItem.swift in Sources */,
 				8C60884C2111A20B00470411 /* LoginPasswordFormComponent.swift in Sources */,
-				8C091906210605AF00703224 /* Router.swift in Sources */,
 				8CF41D8D2136A1AE006D4FE2 /* TransactionsFilterData.swift in Sources */,
 				8C7C33512142C73900EC6C96 /* FloatTextField.swift in Sources */,
 				8C713B2A213EC69D00AC2E25 /* WalletNavigationController.swift in Sources */,
@@ -1588,7 +1544,6 @@
 				8C60885C2111F1A200470411 /* RecoveryFlow.swift in Sources */,
 				8C713B2E213FCF1D00AC2E25 /* WalletTabBarController.swift in Sources */,
 				8C713B28213EB4A000AC2E25 /* UserTelephonyInfoProvider.swift in Sources */,
-				8CF1DE4220EF98160036F986 /* AuthViewController.swift in Sources */,
 				8CA2189D2122EEDE0063C188 /* SegmentedControlElement.swift in Sources */,
 				8C7C338D21493CD400EC6C96 /* KYCPersonalInfoData.swift in Sources */,
 				8C4413CA2118A66A00C9689C /* WalletKeychainConfiguration.swift in Sources */,
@@ -1628,7 +1583,6 @@
 				8C713B32213FE33600AC2E25 /* EmptyViewController.swift in Sources */,
 				8C713B1F213941FF00AC2E25 /* Networking.swift in Sources */,
 				8CA218D2212738450063C188 /* CheckAnimationView.swift in Sources */,
-				8CF1DE4720F37B5E0036F986 /* SMSConfirmationViewController.swift in Sources */,
 				8C333D48210B0F3700949AC0 /* UIViewController+Extensions.swift in Sources */,
 				8CA218FA21302BBF0063C188 /* TransactionCellComponent.swift in Sources */,
 				8C09194D2107214300703224 /* WalletEnvironment.swift in Sources */,
@@ -1652,11 +1606,9 @@
 				8CA218F3213007650063C188 /* TransactionsPageData.swift in Sources */,
 				8C52FFFE211B252F00EB55EA /* InstantPanGestureRecognizer.swift in Sources */,
 				8C6088442110A34200470411 /* CustomUI.swift in Sources */,
-				8C091908210605FA00703224 /* InitialRouter.swift in Sources */,
 				8C60885E2111F28000470411 /* EnterNewPhoneNumberViewController.swift in Sources */,
 				8CA2192721354D370063C188 /* TransactionsDateIntervalFilterComponent.swift in Sources */,
 				8C713B1D2138408700AC2E25 /* OutputButton.swift in Sources */,
-				8CF1DE4B20F3AD210036F986 /* NewPasswordViewController.swift in Sources */,
 				8CF5F93A21144BE80083B36A /* UIDevice+Extensions.swift in Sources */,
 				8C7C33442142913000EC6C96 /* KycFlow.swift in Sources */,
 				8C7C338B21493A3600EC6C96 /* KYCStatus.swift in Sources */,
@@ -1671,7 +1623,6 @@
 				8C52FFEC2119E09200EB55EA /* WalletsViewController.swift in Sources */,
 				8CF5F944211459630083B36A /* DecimalButton.swift in Sources */,
 				8C4413D621199FFC00C9689C /* Dictionary+Extensions.swift in Sources */,
-				8C09190A2106068D00703224 /* OnboardingRouter.swift in Sources */,
 				8C713B0F2137E54100AC2E25 /* UIRefreshControl+Extensions.swift in Sources */,
 				8C333D60210B5E2900949AC0 /* NewPasswordFormComponent.swift in Sources */,
 				8CF5F94E21148BD90083B36A /* EnterPinViewController.swift in Sources */,
@@ -1700,20 +1651,17 @@
 				8C333D302109E0B400949AC0 /* UserViewController.swift in Sources */,
 				8CA2189F2122F9E40063C188 /* SelectingBackView.swift in Sources */,
 				8C7C33712147C47000EC6C96 /* PickersAssets.swift in Sources */,
-				8CF1DE4520EFB1A70036F986 /* HorizontalScrollView.swift in Sources */,
 				8C7C33752147C7EA00EC6C96 /* UIApplication+Extensions.swift in Sources */,
 				8C0919412106264200703224 /* Dispatcher.swift in Sources */,
 				8C52FFE12119BE0400EB55EA /* WalletData.swift in Sources */,
 				8CA218F82130192E0063C188 /* TransactionsHistoryViewController.swift in Sources */,
 				8C7C33812147EFFB00EC6C96 /* ItemWithPhoto.swift in Sources */,
-				8CF1DE4D20F3BDB90036F986 /* KeyboardViewController.swift in Sources */,
 				8CA218AB21241BF90063C188 /* PhoneNumberEnteringHandler.swift in Sources */,
 				8C333D77210F50E000949AC0 /* CountryIconImageView.swift in Sources */,
 				8C333D6F210F00E600949AC0 /* String+Extensions.swift in Sources */,
 				8CA218CB2126D5E00063C188 /* NumberFormatter+Extensions.swift in Sources */,
 				8C09196F21089FB200703224 /* AuthProvider.swift in Sources */,
 				8C04BC3921219D0600E90090 /* Drawing.swift in Sources */,
-				8CF1DE4920F3A0BB0036F986 /* PasswordRecoveryViewController.swift in Sources */,
 				8C4413D02118A8EC00C9689C /* KeychainConfiguration.swift in Sources */,
 				8CA218942122EAC90063C188 /* SendMoneyComponent.swift in Sources */,
 				8CA218A1212304590063C188 /* SendMoneyViewController.swift in Sources */,
