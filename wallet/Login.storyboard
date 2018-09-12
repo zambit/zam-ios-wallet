@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -11,24 +15,24 @@
             <objects>
                 <viewController storyboardIdentifier="EnterPhoneLoginPasswordViewController" id="NSF-fU-ymf" customClass="EnterPhoneLoginPasswordViewController" customModule="wallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Mfk-ws-ANf">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter your phone and login password" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HNl-T0-R7i">
-                                <rect key="frame" x="16" y="36" width="568" height="81.5"/>
+                                <rect key="frame" x="16" y="36" width="343" height="81.5"/>
                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="34"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XTT-fV-5qL" customClass="LoginFormComponent" customModule="wallet" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="142" width="600" height="156"/>
+                                <rect key="frame" x="0.0" y="142" width="375" height="156"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="156" placeholder="YES" id="UbQ-Um-fCV"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0pf-sY-gEA" customClass="RoundContinueButton" customModule="wallet" customModuleProvider="target">
-                                <rect key="frame" x="516" y="516" width="60" height="60"/>
+                                <rect key="frame" x="291" y="583" width="60" height="60"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="60" id="XJK-Hu-8ot"/>
@@ -36,7 +40,7 @@
                                 </constraints>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0s1-JA-O1g" customClass="AdditionalTextButton" customModule="wallet" customModuleProvider="target">
-                                <rect key="frame" x="24" y="529" width="145" height="34"/>
+                                <rect key="frame" x="24" y="596" width="145" height="34"/>
                                 <state key="normal" title="Forgot password?"/>
                             </button>
                         </subviews>
@@ -65,31 +69,31 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oYK-IZ-5cm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1570" y="-99"/>
+            <point key="canvasLocation" x="1568.8" y="-99.400299850074973"/>
         </scene>
         <!--Enter Login Password View Controller-->
         <scene sceneID="9iz-a5-E0c">
             <objects>
                 <viewController storyboardIdentifier="EnterLoginPasswordViewController" id="ACZ-V8-2OJ" customClass="EnterLoginPasswordViewController" customModule="wallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DQo-8M-EZ5">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter your login password" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OKh-o2-0A6">
-                                <rect key="frame" x="16" y="36" width="568" height="41"/>
+                                <rect key="frame" x="16" y="36" width="343" height="81.5"/>
                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="34"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IPD-n3-J1m" customClass="LoginPasswordFormComponent" customModule="wallet" customModuleProvider="target">
-                                <rect key="frame" x="16" y="101.5" width="568" height="56"/>
+                                <rect key="frame" x="16" y="142" width="343" height="56"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="56" placeholder="YES" id="wqh-4A-Phy"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xaL-Vw-Mch" customClass="RoundContinueButton" customModule="wallet" customModuleProvider="target">
-                                <rect key="frame" x="516" y="516" width="60" height="60"/>
+                                <rect key="frame" x="291" y="583" width="60" height="60"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="AMd-aA-kRN"/>
@@ -97,7 +101,7 @@
                                 </constraints>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IV9-fL-7VG" customClass="AdditionalTextButton" customModule="wallet" customModuleProvider="target">
-                                <rect key="frame" x="24" y="529" width="145" height="34"/>
+                                <rect key="frame" x="24" y="596" width="145" height="34"/>
                                 <state key="normal" title="Forgot password?"/>
                             </button>
                         </subviews>

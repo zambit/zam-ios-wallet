@@ -13,9 +13,11 @@ class TextFieldCell: UITableViewCell, UITextFieldDelegate {
 
     private var onTap: ((UITextField) -> Void)?
     private var onEditing: ((UITextField) -> Void)?
-    private var onBegin: ((UITextField) -> Void)?
+    private var onBegin: ((TextFieldCell) -> Void)?
 
     private(set) var textField: UITextField!
+
+    private var indexPath: IndexPath?
 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -68,13 +70,17 @@ class TextFieldCell: UITableViewCell, UITextFieldDelegate {
         textField.delegate = self
     }
 
+    func set(text: String) {
+        self.textField.text = text
+    }
+
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         if let onTap = onTap {
             onTap(textField)
             return false
         }
 
-        onBegin?(textField)
+        onBegin?(self)
         return true
     }
 

@@ -80,7 +80,7 @@ class VerifyPhoneNumberWithSmsViewController: ContinueViewController, Verificati
 
             self?.dismissKeyboard()
 
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            performWithDelay {
                 self?.continueButton?.custom.setLoading(false)
                 self?.onContinue?(phone, token)
             }
@@ -89,7 +89,7 @@ class VerifyPhoneNumberWithSmsViewController: ContinueViewController, Verificati
             error in
             print(error)
 
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            performWithDelay {
                 self?.continueButton?.custom.setLoading(false)
 
                 if let serverError = error as? WalletResponseError {

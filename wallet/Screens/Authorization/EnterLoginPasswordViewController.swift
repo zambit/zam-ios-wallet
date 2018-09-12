@@ -88,6 +88,8 @@ class EnterLoginPasswordViewController: ContinueViewController, LoginPasswordCom
             [weak self]
             authToken in
 
+            self?.dismissKeyboard()
+
             performWithDelay {
                 UserContactsManager.default.fetchContacts({ _ in
                     self?.continueButton?.custom.setLoading(false)
@@ -137,7 +139,12 @@ class EnterLoginPasswordViewController: ContinueViewController, LoginPasswordCom
             } catch let error {
                 fatalError("Error on clearing user data: \(error)")
             }
-            onExit?()
+
+            self.dismissKeyboard()
+            performWithDelay {
+                [weak self] in
+                self?.onExit?()
+            }
             return
         }
 
@@ -152,12 +159,15 @@ class EnterLoginPasswordViewController: ContinueViewController, LoginPasswordCom
                 fatalError("Error on clearing user data: \(error)")
             }
             
-            self?.onExit?()
+            self?.dismissKeyboard()
+            performWithDelay {
+                self?.onExit?()
+            }
         }.catch {
             [weak self]
             error in
 
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            performWithDelay {
                 self?.continueButton?.custom.setLoading(false)
             }
 

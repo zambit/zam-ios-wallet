@@ -109,7 +109,7 @@ class EnterNewPhoneNumberViewController: ContinueViewController, PhoneNumberForm
 
             self?.dismissKeyboard()
 
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            performWithDelay {
                 self?.continueButton?.custom.setLoading(false)
                 self?.onContinue?(phone)
             }
@@ -131,7 +131,7 @@ class EnterNewPhoneNumberViewController: ContinueViewController, PhoneNumberForm
                 }
             }
 
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            performWithDelay {
                 self?.continueButton?.custom.setLoading(false)
             }
         }

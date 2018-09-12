@@ -162,6 +162,7 @@
 		8C7C337F2147EF9800EC6C96 /* PhotoLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C337E2147EF9800EC6C96 /* PhotoLayout.swift */; };
 		8C7C33812147EFFB00EC6C96 /* ItemWithPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C33802147EFFB00EC6C96 /* ItemWithPhoto.swift */; };
 		8C7C338521480AA300EC6C96 /* CAGradientLayer+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C338421480AA300EC6C96 /* CAGradientLayer+Extensions.swift */; };
+		8C7C338921490E3100EC6C96 /* AvoidingKeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C338821490E3100EC6C96 /* AvoidingKeyboardViewController.swift */; };
 		8CA2188F2121D97C0063C188 /* DecimalKeyboardComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CA2188E2121D97B0063C188 /* DecimalKeyboardComponent.xib */; };
 		8CA218922122E8D70063C188 /* SendMoneyComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CA218912122E8D70063C188 /* SendMoneyComponent.xib */; };
 		8CA218942122EAC90063C188 /* SendMoneyComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA218932122EAC90063C188 /* SendMoneyComponent.swift */; };
@@ -426,6 +427,7 @@
 		8C7C337E2147EF9800EC6C96 /* PhotoLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLayout.swift; sourceTree = "<group>"; };
 		8C7C33802147EFFB00EC6C96 /* ItemWithPhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemWithPhoto.swift; sourceTree = "<group>"; };
 		8C7C338421480AA300EC6C96 /* CAGradientLayer+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CAGradientLayer+Extensions.swift"; sourceTree = "<group>"; };
+		8C7C338821490E3100EC6C96 /* AvoidingKeyboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvoidingKeyboardViewController.swift; sourceTree = "<group>"; };
 		8CA2188E2121D97B0063C188 /* DecimalKeyboardComponent.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DecimalKeyboardComponent.xib; sourceTree = "<group>"; };
 		8CA218912122E8D70063C188 /* SendMoneyComponent.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SendMoneyComponent.xib; sourceTree = "<group>"; };
 		8CA218932122EAC90063C188 /* SendMoneyComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMoneyComponent.swift; sourceTree = "<group>"; };
@@ -869,6 +871,7 @@
 				8CF5F94921147C050083B36A /* WalletNavigable.swift */,
 				8C333D67210B72A100949AC0 /* ContinueViewController.swift */,
 				8CA218BC2125A34B0063C188 /* KeyboardBehaviourFollowingViewController.swift */,
+				8C7C338821490E3100EC6C96 /* AvoidingKeyboardViewController.swift */,
 				8C520001211B4B6400EB55EA /* DetailOffsetPresentationViewController.swift */,
 			);
 			path = Base;
@@ -1063,13 +1066,13 @@
 			isa = PBXGroup;
 			children = (
 				8C7C337A2147EF1D00EC6C96 /* MediaSheetPickerViewController.swift */,
-				8C7C3387214816D800EC6C96 /* Images */,
+				8C7C3387214816D800EC6C96 /* Views */,
 				8C7C337E2147EF9800EC6C96 /* PhotoLayout.swift */,
 			);
 			path = MediaPickerSheetViewController;
 			sourceTree = "<group>";
 		};
-		8C7C3387214816D800EC6C96 /* Images */ = {
+		8C7C3387214816D800EC6C96 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				8C7C33722147C67C00EC6C96 /* ItemWithImage.swift */,
@@ -1077,7 +1080,7 @@
 				8C7C337C2147EF6400EC6C96 /* LikeButtonCell.swift */,
 				8C7C33802147EFFB00EC6C96 /* ItemWithPhoto.swift */,
 			);
-			path = Images;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		8CA218902122E8880063C188 /* SendMoneyComponent */ = {
@@ -1567,6 +1570,7 @@
 				8C713B1B21380CE200AC2E25 /* DepositMoneyViewController.swift in Sources */,
 				8CA2191421342ABC0063C188 /* DateInterval+Extensions.swift in Sources */,
 				8C091938210622AA00703224 /* Request.swift in Sources */,
+				8C7C338921490E3100EC6C96 /* AvoidingKeyboardViewController.swift in Sources */,
 				8C7C337F2147EF9800EC6C96 /* PhotoLayout.swift in Sources */,
 				8C7C33622146B11000EC6C96 /* KYCApprovingState.swift in Sources */,
 				8C333D382109F3D500949AC0 /* OnboardingFlow.swift in Sources */,

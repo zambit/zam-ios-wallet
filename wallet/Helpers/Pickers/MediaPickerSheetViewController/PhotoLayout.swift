@@ -25,6 +25,7 @@ class PhotoLayout: UICollectionViewLayout {
 
     fileprivate var contentSize: CGSize = .zero
     public var selectedCellIndexPath: IndexPath?
+    
 
     override var collectionViewContentSize: CGSize {
         return contentSize
@@ -104,8 +105,6 @@ class PhotoLayout: UICollectionViewLayout {
         }
         return false
     }
-
-
 
     override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint) -> CGPoint {
         guard let selectedCellIndexPath = selectedCellIndexPath else { return proposedContentOffset }

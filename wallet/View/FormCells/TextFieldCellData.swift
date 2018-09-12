@@ -18,5 +18,5 @@ struct TextFieldCellData {
     let placeholder: String
     let action: TextFieldCellDataAction?
 
-    let beginEditingAction: ((UITextField) -> Void)?
+    let beginEditingAction: ((TextFieldCell) -> Void)?
 }

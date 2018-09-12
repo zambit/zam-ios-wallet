@@ -10,9 +10,9 @@ import Foundation
 import UIKit
 import Photos
 
-public typealias MediaSheetSelection = (MediaSelectionType) -> ()
+typealias MediaSheetSelection = (MediaSelectionType) -> ()
 
-public enum MediaSelectionType {
+enum MediaSelectionType {
 
     case photos([PHAsset])
     case photosLibraryRequest
@@ -35,13 +35,10 @@ extension UIAlertController {
 final class MediaSheetPickerViewController: UIViewController {
 
     var buttons: [ButtonType] {
-        return selectedAssets.count == 0
-            ? [.photos, .camera]
-            : [.sendPhotos]
+        return [.photos, .camera]
     }
 
     enum ButtonType {
-        case sendPhotos
         case camera
         case photos
     }
@@ -62,15 +59,14 @@ final class MediaSheetPickerViewController: UIViewController {
         switch button {
         case .photos: return "Library"
         case .camera: return "Camera"
-        case .sendPhotos: return "Choose photo"
         //case .sendPhotos: return "Send \(selectedAssets.count) \(selectedAssets.count == 1 ? "Photo" : "Photos")"
         }
     }
 
     func font(for button: ButtonType) -> UIFont {
         switch button {
-        case .sendPhotos: return UIFont.boldSystemFont(ofSize: 20)
-        default: return UIFont.systemFont(ofSize: 20) }
+        default: return UIFont.systemFont(ofSize: 20)
+        }
     }
 
     var preferredHeight: CGFloat {
@@ -95,6 +91,13 @@ final class MediaSheetPickerViewController: UIViewController {
 
     // MARK: Properties
 
+    fileprivate lazy var collectionViewLayout: UICollectionViewFlowLayout = {
+        let flowLayout = UICollectionViewFlowLayout()
+        flowLayout.scrollDirection = .horizontal
+        flowLayout.minimumLineSpacing = UI.minimumLineSpacing
+        return flowLayout
+    }()
+
     fileprivate lazy var collectionView: UICollectionView = { [unowned self] in
         $0.dataSource = self
         $0.delegate = self
@@ -107,16 +110,10 @@ final class MediaSheetPickerViewController: UIViewController {
         $0.backgroundColor = .clear
         $0.maskToBounds = false
         $0.clipsToBounds = false
-        $0.register(ItemWithPhoto.self, forCellWithReuseIdentifier: String(describing: ItemWithPhoto.self))
+        $0.register(ItemWithPhoto.self, forCellWithReuseIdentifier: String(describing: ItemWithPhoto.identifier))
 
         return $0
-        }(UICollectionView(frame: .zero, collectionViewLayout: layout))
-
-    fileprivate lazy var layout: PhotoLayout = { [unowned self] in
-        $0.delegate = self
-        $0.lineSpacing = UI.minimumLineSpacing
-        return $0
-        }(PhotoLayout())
+        }(UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout))
 
     fileprivate lazy var tableView: UITableView = { [unowned self] in
         $0.dataSource = self
@@ -235,27 +232,9 @@ final class MediaSheetPickerViewController: UIViewController {
     }
 
     func action(withAsset asset: PHAsset, at indexPath: IndexPath) {
-        let previousCount = selectedAssets.count
-
-        if selectedAssets.contains(asset) {
-            selectedAssets.remove(asset)
-        } else {
-            selectedAssets.removeAll()
-            selectedAssets.append(asset)
+        alertController?.dismiss(animated: true) { [unowned self] in
+            self.selection?(MediaSelectionType.photos([asset]))
         }
-
-        selection?(MediaSelectionType.photos(selectedAssets))
-
-        let currentCount = selectedAssets.count
-
-        if (previousCount == 0 && currentCount > 0) || (previousCount > 0 && currentCount == 0) {
-            UIView.animate(withDuration: 0.25, animations: {
-                self.layout.invalidateLayout()
-            }) { finished in self.layoutSubviews() }
-        } else {
-            collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
-        }
-        tableView.reloadData()
     }
 
     func action(for button: ButtonType) {
@@ -269,36 +248,31 @@ final class MediaSheetPickerViewController: UIViewController {
             alertController?.dismiss(animated: true) { [weak self] in
                 self?.selection?(MediaSelectionType.cameraLibraryRequest)
             }
-
-        case .sendPhotos:
-            alertController?.dismiss(animated: true) { [unowned self] in
-                self.selection?(MediaSelectionType.photos(self.selectedAssets))
-            }
         }
     }
 }
 
-// MARK: - TableViewDelegate
+// MARK: - UICollectionViewDelegateFlowLayout
+
+extension MediaSheetPickerViewController: UICollectionViewDelegateFlowLayout {
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+
+        let size: CGSize = sizeForItem(asset: assets[indexPath.item])
+        return size
+    }
+}
+
+// MARK: - UICollectionViewDelegate
 
 extension MediaSheetPickerViewController: UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        layout.selectedCellIndexPath = layout.selectedCellIndexPath == indexPath ? nil : indexPath
-        action(withAsset: assets[indexPath.item], at: indexPath)
-
-        collectionView.indexPathsForSelectedItems?.forEach {
-            if $0 != indexPath {
-                collectionView.deselectItem(at: $0, animated: true)
-            }
-        }
-    }
-
-    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         action(withAsset: assets[indexPath.item], at: indexPath)
     }
 }
 
-// MARK: - CollectionViewDataSource
+// MARK: - UICollectionViewDataSource
 
 extension MediaSheetPickerViewController: UICollectionViewDataSource {
 
@@ -311,14 +285,20 @@ extension MediaSheetPickerViewController: UICollectionViewDataSource {
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let item = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: ItemWithPhoto.self), for: indexPath) as? ItemWithPhoto else { return UICollectionViewCell() }
+        let _item = collectionView.dequeueReusableCell(withReuseIdentifier: ItemWithPhoto.identifier, for: indexPath)
+
+        guard let item = _item as? ItemWithPhoto else {
+            return UICollectionViewCell()
+        }
 
         let asset = assets[indexPath.item]
         let size = sizeFor(asset: asset)
 
+        item.custom.setup(style: .exclusive)
+
         DispatchQueue.main.async {
             PickersAssets.resolve(asset: asset, size: size) { new in
-                item.imageView.image = new
+                item.custom.set(image: new)
             }
         }
 
@@ -326,17 +306,7 @@ extension MediaSheetPickerViewController: UICollectionViewDataSource {
     }
 }
 
-// MARK: - PhotoLayoutDelegate
-
-extension MediaSheetPickerViewController: PhotoLayoutDelegate {
-
-    func collectionView(_ collectionView: UICollectionView, sizeForPhotoAtIndexPath indexPath: IndexPath) -> CGSize {
-        let size: CGSize = sizeForItem(asset: assets[indexPath.item])
-        return size
-    }
-}
-
-// MARK: - TableViewDelegate
+// MARK: - UITableViewDelegate
 
 extension MediaSheetPickerViewController: UITableViewDelegate {
 
@@ -347,7 +317,7 @@ extension MediaSheetPickerViewController: UITableViewDelegate {
     }
 }
 
-// MARK: - TableViewDataSource
+// MARK: - UITableViewDataSource
 
 extension MediaSheetPickerViewController: UITableViewDataSource {
 

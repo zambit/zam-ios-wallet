@@ -1,27 +1,15 @@
 //
-//  KeyboardBehaviourFollowingViewController.swift
+//  AvoidingKeyboardViewController.swift
 //  wallet
 //
-//  Created by Alexander Ponomarev on 16/08/2018.
+//  Created by Alexander Ponomarev on 12/09/2018.
 //  Copyright © 2018 zamzam. All rights reserved.
 //
 
 import Foundation
 import UIKit
 
-/**
- UIViewController providing default continue behaviour: "Round @ContinueButton moving with keyboard during it appears"
- */
-class KeyboardBehaviorFollowingViewController: FlowViewController, WalletNavigable {
-
-    var appearingAnimationBlock: () -> Void = {}
-    var disappearingAnimationBlock: () -> Void = {}
-
-    var fastenOffset: CGFloat {
-        return 24
-    }
-
-    @IBOutlet var fastenBottomConstraint: NSLayoutConstraint?
+class AvoidingKeyboardViewController: FlowViewController, WalletNavigable {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -39,8 +27,7 @@ class KeyboardBehaviorFollowingViewController: FlowViewController, WalletNavigab
     }
 
     @objc
-    func notifyKeyboard(_ notification: NSNotification) {
-
+    private func notifyKeyboard(_ notification: NSNotification) {
         guard let userInfoNotification = notification.userInfo else {
             return
         }
@@ -52,7 +39,12 @@ class KeyboardBehaviorFollowingViewController: FlowViewController, WalletNavigab
         let animationCurveRaw = animationCurveRawNSN?.uintValue ?? UIViewAnimationOptions.curveEaseInOut.rawValue
         let animationCurve: UIViewAnimationOptions = UIViewAnimationOptions(rawValue: animationCurveRaw)
 
-        let tabBarOffset: CGFloat = tabBarController == nil ? 0 : -49
+
+        let tabBarOffset: CGFloat = tabBarController == nil ? 0 : -52
+
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate, let window = appDelegate.window else {
+            return
+        }
 
         UIView.animate(withDuration: duration, delay: TimeInterval(0), options: animationCurve, animations: {
             [weak self] in
@@ -62,16 +54,10 @@ class KeyboardBehaviorFollowingViewController: FlowViewController, WalletNavigab
             }
 
             if let keyboardView = endFrame, keyboardView.origin.y < UIScreen.main.bounds.size.height {
-                strongSelf.appearingAnimationBlock()
-                strongSelf.fastenBottomConstraint?.constant = UIDevice.current.iPhoneX ? keyboardView.size.height + strongSelf.fastenOffset - 32 + tabBarOffset : keyboardView.size.height + strongSelf.fastenOffset + tabBarOffset
+                strongSelf.view.frame.origin.y = strongSelf.view.frame.origin.y - (UIDevice.current.iPhoneX ? keyboardView.size.height - 32 + tabBarOffset : keyboardView.size.height + tabBarOffset)
             } else {
-                strongSelf.disappearingAnimationBlock()
-                strongSelf.fastenBottomConstraint?.constant = strongSelf.fastenOffset
+                strongSelf.view.frame.origin.y = 0
             }
-            self?.view.layoutIfNeeded()
-
-            }, completion: nil)
+        }, completion: nil)
     }
-
 }
-

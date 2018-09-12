@@ -79,7 +79,9 @@ class EnterPhoneLoginPasswordViewController: ContinueViewController, LoginFormCo
             [weak self]
             authToken in
 
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self?.dismissKeyboard()
+
+            performWithDelay {
                 self?.continueButton?.custom.setLoading(false)
                 self?.onContinue?(authToken)
             }
@@ -90,7 +92,7 @@ class EnterPhoneLoginPasswordViewController: ContinueViewController, LoginFormCo
             [weak self]
             error in
 
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            performWithDelay {
                 self?.continueButton?.custom.setLoading(false)
             }
 

@@ -89,7 +89,7 @@ class CreateNewPasswordViewController: ContinueViewController, NewPasswordFormCo
                     [weak self] in
 
                     self?.dismissKeyboard()
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    performWithDelay {
                         self?.continueButton?.custom.setLoading(false)
                         self?.onContinue?(phone)
                     }
@@ -98,7 +98,7 @@ class CreateNewPasswordViewController: ContinueViewController, NewPasswordFormCo
                     [weak self]
                     error in
 
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    performWithDelay {
                         self?.continueButton?.custom.setLoading(false)
                     }
             }
@@ -108,7 +108,7 @@ class CreateNewPasswordViewController: ContinueViewController, NewPasswordFormCo
                     authToken in
 
                     self?.dismissKeyboard()
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    performWithDelay {
                         self?.continueButton?.custom.setLoading(false)
                         self?.onContinue?(authToken)
                     }
@@ -118,7 +118,7 @@ class CreateNewPasswordViewController: ContinueViewController, NewPasswordFormCo
                     [weak self]
                     error in
 
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    performWithDelay {
                         self?.continueButton?.custom.setLoading(false)
                     }
             }

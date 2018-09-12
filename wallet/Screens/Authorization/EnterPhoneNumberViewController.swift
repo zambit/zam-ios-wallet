@@ -80,7 +80,7 @@ class EnterPhoneNumberViewController: ContinueViewController, PhoneNumberFormCom
 
             self?.dismissKeyboard()
 
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            performWithDelay {
                 self?.continueButton?.custom.setLoading(false)
                 self?.onContinue?(phone)
             }
@@ -88,7 +88,7 @@ class EnterPhoneNumberViewController: ContinueViewController, PhoneNumberFormCom
             [weak self]
             error in
 
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            performWithDelay {
                 self?.continueButton?.custom.setLoading(false)
 
                 if let serverError = error as? WalletResponseError {

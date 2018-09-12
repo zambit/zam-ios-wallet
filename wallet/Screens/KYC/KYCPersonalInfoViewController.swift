@@ -14,9 +14,11 @@ class KYCPersonalInfoViewController: FlowViewController, WalletNavigable, UITabl
     var onSend: ((KYCApprovingState) -> Void)?
 
     @IBOutlet var tableView: UITableView?
+    @IBOutlet var safeAreaView: UIView?
 
     private weak var sendButton: StageButton?
     private weak var currentLowgroundTextField: UITextField?
+    private var currentIndexPath: IndexPath?
 
     private var forms: [(String, [TextFieldCellData])] = []
     private var progress: KYCPersonalInfoProgress = KYCPersonalInfoProgress()
@@ -26,17 +28,8 @@ class KYCPersonalInfoViewController: FlowViewController, WalletNavigable, UITabl
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(adjustForKeyboard(notification:)),
-                                               name: NSNotification.Name.UIKeyboardWillShow,
-                                               object: nil)
-
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(adjustForKeyboard(notification:)),
-                                               name: NSNotification.Name.UIKeyboardWillHide,
-                                               object: nil)
-
-        //migratingNavigationController?.setNavigationBarHidden(false, animated: false)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
 
     override func viewDidLoad() {
@@ -50,9 +43,9 @@ class KYCPersonalInfoViewController: FlowViewController, WalletNavigable, UITabl
 
                                     self?.progress.email = textField.text }),
                                 beginEditingAction: { [weak self]
-                                    textField in
+                                    cell in
 
-                                    self?.checkTextFieldPosition(textField)}
+                                    self?.checkCellPosition(cell)}
                 ),
               TextFieldCellData(placeholder: "First name",
                                 action: .editingChanged({ [weak self]
@@ -60,9 +53,9 @@ class KYCPersonalInfoViewController: FlowViewController, WalletNavigable, UITabl
 
                                     self?.progress.firstName = textField.text }),
                                 beginEditingAction: { [weak self]
-                                    textField in
+                                    cell in
 
-                                    self?.checkTextFieldPosition(textField)}
+                                    self?.checkCellPosition(cell)}
                 ),
               TextFieldCellData(placeholder: "Last name",
                                 action: .editingChanged({ [weak self]
@@ -70,9 +63,9 @@ class KYCPersonalInfoViewController: FlowViewController, WalletNavigable, UITabl
 
                                     self?.progress.lastName = textField.text }),
                                 beginEditingAction: { [weak self]
-                                    textField in
+                                    cell in
 
-                                    self?.checkTextFieldPosition(textField)}
+                                    self?.checkCellPosition(cell)}
                 ),
               TextFieldCellData(placeholder: "Date of birth",
                                 action: .tap({ [weak self] textField in
@@ -115,9 +108,9 @@ class KYCPersonalInfoViewController: FlowViewController, WalletNavigable, UITabl
 
                                     self?.progress.country = textField.text }),
                                 beginEditingAction: { [weak self]
-                                    textField in
+                                    cell in
 
-                                    self?.checkTextFieldPosition(textField)}
+                                    self?.checkCellPosition(cell)}
                 ),
               TextFieldCellData(placeholder: "City",
                                 action: .editingChanged({ [weak self]
@@ -125,9 +118,9 @@ class KYCPersonalInfoViewController: FlowViewController, WalletNavigable, UITabl
 
                                     self?.progress.city = textField.text }),
                                 beginEditingAction: { [weak self]
-                                    textField in
+                                    cell in
 
-                                    self?.checkTextFieldPosition(textField)}
+                                    self?.checkCellPosition(cell)}
                 ),
               TextFieldCellData(placeholder: "State / Region",
                                 action: .editingChanged({ [weak self]
@@ -135,9 +128,9 @@ class KYCPersonalInfoViewController: FlowViewController, WalletNavigable, UITabl
 
                                     self?.progress.region = textField.text }),
                                 beginEditingAction: { [weak self]
-                                    textField in
+                                    cell in
 
-                                    self?.checkTextFieldPosition(textField)}
+                                    self?.checkCellPosition(cell)}
                 ),
               TextFieldCellData(placeholder: "Street",
                                 action: .editingChanged({ [weak self]
@@ -145,9 +138,9 @@ class KYCPersonalInfoViewController: FlowViewController, WalletNavigable, UITabl
 
                                     self?.progress.street = textField.text }),
                                 beginEditingAction: { [weak self]
-                                    textField in
+                                    cell in
 
-                                    self?.checkTextFieldPosition(textField)}
+                                    self?.checkCellPosition(cell)}
                 ),
               TextFieldCellData(placeholder: "House number",
                                 action: .editingChanged({ [weak self]
@@ -155,9 +148,9 @@ class KYCPersonalInfoViewController: FlowViewController, WalletNavigable, UITabl
 
                                     self?.progress.house = textField.text }),
                                 beginEditingAction: { [weak self]
-                                    textField in
+                                    cell in
 
-                                    self?.checkTextFieldPosition(textField)}
+                                    self?.checkCellPosition(cell)}
                 ),
               TextFieldCellData(placeholder: "Postal code",
                                  action: .editingChanged({ [weak self]
@@ -165,13 +158,13 @@ class KYCPersonalInfoViewController: FlowViewController, WalletNavigable, UITabl
 
                                     self?.progress.postalCode = textField.text }),
                                  beginEditingAction: { [weak self]
-                                    textField in
+                                    cell in
 
-                                    self?.checkTextFieldPosition(textField)}
+                                    self?.checkCellPosition(cell)}
                 )])
         ]
-
         hideKeyboardOnTap()
+
 
         self.tableView?.register(TextFieldCell.self , forCellReuseIdentifier: "TextFieldCell")
         self.tableView?.delegate = self
@@ -298,42 +291,60 @@ class KYCPersonalInfoViewController: FlowViewController, WalletNavigable, UITabl
         return 76.0
     }
 
-    private func checkTextFieldPosition(_ textField: UITextField) {
+    private func checkCellPosition(_ cell: TextFieldCell) {
         guard let app = UIApplication.shared.delegate as? AppDelegate, let window = app.window else {
             return
         }
 
-        let position = textField.convert(textField.bounds.origin, to: window)
+        let position = cell.convert(cell.bounds.origin, to: window)
 
-        if position.y + textField.bounds.height + 15 > window.bounds.height - 350 {
-            currentLowgroundTextField = textField
+        if position.y + cell.bounds.height + 15 > window.bounds.height - 350 {
+            currentIndexPath = tableView?.indexPath(for: cell)
         } else {
-            currentLowgroundTextField = nil
+            currentIndexPath = nil
         }
     }
 
     @objc
     private func sendButtonTouchUpInsideEvent(_ sender: Any) {
         dismissKeyboard()
-        onSend?(.onVerification)
+
+        performWithDelay {
+            [weak self] in
+            self?.onSend?(.onVerification)
+        }
     }
 
-    @objc func adjustForKeyboard(notification: Notification) {
-        guard let _ = currentLowgroundTextField, let scrollView = tableView else {
+    private var contentOffsetBeforeKeeyboard: CGPoint?
+
+    @objc func keyboardWillShow(notification: NSNotification) {
+        guard
+            let tableView = tableView,
+            let safeArea = safeAreaView,
+            let indexPath = currentIndexPath,
+            let cell = tableView.cellForRow(at: indexPath) else {
             return
         }
 
-        let userInfo = notification.userInfo!
-
-        let keyboardScreenEndFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
-        let keyboardViewEndFrame = view.convert(keyboardScreenEndFrame, from: view.window)
-
-        if notification.name == Notification.Name.UIKeyboardWillHide {
-            scrollView.contentInset = UIEdgeInsets.zero
-        } else {
-            scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardViewEndFrame.height, right: 0)
+        guard let keyboardFrameValue = notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue else {
+            return
         }
 
-        scrollView.scrollIndicatorInsets = scrollView.contentInset
+        let keyboardFrame = view.convert(keyboardFrameValue.cgRectValue, from: nil)
+
+        contentOffsetBeforeKeeyboard = tableView.contentOffset
+
+        let cellPosition = cell.convert(cell.bounds.origin, to: safeArea)
+        let bottomSpace = tableView.height - cellPosition.y - cell.height - 15.0
+
+        tableView.contentOffset = CGPoint(x: 0, y: tableView.contentOffset.y + keyboardFrame.size.height - bottomSpace)
+    }
+
+    @objc func keyboardWillHide(notification:NSNotification) {
+        guard let contentOffset = contentOffsetBeforeKeeyboard else {
+            return
+        }
+
+        tableView?.contentOffset = contentOffset
     }
 }

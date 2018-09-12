@@ -224,32 +224,32 @@ class TransactionDetailViewController: FlowViewController, WalletNavigable {
                 [weak self]
                 transaction in
 
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                performWithDelay {
                     self?.sendButton?.custom.setSuccess()
                     self?.changeDataFor(state: .success)
                 }
-                }.catch {
-                    [weak self]
-                    error in
+            }.catch {
+                [weak self]
+                error in
 
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                        self?.sendButton?.custom.setFailure()
-                        self?.changeDataFor(state: .failure)
+                performWithDelay {
+                    self?.sendButton?.custom.setFailure()
+                    self?.changeDataFor(state: .failure)
 
-                        if let serverError = error as? WalletResponseError {
-                            switch serverError {
-                            case .serverFailureResponse(errors: let fails):
-                                guard let fail = fails.first else {
-                                    fatalError()
-                                }
-
-                                self?.errorMessageLabel?.text = fail.message.capitalizingFirst
-                            case .undefinedServerFailureResponse:
-
-                                self?.errorMessageLabel?.text = "Undefined error"
+                    if let serverError = error as? WalletResponseError {
+                        switch serverError {
+                        case .serverFailureResponse(errors: let fails):
+                            guard let fail = fails.first else {
+                                fatalError()
                             }
+
+                            self?.errorMessageLabel?.text = fail.message.capitalizingFirst
+                        case .undefinedServerFailureResponse:
+
+                            self?.errorMessageLabel?.text = "Undefined error"
                         }
                     }
+                }
             }
         case .loading:
             break
