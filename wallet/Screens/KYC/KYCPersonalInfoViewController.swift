@@ -105,6 +105,10 @@ class KYCPersonalInfoViewController: FlowViewController, WalletNavigable, UITabl
                                         textField.text = "Female"
                                         self?.progress.gender = .female
                                     }
+                                    alert.addAction(title: "Undefined", style: .default) { _ in
+                                        textField.text = "Undefined"
+                                        self?.progress.gender = .undefined
+                                    }
                                     alert.addAction(title: "Done", style: .cancel)
                                     alert.show() }),
                                 beginEditingAction: nil
@@ -204,6 +208,8 @@ class KYCPersonalInfoViewController: FlowViewController, WalletNavigable, UITabl
         case .verified:
             sendButton?.custom.changeState(to: 2)
         }
+
+        tableView?.reloadData()
     }
 
     // MARK: - UITableViewDataSource
@@ -246,6 +252,7 @@ class KYCPersonalInfoViewController: FlowViewController, WalletNavigable, UITabl
         let cell = TextFieldCell()
         cell.configure(with: forms[indexPath.section].1[indexPath.row])
         cell.set(text: progress.getTextFor(indexPath: indexPath) ?? "")
+        cell.isUserInteractionEnabled = personalInfoData == nil
 
         return cell
     }

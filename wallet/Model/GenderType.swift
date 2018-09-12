@@ -9,4 +9,5 @@
 enum GenderType: String {
     case male
     case female
+    case undefined
 }
