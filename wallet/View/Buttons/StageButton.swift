@@ -273,5 +273,9 @@ extension BehaviorExtension where Base: StageButton {
     func setEnabled(_ enabled: Bool) {
         base.isUserInteractionEnabled = enabled
         base.alpha = enabled ? 1.0 : 0.3
+
+        base.layer.shadowRadius = enabled ? 21.0 : 12.0
+        //base.layer.shadowOpacity = enabled ? 0.5 : 0.2
+
     }
 }

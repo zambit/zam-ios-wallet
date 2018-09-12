@@ -39,12 +39,14 @@ class KYCMainScreenViewController: FlowViewController, WalletNavigable {
         }
 
         kyc0Button.custom.beginLoading()
+        kyc0Button.isUserInteractionEnabled = false
 
         userAPI?.getKYCPersonalInfo(token: token).done {
             [weak self]
             personalInfo in
 
             kyc0Button.custom.endLoading()
+            kyc0Button.isUserInteractionEnabled = true
 
             self?.personalInfoData = personalInfo
             self?.kyc0ApprovingState = personalInfo.status
@@ -62,6 +64,8 @@ class KYCMainScreenViewController: FlowViewController, WalletNavigable {
 
             print(error)
         }
+
+        kyc1Button?.custom.setEnabled(false)
 
         //migratingNavigationController?.setNavigationBarHidden(false, animated: false)
     }
