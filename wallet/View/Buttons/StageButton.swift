@@ -23,6 +23,19 @@ struct StageDescription {
     let descriptionTextColor: UIColor
 
     let backgroundColor: UIColor
+
+    let image: UIImage?
+    let imageTintColor: UIColor?
+
+    init(id: String? = nil, idTextColor: UIColor? = nil, description: String, descriptionTextColor: UIColor, backgroundColor: UIColor, image: UIImage? = nil, imageTintColor: UIColor? = nil) {
+        self.id = id
+        self.idTextColor = idTextColor
+        self.description = description
+        self.descriptionTextColor = descriptionTextColor
+        self.backgroundColor = backgroundColor
+        self.image = image
+        self.imageTintColor = imageTintColor
+    }
 }
 
 class StageButton: UIButton {
@@ -74,12 +87,45 @@ extension BehaviorExtension where Base: StageButton {
         setupStages(stages)
     }
 
-    func changeState(to index: Int, indicatorBlock: (UIImageView) -> Void) {
+    func changeState(to index: Int) {
         base.currentStateIndex = index
+    }
 
-        if let imageView = base.indicatorImageView {
-            indicatorBlock(imageView)
+    func beginLoading() {
+        base.viewWithTag(9144)?.removeFromSuperview()
+
+        let currentIndex = base.currentStateIndex
+
+        guard currentIndex < base.stages.count else {
+            return
         }
+
+        let currentStage = base.stages[currentIndex]
+
+        guard let imageView = base.indicatorImageView else {
+            return
+        }
+
+        imageView.isHidden = true
+
+        let indicatorView = UIActivityIndicatorView()
+        indicatorView.color = currentStage.imageTintColor ?? .gray
+        indicatorView.tag = 9144
+        indicatorView.startAnimating()
+
+        base.addSubview(indicatorView)
+
+        indicatorView.translatesAutoresizingMaskIntoConstraints = false
+        indicatorView.leftAnchor.constraint(equalTo: imageView.leftAnchor).isActive = true
+        indicatorView.rightAnchor.constraint(equalTo: imageView.rightAnchor).isActive = true
+        indicatorView.topAnchor.constraint(equalTo: imageView.topAnchor).isActive = true
+        indicatorView.bottomAnchor.constraint(equalTo: imageView.bottomAnchor).isActive = true
+    }
+
+    func endLoading() {
+        base.viewWithTag(9144)?.removeFromSuperview()
+
+        base.indicatorImageView?.isHidden = false
     }
 
     func setupStages(_ stages: [StageDescription]) {
@@ -154,7 +200,6 @@ extension BehaviorExtension where Base: StageButton {
 
             base.describingLabel = describingLabel
 
-
             let indicatorImageView = UIImageView()
             indicatorImageView.tag = 9144919
 
@@ -218,6 +263,9 @@ extension BehaviorExtension where Base: StageButton {
 
         base.idLabel?.text = currentStage.id
         base.idLabel?.textColor = currentStage.idTextColor ?? currentStage.descriptionTextColor
+
+        base.indicatorImageView?.image = currentStage.image
+        base.indicatorImageView?.tintColor = currentStage.imageTintColor
 
         base.backgroundColor = currentStage.backgroundColor
     }

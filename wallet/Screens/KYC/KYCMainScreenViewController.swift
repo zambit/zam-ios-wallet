@@ -11,7 +11,10 @@ import UIKit
 
 class KYCMainScreenViewController: FlowViewController, WalletNavigable {
 
-    var onKyc0: (() -> Void)?
+    var userManager: UserDefaultsManager?
+    var userAPI: UserAPI?
+
+    var onKyc0: ((KYCPersonalInfo?) -> Void)?
     var onKyc1: (() -> Void)?
 
     @IBOutlet private var backgroundView: UIView?
@@ -21,11 +24,44 @@ class KYCMainScreenViewController: FlowViewController, WalletNavigable {
     @IBOutlet private var kyc1Button: StageButton?
     @IBOutlet private var bottomPlaceholderLabel: UILabel?
 
-    private var kyc0ApprovingState: KYCApprovingState = .initial
-    private var kyc1ApprovingState: KYCApprovingState = .initial
+    private var personalInfoData: KYCPersonalInfo?
+    private var kyc0ApprovingState: KYCStatus = .unloaded
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+
+        guard let token = userManager?.getToken() else {
+            return
+        }
+
+        guard let kyc0Button = kyc0Button else {
+            return
+        }
+
+        kyc0Button.custom.beginLoading()
+
+        userAPI?.getKYCPersonalInfo(token: token).done {
+            [weak self]
+            personalInfo in
+
+            kyc0Button.custom.endLoading()
+
+            self?.personalInfoData = personalInfo
+            self?.kyc0ApprovingState = personalInfo.status
+
+            switch personalInfo.status {
+            case .unloaded:
+                kyc0Button.custom.changeState(to: 0)
+            case .pending:
+                kyc0Button.custom.changeState(to: 1)
+            case .verified:
+                kyc0Button.custom.changeState(to: 2)
+            }
+        }.catch {
+            error in
+
+            print(error)
+        }
 
         //migratingNavigationController?.setNavigationBarHidden(false, animated: false)
     }
@@ -40,25 +76,17 @@ class KYCMainScreenViewController: FlowViewController, WalletNavigable {
         topPlaceholderComponent?.textColor = .black
 
         let kyc0Stages = [
-            StageDescription(id: "KYC0", idTextColor: .azure, description: "Personal info and address", descriptionTextColor: .darkIndigo, backgroundColor: .white),
-            StageDescription(id: "KYC0", idTextColor: nil, description: "Personal info and address", descriptionTextColor: .white, backgroundColor: .lightblue),
-            StageDescription(id: "KYC0", idTextColor: nil, description: "Personal info and address", descriptionTextColor: .white, backgroundColor: .paleOliveGreen)]
+            StageDescription(id: "KYC0", idTextColor: .azure, description: "Personal info and address", descriptionTextColor: .darkIndigo, backgroundColor: .white, image: #imageLiteral(resourceName: "chevronRight"), imageTintColor: .darkIndigo),
+            StageDescription(id: "KYC0", idTextColor: nil, description: "Personal info and address", descriptionTextColor: .white, backgroundColor: .lightblue, image: #imageLiteral(resourceName: "icTime"), imageTintColor: .white),
+            StageDescription(id: "KYC0", idTextColor: nil, description: "Personal info and address", descriptionTextColor: .white, backgroundColor: .paleOliveGreen, image: #imageLiteral(resourceName: "icCheck"), imageTintColor: .white)]
         kyc0Button?.custom.setup(type: .large, stages: kyc0Stages)
-        kyc0Button?.custom.changeState(to: 0, indicatorBlock: { imageView in
-            imageView.image = #imageLiteral(resourceName: "chevronRight")
-            imageView.tintColor = .darkIndigo
-        })
         kyc0Button?.addTarget(self, action: #selector(kyc0ButtonTouchUpInsideEvent(_:)), for: .touchUpInside)
 
         let kyc1Stages = [
-            StageDescription(id: "KYC1", idTextColor: .azure, description: "Photos of documents", descriptionTextColor: .darkIndigo, backgroundColor: .white),
-            StageDescription(id: "KYC1", idTextColor: nil, description: "Photos of documents", descriptionTextColor: .white, backgroundColor: .lightblue),
-            StageDescription(id: "KYC1", idTextColor: nil, description: "Photos of documents", descriptionTextColor: .white, backgroundColor: .paleOliveGreen)]
+            StageDescription(id: "KYC1", idTextColor: .azure, description: "Photos of documents", descriptionTextColor: .darkIndigo, backgroundColor: .white, image: #imageLiteral(resourceName: "chevronRight"), imageTintColor: .darkIndigo),
+            StageDescription(id: "KYC1", idTextColor: nil, description: "Photos of documents", descriptionTextColor: .white, backgroundColor: .lightblue, image: #imageLiteral(resourceName: "icTime"), imageTintColor: .white),
+            StageDescription(id: "KYC1", idTextColor: nil, description: "Photos of documents", descriptionTextColor: .white, backgroundColor: .paleOliveGreen, image: #imageLiteral(resourceName: "icCheck"), imageTintColor: .white)]
         kyc1Button?.custom.setup(type: .large, stages: kyc1Stages)
-        kyc1Button?.custom.changeState(to: 0, indicatorBlock: { imageView in
-            imageView.image = #imageLiteral(resourceName: "chevronRight")
-            imageView.tintColor = .darkIndigo
-        })
         kyc1Button?.addTarget(self, action: #selector(kyc1ButtonTouchUpInsideEvent(_:)), for: .touchUpInside)
 
         bottomPlaceholderLabel?.font = UIFont.walletFont(ofSize: 12.0, weight: .regular)
@@ -68,38 +96,22 @@ class KYCMainScreenViewController: FlowViewController, WalletNavigable {
         bottomPlaceholderLabel?.text = "Upload photos of your passport, ID card, or driving license as your ID document. \n\nIf you submit your passport photos, make sure it’s a reversal image. If you submit ID card or driving license, please upload 2 photos of both sides those documents. Scans and screenshots are not accepted."
     }
 
-    func prepare() {
-        kyc0Button?.custom.changeState(to: 1, indicatorBlock: { imageView in
-            imageView.image = #imageLiteral(resourceName: "icTime")
-            imageView.tintColor = .white
-        })
-    }
-
-    func updateKYC0State(_ state: KYCApprovingState) {
+    func updateKYC0State(_ state: KYCStatus) {
         self.kyc0ApprovingState = state
 
         switch state {
-        case .initial:
-            kyc0Button?.custom.changeState(to: 0, indicatorBlock: { imageView in
-                imageView.image = #imageLiteral(resourceName: "chevronRight")
-                imageView.tintColor = .darkIndigo
-            })
-        case .onVerification:
-            kyc0Button?.custom.changeState(to: 1, indicatorBlock: { imageView in
-                imageView.image = #imageLiteral(resourceName: "icTime")
-                imageView.tintColor = .white
-            })
+        case .unloaded:
+            kyc0Button?.custom.changeState(to: 0)
+        case .pending:
+            kyc0Button?.custom.changeState(to: 1)
         case .verified:
-            kyc0Button?.custom.changeState(to: 2, indicatorBlock: { imageView in
-                imageView.image = #imageLiteral(resourceName: "icCheck")
-                imageView.tintColor = .white
-            })
+            kyc0Button?.custom.changeState(to: 2)
         }
     }
 
     @objc
     private func kyc0ButtonTouchUpInsideEvent(_ sender: StageButton) {
-        onKyc0?()
+        onKyc0?(personalInfoData)
     }
 
     @objc

@@ -11,19 +11,22 @@ import UIKit
 
 class KYCPersonalInfoViewController: FlowViewController, WalletNavigable, UITableViewDelegate, UITableViewDataSource {
 
-    var onSend: ((KYCApprovingState) -> Void)?
+    var userManager: UserDefaultsManager?
+    var userAPI: UserAPI?
+
+    var onSend: ((KYCStatus) -> Void)?
 
     @IBOutlet var tableView: UITableView?
     @IBOutlet var safeAreaView: UIView?
 
     private weak var sendButton: StageButton?
-    private weak var currentLowgroundTextField: UITextField?
     private var currentIndexPath: IndexPath?
 
     private var forms: [(String, [TextFieldCellData])] = []
     private var progress: KYCPersonalInfoProgress = KYCPersonalInfoProgress()
 
-    private var approvingState: KYCApprovingState = .initial
+    private var personalInfoData: KYCPersonalInfoData?
+    private var approvingState: KYCStatus = .unloaded
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -38,6 +41,7 @@ class KYCPersonalInfoViewController: FlowViewController, WalletNavigable, UITabl
         forms = [
             ("Personal info",
              [TextFieldCellData(placeholder: "Email",
+                                keyboardType: .emailAddress,
                                 action: .editingChanged({ [weak self]
                                     textField in
 
@@ -48,6 +52,7 @@ class KYCPersonalInfoViewController: FlowViewController, WalletNavigable, UITabl
                                     self?.checkCellPosition(cell)}
                 ),
               TextFieldCellData(placeholder: "First name",
+                                keyboardType: .default,
                                 action: .editingChanged({ [weak self]
                                     textField in
 
@@ -58,6 +63,7 @@ class KYCPersonalInfoViewController: FlowViewController, WalletNavigable, UITabl
                                     self?.checkCellPosition(cell)}
                 ),
               TextFieldCellData(placeholder: "Last name",
+                                keyboardType: .default,
                                 action: .editingChanged({ [weak self]
                                     textField in
 
@@ -68,6 +74,7 @@ class KYCPersonalInfoViewController: FlowViewController, WalletNavigable, UITabl
                                     self?.checkCellPosition(cell)}
                 ),
               TextFieldCellData(placeholder: "Date of birth",
+                                keyboardType: nil,
                                 action: .tap({ [weak self] textField in
 
                                     self?.dismissKeyboard()
@@ -84,6 +91,7 @@ class KYCPersonalInfoViewController: FlowViewController, WalletNavigable, UITabl
                                 beginEditingAction: nil
                 ),
               TextFieldCellData(placeholder: "Gender",
+                                keyboardType: nil,
                                 action: .tap({ [weak self] textField in
 
                                     self?.dismissKeyboard()
@@ -103,6 +111,7 @@ class KYCPersonalInfoViewController: FlowViewController, WalletNavigable, UITabl
                 )]),
             ("Personal info",
              [TextFieldCellData(placeholder: "Country",
+                                keyboardType: .default,
                                 action: .editingChanged({ [weak self]
                                     textField in
 
@@ -113,6 +122,7 @@ class KYCPersonalInfoViewController: FlowViewController, WalletNavigable, UITabl
                                     self?.checkCellPosition(cell)}
                 ),
               TextFieldCellData(placeholder: "City",
+                                keyboardType: .default,
                                 action: .editingChanged({ [weak self]
                                     textField in
 
@@ -123,6 +133,7 @@ class KYCPersonalInfoViewController: FlowViewController, WalletNavigable, UITabl
                                     self?.checkCellPosition(cell)}
                 ),
               TextFieldCellData(placeholder: "State / Region",
+                                keyboardType: .default,
                                 action: .editingChanged({ [weak self]
                                     textField in
 
@@ -133,6 +144,7 @@ class KYCPersonalInfoViewController: FlowViewController, WalletNavigable, UITabl
                                     self?.checkCellPosition(cell)}
                 ),
               TextFieldCellData(placeholder: "Street",
+                                keyboardType: .default,
                                 action: .editingChanged({ [weak self]
                                     textField in
 
@@ -143,6 +155,7 @@ class KYCPersonalInfoViewController: FlowViewController, WalletNavigable, UITabl
                                     self?.checkCellPosition(cell)}
                 ),
               TextFieldCellData(placeholder: "House number",
+                                keyboardType: .default,
                                 action: .editingChanged({ [weak self]
                                     textField in
 
@@ -153,11 +166,12 @@ class KYCPersonalInfoViewController: FlowViewController, WalletNavigable, UITabl
                                     self?.checkCellPosition(cell)}
                 ),
               TextFieldCellData(placeholder: "Postal code",
-                                 action: .editingChanged({ [weak self]
+                                keyboardType: .numberPad,
+                                action: .editingChanged({ [weak self]
                                     textField in
 
                                     self?.progress.postalCode = textField.text }),
-                                 beginEditingAction: { [weak self]
+                                beginEditingAction: { [weak self]
                                     cell in
 
                                     self?.checkCellPosition(cell)}
@@ -176,25 +190,19 @@ class KYCPersonalInfoViewController: FlowViewController, WalletNavigable, UITabl
         self.view.applyDefaultGradientHorizontally()
     }
 
-    func prepare(state: KYCApprovingState) {
-        self.approvingState = state
+    func prepare(data: KYCPersonalInfo) {
+        self.personalInfoData = data.data
+        self.approvingState = data.status
 
-        switch state {
-        case .initial:
-            sendButton?.custom.changeState(to: 0, indicatorBlock: { imageView in
-                imageView.image = #imageLiteral(resourceName: "chevronRight")
-                imageView.tintColor = .darkIndigo
-            })
-        case .onVerification:
-            sendButton?.custom.changeState(to: 1, indicatorBlock: { imageView in
-                imageView.image = #imageLiteral(resourceName: "icTime")
-                imageView.tintColor = .white
-            })
+        self.progress = KYCPersonalInfoProgress(data: data.data)
+
+        switch data.status {
+        case .unloaded:
+            sendButton?.custom.changeState(to: 0)
+        case .pending:
+            sendButton?.custom.changeState(to: 1)
         case .verified:
-            sendButton?.custom.changeState(to: 2, indicatorBlock: { imageView in
-                imageView.image = #imageLiteral(resourceName: "icCheck")
-                imageView.tintColor = .white
-            })
+            sendButton?.custom.changeState(to: 2)
         }
     }
 
@@ -237,6 +245,7 @@ class KYCPersonalInfoViewController: FlowViewController, WalletNavigable, UITabl
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = TextFieldCell()
         cell.configure(with: forms[indexPath.section].1[indexPath.row])
+        cell.set(text: progress.getTextFor(indexPath: indexPath) ?? "")
 
         return cell
     }
@@ -246,7 +255,7 @@ class KYCPersonalInfoViewController: FlowViewController, WalletNavigable, UITabl
     }
 
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        guard section == forms.count - 1 else {
+        guard section == forms.count - 1, personalInfoData == nil else {
             return nil
         }
 
@@ -255,7 +264,9 @@ class KYCPersonalInfoViewController: FlowViewController, WalletNavigable, UITabl
 
         let sendButton = StageButton(type: .custom)
         sendButton.custom.setup(type: .small, stages: [
-            StageDescription(id: nil, idTextColor: nil, description: "Send", descriptionTextColor: .white, backgroundColor: .lightblue)])
+            StageDescription(description: "Send", descriptionTextColor: .white, backgroundColor: .lightblue),
+            StageDescription(description: "Send", descriptionTextColor: .white, backgroundColor: .lightblue, image: #imageLiteral(resourceName: "icTime"), imageTintColor: .white),
+            StageDescription(description: "Send", descriptionTextColor: .white, backgroundColor: .lightblue, image: #imageLiteral(resourceName: "icCheck"), imageTintColor: .white)])
 
         footer.addSubview(sendButton)
 
@@ -284,7 +295,7 @@ class KYCPersonalInfoViewController: FlowViewController, WalletNavigable, UITabl
     }
 
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        guard section == forms.count - 1 else {
+        guard section == forms.count - 1, personalInfoData == nil else {
             return 0.0
         }
 
@@ -307,17 +318,33 @@ class KYCPersonalInfoViewController: FlowViewController, WalletNavigable, UITabl
 
     @objc
     private func sendButtonTouchUpInsideEvent(_ sender: Any) {
-        dismissKeyboard()
+        guard let token = userManager?.getToken(), let personalData = progress.data else {
+            return
+        }
 
-        performWithDelay {
+        sendButton?.custom.beginLoading()
+
+        userAPI?.sendKYCPersonalInfo(token: token, personalData: personalData).done {
             [weak self] in
-            self?.onSend?(.onVerification)
+
+            self?.dismissKeyboard()
+            performWithDelay {
+                self?.sendButton?.custom.endLoading()
+                self?.onSend?(.pending)
+            }
+        }.catch {
+            [weak self]
+            error in
+
+            print(error)
+            self?.sendButton?.custom.endLoading()
         }
     }
 
     private var contentOffsetBeforeKeeyboard: CGPoint?
 
-    @objc func keyboardWillShow(notification: NSNotification) {
+    @objc
+    private func keyboardWillShow(notification: NSNotification) {
         guard
             let tableView = tableView,
             let safeArea = safeAreaView,
@@ -340,7 +367,8 @@ class KYCPersonalInfoViewController: FlowViewController, WalletNavigable, UITabl
         tableView.contentOffset = CGPoint(x: 0, y: tableView.contentOffset.y + keyboardFrame.size.height - bottomSpace)
     }
 
-    @objc func keyboardWillHide(notification:NSNotification) {
+    @objc
+    private func keyboardWillHide(notification:NSNotification) {
         guard let contentOffset = contentOffsetBeforeKeeyboard else {
             return
         }

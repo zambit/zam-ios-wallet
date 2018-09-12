@@ -94,7 +94,7 @@ class KYCPersonalInfoProgress {
         }
     }
 
-    var completion: ProgressCompletion? {
+    var data: KYCPersonalInfoData? {
         if let email = email,
             let firstName = firstName,
             let lastName = lastName,
@@ -105,9 +105,10 @@ class KYCPersonalInfoProgress {
             let region = region,
             let street = street,
             let house = house,
-            let postalCode = postalCode {
+            let postalCodeString = postalCode,
+            let postalCode = Int(postalCodeString) {
 
-            return ProgressCompletion(email: email,
+            return KYCPersonalInfoData(email: email,
                                       firstName: firstName,
                                       lastName: lastName,
                                       birthDate: birthDate,
@@ -123,7 +124,7 @@ class KYCPersonalInfoProgress {
         return nil
     }
 
-    var completionCallback: ((ProgressCompletion) -> Void)?
+    var completionCallback: ((KYCPersonalInfoData) -> Void)?
     var incompletionCallback: (() -> Void)?
 
     var isCompleted: Bool {
@@ -146,8 +147,28 @@ class KYCPersonalInfoProgress {
 
     init() {}
 
+    init(data: KYCPersonalInfoData) {
+        email = data.email
+        firstName = data.firstName
+        lastName = data.lastName
+        birthDate = data.birthDate
+        gender = data.gender
+        country = data.country
+        city = data.city
+        region = data.region
+        street = data.street
+        house = data.house
+        postalCode = String(data.postalCode)
+    }
+
+    func getTextFor(indexPath: IndexPath) -> String? {
+        let allProperties: [[String?]] = [[email, firstName, lastName, birthDate == nil ? nil : Date.walletShortString(from: birthDate!), gender?.rawValue], [country, city, region, street, house, postalCode]]
+
+        return allProperties[indexPath.section][indexPath.row]
+    }
+
     private func checkForCompletion() {
-        if let progressCompletion = self.completion {
+        if let progressCompletion = self.data {
             completionCallback?(progressCompletion)
         } else {
             incompletionCallback?()

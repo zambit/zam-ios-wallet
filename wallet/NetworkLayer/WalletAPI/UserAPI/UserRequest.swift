@@ -10,6 +10,7 @@ import Foundation
 
 enum UserRequest: Request {
 
+    // User
     case userInfo(token: String, coin: String?)
 
     // Transactions
@@ -21,6 +22,10 @@ enum UserRequest: Request {
     case createWallet(token: String, coin: String, walletName: String?)
     case getUserWallets(token: String, coin: String?, walletId: String?, page: String?, count: Int?)
     case getUserWalletInfo(token: String, walletId: String)
+
+    // KYC Personal
+    case sendKYCPersonalInfo(token: String, email: String, firstName: String, lastName: String, birthDate: String, sex: String, country: String, city: String, region: String, street: String, house: String, postalCode: Int)
+    case getKYCPersonalInfo(token: String)
 
     var path: String {
         switch self {
@@ -34,6 +39,8 @@ enum UserRequest: Request {
             return "user/me/txs"
         case .getTransactionInfo(transactionId: let id):
             return "user/me/txs/\(id)"
+        case .sendKYCPersonalInfo, .getKYCPersonalInfo:
+            return "user/me/personal"
         }
     }
 
@@ -52,6 +59,10 @@ enum UserRequest: Request {
         case .getTransactions:
             return .get
         case .getTransactionInfo:
+            return .get
+        case .sendKYCPersonalInfo:
+            return .post
+        case .getKYCPersonalInfo:
             return .get
         }
     }
@@ -110,6 +121,26 @@ enum UserRequest: Request {
 
         case .getUserWalletInfo:
             return nil
+
+        case let .sendKYCPersonalInfo(token: _, email: email, firstName: firstName, lastName: lastName, birthDate: birthDate, sex: sex, country: country, city: city, region: region, street: street, house: house, postalCode: code):
+            let dict = [
+                "email": email,
+                "first_name": firstName,
+                "last_name": lastName,
+                "birth_date": birthDate,
+                "sex": sex,
+                "country": country,
+                "city": city,
+                "region": region,
+                "street": street,
+                "house": house,
+                "postal_code": String(code)
+            ]
+
+            return RequestParams.body(dict)
+
+        case .getKYCPersonalInfo:
+            return nil
         }
     }
 
@@ -128,6 +159,10 @@ enum UserRequest: Request {
         case .getUserWallets(token: let token, coin: _, walletId: _, page: _, count: _):
             return ["Authorization": "Bearer \(token)"]
         case .getUserWalletInfo(token: let token, walletId: _):
+            return ["Authorization": "Bearer \(token)"]
+        case .sendKYCPersonalInfo(token: let token, email: _, firstName: _, lastName: _, birthDate: _, sex: _, country: _, city: _, region: _, street: _, house: _, postalCode: _):
+            return ["Authorization": "Bearer \(token)"]
+        case .getKYCPersonalInfo(token: let token):
             return ["Authorization": "Bearer \(token)"]
         }
     }

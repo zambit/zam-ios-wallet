@@ -16,7 +16,8 @@ enum TextFieldCellDataAction {
 struct TextFieldCellData {
 
     let placeholder: String
-    let action: TextFieldCellDataAction?
+    let keyboardType: UIKeyboardType?
 
+    let action: TextFieldCellDataAction?
     let beginEditingAction: ((TextFieldCell) -> Void)?
 }

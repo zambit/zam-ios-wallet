@@ -52,6 +52,7 @@ class TextFieldCell: UITableViewCell, UITextFieldDelegate {
 
     func configure(with data: TextFieldCellData) {
         textField.placeholder = data.placeholder
+        textField.keyboardType = data.keyboardType ?? .default
 
         if let action = data.action {
             switch action {

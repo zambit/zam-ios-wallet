@@ -51,14 +51,19 @@ final class MainFlow: ScreenFlow {
             fatalError()
         }
 
-        let onKyc0: () -> Void = {
-            [weak self] in
+        let onKyc0: (KYCPersonalInfo?) -> Void = {
+            [weak self]
+            data in
 
             guard let strongSelf = self else {
                 return
             }
 
             let target = strongSelf.personalInfoScreen
+
+            if let data = data {
+                target.prepare(data: data)
+            }
             vc.migratingNavigationController?.custom.push(viewController: target)
         }
 
@@ -73,6 +78,8 @@ final class MainFlow: ScreenFlow {
             vc.migratingNavigationController?.custom.push(viewController: target)
         }
 
+        vc.userManager = UserDefaultsManager(keychainConfiguration: WalletKeychainConfiguration())
+        vc.userAPI = UserAPI(provider: UserProvider(environment: WalletEnvironment(), dispatcher: HTTPDispatcher()))
         vc.onKyc0 = onKyc0
         vc.onKyc1 = onKyc1
         vc.title = "Identify verification"
@@ -87,7 +94,7 @@ final class MainFlow: ScreenFlow {
             fatalError()
         }
 
-        let onSend: (KYCApprovingState) -> Void = {
+        let onSend: (KYCStatus) -> Void = {
             state in
 
             vc.migratingNavigationController?.custom.popBack(nextViewController: {
@@ -162,7 +169,7 @@ final class MainFlow: ScreenFlow {
             fatalError()
         }
 
-        let onSend: (KYCApprovingState) -> Void = {
+        let onSend: (KYCStatus) -> Void = {
             state in
 
             vc.migratingNavigationController?.custom.popBack(nextViewController: {
@@ -189,7 +196,7 @@ final class MainFlow: ScreenFlow {
             fatalError()
         }
 
-        let onSend: (KYCApprovingState) -> Void = {
+        let onSend: (KYCStatus) -> Void = {
             state in
 
             vc.migratingNavigationController?.custom.popBack(nextViewController: {
@@ -216,7 +223,7 @@ final class MainFlow: ScreenFlow {
             fatalError()
         }
 
-        let onSend: (KYCApprovingState) -> Void = {
+        let onSend: (KYCStatus) -> Void = {
             state in
 
             vc.migratingNavigationController?.custom.popBack(nextViewController: {

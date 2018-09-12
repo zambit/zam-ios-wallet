@@ -146,7 +146,6 @@
 		8C7C335D2146A49A00EC6C96 /* KeyboardAvoiding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C335B2146A49900EC6C96 /* KeyboardAvoiding.swift */; };
 		8C7C335E2146A49A00EC6C96 /* KeyboardDismissingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C335C2146A49A00EC6C96 /* KeyboardDismissingView.swift */; };
 		8C7C33602146ACBE00EC6C96 /* KYCUploadDocumentsMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C335F2146ACBE00EC6C96 /* KYCUploadDocumentsMenuViewController.swift */; };
-		8C7C33622146B11000EC6C96 /* KYCApprovingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C33612146B11000EC6C96 /* KYCApprovingState.swift */; };
 		8C7C33642146C47000EC6C96 /* KYCUploadDocumentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C33632146C47000EC6C96 /* KYCUploadDocumentViewController.swift */; };
 		8C7C33662146C62200EC6C96 /* KYCUploadPrivateDocumentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C33652146C62200EC6C96 /* KYCUploadPrivateDocumentViewController.swift */; };
 		8C7C33682146C9B000EC6C96 /* PhotoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C33672146C9B000EC6C96 /* PhotoButton.swift */; };
@@ -163,6 +162,9 @@
 		8C7C33812147EFFB00EC6C96 /* ItemWithPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C33802147EFFB00EC6C96 /* ItemWithPhoto.swift */; };
 		8C7C338521480AA300EC6C96 /* CAGradientLayer+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C338421480AA300EC6C96 /* CAGradientLayer+Extensions.swift */; };
 		8C7C338921490E3100EC6C96 /* AvoidingKeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C338821490E3100EC6C96 /* AvoidingKeyboardViewController.swift */; };
+		8C7C338B21493A3600EC6C96 /* KYCStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C338A21493A3600EC6C96 /* KYCStatus.swift */; };
+		8C7C338D21493CD400EC6C96 /* KYCPersonalInfoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C338C21493CD400EC6C96 /* KYCPersonalInfoData.swift */; };
+		8C7C338F2149659100EC6C96 /* KYCPersonalInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C338E2149659100EC6C96 /* KYCPersonalInfo.swift */; };
 		8CA2188F2121D97C0063C188 /* DecimalKeyboardComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CA2188E2121D97B0063C188 /* DecimalKeyboardComponent.xib */; };
 		8CA218922122E8D70063C188 /* SendMoneyComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CA218912122E8D70063C188 /* SendMoneyComponent.xib */; };
 		8CA218942122EAC90063C188 /* SendMoneyComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA218932122EAC90063C188 /* SendMoneyComponent.swift */; };
@@ -411,7 +413,6 @@
 		8C7C335B2146A49900EC6C96 /* KeyboardAvoiding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardAvoiding.swift; sourceTree = "<group>"; };
 		8C7C335C2146A49A00EC6C96 /* KeyboardDismissingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardDismissingView.swift; sourceTree = "<group>"; };
 		8C7C335F2146ACBE00EC6C96 /* KYCUploadDocumentsMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KYCUploadDocumentsMenuViewController.swift; sourceTree = "<group>"; };
-		8C7C33612146B11000EC6C96 /* KYCApprovingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KYCApprovingState.swift; sourceTree = "<group>"; };
 		8C7C33632146C47000EC6C96 /* KYCUploadDocumentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KYCUploadDocumentViewController.swift; sourceTree = "<group>"; };
 		8C7C33652146C62200EC6C96 /* KYCUploadPrivateDocumentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KYCUploadPrivateDocumentViewController.swift; sourceTree = "<group>"; };
 		8C7C33672146C9B000EC6C96 /* PhotoButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoButton.swift; sourceTree = "<group>"; };
@@ -428,6 +429,9 @@
 		8C7C33802147EFFB00EC6C96 /* ItemWithPhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemWithPhoto.swift; sourceTree = "<group>"; };
 		8C7C338421480AA300EC6C96 /* CAGradientLayer+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CAGradientLayer+Extensions.swift"; sourceTree = "<group>"; };
 		8C7C338821490E3100EC6C96 /* AvoidingKeyboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvoidingKeyboardViewController.swift; sourceTree = "<group>"; };
+		8C7C338A21493A3600EC6C96 /* KYCStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KYCStatus.swift; sourceTree = "<group>"; };
+		8C7C338C21493CD400EC6C96 /* KYCPersonalInfoData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KYCPersonalInfoData.swift; sourceTree = "<group>"; };
+		8C7C338E2149659100EC6C96 /* KYCPersonalInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KYCPersonalInfo.swift; sourceTree = "<group>"; };
 		8CA2188E2121D97B0063C188 /* DecimalKeyboardComponent.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DecimalKeyboardComponent.xib; sourceTree = "<group>"; };
 		8CA218912122E8D70063C188 /* SendMoneyComponent.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SendMoneyComponent.xib; sourceTree = "<group>"; };
 		8CA218932122EAC90063C188 /* SendMoneyComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMoneyComponent.swift; sourceTree = "<group>"; };
@@ -844,13 +848,15 @@
 				8CA218CC2126F23B0063C188 /* UserData.swift */,
 				8CA218AC212421150063C188 /* PhoneMaskData.swift */,
 				9319BA842129A07A00033A7E /* TransactionData.swift */,
+				8C7C338A21493A3600EC6C96 /* KYCStatus.swift */,
+				8C7C338C21493CD400EC6C96 /* KYCPersonalInfoData.swift */,
+				8C7C338E2149659100EC6C96 /* KYCPersonalInfo.swift */,
 				8CA219092133EEF40063C188 /* TransactionsGroupData.swift */,
 				8CA218F2213007650063C188 /* TransactionsPageData.swift */,
 				8CA219072133EE910063C188 /* GroupedTransactionsPageData.swift */,
 				8C04BC442121D48E00E90090 /* BalanceData.swift */,
 				8CA218DA212D892A0063C188 /* ContactData.swift */,
 				8C52FFE22119C1CF00EB55EA /* TermData.swift */,
-				8C7C33612146B11000EC6C96 /* KYCApprovingState.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1572,7 +1578,6 @@
 				8C091938210622AA00703224 /* Request.swift in Sources */,
 				8C7C338921490E3100EC6C96 /* AvoidingKeyboardViewController.swift in Sources */,
 				8C7C337F2147EF9800EC6C96 /* PhotoLayout.swift in Sources */,
-				8C7C33622146B11000EC6C96 /* KYCApprovingState.swift in Sources */,
 				8C333D382109F3D500949AC0 /* OnboardingFlow.swift in Sources */,
 				8C6088652112027300470411 /* ThreeStepsAPI.swift in Sources */,
 				8C091949210714D800703224 /* NetworkService.swift in Sources */,
@@ -1585,6 +1590,7 @@
 				8C713B28213EB4A000AC2E25 /* UserTelephonyInfoProvider.swift in Sources */,
 				8CF1DE4220EF98160036F986 /* AuthViewController.swift in Sources */,
 				8CA2189D2122EEDE0063C188 /* SegmentedControlElement.swift in Sources */,
+				8C7C338D21493CD400EC6C96 /* KYCPersonalInfoData.swift in Sources */,
 				8C4413CA2118A66A00C9689C /* WalletKeychainConfiguration.swift in Sources */,
 				8C09193D2106243600703224 /* Response.swift in Sources */,
 				8C0919742108BE5700703224 /* UserAPI.swift in Sources */,
@@ -1601,6 +1607,7 @@
 				8C713B212139911D00AC2E25 /* QRCodeScannerViewController.swift in Sources */,
 				8C713B112137F95200AC2E25 /* DepositMoneyMethodComponent.swift in Sources */,
 				9319BA852129A07A00033A7E /* TransactionData.swift in Sources */,
+				8C7C338F2149659100EC6C96 /* KYCPersonalInfo.swift in Sources */,
 				8C333D66210B6E7600949AC0 /* UITextField+Extensions.swift in Sources */,
 				8CF5F92F211327EB0083B36A /* MaskParser.swift in Sources */,
 				8C0919512107234B00703224 /* SignupAPI.swift in Sources */,
@@ -1652,6 +1659,7 @@
 				8CF1DE4B20F3AD210036F986 /* NewPasswordViewController.swift in Sources */,
 				8CF5F93A21144BE80083B36A /* UIDevice+Extensions.swift in Sources */,
 				8C7C33442142913000EC6C96 /* KycFlow.swift in Sources */,
+				8C7C338B21493A3600EC6C96 /* KYCStatus.swift in Sources */,
 				8CA219122134259F0063C188 /* Date+Extensions.swift in Sources */,
 				8CA218C42125AD130063C188 /* WalletSmallItemComponent.swift in Sources */,
 				8CA218F7213018DA0063C188 /* Paginator.swift in Sources */,

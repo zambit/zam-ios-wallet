@@ -632,7 +632,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3hJ-lo-acI">
+                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3hJ-lo-acI">
                                 <rect key="frame" x="24" y="475" width="327" height="90"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="90" id="VhM-Qw-iMM"/>
@@ -651,6 +651,7 @@
                             <constraint firstItem="ved-ee-kMD" firstAttribute="top" secondItem="ZtA-l5-RKz" secondAttribute="top" id="7bE-uu-nfB"/>
                             <constraint firstItem="ZtA-l5-RKz" firstAttribute="trailing" secondItem="yaT-aA-Dwu" secondAttribute="trailing" constant="24" id="9Nv-62-1Mv"/>
                             <constraint firstItem="ZtA-l5-RKz" firstAttribute="bottom" secondItem="Dgu-De-Jxe" secondAttribute="bottom" constant="32" id="E4G-Iq-Rte"/>
+                            <constraint firstItem="ZtA-l5-RKz" firstAttribute="trailing" secondItem="3hJ-lo-acI" secondAttribute="trailing" constant="24" placeholder="YES" id="HxC-S7-fnh"/>
                             <constraint firstItem="3hJ-lo-acI" firstAttribute="leading" secondItem="ZtA-l5-RKz" secondAttribute="leading" constant="24" id="TLC-W8-H2g"/>
                             <constraint firstItem="iJW-EK-73M" firstAttribute="leading" secondItem="ZtA-l5-RKz" secondAttribute="leading" constant="24" id="Tc5-SB-1rg"/>
                             <constraint firstItem="ZtA-l5-RKz" firstAttribute="trailing" secondItem="Dgu-De-Jxe" secondAttribute="trailing" constant="24" id="VC4-Wz-hhl"/>

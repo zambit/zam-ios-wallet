@@ -313,6 +313,91 @@ struct UserAPI: NetworkService {
         }
     }
 
+    func getKYCPersonalInfo(token: String) -> Promise<KYCPersonalInfo> {
+        return provider.execute(.getKYCPersonalInfo(token: token))
+            .then {
+                (response: Response) -> Promise<KYCPersonalInfo> in
+
+                return Promise { seal in
+                    switch response {
+                    case .data(_):
+
+                        let success: (CodableSuccessKYCPersonalInfoResponse) -> Void = { s in
+                            do {
+                                let info = try KYCPersonalInfo(codable: s.data)
+                                seal.fulfill(info)
+                            } catch let e {
+                                seal.reject(e)
+                            }
+                        }
+
+                        let failure: (CodableFailure) -> Void = { f in
+                            guard f.errors.count > 0 else {
+                                let error = WalletResponseError.undefinedServerFailureResponse
+                                seal.reject(error)
+                                return
+                            }
+
+                            let error = WalletResponseError.serverFailureResponse(errors: f.errors)
+                            seal.reject(error)
+                        }
+
+                        do {
+                            try response.extractResult(success: success, failure: failure)
+                        } catch let error {
+                            seal.reject(error)
+                        }
+                    case .error(let error):
+                        seal.reject(error)
+                    }
+                }
+        }
+    }
+
+    func sendKYCPersonalInfo(token: String, personalData: KYCPersonalInfoData) -> Promise<Void> {
+        return self.sendKYCPersonalInfo(token: token, email: personalData.email, firstName: personalData.firstName, lastName: personalData.lastName, birthDate: personalData.birthDate, gender: personalData.gender, country: personalData.country, city: personalData.city, region: personalData.region, street: personalData.street, house: personalData.house, postalCode: personalData.postalCode)
+    }
+
+    func sendKYCPersonalInfo(token: String, email: String, firstName: String, lastName: String, birthDate: Date, gender: GenderType, country: String, city: String, region: String, street: String, house: String, postalCode: Int) -> Promise<Void> {
+        return provider.execute(.sendKYCPersonalInfo(token: token, email: email, firstName: firstName, lastName: lastName, birthDate: String(birthDate.unixTimestamp), sex: gender.rawValue, country: country, city: city, region: region, street: street, house: house, postalCode: postalCode))
+            .then {
+                (response: Response) -> Promise<Void> in
+
+                return Promise { seal in
+                    switch response {
+                    case .data(_):
+
+                        let success: (CodableSuccessEmptyResponse) -> Void = { s in
+                            do {
+                                seal.fulfill(())
+                            } catch let e {
+                                seal.reject(e)
+                            }
+                        }
+
+                        let failure: (CodableFailure) -> Void = { f in
+                            guard f.errors.count > 0 else {
+                                let error = WalletResponseError.undefinedServerFailureResponse
+                                seal.reject(error)
+                                return
+                            }
+
+                            let error = WalletResponseError.serverFailureResponse(errors: f.errors)
+                            seal.reject(error)
+                        }
+
+                        do {
+                            try response.extractResult(success: success, failure: failure)
+                        } catch let error {
+                            seal.reject(error)
+                        }
+                    case .error(let error):
+                        seal.reject(error)
+                    }
+                }
+        }
+    }
+
     func cancelTasks() {
         provider.cancelAllTasks()
     }

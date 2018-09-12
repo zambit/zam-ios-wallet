@@ -11,11 +11,11 @@ import UIKit
 
 class KYCUploadDocumentViewController: FlowViewController, WalletNavigable {
 
-    var onSend: ((KYCApprovingState) -> Void)?
+    var onSend: ((KYCStatus) -> Void)?
 
     private(set) var documentsImages: [UIImage?] = []
 
-    private var approvingState: KYCApprovingState = .initial
+    private var approvingState: KYCStatus = .unloaded
 
     @IBOutlet private var backgroundView: UIView?
 
@@ -26,7 +26,7 @@ class KYCUploadDocumentViewController: FlowViewController, WalletNavigable {
 
     @IBOutlet private var sendButton: StageButton?
 
-    var sendingState: KYCApprovingState = .initial
+    var sendingState: KYCStatus = .unloaded
 
     var descriptionTitle: String {
         return "Title"
@@ -61,7 +61,9 @@ class KYCUploadDocumentViewController: FlowViewController, WalletNavigable {
         detailTextLabel?.text = descriptionText
 
         sendButton?.custom.setup(type: .small, stages: [
-            StageDescription(id: nil, idTextColor: nil, description: "Send", descriptionTextColor: .white, backgroundColor: .lightblue)])
+            StageDescription(description: "Send", descriptionTextColor: .white, backgroundColor: .lightblue),
+            StageDescription(description: "Send", descriptionTextColor: .white, backgroundColor: .lightblue, image: #imageLiteral(resourceName: "icTime"), imageTintColor: .white),
+            StageDescription(description: "Send", descriptionTextColor: .white, backgroundColor: .lightblue, image: #imageLiteral(resourceName: "icCheck"), imageTintColor: .white)])
 
         sendButton?.custom.setEnabled(false)
         sendButton?.addTarget(self, action: #selector(sendButtonTouchUpInsideEvent(_:)), for: .touchUpInside)
@@ -91,31 +93,22 @@ class KYCUploadDocumentViewController: FlowViewController, WalletNavigable {
         }
     }
 
-    func prepare(state: KYCApprovingState) {
+    func prepare(state: KYCStatus) {
         self.approvingState = state
 
         switch state {
-        case .initial:
-            sendButton?.custom.changeState(to: 0, indicatorBlock: { imageView in
-                imageView.image = #imageLiteral(resourceName: "chevronRight")
-                imageView.tintColor = .darkIndigo
-            })
-        case .onVerification:
-            sendButton?.custom.changeState(to: 1, indicatorBlock: { imageView in
-                imageView.image = #imageLiteral(resourceName: "icTime")
-                imageView.tintColor = .white
-            })
+        case .unloaded:
+            sendButton?.custom.changeState(to: 0)
+        case .pending:
+            sendButton?.custom.changeState(to: 1)
         case .verified:
-            sendButton?.custom.changeState(to: 2, indicatorBlock: { imageView in
-                imageView.image = #imageLiteral(resourceName: "icCheck")
-                imageView.tintColor = .white
-            })
+            sendButton?.custom.changeState(to: 2)
         }
     }
 
     @objc
     func sendButtonTouchUpInsideEvent(_ sender: StageButton) {
-        onSend?(.onVerification)
+        onSend?(.pending)
     }
 
     @objc
