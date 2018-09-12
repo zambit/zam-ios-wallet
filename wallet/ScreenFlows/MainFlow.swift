@@ -108,6 +108,8 @@ final class MainFlow: ScreenFlow {
             })
         }
 
+        vc.userManager = UserDefaultsManager(keychainConfiguration: WalletKeychainConfiguration())
+        vc.userAPI = UserAPI(provider: UserProvider(environment: WalletEnvironment(), dispatcher: HTTPDispatcher()))
         vc.onSend = onSend
         vc.title = "KYC0"
         vc.flow = self

@@ -21,6 +21,7 @@ struct HTTPDispatcher: Dispatcher {
 
                 print(urlRequest.url)
                 print(urlRequest.allHTTPHeaderFields)
+                print(String(data: urlRequest.httpBody ?? Data(), encoding: String.Encoding.utf8))
 
                 let task = self.session.dataTask(with: urlRequest) { data, response, error in
 

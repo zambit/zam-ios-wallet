@@ -324,7 +324,7 @@ struct CodableSuccessKYCPersonalInfoResponse: Codable {
 
 struct CodableKYCPersonalInfo: Codable {
     let status: String
-    let personalData: CodableInfoProperties
+    let personalData: CodableInfoProperties?
 
     private enum CodingKeys: String, CodingKey {
         case status

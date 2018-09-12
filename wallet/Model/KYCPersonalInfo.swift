@@ -11,7 +11,7 @@ import Foundation
 struct KYCPersonalInfo {
 
     let status: KYCStatus
-    let data: KYCPersonalInfoData
+    let data: KYCPersonalInfoData?
 
     init(codable: CodableKYCPersonalInfo) throws {
         guard let status = KYCStatus(rawValue: codable.status) else {
@@ -19,7 +19,11 @@ struct KYCPersonalInfo {
         }
         self.status = status
 
-        self.data = try KYCPersonalInfoData(codable: codable.personalData)
+        if let info = codable.personalData {
+            self.data = try KYCPersonalInfoData(codable: info)
+        } else {
+            self.data = nil
+        }
     }
 }
 

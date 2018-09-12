@@ -162,7 +162,7 @@ class KYCPersonalInfoProgress {
     }
 
     func getTextFor(indexPath: IndexPath) -> String? {
-        let allProperties: [[String?]] = [[email, firstName, lastName, birthDate == nil ? nil : Date.walletShortString(from: birthDate!), gender?.rawValue], [country, city, region, street, house, postalCode]]
+        let allProperties: [[String?]] = [[email, firstName, lastName, birthDate == nil ? nil : Date.walletLongString(from: birthDate!), gender?.rawValue], [country, city, region, street, house, postalCode]]
 
         return allProperties[indexPath.section][indexPath.row]
     }

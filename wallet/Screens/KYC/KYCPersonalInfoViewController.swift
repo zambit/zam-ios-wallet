@@ -195,10 +195,12 @@ class KYCPersonalInfoViewController: FlowViewController, WalletNavigable, UITabl
     }
 
     func prepare(data: KYCPersonalInfo) {
-        self.personalInfoData = data.data
         self.approvingState = data.status
+        self.personalInfoData = data.data
 
-        self.progress = KYCPersonalInfoProgress(data: data.data)
+        if let info = data.data {
+            self.progress = KYCPersonalInfoProgress(data: info)
+        }
 
         switch data.status {
         case .unloaded:
