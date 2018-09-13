@@ -108,11 +108,25 @@ class EnterPinViewController: FlowViewController, WalletNavigable, DecimalKeyboa
                         [weak self]
                         phone in
 
-                        performWithDelay {
-                            UserContactsManager.default.fetchContacts({ _ in
+                        self?.authAPI?.refreshToken(token: token).done {
+                            token in
+
+                            self?.userManager?.save(token: token)
+
+                            performWithDelay {
+                                UserContactsManager.default.fetchContacts({ _ in
+                                    self?.dotsFieldComponent?.endLoading()
+                                    self?.onContinue?()
+                                })
+                            }
+                        }.catch {
+                            error in
+
+                            performWithDelay {
                                 self?.dotsFieldComponent?.endLoading()
-                                self?.onContinue?()
-                            })
+                                self?.onLoginForm?(phone)
+                            }
+
                         }
                     }.catch {
                         [weak self]
@@ -186,11 +200,25 @@ class EnterPinViewController: FlowViewController, WalletNavigable, DecimalKeyboa
             self?.authAPI?.checkIfUserAuthorized(token: token).done {
                 phone in
 
-                performWithDelay {
-                    UserContactsManager.default.fetchContacts({ _ in
-                        self?.dotsFieldComponent?.endLoading()
-                        self?.onContinue?()
-                    })
+                self?.authAPI?.refreshToken(token: token).done {
+                    token in
+
+                    self?.userManager?.save(token: token)
+
+                    performWithDelay {
+                        UserContactsManager.default.fetchContacts({ _ in
+                            self?.dotsFieldComponent?.endLoading()
+                            self?.onContinue?()
+                        })
+                    }
+                    }.catch {
+                        error in
+
+                        performWithDelay {
+                            self?.dotsFieldComponent?.endLoading()
+                            self?.onLoginForm?(phone)
+                        }
+
                 }
             }.catch {
                 [weak self]
