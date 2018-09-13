@@ -38,6 +38,17 @@ class SendMoneyViewController: KeyboardBehaviorFollowingViewController, SendMone
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        switch UIDevice.current.screenType {
+        case .small, .extraSmall:
+            sendMoneyComponent?.prepare(preset: .superCompact)
+        case .medium:
+            sendMoneyComponent?.prepare(preset: .compact)
+        case .plus, .extra:
+            sendMoneyComponent?.prepare(preset: .default)
+        case .unknown:
+            fatalError()
+        }
+
         hideKeyboardOnTap()
         
         view.applyDefaultGradientHorizontally()
@@ -155,7 +166,12 @@ class SendMoneyViewController: KeyboardBehaviorFollowingViewController, SendMone
 
     func sendMoneyComponentRequestSending(_ sendMoneyComponent: SendMoneyComponent, sendMoneyData: SendMoneyData) {
         dismissKeyboard()
-        onSend?(sendMoneyData)
+        
+        performWithDelay {
+            [weak self] in
+            self?.onSend?(sendMoneyData)
+        }
+
     }
 
     func qrCodeScannerViewController(_ qrCodeScannerViewController: QRCodeScannerViewController, didFindCode code: String) {

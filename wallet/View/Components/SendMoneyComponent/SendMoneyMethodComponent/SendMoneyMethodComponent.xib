@@ -14,6 +14,8 @@
             <connections>
                 <outlet property="contentView" destination="iN0-l3-epB" id="NFu-rc-R5j"/>
                 <outlet property="recipientTextField" destination="bgV-8U-48N" id="J3I-75-tMa"/>
+                <outlet property="recipientTextFieldHeightConstraint" destination="utt-BH-mrq" id="vi4-Mk-SUd"/>
+                <outlet property="recipientTextFieldTopConstraint" destination="tc4-Qc-ZtG" id="UrR-DA-3Gm"/>
                 <outlet property="segmentedControlComponent" destination="UYB-Ne-Px6" id="YrC-7T-7Ge"/>
                 <outlet property="toLabel" destination="D9Y-qd-BwG" id="fDq-yD-3jU"/>
             </connections>

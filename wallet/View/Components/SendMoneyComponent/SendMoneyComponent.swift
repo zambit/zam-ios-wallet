@@ -20,7 +20,7 @@ protocol SendMoneyComponentDelegate: class {
     func sendMoneyComponentRequestSending(_ sendMoneyComponent: SendMoneyComponent, sendMoneyData: SendMoneyData)
 }
 
-class SendMoneyComponent: Component, SendMoneyAmountComponentDelegate, SendMoneyMethodComponentDelegate {
+class SendMoneyComponent: Component, SizePresetable, SendMoneyAmountComponentDelegate, SendMoneyMethodComponentDelegate {
 
     var onQRCodeScanning: (() -> Void)? {
         didSet {
@@ -36,7 +36,8 @@ class SendMoneyComponent: Component, SendMoneyAmountComponentDelegate, SendMoney
     @IBOutlet private var sendMoneyAmountComponent: SendMoneyAmountComponent?
     @IBOutlet private var sendButton: SendMoneyButton?
 
-    @IBOutlet private var topConstraint: NSLayoutConstraint?
+    @IBOutlet private var topGreaterThanConstraint: NSLayoutConstraint?
+    @IBOutlet private var sendButtonHeightConstraint: NSLayoutConstraint?
 
     private var balanceData: BalanceData?
     private var method: SendMoneyMethod.Data?
@@ -80,6 +81,23 @@ class SendMoneyComponent: Component, SendMoneyAmountComponentDelegate, SendMoney
         super.setupStyle()
 
         backgroundColor = .white
+    }
+
+
+    func prepare(preset: SizePreset) {
+        sendMoneyAmountComponent?.prepare(preset: preset)
+        sendMoneyMethodComponent?.prepare(preset: preset)
+
+        switch preset {
+        case .superCompact:
+            topGreaterThanConstraint?.constant = 10.0
+            sendButtonHeightConstraint?.constant = 44.0
+        case .compact, .default:
+            topGreaterThanConstraint?.constant = 17.0
+            sendButtonHeightConstraint?.constant = 56.0
+        }
+
+        layoutIfNeeded()
     }
 
     func prepare(recipient: ContactData? = nil, coinType: CoinType, walletId: String) {

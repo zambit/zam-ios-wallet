@@ -34,6 +34,8 @@ class TransactionDetailViewController: FlowViewController, WalletNavigable {
     @IBOutlet private var topTitleConstraint: NSLayoutConstraint?
     @IBOutlet private var titleAmountBetweenConstraint: NSLayoutConstraint?
     @IBOutlet private var recipientButtonBetweenConstraint: NSLayoutConstraint?
+    @IBOutlet private var titleLeftConstraint: NSLayoutConstraint?
+    @IBOutlet private var titleRightConstraint: NSLayoutConstraint?
 
     private var effectView: UIVisualEffectView?
     private var backgroundView: UIView?
@@ -83,18 +85,26 @@ class TransactionDetailViewController: FlowViewController, WalletNavigable {
         case .small, .extraSmall:
             topTitleConstraint?.constant = 0.0
             titleAmountBetweenConstraint?.constant = 47.0
-            recipientButtonBetweenConstraint?.constant = 16.0
+            recipientButtonBetweenConstraint?.constant = 20.0
+            titleLeftConstraint?.constant = 17.0
+            titleRightConstraint?.constant = 17.0
         case .medium:
             topTitleConstraint?.constant = 7.0
             titleAmountBetweenConstraint?.constant = 67.0
             recipientButtonBetweenConstraint?.constant = 26.0
+            titleLeftConstraint?.constant = 35.0
+            titleRightConstraint?.constant = 35.0
         case .plus:
             titleAmountBetweenConstraint?.constant = 97.0
             recipientButtonBetweenConstraint?.constant = 46.0
+            titleLeftConstraint?.constant = 55.0
+            titleRightConstraint?.constant = 55.0
         case .extra:
             topTitleConstraint?.constant = 44.0
             titleAmountBetweenConstraint?.constant = 107.0
             recipientButtonBetweenConstraint?.constant = 56.0
+            titleLeftConstraint?.constant = 55.0
+            titleRightConstraint?.constant = 55.0
         case .unknown:
             fatalError()
         }

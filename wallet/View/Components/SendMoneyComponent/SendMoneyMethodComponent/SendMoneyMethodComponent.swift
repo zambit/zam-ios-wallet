@@ -26,10 +26,9 @@ protocol SendMoneyMethodComponentDelegate: class {
     func sendMoneyMethodComponent(_ sendMoneyMethodComponent: SendMoneyMethodComponent, methodRecipientDataEntered methodData: SendMoneyMethod.Data)
 
     func sendMoneyMethodComponentRecipientDataInvalid(_ sendMoneyMethodComponent: SendMoneyMethodComponent)
-
 }
 
-class SendMoneyMethodComponent: Component, SegmentedControlComponentDelegate, PhoneNumberEnteringHandlerDelegate, IconableTextFieldDelegate {
+class SendMoneyMethodComponent: Component, SizePresetable, SegmentedControlComponentDelegate, PhoneNumberEnteringHandlerDelegate, IconableTextFieldDelegate {
 
     var onRightDetail: (() -> Void)?
 
@@ -38,6 +37,9 @@ class SendMoneyMethodComponent: Component, SegmentedControlComponentDelegate, Ph
     @IBOutlet private var toLabel: UILabel?
     @IBOutlet private var segmentedControlComponent: SegmentedControlComponent?
     @IBOutlet private var recipientTextField: IconableTextField?
+
+    @IBOutlet private var recipientTextFieldTopConstraint: NSLayoutConstraint?
+    @IBOutlet private var recipientTextFieldHeightConstraint: NSLayoutConstraint?
 
     private var phoneNumberEnteringHandler: PhoneNumberEnteringHandler?
 
@@ -94,6 +96,19 @@ class SendMoneyMethodComponent: Component, SegmentedControlComponentDelegate, Ph
         if let textField = recipientTextField {
             setPhoneNumberStyleForRecipientTextField(textField, backgroundColor: .paleOliveGreen, masks: phoneMasks, parser: parser)
         }
+    }
+
+    func prepare(preset: SizePreset) {
+        switch preset {
+        case .superCompact:
+            recipientTextFieldTopConstraint?.constant = 10.0
+            recipientTextFieldHeightConstraint?.constant = 50.0
+        case .compact, .default:
+            recipientTextFieldTopConstraint?.constant = 20.0
+            recipientTextFieldHeightConstraint?.constant = 56.0
+        }
+
+        layoutIfNeeded()
     }
 
     func prepare(recipient: ContactData) {

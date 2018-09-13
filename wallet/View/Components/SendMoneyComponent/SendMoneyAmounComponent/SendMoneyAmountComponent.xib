@@ -17,18 +17,27 @@
                 <outlet property="blockchainFee" destination="rZ0-vl-O1e" id="2t6-gx-eOk"/>
                 <outlet property="contentView" destination="iN0-l3-epB" id="Wpj-Ru-k4t"/>
                 <outlet property="feeContainer" destination="XaW-xK-dtz" id="81i-4s-Ms5"/>
+                <outlet property="feesBottomGreaterThanConstraint" destination="bdN-eO-Que" id="S9p-v4-jPH"/>
+                <outlet property="feesHeightConstraint" destination="KPb-4a-ksd" id="rh1-Pr-1ij"/>
+                <outlet property="feesTopConstraint" destination="wDy-mT-Hlm" id="804-Dp-6HB"/>
                 <outlet property="titleLabel" destination="eg3-E9-yqy" id="yOI-6f-9OQ"/>
+                <outlet property="titleLabelHeightConstraint" destination="dmv-C1-6jW" id="aZp-EZ-LEJ"/>
+                <outlet property="topGreaterThanConstraint" destination="7kU-cK-Uky" id="17m-f3-tyW"/>
+                <outlet property="topInitialConstraint" destination="45A-Hb-Ovs" id="UoQ-3c-zhJ"/>
                 <outlet property="valueTextField" destination="Q45-Zq-EGm" id="ovF-rl-S4u"/>
+                <outlet property="valueTextFieldBottomConstraint" destination="EAI-RW-EXA" id="fdW-aS-PdN"/>
+                <outlet property="valueTextFieldHeightConstraint" destination="gJb-In-gev" id="Hl0-39-C9f"/>
+                <outlet property="valueTextFieldTopConstraint" destination="DAx-fa-YsA" id="1z5-W2-u6w"/>
                 <outlet property="zamzamFee" destination="fWh-gm-WIt" id="sYZ-kd-ia9"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="581" height="460"/>
+            <rect key="frame" x="0.0" y="0.0" width="585" height="438"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eg3-E9-yqy">
-                    <rect key="frame" x="269.5" y="35" width="42" height="18"/>
+                    <rect key="frame" x="271.5" y="35" width="42" height="18"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="18" id="dmv-C1-6jW"/>
                     </constraints>
@@ -37,7 +46,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Q45-Zq-EGm">
-                    <rect key="frame" x="16" y="62" width="549" height="54"/>
+                    <rect key="frame" x="16" y="63" width="553" height="54"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="54" id="gJb-In-gev"/>
                     </constraints>
@@ -46,7 +55,7 @@
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qlR-ac-cJq">
-                    <rect key="frame" x="269.5" y="126" width="42" height="17"/>
+                    <rect key="frame" x="271.5" y="127" width="42" height="17"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="17" id="FjS-WU-HcJ"/>
                     </constraints>
@@ -55,10 +64,10 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XaW-xK-dtz">
-                    <rect key="frame" x="16" y="162" width="549" height="51"/>
+                    <rect key="frame" x="16" y="163" width="553" height="51"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GfN-es-gaT">
-                            <rect key="frame" x="0.0" y="0.0" width="274.5" height="51"/>
+                            <rect key="frame" x="0.0" y="0.0" width="276.5" height="51"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rZ0-vl-O1e" customClass="IndentLabel" customModule="wallet" customModuleProvider="target">
                                     <rect key="frame" x="19" y="15" width="42" height="21"/>
@@ -73,10 +82,10 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jIb-xs-uWB">
-                            <rect key="frame" x="274" y="0.0" width="275" height="51"/>
+                            <rect key="frame" x="276" y="0.0" width="277" height="51"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fWh-gm-WIt" customClass="IndentLabel" customModule="wallet" customModuleProvider="target">
-                                    <rect key="frame" x="19" y="15" width="256" height="21"/>
+                                    <rect key="frame" x="19" y="15" width="258" height="21"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
@@ -107,7 +116,7 @@
             <constraints>
                 <constraint firstItem="eg3-E9-yqy" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" priority="999" constant="35" id="45A-Hb-Ovs"/>
                 <constraint firstItem="eg3-E9-yqy" firstAttribute="top" relation="greaterThanOrEqual" secondItem="vUN-kp-3ea" secondAttribute="top" constant="10" id="7kU-cK-Uky"/>
-                <constraint firstItem="Q45-Zq-EGm" firstAttribute="top" secondItem="eg3-E9-yqy" secondAttribute="bottom" constant="9" id="DAx-fa-YsA"/>
+                <constraint firstItem="Q45-Zq-EGm" firstAttribute="top" secondItem="eg3-E9-yqy" secondAttribute="bottom" constant="10" id="DAx-fa-YsA"/>
                 <constraint firstItem="qlR-ac-cJq" firstAttribute="top" secondItem="Q45-Zq-EGm" secondAttribute="bottom" constant="10" id="EAI-RW-EXA"/>
                 <constraint firstItem="eg3-E9-yqy" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="UUA-wZ-Wfu"/>
                 <constraint firstItem="Q45-Zq-EGm" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="YIS-iq-sJR"/>
@@ -120,7 +129,7 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <point key="canvasLocation" x="415.5" y="-86"/>
+            <point key="canvasLocation" x="417.5" y="-97"/>
         </view>
     </objects>
 </document>

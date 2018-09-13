@@ -14,10 +14,9 @@ protocol SendMoneyAmountComponentDelegate: class {
     func sendMoneyAmountComponent(_ sendMoneyAmountComponent: SendMoneyAmountComponent, amountDataEntered data: BalanceData)
 
     func sendMoneyAmountComponentValueEnteredIncorrectly(_ sendMoneyAmountComponent: SendMoneyAmountComponent)
-
 }
 
-class SendMoneyAmountComponent: Component, UITextFieldDelegate {
+class SendMoneyAmountComponent: Component, SizePresetable, UITextFieldDelegate {
 
     weak var delegate: SendMoneyAmountComponentDelegate?
     
@@ -29,6 +28,17 @@ class SendMoneyAmountComponent: Component, UITextFieldDelegate {
 
     @IBOutlet private var blockchainFee: IndentLabel?
     @IBOutlet private var zamzamFee: IndentLabel?
+
+    @IBOutlet private var feesHeightConstraint: NSLayoutConstraint?
+    @IBOutlet private var feesBottomGreaterThanConstraint: NSLayoutConstraint?
+    @IBOutlet private var feesTopConstraint: NSLayoutConstraint?
+    @IBOutlet private var valueTextFieldHeightConstraint: NSLayoutConstraint?
+    @IBOutlet private var titleLabelHeightConstraint: NSLayoutConstraint?
+    @IBOutlet private var topInitialConstraint: NSLayoutConstraint?
+    @IBOutlet private var valueTextFieldTopConstraint: NSLayoutConstraint?
+    @IBOutlet private var valueTextFieldBottomConstraint: NSLayoutConstraint?
+    @IBOutlet private var topGreaterThanConstraint: NSLayoutConstraint?
+
 
     private var coin: CoinType?
 
@@ -94,6 +104,55 @@ class SendMoneyAmountComponent: Component, UITextFieldDelegate {
 
             drawSeparator(in: view, center: point, width: view.bounds.width)
         }
+    }
+
+    func prepare(preset: SizePreset) {
+        switch preset {
+        case .superCompact:
+            blockchainFee?.custom.setIndent("blockch. fee   ")
+            blockchainFee?.font = UIFont.walletFont(ofSize: 12.0, weight: .regular)
+            zamzamFee?.font = UIFont.walletFont(ofSize: 12.0, weight: .regular)
+            valueTextField?.font = UIFont.walletFont(ofSize: 36.0, weight: .regular)
+            titleLabel?.font = UIFont.walletFont(ofSize: 14.0, weight: .regular)
+
+            feesTopConstraint?.constant = 10.0
+            feesHeightConstraint?.constant = 30.0
+            feesBottomGreaterThanConstraint?.constant = 0.0
+            valueTextFieldHeightConstraint?.constant = 36.0
+            topInitialConstraint?.constant = 10.0
+            topGreaterThanConstraint?.constant = 10
+            valueTextFieldTopConstraint?.constant = 5.0
+            valueTextFieldBottomConstraint?.constant = 5.0
+            titleLabelHeightConstraint?.constant = 16.0
+        case .compact, .default:
+            blockchainFee?.custom.setIndent("blockchain fee   ")
+            blockchainFee?.font = UIFont.walletFont(ofSize: 14.0, weight: .regular)
+            zamzamFee?.font = UIFont.walletFont(ofSize: 14.0, weight: .regular)
+            valueTextField?.font = UIFont.walletFont(ofSize: 46.0, weight: .regular)
+            titleLabel?.font = UIFont.walletFont(ofSize: 16.0, weight: .regular)
+
+            feesTopConstraint?.constant = 20.0
+            feesHeightConstraint?.constant = 51.0
+
+            switch preset {
+            case .compact:
+                topGreaterThanConstraint?.constant = 15
+                feesBottomGreaterThanConstraint?.constant = 0
+            case .default:
+                topGreaterThanConstraint?.constant = 35
+                feesBottomGreaterThanConstraint?.constant = 45
+            default:
+                break
+            }
+
+            valueTextFieldHeightConstraint?.constant = 54.0
+            topInitialConstraint?.constant = 35.0
+            valueTextFieldTopConstraint?.constant = 10.0
+            valueTextFieldBottomConstraint?.constant = 10.0
+            titleLabelHeightConstraint?.constant = 19.5
+        }
+
+        layoutIfNeeded()
     }
 
     func prepare(coinType: CoinType) {
