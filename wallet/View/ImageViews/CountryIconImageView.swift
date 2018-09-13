@@ -37,6 +37,7 @@ class CountryView: UIView {
 
         innerImageView.clipsToBounds = true
         innerImageView.frame = bounds
+        innerImageView.contentMode = .scaleAspectFill
         innerImageView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
 
         addSubview(innerImageView)

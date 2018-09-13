@@ -28,6 +28,15 @@ class EnterPhoneNumberViewController: ContinueViewController, PhoneNumberFormCom
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        switch UIDevice.current.screenType {
+        case .small, .extraSmall:
+            phoneNumberForm?.prepare(preset: .superCompact)
+        case .medium, .extra, .plus:
+            phoneNumberForm?.prepare(preset: .default)
+        case .unknown:
+            fatalError()
+        }
+
         setupDefaultStyle()
         hideKeyboardOnTap()
 

@@ -36,6 +36,16 @@ class EnterNewPhoneNumberViewController: ContinueViewController, PhoneNumberForm
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        switch UIDevice.current.screenType {
+        case .small, .extraSmall:
+            phoneNumberForm?.prepare(preset: .superCompact)
+        case .medium, .extra, .plus:
+            phoneNumberForm?.prepare(preset: .default)
+        case .unknown:
+            fatalError()
+        }
+
+
         termsItems = [
             TermData(text: "Test for the call to confirm the legal document"),
             TermData(text: "Test for the call to confirm the legal document")

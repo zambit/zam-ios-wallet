@@ -15,7 +15,7 @@ protocol LoginFormComponentDelegate: class {
 
 }
 
-class LoginFormComponent: UIView, PhoneNumberFormComponentDelegate, LoginPasswordComponentDelegate {
+class LoginFormComponent: UIView, SizePresetable, PhoneNumberFormComponentDelegate, LoginPasswordComponentDelegate {
 
     @IBOutlet private var contentView: UIView!
 
@@ -92,6 +92,10 @@ class LoginFormComponent: UIView, PhoneNumberFormComponentDelegate, LoginPasswor
 
         contentView.frame = bounds
         contentView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+    }
+
+    func prepare(preset: SizePreset) {
+        phoneNumberFormComponent?.prepare(preset: preset)
     }
 
     func provide(masks: [String: PhoneMaskData], parser: MaskParser, userCountryCode: String? = nil) {

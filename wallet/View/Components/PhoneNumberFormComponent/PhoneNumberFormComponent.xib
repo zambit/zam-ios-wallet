@@ -17,6 +17,7 @@
                 <outlet property="countryImageView" destination="zBE-Kp-ckQ" id="XuM-wk-rW9"/>
                 <outlet property="countryImageViewHeightConstraint" destination="i6z-6a-a8Y" id="rsa-Ds-Fwg"/>
                 <outlet property="detailPhonePartTextField" destination="4Lo-uk-YuC" id="BM5-rC-aOO"/>
+                <outlet property="detailTextFieldWidthConstraint" destination="Azu-dW-fKk" id="t4N-Rv-hLb"/>
                 <outlet property="helperTextLabel" destination="fcb-1l-le0" id="jCe-dz-0CR"/>
                 <outlet property="mainPhonePartTextField" destination="edG-vE-9P9" id="aVY-Rd-7f2"/>
                 <outlet property="rightImageToContentViewConstraint" destination="g2H-do-sko" id="eJm-Xy-TNw"/>

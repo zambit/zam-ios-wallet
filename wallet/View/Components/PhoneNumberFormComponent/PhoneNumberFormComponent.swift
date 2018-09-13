@@ -34,7 +34,7 @@ extension PhoneNumberFormComponentDelegate {
 /**
  Class that controlls entreing phone number form, handles all textFields editing and defines its behaviour.
  */
-class PhoneNumberFormComponent: Component, UITextFieldDelegate, PhoneNumberEnteringHandlerDelegate {
+class PhoneNumberFormComponent: Component, SizePresetable, UITextFieldDelegate, PhoneNumberEnteringHandlerDelegate {
 
     weak var delegate: PhoneNumberFormComponentDelegate?
 
@@ -65,6 +65,8 @@ class PhoneNumberFormComponent: Component, UITextFieldDelegate, PhoneNumberEnter
 
     @IBOutlet private var textFieldsHeightConstraint: NSLayoutConstraint?
     @IBOutlet private var countryImageViewHeightConstraint: NSLayoutConstraint?
+
+    @IBOutlet private var detailTextFieldWidthConstraint: NSLayoutConstraint?
 
     var helperText: String {
         get {
@@ -182,6 +184,17 @@ class PhoneNumberFormComponent: Component, UITextFieldDelegate, PhoneNumberEnter
                                             .foregroundColor: UIColor.white.withAlphaComponent(0.2)])
 
         self.countryImageView?.setImage(#imageLiteral(resourceName: "icon_placeholder"))
+    }
+
+    func prepare(preset: SizePreset) {
+        switch preset {
+        case .superCompact:
+            detailTextFieldWidthConstraint?.constant = 65
+            mainPhonePartTextField?.leftPadding = 6.0
+        case .compact, .default:
+            detailTextFieldWidthConstraint?.constant = 80
+            mainPhonePartTextField?.leftPadding = 12.0
+        }
     }
 
     func provide(masks: [String: PhoneMaskData], parser: MaskParser, initialCountryCode: String? = nil) {

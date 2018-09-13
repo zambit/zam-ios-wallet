@@ -26,6 +26,15 @@ class EnterPhoneLoginPasswordViewController: ContinueViewController, LoginFormCo
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        switch UIDevice.current.screenType {
+        case .small, .extraSmall:
+            loginFormView?.prepare(preset: .superCompact)
+        case .medium, .extra, .plus:
+            loginFormView?.prepare(preset: .default)
+        case .unknown:
+            fatalError()
+        }
+
         setupDefaultStyle()
         hideKeyboardOnTap()
 
