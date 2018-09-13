@@ -92,7 +92,7 @@ class CreatePinViewController: FlowViewController, WalletNavigable, DecimalKeybo
     }
 
     func createPinComponentWrongConfirmation(_ createPinComponent: CreatePinComponent) {
-        AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
+        Interactions.vibrateError()
     }
 
     @objc

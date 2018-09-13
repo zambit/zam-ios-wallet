@@ -141,7 +141,7 @@ class EnterPinViewController: FlowViewController, WalletNavigable, DecimalKeyboa
                     }
 
                     pinText = ""
-                    AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
+                    Interactions.vibrateError()
                 }
 
             }

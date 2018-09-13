@@ -162,6 +162,7 @@
 		8C7C338B21493A3600EC6C96 /* KYCStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C338A21493A3600EC6C96 /* KYCStatus.swift */; };
 		8C7C338D21493CD400EC6C96 /* KYCPersonalInfoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C338C21493CD400EC6C96 /* KYCPersonalInfoData.swift */; };
 		8C7C338F2149659100EC6C96 /* KYCPersonalInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C338E2149659100EC6C96 /* KYCPersonalInfo.swift */; };
+		8C7C3391214A5ABC00EC6C96 /* Interactions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C3390214A5ABC00EC6C96 /* Interactions.swift */; };
 		8CA2188F2121D97C0063C188 /* DecimalKeyboardComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CA2188E2121D97B0063C188 /* DecimalKeyboardComponent.xib */; };
 		8CA218922122E8D70063C188 /* SendMoneyComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CA218912122E8D70063C188 /* SendMoneyComponent.xib */; };
 		8CA218942122EAC90063C188 /* SendMoneyComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA218932122EAC90063C188 /* SendMoneyComponent.swift */; };
@@ -420,6 +421,7 @@
 		8C7C338A21493A3600EC6C96 /* KYCStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KYCStatus.swift; sourceTree = "<group>"; };
 		8C7C338C21493CD400EC6C96 /* KYCPersonalInfoData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KYCPersonalInfoData.swift; sourceTree = "<group>"; };
 		8C7C338E2149659100EC6C96 /* KYCPersonalInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KYCPersonalInfo.swift; sourceTree = "<group>"; };
+		8C7C3390214A5ABC00EC6C96 /* Interactions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interactions.swift; sourceTree = "<group>"; };
 		8CA2188E2121D97B0063C188 /* DecimalKeyboardComponent.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DecimalKeyboardComponent.xib; sourceTree = "<group>"; };
 		8CA218912122E8D70063C188 /* SendMoneyComponent.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SendMoneyComponent.xib; sourceTree = "<group>"; };
 		8CA218932122EAC90063C188 /* SendMoneyComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMoneyComponent.swift; sourceTree = "<group>"; };
@@ -552,6 +554,7 @@
 				8C713B2B213EC77500AC2E25 /* CustomBehavioral.swift */,
 				8C52FFEF211AE19300EB55EA /* OverlappingFlowLayout.swift */,
 				8C04BC3821219D0600E90090 /* Drawing.swift */,
+				8C7C3390214A5ABC00EC6C96 /* Interactions.swift */,
 				8C713B1E213941FF00AC2E25 /* Networking.swift */,
 				8CF5F92E211327EB0083B36A /* MaskParser.swift */,
 				8C52FFFD211B252F00EB55EA /* InstantPanGestureRecognizer.swift */,
@@ -1690,6 +1693,7 @@
 				8CA219402135949C0063C188 /* CoinItemComponent.swift in Sources */,
 				8CA218D6212D61EB0063C188 /* BiometricIDAuth.swift in Sources */,
 				8CA218EF212DCC030063C188 /* LetterImage.swift in Sources */,
+				8C7C3391214A5ABC00EC6C96 /* Interactions.swift in Sources */,
 				8C333D342109F02000949AC0 /* ScreenFlow.swift in Sources */,
 				8C09194B210716C500703224 /* SignupRequest.swift in Sources */,
 				8C60884A2110B42A00470411 /* CountdownTimer.swift in Sources */,

@@ -132,7 +132,7 @@ extension QRCodeScannerViewController: AVCaptureMetadataOutputObjectsDelegate {
                 //launchApp(decodedURL: result)
                 print(result)
                 delegate?.qrCodeScannerViewController(self, didFindCode: result)
-                AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
+                Interactions.vibrateSuccess()
                 onClose?(self)
                 //messageLabel.text = metadataObj.stringValue
             }

@@ -14,7 +14,9 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IllustrationalPlaceholder" customModule="wallet" customModuleProvider="target">
             <connections>
                 <outlet property="contentView" destination="iN0-l3-epB" id="4TC-4K-Ty0"/>
+                <outlet property="illustrationBottomConstraint" destination="LkD-fu-mdM" id="CqI-gz-h23"/>
                 <outlet property="illustrationImageView" destination="ijZ-6F-5wZ" id="3HJ-lv-JnK"/>
+                <outlet property="illustrationTopConstraint" destination="TMk-Tq-SaX" id="tls-sv-Qkn"/>
                 <outlet property="titleLabel" destination="GpA-gA-kJY" id="lrS-bn-XEj"/>
             </connections>
         </placeholder>

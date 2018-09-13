@@ -359,7 +359,7 @@ struct UserAPI: NetworkService {
     }
 
     func sendKYCPersonalInfo(token: String, email: String, firstName: String, lastName: String, birthDate: Date, gender: GenderType, country: String, city: String, region: String, street: String, house: String, postalCode: Int) -> Promise<Void> {
-        return provider.execute(.sendKYCPersonalInfo(token: token, email: email, firstName: firstName, lastName: lastName, birthDate: String(birthDate.unixTimestamp), sex: gender.rawValue, country: country, city: city, region: region, street: street, house: house, postalCode: postalCode))
+        return provider.execute(.sendKYCPersonalInfo(token: token, email: email, firstName: firstName, lastName: lastName, birthDate: String(Int(birthDate.unixTimestamp)), sex: gender.rawValue, country: country, city: city, region: region, street: street, house: house, postalCode: postalCode))
             .then {
                 (response: Response) -> Promise<Void> in
 

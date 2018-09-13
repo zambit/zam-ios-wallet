@@ -345,8 +345,10 @@ class KYCPersonalInfoViewController: FlowViewController, WalletNavigable, UITabl
             [weak self]
             error in
 
-            print(error)
-            self?.sendButton?.custom.endLoading()
+            performWithDelay {
+                Interactions.vibrateError()
+                self?.sendButton?.custom.endLoading()
+            }
         }
     }
 

@@ -109,7 +109,7 @@ extension BehaviorExtension where Base: StageButton {
         imageView.isHidden = true
 
         let indicatorView = UIActivityIndicatorView()
-        indicatorView.color = currentStage.imageTintColor ?? .gray
+        indicatorView.color = currentStage.imageTintColor ?? .white
         indicatorView.tag = 9144
         indicatorView.startAnimating()
 

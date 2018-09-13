@@ -24,6 +24,10 @@ class KYCMainScreenViewController: FlowViewController, WalletNavigable {
     @IBOutlet private var kyc1Button: StageButton?
     @IBOutlet private var bottomPlaceholderLabel: UILabel?
 
+    @IBOutlet private var topPlaceholderHeightConstraint: NSLayoutConstraint?
+    @IBOutlet private var topPlaceholderBottomConstraint: NSLayoutConstraint?
+    @IBOutlet private var bottomPlaceholderTopConstraint: NSLayoutConstraint?
+
     private var personalInfoData: KYCPersonalInfo?
     private var kyc0ApprovingState: KYCStatus = .unloaded
 
@@ -72,6 +76,23 @@ class KYCMainScreenViewController: FlowViewController, WalletNavigable {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        switch UIDevice.current.screenType {
+        case .small, .extraSmall:
+            topPlaceholderComponent?.font = UIFont.walletFont(ofSize: 12.0, weight: .medium)
+            topPlaceholderComponent?.sizingType = .small
+            topPlaceholderHeightConstraint?.constant = 150.0
+            topPlaceholderBottomConstraint?.constant = -5.0
+            bottomPlaceholderTopConstraint?.constant = 12.0
+        case .medium, .extra, .plus:
+            topPlaceholderComponent?.font = UIFont.walletFont(ofSize: 14.0, weight: .medium)
+            topPlaceholderComponent?.sizingType = .normal
+            topPlaceholderHeightConstraint?.constant = 250.0
+            topPlaceholderBottomConstraint?.constant = 20.0
+            bottomPlaceholderTopConstraint?.constant = 22.0
+        case .unknown:
+            fatalError()
+        }
 
         backgroundView?.backgroundColor = .white
         view.applyDefaultGradientHorizontally()

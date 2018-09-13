@@ -307,9 +307,12 @@
                     <connections>
                         <outlet property="backgroundView" destination="wTa-tO-a5W" id="oiC-Hl-u5U"/>
                         <outlet property="bottomPlaceholderLabel" destination="0jg-iP-FvN" id="4Q2-Ha-xCr"/>
+                        <outlet property="bottomPlaceholderTopConstraint" destination="IbS-B9-Jex" id="F3d-pj-FD6"/>
                         <outlet property="kyc0Button" destination="Fj6-TG-G0N" id="hGu-tL-R2l"/>
                         <outlet property="kyc1Button" destination="HVf-FQ-IAQ" id="hPs-yd-yjq"/>
+                        <outlet property="topPlaceholderBottomConstraint" destination="rHA-xm-67N" id="kOT-e5-ojk"/>
                         <outlet property="topPlaceholderComponent" destination="hlN-uQ-fsq" id="GTP-Qp-WGe"/>
+                        <outlet property="topPlaceholderHeightConstraint" destination="myU-w5-9L1" id="4XP-Z4-7dT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rlI-Q2-o7u" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -552,17 +555,17 @@
                                         </constraints>
                                         <state key="normal" title="Button"/>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tZO-CV-skW" customClass="StageButton" customModule="wallet" customModuleProvider="target">
-                                        <rect key="frame" x="17" y="112" width="341" height="75"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="75" id="ZVh-9s-5o9"/>
-                                        </constraints>
-                                        <state key="normal" title="Button"/>
-                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zQU-Kh-8F9" customClass="StageButton" customModule="wallet" customModuleProvider="target">
                                         <rect key="frame" x="17" y="203" width="341" height="75"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="75" id="Uri-FB-m0W"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tZO-CV-skW" customClass="StageButton" customModule="wallet" customModuleProvider="target">
+                                        <rect key="frame" x="17" y="112" width="341" height="75"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="75" id="ZVh-9s-5o9"/>
                                         </constraints>
                                         <state key="normal" title="Button"/>
                                     </button>
