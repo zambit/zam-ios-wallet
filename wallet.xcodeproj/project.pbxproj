@@ -136,7 +136,6 @@
 		8C7C33492142973C00EC6C96 /* StageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C33482142973C00EC6C96 /* StageButton.swift */; };
 		8C7C334D2142C15100EC6C96 /* KYCPersonalInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C334C2142C15100EC6C96 /* KYCPersonalInfoViewController.swift */; };
 		8C7C334F2142C2F500EC6C96 /* TextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C334E2142C2F500EC6C96 /* TextFieldCell.swift */; };
-		8C7C33512142C73900EC6C96 /* FloatTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C33502142C73900EC6C96 /* FloatTextField.swift */; };
 		8C7C3356214662CF00EC6C96 /* TextFieldCellData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C3355214662CF00EC6C96 /* TextFieldCellData.swift */; };
 		8C7C335821466E5800EC6C96 /* GenderType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C335721466E5800EC6C96 /* GenderType.swift */; };
 		8C7C335A21468F5A00EC6C96 /* KYCPersonalInfoProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C335921468F5A00EC6C96 /* KYCPersonalInfoProgress.swift */; };
@@ -163,6 +162,8 @@
 		8C7C338D21493CD400EC6C96 /* KYCPersonalInfoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C338C21493CD400EC6C96 /* KYCPersonalInfoData.swift */; };
 		8C7C338F2149659100EC6C96 /* KYCPersonalInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C338E2149659100EC6C96 /* KYCPersonalInfo.swift */; };
 		8C7C3391214A5ABC00EC6C96 /* Interactions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C3390214A5ABC00EC6C96 /* Interactions.swift */; };
+		8C7C3393214A83A500EC6C96 /* UILabel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C3392214A83A500EC6C96 /* UILabel+Extensions.swift */; };
+		8C7C3395214A882A00EC6C96 /* AdjustableToFitHeightLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C3394214A882A00EC6C96 /* AdjustableToFitHeightLabel.swift */; };
 		8CA2188F2121D97C0063C188 /* DecimalKeyboardComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CA2188E2121D97B0063C188 /* DecimalKeyboardComponent.xib */; };
 		8CA218922122E8D70063C188 /* SendMoneyComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CA218912122E8D70063C188 /* SendMoneyComponent.xib */; };
 		8CA218942122EAC90063C188 /* SendMoneyComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA218932122EAC90063C188 /* SendMoneyComponent.swift */; };
@@ -422,6 +423,8 @@
 		8C7C338C21493CD400EC6C96 /* KYCPersonalInfoData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KYCPersonalInfoData.swift; sourceTree = "<group>"; };
 		8C7C338E2149659100EC6C96 /* KYCPersonalInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KYCPersonalInfo.swift; sourceTree = "<group>"; };
 		8C7C3390214A5ABC00EC6C96 /* Interactions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interactions.swift; sourceTree = "<group>"; };
+		8C7C3392214A83A500EC6C96 /* UILabel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extensions.swift"; sourceTree = "<group>"; };
+		8C7C3394214A882A00EC6C96 /* AdjustableToFitHeightLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdjustableToFitHeightLabel.swift; sourceTree = "<group>"; };
 		8CA2188E2121D97B0063C188 /* DecimalKeyboardComponent.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DecimalKeyboardComponent.xib; sourceTree = "<group>"; };
 		8CA218912122E8D70063C188 /* SendMoneyComponent.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SendMoneyComponent.xib; sourceTree = "<group>"; };
 		8CA218932122EAC90063C188 /* SendMoneyComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMoneyComponent.swift; sourceTree = "<group>"; };
@@ -584,6 +587,7 @@
 				8C7C33402142909200EC6C96 /* TextFields */,
 				8CA2191B213442140063C188 /* IllustrationPlaceholder */,
 				8CA218BA212573510063C188 /* IndentLabel.swift */,
+				8C7C3394214A882A00EC6C96 /* AdjustableToFitHeightLabel.swift */,
 				8C333D5B210B538700949AC0 /* TextCheckBoxView */,
 			);
 			path = View;
@@ -1285,6 +1289,7 @@
 				8CA218A8212343760063C188 /* UIImageView+Extensions.swift */,
 				8C713B0E2137E54100AC2E25 /* UIRefreshControl+Extensions.swift */,
 				8C333D64210B619200949AC0 /* UITextField+Extensions.swift */,
+				8C7C3392214A83A500EC6C96 /* UILabel+Extensions.swift */,
 				8C333D3F210A08A600949AC0 /* UIView+Extensions.swift */,
 				8C333D47210B0F3700949AC0 /* UIViewController+Extensions.swift */,
 			);
@@ -1529,7 +1534,6 @@
 				8CF5F95E2114A77D0083B36A /* CreatePinStageItem.swift in Sources */,
 				8C60884C2111A20B00470411 /* LoginPasswordFormComponent.swift in Sources */,
 				8CF41D8D2136A1AE006D4FE2 /* TransactionsFilterData.swift in Sources */,
-				8C7C33512142C73900EC6C96 /* FloatTextField.swift in Sources */,
 				8C713B2A213EC69D00AC2E25 /* WalletNavigationController.swift in Sources */,
 				8CA2190D213420040063C188 /* TransactionsGroupHeaderComponent.swift in Sources */,
 				8C713B1B21380CE200AC2E25 /* DepositMoneyViewController.swift in Sources */,
@@ -1584,6 +1588,7 @@
 				8CA218962122EAF60063C188 /* SegmentedControlComponent.swift in Sources */,
 				8C6088562111CB8C00470411 /* LoginFormComponent.swift in Sources */,
 				8C713B32213FE33600AC2E25 /* EmptyViewController.swift in Sources */,
+				8C7C3395214A882A00EC6C96 /* AdjustableToFitHeightLabel.swift in Sources */,
 				8C713B1F213941FF00AC2E25 /* Networking.swift in Sources */,
 				8CA218D2212738450063C188 /* CheckAnimationView.swift in Sources */,
 				8C333D48210B0F3700949AC0 /* UIViewController+Extensions.swift in Sources */,
@@ -1699,6 +1704,7 @@
 				8C60884A2110B42A00470411 /* CountdownTimer.swift in Sources */,
 				8CA219082133EE910063C188 /* GroupedTransactionsPageData.swift in Sources */,
 				8C04BC35211C5AD800E90090 /* CreditCardViewComponent.swift in Sources */,
+				8C7C3393214A83A500EC6C96 /* UILabel+Extensions.swift in Sources */,
 				8C0919532107320800703224 /* CodableFailure.swift in Sources */,
 				8C04BC2A211C4F4000E90090 /* UIFont+Additions.swift in Sources */,
 				8C04BC432121C23200E90090 /* UIImage+Extensions.swift in Sources */,
