@@ -54,6 +54,7 @@ class KYCUploadDocumentViewController: FlowViewController, WalletNavigable {
 
         topPlaceholderComponent?.text = ""
         topPlaceholderComponent?.image = placeholderImage
+        topPlaceholderComponent?.prepare(preset: .default)
 
         titleLabel?.font = UIFont.walletFont(ofSize: 28.0, weight: .bold)
         titleLabel?.textColor = .black

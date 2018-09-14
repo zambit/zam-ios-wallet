@@ -9,12 +9,7 @@
 import Foundation
 import UIKit
 
-class IllustrationalPlaceholder: Component {
-
-    enum SizingType {
-        case small
-        case normal
-    }
+class IllustrationalPlaceholder: Component, SizePresetable {
 
     @IBOutlet private var illustrationImageView: UIImageView?
     @IBOutlet private var titleLabel: UILabel?
@@ -24,25 +19,8 @@ class IllustrationalPlaceholder: Component {
 
     private var bottomConstant: CGFloat = 0.0
 
-    var sizingType: SizingType = .normal {
-        didSet {
-            switch sizingType {
-            case .small:
-                illustrationBottomConstraint?.constant = 0.0
-                illustrationTopConstraint?.constant = 10.0
-                bottomConstant = 10.0
-            case .normal:
-                illustrationBottomConstraint?.constant = 0.0
-                illustrationTopConstraint?.constant = 20.0
-                bottomConstant = 20.0
-            }
-        }
-    }
-
     override func setupStyle() {
         super.setupStyle()
-
-        sizingType = .normal
 
         titleLabel?.font = UIFont.systemFont(ofSize: 14.0, weight: .medium)
         titleLabel?.textColor = .blueGrey
@@ -51,6 +29,19 @@ class IllustrationalPlaceholder: Component {
         titleLabel?.sizeToFit()
 
         illustrationImageView?.image = #imageLiteral(resourceName: "illustrationPlaceholderDark")
+    }
+
+    func prepare(preset: SizePreset) {
+        switch preset {
+        case .superCompact:
+            illustrationBottomConstraint?.constant = 5.0
+            illustrationTopConstraint?.constant = 0.0
+            bottomConstant = -5.0
+        case .compact, .default:
+            illustrationBottomConstraint?.constant = 10.0
+            illustrationTopConstraint?.constant = 0.0
+            bottomConstant = -5.0
+        }
     }
 
     var image: UIImage? {
