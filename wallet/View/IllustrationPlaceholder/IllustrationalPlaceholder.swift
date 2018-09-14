@@ -22,21 +22,27 @@ class IllustrationalPlaceholder: Component {
     @IBOutlet private var illustrationBottomConstraint: NSLayoutConstraint?
     @IBOutlet private var illustrationTopConstraint: NSLayoutConstraint?
 
+    private var bottomConstant: CGFloat = 0.0
+
     var sizingType: SizingType = .normal {
         didSet {
             switch sizingType {
             case .small:
-                illustrationBottomConstraint?.constant = 10.0
+                illustrationBottomConstraint?.constant = 0.0
                 illustrationTopConstraint?.constant = 10.0
+                bottomConstant = 10.0
             case .normal:
-                illustrationBottomConstraint?.constant = 20.0
+                illustrationBottomConstraint?.constant = 0.0
                 illustrationTopConstraint?.constant = 20.0
+                bottomConstant = 20.0
             }
         }
     }
 
     override func setupStyle() {
         super.setupStyle()
+
+        sizingType = .normal
 
         titleLabel?.font = UIFont.systemFont(ofSize: 14.0, weight: .medium)
         titleLabel?.textColor = .blueGrey
@@ -47,6 +53,17 @@ class IllustrationalPlaceholder: Component {
         illustrationImageView?.image = #imageLiteral(resourceName: "illustrationPlaceholderDark")
     }
 
+    var image: UIImage? {
+        get {
+            return illustrationImageView?.image
+        }
+
+        set {
+            illustrationImageView?.image = newValue
+
+        }
+    }
+
     var text: String? {
         get {
             return titleLabel?.text
@@ -54,7 +71,11 @@ class IllustrationalPlaceholder: Component {
         set {
             titleLabel?.text = newValue
             titleLabel?.sizeToFit()
-            layoutIfNeeded()
+
+            if let text = newValue, !text.isEmpty {
+                illustrationBottomConstraint?.constant = bottomConstant
+                layoutIfNeeded()
+            }
         }
     }
 

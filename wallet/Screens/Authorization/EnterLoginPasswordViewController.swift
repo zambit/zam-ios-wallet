@@ -133,24 +133,7 @@ class EnterLoginPasswordViewController: ContinueViewController, LoginPasswordCom
 
     @objc
     private func exitButtonTouchEvent(_ sender: UIBarButtonItem) {
-        guard let token = userManager?.getToken() else {
-            do {
-                try userManager?.clearUserData()
-            } catch let error {
-                fatalError("Error on clearing user data: \(error)")
-            }
-
-            self.dismissKeyboard()
-            performWithDelay {
-                [weak self] in
-                self?.onExit?()
-            }
-            return
-        }
-
-        continueButton?.custom.setLoading(true)
-
-        authAPI?.signOut(token: token).done {
+        let exit: () -> Void = {
             [weak self] in
 
             do {
@@ -158,31 +141,31 @@ class EnterLoginPasswordViewController: ContinueViewController, LoginPasswordCom
             } catch let error {
                 fatalError("Error on clearing user data: \(error)")
             }
-            
+
             self?.dismissKeyboard()
             performWithDelay {
+                self?.continueButton?.custom.setLoading(false)
                 self?.onExit?()
             }
+        }
+
+        guard let token = userManager?.getToken() else {
+            exit()
+            return
+        }
+
+        continueButton?.custom.setLoading(true)
+
+        authAPI?.signOut(token: token).done {
+            exit()
         }.catch {
             [weak self]
             error in
 
-            performWithDelay {
-                self?.continueButton?.custom.setLoading(false)
-            }
-
-            if let serverError = error as? WalletResponseError {
-                switch serverError {
-                case .serverFailureResponse(errors: let fails):
-                    guard let fail = fails.first else {
-                        fatalError()
-                    }
-
-                    self?.loginPasswordForm?.helperText = fail.message
-                case .undefinedServerFailureResponse:
-
-                    self?.loginPasswordForm?.helperText = "Undefined error"
-                }
+            if let _ = error as? WalletResponseError {
+                exit()
+            } else {
+                self?.loginPasswordForm?.helperText = "Network problems"
             }
         }
 

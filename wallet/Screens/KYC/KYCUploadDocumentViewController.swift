@@ -28,6 +28,10 @@ class KYCUploadDocumentViewController: FlowViewController, WalletNavigable {
 
     var sendingState: KYCStatus = .unloaded
 
+    var placeholderImage: UIImage {
+        return #imageLiteral(resourceName: "illustrationPlaceholderLight")
+    }
+
     var descriptionTitle: String {
         return "Title"
     }
@@ -49,6 +53,7 @@ class KYCUploadDocumentViewController: FlowViewController, WalletNavigable {
         view.applyDefaultGradientHorizontally()
 
         topPlaceholderComponent?.text = ""
+        topPlaceholderComponent?.image = placeholderImage
 
         titleLabel?.font = UIFont.walletFont(ofSize: 28.0, weight: .bold)
         titleLabel?.textColor = .black

@@ -19,11 +19,17 @@ class KYCUploadPrivateDocumentViewController: KYCUploadDocumentViewController {
         return "Upload photos of your passport, ID card, or driving license as your ID document.\n\nIf you submit your passport photos, make sure it’s a reversal image. If you submit ID card or driving license, please upload 2 photos of both sides those documents. Scans and screenshots are not accepted."
     }
 
+    override var placeholderImage: UIImage {
+        return #imageLiteral(resourceName: "passport")
+    }
+
     override var documentButtonsCount: Int {
         return 2
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        
     }
 }
