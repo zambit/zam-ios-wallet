@@ -18,8 +18,8 @@ class SearchTextField: UITextField {
 
     weak var searchDelegate: SearchTextFieldDelegate?
 
-    private var normalDetailImageView: UIImageView?
-    private var editingDetailButton: UIButton?
+    fileprivate var normalDetailImageView: UIImageView?
+    fileprivate var editingDetailButton: UIButton?
 
     private var normalDetailRightOffsetConstraint: NSLayoutConstraint?
     private var editingDetailRightOffsetConstraint: NSLayoutConstraint?
@@ -87,8 +87,9 @@ class SearchTextField: UITextField {
         editingDetailButton?.heightAnchor.constraint(equalToConstant: 16.0).isActive = true
 
         editingDetailButton?.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-        editingDetailRightOffsetConstraint = editingDetailButton?.rightAnchor.constraint(equalTo: rightAnchor, constant: 16.0)
+        editingDetailRightOffsetConstraint = editingDetailButton?.rightAnchor.constraint(equalTo: rightAnchor, constant: -12.0)
         editingDetailRightOffsetConstraint?.isActive = true
+        editingDetailButton?.alpha = 0.0
 
         layoutIfNeeded()
     }
@@ -102,19 +103,19 @@ class SearchTextField: UITextField {
 
     @objc
     private func editingDidBegin(_ sender: SearchTextField) {
-        UIView.animate(withDuration: 0.1, animations: {
+        UIView.animate(withDuration: 0.2, animations: {
 
-            sender.normalDetailRightOffsetConstraint?.constant = 16.0
+            sender.normalDetailImageView?.alpha = 0.0
+            sender.editingDetailButton?.alpha = 1.0
+        }, completion: {
+            [weak self]
+            _ in
 
-            sender.layoutIfNeeded()
-        }, completion: { _ in
+            guard let detailButton = sender.editingDetailButton else {
+                return
+            }
 
-            UIView.animate(withDuration: 0.1, animations: {
-
-                sender.editingDetailRightOffsetConstraint?.constant = -12.0
-
-                sender.layoutIfNeeded()
-            })
+            self?.bringSubview(toFront: detailButton)
         })
     }
 
@@ -128,19 +129,20 @@ class SearchTextField: UITextField {
         self.resignFirstResponder()
         self.layoutIfNeeded()
         
-        UIView.animate(withDuration: 0.1, animations: {
+        UIView.animate(withDuration: 0.2, animations: {
 
-            sender.editingDetailRightOffsetConstraint?.constant = 16.0
+            sender.normalDetailImageView?.alpha = 1.0
+            sender.editingDetailButton?.alpha = 0.0
 
-            sender.layoutIfNeeded()
-        }, completion: { _ in
+        }, completion: {
+            [weak self]
+            _ in
 
-            UIView.animate(withDuration: 0.1, animations: {
+            guard let detailImage = sender.normalDetailImageView else {
+                return
+            }
 
-                sender.normalDetailRightOffsetConstraint?.constant = -12.0
-
-                sender.layoutIfNeeded()
-            })
+            self?.bringSubview(toFront: detailImage)
         })
     }
 }
