@@ -33,6 +33,17 @@ class EnterNewPhoneNumberViewController: ContinueViewController, PhoneNumberForm
     @IBOutlet var phoneNumberForm: PhoneNumberFormComponent?
     @IBOutlet var termsStackView: UIStackView?
 
+    private var phoneNumberValid: Bool = false
+    private var allTermsAccepted: Bool {
+        guard let views = termsStackView?.arrangedSubviews else {
+            return true
+        }
+
+        let checkBoxes = views.compactMap { return $0 as? TextCheckBoxView }
+
+        return !checkBoxes.contains { $0.isChecked == false }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -45,10 +56,8 @@ class EnterNewPhoneNumberViewController: ContinueViewController, PhoneNumberForm
             fatalError()
         }
 
-
         termsItems = [
-            TermData(text: "Test for the call to confirm the legal document"),
-            TermData(text: "Test for the call to confirm the legal document")
+            TermData(text: "I accept the Terms of Use and give my consent to Zamzam LLC to process my personal data for the services outlined in the Privacy Policy")
         ]
 
         addSubviews()
@@ -81,18 +90,30 @@ class EnterNewPhoneNumberViewController: ContinueViewController, PhoneNumberForm
     // PhoneNumberFormViewDelegate
 
     func phoneNumberFormComponent(_ phoneNumberFormViewController: PhoneNumberFormComponent, dontSatisfyTheCondition: PhoneCondition) {
+        phoneNumberValid = false
         continueButton?.custom.setEnabled(false)
     }
 
     func phoneNumberFormComponentSatisfiesAllConditions(_ phoneNumberFormViewController: PhoneNumberFormComponent) {
-        continueButton?.custom.setEnabled(true)
+        phoneNumberValid = true
+        continueButton?.custom.setEnabled(phoneNumberValid && allTermsAccepted)
     }
 
     private func addSubviews() {
         termsItems.forEach {
             let termView = TextCheckBoxView(frame: CGRect.zero)
-            termView.heightAnchor.constraint(equalToConstant: 32.0).isActive = true
+            //termView.heightAnchor.constraint(equalToConstant: 32.0).isActive = true
             termView.configure(text: $0.text)
+            termView.sizeToFit()
+            termView.addAction({
+                [weak self]
+                _ in
+
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.continueButton?.custom.setEnabled(strongSelf.phoneNumberValid && strongSelf.allTermsAccepted)
+            }, for: .check)
 
             termsStackView?.addArrangedSubview(termView)
         }

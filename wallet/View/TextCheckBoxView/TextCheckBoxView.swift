@@ -11,9 +11,15 @@ import UIKit
 
 class TextCheckBoxView: UIView {
 
+    enum TextCheckBoxViewEvents {
+        case check
+    }
+
     @IBOutlet private var contentView: UIView!
     @IBOutlet private var checkBox: CheckBoxButton?
     @IBOutlet private var textLabel: UILabel?
+
+    private var checkAction: ((TextCheckBoxView) -> Void)?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -29,6 +35,17 @@ class TextCheckBoxView: UIView {
 
     func configure(text: String) {
         textLabel?.text = text
+    }
+
+    func addAction(_ action: @escaping (TextCheckBoxView) -> Void, for event: TextCheckBoxViewEvents) {
+        switch event {
+        case .check:
+            self.checkAction = action
+        }
+    }
+
+    var isChecked: Bool {
+        return checkBox?.custom.isChecked ?? true
     }
 
     private func initFromNib() {
@@ -54,5 +71,7 @@ class TextCheckBoxView: UIView {
         }
 
         checkBox?.custom.setChecked(!state)
+
+        checkAction?(self)
     }
 }
