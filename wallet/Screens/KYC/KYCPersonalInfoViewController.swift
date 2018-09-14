@@ -113,7 +113,7 @@ class KYCPersonalInfoViewController: FlowViewController, WalletNavigable, UITabl
                                     alert.show() }),
                                 beginEditingAction: nil
                 )]),
-            ("Personal info",
+            ("Personal address",
              [TextFieldCellData(placeholder: "Country",
                                 keyboardType: .default,
                                 action: .editingChanged({ [weak self]
