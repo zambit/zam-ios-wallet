@@ -44,6 +44,14 @@ final class FirstEnterLoginFlow: ScreenFlow {
 
             strongSelf.recoveryFlow?.begin()
         }
+
+        let onExit: () -> Void = {
+            [weak self] in
+
+            self?.onboardingFlow.begin()
+        }
+
+        vc.onExit = onExit
         vc.onContinue = onContinue
         vc.onRecovery = onRecovery
         vc.telephonyProvider = UserTelephonyInfoProvider()
@@ -65,6 +73,11 @@ final class FirstEnterLoginFlow: ScreenFlow {
 
     private var recoveryFlow: RecoveryFlow? {
         let flow = RecoveryFlow(migratingNavigationController: migratingNavigationController)
+        return flow
+    }
+
+    private var onboardingFlow: OnboardingFlow {
+        let flow = OnboardingFlow(migratingNavigationController: migratingNavigationController)
         return flow
     }
 }

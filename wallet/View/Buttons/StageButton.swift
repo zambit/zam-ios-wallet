@@ -276,6 +276,5 @@ extension BehaviorExtension where Base: StageButton {
 
         base.layer.shadowRadius = enabled ? 21.0 : 12.0
         //base.layer.shadowOpacity = enabled ? 0.5 : 0.2
-
     }
 }

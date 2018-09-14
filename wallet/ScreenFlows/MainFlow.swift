@@ -37,9 +37,36 @@ final class MainFlow: ScreenFlow {
         tabbar.custom.add(viewController: mainKYCScreen, with: contactsScreenItemData)
 
         let moreScreenItemData = WalletTabBarItemData(image: #imageLiteral(resourceName: "more"), type: .normal, title: "More")
-        tabbar.custom.add(viewController: EmptyViewController(), with: moreScreenItemData)
+        tabbar.custom.add(viewController: moreScreen, with: moreScreenItemData)
 
         return tabbar
+    }
+
+    // MARK: - MoreTabBarItem
+
+    private var moreScreen: MoreViewController {
+        let _vc = ControllerHelper.instantiateViewController(identifier: "MoreViewController", storyboardName: "Main")
+
+        guard let vc = _vc as? MoreViewController else {
+            fatalError()
+        }
+
+        let onExit: () -> Void = {
+            [weak self] in
+
+            self?.onboardingFlow.begin()
+        }
+        
+        vc.onExit = onExit
+        vc.userManager = UserDefaultsManager(keychainConfiguration: WalletKeychainConfiguration())
+        vc.authAPI = AuthAPI(provider: AuthProvider(environment: WalletEnvironment(), dispatcher: HTTPDispatcher()))
+        vc.flow = self
+        return vc
+    }
+
+    private var onboardingFlow: OnboardingFlow {
+        let flow = OnboardingFlow(migratingNavigationController: migratingNavigationController)
+        return flow
     }
 
     // MARK: - KYCTabBarItem

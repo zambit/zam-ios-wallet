@@ -58,7 +58,7 @@ class OnboardingViewController: FlowViewController, WalletNavigable, UICollectio
                                text: "Send cryptocurrency\nby phone number",
                                additionalText: nil),
             OnboardingItemData(image: #imageLiteral(resourceName: "wallet"),
-                               text: "Safe storage of \nBTC, BHC, ETH, ZAM",
+                               text: "Safe storage of\nBTC, BCH, ETH, ZAM",
                                additionalText: nil),
             OnboardingItemData(image: #imageLiteral(resourceName: "kyc"),
                                text: "Pass the verification of identity and get free ZAM tokens",
