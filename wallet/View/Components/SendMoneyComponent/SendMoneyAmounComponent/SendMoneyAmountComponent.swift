@@ -39,7 +39,6 @@ class SendMoneyAmountComponent: Component, SizePresetable, UITextFieldDelegate {
     @IBOutlet private var valueTextFieldBottomConstraint: NSLayoutConstraint?
     @IBOutlet private var topGreaterThanConstraint: NSLayoutConstraint?
 
-
     private var coin: CoinType?
 
     private var coinPrefix: String {
@@ -140,7 +139,7 @@ class SendMoneyAmountComponent: Component, SizePresetable, UITextFieldDelegate {
                 feesBottomGreaterThanConstraint?.constant = 0
             case .default:
                 topGreaterThanConstraint?.constant = 35
-                feesBottomGreaterThanConstraint?.constant = 45
+                feesBottomGreaterThanConstraint?.constant = 20
             default:
                 break
             }
