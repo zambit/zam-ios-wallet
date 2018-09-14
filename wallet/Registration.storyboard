@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
+    <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -15,24 +15,24 @@
             <objects>
                 <viewController storyboardIdentifier="EnterNewPhoneNumberViewController" id="Pyg-73-OqK" customClass="EnterNewPhoneNumberViewController" customModule="wallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="tUF-U7-7TA">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What's your phone number?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U4Y-RM-BPg">
-                                <rect key="frame" x="16" y="36" width="343" height="81.5"/>
+                                <rect key="frame" x="16" y="36" width="288" height="81.5"/>
                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="34"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qQ8-XH-WUs" customClass="PhoneNumberFormComponent" customModule="wallet" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="142.5" width="375" height="56"/>
+                                <rect key="frame" x="0.0" y="142.5" width="320" height="56"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="56" placeholder="YES" id="w2H-ng-OF1"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yY4-cD-Qm1" customClass="RoundContinueButton" customModule="wallet" customModuleProvider="target">
-                                <rect key="frame" x="291" y="583" width="60" height="60"/>
+                                <rect key="frame" x="236" y="484" width="60" height="60"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="60" id="UBg-LH-KT8"/>
@@ -40,9 +40,8 @@
                                 </constraints>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="OBf-Zh-HeM">
-                                <rect key="frame" x="16" y="214.5" width="215" height="200"/>
+                                <rect key="frame" x="16" y="214.5" width="250" height="200"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="215" id="DPC-1c-H2H"/>
                                     <constraint firstAttribute="height" constant="200" placeholder="YES" id="W1d-wb-Ork"/>
                                 </constraints>
                             </stackView>
@@ -51,13 +50,15 @@
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="U4Y-RM-BPg" secondAttribute="trailing" constant="16" id="2ha-1E-Wvu"/>
                             <constraint firstItem="qQ8-XH-WUs" firstAttribute="top" secondItem="U4Y-RM-BPg" secondAttribute="bottom" constant="25" id="3qq-uG-0N5"/>
-                            <constraint firstItem="U4Y-RM-BPg" firstAttribute="top" secondItem="egG-wf-OqO" secondAttribute="top" constant="16" id="PVF-2c-ahe"/>
+                            <constraint firstItem="yY4-cD-Qm1" firstAttribute="top" relation="greaterThanOrEqual" secondItem="OBf-Zh-HeM" secondAttribute="bottom" constant="5" id="68w-oi-3Zo"/>
+                            <constraint firstItem="U4Y-RM-BPg" firstAttribute="top" secondItem="egG-wf-OqO" secondAttribute="top" priority="999" constant="16" id="PVF-2c-ahe"/>
                             <constraint firstItem="egG-wf-OqO" firstAttribute="trailing" secondItem="yY4-cD-Qm1" secondAttribute="trailing" constant="24" id="UOm-zz-zKb"/>
                             <constraint firstItem="egG-wf-OqO" firstAttribute="trailing" secondItem="qQ8-XH-WUs" secondAttribute="trailing" id="ZMm-x6-qFJ"/>
                             <constraint firstItem="OBf-Zh-HeM" firstAttribute="top" secondItem="qQ8-XH-WUs" secondAttribute="bottom" constant="16" id="p1W-L0-1T6"/>
                             <constraint firstItem="OBf-Zh-HeM" firstAttribute="leading" secondItem="egG-wf-OqO" secondAttribute="leading" constant="16" id="pB4-4w-6zr"/>
                             <constraint firstItem="qQ8-XH-WUs" firstAttribute="leading" secondItem="egG-wf-OqO" secondAttribute="leading" id="plK-hK-eiJ"/>
                             <constraint firstItem="egG-wf-OqO" firstAttribute="bottom" secondItem="yY4-cD-Qm1" secondAttribute="bottom" constant="24" id="tw1-mZ-PDp"/>
+                            <constraint firstItem="egG-wf-OqO" firstAttribute="trailing" secondItem="OBf-Zh-HeM" secondAttribute="trailing" constant="54" id="x4V-vV-3eI"/>
                             <constraint firstItem="U4Y-RM-BPg" firstAttribute="leading" secondItem="egG-wf-OqO" secondAttribute="leading" constant="16" id="zz9-Kf-9xn"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="egG-wf-OqO"/>
@@ -72,31 +73,31 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4AW-mO-z2B" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-418" y="255"/>
+            <point key="canvasLocation" x="-418.125" y="254.57746478873239"/>
         </scene>
         <!--Verify Phone Number With Sms View Controller-->
         <scene sceneID="bRc-aH-hZa">
             <objects>
                 <viewController storyboardIdentifier="VerifyPhoneNumberWithSmsViewController" id="M2G-cM-Sue" customClass="VerifyPhoneNumberWithSmsViewController" customModule="wallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="19j-Om-sn0">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Verification with sms-code" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5C8-LU-ILM">
-                                <rect key="frame" x="16" y="36" width="343" height="81.5"/>
+                                <rect key="frame" x="16" y="36" width="288" height="81.5"/>
                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="34"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3FS-X7-4ZV" customClass="VerificationCodeFormComponent" customModule="wallet" customModuleProvider="target">
-                                <rect key="frame" x="16" y="142" width="343" height="56"/>
+                                <rect key="frame" x="16" y="142" width="288" height="56"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="56" id="RVY-1x-yy0"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fDU-AV-0sT" customClass="RoundContinueButton" customModule="wallet" customModuleProvider="target">
-                                <rect key="frame" x="291" y="583" width="60" height="60"/>
+                                <rect key="frame" x="236" y="484" width="60" height="60"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="60" id="B9j-sb-fwq"/>
@@ -104,7 +105,7 @@
                                 </constraints>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w2q-jJ-o6c" customClass="AdditionalTextButton" customModule="wallet" customModuleProvider="target">
-                                <rect key="frame" x="24" y="596" width="54" height="34"/>
+                                <rect key="frame" x="24" y="497" width="54" height="34"/>
                                 <state key="normal" title="Button"/>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Helper text" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VAD-Gv-oSN">
@@ -118,12 +119,13 @@
                         <constraints>
                             <constraint firstItem="sIn-t9-VZF" firstAttribute="bottom" secondItem="fDU-AV-0sT" secondAttribute="bottom" constant="24" id="0xM-Ph-g7f"/>
                             <constraint firstItem="VAD-Gv-oSN" firstAttribute="top" secondItem="3FS-X7-4ZV" secondAttribute="bottom" constant="8" id="1f9-kj-lSz"/>
+                            <constraint firstItem="fDU-AV-0sT" firstAttribute="top" relation="greaterThanOrEqual" secondItem="3FS-X7-4ZV" secondAttribute="bottom" constant="5" id="Byy-sf-UMx"/>
                             <constraint firstItem="5C8-LU-ILM" firstAttribute="leading" secondItem="sIn-t9-VZF" secondAttribute="leading" constant="16" id="Dl3-4W-Ppd"/>
                             <constraint firstItem="sIn-t9-VZF" firstAttribute="trailing" secondItem="fDU-AV-0sT" secondAttribute="trailing" constant="24" id="EQ8-1E-jtl"/>
                             <constraint firstItem="3FS-X7-4ZV" firstAttribute="trailing" secondItem="5C8-LU-ILM" secondAttribute="trailing" id="H2X-qz-Ccw"/>
                             <constraint firstItem="VAD-Gv-oSN" firstAttribute="leading" secondItem="3FS-X7-4ZV" secondAttribute="leading" id="T4S-xp-Us9"/>
                             <constraint firstItem="w2q-jJ-o6c" firstAttribute="centerY" secondItem="fDU-AV-0sT" secondAttribute="centerY" id="W7y-M8-mMu"/>
-                            <constraint firstItem="5C8-LU-ILM" firstAttribute="top" secondItem="sIn-t9-VZF" secondAttribute="top" constant="16" id="Z3J-Mi-LOT"/>
+                            <constraint firstItem="5C8-LU-ILM" firstAttribute="top" secondItem="sIn-t9-VZF" secondAttribute="top" priority="999" constant="16" id="Z3J-Mi-LOT"/>
                             <constraint firstItem="w2q-jJ-o6c" firstAttribute="leading" secondItem="sIn-t9-VZF" secondAttribute="leading" constant="24" id="ikK-jT-Jh7"/>
                             <constraint firstItem="sIn-t9-VZF" firstAttribute="trailing" secondItem="5C8-LU-ILM" secondAttribute="trailing" constant="16" id="kpg-Xf-sdu"/>
                             <constraint firstItem="3FS-X7-4ZV" firstAttribute="top" secondItem="5C8-LU-ILM" secondAttribute="bottom" constant="24" id="mj7-vJ-1ZF"/>
@@ -142,31 +144,31 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AVM-6k-sDh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="613.60000000000002" y="253.2233883058471"/>
+            <point key="canvasLocation" x="613.125" y="252.46478873239437"/>
         </scene>
         <!--Create New Password View Controller-->
         <scene sceneID="hKm-GD-hJA">
             <objects>
                 <viewController storyboardIdentifier="CreateNewPasswordViewController" id="O4A-O5-OzH" customClass="CreateNewPasswordViewController" customModule="wallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Cx1-kA-TRG">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create a new password" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HrH-uf-gIy">
-                                <rect key="frame" x="16" y="36" width="343" height="81.5"/>
+                                <rect key="frame" x="16" y="36" width="288" height="81.5"/>
                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="34"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SE1-m1-7P3" customClass="NewPasswordFormComponent" customModule="wallet" customModuleProvider="target">
-                                <rect key="frame" x="16" y="142" width="343" height="146"/>
+                                <rect key="frame" x="16" y="142" width="288" height="146"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="146" placeholder="YES" id="o3U-HE-MCg"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VGq-BV-aTL" customClass="RoundContinueButton" customModule="wallet" customModuleProvider="target">
-                                <rect key="frame" x="291" y="583" width="60" height="60"/>
+                                <rect key="frame" x="236" y="484" width="60" height="60"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="gX7-8r-GKb"/>
@@ -181,8 +183,9 @@
                             <constraint firstItem="HrH-uf-gIy" firstAttribute="leading" secondItem="trT-Z0-yVr" secondAttribute="leading" constant="16" id="NGs-by-HT4"/>
                             <constraint firstItem="trT-Z0-yVr" firstAttribute="trailing" secondItem="HrH-uf-gIy" secondAttribute="trailing" constant="16" id="PwC-sz-Yzm"/>
                             <constraint firstItem="SE1-m1-7P3" firstAttribute="leading" secondItem="HrH-uf-gIy" secondAttribute="leading" id="aTf-Cd-nEV"/>
-                            <constraint firstItem="trT-Z0-yVr" firstAttribute="top" secondItem="HrH-uf-gIy" secondAttribute="top" constant="-16" id="baW-5k-xck"/>
+                            <constraint firstItem="trT-Z0-yVr" firstAttribute="top" secondItem="HrH-uf-gIy" secondAttribute="top" priority="999" constant="-16" id="baW-5k-xck"/>
                             <constraint firstItem="trT-Z0-yVr" firstAttribute="trailing" secondItem="VGq-BV-aTL" secondAttribute="trailing" constant="24" id="kcB-6h-FJe"/>
+                            <constraint firstItem="VGq-BV-aTL" firstAttribute="top" relation="greaterThanOrEqual" secondItem="SE1-m1-7P3" secondAttribute="bottom" constant="5" id="rYe-76-Xhy"/>
                             <constraint firstItem="trT-Z0-yVr" firstAttribute="bottom" secondItem="VGq-BV-aTL" secondAttribute="bottom" constant="24" id="vPh-bZ-rpM"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="trT-Z0-yVr"/>
@@ -196,7 +199,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m4I-7U-FOc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1553" y="253"/>
+            <point key="canvasLocation" x="1552.5" y="252.46478873239437"/>
         </scene>
     </scenes>
 </document>

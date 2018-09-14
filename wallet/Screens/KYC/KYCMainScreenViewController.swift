@@ -88,7 +88,7 @@ class KYCMainScreenViewController: FlowViewController, WalletNavigable {
         switch UIDevice.current.screenType {
         case .small, .extraSmall:
             topPlaceholderComponent?.font = UIFont.walletFont(ofSize: 12.0, weight: .medium)
-            topPlaceholderComponent?.sizingType = .small
+            topPlaceholderComponent?.prepare(preset: .superCompact)
             topPlaceholderHeightConstraint?.constant = 150.0
             topPlaceholderBottomConstraint?.constant = -5.0
             bottomPlaceholderTopConstraint?.constant = 12.0
@@ -96,7 +96,7 @@ class KYCMainScreenViewController: FlowViewController, WalletNavigable {
             buttonsType = .medium
         case .medium:
             topPlaceholderComponent?.font = UIFont.walletFont(ofSize: 14.0, weight: .medium)
-            topPlaceholderComponent?.sizingType = .normal
+            topPlaceholderComponent?.prepare(preset: .compact)
             topPlaceholderHeightConstraint?.constant = 250.0
             topPlaceholderBottomConstraint?.constant = 5.0
             bottomPlaceholderTopConstraint?.constant = 17.0
@@ -104,7 +104,7 @@ class KYCMainScreenViewController: FlowViewController, WalletNavigable {
             buttonsType = .large
         case .extra, .plus:
             topPlaceholderComponent?.font = UIFont.walletFont(ofSize: 14.0, weight: .medium)
-            topPlaceholderComponent?.sizingType = .normal
+            topPlaceholderComponent?.prepare(preset: .default)
             topPlaceholderHeightConstraint?.constant = 250.0
             topPlaceholderBottomConstraint?.constant = 20.0
             bottomPlaceholderTopConstraint?.constant = 22.0
@@ -119,6 +119,7 @@ class KYCMainScreenViewController: FlowViewController, WalletNavigable {
 
         topPlaceholderComponent?.text = "Pass the procedure of identification to the end and get bonus 500 ZAM-tokens"
         topPlaceholderComponent?.textColor = .black
+        topPlaceholderComponent?.image = #imageLiteral(resourceName: "kyc")
 
         let kyc0Stages = [
             StageDescription(id: "KYC0", idTextColor: .azure, description: "Personal info and address", descriptionTextColor: .darkIndigo, backgroundColor: .white, image: #imageLiteral(resourceName: "chevronRight"), imageTintColor: .darkIndigo),

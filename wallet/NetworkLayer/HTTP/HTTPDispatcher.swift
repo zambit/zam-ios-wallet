@@ -68,8 +68,9 @@ struct HTTPDispatcher: Dispatcher {
 
         switch request.parameters {
         case .body(let params)?:
-            let encoder = JSONEncoder()
-            urlRequest.httpBody = try encoder.encode(params)
+//            let encoder = JSONEncoder()
+//            urlRequest.httpBody = try encoder.encode(params)
+            urlRequest.httpBody = try JSONSerialization.data(withJSONObject: params, options: [])
 
         case .url(let params)?:
             guard var components = URLComponents(string: fullURLString) else {

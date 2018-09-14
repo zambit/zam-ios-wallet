@@ -123,7 +123,7 @@ enum UserRequest: Request {
             return nil
 
         case let .sendKYCPersonalInfo(token: _, email: email, firstName: firstName, lastName: lastName, birthDate: birthDate, sex: sex, country: country, city: city, region: region, street: street, house: house, postalCode: code):
-            let dict = [
+            let dict: [String : Any] = [
                 "email": email,
                 "first_name": firstName,
                 "last_name": lastName,
@@ -134,7 +134,7 @@ enum UserRequest: Request {
                 "region": region,
                 "street": street,
                 "house": house,
-                "postal_code": String(code)
+                "postal_code": code
             ]
 
             return RequestParams.body(dict)

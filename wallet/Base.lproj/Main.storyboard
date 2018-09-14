@@ -550,6 +550,105 @@
             </objects>
             <point key="canvasLocation" x="-4022" y="-906"/>
         </scene>
+        <!--More View Controller-->
+        <scene sceneID="bIJ-GF-PFz">
+            <objects>
+                <viewController storyboardIdentifier="MoreViewController" id="OXY-hi-nQn" customClass="MoreViewController" customModule="wallet" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="SVb-g8-3Zn">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6gK-Qv-G2Z">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5iH-0f-8DR" customClass="MenuButton" customModule="wallet" customModuleProvider="target">
+                                        <rect key="frame" x="17" y="30" width="341" height="59"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="59" id="4Bn-Ye-8Kf"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lam-2T-aan" customClass="MenuButton" customModule="wallet" customModuleProvider="target">
+                                        <rect key="frame" x="17" y="104" width="341" height="59"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="59" id="0RA-Ai-42N"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dnb-mu-K81" customClass="MenuButton" customModule="wallet" customModuleProvider="target">
+                                        <rect key="frame" x="17" y="178" width="341" height="59"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="59" id="eT7-iz-qH0"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mi8-1m-Iru">
+                                        <rect key="frame" x="17" y="596" width="341" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zpM-RK-jPe">
+                                        <rect key="frame" x="87" y="526" width="200" height="25"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="200" placeholder="YES" id="u5S-eX-FIG"/>
+                                            <constraint firstAttribute="height" constant="25" id="zSS-e7-9Ri"/>
+                                        </constraints>
+                                    </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8ph-jb-2xS" customClass="HighlightableButton" customModule="wallet" customModuleProvider="target">
+                                        <rect key="frame" x="48" y="439" width="279" height="59"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="59" id="0DQ-BQ-U3o"/>
+                                            <constraint firstAttribute="width" constant="279" id="5xF-Zz-gYi"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="dnb-mu-K81" firstAttribute="top" secondItem="Lam-2T-aan" secondAttribute="bottom" constant="15" id="1s4-hE-qzb"/>
+                                    <constraint firstAttribute="trailing" secondItem="Mi8-1m-Iru" secondAttribute="trailing" constant="17" id="5eJ-3a-1yS"/>
+                                    <constraint firstAttribute="trailing" secondItem="Lam-2T-aan" secondAttribute="trailing" constant="17" id="9z6-M4-3cN"/>
+                                    <constraint firstItem="Lam-2T-aan" firstAttribute="top" secondItem="5iH-0f-8DR" secondAttribute="bottom" constant="15" id="JDT-9v-jOh"/>
+                                    <constraint firstAttribute="trailing" secondItem="5iH-0f-8DR" secondAttribute="trailing" constant="17" id="Mtx-7V-9bD"/>
+                                    <constraint firstItem="zpM-RK-jPe" firstAttribute="centerX" secondItem="6gK-Qv-G2Z" secondAttribute="centerX" id="R4T-OW-9z4"/>
+                                    <constraint firstAttribute="bottom" secondItem="Mi8-1m-Iru" secondAttribute="bottom" constant="30" id="WJD-0i-Hdb"/>
+                                    <constraint firstItem="zpM-RK-jPe" firstAttribute="top" secondItem="8ph-jb-2xS" secondAttribute="bottom" constant="28" id="Wmr-zE-bvy"/>
+                                    <constraint firstItem="8ph-jb-2xS" firstAttribute="centerX" secondItem="6gK-Qv-G2Z" secondAttribute="centerX" id="ZEf-Dm-H12"/>
+                                    <constraint firstAttribute="trailing" secondItem="dnb-mu-K81" secondAttribute="trailing" constant="17" id="fzx-uJ-zfX"/>
+                                    <constraint firstItem="Mi8-1m-Iru" firstAttribute="leading" secondItem="6gK-Qv-G2Z" secondAttribute="leading" constant="17" id="hnp-YM-mlh"/>
+                                    <constraint firstItem="Mi8-1m-Iru" firstAttribute="top" secondItem="zpM-RK-jPe" secondAttribute="bottom" constant="45" id="poK-wh-Pde"/>
+                                    <constraint firstItem="dnb-mu-K81" firstAttribute="leading" secondItem="6gK-Qv-G2Z" secondAttribute="leading" constant="17" id="shU-Kn-gkt"/>
+                                    <constraint firstItem="5iH-0f-8DR" firstAttribute="leading" secondItem="6gK-Qv-G2Z" secondAttribute="leading" constant="17" id="tt1-Zb-e3C"/>
+                                    <constraint firstItem="Lam-2T-aan" firstAttribute="leading" secondItem="6gK-Qv-G2Z" secondAttribute="leading" constant="17" id="wsM-Fl-i9g"/>
+                                    <constraint firstItem="5iH-0f-8DR" firstAttribute="top" secondItem="6gK-Qv-G2Z" secondAttribute="top" constant="30" id="zmd-zA-gpZ"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="6gK-Qv-G2Z" firstAttribute="trailing" secondItem="17L-4t-Wkh" secondAttribute="trailing" id="GoC-FY-tQe"/>
+                            <constraint firstItem="6gK-Qv-G2Z" firstAttribute="bottom" secondItem="17L-4t-Wkh" secondAttribute="bottom" id="Pi9-U1-2nk"/>
+                            <constraint firstItem="6gK-Qv-G2Z" firstAttribute="leading" secondItem="17L-4t-Wkh" secondAttribute="leading" id="Quh-a5-ejn"/>
+                            <constraint firstItem="6gK-Qv-G2Z" firstAttribute="top" secondItem="17L-4t-Wkh" secondAttribute="top" id="sHw-lb-9Qz"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="17L-4t-Wkh"/>
+                    </view>
+                    <connections>
+                        <outlet property="backgroundView" destination="6gK-Qv-G2Z" id="3VF-f8-AVQ"/>
+                        <outlet property="baseCurrencyButton" destination="dnb-mu-K81" id="BLs-cI-edh"/>
+                        <outlet property="changePasswordButton" destination="5iH-0f-8DR" id="SBd-0C-Ljx"/>
+                        <outlet property="socialButtonsStackView" destination="zpM-RK-jPe" id="ppB-2W-Tfy"/>
+                        <outlet property="socialButtonsStackViewBottomConstraint" destination="poK-wh-Pde" id="SPm-ap-qgD"/>
+                        <outlet property="supportButton" destination="Lam-2T-aan" id="nKh-xP-hvk"/>
+                        <outlet property="telegramButton" destination="8ph-jb-2xS" id="kJS-MC-e8o"/>
+                        <outlet property="versLabel" destination="Mi8-1m-Iru" id="ETc-ls-fOq"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Euz-Fa-gOn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-4023.1999999999998" y="2159.3703148425789"/>
+        </scene>
         <!--Upload Documents Menu View Controller-->
         <scene sceneID="Oko-Lp-onv">
             <objects>
@@ -913,7 +1012,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mux-u7-Ms9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-4023" y="2173"/>
+            <point key="canvasLocation" x="-4006" y="2894"/>
         </scene>
         <!--Personal Info View Controller-->
         <scene sceneID="IW0-CT-9TG">

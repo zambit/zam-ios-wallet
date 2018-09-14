@@ -30,6 +30,15 @@ class CreateNewPasswordViewController: ContinueViewController, NewPasswordFormCo
     @IBOutlet var largeTitleLabel: UILabel?
     @IBOutlet var newPasswordFormComponent: NewPasswordFormComponent?
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        if let label = largeTitleLabel {
+            largeTitleLabel?.heightAnchor.constraint(equalToConstant: label.bounds.height).isActive = true
+            view.layoutIfNeeded()
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 

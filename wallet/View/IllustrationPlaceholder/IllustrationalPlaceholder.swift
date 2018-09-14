@@ -9,12 +9,7 @@
 import Foundation
 import UIKit
 
-class IllustrationalPlaceholder: Component {
-
-    enum SizingType {
-        case small
-        case normal
-    }
+class IllustrationalPlaceholder: Component, SizePresetable {
 
     @IBOutlet private var illustrationImageView: UIImageView?
     @IBOutlet private var titleLabel: UILabel?
@@ -22,18 +17,7 @@ class IllustrationalPlaceholder: Component {
     @IBOutlet private var illustrationBottomConstraint: NSLayoutConstraint?
     @IBOutlet private var illustrationTopConstraint: NSLayoutConstraint?
 
-    var sizingType: SizingType = .normal {
-        didSet {
-            switch sizingType {
-            case .small:
-                illustrationBottomConstraint?.constant = 10.0
-                illustrationTopConstraint?.constant = 10.0
-            case .normal:
-                illustrationBottomConstraint?.constant = 20.0
-                illustrationTopConstraint?.constant = 20.0
-            }
-        }
-    }
+    private var bottomConstant: CGFloat = 0.0
 
     override func setupStyle() {
         super.setupStyle()
@@ -47,6 +31,30 @@ class IllustrationalPlaceholder: Component {
         illustrationImageView?.image = #imageLiteral(resourceName: "illustrationPlaceholderDark")
     }
 
+    func prepare(preset: SizePreset) {
+        switch preset {
+        case .superCompact:
+            illustrationBottomConstraint?.constant = 5.0
+            illustrationTopConstraint?.constant = 0.0
+            bottomConstant = -5.0
+        case .compact, .default:
+            illustrationBottomConstraint?.constant = 10.0
+            illustrationTopConstraint?.constant = 0.0
+            bottomConstant = -5.0
+        }
+    }
+
+    var image: UIImage? {
+        get {
+            return illustrationImageView?.image
+        }
+
+        set {
+            illustrationImageView?.image = newValue
+
+        }
+    }
+
     var text: String? {
         get {
             return titleLabel?.text
@@ -54,7 +62,11 @@ class IllustrationalPlaceholder: Component {
         set {
             titleLabel?.text = newValue
             titleLabel?.sizeToFit()
-            layoutIfNeeded()
+
+            if let text = newValue, !text.isEmpty {
+                illustrationBottomConstraint?.constant = bottomConstant
+                layoutIfNeeded()
+            }
         }
     }
 

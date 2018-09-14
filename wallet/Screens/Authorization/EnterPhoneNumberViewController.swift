@@ -25,6 +25,15 @@ class EnterPhoneNumberViewController: ContinueViewController, PhoneNumberFormCom
     @IBOutlet var largeTitleLabel: UILabel?
     @IBOutlet var phoneNumberForm: PhoneNumberFormComponent?
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        if let label = largeTitleLabel {
+            largeTitleLabel?.heightAnchor.constraint(equalToConstant: label.bounds.height).isActive = true
+            view.layoutIfNeeded()
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 

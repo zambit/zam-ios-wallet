@@ -33,19 +33,42 @@ class OnboardingViewController: FlowViewController, WalletNavigable, UICollectio
     @IBOutlet var registrationButton: OnboardingLargeButton?
     @IBOutlet var loginButton: UIButton?
 
+    @IBOutlet private var registrationButtonTopConstraint: NSLayoutConstraint?
+    private var sizePreset: SizePreset = .default
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        switch UIDevice.current.screenType {
+        case .extraSmall, .small:
+            registrationButtonTopConstraint?.constant = 25.0
+            sizePreset = .superCompact
+        case .medium:
+            registrationButtonTopConstraint?.constant = 60.0
+            sizePreset = .compact
+        case .plus, .extra:
+            registrationButtonTopConstraint?.constant = 100.0
+            sizePreset = .default
+        case .unknown:
+            fatalError()
+        }
+
         onboardingItems = [
-            OnboardingItemData(image: #imageLiteral(resourceName: "illustrationPlaceholderLight"),
-                               title: "Item 1",
-                               text: "Et harum Discription quidem rerum facilis est et expedita distinctiolorem ipsun"),
-            OnboardingItemData(image: #imageLiteral(resourceName: "illustrationPlaceholderLight"),
-                               title: "Item 2",
-                               text: "Et harum Discription quidem rerum facilis est et expedita distinctiolorem ipsun"),
-            OnboardingItemData(image: #imageLiteral(resourceName: "illustrationPlaceholderLight"),
-                               title: "Item 3",
-                               text: "Et harum Discription quidem rerum facilis est et expedita distinctiolorem ipsun")
+            OnboardingItemData(image: #imageLiteral(resourceName: "sendTel"),
+                               text: "Send cryptocurrency\nby phone number",
+                               additionalText: nil),
+            OnboardingItemData(image: #imageLiteral(resourceName: "wallet"),
+                               text: "Safe storage of\nBTC, BCH, ETH, ZAM",
+                               additionalText: nil),
+            OnboardingItemData(image: #imageLiteral(resourceName: "kyc"),
+                               text: "Pass the verification of identity and get free ZAM tokens",
+                               additionalText: nil),
+            OnboardingItemData(image: #imageLiteral(resourceName: "withdrawCard"),
+                               text: "Withdraw cryptocurrencies\nto your card instantly",
+                               additionalText: "Coming soon"),
+            OnboardingItemData(image: #imageLiteral(resourceName: "buyCrypto"),
+                               text: "Buy cryptocurrencies by credit card Visa / MasterCard",
+                               additionalText: "Coming soon")
         ]
 
         pagesCollectionView?.register(OnboardingItemComponent.self, forCellWithReuseIdentifier: "OnboardingItemComponent")
@@ -82,6 +105,7 @@ class OnboardingViewController: FlowViewController, WalletNavigable, UICollectio
 
         cell.configure(data: onboardingItems[indexPath.section])
         cell.insets = UIEdgeInsets(top: 0, left: 30.0, bottom: 0, right: 30.0)
+        cell.prepare(preset: sizePreset)
         return cell
     }
 
@@ -126,6 +150,6 @@ class OnboardingViewController: FlowViewController, WalletNavigable, UICollectio
  */
 struct OnboardingItemData {
     var image: UIImage
-    var title: String
     var text: String
+    var additionalText: String?
 }

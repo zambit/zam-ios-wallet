@@ -19,6 +19,10 @@ class KYCUploadAddressDocumentViewController: KYCUploadDocumentViewController {
         return "Utility bill or banking statement with address, or registration in passport."
     }
 
+    override var placeholderImage: UIImage {
+        return #imageLiteral(resourceName: "document")
+    }
+
     override var documentButtonsCount: Int {
         return 1
     }

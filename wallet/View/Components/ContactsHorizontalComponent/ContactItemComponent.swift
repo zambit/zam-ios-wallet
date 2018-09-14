@@ -19,7 +19,7 @@ class ContactItemComponent: RectItemComponent {
         super.initFromNib()
 
         let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(longPressGestureEvent(_:)))
-        longPressGesture.minimumPressDuration = 0.1
+        longPressGesture.minimumPressDuration = 0.07
 
         view.addGestureRecognizer(longPressGesture)
     }

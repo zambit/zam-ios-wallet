@@ -19,6 +19,10 @@ class KYCUploadSelfieViewController: KYCUploadDocumentViewController {
         return "Make a selfie holding the ID document that you submitted. Please, look straight at the camera, do not wear sunglasses, a hat or a headband. Your selfie should be colored and the information on your document should be clearly visible."
     }
 
+    override var placeholderImage: UIImage {
+        return #imageLiteral(resourceName: "selfie")
+    }
+
     override var documentButtonsCount: Int {
         return 1
     }

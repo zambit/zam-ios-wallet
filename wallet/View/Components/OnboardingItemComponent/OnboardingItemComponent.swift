@@ -11,27 +11,50 @@ import UIKit
 /**
  Page of the tutorial on Onboarding screen. This skeleton defined only by sample design. Image + Title + Text.
  */
-class OnboardingItemComponent: ItemComponent {
+class OnboardingItemComponent: ItemComponent, SizePresetable {
 
     @IBOutlet var illustrationImageView: UIImageView?
-    @IBOutlet var titleLabel: UILabel?
     @IBOutlet var textLabel: UILabel?
 
-    @IBOutlet private var topImageToSafeAreaConstraint: NSLayoutConstraint?
-    @IBOutlet private var bottomImageToTopTitleConstraint: NSLayoutConstraint?
-    @IBOutlet private var leftImageToSafeAreaTitleConstraint: NSLayoutConstraint?
-    @IBOutlet private var rightImageToSafeAreaTitleConstraint: NSLayoutConstraint?
+    @IBOutlet private var illustrationImageViewTopConstraint: NSLayoutConstraint?
+    @IBOutlet private var illustrationImageViewBottomConstraint: NSLayoutConstraint?
+    @IBOutlet private var illustrationImageViewHeightConstraint: NSLayoutConstraint?
+
+    private var textAttributes: [NSAttributedStringKey: Any] = [:]
+    private var additionalTextAttributes: [NSAttributedStringKey: Any] = [:]
 
     func configure(data: OnboardingItemData) {
-        illustrationImageView?.image = data.image
-        titleLabel?.text = data.title
-        textLabel?.text = data.text
+        self.configure(image: data.image, text: data.text, additional: data.additionalText)
     }
 
-    func configure(image: UIImage, title: String, text: String) {
+    func configure(image: UIImage, text: String, additional: String?) {
         illustrationImageView?.image = image
-        titleLabel?.text = title
-        textLabel?.text = text
+
+        let mutableText = NSMutableAttributedString(string: text, attributes: textAttributes)
+
+        if let additional = additional {
+            let additionalText = NSAttributedString(string: "\n\(additional)", attributes: additionalTextAttributes)
+            mutableText.append(additionalText)
+        }
+
+        textLabel?.attributedText = mutableText
+    }
+
+    func prepare(preset: SizePreset) {
+        switch preset {
+        case .superCompact:
+            illustrationImageViewTopConstraint?.constant = 20
+            illustrationImageViewBottomConstraint?.constant = 0
+            illustrationImageViewHeightConstraint?.constant = 200
+        case .compact:
+            illustrationImageViewTopConstraint?.constant = 40
+            illustrationImageViewBottomConstraint?.constant = 0
+            illustrationImageViewHeightConstraint?.constant = 200
+        case .default:
+            illustrationImageViewTopConstraint?.constant = 79
+            illustrationImageViewBottomConstraint?.constant = 0
+            illustrationImageViewHeightConstraint?.constant = 230
+        }
     }
 
     override func initFromNib() {
@@ -41,26 +64,36 @@ class OnboardingItemComponent: ItemComponent {
     override func setupStyle() {
         super.setupStyle()
 
-        titleLabel?.textColor = .white
-        textLabel?.textColor = .silver
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 7
+        paragraphStyle.alignment = .center
 
-        switch UIDevice.current.screenType {
-        case .extraSmall, .small:
-            topImageToSafeAreaConstraint?.constant = 20.0
-            titleLabel?.font = UIFont.systemFont(ofSize: 28.0, weight: .bold)
-        case .medium:
-            topImageToSafeAreaConstraint?.constant = 20.0
-            titleLabel?.font = UIFont.systemFont(ofSize: 34.0, weight: .bold)
-        case .extra, .plus:
-            topImageToSafeAreaConstraint?.constant = 79.5
-            titleLabel?.font = UIFont.systemFont(ofSize: 34.0, weight: .bold)
-        case .unknown:
-            print("Error: Unknown screen")
-            break
-        }
-    }
+        let font = UIFont.walletFont(ofSize: 18, weight: .medium)
+        let textColor = UIColor.fadedBlue
 
-    private func setupLayouts() {
+        textAttributes = [.paragraphStyle: paragraphStyle, .font: font, .foregroundColor: textColor]
 
+        let additionalFont = UIFont.walletFont(ofSize: 18, weight: .regular)
+        let additionalTextColor = UIColor.fadedBlue
+
+        additionalTextAttributes = [.paragraphStyle: paragraphStyle, .font: additionalFont, .foregroundColor: additionalTextColor]
+
+        textLabel?.numberOfLines = 0
+        illustrationImageView?.contentMode = .scaleAspectFill
+
+//        switch UIDevice.current.screenType {
+//        case .extraSmall, .small:
+//            topImageToSafeAreaConstraint?.constant = 20.0
+//            titleLabel?.font = UIFont.systemFont(ofSize: 28.0, weight: .bold)
+//        case .medium:
+//            topImageToSafeAreaConstraint?.constant = 20.0
+//            titleLabel?.font = UIFont.systemFont(ofSize: 34.0, weight: .bold)
+//        case .extra, .plus:
+//            topImageToSafeAreaConstraint?.constant = 79.5
+//            titleLabel?.font = UIFont.systemFont(ofSize: 34.0, weight: .bold)
+//        case .unknown:
+//            print("Error: Unknown screen")
+//            break
+//        }
     }
 }
