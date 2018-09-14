@@ -39,12 +39,7 @@ class AvoidingKeyboardViewController: FlowViewController, WalletNavigable {
         let animationCurveRaw = animationCurveRawNSN?.uintValue ?? UIViewAnimationOptions.curveEaseInOut.rawValue
         let animationCurve: UIViewAnimationOptions = UIViewAnimationOptions(rawValue: animationCurveRaw)
 
-
         let tabBarOffset: CGFloat = tabBarController == nil ? 0 : -52
-
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate, let window = appDelegate.window else {
-            return
-        }
 
         UIView.animate(withDuration: duration, delay: TimeInterval(0), options: animationCurve, animations: {
             [weak self] in
