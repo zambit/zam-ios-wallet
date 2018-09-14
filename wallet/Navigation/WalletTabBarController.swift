@@ -38,11 +38,28 @@ extension BehaviorExtension where Base: WalletTabBarController {
     /**
      Add given viewControllers to tabBar generating own navigationController hierarchy for each item.
      */
-    func add(viewController: ScreenWalletNavigable, with item: WalletTabBarItemData) {
-        let rootItemController = WalletNavigationController(rootViewController: viewController)
+    func add(viewController: ScreenWalletNavigable? = nil, with item: WalletTabBarItemData) {
+        guard let vc = viewController else {
+            add(item: item)
+            return
+        }
+
+        let rootItemController = WalletNavigationController(rootViewController: vc)
         rootItemController.tabBarItem = ESTabBarItem(item.type.view, title: item.title, image: item.image)
 
         let viewControllers = (base.viewControllers ?? []) + [rootItemController]
+        base.viewControllers = viewControllers
+    }
+
+    /**
+     Add given viewControllers to tabBar generating own navigationController hierarchy for each item.
+     */
+    func add(item: WalletTabBarItemData) {
+        let viewController = EmptyViewController()
+        viewController.tabBarItem = ESTabBarItem(item.type.view, title: item.title, image: item.image)
+        viewController.tabBarItem.isEnabled = false
+
+        let viewControllers = (base.viewControllers ?? []) + [viewController]
         base.viewControllers = viewControllers
     }
 

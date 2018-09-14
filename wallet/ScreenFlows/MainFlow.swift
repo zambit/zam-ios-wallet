@@ -31,7 +31,7 @@ final class MainFlow: ScreenFlow {
         tabbar.custom.add(viewController: transactionsScreen, with: transactionsScreenItemData)
 
         let zamScreenItemData = WalletTabBarItemData(image: #imageLiteral(resourceName: "logo"), type: .large, title: nil)
-        tabbar.custom.add(viewController: EmptyViewController(), with: zamScreenItemData)
+        tabbar.custom.add(item: zamScreenItemData)
 
         let contactsScreenItemData = WalletTabBarItemData(image: #imageLiteral(resourceName: "users"), type: .normal, title: "Verify")
         tabbar.custom.add(viewController: mainKYCScreen, with: contactsScreenItemData)
