@@ -68,7 +68,7 @@ class EnterNewPhoneNumberViewController: ContinueViewController, PhoneNumberForm
         }
 
         termsItems = [
-            TermData(text: "I accept the Terms of Use and give my consent to Zamzam LLC to process my personal data for the services outlined in the Privacy Policy")
+            TermData(text: "I accept the Terms of Use and give my consent to ZamZamTechnology OÜ to process my personal data for the services outlined in the Privacy Policy")
         ]
 
         addSubviews()
