@@ -50,7 +50,8 @@
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="U4Y-RM-BPg" secondAttribute="trailing" constant="16" id="2ha-1E-Wvu"/>
                             <constraint firstItem="qQ8-XH-WUs" firstAttribute="top" secondItem="U4Y-RM-BPg" secondAttribute="bottom" constant="25" id="3qq-uG-0N5"/>
-                            <constraint firstItem="U4Y-RM-BPg" firstAttribute="top" secondItem="egG-wf-OqO" secondAttribute="top" constant="16" id="PVF-2c-ahe"/>
+                            <constraint firstItem="yY4-cD-Qm1" firstAttribute="top" relation="greaterThanOrEqual" secondItem="OBf-Zh-HeM" secondAttribute="bottom" constant="5" id="68w-oi-3Zo"/>
+                            <constraint firstItem="U4Y-RM-BPg" firstAttribute="top" secondItem="egG-wf-OqO" secondAttribute="top" priority="999" constant="16" id="PVF-2c-ahe"/>
                             <constraint firstItem="egG-wf-OqO" firstAttribute="trailing" secondItem="yY4-cD-Qm1" secondAttribute="trailing" constant="24" id="UOm-zz-zKb"/>
                             <constraint firstItem="egG-wf-OqO" firstAttribute="trailing" secondItem="qQ8-XH-WUs" secondAttribute="trailing" id="ZMm-x6-qFJ"/>
                             <constraint firstItem="OBf-Zh-HeM" firstAttribute="top" secondItem="qQ8-XH-WUs" secondAttribute="bottom" constant="16" id="p1W-L0-1T6"/>
@@ -72,7 +73,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4AW-mO-z2B" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-418" y="255"/>
+            <point key="canvasLocation" x="-418.125" y="254.57746478873239"/>
         </scene>
         <!--Verify Phone Number With Sms View Controller-->
         <scene sceneID="bRc-aH-hZa">
@@ -181,8 +182,9 @@
                             <constraint firstItem="HrH-uf-gIy" firstAttribute="leading" secondItem="trT-Z0-yVr" secondAttribute="leading" constant="16" id="NGs-by-HT4"/>
                             <constraint firstItem="trT-Z0-yVr" firstAttribute="trailing" secondItem="HrH-uf-gIy" secondAttribute="trailing" constant="16" id="PwC-sz-Yzm"/>
                             <constraint firstItem="SE1-m1-7P3" firstAttribute="leading" secondItem="HrH-uf-gIy" secondAttribute="leading" id="aTf-Cd-nEV"/>
-                            <constraint firstItem="trT-Z0-yVr" firstAttribute="top" secondItem="HrH-uf-gIy" secondAttribute="top" constant="-16" id="baW-5k-xck"/>
+                            <constraint firstItem="trT-Z0-yVr" firstAttribute="top" secondItem="HrH-uf-gIy" secondAttribute="top" priority="999" constant="-16" id="baW-5k-xck"/>
                             <constraint firstItem="trT-Z0-yVr" firstAttribute="trailing" secondItem="VGq-BV-aTL" secondAttribute="trailing" constant="24" id="kcB-6h-FJe"/>
+                            <constraint firstItem="VGq-BV-aTL" firstAttribute="top" relation="greaterThanOrEqual" secondItem="SE1-m1-7P3" secondAttribute="bottom" constant="5" id="rYe-76-Xhy"/>
                             <constraint firstItem="trT-Z0-yVr" firstAttribute="bottom" secondItem="VGq-BV-aTL" secondAttribute="bottom" constant="24" id="vPh-bZ-rpM"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="trT-Z0-yVr"/>
@@ -196,7 +198,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m4I-7U-FOc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1553" y="253"/>
+            <point key="canvasLocation" x="1552.5" y="252.46478873239437"/>
         </scene>
     </scenes>
 </document>

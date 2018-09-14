@@ -23,6 +23,14 @@ class EnterPhoneLoginPasswordViewController: ContinueViewController, LoginFormCo
     @IBOutlet var loginFormView: LoginFormComponent?
     @IBOutlet var forgotPasswordButton: AdditionalTextButton?
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        if let label = largeTitleLabel {
+            largeTitleLabel?.heightAnchor.constraint(equalToConstant: label.bounds.height).isActive = true
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 

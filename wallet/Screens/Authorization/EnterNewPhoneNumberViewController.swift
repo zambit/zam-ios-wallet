@@ -44,6 +44,15 @@ class EnterNewPhoneNumberViewController: ContinueViewController, PhoneNumberForm
         return !checkBoxes.contains { $0.isChecked == false }
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        if let label = largeTitleLabel, let stack = termsStackView, let button = continueButton {
+            largeTitleLabel?.heightAnchor.constraint(equalToConstant: label.bounds.height).isActive = true
+            termsStackView?.heightAnchor.constraint(equalToConstant: stack.bounds.height).isActive = true
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
