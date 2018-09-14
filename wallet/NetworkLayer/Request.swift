@@ -30,6 +30,6 @@ enum HTTPMethod: String {
 }
 
 enum RequestParams {
-    case body([String: String])
+    case body([String: Any])
     case url([String: String])
 }

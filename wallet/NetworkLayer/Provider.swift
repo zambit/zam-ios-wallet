@@ -14,7 +14,6 @@ import PromiseKit
  */
 protocol Provider {
     
-
     associatedtype ProviderRequest: Request
 
     associatedtype ProviderEnvironment: Environment

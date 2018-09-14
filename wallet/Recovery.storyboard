@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -11,24 +15,24 @@
             <objects>
                 <viewController storyboardIdentifier="EnterPhoneNumberViewController" id="o3G-T1-meo" customClass="EnterPhoneNumberViewController" customModule="wallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="o7T-yq-6i4">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What's your phone number?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s4K-11-EeI">
-                                <rect key="frame" x="16" y="36" width="568" height="41"/>
+                                <rect key="frame" x="16" y="36" width="343" height="81.5"/>
                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="34"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y5H-P7-dyB" customClass="PhoneNumberFormComponent" customModule="wallet" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="101.5" width="600" height="56"/>
+                                <rect key="frame" x="0.0" y="142" width="375" height="56"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="56" placeholder="YES" id="zGi-bm-fyE"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P8R-ru-Tcx" customClass="RoundContinueButton" customModule="wallet" customModuleProvider="target">
-                                <rect key="frame" x="516" y="516" width="60" height="60"/>
+                                <rect key="frame" x="291" y="583" width="60" height="60"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="Pje-lF-TR7"/>
@@ -38,9 +42,10 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="P8R-ru-Tcx" firstAttribute="top" relation="greaterThanOrEqual" secondItem="y5H-P7-dyB" secondAttribute="bottom" constant="5" id="E0z-nf-CZs"/>
                             <constraint firstItem="FAz-29-0bM" firstAttribute="trailing" secondItem="y5H-P7-dyB" secondAttribute="trailing" id="NTX-w5-uZa"/>
                             <constraint firstItem="y5H-P7-dyB" firstAttribute="top" secondItem="s4K-11-EeI" secondAttribute="bottom" constant="24" id="XOU-aP-CCi"/>
-                            <constraint firstItem="s4K-11-EeI" firstAttribute="top" secondItem="FAz-29-0bM" secondAttribute="top" constant="16" id="ck9-IA-pwh"/>
+                            <constraint firstItem="s4K-11-EeI" firstAttribute="top" secondItem="FAz-29-0bM" secondAttribute="top" priority="999" constant="16" id="ck9-IA-pwh"/>
                             <constraint firstItem="y5H-P7-dyB" firstAttribute="leading" secondItem="FAz-29-0bM" secondAttribute="leading" id="mLw-NR-2ai"/>
                             <constraint firstItem="FAz-29-0bM" firstAttribute="bottom" secondItem="P8R-ru-Tcx" secondAttribute="bottom" constant="24" id="teI-gi-Yao"/>
                             <constraint firstItem="FAz-29-0bM" firstAttribute="trailing" secondItem="s4K-11-EeI" secondAttribute="trailing" constant="16" id="xPu-l7-p9T"/>
@@ -58,7 +63,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ogz-GD-M8s" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1570" y="-99"/>
+            <point key="canvasLocation" x="1568.8" y="-99.400299850074973"/>
         </scene>
     </scenes>
 </document>

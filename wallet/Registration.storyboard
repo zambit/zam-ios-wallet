@@ -119,12 +119,13 @@
                         <constraints>
                             <constraint firstItem="sIn-t9-VZF" firstAttribute="bottom" secondItem="fDU-AV-0sT" secondAttribute="bottom" constant="24" id="0xM-Ph-g7f"/>
                             <constraint firstItem="VAD-Gv-oSN" firstAttribute="top" secondItem="3FS-X7-4ZV" secondAttribute="bottom" constant="8" id="1f9-kj-lSz"/>
+                            <constraint firstItem="fDU-AV-0sT" firstAttribute="top" relation="greaterThanOrEqual" secondItem="3FS-X7-4ZV" secondAttribute="bottom" constant="5" id="Byy-sf-UMx"/>
                             <constraint firstItem="5C8-LU-ILM" firstAttribute="leading" secondItem="sIn-t9-VZF" secondAttribute="leading" constant="16" id="Dl3-4W-Ppd"/>
                             <constraint firstItem="sIn-t9-VZF" firstAttribute="trailing" secondItem="fDU-AV-0sT" secondAttribute="trailing" constant="24" id="EQ8-1E-jtl"/>
                             <constraint firstItem="3FS-X7-4ZV" firstAttribute="trailing" secondItem="5C8-LU-ILM" secondAttribute="trailing" id="H2X-qz-Ccw"/>
                             <constraint firstItem="VAD-Gv-oSN" firstAttribute="leading" secondItem="3FS-X7-4ZV" secondAttribute="leading" id="T4S-xp-Us9"/>
                             <constraint firstItem="w2q-jJ-o6c" firstAttribute="centerY" secondItem="fDU-AV-0sT" secondAttribute="centerY" id="W7y-M8-mMu"/>
-                            <constraint firstItem="5C8-LU-ILM" firstAttribute="top" secondItem="sIn-t9-VZF" secondAttribute="top" constant="16" id="Z3J-Mi-LOT"/>
+                            <constraint firstItem="5C8-LU-ILM" firstAttribute="top" secondItem="sIn-t9-VZF" secondAttribute="top" priority="999" constant="16" id="Z3J-Mi-LOT"/>
                             <constraint firstItem="w2q-jJ-o6c" firstAttribute="leading" secondItem="sIn-t9-VZF" secondAttribute="leading" constant="24" id="ikK-jT-Jh7"/>
                             <constraint firstItem="sIn-t9-VZF" firstAttribute="trailing" secondItem="5C8-LU-ILM" secondAttribute="trailing" constant="16" id="kpg-Xf-sdu"/>
                             <constraint firstItem="3FS-X7-4ZV" firstAttribute="top" secondItem="5C8-LU-ILM" secondAttribute="bottom" constant="24" id="mj7-vJ-1ZF"/>
@@ -143,7 +144,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AVM-6k-sDh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="613.60000000000002" y="253.2233883058471"/>
+            <point key="canvasLocation" x="613.125" y="252.46478873239437"/>
         </scene>
         <!--Create New Password View Controller-->
         <scene sceneID="hKm-GD-hJA">

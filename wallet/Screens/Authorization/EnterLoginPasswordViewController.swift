@@ -30,6 +30,15 @@ class EnterLoginPasswordViewController: ContinueViewController, LoginPasswordCom
         migratingNavigationController?.custom.addRightBarItemButton(for: self, title: "EXIT", target: self, action: #selector(exitButtonTouchEvent(_:)))
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        if let label = largeTitleLabel {
+            largeTitleLabel?.heightAnchor.constraint(equalToConstant: label.bounds.height).isActive = true
+            view.layoutIfNeeded()
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
