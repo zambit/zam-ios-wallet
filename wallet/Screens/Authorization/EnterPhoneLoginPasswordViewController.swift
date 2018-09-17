@@ -97,9 +97,7 @@ class EnterPhoneLoginPasswordViewController: ContinueViewController, LoginFormCo
             [weak self]
             authToken in
 
-            self?.dismissKeyboard()
-
-            performWithDelay {
+            self?.dismissKeyboard {
                 self?.continueButton?.custom.setLoading(false)
                 self?.onContinue?(authToken)
             }

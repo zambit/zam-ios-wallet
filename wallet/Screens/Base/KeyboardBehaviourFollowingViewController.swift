@@ -72,6 +72,5 @@ class KeyboardBehaviorFollowingViewController: FlowViewController, WalletNavigab
 
             }, completion: nil)
     }
-
 }
 

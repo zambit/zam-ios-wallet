@@ -56,6 +56,8 @@
 		8C231443214BE6FE007340E7 /* MenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C231442214BE6FE007340E7 /* MenuButton.swift */; };
 		8C231445214BFC0E007340E7 /* ExternalLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C231444214BFC0E007340E7 /* ExternalLinks.swift */; };
 		8C231447214C0058007340E7 /* HighlightableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C231446214C0058007340E7 /* HighlightableButton.swift */; };
+		8C231449214FB7FE007340E7 /* UITapGestureRecognizer+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C231448214FB7FE007340E7 /* UITapGestureRecognizer+Extensions.swift */; };
+		8C23144B214FCA90007340E7 /* KeyboardNotifiableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C23144A214FCA90007340E7 /* KeyboardNotifiableViewController.swift */; };
 		8C333D302109E0B400949AC0 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D2F2109E0B400949AC0 /* UserViewController.swift */; };
 		8C333D342109F02000949AC0 /* ScreenFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D332109F02000949AC0 /* ScreenFlow.swift */; };
 		8C333D362109F09800949AC0 /* FirstEnterLoginFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D352109F09800949AC0 /* FirstEnterLoginFlow.swift */; };
@@ -319,6 +321,8 @@
 		8C231442214BE6FE007340E7 /* MenuButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuButton.swift; sourceTree = "<group>"; };
 		8C231444214BFC0E007340E7 /* ExternalLinks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalLinks.swift; sourceTree = "<group>"; };
 		8C231446214C0058007340E7 /* HighlightableButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightableButton.swift; sourceTree = "<group>"; };
+		8C231448214FB7FE007340E7 /* UITapGestureRecognizer+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITapGestureRecognizer+Extensions.swift"; sourceTree = "<group>"; };
+		8C23144A214FCA90007340E7 /* KeyboardNotifiableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardNotifiableViewController.swift; sourceTree = "<group>"; };
 		8C333D2F2109E0B400949AC0 /* UserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
 		8C333D332109F02000949AC0 /* ScreenFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenFlow.swift; sourceTree = "<group>"; };
 		8C333D352109F09800949AC0 /* FirstEnterLoginFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstEnterLoginFlow.swift; sourceTree = "<group>"; };
@@ -882,6 +886,7 @@
 			isa = PBXGroup;
 			children = (
 				8C333D7A210F767100949AC0 /* FlowViewController.swift */,
+				8C23144A214FCA90007340E7 /* KeyboardNotifiableViewController.swift */,
 				8CF5F94921147C050083B36A /* WalletNavigable.swift */,
 				8C333D67210B72A100949AC0 /* ContinueViewController.swift */,
 				8CA218BC2125A34B0063C188 /* KeyboardBehaviourFollowingViewController.swift */,
@@ -1315,6 +1320,7 @@
 				8C7C3392214A83A500EC6C96 /* UILabel+Extensions.swift */,
 				8C333D3F210A08A600949AC0 /* UIView+Extensions.swift */,
 				8C333D47210B0F3700949AC0 /* UIViewController+Extensions.swift */,
+				8C231448214FB7FE007340E7 /* UITapGestureRecognizer+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1600,6 +1606,7 @@
 				8C0919512107234B00703224 /* SignupAPI.swift in Sources */,
 				8C7C336C2146D6A700EC6C96 /* KYCUploadAddressDocumentViewController.swift in Sources */,
 				8C60885A2111DCB000470411 /* EnterPhoneLoginPasswordViewController.swift in Sources */,
+				8C231449214FB7FE007340E7 /* UITapGestureRecognizer+Extensions.swift in Sources */,
 				8CA218B121247FF80063C188 /* SendMoneyMethodComponent.swift in Sources */,
 				8CA219062133ED4E0063C188 /* GroupingType.swift in Sources */,
 				8CF5F92D2113206A0083B36A /* SecondEnterLoginFlow.swift in Sources */,
@@ -1709,6 +1716,7 @@
 				8C09197B2108D66100703224 /* SignUpFlow.swift in Sources */,
 				8C7C334D2142C15100EC6C96 /* KYCPersonalInfoViewController.swift in Sources */,
 				8CA218BD2125A34B0063C188 /* KeyboardBehaviourFollowingViewController.swift in Sources */,
+				8C23144B214FCA90007340E7 /* KeyboardNotifiableViewController.swift in Sources */,
 				8C333D54210B394800949AC0 /* RoundContinueButton.swift in Sources */,
 				8C7C335E2146A49A00EC6C96 /* KeyboardDismissingView.swift in Sources */,
 				8CF5F95B21149E460083B36A /* CreatePinComponent.swift in Sources */,

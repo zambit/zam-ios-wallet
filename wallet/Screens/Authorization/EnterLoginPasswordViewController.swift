@@ -57,8 +57,6 @@ class EnterLoginPasswordViewController: ContinueViewController, LoginPasswordCom
 //        if let maskData = userManager?.getMaskData(), let phone = phone {
 //            title = MaskParser(symbol: maskData.1, space: maskData.2).matchingUnstrict(text: phone, withMask: maskData.0)
 //        }
-
-
     }
 
     private func setupViewControllerStyle() {
@@ -97,9 +95,7 @@ class EnterLoginPasswordViewController: ContinueViewController, LoginPasswordCom
             [weak self]
             authToken in
 
-            self?.dismissKeyboard()
-
-            performWithDelay {
+            self?.dismissKeyboard {
                 UserContactsManager.default.fetchContacts({ _ in
                     self?.continueButton?.custom.setLoading(false)
                     self?.onContinue?(authToken)
@@ -151,8 +147,7 @@ class EnterLoginPasswordViewController: ContinueViewController, LoginPasswordCom
                 fatalError("Error on clearing user data: \(error)")
             }
 
-            self?.dismissKeyboard()
-            performWithDelay {
+            self?.dismissKeyboard {
                 self?.continueButton?.custom.setLoading(false)
                 self?.onExit?()
             }

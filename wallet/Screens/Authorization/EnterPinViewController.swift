@@ -211,13 +211,13 @@ class EnterPinViewController: FlowViewController, WalletNavigable, DecimalKeyboa
                             self?.onContinue?()
                         })
                     }
-                    }.catch {
-                        error in
+                }.catch {
+                    error in
 
-                        performWithDelay {
-                            self?.dotsFieldComponent?.endLoading()
-                            self?.onLoginForm?(phone)
-                        }
+                    performWithDelay {
+                        self?.dotsFieldComponent?.endLoading()
+                        self?.onLoginForm?(phone)
+                    }
 
                 }
             }.catch {

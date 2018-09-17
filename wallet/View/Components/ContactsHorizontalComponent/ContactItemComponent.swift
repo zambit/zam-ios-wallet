@@ -18,31 +18,34 @@ class ContactItemComponent: RectItemComponent {
     override func initFromNib() {
         super.initFromNib()
 
-        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(longPressGestureEvent(_:)))
-        longPressGesture.minimumPressDuration = 0.07
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapGestureEvent(_:)))
+        view.addGestureRecognizer(tapGestureRecognizer)
+    }
 
-        view.addGestureRecognizer(longPressGesture)
+    override func setupStyle() {
+        super.setupStyle()
+
+        view.backgroundColor = .clear
+
+        let unselected: UIView = UIView(frame: bounds)
+        let unselectedInside = UIView(frame: bounds)
+        unselectedInside.cornerRadius = 16.0
+        unselectedInside.backgroundColor = .darkSlateBlue
+        unselectedInside.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        unselected.addSubview(unselectedInside)
+        backgroundView = unselected
+
+        let selected: UIView = UIView(frame: bounds)
+        let selectedInside = UIView(frame: bounds)
+        selectedInside.cornerRadius = 16.0
+        selectedInside.backgroundColor = .skyBlue
+        selectedInside.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        selected.addSubview(selectedInside)
+        selectedBackgroundView = selected
     }
 
     @objc
-    private func longPressGestureEvent(_ sender: UILongPressGestureRecognizer) {
-        switch sender.state {
-        case .began:
-            UIView.animate(withDuration: 0.25, animations: {
-                [weak self] in
-                self?.view.transform = .init(scaleX: 0.9, y: 0.9)
-                }, completion: {
-                    [weak self] _ in
-
-                    self?.onTap?()
-            })
-        case .ended:
-            UIView.animate(withDuration: 0.25) {
-                [weak self] in
-                self?.view.transform = .identity
-            }
-        default:
-            return
-        }
+    private func tapGestureEvent(_ sender: UITapGestureRecognizer) {
+        onTap?()
     }
 }
