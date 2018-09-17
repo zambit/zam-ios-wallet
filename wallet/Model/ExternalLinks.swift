@@ -15,6 +15,7 @@ enum ExternalLinks {
     case medium
     case facebook
     case message
+    case terms
 
     var url: URL {
         switch self {
@@ -26,6 +27,8 @@ enum ExternalLinks {
             return URL(string: "https://medium.com/@zamzamofficial")!
         case .facebook:
             return URL(string: "https://www.facebook.com/zamzambank")!
+        case .terms:
+            return URL(string: "https://privacy.zam.io/PRIVACY_POLICY.pdf")!
         case .message:
             let email = "support@zam.me"
             return URL(string: "mailto:\(email)")!
