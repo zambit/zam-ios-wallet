@@ -20,6 +20,7 @@ class KYCPersonalInfoViewController: FlowViewController, WalletNavigable, UITabl
     @IBOutlet var safeAreaView: UIView?
 
     private weak var sendButton: StageButton?
+    private weak var helperLabel: UILabel?
     private var currentIndexPath: IndexPath?
 
     private var forms: [(String, [TextFieldCellData])] = []
@@ -281,7 +282,7 @@ class KYCPersonalInfoViewController: FlowViewController, WalletNavigable, UITabl
 
         sendButton.translatesAutoresizingMaskIntoConstraints = false
         sendButton.centerXAnchor.constraint(equalTo: footer.centerXAnchor).isActive = true
-        sendButton.centerYAnchor.constraint(equalTo: footer.centerYAnchor).isActive = true
+        sendButton.topAnchor.constraint(equalTo: footer.topAnchor, constant: 15.0).isActive = true
         sendButton.heightAnchor.constraint(equalToConstant: 46.0).isActive = true
         sendButton.widthAnchor.constraint(equalToConstant: 230.0).isActive = true
 
@@ -300,6 +301,23 @@ class KYCPersonalInfoViewController: FlowViewController, WalletNavigable, UITabl
             sendButton.custom.setEnabled(false)
         }
 
+        let helperLabel = UILabel()
+        helperLabel.font = UIFont.walletFont(ofSize: 14.0, weight: .medium)
+        helperLabel.textColor = .error
+        helperLabel.text = ""
+        helperLabel.numberOfLines = 0
+        helperLabel.textAlignment = .center
+
+        footer.addSubview(helperLabel)
+
+        helperLabel.translatesAutoresizingMaskIntoConstraints = false
+        helperLabel.centerXAnchor.constraint(equalTo: footer.centerXAnchor).isActive = true
+        helperLabel.widthAnchor.constraint(equalToConstant: 230.0).isActive = true
+        helperLabel.topAnchor.constraint(equalTo: sendButton.bottomAnchor, constant: 3.0).isActive = true
+        helperLabel.bottomAnchor.constraint(equalTo: footer.bottomAnchor, constant: -5.0).isActive = true
+
+        self.helperLabel = helperLabel
+
         return footer
     }
 
@@ -308,7 +326,7 @@ class KYCPersonalInfoViewController: FlowViewController, WalletNavigable, UITabl
             return 0.0
         }
 
-        return 76.0
+        return 106.0
     }
 
     private func checkCellPosition(_ cell: TextFieldCell) {
@@ -345,9 +363,27 @@ class KYCPersonalInfoViewController: FlowViewController, WalletNavigable, UITabl
             [weak self]
             error in
 
+            self?.dismissKeyboard()
             performWithDelay {
                 Interactions.vibrateError()
                 self?.sendButton?.custom.endLoading()
+
+                if let serverError = error as? WalletResponseError {
+                    switch serverError {
+                    case .serverFailureResponse(errors: let fails):
+                        guard let fail = fails.first else {
+                            fatalError()
+                        }
+
+                        if let name = fail.name {
+                            self?.helperLabel?.text = "\(fail.message.capitalizingFirst) on \(name.replacingOccurrences(of: "_", with: " ").capitalizingFirst) field."
+                        } else {
+                            self?.helperLabel?.text = fail.message.capitalizingFirst
+                        }
+                    case .undefinedServerFailureResponse:
+                        self?.helperLabel?.text = "Undefined error"
+                    }
+                }
             }
         }
     }
