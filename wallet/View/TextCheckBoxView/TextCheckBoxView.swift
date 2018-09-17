@@ -21,7 +21,7 @@ class TextCheckBoxView: UIView {
 
     private var checkAction: ((TextCheckBoxView) -> Void)?
 
-    private var linkText: String?
+    private var linkText: [String] = []
     private var linkAction: ((String) -> Void)?
 
     override init(frame: CGRect) {
@@ -40,13 +40,15 @@ class TextCheckBoxView: UIView {
         textLabel?.text = text
     }
 
-    func configure(text: String, tapableText: String, tapHandler: @escaping (String) -> Void) {
+    func configure(text: String, tapableText: [String], tapHandler: @escaping (String) -> Void) {
         let attributes: [NSAttributedStringKey: Any] = [.font: UIFont.walletFont(ofSize: 13.0, weight: .regular),
                                                         .foregroundColor: UIColor.white]
         let attributedString = NSAttributedString(string: text, attributes: attributes)
         let underlineString = NSMutableAttributedString(attributedString: attributedString)
-        let range = (text as NSString).range(of: tapableText)
-        underlineString.addAttribute(.foregroundColor, value: UIColor.fadedBlue, range: range)
+        for linkText in tapableText {
+            let range = (text as NSString).range(of: linkText)
+            underlineString.addAttribute(.foregroundColor, value: UIColor.fadedBlue, range: range)
+        }
 
         textLabel?.attributedText = underlineString
         textLabel?.isUserInteractionEnabled = true
@@ -99,13 +101,17 @@ class TextCheckBoxView: UIView {
 
     @objc
     func tapLabel(gesture: UITapGestureRecognizer) {
-        guard let label = textLabel, let text = textLabel?.text, let link = linkText else {
+        guard let label = textLabel, let text = textLabel?.text else {
             return
         }
-        let range = (text as NSString).range(of: link)
 
-        if gesture.didTapAttributedTextInLabel(label: label, inRange: range) {
-            linkAction?(link)
+        for link in linkText {
+            let range = (text as NSString).range(of: link)
+
+            if gesture.didTapAttributedTextInLabel(label: label, inRange: range) {
+                linkAction?(link)
+                return
+            }
         }
     }
 }
