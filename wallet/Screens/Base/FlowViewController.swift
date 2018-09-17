@@ -12,15 +12,9 @@ import UIKit
 /**
  UIViewController that is a part of some ScreenFlow. Holds strong reference on its ScreenFlow
  */
-class FlowViewController: UIViewController {
+class FlowViewController: KeyboardNotifiableViewController {
 
     var flow: ScreenFlow?
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
-        view.setNeedsLayout()
-    }
 
 }
 

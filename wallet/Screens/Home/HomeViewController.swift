@@ -111,31 +111,6 @@ class HomeViewController: DetailOffsetPresentationViewController, WalletsViewCon
             }
         }
 
-//        isContactsLoading = true
-//
-//        contactsManager?.fetchContacts {
-//            [weak self]
-//            contacts in
-//
-//            self?.isContactsLoading = false
-//
-//            if !contacts.isEmpty {
-//                self?.contactsComponent?.delegate = self
-//                self?.contactsComponent?.contactsCollectionView?.endLoading()
-//                self?.contactsComponent?.prepare(contacts: contacts)
-//                self?.detailViewOffset = 350
-//
-//            } else {
-//
-//                self?.contactsComponent?.contactsCollectionView?.endLoading()
-//                self?.detailViewOffset = 200
-//
-//                if self?.currentState == .closed {
-//                    self?.animate(to: .closed)
-//                }
-//            }
-//        }
-
         switch UIDevice.current.screenType {
         case .small, .extraSmall:
             detailViewHeight?.constant = 515.0
@@ -333,7 +308,13 @@ class HomeViewController: DetailOffsetPresentationViewController, WalletsViewCon
     // MARK: - ContactsHorizontalComponentDelegate
 
     func contactsHorizontalComponent(_ contactsHorizontalComponent: ContactsHorizontalComponent, itemWasTapped contactData: ContactData) {
-        embededViewController?.onSendWithContact(contactData)
+        contactsHorizontalComponent.isUserInteractionEnabled = false
+        dismissKeyboard {
+            [weak self] in
+
+            contactsHorizontalComponent.isUserInteractionEnabled = true
+            self?.embededViewController?.onSendWithContact(contactData)
+        }
     }
 
     // MARK: - Animation

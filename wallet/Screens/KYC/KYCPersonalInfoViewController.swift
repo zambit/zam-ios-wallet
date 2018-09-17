@@ -354,8 +354,7 @@ class KYCPersonalInfoViewController: FlowViewController, WalletNavigable, UITabl
         userAPI?.sendKYCPersonalInfo(token: token, personalData: personalData).done {
             [weak self] in
 
-            self?.dismissKeyboard()
-            performWithDelay {
+            self?.dismissKeyboard {
                 self?.sendButton?.custom.endLoading()
                 self?.onSend?(.pending)
             }
@@ -363,8 +362,7 @@ class KYCPersonalInfoViewController: FlowViewController, WalletNavigable, UITabl
             [weak self]
             error in
 
-            self?.dismissKeyboard()
-            performWithDelay {
+            self?.dismissKeyboard {
                 Interactions.vibrateError()
                 self?.sendButton?.custom.endLoading()
 

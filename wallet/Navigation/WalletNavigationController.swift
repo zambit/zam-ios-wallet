@@ -15,6 +15,11 @@ class WalletNavigationController: UINavigationController {
         super.viewDidLoad()
         self.custom.setupStyle()
     }
+
+    @objc
+    fileprivate func backBarButtonItemAction(_ sender: Any) {
+        custom.popViewController(animated: true)
+    }
 }
 
 extension BehaviorExtension where Base: WalletNavigationController {
@@ -56,7 +61,6 @@ extension BehaviorExtension where Base: WalletNavigationController {
             hideBackButton(for: viewController)
 
             (viewController as? WalletTabBarController)?.navigationController?.setNavigationBarHidden(true, animated: false)
-
             return
         }
 
@@ -89,6 +93,18 @@ extension BehaviorExtension where Base: WalletNavigationController {
         }
 
         (viewController as? WalletTabBarController)?.navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+
+    func popViewController(animated: Bool) {
+        let pop: () -> Void = {
+            self.base.popViewController(animated: animated)
+        }
+
+        if let last = base.viewControllers.last as? FlowViewController {
+            last.dismissKeyboard(completion: pop)
+        } else {
+            pop()
+        }
     }
 
     func popBack(animated: Bool = true, nextViewController: (ScreenWalletNavigable) -> Void) {
@@ -167,7 +183,7 @@ extension BehaviorExtension where Base: WalletNavigationController {
             image: #imageLiteral(resourceName: "icArrowLeft"),
             style: .plain,
             target: base,
-            action: #selector(base.popViewController(animated:))
+            action: #selector(base.backBarButtonItemAction(_:))
         )
         backItem.tintColor = .white
         viewController.navigationItem.leftBarButtonItem = backItem

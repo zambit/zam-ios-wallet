@@ -96,9 +96,7 @@ class EnterPhoneNumberViewController: ContinueViewController, PhoneNumberFormCom
         recoveryAPI?.sendVerificationCode(to: phone).done {
             [weak self] in
 
-            self?.dismissKeyboard()
-
-            performWithDelay {
+            self?.dismissKeyboard {
                 self?.continueButton?.custom.setLoading(false)
                 self?.onContinue?(phone)
             }
