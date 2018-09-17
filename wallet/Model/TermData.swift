@@ -13,4 +13,5 @@ import Foundation
  */
 struct TermData {
     var text: String
+    var linkText: [String]
 }

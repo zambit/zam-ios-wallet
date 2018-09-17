@@ -141,7 +141,6 @@ class ContactsHorizontalComponent: Component, UICollectionViewDataSource, UIColl
             cell.configure(avatar: image, name: contact.name)
         }
 
-
         cell.onTap = {
             [weak self] in
 

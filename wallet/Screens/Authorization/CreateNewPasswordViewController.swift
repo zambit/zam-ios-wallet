@@ -97,8 +97,7 @@ class CreateNewPasswordViewController: ContinueViewController, NewPasswordFormCo
             recoveryAPI?.providePassword(password, confirmation: confirmation, for: phone, recoveryToken: token).done {
                     [weak self] in
 
-                    self?.dismissKeyboard()
-                    performWithDelay {
+                    self?.dismissKeyboard {
                         self?.continueButton?.custom.setLoading(false)
                         self?.onContinue?(phone)
                     }
@@ -116,8 +115,7 @@ class CreateNewPasswordViewController: ContinueViewController, NewPasswordFormCo
                     [weak self]
                     authToken in
 
-                    self?.dismissKeyboard()
-                    performWithDelay {
+                    self?.dismissKeyboard {
                         self?.continueButton?.custom.setLoading(false)
                         self?.onContinue?(authToken)
                     }

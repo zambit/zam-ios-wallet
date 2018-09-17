@@ -68,7 +68,7 @@ class EnterNewPhoneNumberViewController: ContinueViewController, PhoneNumberForm
         }
 
         termsItems = [
-            TermData(text: "I accept the Terms of Use and give my consent to ZamZamTechnology OÜ to process my personal data for the services outlined in the Privacy Policy")
+            TermData(text: "I accept the Terms of Use and give my consent to ZamZamTechnology OÜ to process my personal data for the services outlined in the Privacy Policy", linkText: ["Terms of Use", "Privacy Policy"])
         ]
 
         addSubviews()
@@ -114,7 +114,16 @@ class EnterNewPhoneNumberViewController: ContinueViewController, PhoneNumberForm
         termsItems.forEach {
             let termView = TextCheckBoxView(frame: CGRect.zero)
             //termView.heightAnchor.constraint(equalToConstant: 32.0).isActive = true
-            termView.configure(text: $0.text)
+            termView.configure(text: $0.text, tapableText: $0.linkText, tapHandler: { element in
+                switch element {
+                case "Terms of Use":
+                    UIApplication.shared.open(ExternalLinks.terms.url)
+                case "Privacy Policy":
+                    UIApplication.shared.open(ExternalLinks.privacy.url)
+                default:
+                    return
+                }
+            })
             termView.sizeToFit()
             termView.addAction({
                 [weak self]
@@ -149,9 +158,7 @@ class EnterNewPhoneNumberViewController: ContinueViewController, PhoneNumberForm
         signupAPI?.sendVerificationCode(to: phone).done {
             [weak self] in
 
-            self?.dismissKeyboard()
-
-            performWithDelay {
+            self?.dismissKeyboard {
                 self?.continueButton?.custom.setLoading(false)
                 self?.onContinue?(phone)
             }

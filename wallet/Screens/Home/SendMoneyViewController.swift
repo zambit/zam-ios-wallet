@@ -56,6 +56,7 @@ class SendMoneyViewController: KeyboardBehaviorFollowingViewController, SendMone
         appearingAnimationBlock = {
             [weak self] in
 
+            self?.walletsCollectionView?.visibleCells.first?.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
             self?.walletsCollectionView?.alpha = 0.0
             self?.titleLabel?.alpha = 0.0
         }
@@ -63,6 +64,7 @@ class SendMoneyViewController: KeyboardBehaviorFollowingViewController, SendMone
         disappearingAnimationBlock = {
             [weak self] in
 
+            self?.walletsCollectionView?.visibleCells.first?.transform = .identity
             self?.walletsCollectionView?.alpha = 1.0
             self?.titleLabel?.alpha = 1.0
         }
@@ -165,11 +167,10 @@ class SendMoneyViewController: KeyboardBehaviorFollowingViewController, SendMone
     func sendMoneyComponentRequestSending(_ sendMoneyComponent: SendMoneyComponent, sendMoneyData: SendMoneyData) {
         dismissKeyboard()
         
-        performWithDelay {
+        dismissKeyboard {
             [weak self] in
             self?.onSend?(sendMoneyData)
         }
-
     }
 
     func qrCodeScannerViewController(_ qrCodeScannerViewController: QRCodeScannerViewController, didFindCode code: String) {
