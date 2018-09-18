@@ -19,7 +19,6 @@ protocol PhoneNumberFormComponentDelegate: class {
     func phoneNumberFormComponent(_ phoneNumberFormComponent: PhoneNumberFormComponent, dontSatisfyTheCondition: PhoneCondition)
 
     func phoneNumberFormComponentSatisfiesAllConditions(_ phoneNumberFormComponent: PhoneNumberFormComponent)
-
 }
 
 extension PhoneNumberFormComponentDelegate {

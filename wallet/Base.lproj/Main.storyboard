@@ -1014,6 +1014,38 @@
             </objects>
             <point key="canvasLocation" x="-4006" y="2894"/>
         </scene>
+        <!--Test View Controller-->
+        <scene sceneID="eet-pF-8jq">
+            <objects>
+                <viewController storyboardIdentifier="TestViewController" id="bTe-cU-TZ6" customClass="TestViewController" customModule="wallet" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8PS-Qx-K7u">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qlK-mw-HKt" customClass="PhoneNumberComponent" customModule="wallet" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="45" width="375" height="86"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="86" id="l7C-z6-vcZ"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="qlK-mw-HKt" firstAttribute="top" secondItem="taj-hW-BNl" secondAttribute="top" constant="25" id="FIR-AZ-zZz"/>
+                            <constraint firstItem="taj-hW-BNl" firstAttribute="trailing" secondItem="qlK-mw-HKt" secondAttribute="trailing" id="JdU-lB-5Lj"/>
+                            <constraint firstItem="qlK-mw-HKt" firstAttribute="leading" secondItem="taj-hW-BNl" secondAttribute="leading" id="tMS-F1-bPJ"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="taj-hW-BNl"/>
+                    </view>
+                    <connections>
+                        <outlet property="phoneNumberComponent" destination="qlK-mw-HKt" id="KBZ-4f-LGc"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="e25-O7-cBC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2142" y="3802"/>
+        </scene>
         <!--Personal Info View Controller-->
         <scene sceneID="IW0-CT-9TG">
             <objects>

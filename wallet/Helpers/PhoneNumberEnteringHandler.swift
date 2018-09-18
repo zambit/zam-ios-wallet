@@ -13,7 +13,6 @@ protocol PhoneNumberEnteringHandlerDelegate: class {
     func phoneNumberMaskChanged(_ handler: PhoneNumberEnteringHandler, from oldValue: PhoneMaskData?, to newValue: PhoneMaskData?)
 
     func phoneNumberEditingChanged(_ handler: PhoneNumberEnteringHandler, with mask: PhoneMaskData?, phoneNumber: String)
-
 }
 
 class PhoneNumberEnteringHandler: NSObject, UITextFieldDelegate {

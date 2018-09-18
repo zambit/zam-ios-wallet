@@ -25,6 +25,13 @@ class CountryView: UIView {
         innerImageView.layer.cornerRadius = minimalInnerSide / 2
     }
 
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+
+        addSubviews()
+        setupStyle()
+    }
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
 
