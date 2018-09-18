@@ -10,31 +10,19 @@ import Foundation
 
 enum TransactionStatus: String {
     case waiting
-    case pending
-    case awaitingRecipient = "awaiting_recipient"
-    case awaitingConfirmation = "awaiting_confirmation"
-    case done
-    case success
-    case cancelled
     case decline
-    case failed
+    case pending
+    case cancel
+    case success
 
     var formatted: String {
         switch self {
         case .pending:
             return "Pending"
-        case .awaitingRecipient:
-            return "Awaiting recipient"
-        case .awaitingConfirmation:
-            return "Awaiting confirmation"
-        case .done:
-            return "Done"
-        case .cancelled:
+        case .cancel:
             return "Cancelled"
         case .waiting:
             return "Waiting"
-        case .failed:
-            return "Failed"
         case .decline:
             return "Declined"
         case .success:
