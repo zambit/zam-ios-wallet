@@ -39,8 +39,8 @@ class PhoneNumberComponent: UIView {
      */
     fileprivate var helperTextDelayTimer: DelayTimer = DelayTimer(delay: 1.0)
 
-    fileprivate var codeTextField: PhoneNumberCodeTextField?
-    fileprivate var phoneTextField: PhoneNumberTextField?
+    fileprivate var codeTextField: PartialPhoneNumberCodeTextField?
+    fileprivate var phoneTextField: PartialPhoneNumberTextField?
     fileprivate var countryImageView: CountryView?
 
     fileprivate var helperLabel: UILabel?
@@ -60,12 +60,12 @@ class PhoneNumberComponent: UIView {
     }
 
     @objc
-    fileprivate func phoneNumberCodeChanged(_ sender: PhoneNumberCodeTextField) {
+    fileprivate func phoneNumberCodeChanged(_ sender: PartialPhoneNumberCodeTextField) {
         custom.phoneNumberCodeChanged()
     }
 
     @objc
-    fileprivate func phoneNumberChanged(_ sender: PhoneNumberTextField) {
+    fileprivate func phoneNumberChanged(_ sender: PartialPhoneNumberTextField) {
         custom.phoneNumberChanged()
     }
 }
@@ -93,12 +93,6 @@ extension BehaviorExtension: SizePresetable where Base: PhoneNumberComponent {
         base.helperLabel?.text = text
     }
 
-    fileprivate func setHelperTextWithCheck(_ text: String) {
-        if base.delegate?.phoneNumberComponentCanChangeHelperText(base) ?? true {
-            setHelperText(text)
-        }
-    }
-
     fileprivate func setup() {
         base.phoneNumberFormatter = PhoneNumberFormatter()
         setupStyle()
@@ -114,7 +108,7 @@ extension BehaviorExtension: SizePresetable where Base: PhoneNumberComponent {
         base.viewWithTag(8512168)?.removeFromSuperview()
         base.viewWithTag(315168)?.removeFromSuperview()
 
-        let codeTextField = PhoneNumberCodeTextField()
+        let codeTextField = PartialPhoneNumberCodeTextField()
         codeTextField.tag = 31545168
         codeTextField.font = UIFont.walletFont(ofSize: 20.0, weight: .regular)
         codeTextField.textColor = .white
@@ -139,7 +133,7 @@ extension BehaviorExtension: SizePresetable where Base: PhoneNumberComponent {
         base.codeTextField = codeTextField
 
 
-        let phoneTextField = PhoneNumberTextField()
+        let phoneTextField = PartialPhoneNumberTextField()
         phoneTextField.tag = 131914168
         phoneTextField.font = UIFont.walletFont(ofSize: 20.0, weight: .regular)
         phoneTextField.textColor = .white
@@ -199,6 +193,12 @@ extension BehaviorExtension: SizePresetable where Base: PhoneNumberComponent {
 
     fileprivate func setupStyle() {
         base.backgroundColor = .clear
+    }
+
+    fileprivate func setHelperTextWithCheck(_ text: String) {
+        if base.delegate?.phoneNumberComponentCanChangeHelperText(base) ?? true {
+            setHelperText(text)
+        }
     }
 
     fileprivate func phoneNumberCodeChanged() {

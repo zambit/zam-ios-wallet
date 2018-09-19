@@ -17,74 +17,74 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     //var navigation: WalletNavigationController!
     var userDefaultsManager: UserDefaultsManager!
 
-//    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-//        let _vc = ControllerHelper.instantiateViewController(identifier: "TestViewController", storyboardName: "Main")
-//
-//        guard let vc = _vc as? TestViewController else {
-//            fatalError()
-//        }
-//
-//        self.window = UIWindow(frame: UIScreen.main.bounds)
-//        self.window?.rootViewController = vc
-//        self.window?.makeKeyAndVisible()
-//
-//        return true
-//    }
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
-        UIApplication.shared.statusBarStyle = .lightContent
+        let _vc = ControllerHelper.instantiateViewController(identifier: "TestViewController", storyboardName: "Main")
 
-        let _vc = ControllerHelper.instantiateViewController(identifier: "LaunchScreenViewController", storyboardName: "Onboarding")
-
-        guard let vc = _vc as? LaunchScreenViewController else {
+        guard let vc = _vc as? TestViewController else {
             fatalError()
-        }
-
-        let navigationController = WalletNavigationController(rootViewController: vc)
-
-        userDefaultsManager = UserDefaultsManager(keychainConfiguration: WalletKeychainConfiguration())
-
-        switch (userDefaultsManager.isPhoneVerified, userDefaultsManager.isPinCreated) {
-        case (true, true):
-            guard let phone = userDefaultsManager.getPhoneNumber() else {
-                fatalError()
-            }
-
-            let screenFlow = EnterPinFlow(migratingNavigationController: navigationController)
-            screenFlow.prepare(phone: phone)
-
-            self.mainScreenFlow = screenFlow
-            self.mainScreenFlow.begin(animated: false)
-            break
-        case (true, false):
-            guard let phone = userDefaultsManager.getPhoneNumber() else {
-                fatalError()
-            }
-
-            let screenFlow = SecondEnterLoginFlow(migratingNavigationController: navigationController)
-            screenFlow.prepare(phone: phone)
-
-            self.mainScreenFlow = screenFlow
-            self.mainScreenFlow.begin(animated: false)
-            break
-        case (false, true):
-            fatalError()
-        case (false, false):
-            //let screenFlow = OnboardingFlow(navigationController: navigation)
-
-            let screenFlow = OnboardingFlow(migratingNavigationController: navigationController)
-            self.mainScreenFlow = screenFlow
-            self.mainScreenFlow.begin(animated: false)
-            break
         }
 
         self.window = UIWindow(frame: UIScreen.main.bounds)
-        self.window?.rootViewController = navigationController
+        self.window?.rootViewController = vc
         self.window?.makeKeyAndVisible()
 
         return true
     }
+
+//    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+//        // Override point for customization after application launch.
+//        UIApplication.shared.statusBarStyle = .lightContent
+//
+//        let _vc = ControllerHelper.instantiateViewController(identifier: "LaunchScreenViewController", storyboardName: "Onboarding")
+//
+//        guard let vc = _vc as? LaunchScreenViewController else {
+//            fatalError()
+//        }
+//
+//        let navigationController = WalletNavigationController(rootViewController: vc)
+//
+//        userDefaultsManager = UserDefaultsManager(keychainConfiguration: WalletKeychainConfiguration())
+//
+//        switch (userDefaultsManager.isPhoneVerified, userDefaultsManager.isPinCreated) {
+//        case (true, true):
+//            guard let phone = userDefaultsManager.getPhoneNumber() else {
+//                fatalError()
+//            }
+//
+//            let screenFlow = EnterPinFlow(migratingNavigationController: navigationController)
+//            screenFlow.prepare(phone: phone)
+//
+//            self.mainScreenFlow = screenFlow
+//            self.mainScreenFlow.begin(animated: false)
+//            break
+//        case (true, false):
+//            guard let phone = userDefaultsManager.getPhoneNumber() else {
+//                fatalError()
+//            }
+//
+//            let screenFlow = SecondEnterLoginFlow(migratingNavigationController: navigationController)
+//            screenFlow.prepare(phone: phone)
+//
+//            self.mainScreenFlow = screenFlow
+//            self.mainScreenFlow.begin(animated: false)
+//            break
+//        case (false, true):
+//            fatalError()
+//        case (false, false):
+//            //let screenFlow = OnboardingFlow(navigationController: navigation)
+//
+//            let screenFlow = OnboardingFlow(migratingNavigationController: navigationController)
+//            self.mainScreenFlow = screenFlow
+//            self.mainScreenFlow.begin(animated: false)
+//            break
+//        }
+//
+//        self.window = UIWindow(frame: UIScreen.main.bounds)
+//        self.window?.rootViewController = navigationController
+//        self.window?.makeKeyAndVisible()
+//
+//        return true
+//    }
 
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

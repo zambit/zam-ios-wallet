@@ -59,9 +59,14 @@
 		8C231449214FB7FE007340E7 /* UITapGestureRecognizer+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C231448214FB7FE007340E7 /* UITapGestureRecognizer+Extensions.swift */; };
 		8C23144B214FCA90007340E7 /* KeyboardNotifiableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C23144A214FCA90007340E7 /* KeyboardNotifiableViewController.swift */; };
 		8C23144D21500529007340E7 /* PhoneNumberComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C23144C21500529007340E7 /* PhoneNumberComponent.swift */; };
-		8C2314512150EA53007340E7 /* PhoneNumberCodeTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2314502150EA53007340E7 /* PhoneNumberCodeTextField.swift */; };
-		8C2314532150EA66007340E7 /* PhoneNumberTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2314522150EA66007340E7 /* PhoneNumberTextField.swift */; };
+		8C2314512150EA53007340E7 /* PartialPhoneNumberCodeTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2314502150EA53007340E7 /* PartialPhoneNumberCodeTextField.swift */; };
+		8C2314532150EA66007340E7 /* PartialPhoneNumberTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2314522150EA66007340E7 /* PartialPhoneNumberTextField.swift */; };
 		8C2314552150FF6A007340E7 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2314542150FF6A007340E7 /* TestViewController.swift */; };
+		8C23145B21526C9A007340E7 /* RecipientComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C23145A21526C9A007340E7 /* RecipientComponent.swift */; };
+		8C23145F21527095007340E7 /* AddressRecipientComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C23145E21527095007340E7 /* AddressRecipientComponent.swift */; };
+		8C231461215283DA007340E7 /* FormEditingStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C231460215283DA007340E7 /* FormEditingStatus.swift */; };
+		8C23146321528C70007340E7 /* PhoneNumberTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C23146221528C70007340E7 /* PhoneNumberTextField.swift */; };
+		8C231464215293B8007340E7 /* PhoneNumberRecipientComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C23145C21526FEF007340E7 /* PhoneNumberRecipientComponent.swift */; };
 		8C333D302109E0B400949AC0 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D2F2109E0B400949AC0 /* UserViewController.swift */; };
 		8C333D342109F02000949AC0 /* ScreenFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D332109F02000949AC0 /* ScreenFlow.swift */; };
 		8C333D362109F09800949AC0 /* FirstEnterLoginFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D352109F09800949AC0 /* FirstEnterLoginFlow.swift */; };
@@ -324,9 +329,14 @@
 		8C231448214FB7FE007340E7 /* UITapGestureRecognizer+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITapGestureRecognizer+Extensions.swift"; sourceTree = "<group>"; };
 		8C23144A214FCA90007340E7 /* KeyboardNotifiableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardNotifiableViewController.swift; sourceTree = "<group>"; };
 		8C23144C21500529007340E7 /* PhoneNumberComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberComponent.swift; sourceTree = "<group>"; };
-		8C2314502150EA53007340E7 /* PhoneNumberCodeTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberCodeTextField.swift; sourceTree = "<group>"; };
-		8C2314522150EA66007340E7 /* PhoneNumberTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberTextField.swift; sourceTree = "<group>"; };
+		8C2314502150EA53007340E7 /* PartialPhoneNumberCodeTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartialPhoneNumberCodeTextField.swift; sourceTree = "<group>"; };
+		8C2314522150EA66007340E7 /* PartialPhoneNumberTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartialPhoneNumberTextField.swift; sourceTree = "<group>"; };
 		8C2314542150FF6A007340E7 /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
+		8C23145A21526C9A007340E7 /* RecipientComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipientComponent.swift; sourceTree = "<group>"; };
+		8C23145C21526FEF007340E7 /* PhoneNumberRecipientComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberRecipientComponent.swift; sourceTree = "<group>"; };
+		8C23145E21527095007340E7 /* AddressRecipientComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressRecipientComponent.swift; sourceTree = "<group>"; };
+		8C231460215283DA007340E7 /* FormEditingStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormEditingStatus.swift; sourceTree = "<group>"; };
+		8C23146221528C70007340E7 /* PhoneNumberTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberTextField.swift; sourceTree = "<group>"; };
 		8C333D2F2109E0B400949AC0 /* UserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
 		8C333D332109F02000949AC0 /* ScreenFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenFlow.swift; sourceTree = "<group>"; };
 		8C333D352109F09800949AC0 /* FirstEnterLoginFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstEnterLoginFlow.swift; sourceTree = "<group>"; };
@@ -762,6 +772,16 @@
 			path = Login;
 			sourceTree = "<group>";
 		};
+		8C23145921526C68007340E7 /* RecipientComponent */ = {
+			isa = PBXGroup;
+			children = (
+				8C23145A21526C9A007340E7 /* RecipientComponent.swift */,
+				8C23145C21526FEF007340E7 /* PhoneNumberRecipientComponent.swift */,
+				8C23145E21527095007340E7 /* AddressRecipientComponent.swift */,
+			);
+			path = RecipientComponent;
+			sourceTree = "<group>";
+		};
 		8C333D59210B536E00949AC0 /* VerificationCodeFormComponent */ = {
 			isa = PBXGroup;
 			children = (
@@ -769,16 +789,6 @@
 				8C333D57210B4F7D00949AC0 /* VerificationCodeFormComponent.xib */,
 			);
 			path = VerificationCodeFormComponent;
-			sourceTree = "<group>";
-		};
-		8C333D5A210B537A00949AC0 /* PhoneNumberComponent */ = {
-			isa = PBXGroup;
-			children = (
-				8C2314502150EA53007340E7 /* PhoneNumberCodeTextField.swift */,
-				8C2314522150EA66007340E7 /* PhoneNumberTextField.swift */,
-				8C23144C21500529007340E7 /* PhoneNumberComponent.swift */,
-			);
-			path = PhoneNumberComponent;
 			sourceTree = "<group>";
 		};
 		8C333D5B210B538700949AC0 /* TextCheckBoxView */ = {
@@ -879,6 +889,7 @@
 			children = (
 				8C4413D3211993B400C9689C /* CoinType.swift */,
 				8CA218FD21303BC30063C188 /* TransactionStatus.swift */,
+				8C231460215283DA007340E7 /* FormEditingStatus.swift */,
 				8CA2190121304B730063C188 /* DirectionType.swift */,
 				8CA219052133ED4E0063C188 /* GroupingType.swift */,
 				8CA2190321305EC00063C188 /* GroupType.swift */,
@@ -951,6 +962,7 @@
 				8CF5F9622114AB000083B36A /* ItemComponent.swift */,
 				8C52FFE92119DA2700EB55EA /* CellComponent.swift */,
 				8CA2191521342D720063C188 /* HeaderFooterComponent.swift */,
+				8C23144C21500529007340E7 /* PhoneNumberComponent.swift */,
 				8CA219102134208B0063C188 /* TransactionsGroupHeaderComponent */,
 				8C713B1921380CC000AC2E25 /* DepositMoneyAddressComponent */,
 				8C713B14213800A000AC2E25 /* DepositMoneyMethodComponent */,
@@ -959,13 +971,13 @@
 				8CA2190B21341FE60063C188 /* TransactionCellComponent */,
 				8CA218E4212DA52F0063C188 /* ContactsHorizontalComponent */,
 				8CA218902122E8880063C188 /* SendMoneyComponent */,
+				8C23145921526C68007340E7 /* RecipientComponent */,
 				8CA218992122EB150063C188 /* SegmentedControlComponent */,
 				8CA218C72125AD380063C188 /* WalletSmallItemComponent */,
 				8C52FFE42119D0EF00EB55EA /* WalletItemComponent */,
 				8CF5F95C2114A4DC0083B36A /* CreatePinComponent */,
 				8CF5F9552114949D0083B36A /* DotsFieldComponent */,
 				8CF5F940211456DB0083B36A /* DecimalKeyboardComponent */,
-				8C333D5A210B537A00949AC0 /* PhoneNumberComponent */,
 				8C333D59210B536E00949AC0 /* VerificationCodeFormComponent */,
 				8C333D61210B5E3400949AC0 /* NewPasswordFormComponent */,
 				8C60884F2111A23500470411 /* LoginPasswordFormComponent */,
@@ -1031,6 +1043,9 @@
 		8C7C33402142909200EC6C96 /* TextFields */ = {
 			isa = PBXGroup;
 			children = (
+				8C2314502150EA53007340E7 /* PartialPhoneNumberCodeTextField.swift */,
+				8C2314522150EA66007340E7 /* PartialPhoneNumberTextField.swift */,
+				8C23146221528C70007340E7 /* PhoneNumberTextField.swift */,
 				8C7C33502142C73900EC6C96 /* FloatTextField.swift */,
 				8CA218A4212333B20063C188 /* IconableTextField.swift */,
 				8CA218E6212DA8300063C188 /* SearchTextField.swift */,
@@ -1581,6 +1596,7 @@
 				8CA2190D213420040063C188 /* TransactionsGroupHeaderComponent.swift in Sources */,
 				8C713B1B21380CE200AC2E25 /* DepositMoneyViewController.swift in Sources */,
 				8CA2191421342ABC0063C188 /* DateInterval+Extensions.swift in Sources */,
+				8C231461215283DA007340E7 /* FormEditingStatus.swift in Sources */,
 				8C091938210622AA00703224 /* Request.swift in Sources */,
 				8C7C338921490E3100EC6C96 /* AvoidingKeyboardViewController.swift in Sources */,
 				8C7C337F2147EF9800EC6C96 /* PhotoLayout.swift in Sources */,
@@ -1630,6 +1646,7 @@
 				8C52FFE32119C1CF00EB55EA /* TermData.swift in Sources */,
 				8CF5F9282112FE580083B36A /* DelayTimer.swift in Sources */,
 				8CF5F94A21147C050083B36A /* WalletNavigable.swift in Sources */,
+				8C23145B21526C9A007340E7 /* RecipientComponent.swift in Sources */,
 				8C7C335A21468F5A00EC6C96 /* KYCPersonalInfoProgress.swift in Sources */,
 				8CA218962122EAF60063C188 /* SegmentedControlComponent.swift in Sources */,
 				8C713B32213FE33600AC2E25 /* EmptyViewController.swift in Sources */,
@@ -1641,12 +1658,14 @@
 				8C09194D2107214300703224 /* WalletEnvironment.swift in Sources */,
 				8CF41F112136E750006D4FE2 /* DatePickerViewController.swift in Sources */,
 				8C713B2C213EC77500AC2E25 /* CustomBehavioral.swift in Sources */,
+				8C23146321528C70007340E7 /* PhoneNumberTextField.swift in Sources */,
 				8C7C33642146C47000EC6C96 /* KYCUploadDocumentViewController.swift in Sources */,
 				8C231443214BE6FE007340E7 /* MenuButton.swift in Sources */,
 				8C333D4C210B1D3500949AC0 /* CheckBoxButton.swift in Sources */,
 				8C7C335D2146A49A00EC6C96 /* KeyboardAvoiding.swift in Sources */,
 				8CA218BB212573510063C188 /* IndentLabel.swift in Sources */,
 				8CF5F94821147A870083B36A /* CreatePinViewController.swift in Sources */,
+				8C23145F21527095007340E7 /* AddressRecipientComponent.swift in Sources */,
 				8C09192D21061F3600703224 /* ControllerHelper.swift in Sources */,
 				8CA218E9212DB0210063C188 /* RoundedImageView.swift in Sources */,
 				8C713B34214024CE00AC2E25 /* PhoneNumberFormatter.swift in Sources */,
@@ -1656,7 +1675,7 @@
 				8CF5F931211345320083B36A /* MainFlow.swift in Sources */,
 				8C09196221076B7000703224 /* RecoveryProvider.swift in Sources */,
 				8C4413C92118A66A00C9689C /* KeychainPasswordItem.swift in Sources */,
-				8C2314512150EA53007340E7 /* PhoneNumberCodeTextField.swift in Sources */,
+				8C2314512150EA53007340E7 /* PartialPhoneNumberCodeTextField.swift in Sources */,
 				8CA218F3213007650063C188 /* TransactionsPageData.swift in Sources */,
 				8C52FFFE211B252F00EB55EA /* InstantPanGestureRecognizer.swift in Sources */,
 				8C6088442110A34200470411 /* CustomUI.swift in Sources */,
@@ -1720,10 +1739,11 @@
 				8CA218942122EAC90063C188 /* SendMoneyComponent.swift in Sources */,
 				8CA218A1212304590063C188 /* SendMoneyViewController.swift in Sources */,
 				8C0919832109CC2000703224 /* EnterLoginPasswordViewController.swift in Sources */,
-				8C2314532150EA66007340E7 /* PhoneNumberTextField.swift in Sources */,
+				8C2314532150EA66007340E7 /* PartialPhoneNumberTextField.swift in Sources */,
 				8C713B0D2136EA9E00AC2E25 /* UIAlertController+Extensions.swift in Sources */,
 				8C7C33732147C67C00EC6C96 /* ItemWithImage.swift in Sources */,
 				8C0919562107362300703224 /* CodableSuccess.swift in Sources */,
+				8C231464215293B8007340E7 /* PhoneNumberRecipientComponent.swift in Sources */,
 				8CF41D8B21359776006D4FE2 /* ContactItemComponent.swift in Sources */,
 				8CF5F95221148D800083B36A /* DotsFieldComponent.swift in Sources */,
 				8C7C3397214A972200EC6C96 /* SizePresetable.swift in Sources */,

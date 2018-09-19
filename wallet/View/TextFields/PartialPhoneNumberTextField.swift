@@ -1,5 +1,5 @@
 //
-//  PhoneNumberCodeTextField.swift
+//  PartialPhoneNumberTextField.swift
 //  wallet
 //
 //  Created by Alexander Ponomarev on 18/09/2018.
@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class PhoneNumberCodeTextField: UITextField, UITextFieldDelegate {
+class PartialPhoneNumberTextField: UITextField, UITextFieldDelegate {
 
     let allowedCharacters = CharacterSet(charactersIn: "1234567890")
 
@@ -17,10 +17,10 @@ class PhoneNumberCodeTextField: UITextField, UITextFieldDelegate {
         set {
             if let value = newValue {
                 let number = value.filter {
-                    "1234567890".contains($0)
+                    "1234567890 -()".contains($0)
                 }
 
-                super.text = "+\(number)"
+                super.text = number
             } else {
                 super.text = newValue
             }
@@ -54,8 +54,6 @@ class PhoneNumberCodeTextField: UITextField, UITextFieldDelegate {
     override public init(frame:CGRect) {
         super.init(frame:frame)
         self.setup()
-
-        self.addTarget(self, action: #selector(textFieldEditingChanged(_:)), for: .editingChanged)
     }
 
     /**
@@ -68,8 +66,6 @@ class PhoneNumberCodeTextField: UITextField, UITextFieldDelegate {
     required public init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
         self.setup()
-
-        self.addTarget(self, action: #selector(textFieldEditingChanged(_:)), for: .editingChanged)
     }
 
     func setup() {
@@ -79,11 +75,6 @@ class PhoneNumberCodeTextField: UITextField, UITextFieldDelegate {
     }
 
     // MARK: - UITextFieldDelegate
-
-    @objc
-    private func textFieldEditingChanged(_ textField: UITextField) {
-        textField.text?.addPrefixIfNeeded("+")
-    }
 
     open func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         // allow delegate to intervene
@@ -100,12 +91,7 @@ class PhoneNumberCodeTextField: UITextField, UITextFieldDelegate {
     }
 
     open func textFieldDidBeginEditing(_ textField: UITextField) {
-        guard _delegate == nil else {
-            _delegate?.textFieldDidBeginEditing?(textField)
-            return
-        }
-
-        textField.text?.addPrefixIfNeeded("+")
+        _delegate?.textFieldDidBeginEditing?(textField)
     }
 
     open func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
@@ -114,16 +100,12 @@ class PhoneNumberCodeTextField: UITextField, UITextFieldDelegate {
 
     open func textFieldDidEndEditing(_ textField: UITextField) {
         guard _delegate == nil else {
-             _delegate?.textFieldDidEndEditing?(textField)
+            _delegate?.textFieldDidEndEditing?(textField)
             return
         }
 
         textField.resignFirstResponder()
         textField.layoutIfNeeded()
-
-        if let text = textField.text, text == "+" {
-            textField.text = ""
-        }
     }
 
     open func textFieldShouldClear(_ textField: UITextField) -> Bool {
@@ -133,4 +115,5 @@ class PhoneNumberCodeTextField: UITextField, UITextFieldDelegate {
     open func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         return _delegate?.textFieldShouldReturn?(textField) ?? true
     }
+
 }

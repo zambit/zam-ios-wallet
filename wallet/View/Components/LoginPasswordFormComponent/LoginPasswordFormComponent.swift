@@ -37,20 +37,7 @@ class LoginPasswordFormComponent: UIView {
     @IBOutlet private var passwordTextField: UITextField?
     @IBOutlet private var helperTextLabel: UILabel?
 
-    @IBOutlet private var passwordTextFieldHeightConstraint: NSLayoutConstraint?
-
     weak var delegate: LoginPasswordComponentDelegate?
-    
-    var textFieldHeight: CGFloat {
-        get {
-            return passwordTextFieldHeightConstraint?.constant ?? 0
-        }
-        
-        set {
-            passwordTextFieldHeightConstraint?.constant = newValue
-            self.layoutIfNeeded()
-        }
-    }
 
     var password: String {
         guard let text = passwordTextField?.text else {

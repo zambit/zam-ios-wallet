@@ -11,12 +11,21 @@ import UIKit
 
 class TestViewController: UIViewController {
 
-    @IBOutlet var phoneNumberComponent: PhoneNumberComponent!
+    @IBOutlet var recipientComponent: RecipientComponent!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setupDefaultStyle()
+        hideKeyboardOnTap()
+    }
+
+    @IBAction func turnLeft() {
+        recipientComponent.custom.turnLeft()
+    }
+
+    @IBAction func turnRight() {
+        recipientComponent.custom.turnRight()
     }
 
 }
