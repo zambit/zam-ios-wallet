@@ -12,9 +12,8 @@ import UIKit
 /**
  Entering new phone number screen controller. Owns its model and views.
  */
-class EnterNewPhoneNumberViewController: ContinueViewController, PhoneNumberFormComponentDelegate {
+class EnterNewPhoneNumberViewController: ContinueViewController, PhoneNumberComponentDelegate {
 
-    var telephonyProvider: UserTelephonyInfoProvider?
     var signupAPI: SignupAPI?
 
     /**
@@ -30,7 +29,7 @@ class EnterNewPhoneNumberViewController: ContinueViewController, PhoneNumberForm
     private var termsItems: [TermData] = []
 
     @IBOutlet var largeTitleLabel: UILabel?
-    @IBOutlet var phoneNumberForm: PhoneNumberFormComponent?
+    @IBOutlet var phoneNumberComponent: PhoneNumberComponent?
     @IBOutlet var termsStackView: UIStackView?
 
     private var phoneNumberValid: Bool = false
@@ -60,9 +59,9 @@ class EnterNewPhoneNumberViewController: ContinueViewController, PhoneNumberForm
 
         switch UIDevice.current.screenType {
         case .small, .extraSmall:
-            phoneNumberForm?.prepare(preset: .superCompact)
+            phoneNumberComponent?.custom.prepare(preset: .superCompact)
         case .medium, .extra, .plus:
-            phoneNumberForm?.prepare(preset: .default)
+            phoneNumberComponent?.custom.prepare(preset: .default)
         case .unknown:
             fatalError()
         }
@@ -70,50 +69,37 @@ class EnterNewPhoneNumberViewController: ContinueViewController, PhoneNumberForm
         termsItems = [
             TermData(text: "I accept the Terms of Use and give my consent to ZamZamTechnology OÜ to process my personal data for the services outlined in the Privacy Policy", linkText: ["Terms of Use", "Privacy Policy"])
         ]
+        setupTermsItems()
 
-        addSubviews()
-        
         setupDefaultStyle()
         hideKeyboardOnTap()
 
-        setupViewControllerStyle()
+        largeTitleLabel?.textColor = .white
 
-        // Add dictionary with phone codes to appropriate PhoneNumberFormView
-        guard let path = Bundle.main.path(forResource: "PhoneMasks", ofType: "plist"),
-            let masksDictionary = NSDictionary(contentsOfFile: path) as? [String: [String: String]] else {
-                fatalError("PhoneMasks.plist error")
-        }
+        continueButton?.setImage(#imageLiteral(resourceName: "icArrowRight"), for: .normal)
+        continueButton?.addTarget(self, action: #selector(continueButtonTouchUpInsideEvent(_:)), for: .touchUpInside)
 
-        // Convert dictionary of mask to appropriate format
-        do {
-            let masks = try masksDictionary.mapValues {
-                return try PhoneMaskData(dictionary: $0)
-            }
+        termsStackView?.spacing = 32.0
 
-            phoneNumberForm?.delegate = self
-            phoneNumberForm?.provide(masks: masks, parser: MaskParser(symbol: "X", space: " "), initialCountryCode: telephonyProvider?.countryCode)
-
-        } catch let e {
-            fatalError(e.localizedDescription)
-        }
+        phoneNumberComponent?.delegate = self
     }
 
-    // PhoneNumberFormViewDelegate
+    // PhoneNumberComponentDelegate
 
-    func phoneNumberFormComponent(_ phoneNumberFormViewController: PhoneNumberFormComponent, dontSatisfyTheCondition: PhoneCondition) {
+    func phoneNumberComponent(_ phoneNumberComponent: PhoneNumberComponent, dontSatisfyTheCondition: PhoneCondition) {
         phoneNumberValid = false
         continueButton?.custom.setEnabled(false)
     }
 
-    func phoneNumberFormComponentSatisfiesAllConditions(_ phoneNumberFormViewController: PhoneNumberFormComponent) {
+    func phoneNumberComponentSatisfiesAllConditions(_ phoneNumberComponent: PhoneNumberComponent) {
         phoneNumberValid = true
         continueButton?.custom.setEnabled(phoneNumberValid && allTermsAccepted)
     }
 
-    private func addSubviews() {
+    private func setupTermsItems() {
         termsItems.forEach {
             let termView = TextCheckBoxView(frame: CGRect.zero)
-            //termView.heightAnchor.constraint(equalToConstant: 32.0).isActive = true
+
             termView.configure(text: $0.text, tapableText: $0.linkText, tapHandler: { element in
                 switch element {
                 case "Terms of Use":
@@ -139,18 +125,9 @@ class EnterNewPhoneNumberViewController: ContinueViewController, PhoneNumberForm
         }
     }
 
-    private func setupViewControllerStyle() {
-        largeTitleLabel?.textColor = .white
-
-        continueButton?.setImage(#imageLiteral(resourceName: "icArrowRight"), for: .normal)
-        continueButton?.addTarget(self, action: #selector(continueButtonTouchUpInsideEvent(_:)), for: .touchUpInside)
-
-        termsStackView?.spacing = 32.0
-    }
-
     @objc
     private func continueButtonTouchUpInsideEvent(_ sender: Any) {
-        guard let phone = phoneNumberForm?.phone else {
+        guard let phone = phoneNumberComponent?.custom.phoneNumber else {
             return
         }
 
@@ -173,10 +150,10 @@ class EnterNewPhoneNumberViewController: ContinueViewController, PhoneNumberForm
                         fatalError()
                     }
 
-                    self?.phoneNumberForm?.helperText = fail.message.capitalizingFirst
+                    self?.phoneNumberComponent?.custom.setHelperText(fail.message.capitalizingFirst)
                 case .undefinedServerFailureResponse:
 
-                    self?.phoneNumberForm?.helperText = "Undefined error"
+                    self?.phoneNumberComponent?.custom.setHelperText("Undefined error")
                 }
             }
 

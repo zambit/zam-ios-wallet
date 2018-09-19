@@ -58,6 +58,10 @@
 		8C231447214C0058007340E7 /* HighlightableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C231446214C0058007340E7 /* HighlightableButton.swift */; };
 		8C231449214FB7FE007340E7 /* UITapGestureRecognizer+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C231448214FB7FE007340E7 /* UITapGestureRecognizer+Extensions.swift */; };
 		8C23144B214FCA90007340E7 /* KeyboardNotifiableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C23144A214FCA90007340E7 /* KeyboardNotifiableViewController.swift */; };
+		8C23144D21500529007340E7 /* PhoneNumberComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C23144C21500529007340E7 /* PhoneNumberComponent.swift */; };
+		8C2314512150EA53007340E7 /* PhoneNumberCodeTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2314502150EA53007340E7 /* PhoneNumberCodeTextField.swift */; };
+		8C2314532150EA66007340E7 /* PhoneNumberTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2314522150EA66007340E7 /* PhoneNumberTextField.swift */; };
+		8C2314552150FF6A007340E7 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2314542150FF6A007340E7 /* TestViewController.swift */; };
 		8C333D302109E0B400949AC0 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D2F2109E0B400949AC0 /* UserViewController.swift */; };
 		8C333D342109F02000949AC0 /* ScreenFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D332109F02000949AC0 /* ScreenFlow.swift */; };
 		8C333D362109F09800949AC0 /* FirstEnterLoginFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D352109F09800949AC0 /* FirstEnterLoginFlow.swift */; };
@@ -72,8 +76,6 @@
 		8C333D4A210B1C4300949AC0 /* TextCheckBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D49210B1C4300949AC0 /* TextCheckBoxView.swift */; };
 		8C333D4C210B1D3500949AC0 /* CheckBoxButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D4B210B1D3500949AC0 /* CheckBoxButton.swift */; };
 		8C333D4E210B272D00949AC0 /* TextCheckBoxView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C333D4D210B272D00949AC0 /* TextCheckBoxView.xib */; };
-		8C333D50210B2B6900949AC0 /* PhoneNumberFormComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D4F210B2B6900949AC0 /* PhoneNumberFormComponent.swift */; };
-		8C333D52210B2C5800949AC0 /* PhoneNumberFormComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C333D51210B2C5800949AC0 /* PhoneNumberFormComponent.xib */; };
 		8C333D54210B394800949AC0 /* RoundContinueButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D53210B394800949AC0 /* RoundContinueButton.swift */; };
 		8C333D56210B4EF400949AC0 /* VerificationCodeFormComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D55210B4EF400949AC0 /* VerificationCodeFormComponent.swift */; };
 		8C333D58210B4F7D00949AC0 /* VerificationCodeFormComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C333D57210B4F7D00949AC0 /* VerificationCodeFormComponent.xib */; };
@@ -112,8 +114,6 @@
 		8C60884C2111A20B00470411 /* LoginPasswordFormComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C60884B2111A20B00470411 /* LoginPasswordFormComponent.swift */; };
 		8C60884E2111A22D00470411 /* LoginPasswordFormView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C60884D2111A22D00470411 /* LoginPasswordFormView.xib */; };
 		8C6088512111A95100470411 /* Conditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6088502111A95100470411 /* Conditions.swift */; };
-		8C6088532111CB7000470411 /* LoginFormView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C6088522111CB7000470411 /* LoginFormView.xib */; };
-		8C6088562111CB8C00470411 /* LoginFormComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6088552111CB8C00470411 /* LoginFormComponent.swift */; };
 		8C60885A2111DCB000470411 /* EnterPhoneLoginPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6088592111DCB000470411 /* EnterPhoneLoginPasswordViewController.swift */; };
 		8C60885C2111F1A200470411 /* RecoveryFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C60885B2111F1A200470411 /* RecoveryFlow.swift */; };
 		8C60885E2111F28000470411 /* EnterNewPhoneNumberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C60885D2111F28000470411 /* EnterNewPhoneNumberViewController.swift */; };
@@ -323,6 +323,10 @@
 		8C231446214C0058007340E7 /* HighlightableButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightableButton.swift; sourceTree = "<group>"; };
 		8C231448214FB7FE007340E7 /* UITapGestureRecognizer+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITapGestureRecognizer+Extensions.swift"; sourceTree = "<group>"; };
 		8C23144A214FCA90007340E7 /* KeyboardNotifiableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardNotifiableViewController.swift; sourceTree = "<group>"; };
+		8C23144C21500529007340E7 /* PhoneNumberComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberComponent.swift; sourceTree = "<group>"; };
+		8C2314502150EA53007340E7 /* PhoneNumberCodeTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberCodeTextField.swift; sourceTree = "<group>"; };
+		8C2314522150EA66007340E7 /* PhoneNumberTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberTextField.swift; sourceTree = "<group>"; };
+		8C2314542150FF6A007340E7 /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		8C333D2F2109E0B400949AC0 /* UserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
 		8C333D332109F02000949AC0 /* ScreenFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenFlow.swift; sourceTree = "<group>"; };
 		8C333D352109F09800949AC0 /* FirstEnterLoginFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstEnterLoginFlow.swift; sourceTree = "<group>"; };
@@ -337,8 +341,6 @@
 		8C333D49210B1C4300949AC0 /* TextCheckBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextCheckBoxView.swift; sourceTree = "<group>"; };
 		8C333D4B210B1D3500949AC0 /* CheckBoxButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBoxButton.swift; sourceTree = "<group>"; };
 		8C333D4D210B272D00949AC0 /* TextCheckBoxView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextCheckBoxView.xib; sourceTree = "<group>"; };
-		8C333D4F210B2B6900949AC0 /* PhoneNumberFormComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberFormComponent.swift; sourceTree = "<group>"; };
-		8C333D51210B2C5800949AC0 /* PhoneNumberFormComponent.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhoneNumberFormComponent.xib; sourceTree = "<group>"; };
 		8C333D53210B394800949AC0 /* RoundContinueButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundContinueButton.swift; sourceTree = "<group>"; };
 		8C333D55210B4EF400949AC0 /* VerificationCodeFormComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationCodeFormComponent.swift; sourceTree = "<group>"; };
 		8C333D57210B4F7D00949AC0 /* VerificationCodeFormComponent.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VerificationCodeFormComponent.xib; sourceTree = "<group>"; };
@@ -379,8 +381,6 @@
 		8C60884B2111A20B00470411 /* LoginPasswordFormComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPasswordFormComponent.swift; sourceTree = "<group>"; };
 		8C60884D2111A22D00470411 /* LoginPasswordFormView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginPasswordFormView.xib; sourceTree = "<group>"; };
 		8C6088502111A95100470411 /* Conditions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Conditions.swift; sourceTree = "<group>"; };
-		8C6088522111CB7000470411 /* LoginFormView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginFormView.xib; sourceTree = "<group>"; };
-		8C6088552111CB8C00470411 /* LoginFormComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFormComponent.swift; sourceTree = "<group>"; };
 		8C6088592111DCB000470411 /* EnterPhoneLoginPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterPhoneLoginPasswordViewController.swift; sourceTree = "<group>"; };
 		8C60885B2111F1A200470411 /* RecoveryFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecoveryFlow.swift; sourceTree = "<group>"; };
 		8C60885D2111F28000470411 /* EnterNewPhoneNumberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterNewPhoneNumberViewController.swift; sourceTree = "<group>"; };
@@ -735,6 +735,33 @@
 			path = More;
 			sourceTree = "<group>";
 		};
+		8C23145621525B62007340E7 /* Recovery */ = {
+			isa = PBXGroup;
+			children = (
+				8C60885F2111F35E00470411 /* EnterPhoneNumberViewController.swift */,
+			);
+			path = Recovery;
+			sourceTree = "<group>";
+		};
+		8C23145721525B80007340E7 /* Registration */ = {
+			isa = PBXGroup;
+			children = (
+				8C60885D2111F28000470411 /* EnterNewPhoneNumberViewController.swift */,
+				8C09197E2108D8B600703224 /* VerifyPhoneNumberWithSmsViewController.swift */,
+				8C0919802108D99400703224 /* CreateNewPasswordViewController.swift */,
+			);
+			path = Registration;
+			sourceTree = "<group>";
+		};
+		8C23145821525B8A007340E7 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				8C6088592111DCB000470411 /* EnterPhoneLoginPasswordViewController.swift */,
+				8C0919822109CC2000703224 /* EnterLoginPasswordViewController.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
 		8C333D59210B536E00949AC0 /* VerificationCodeFormComponent */ = {
 			isa = PBXGroup;
 			children = (
@@ -744,13 +771,14 @@
 			path = VerificationCodeFormComponent;
 			sourceTree = "<group>";
 		};
-		8C333D5A210B537A00949AC0 /* PhoneNumberFormComponent */ = {
+		8C333D5A210B537A00949AC0 /* PhoneNumberComponent */ = {
 			isa = PBXGroup;
 			children = (
-				8C333D4F210B2B6900949AC0 /* PhoneNumberFormComponent.swift */,
-				8C333D51210B2C5800949AC0 /* PhoneNumberFormComponent.xib */,
+				8C2314502150EA53007340E7 /* PhoneNumberCodeTextField.swift */,
+				8C2314522150EA66007340E7 /* PhoneNumberTextField.swift */,
+				8C23144C21500529007340E7 /* PhoneNumberComponent.swift */,
 			);
-			path = PhoneNumberFormComponent;
+			path = PhoneNumberComponent;
 			sourceTree = "<group>";
 		};
 		8C333D5B210B538700949AC0 /* TextCheckBoxView */ = {
@@ -812,6 +840,7 @@
 			children = (
 				8C34616A20EF8FA700746724 /* AppDelegate.swift */,
 				8C713B33214024CE00AC2E25 /* PhoneNumberFormatter.swift */,
+				8C2314542150FF6A007340E7 /* TestViewController.swift */,
 				8C04BC2B211C4FB200E90090 /* Fonts */,
 				8C333D6D210EFC7900949AC0 /* Files */,
 				8C60883E2110632100470411 /* UserDataManager */,
@@ -915,15 +944,6 @@
 			path = LoginPasswordFormComponent;
 			sourceTree = "<group>";
 		};
-		8C6088542111CB7700470411 /* LoginFormComponent */ = {
-			isa = PBXGroup;
-			children = (
-				8C6088552111CB8C00470411 /* LoginFormComponent.swift */,
-				8C6088522111CB7000470411 /* LoginFormView.xib */,
-			);
-			path = LoginFormComponent;
-			sourceTree = "<group>";
-		};
 		8C6088612111FB0A00470411 /* Components */ = {
 			isa = PBXGroup;
 			children = (
@@ -931,11 +951,11 @@
 				8CF5F9622114AB000083B36A /* ItemComponent.swift */,
 				8C52FFE92119DA2700EB55EA /* CellComponent.swift */,
 				8CA2191521342D720063C188 /* HeaderFooterComponent.swift */,
+				8CA219102134208B0063C188 /* TransactionsGroupHeaderComponent */,
 				8C713B1921380CC000AC2E25 /* DepositMoneyAddressComponent */,
 				8C713B14213800A000AC2E25 /* DepositMoneyMethodComponent */,
 				8CA218E5212DA5400063C188 /* RectItemComponent */,
 				8CA2192021354C8F0063C188 /* TransactionsFilterComponents */,
-				8CA219102134208B0063C188 /* TransactionsGroupHeaderComponent */,
 				8CA2190B21341FE60063C188 /* TransactionCellComponent */,
 				8CA218E4212DA52F0063C188 /* ContactsHorizontalComponent */,
 				8CA218902122E8880063C188 /* SendMoneyComponent */,
@@ -945,10 +965,9 @@
 				8CF5F95C2114A4DC0083B36A /* CreatePinComponent */,
 				8CF5F9552114949D0083B36A /* DotsFieldComponent */,
 				8CF5F940211456DB0083B36A /* DecimalKeyboardComponent */,
-				8C333D5A210B537A00949AC0 /* PhoneNumberFormComponent */,
+				8C333D5A210B537A00949AC0 /* PhoneNumberComponent */,
 				8C333D59210B536E00949AC0 /* VerificationCodeFormComponent */,
 				8C333D61210B5E3400949AC0 /* NewPasswordFormComponent */,
-				8C6088542111CB7700470411 /* LoginFormComponent */,
 				8C60884F2111A23500470411 /* LoginPasswordFormComponent */,
 				8C333D5C210B539800949AC0 /* OnboardingItemComponent */,
 			);
@@ -977,12 +996,9 @@
 			isa = PBXGroup;
 			children = (
 				8C091933210620C800703224 /* OnboardingViewController.swift */,
-				8C60885D2111F28000470411 /* EnterNewPhoneNumberViewController.swift */,
-				8C60885F2111F35E00470411 /* EnterPhoneNumberViewController.swift */,
-				8C09197E2108D8B600703224 /* VerifyPhoneNumberWithSmsViewController.swift */,
-				8C0919802108D99400703224 /* CreateNewPasswordViewController.swift */,
-				8C6088592111DCB000470411 /* EnterPhoneLoginPasswordViewController.swift */,
-				8C0919822109CC2000703224 /* EnterLoginPasswordViewController.swift */,
+				8C23145721525B80007340E7 /* Registration */,
+				8C23145621525B62007340E7 /* Recovery */,
+				8C23145821525B8A007340E7 /* Login */,
 				8CF5F94D21148BD90083B36A /* EnterPinViewController.swift */,
 				8CF5F94721147A870083B36A /* CreatePinViewController.swift */,
 			);
@@ -1475,13 +1491,11 @@
 				8C713B1821380AE800AC2E25 /* DepositMoneyAddressComponent.xib in Resources */,
 				8C713B132138009B00AC2E25 /* DepositMoneyMethodComponent.xib in Resources */,
 				8C091900210601F300703224 /* Recovery.storyboard in Resources */,
-				8C6088532111CB7000470411 /* LoginFormView.xib in Resources */,
 				8C04BC32211C4FC100E90090 /* MavenPro-Black.ttf in Resources */,
 				8C333D5E210B5E1600949AC0 /* NewPasswordFormView.xib in Resources */,
 				8C333D4E210B272D00949AC0 /* TextCheckBoxView.xib in Resources */,
 				8CF5F95721149CD20083B36A /* DotsFieldComponent.xib in Resources */,
 				8CA2192E21355D0A0063C188 /* TransactionsFeatureFilterComponent.xib in Resources */,
-				8C333D52210B2C5800949AC0 /* PhoneNumberFormComponent.xib in Resources */,
 				8C04BC33211C4FC100E90090 /* MavenPro-Regular.ttf in Resources */,
 				8CA21939213591D10063C188 /* TransactionsCoinFilterComponent.xib in Resources */,
 				8CA218C62125AD230063C188 /* WalletSmallItemComponent.xib in Resources */,
@@ -1618,7 +1632,6 @@
 				8CF5F94A21147C050083B36A /* WalletNavigable.swift in Sources */,
 				8C7C335A21468F5A00EC6C96 /* KYCPersonalInfoProgress.swift in Sources */,
 				8CA218962122EAF60063C188 /* SegmentedControlComponent.swift in Sources */,
-				8C6088562111CB8C00470411 /* LoginFormComponent.swift in Sources */,
 				8C713B32213FE33600AC2E25 /* EmptyViewController.swift in Sources */,
 				8C7C3395214A882A00EC6C96 /* AdjustableToFitHeightLabel.swift in Sources */,
 				8C713B1F213941FF00AC2E25 /* Networking.swift in Sources */,
@@ -1640,10 +1653,10 @@
 				8CA218CD2126F23B0063C188 /* UserData.swift in Sources */,
 				8CA218D0212737210063C188 /* LargeSendButton.swift in Sources */,
 				8CF41D892135973F006D4FE2 /* RectItemComponent.swift in Sources */,
-				8C333D50210B2B6900949AC0 /* PhoneNumberFormComponent.swift in Sources */,
 				8CF5F931211345320083B36A /* MainFlow.swift in Sources */,
 				8C09196221076B7000703224 /* RecoveryProvider.swift in Sources */,
 				8C4413C92118A66A00C9689C /* KeychainPasswordItem.swift in Sources */,
+				8C2314512150EA53007340E7 /* PhoneNumberCodeTextField.swift in Sources */,
 				8CA218F3213007650063C188 /* TransactionsPageData.swift in Sources */,
 				8C52FFFE211B252F00EB55EA /* InstantPanGestureRecognizer.swift in Sources */,
 				8C6088442110A34200470411 /* CustomUI.swift in Sources */,
@@ -1707,6 +1720,7 @@
 				8CA218942122EAC90063C188 /* SendMoneyComponent.swift in Sources */,
 				8CA218A1212304590063C188 /* SendMoneyViewController.swift in Sources */,
 				8C0919832109CC2000703224 /* EnterLoginPasswordViewController.swift in Sources */,
+				8C2314532150EA66007340E7 /* PhoneNumberTextField.swift in Sources */,
 				8C713B0D2136EA9E00AC2E25 /* UIAlertController+Extensions.swift in Sources */,
 				8C7C33732147C67C00EC6C96 /* ItemWithImage.swift in Sources */,
 				8C0919562107362300703224 /* CodableSuccess.swift in Sources */,
@@ -1720,6 +1734,7 @@
 				8C333D54210B394800949AC0 /* RoundContinueButton.swift in Sources */,
 				8C7C335E2146A49A00EC6C96 /* KeyboardDismissingView.swift in Sources */,
 				8CF5F95B21149E460083B36A /* CreatePinComponent.swift in Sources */,
+				8C23144D21500529007340E7 /* PhoneNumberComponent.swift in Sources */,
 				8CA2191D21344C730063C188 /* Array+Extensions.swift in Sources */,
 				8C333D46210B0D5400949AC0 /* LaunchScreenViewController.swift in Sources */,
 				8C09197121089FBB00703224 /* AuthAPI.swift in Sources */,
@@ -1752,6 +1767,7 @@
 				8CF5F93F211456D50083B36A /* DecimalKeyboardComponent.swift in Sources */,
 				8CA218AF212479040063C188 /* SendMoneyButton.swift in Sources */,
 				8C09193B210623F200703224 /* Environment.swift in Sources */,
+				8C2314552150FF6A007340E7 /* TestViewController.swift in Sources */,
 				8C6088482110A75100470411 /* AdditionalTextButton.swift in Sources */,
 				8C7C33602146ACBE00EC6C96 /* KYCUploadDocumentsMenuViewController.swift in Sources */,
 				8C333D56210B4EF400949AC0 /* VerificationCodeFormComponent.swift in Sources */,

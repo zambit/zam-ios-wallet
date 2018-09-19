@@ -112,23 +112,7 @@ class PhoneNumberFormatter {
         }
     }
 
-    var completed: PhoneNumber? {
-        guard let num = number, let object = try? formatter.parse(num) else {
-            return nil
-        }
-
-        let united = String(object.countryCode) + String(object.nationalNumber)
-        let unitedFormatted = PhoneNumberFormatter(united).formatted
-
-        return PhoneNumber(numberString: united,
-                           formattedString: unitedFormatted,
-                           code: object.countryCode,
-                           region: formatter.mainCountry(forCode: object.countryCode))
-    }
-
-    var isValid: Bool {
-        return completed != nil
-    }
+    // MARK: - Setters
 
     var number: String? {
         get {
@@ -139,23 +123,6 @@ class PhoneNumberFormatter {
         set {
             let separated = newValue?.components(separatedBy: allowedCharacters.inverted)
             _number = separated?.joined(separator: "")
-        }
-    }
-
-    var formatted: String {
-        get {
-            return partialFormatter.formatPartial("+\(number ?? "")")
-        }
-    }
-
-    var region: String? {
-        get {
-            guard let numCode = numericCode else {
-                return nil
-            }
-
-            let region = formatter.countries(withCode: numCode)
-            return region?.first
         }
     }
 
@@ -197,25 +164,71 @@ class PhoneNumberFormatter {
         }
     }
 
-    private var numericCode: UInt64? {
-        get {
-            let separated = formatted.split(separator: " ")
+    // MARK: - Default region and code values
 
-            if let expectedCode = separated.first {
-                let allowedCharacters = CharacterSet(charactersIn: "1234567890")
-                let separated = expectedCode.components(separatedBy: allowedCharacters.inverted)
-                let clearCode = separated.joined(separator: "")
+    var defaultCode: String? {
+        if let numCode = formatter.countryCode(for: partialFormatter.currentRegion) {
+            return String(numCode)
+        }
 
-                guard let numCode = UInt64(clearCode) else {
-                    return nil
-                }
+        return nil
+    }
 
-                if let _ = formatter.countries(withCode: numCode) {
-                    return numCode
-                }
-            }
+    var defaultRegion: String {
+        return partialFormatter.currentRegion
+    }
 
+    // MARK: - Getters
+
+    var isValid: Bool {
+        return completed != nil
+    }
+
+    var completed: PhoneNumber? {
+        guard let num = number, let object = try? formatter.parse(num) else {
             return nil
         }
+
+        let united = String(object.countryCode) + String(object.nationalNumber)
+        let unitedFormatted = PhoneNumberFormatter(united).formatted
+
+        return PhoneNumber(numberString: united,
+                           formattedString: unitedFormatted,
+                           code: object.countryCode,
+                           region: formatter.mainCountry(forCode: object.countryCode))
+    }
+
+    var formatted: String {
+        get {
+            return partialFormatter.formatPartial("+\(number ?? "")")
+        }
+    }
+
+    var region: String? {
+        guard let numCode = numericCode else {
+            return nil
+        }
+
+        return formatter.mainCountry(forCode: numCode)
+    }
+
+    private var numericCode: UInt64? {
+        let separated = formatted.split(separator: " ")
+        
+        if let expectedCode = separated.first {
+            let allowedCharacters = CharacterSet(charactersIn: "1234567890")
+            let separated = expectedCode.components(separatedBy: allowedCharacters.inverted)
+            let clearCode = separated.joined(separator: "")
+
+            guard let numCode = UInt64(clearCode) else {
+                return nil
+            }
+
+            if let _ = formatter.countries(withCode: numCode) {
+                return numCode
+            }
+        }
+
+        return nil
     }
 }

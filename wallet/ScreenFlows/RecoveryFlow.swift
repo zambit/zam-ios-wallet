@@ -42,7 +42,6 @@ final class RecoveryFlow: ScreenFlow {
             strongSelf.migratingNavigationController.custom.push(viewController: target)
         }
 
-        vc.telephonyProvider = UserTelephonyInfoProvider()
         vc.onContinue = onContinue
         vc.recoveryAPI = RecoveryAPI(provider: RecoveryProvider(environment: WalletEnvironment(), dispatcher: HTTPDispatcher()))
         vc.flow = self
