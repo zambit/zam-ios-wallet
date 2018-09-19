@@ -24,11 +24,11 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XTT-fV-5qL" customClass="LoginFormComponent" customModule="wallet" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="182.5" width="320" height="156"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XTT-fV-5qL" customClass="PhoneNumberComponent" customModule="wallet" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="182.5" width="320" height="86"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="156" placeholder="YES" id="UbQ-Um-fCV"/>
+                                    <constraint firstAttribute="height" constant="86" id="UbQ-Um-fCV"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0pf-sY-gEA" customClass="RoundContinueButton" customModule="wallet" customModuleProvider="target">
@@ -43,20 +43,30 @@
                                 <rect key="frame" x="24" y="497" width="145" height="34"/>
                                 <state key="normal" title="Forgot password?"/>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="txh-oo-zCD" customClass="LoginPasswordFormComponent" customModule="wallet" customModuleProvider="target">
+                                <rect key="frame" x="16" y="268.5" width="288" height="86"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="86" id="l6F-A9-Dz5"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="Cr0-Eu-ur2" firstAttribute="trailing" secondItem="txh-oo-zCD" secondAttribute="trailing" constant="16" id="Fec-8v-YKf"/>
                             <constraint firstItem="0s1-JA-O1g" firstAttribute="centerY" secondItem="0pf-sY-gEA" secondAttribute="centerY" id="Jom-Kt-Aku"/>
                             <constraint firstItem="Cr0-Eu-ur2" firstAttribute="trailing" secondItem="XTT-fV-5qL" secondAttribute="trailing" id="Rfc-bw-0jJ"/>
                             <constraint firstItem="Cr0-Eu-ur2" firstAttribute="trailing" secondItem="0pf-sY-gEA" secondAttribute="trailing" constant="24" id="UOH-oQ-Dqd"/>
+                            <constraint firstItem="txh-oo-zCD" firstAttribute="leading" secondItem="Cr0-Eu-ur2" secondAttribute="leading" constant="16" id="VsD-mm-gCI"/>
                             <constraint firstItem="0s1-JA-O1g" firstAttribute="leading" secondItem="Cr0-Eu-ur2" secondAttribute="leading" constant="24" id="f6B-um-0Ap"/>
                             <constraint firstItem="HNl-T0-R7i" firstAttribute="top" secondItem="Cr0-Eu-ur2" secondAttribute="top" priority="999" constant="16" id="hRv-GY-l1S"/>
                             <constraint firstItem="XTT-fV-5qL" firstAttribute="top" secondItem="HNl-T0-R7i" secondAttribute="bottom" constant="24" id="iwy-Qw-Zq8"/>
                             <constraint firstItem="XTT-fV-5qL" firstAttribute="leading" secondItem="Cr0-Eu-ur2" secondAttribute="leading" id="kAC-hR-dbc"/>
-                            <constraint firstItem="0pf-sY-gEA" firstAttribute="top" relation="greaterThanOrEqual" secondItem="XTT-fV-5qL" secondAttribute="bottom" constant="5" id="l3u-l9-EFJ"/>
+                            <constraint firstItem="0pf-sY-gEA" firstAttribute="top" relation="greaterThanOrEqual" secondItem="txh-oo-zCD" secondAttribute="bottom" constant="5" id="l3u-l9-EFJ"/>
                             <constraint firstItem="Cr0-Eu-ur2" firstAttribute="trailing" secondItem="HNl-T0-R7i" secondAttribute="trailing" constant="16" id="ms7-jm-D5F"/>
                             <constraint firstItem="Cr0-Eu-ur2" firstAttribute="bottom" secondItem="0pf-sY-gEA" secondAttribute="bottom" constant="24" id="nSP-wL-PaY"/>
                             <constraint firstItem="HNl-T0-R7i" firstAttribute="leading" secondItem="Cr0-Eu-ur2" secondAttribute="leading" constant="16" id="vkO-2h-s4s"/>
+                            <constraint firstItem="txh-oo-zCD" firstAttribute="top" secondItem="XTT-fV-5qL" secondAttribute="bottom" id="z2e-Vl-Se8"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Cr0-Eu-ur2"/>
                     </view>
@@ -65,12 +75,13 @@
                         <outlet property="fastenBottomConstraint" destination="nSP-wL-PaY" id="Oko-ZG-qfP"/>
                         <outlet property="forgotPasswordButton" destination="0s1-JA-O1g" id="DLV-3O-SDL"/>
                         <outlet property="largeTitleLabel" destination="HNl-T0-R7i" id="tAn-Sa-kIX"/>
-                        <outlet property="loginFormView" destination="XTT-fV-5qL" id="GOx-RS-ztk"/>
+                        <outlet property="loginPasswordFormComponent" destination="txh-oo-zCD" id="iLC-wq-WYq"/>
+                        <outlet property="phoneNumberComponent" destination="XTT-fV-5qL" id="dqD-I7-BdM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oYK-IZ-5cm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1568.8" y="-99.400299850074973"/>
+            <point key="canvasLocation" x="1567.5" y="-100.35211267605634"/>
         </scene>
         <!--Enter Login Password View Controller-->
         <scene sceneID="9iz-a5-E0c">

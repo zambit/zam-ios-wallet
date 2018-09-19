@@ -54,7 +54,6 @@ final class FirstEnterLoginFlow: ScreenFlow {
         vc.onExit = onExit
         vc.onContinue = onContinue
         vc.onRecovery = onRecovery
-        vc.telephonyProvider = UserTelephonyInfoProvider()
         vc.authAPI = AuthAPI(provider: AuthProvider(environment: WalletEnvironment(), dispatcher: HTTPDispatcher()))
         vc.userManager = UserDefaultsManager(keychainConfiguration: WalletKeychainConfiguration())
         vc.flow = self

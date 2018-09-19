@@ -299,7 +299,7 @@ extension BehaviorExtension: SizePresetable where Base: PhoneNumberComponent {
                         return
                     }
 
-                    self?.setHelperText(failedCondition.rawValue)
+                    self?.setHelperTextWithCheck(failedCondition.rawValue)
                 }.fire()
 
                 base.delegate?.phoneNumberComponent(base, dontSatisfyTheCondition: failedCondition)
@@ -315,7 +315,7 @@ extension BehaviorExtension: SizePresetable where Base: PhoneNumberComponent {
                     return
                 }
 
-                self?.setHelperText(failedCondition.rawValue)
+                self?.setHelperTextWithCheck(failedCondition.rawValue)
             }.fire()
 
             base.delegate?.phoneNumberComponent(base, dontSatisfyTheCondition: failedCondition)
