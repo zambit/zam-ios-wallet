@@ -79,7 +79,7 @@ extension BehaviorExtension: SizePresetable where Base: PhoneNumberComponent {
     func prepare(preset: SizePreset) {
         switch preset {
         case .superCompact:
-            base.codeTextFieldWidthConstraint?.constant = 65
+            base.codeTextFieldWidthConstraint?.constant = 50
             base.codeTextField?.leftPadding = 6.0
         case .compact, .default:
             base.codeTextFieldWidthConstraint?.constant = 80
