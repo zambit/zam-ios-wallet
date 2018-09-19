@@ -19,6 +19,13 @@ protocol PhoneNumberComponentDelegate: class {
     func phoneNumberComponentSatisfiesAllConditions(_ phoneNumberComponent: PhoneNumberComponent)
 }
 
+extension PhoneNumberComponentDelegate {
+
+    func phoneNumberComponentCanChangeHelperText(_ phoneNumberComponent: PhoneNumberComponent) -> Bool {
+        return true
+    }
+}
+
 class PhoneNumberComponent: UIView {
 
     weak var delegate: PhoneNumberComponentDelegate?
@@ -40,7 +47,7 @@ class PhoneNumberComponent: UIView {
 
     fileprivate var imageViewLeadingConstraint: NSLayoutConstraint?
     fileprivate var textFieldTrailingConstraint: NSLayoutConstraint?
-    
+    fileprivate var codeTextFieldWidthConstraint: NSLayoutConstraint?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -63,7 +70,24 @@ class PhoneNumberComponent: UIView {
     }
 }
 
-extension BehaviorExtension where Base: PhoneNumberComponent {
+extension BehaviorExtension: SizePresetable where Base: PhoneNumberComponent {
+
+    var phoneNumber: String {
+        return base.resultingString
+    }
+
+    func prepare(preset: SizePreset) {
+        switch preset {
+        case .superCompact:
+            base.codeTextFieldWidthConstraint?.constant = 65
+            base.codeTextField?.leftPadding = 6.0
+        case .compact, .default:
+            base.codeTextFieldWidthConstraint?.constant = 80
+            base.codeTextField?.leftPadding = 12.0
+        }
+
+        base.layoutIfNeeded()
+    }
 
     func setHelperText(_ text: String) {
         base.helperLabel?.text = text
@@ -96,7 +120,7 @@ extension BehaviorExtension where Base: PhoneNumberComponent {
         codeTextField.textColor = .white
         codeTextField.backgroundColor = UIColor.white.withAlphaComponent(0.04)
         codeTextField.layer.cornerRadius = 8.0
-        codeTextField.leftPadding = 6.0
+        codeTextField.leftPadding = 12.0
         codeTextField.keyboardType = .decimalPad
         codeTextField.addTarget(self, action: #selector(base.phoneNumberCodeChanged(_:)), for: .editingChanged)
         codeTextField.attributedPlaceholder =
@@ -107,9 +131,10 @@ extension BehaviorExtension where Base: PhoneNumberComponent {
         base.addSubview(codeTextField)
 
         codeTextField.translatesAutoresizingMaskIntoConstraints = false
-        codeTextField.widthAnchor.constraint(equalToConstant: 60.0).isActive = true
         codeTextField.leadingAnchor.constraint(equalTo: base.leadingAnchor, constant: 16.0).isActive = true
         codeTextField.topAnchor.constraint(equalTo: base.topAnchor).isActive = true
+        base.codeTextFieldWidthConstraint = codeTextField.widthAnchor.constraint(equalToConstant: 80.0)
+        base.codeTextFieldWidthConstraint?.isActive = true
 
         base.codeTextField = codeTextField
 
@@ -214,7 +239,7 @@ extension BehaviorExtension where Base: PhoneNumberComponent {
 
         // divide between parts
 
-        if newCountry != nil {
+        if newCountry != nil, newCountry != country {
             let phone = base.phoneTextField?.text ?? ""
             base.phoneNumberFormatter.number = code + phone
             base.resultingString = base.phoneNumberFormatter.formatted

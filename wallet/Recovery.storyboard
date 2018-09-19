@@ -24,11 +24,11 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y5H-P7-dyB" customClass="PhoneNumberFormComponent" customModule="wallet" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="142" width="375" height="56"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y5H-P7-dyB" customClass="PhoneNumberComponent" customModule="wallet" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="142" width="375" height="86"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="56" placeholder="YES" id="zGi-bm-fyE"/>
+                                    <constraint firstAttribute="height" constant="86" id="zGi-bm-fyE"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P8R-ru-Tcx" customClass="RoundContinueButton" customModule="wallet" customModuleProvider="target">
@@ -58,7 +58,7 @@
                         <outlet property="continueButton" destination="P8R-ru-Tcx" id="IyS-uj-5i8"/>
                         <outlet property="fastenBottomConstraint" destination="teI-gi-Yao" id="dti-uq-nLU"/>
                         <outlet property="largeTitleLabel" destination="s4K-11-EeI" id="bpI-6T-T7f"/>
-                        <outlet property="phoneNumberForm" destination="y5H-P7-dyB" id="VNa-4E-xLd"/>
+                        <outlet property="phoneNumberComponent" destination="y5H-P7-dyB" id="VNa-4E-xLd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ogz-GD-M8s" userLabel="First Responder" sceneMemberID="firstResponder"/>
