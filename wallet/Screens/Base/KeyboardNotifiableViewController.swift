@@ -35,7 +35,9 @@ class KeyboardNotifiableViewController: UIViewController {
         self._dismissHandlerAction = handler
 
         guard isKeyboardShown else {
-            return handler()
+            self._dismissHandlerAction()
+            self._dismissHandlerAction = {}
+            return
         }
 
         self.dismissKeyboard()

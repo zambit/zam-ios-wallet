@@ -20,7 +20,7 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
 
     weak var delegate: WalletsViewControllerDelegate?
 
-    var onSendFromWallet: ((_ index: Int, _ wallets: [WalletData], _ recipient: ContactData?, _ phone: String, _ owner: ScreenWalletNavigable) -> Void)?
+    var onSendFromWallet: ((_ index: Int, _ wallets: [WalletData], _ recipient: FormattedContactData?, _ phone: String, _ owner: ScreenWalletNavigable) -> Void)?
     var onDepositToWallet: ((_ index: Int, _ wallets: [WalletData], _ phone: String, _ owner: ScreenWalletNavigable) -> Void)?
 
     var userManager: UserDefaultsManager?
@@ -63,7 +63,7 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
         collectionView?.setContentOffset(newContentOffset, animated: false)
     }
 
-    func onSendWithContact(_ contact: ContactData) {
+    func onSendWithContact(_ contact: FormattedContactData) {
         guard let phone = phone, let owner = owner else {
             return
         }

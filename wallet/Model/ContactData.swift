@@ -30,4 +30,24 @@ struct ContactData {
         self.avatarData = avatar
         self.phoneNumbers = phoneNumbers
     }
+
+    func toFormatted(_ block: @escaping (FormattedContactData?) -> Void) {
+        let formatter = PhoneNumberFormatter()
+
+        guard let phoneNumber = phoneNumbers.first else {
+            return block(nil)
+        }
+
+        formatter.getCompleted(from: phoneNumber) {
+            phone in
+
+            if let formattedPhone = phone?.formattedString {
+                let formattedContact = FormattedContactData(name: self.name, avatarData: self.avatarData, formattedPhoneNumber: formattedPhone)
+                block(formattedContact)
+                return
+            }
+
+            block(nil)
+        }
+    }
 }

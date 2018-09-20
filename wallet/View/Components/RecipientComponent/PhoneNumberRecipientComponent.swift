@@ -67,11 +67,12 @@ extension BehaviorExtension where Base: PhoneNumberRecipientComponent {
         return base.textField?.isEditing ?? false
     }
 
-    func setup(contact: ContactData) {
-        base.textField?.text = contact.phoneNumbers.first
-        textFieldEditingDidBegin()
+    func setup(contact: FormattedContactData) {
+        self.base.phoneNumberFormatter.number = contact.formattedPhoneNumber
+        self.base.textField?.text = self.base.phoneNumberFormatter.formatted
+        self.textFieldEditingDidBegin()
 
-        if let data = contact.avatarData, let avatar = UIImage(data: data, scale: 0.3) {
+        if let data = contact.avatarData, let avatar = UIImage(data: data, scale: 0.05) {
             base.detailButton?.setImage(avatar, for: UIControlState())
         }
     }
@@ -153,7 +154,10 @@ extension BehaviorExtension where Base: PhoneNumberRecipientComponent {
 
         let detailButton = HighlightableButton()
         detailButton.tag = 315168
-        detailButton.circleCorner = true
+        detailButton.layer.cornerRadius = 18.0
+        detailButton.clipsToBounds = true
+        detailButton.layer.borderWidth = 2.0
+        detailButton.layer.borderColor = UIColor.white.cgColor
         detailButton.contentEdgeInsets = UIEdgeInsets.zero
         detailButton.setImage(#imageLiteral(resourceName: "contactPlaceholder"), for: .normal)
         detailButton.tintColor = .white

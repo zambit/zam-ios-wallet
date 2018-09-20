@@ -355,7 +355,7 @@ final class MainFlow: ScreenFlow {
             fatalError()
         }
 
-        let onSendFromWallet: (Int, [WalletData], ContactData?, String, ScreenWalletNavigable) -> Void = {
+        let onSendFromWallet: (Int, [WalletData], FormattedContactData?, String, ScreenWalletNavigable) -> Void = {
             [weak self]
             index, wallets, contact, phone, owner in
 

@@ -308,12 +308,20 @@ class HomeViewController: DetailOffsetPresentationViewController, WalletsViewCon
     // MARK: - ContactsHorizontalComponentDelegate
 
     func contactsHorizontalComponent(_ contactsHorizontalComponent: ContactsHorizontalComponent, itemWasTapped contactData: ContactData) {
+
         contactsHorizontalComponent.isUserInteractionEnabled = false
         dismissKeyboard {
             [weak self] in
 
-            contactsHorizontalComponent.isUserInteractionEnabled = true
-            self?.embededViewController?.onSendWithContact(contactData)
+            contactData.toFormatted {
+                formatted in
+
+                contactsHorizontalComponent.isUserInteractionEnabled = true
+
+                if let formatted = formatted {
+                    self?.embededViewController?.onSendWithContact(formatted)
+                }
+            }
         }
     }
 

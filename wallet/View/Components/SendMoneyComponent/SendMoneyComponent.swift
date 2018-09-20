@@ -118,7 +118,7 @@ class SendMoneyComponent: Component, SizePresetable, SendMoneyAmountComponentDel
         layoutIfNeeded()
     }
 
-    func prepare(recipient: ContactData? = nil, coinType: CoinType, walletId: String) {
+    func prepare(recipient: FormattedContactData? = nil, coinType: CoinType, walletId: String) {
         self.walletId = walletId
         
         sendMoneyAmountComponent?.prepare(coinType: coinType)

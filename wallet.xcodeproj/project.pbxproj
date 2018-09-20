@@ -67,6 +67,7 @@
 		8C231461215283DA007340E7 /* FormEditingStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C231460215283DA007340E7 /* FormEditingStatus.swift */; };
 		8C23146321528C70007340E7 /* PhoneNumberTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C23146221528C70007340E7 /* PhoneNumberTextField.swift */; };
 		8C231464215293B8007340E7 /* PhoneNumberRecipientComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C23145C21526FEF007340E7 /* PhoneNumberRecipientComponent.swift */; };
+		8C2314682153E461007340E7 /* FormattedContactData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2314672153E461007340E7 /* FormattedContactData.swift */; };
 		8C333D302109E0B400949AC0 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D2F2109E0B400949AC0 /* UserViewController.swift */; };
 		8C333D342109F02000949AC0 /* ScreenFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D332109F02000949AC0 /* ScreenFlow.swift */; };
 		8C333D362109F09800949AC0 /* FirstEnterLoginFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D352109F09800949AC0 /* FirstEnterLoginFlow.swift */; };
@@ -335,6 +336,7 @@
 		8C23145E21527095007340E7 /* AddressRecipientComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressRecipientComponent.swift; sourceTree = "<group>"; };
 		8C231460215283DA007340E7 /* FormEditingStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormEditingStatus.swift; sourceTree = "<group>"; };
 		8C23146221528C70007340E7 /* PhoneNumberTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberTextField.swift; sourceTree = "<group>"; };
+		8C2314672153E461007340E7 /* FormattedContactData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormattedContactData.swift; sourceTree = "<group>"; };
 		8C333D2F2109E0B400949AC0 /* UserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
 		8C333D332109F02000949AC0 /* ScreenFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenFlow.swift; sourceTree = "<group>"; };
 		8C333D352109F09800949AC0 /* FirstEnterLoginFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstEnterLoginFlow.swift; sourceTree = "<group>"; };
@@ -903,6 +905,7 @@
 				8CA219072133EE910063C188 /* GroupedTransactionsPageData.swift */,
 				8C04BC442121D48E00E90090 /* BalanceData.swift */,
 				8CA218DA212D892A0063C188 /* ContactData.swift */,
+				8C2314672153E461007340E7 /* FormattedContactData.swift */,
 				8C231444214BFC0E007340E7 /* ExternalLinks.swift */,
 				8C52FFE22119C1CF00EB55EA /* TermData.swift */,
 			);
@@ -1572,6 +1575,7 @@
 				8C09196421076B8200703224 /* RecoveryRequest.swift in Sources */,
 				8CA218DD212D93570063C188 /* ContactsHorizontalComponent.swift in Sources */,
 				8CA2192C21355CF60063C188 /* TransactionsFeatureFilterComponent.swift in Sources */,
+				8C2314682153E461007340E7 /* FormattedContactData.swift in Sources */,
 				8C04BC452121D48E00E90090 /* BalanceData.swift in Sources */,
 				8C7C33682146C9B000EC6C96 /* PhotoButton.swift in Sources */,
 				8CF5F95E2114A77D0083B36A /* CreatePinStageItem.swift in Sources */,
