@@ -14,8 +14,8 @@ import Foundation
 class DelayTimer {
 
     private var timer: Timer = Timer()
-    private var operations: [() -> Void] = []
-    private var firedOperationsStack: [() -> Void] = []
+    private var operations: [(Any?, () -> Void)] = []
+    private var firedOperationsStack: [(Any?, () -> Void)] = []
 
     let delay: Double
 
@@ -24,8 +24,8 @@ class DelayTimer {
     }
 
     @discardableResult
-    func addOperation(_ block: @escaping () -> Void) -> DelayTimer {
-        operations.append(block)
+    func addOperation(target: Any? = nil, _ block: @escaping () -> Void) -> DelayTimer {
+        operations.append((target,block))
         return self
     }
 
@@ -44,8 +44,9 @@ class DelayTimer {
 
     @objc
     private func performWithDelay(_ sender: Any) {
-        firedOperationsStack.forEach {
-            $0()
+        while firedOperationsStack.count > 0 {
+            let first = firedOperationsStack.removeFirst()
+            first.1()
         }
     }
 }

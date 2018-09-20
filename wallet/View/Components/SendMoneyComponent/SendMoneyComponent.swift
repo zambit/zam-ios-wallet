@@ -9,104 +9,123 @@
 import Foundation
 import UIKit
 
-struct SendMoneyData {
+struct SendingData {
+
+    enum RecipientType {
+        case address(String)
+        case contact(name: String, phone: String)
+        case phone(String)
+    }
+
     let amountData: BalanceData
-    let method: SendMoneyMethod.Data
     let walletId: String
+    let recipient: RecipientType
 }
 
 protocol SendMoneyComponentDelegate: class {
 
-    func sendMoneyComponentRequestSending(_ sendMoneyComponent: SendMoneyComponent, sendMoneyData: SendMoneyData)
+    func sendMoneyComponentRequestSending(_ sendMoneyComponent: SendMoneyComponent, output: SendingData)
 }
 
-class SendMoneyComponent: Component, SizePresetable, SendMoneyAmountComponentDelegate, SendMoneyMethodComponentDelegate {
+class SendMoneyComponent: Component, SizePresetable, SendMoneyAmountComponentDelegate, SegmentedControlComponentDelegate, RecipientComponentDelegate {
 
-    var onQRCodeScanning: (() -> Void)? {
-        didSet {
-            sendMoneyMethodComponent?.onRightDetail = onQRCodeScanning
-        }
-    }
-
-    var userAPI: UserAPI?
+    var onQRCodeScanning: (() -> Void)?
 
     weak var delegate: SendMoneyComponentDelegate?
 
-    @IBOutlet private var sendMoneyMethodComponent: SendMoneyMethodComponent?
+    @IBOutlet private var toLabel: UILabel?
+    @IBOutlet private var segmentedControlComponent: SegmentedControlComponent?
+    @IBOutlet private var recipientComponent: RecipientComponent?
+
     @IBOutlet private var sendMoneyAmountComponent: SendMoneyAmountComponent?
     @IBOutlet private var sendButton: SendMoneyButton?
 
     @IBOutlet private var topGreaterThanConstraint: NSLayoutConstraint?
     @IBOutlet private var sendButtonHeightConstraint: NSLayoutConstraint?
+    @IBOutlet private var recipientTextFieldTopConstraint: NSLayoutConstraint?
+    @IBOutlet private var recipientTextFieldHeightConstraint: NSLayoutConstraint?
 
-    private var balanceData: BalanceData?
-    private var method: SendMoneyMethod.Data?
+    private var amountData: BalanceData?
     private var walletId: String?
+    private var recipientData: SendingData.RecipientType?
 
-    private var sendMoneyDataProgress: SendMoneyData? {
-        guard let method = method, let data = balanceData, let id = walletId else {
+    private var sendingData: SendingData? {
+        guard let recipient = recipientData, let amount = amountData, let id = walletId else {
             return nil
         }
 
-        return SendMoneyData(amountData: data, method: method, walletId: id)
+        return SendingData(amountData: amount, walletId: id, recipient: recipient)
     }
 
     override func initFromNib() {
         super.initFromNib()
 
+        segmentedControlComponent?.delegate = self
         sendMoneyAmountComponent?.delegate = self
-        sendMoneyMethodComponent?.delegate = self
+        recipientComponent?.delegate = self
+
+        segmentedControlComponent?.segmentsHorizontalMargin = 15.0
+        segmentedControlComponent?.segmentsHorizontalSpacing = 5.0
+
+        switch UIDevice.current.screenType {
+        case .extraSmall, .small:
+            segmentedControlComponent?.alignment = .left
+            if let label = toLabel {
+                segmentedControlComponent?.leftAnchor.constraint(equalTo: label.rightAnchor, constant: 10.0).isActive = true
+            }
+        case .medium, .plus, .extra:
+            segmentedControlComponent?.alignment = .center
+            segmentedControlComponent?.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 0.0).isActive = true
+        default:
+            fatalError()
+        }
+
+        segmentedControlComponent?.addSegment(icon: #imageLiteral(resourceName: "phoneOutgoing"), title: "Phone", iconTintColor: .paleOliveGreen, selectedTintColor: .white, backColor: .paleOliveGreen)
+        segmentedControlComponent?.addSegment(icon: #imageLiteral(resourceName: "linkTo"), title: "Address", iconTintColor: .paleOliveGreen, selectedTintColor: .white, backColor: .lightblue)
+
+        recipientComponent?.custom.addRightDetailButtonTouchUpInsideEvent(target: self, action: #selector(scanQRAddressWithCamera(_:)))
 
         sendButton?.addTarget(self, action: #selector(sendButtonTouchUpInside(_:)), for: .touchUpInside)
-
-        // Add dictionary with phone codes to appropriate PhoneNumberFormView
-        guard let path = Bundle.main.path(forResource: "PhoneMasks", ofType: "plist"),
-            let masksDictionary = NSDictionary(contentsOfFile: path) as? [String: [String: String]] else {
-                fatalError("PhoneMasks.plist error")
-        }
-
-        // Convert dictionary of mask to appropriate format
-        do {
-            let phoneMasks = try masksDictionary.mapValues {
-                return try PhoneMaskData(dictionary: $0)
-            }
-
-            sendMoneyMethodComponent?.provide(phoneMasks: phoneMasks, parser: MaskParser(symbol: "X", space: " "))
-        } catch let e {
-            fatalError(e.localizedDescription)
-        }
     }
 
     override func setupStyle() {
         super.setupStyle()
 
         backgroundColor = .white
-    }
 
+        toLabel?.font = UIFont.walletFont(ofSize: 22.0, weight: .bold)
+        toLabel?.textColor = .darkIndigo
+        toLabel?.text = "To"
+    }
 
     func prepare(preset: SizePreset) {
         sendMoneyAmountComponent?.prepare(preset: preset)
-        sendMoneyMethodComponent?.prepare(preset: preset)
 
         switch preset {
         case .superCompact:
             topGreaterThanConstraint?.constant = 10.0
             sendButtonHeightConstraint?.constant = 44.0
+            recipientTextFieldTopConstraint?.constant = 10.0
+            recipientTextFieldHeightConstraint?.constant = 50.0
+
         case .compact, .default:
             topGreaterThanConstraint?.constant = 17.0
             sendButtonHeightConstraint?.constant = 56.0
+            recipientTextFieldTopConstraint?.constant = 20.0
+            recipientTextFieldHeightConstraint?.constant = 56.0
         }
 
         layoutIfNeeded()
     }
 
-    func prepare(recipient: ContactData? = nil, coinType: CoinType, walletId: String) {
+    func prepare(recipient: FormattedContactData? = nil, coinType: CoinType, walletId: String) {
         self.walletId = walletId
         
         sendMoneyAmountComponent?.prepare(coinType: coinType)
 
         if let recipient = recipient {
-            sendMoneyMethodComponent?.prepare(recipient: recipient)
+            recipientComponent?.custom.setup(contact: recipient)
+            updateSendingData(for: .phone)
         }
     }
 
@@ -114,51 +133,112 @@ class SendMoneyComponent: Component, SizePresetable, SendMoneyAmountComponentDel
         self.walletId = walletId
 
         sendMoneyAmountComponent?.prepare(coinType: coinType)
-        sendMoneyMethodComponent?.prepare(address: address)
+        recipientComponent?.custom.setup(address: address)
+        updateSendingData(for: .address)
     }
 
     // MARK: - SendMoneyAmountComponentDelegate
 
     func sendMoneyAmountComponent(_ sendMoneyAmountComponent: SendMoneyAmountComponent, amountDataEntered data: BalanceData) {
-        self.balanceData = data
+        self.amountData = data
 
-        if let progressData = sendMoneyDataProgress {
+        if let output = sendingData {
             sendButton?.customAppearance.setEnabled(true)
-            sendButton?.customAppearance.provideData(amount: "\(progressData.amountData.formatted(currency: .original)) \(progressData.amountData.coin.short.uppercased())", alternative: "")
+            sendButton?.customAppearance.provideData(amount: "\(output.amountData.formatted(currency: .original)) \(output.amountData.coin.short.uppercased())", alternative: "")
         }
     }
 
     func sendMoneyAmountComponentValueEnteredIncorrectly(_ sendMoneyAmountComponent: SendMoneyAmountComponent) {
-        self.balanceData = nil
+        self.amountData = nil
         sendButton?.customAppearance.setEnabled(false)
     }
 
-    // MARK: - SendMoneyMethodComponentDelegate
+    // MARK: - SegmentedControlComponentDelegate
 
-    func sendMoneyMethodSelected(_ sendMoneyMethodComponent: SendMoneyMethodComponent, method: SendMoneyMethod) {
-        //...
-    }
-
-    func sendMoneyMethodComponent(_ sendMoneyMethodComponent: SendMoneyMethodComponent, methodRecipientDataEntered methodData: SendMoneyMethod.Data) {
-        self.method = methodData
-
-        if let progressData = sendMoneyDataProgress {
-            sendButton?.customAppearance.setEnabled(true)
-            sendButton?.customAppearance.provideData(amount: "\(progressData.amountData.formatted(currency: .original)) \(progressData.amountData.coin.short.uppercased())", alternative: "")
+    func segmentedControlComponent(_ segmentedControlComponent: SegmentedControlComponent, willChangeTo index: Int) {
+        switch index {
+        case 0:
+            recipientComponent?.custom.showPhone()
+            updateSendingData(for: .phone)
+        case 1:
+            recipientComponent?.custom.showAddress()
+            updateSendingData(for: .address)
+        default:
+            return
         }
     }
 
-    func sendMoneyMethodComponentRecipientDataInvalid(_ sendMoneyMethodComponent: SendMoneyMethodComponent) {
-        self.method = nil
-        sendButton?.customAppearance.setEnabled(false)
+    // MARK: - RecipientComponentDelegate
+
+    func recipientComponentStatusChanged(_ recipientComponent: RecipientComponent, to status: FormEditingStatus, recipientType: RecipientType) {
+        switch status {
+        case .valid:
+            updateSendingData(for: recipientType)
+        case .invalid:
+            recipientData = nil
+            sendButton?.customAppearance.setEnabled(false)
+        }
     }
+
+    private func updateSendingData(for recipientType: RecipientType) {
+        switch recipientType {
+        case .phone:
+            guard let phone = recipientComponent?.custom.phoneNumber, !phone.isEmpty else {
+                recipientData = nil
+                return
+            }
+
+            if let name = recipientComponent?.custom.recipientName {
+                recipientData = .contact(name: name, phone: phone)
+            } else {
+                recipientData = .phone(phone)
+            }
+
+            if let output = sendingData {
+                sendButton?.customAppearance.setEnabled(true)
+                sendButton?.customAppearance.provideData(amount: "\(output.amountData.formatted(currency: .original)) \(output.amountData.coin.short.uppercased())", alternative: "")
+            }
+        case .address:
+            guard let address = recipientComponent?.custom.address, !address.isEmpty else {
+                recipientData = nil
+                return
+            }
+
+            recipientData = .address(address)
+
+            if let output = sendingData {
+                sendButton?.customAppearance.setEnabled(true)
+                sendButton?.customAppearance.provideData(amount: "\(output.amountData.formatted(currency: .original)) \(output.amountData.coin.short.uppercased())", alternative: "")
+            }
+        }
+    }
+
+    // MARK: - TouchEvents
 
     @objc
     private func sendButtonTouchUpInside(_ sender: Any) {
-        guard let data = sendMoneyDataProgress else {
+        guard let index = segmentedControlComponent?.currentIndex else {
             return
         }
 
-        delegate?.sendMoneyComponentRequestSending(self, sendMoneyData: data)
+        switch index {
+        case 0:
+            updateSendingData(for: .phone)
+        case 1:
+            updateSendingData(for: .address)
+        default:
+            return
+        }
+
+        guard let output = sendingData else {
+            return
+        }
+
+        delegate?.sendMoneyComponentRequestSending(self, output: output)
+    }
+
+    @objc
+    private func scanQRAddressWithCamera(_ sender: Any) {
+        onQRCodeScanning?()
     }
 }

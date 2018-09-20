@@ -11,14 +11,14 @@ import UIKit
 
 class SendMoneyViewController: KeyboardBehaviorFollowingViewController, SendMoneyComponentDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, QRCodeScannerViewControllerDelegate {
 
-    var onSend: ((SendMoneyData) -> Void)?
+    var onSend: ((SendingData) -> Void)?
     var onQRScanner: (() -> Void)?
 
     @IBOutlet var sendMoneyComponent: SendMoneyComponent?
     @IBOutlet var titleLabel: UILabel?
     @IBOutlet var walletsCollectionView: UICollectionView?
 
-    private var recipient: ContactData?
+    private var recipient: FormattedContactData?
     private var phone: String?
     private var wallets: [WalletData] = []
     private var currentIndex: Int?
@@ -92,7 +92,7 @@ class SendMoneyViewController: KeyboardBehaviorFollowingViewController, SendMone
         sendMoneyComponent?.delegate = self
     }
 
-    func prepare(wallets: [WalletData], currentIndex: Int, recipient: ContactData? = nil, phone: String) {
+    func prepare(wallets: [WalletData], currentIndex: Int, recipient: FormattedContactData? = nil, phone: String) {
         self.phone = phone
         self.wallets = wallets
         self.currentIndex = currentIndex
@@ -164,12 +164,11 @@ class SendMoneyViewController: KeyboardBehaviorFollowingViewController, SendMone
         self.sendMoneyComponent?.prepare(coinType: wallet.coin, walletId: wallet.id)
     }
 
-    func sendMoneyComponentRequestSending(_ sendMoneyComponent: SendMoneyComponent, sendMoneyData: SendMoneyData) {
-        dismissKeyboard()
-        
+    func sendMoneyComponentRequestSending(_ sendMoneyComponent: SendMoneyComponent, output: SendingData) {
         dismissKeyboard {
             [weak self] in
-            self?.onSend?(sendMoneyData)
+            
+            self?.onSend?(output)
         }
     }
 

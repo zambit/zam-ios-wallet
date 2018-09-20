@@ -18,6 +18,15 @@ extension String {
         self.init(int)
     }
 
+    func deletingPrefix(_ prefix: String) -> String {
+        guard self.hasPrefix(prefix) else { return self }
+        return String(self.dropFirst(prefix.count))
+    }
+
+    func deletingLeading(character: Character) -> String {
+        return self.split(separator: character).joined(separator: String(character))
+    }
+
     /**
      Adds a given suffix to self, if the suffix itself, or another required suffix does not yet exist in self.
      */

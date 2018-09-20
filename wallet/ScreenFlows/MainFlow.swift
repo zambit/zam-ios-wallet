@@ -355,7 +355,7 @@ final class MainFlow: ScreenFlow {
             fatalError()
         }
 
-        let onSendFromWallet: (Int, [WalletData], ContactData?, String, ScreenWalletNavigable) -> Void = {
+        let onSendFromWallet: (Int, [WalletData], FormattedContactData?, String, ScreenWalletNavigable) -> Void = {
             [weak self]
             index, wallets, contact, phone, owner in
 
@@ -421,7 +421,7 @@ final class MainFlow: ScreenFlow {
             fatalError()
         }
 
-        let onSend: (SendMoneyData) -> Void = {
+        let onSend: (SendingData) -> Void = {
             [weak self]
             data in
 
@@ -430,7 +430,7 @@ final class MainFlow: ScreenFlow {
             }
 
             let target = strongSelf.transactionDetailScreen
-            target.prepare(sendMoneyData: data)
+            target.prepare(sendingData: data)
 
             strongSelf.migratingNavigationController.custom.presentNavigable(viewController: target, animate: false)
         }

@@ -18,9 +18,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var userDefaultsManager: UserDefaultsManager!
 
 //    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-//        let _vc = ControllerHelper.instantiateViewController(identifier: "SendMoneyViewController", storyboardName: "Main")
+//        let _vc = ControllerHelper.instantiateViewController(identifier: "TestViewController", storyboardName: "Main")
 //
-//        guard let vc = _vc as? SendMoneyViewController else {
+//        guard let vc = _vc as? TestViewController else {
 //            fatalError()
 //        }
 //
@@ -42,9 +42,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
         let navigationController = WalletNavigationController(rootViewController: vc)
-
-//        navigation = WalletNavigationController(navigationController: navigationController)
-//        navigation.transitionCoordinator = NavigationControllerTransitionCoordinator(animator: SlideTransitionAnimator())
 
         userDefaultsManager = UserDefaultsManager(keychainConfiguration: WalletKeychainConfiguration())
 

@@ -10,9 +10,16 @@ import UIKit
 
 protocol SegmentedControlComponentDelegate: class {
 
-    func segmentedControlComponent(_ segmentedControlComponent: SegmentedControlComponent, willChangeTo index: Int, withAnimatedDuration: Float, color: UIColor)
+    func segmentedControlComponent(_ segmentedControlComponent: SegmentedControlComponent, willChangeTo index: Int)
 
-    func segmentedControlComponent(_ segmentedControlComponent: SegmentedControlComponent, currentIndexChangedTo index: Int, color: UIColor)
+    func segmentedControlComponent(_ segmentedControlComponent: SegmentedControlComponent, currentIndexChangedTo index: Int)
+}
+
+extension SegmentedControlComponentDelegate {
+
+    func segmentedControlComponent(_ segmentedControlComponent: SegmentedControlComponent, willChangeTo index: Int) {}
+
+    func segmentedControlComponent(_ segmentedControlComponent: SegmentedControlComponent, currentIndexChangedTo index: Int) {}
 
 }
 
@@ -59,7 +66,7 @@ class SegmentedControlComponent: Component {
     
     private var backView: SelectingBackView?
 
-    private var currentIndex: Int = 0
+    private(set) var currentIndex: Int = 0
 
     override func initFromNib() {
         super.initFromNib()
@@ -134,7 +141,7 @@ class SegmentedControlComponent: Component {
             return
         }
 
-        delegate?.segmentedControlComponent(self, willChangeTo: index, withAnimatedDuration: 0.2, color: segments[index].backColor)
+        delegate?.segmentedControlComponent(self, willChangeTo: index)
 
         UIView.animate(withDuration: 0.2, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.001, options: .curveEaseOut, animations: {
             [weak self] in
@@ -155,7 +162,7 @@ class SegmentedControlComponent: Component {
             }
 
             strongSelf.currentIndex = index
-            strongSelf.delegate?.segmentedControlComponent(strongSelf, currentIndexChangedTo: strongSelf.currentIndex, color: strongSelf.segments[index].backColor)
+            strongSelf.delegate?.segmentedControlComponent(strongSelf, currentIndexChangedTo: strongSelf.currentIndex)
         })
     }
 

@@ -128,7 +128,7 @@ class ContactsHorizontalComponent: Component, UICollectionViewDataSource, UIColl
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let _cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ContactItemComponent", for: indexPath)
 
-        guard let cell = _cell as? RectItemComponent else {
+        guard let cell = _cell as? ContactItemComponent else {
             fatalError()
         }
 
@@ -154,8 +154,12 @@ class ContactsHorizontalComponent: Component, UICollectionViewDataSource, UIColl
         return cell
     }
 
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+
+    }
+
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        guard let contactCell = cell as? RectItemComponent else {
+        guard let contactCell = cell as? ContactItemComponent else {
             fatalError()
         }
 
