@@ -40,7 +40,7 @@ class TransactionDetailViewController: FlowViewController, WalletNavigable {
     private var effectView: UIVisualEffectView?
     private var backgroundView: UIView?
 
-    private var sendMoneyData: SendMoneyData?
+    private var sendingData: SendingData?
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -142,24 +142,26 @@ class TransactionDetailViewController: FlowViewController, WalletNavigable {
         changeDataFor(state: .confirm)
     }
 
-    func prepare(sendMoneyData: SendMoneyData) {
-        self.sendMoneyData = sendMoneyData
+    func prepare(sendingData: SendingData) {
+        self.sendingData = sendingData
 
         dataWasLoaded()
     }
 
     private func dataWasLoaded() {
-        guard let data = sendMoneyData else {
+        guard let data = sendingData else {
             return
         }
 
         amountLabel?.text = data.amountData.formatted(currency: .original)
         amountDetailLabel?.text = data.amountData.coin.short.uppercased()
 
-        switch data.method {
-        case .phone(data: let phone):
+        switch data.recipient {
+        case .phone(let phone):
             recipientDataLabel?.text = phone
-        case .address(data: let adress):
+        case .contact(let contact):
+            break //.....
+        case .address(let adress):
             recipientDataLabel?.text = adress
         }
     }
@@ -215,16 +217,18 @@ class TransactionDetailViewController: FlowViewController, WalletNavigable {
                 return
             }
 
-            guard let data = sendMoneyData else {
+            guard let data = sendingData else {
                 return
             }
 
             var recipient: String
 
-            switch data.method {
-            case .phone(data: let phone):
+            switch data.recipient {
+            case .phone(let phone):
                 recipient = phone
-            case .address(data: let address):
+            case .contact(let contact):
+                recipient = ""
+            case .address(let address):
                 recipient = address
             }
 

@@ -421,7 +421,7 @@ final class MainFlow: ScreenFlow {
             fatalError()
         }
 
-        let onSend: (SendMoneyData) -> Void = {
+        let onSend: (SendingData) -> Void = {
             [weak self]
             data in
 
@@ -430,7 +430,7 @@ final class MainFlow: ScreenFlow {
             }
 
             let target = strongSelf.transactionDetailScreen
-            target.prepare(sendMoneyData: data)
+            target.prepare(sendingData: data)
 
             strongSelf.migratingNavigationController.custom.presentNavigable(viewController: target, animate: false)
         }

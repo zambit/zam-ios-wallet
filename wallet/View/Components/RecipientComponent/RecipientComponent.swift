@@ -75,23 +75,31 @@ extension BehaviorExtension where Base: RecipientComponent {
         return base.addressRecipientComponent?.custom.address ?? ""
     }
 
-    func turnLeft() {
+    func setup(address: String) {
+        base.addressRecipientComponent?.custom.setup(address: address)
+    }
+
+    func setup(contact: ContactData) {
+        base.phoneRecipientComponent?.custom.setup(contact: contact)
+    }
+
+    func showPhone() {
         let isEditing = base.addressRecipientComponent?.custom.isEditing ?? false
         base.phoneRecipientComponent?.custom.set(state: .appeared, animation: {
             [weak self]
             _ in
 
             self?.base.backgroundColor = .paleOliveGreen
-            self?.base.addressRecipientComponent?.isUserInteractionEnabled = false
         })
         base.addressRecipientComponent?.custom.set(state: .disappeared)
 
         if isEditing {
             base.phoneRecipientComponent?.custom.beginEditing()
         }
+        base.addressRecipientComponent?.isUserInteractionEnabled = false
     }
 
-    func turnRight() {
+    func showAddress() {
         let isEditing = base.phoneRecipientComponent?.custom.isEditing ?? false
         base.addressRecipientComponent?.custom.set(state: .appeared, animation: {
             [weak self]
@@ -105,6 +113,10 @@ extension BehaviorExtension where Base: RecipientComponent {
         if isEditing {
             base.addressRecipientComponent?.custom.beginEditing()
         }
+    }
+
+    func addRightDetailButtonTouchUpInsideEvent(target: Any?, action: Selector) {
+        base.addressRecipientComponent?.custom.addDetailButtonTouchUpInsideEvent(target: target, action: action)
     }
 
     fileprivate func setup() {

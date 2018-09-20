@@ -69,6 +69,7 @@ extension BehaviorExtension where Base: PhoneNumberRecipientComponent {
 
     func setup(contact: ContactData) {
         base.textField?.text = contact.phoneNumbers.first
+        textFieldEditingDidBegin()
 
         if let data = contact.avatarData, let avatar = UIImage(data: data, scale: 0.3) {
             base.detailButton?.setImage(avatar, for: UIControlState())
@@ -80,7 +81,7 @@ extension BehaviorExtension where Base: PhoneNumberRecipientComponent {
 
         switch state {
         case .appeared:
-            UIView.animate(withDuration: 0.1, animations: {
+            UIView.animate(withDuration: 0.05, animations: {
                 self.base.textField?.alpha = 1.0
                 block(self.base)
             })
@@ -91,7 +92,7 @@ extension BehaviorExtension where Base: PhoneNumberRecipientComponent {
             }, completion: nil)
 
         case .disappeared:
-            UIView.animate(withDuration: 0.1, animations: {
+            UIView.animate(withDuration: 0.05, animations: {
                 self.base.textField?.alpha = 0.0
                 block(self.base)
             })
@@ -127,7 +128,9 @@ extension BehaviorExtension where Base: PhoneNumberRecipientComponent {
         textField.textColor = .white
         textField.backgroundColor = .clear
         textField.textAlignment = .center
-        textField.placeholder = "Phone number"
+        textField.attributedPlaceholder =
+            NSAttributedString(string: "Phone number",
+                               attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
         textField.adjustsFontSizeToFitWidth = true
         textField.minimumFontSize = 11.0
         textField.autocorrectionType = .no

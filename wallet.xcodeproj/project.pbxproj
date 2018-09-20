@@ -191,8 +191,6 @@
 		8CA218AB21241BF90063C188 /* PhoneNumberEnteringHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA218AA21241BF90063C188 /* PhoneNumberEnteringHandler.swift */; };
 		8CA218AD212421150063C188 /* PhoneMaskData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA218AC212421150063C188 /* PhoneMaskData.swift */; };
 		8CA218AF212479040063C188 /* SendMoneyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA218AE212479040063C188 /* SendMoneyButton.swift */; };
-		8CA218B121247FF80063C188 /* SendMoneyMethodComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA218B021247FF80063C188 /* SendMoneyMethodComponent.swift */; };
-		8CA218B32124837D0063C188 /* SendMoneyMethodComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CA218B22124837D0063C188 /* SendMoneyMethodComponent.xib */; };
 		8CA218B821248FA50063C188 /* SendMoneyAmountComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA218B721248FA50063C188 /* SendMoneyAmountComponent.swift */; };
 		8CA218BB212573510063C188 /* IndentLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA218BA212573510063C188 /* IndentLabel.swift */; };
 		8CA218BD2125A34B0063C188 /* KeyboardBehaviourFollowingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA218BC2125A34B0063C188 /* KeyboardBehaviourFollowingViewController.swift */; };
@@ -464,8 +462,6 @@
 		8CA218AA21241BF90063C188 /* PhoneNumberEnteringHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberEnteringHandler.swift; sourceTree = "<group>"; };
 		8CA218AC212421150063C188 /* PhoneMaskData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneMaskData.swift; sourceTree = "<group>"; };
 		8CA218AE212479040063C188 /* SendMoneyButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMoneyButton.swift; sourceTree = "<group>"; };
-		8CA218B021247FF80063C188 /* SendMoneyMethodComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMoneyMethodComponent.swift; sourceTree = "<group>"; };
-		8CA218B22124837D0063C188 /* SendMoneyMethodComponent.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SendMoneyMethodComponent.xib; sourceTree = "<group>"; };
 		8CA218B721248FA50063C188 /* SendMoneyAmountComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMoneyAmountComponent.swift; sourceTree = "<group>"; };
 		8CA218BA212573510063C188 /* IndentLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndentLabel.swift; sourceTree = "<group>"; };
 		8CA218BC2125A34B0063C188 /* KeyboardBehaviourFollowingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardBehaviourFollowingViewController.swift; sourceTree = "<group>"; };
@@ -1141,8 +1137,7 @@
 				8CA218932122EAC90063C188 /* SendMoneyComponent.swift */,
 				8CA218912122E8D70063C188 /* SendMoneyComponent.xib */,
 				8CA218AE212479040063C188 /* SendMoneyButton.swift */,
-				8CA218B9212490E90063C188 /* SendMoneyAmounComponent */,
-				8CA218B4212483800063C188 /* SendMoneyMethodComponent */,
+				8CA218B9212490E90063C188 /* SendMoneyAmountComponent */,
 			);
 			path = SendMoneyComponent;
 			sourceTree = "<group>";
@@ -1174,22 +1169,13 @@
 			path = SelectedBackView;
 			sourceTree = "<group>";
 		};
-		8CA218B4212483800063C188 /* SendMoneyMethodComponent */ = {
-			isa = PBXGroup;
-			children = (
-				8CA218B021247FF80063C188 /* SendMoneyMethodComponent.swift */,
-				8CA218B22124837D0063C188 /* SendMoneyMethodComponent.xib */,
-			);
-			path = SendMoneyMethodComponent;
-			sourceTree = "<group>";
-		};
-		8CA218B9212490E90063C188 /* SendMoneyAmounComponent */ = {
+		8CA218B9212490E90063C188 /* SendMoneyAmountComponent */ = {
 			isa = PBXGroup;
 			children = (
 				8CA218B721248FA50063C188 /* SendMoneyAmountComponent.swift */,
 				8C23143D214BCA9C007340E7 /* SendMoneyAmountComponent.xib */,
 			);
-			path = SendMoneyAmounComponent;
+			path = SendMoneyAmountComponent;
 			sourceTree = "<group>";
 		};
 		8CA218C72125AD380063C188 /* WalletSmallItemComponent */ = {
@@ -1485,7 +1471,6 @@
 				8CA218982122EB0F0063C188 /* SegmentedControlComponent.xib in Resources */,
 				8C333D3E2109FD1000949AC0 /* OnboardingItemComponent.xib in Resources */,
 				8C34617520EF8FA900746724 /* LaunchScreen.storyboard in Resources */,
-				8CA218B32124837D0063C188 /* SendMoneyMethodComponent.xib in Resources */,
 				8CF5F95921149E380083B36A /* CreatePinComponent.xib in Resources */,
 				8CA2190F213420870063C188 /* TransactionsGroupHeaderComponent.xib in Resources */,
 				8C0918FE2105F76200703224 /* Registration.storyboard in Resources */,
@@ -1637,7 +1622,6 @@
 				8C7C336C2146D6A700EC6C96 /* KYCUploadAddressDocumentViewController.swift in Sources */,
 				8C60885A2111DCB000470411 /* EnterPhoneLoginPasswordViewController.swift in Sources */,
 				8C231449214FB7FE007340E7 /* UITapGestureRecognizer+Extensions.swift in Sources */,
-				8CA218B121247FF80063C188 /* SendMoneyMethodComponent.swift in Sources */,
 				8CA219062133ED4E0063C188 /* GroupingType.swift in Sources */,
 				8CF5F92D2113206A0083B36A /* SecondEnterLoginFlow.swift in Sources */,
 				8C7C337D2147EF6400EC6C96 /* LikeButtonCell.swift in Sources */,

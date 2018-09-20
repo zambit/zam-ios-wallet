@@ -153,11 +153,7 @@ class DepositMoneyMethodComponent: Component, SegmentedControlComponentDelegate,
 
     // MARK: - SegmentedControlComponentDelegate
 
-    func segmentedControlComponent(_ segmentedControlComponent: SegmentedControlComponent, willChangeTo index: Int, withAnimatedDuration: Float, color: UIColor) {
-        //...
-    }
-
-    func segmentedControlComponent(_ segmentedControlComponent: SegmentedControlComponent, currentIndexChangedTo index: Int, color: UIColor) {
+    func segmentedControlComponent(_ segmentedControlComponent: SegmentedControlComponent, currentIndexChangedTo index: Int) {
         //...
     }
 }

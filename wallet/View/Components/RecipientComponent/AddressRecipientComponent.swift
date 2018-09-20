@@ -68,12 +68,17 @@ extension BehaviorExtension where Base: AddressRecipientComponent {
         return base.textField?.isEditing ?? false
     }
 
+    func setup(address: String) {
+        base.textField?.text = address
+        textFieldEditingDidBegin()
+    }
+
     func set(state: DisplayState, animation block: @escaping (UIView) -> Void = { _ in }) {
         base.state = state
 
         switch state {
         case .appeared:
-            UIView.animate(withDuration: 0.1, animations: {
+            UIView.animate(withDuration: 0.05, animations: {
                 self.base.textField?.alpha = 1.0
                 block(self.base)
             })
@@ -84,7 +89,7 @@ extension BehaviorExtension where Base: AddressRecipientComponent {
             }, completion: nil)
 
         case .disappeared:
-            UIView.animate(withDuration: 0.1, animations: {
+            UIView.animate(withDuration: 0.05, animations: {
                 self.base.textField?.alpha = 0.0
                 block(self.base)
             })
@@ -104,6 +109,10 @@ extension BehaviorExtension where Base: AddressRecipientComponent {
         base.textField?.resignFirstResponder()
     }
 
+    func addDetailButtonTouchUpInsideEvent(target: Any?, action: Selector) {
+        base.detailButton?.addTarget(target, action: action, for: .touchUpInside)
+    }
+
     fileprivate func setup() {
         setupStyle()
         setupSubviews()
@@ -119,7 +128,9 @@ extension BehaviorExtension where Base: AddressRecipientComponent {
         textField.textColor = .white
         textField.backgroundColor = .clear
         textField.textAlignment = .center
-        textField.placeholder = "Address"
+        textField.attributedPlaceholder =
+            NSAttributedString(string: "Address",
+                               attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
         textField.adjustsFontSizeToFitWidth = true
         textField.minimumFontSize = 11.0
         textField.autocorrectionType = .no
@@ -164,10 +175,6 @@ extension BehaviorExtension where Base: AddressRecipientComponent {
 
     fileprivate func setupStyle() {
         base.backgroundColor = .clear
-    }
-
-    func addDetailButtonTouchUpInsideEvent(target: Any?, action: Selector) {
-        base.detailButton?.addTarget(target, action: action, for: .touchUpInside)
     }
 
     fileprivate func textFieldEditingDidBegin() {

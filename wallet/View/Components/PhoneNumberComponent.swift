@@ -244,7 +244,6 @@ extension BehaviorExtension: SizePresetable where Base: PhoneNumberComponent {
             base.phoneNumberFormatter.number = code + phone
             base.resultingString = base.phoneNumberFormatter.formatted
             base.phoneTextField?.text = base.resultingString.deletingPrefix(code).deletingLeading(character: " ")
-            base.codeTextField?.resignFirstResponder()
             base.phoneTextField?.becomeFirstResponder()
         }
 

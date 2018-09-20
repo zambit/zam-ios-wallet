@@ -21,11 +21,11 @@ class TestViewController: UIViewController {
     }
 
     @IBAction func turnLeft() {
-        recipientComponent.custom.turnLeft()
+        recipientComponent.custom.showPhone()
     }
 
     @IBAction func turnRight() {
-        recipientComponent.custom.turnRight()
+        recipientComponent.custom.showAddress()
     }
 
 }
