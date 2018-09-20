@@ -25,7 +25,8 @@ class TransactionDetailViewController: FlowViewController, WalletNavigable {
     @IBOutlet private var titleLabel: UILabel?
     @IBOutlet private var amountLabel: UILabel?
     @IBOutlet private var amountDetailLabel: UILabel?
-    @IBOutlet private var recipientDataLabel: UILabel?
+    @IBOutlet private var recipientPhoneLabel: UILabel?
+    @IBOutlet private var recipientNameLabel: UILabel?
     @IBOutlet private var sendButton: LargeSendButton?
     @IBOutlet private var errorMessageLabel: UILabel?
 
@@ -48,7 +49,8 @@ class TransactionDetailViewController: FlowViewController, WalletNavigable {
         titleLabel?.alpha = 0.0
         amountLabel?.alpha = 0.0
         amountDetailLabel?.alpha = 0.0
-        recipientDataLabel?.alpha = 0.0
+        recipientPhoneLabel?.alpha = 0.0
+        recipientNameLabel?.alpha = 0.0
         sendButton?.alpha = 0.0
     }
 
@@ -63,7 +65,8 @@ class TransactionDetailViewController: FlowViewController, WalletNavigable {
             self?.titleLabel?.alpha = 1.0
             self?.amountLabel?.alpha = 1.0
             self?.amountDetailLabel?.alpha = 1.0
-            self?.recipientDataLabel?.alpha = 1.0
+            self?.recipientPhoneLabel?.alpha = 1.0
+            self?.recipientNameLabel?.alpha = 1.0
             self?.sendButton?.alpha = 1.0
 
         }, completion: {
@@ -121,9 +124,14 @@ class TransactionDetailViewController: FlowViewController, WalletNavigable {
         amountDetailLabel?.textAlignment = .center
         amountDetailLabel?.textColor = .white
 
-        recipientDataLabel?.font = UIFont.walletFont(ofSize: 12.0, weight: .medium)
-        recipientDataLabel?.textAlignment = .center
-        recipientDataLabel?.textColor = .blueGrey
+        recipientPhoneLabel?.font = UIFont.walletFont(ofSize: 12.0, weight: .medium)
+        recipientPhoneLabel?.textAlignment = .center
+        recipientPhoneLabel?.textColor = .blueGrey
+
+        recipientNameLabel?.font = UIFont.walletFont(ofSize: 16.0, weight: .medium)
+        recipientNameLabel?.textAlignment = .center
+        recipientNameLabel?.textColor = .blueGrey
+        recipientNameLabel?.text = ""
 
         view.backgroundColor = .clear
 
@@ -158,11 +166,12 @@ class TransactionDetailViewController: FlowViewController, WalletNavigable {
 
         switch data.recipient {
         case .phone(let phone):
-            recipientDataLabel?.text = phone
-        case .contact(let contact):
-            break //.....
-        case .address(let adress):
-            recipientDataLabel?.text = adress
+            recipientPhoneLabel?.text = phone
+        case let .contact(name: name, phone: phone):
+            recipientPhoneLabel?.text = phone
+            recipientNameLabel?.text = name
+        case .address(let address):
+            recipientPhoneLabel?.text = address
         }
     }
 
@@ -226,8 +235,8 @@ class TransactionDetailViewController: FlowViewController, WalletNavigable {
             switch data.recipient {
             case .phone(let phone):
                 recipient = phone
-            case .contact(let contact):
-                recipient = ""
+            case let .contact(name: _, phone: phone):
+                recipient = phone
             case .address(let address):
                 recipient = address
             }
@@ -282,7 +291,8 @@ class TransactionDetailViewController: FlowViewController, WalletNavigable {
             self?.titleLabel?.alpha = 0.0
             self?.amountLabel?.alpha = 0.0
             self?.amountDetailLabel?.alpha = 0.0
-            self?.recipientDataLabel?.alpha = 0.0
+            self?.recipientPhoneLabel?.alpha = 0.0
+            self?.recipientNameLabel?.alpha = 0.0
             self?.sendButton?.alpha = 0.0
             self?.errorMessageLabel?.alpha = 0.0
             self?.closeButton?.alpha = 0.0

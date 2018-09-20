@@ -67,7 +67,12 @@ class RecipientComponent: UIView, PhoneNumberRecipientComponentDelegate, Address
 
 extension BehaviorExtension where Base: RecipientComponent {
 
+    var recipientName: String? {
+        return base.phoneRecipientComponent?.custom.name
+    }
+
     var phoneNumber: String {
+        print(base.phoneRecipientComponent?.custom.phone)
         return base.phoneRecipientComponent?.custom.phone ?? ""
     }
 

@@ -13,7 +13,7 @@ struct SendingData {
 
     enum RecipientType {
         case address(String)
-        case contact(ContactData)
+        case contact(name: String, phone: String)
         case phone(String)
     }
 
@@ -125,6 +125,7 @@ class SendMoneyComponent: Component, SizePresetable, SendMoneyAmountComponentDel
 
         if let recipient = recipient {
             recipientComponent?.custom.setup(contact: recipient)
+            updateSendingData(for: .phone)
         }
     }
 
@@ -133,6 +134,7 @@ class SendMoneyComponent: Component, SizePresetable, SendMoneyAmountComponentDel
 
         sendMoneyAmountComponent?.prepare(coinType: coinType)
         recipientComponent?.custom.setup(address: address)
+        updateSendingData(for: .address)
     }
 
     // MARK: - SendMoneyAmountComponentDelegate
@@ -157,24 +159,10 @@ class SendMoneyComponent: Component, SizePresetable, SendMoneyAmountComponentDel
         switch index {
         case 0:
             recipientComponent?.custom.showPhone()
-
-            let phone = recipientComponent?.custom.phoneNumber ?? ""
-            recipientData = .phone(phone)
-
-            if let output = sendingData {
-                sendButton?.customAppearance.setEnabled(true)
-                sendButton?.customAppearance.provideData(amount: "\(output.amountData.formatted(currency: .original)) \(output.amountData.coin.short.uppercased())", alternative: "")
-            }
+            updateSendingData(for: .phone)
         case 1:
             recipientComponent?.custom.showAddress()
-
-            let address = recipientComponent?.custom.address ?? ""
-            recipientData = .address(address)
-
-            if let output = sendingData {
-                sendButton?.customAppearance.setEnabled(true)
-                sendButton?.customAppearance.provideData(amount: "\(output.amountData.formatted(currency: .original)) \(output.amountData.coin.short.uppercased())", alternative: "")
-            }
+            updateSendingData(for: .address)
         default:
             return
         }
@@ -183,34 +171,44 @@ class SendMoneyComponent: Component, SizePresetable, SendMoneyAmountComponentDel
     // MARK: - RecipientComponentDelegate
 
     func recipientComponentStatusChanged(_ recipientComponent: RecipientComponent, to status: FormEditingStatus, recipientType: RecipientType) {
+        switch status {
+        case .valid:
+            updateSendingData(for: recipientType)
+        case .invalid:
+            recipientData = nil
+            sendButton?.customAppearance.setEnabled(false)
+        }
+    }
+
+    private func updateSendingData(for recipientType: RecipientType) {
         switch recipientType {
-        case .address:
-            switch status {
-            case .valid:
-                let address = recipientComponent.custom.address
-                recipientData = .address(address)
-
-                if let output = sendingData {
-                    sendButton?.customAppearance.setEnabled(true)
-                    sendButton?.customAppearance.provideData(amount: "\(output.amountData.formatted(currency: .original)) \(output.amountData.coin.short.uppercased())", alternative: "")
-                }
-            case .invalid:
-                recipientData = nil
-                sendButton?.customAppearance.setEnabled(false)
-            }
         case .phone:
-            switch status {
-            case .valid:
-                let phone = recipientComponent.custom.phoneNumber
-                recipientData = .phone(phone)
-
-                if let output = sendingData {
-                    sendButton?.customAppearance.setEnabled(true)
-                    sendButton?.customAppearance.provideData(amount: "\(output.amountData.formatted(currency: .original)) \(output.amountData.coin.short.uppercased())", alternative: "")
-                }
-            case .invalid:
+            guard let phone = recipientComponent?.custom.phoneNumber, !phone.isEmpty else {
                 recipientData = nil
-                sendButton?.customAppearance.setEnabled(false)
+                return
+            }
+
+            if let name = recipientComponent?.custom.recipientName {
+                recipientData = .contact(name: name, phone: phone)
+            } else {
+                recipientData = .phone(phone)
+            }
+
+            if let output = sendingData {
+                sendButton?.customAppearance.setEnabled(true)
+                sendButton?.customAppearance.provideData(amount: "\(output.amountData.formatted(currency: .original)) \(output.amountData.coin.short.uppercased())", alternative: "")
+            }
+        case .address:
+            guard let address = recipientComponent?.custom.address, !address.isEmpty else {
+                recipientData = nil
+                return
+            }
+
+            recipientData = .address(address)
+
+            if let output = sendingData {
+                sendButton?.customAppearance.setEnabled(true)
+                sendButton?.customAppearance.provideData(amount: "\(output.amountData.formatted(currency: .original)) \(output.amountData.coin.short.uppercased())", alternative: "")
             }
         }
     }
@@ -219,6 +217,19 @@ class SendMoneyComponent: Component, SizePresetable, SendMoneyAmountComponentDel
 
     @objc
     private func sendButtonTouchUpInside(_ sender: Any) {
+        guard let index = segmentedControlComponent?.currentIndex else {
+            return
+        }
+
+        switch index {
+        case 0:
+            updateSendingData(for: .phone)
+        case 1:
+            updateSendingData(for: .address)
+        default:
+            return
+        }
+
         guard let output = sendingData else {
             return
         }

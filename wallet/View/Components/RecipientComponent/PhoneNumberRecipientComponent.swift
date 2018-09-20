@@ -21,6 +21,7 @@ class PhoneNumberRecipientComponent: UIView {
     fileprivate var phoneNumberFormatter: PhoneNumberFormatter!
 
     fileprivate var resultingString: String = ""
+    fileprivate var contactName: String?
 
     fileprivate var detailButton: HighlightableButton?
     fileprivate var textField: PhoneNumberTextField?
@@ -59,6 +60,10 @@ class PhoneNumberRecipientComponent: UIView {
 
 extension BehaviorExtension where Base: PhoneNumberRecipientComponent {
 
+    var name: String? {
+        return base.contactName
+    }
+
     var phone: String {
         return base.resultingString
     }
@@ -68,8 +73,12 @@ extension BehaviorExtension where Base: PhoneNumberRecipientComponent {
     }
 
     func setup(contact: FormattedContactData) {
+        self.base.contactName = contact.name
+
         self.base.phoneNumberFormatter.number = contact.formattedPhoneNumber
-        self.base.textField?.text = self.base.phoneNumberFormatter.formatted
+        let formatted = self.base.phoneNumberFormatter.formatted
+        self.base.resultingString = formatted
+        self.base.textField?.text = formatted
         self.textFieldEditingDidBegin()
 
         if let data = contact.avatarData, let avatar = UIImage(data: data, scale: 0.05) {

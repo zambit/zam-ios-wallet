@@ -66,7 +66,7 @@ class SegmentedControlComponent: Component {
     
     private var backView: SelectingBackView?
 
-    private var currentIndex: Int = 0
+    private(set) var currentIndex: Int = 0
 
     override func initFromNib() {
         super.initFromNib()
