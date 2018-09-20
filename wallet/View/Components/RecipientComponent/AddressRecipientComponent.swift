@@ -64,45 +64,44 @@ extension BehaviorExtension where Base: AddressRecipientComponent {
         return base.textField?.text ?? ""
     }
 
+    var isEditing: Bool {
+        return base.textField?.isEditing ?? false
+    }
+
     func set(state: DisplayState, animation block: @escaping (UIView) -> Void = { _ in }) {
         base.state = state
 
         switch state {
         case .appeared:
             UIView.animate(withDuration: 0.1, animations: {
-                [weak self] in
-
-                self?.base.textField?.alpha = 1.0
-
-                if let strongSelf = self {
-                    block(strongSelf.base)
-                }
+                self.base.textField?.alpha = 1.0
+                block(self.base)
             })
 
             UIView.animate(withDuration: 0.15, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.01, options: .curveEaseInOut, animations: {
-                [weak self] in
-
-                self?.base.detailButtonLeadingConstraint?.constant = -40.0
-                self?.base.layoutIfNeeded()
+                self.base.detailButtonLeadingConstraint?.constant = -40.0
+                self.base.layoutIfNeeded()
             }, completion: nil)
+
         case .disappeared:
             UIView.animate(withDuration: 0.1, animations: {
-                [weak self] in
-
-                self?.base.textField?.alpha = 0.0
-
-                if let strongSelf = self {
-                    block(strongSelf.base)
-                }
+                self.base.textField?.alpha = 0.0
+                block(self.base)
             })
 
             UIView.animate(withDuration: 0.15, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.01, options: .curveEaseInOut, animations: {
-                [weak self] in
-
-                self?.base.detailButtonLeadingConstraint?.constant = 0.0
-                self?.base.layoutIfNeeded()
+                self.base.detailButtonLeadingConstraint?.constant = 0.0
+                self.base.layoutIfNeeded()
             }, completion: nil)
         }
+    }
+
+    func beginEditing() {
+        base.textField?.becomeFirstResponder()
+    }
+
+    func endEditing() {
+        base.textField?.resignFirstResponder()
     }
 
     fileprivate func setup() {

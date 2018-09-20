@@ -63,8 +63,16 @@ extension BehaviorExtension where Base: PhoneNumberRecipientComponent {
         return base.resultingString
     }
 
-    func setup(contact: ContactData) {
+    var isEditing: Bool {
+        return base.textField?.isEditing ?? false
+    }
 
+    func setup(contact: ContactData) {
+        base.textField?.text = contact.phoneNumbers.first
+
+        if let data = contact.avatarData, let avatar = UIImage(data: data, scale: 0.3) {
+            base.detailButton?.setImage(avatar, for: UIControlState())
+        }
     }
 
     func set(state: DisplayState, animation block: @escaping (UIView) -> Void = { _ in }) {
@@ -73,39 +81,34 @@ extension BehaviorExtension where Base: PhoneNumberRecipientComponent {
         switch state {
         case .appeared:
             UIView.animate(withDuration: 0.1, animations: {
-                [weak self] in
-
-                self?.base.textField?.alpha = 1.0
-
-                if let strongSelf = self {
-                    block(strongSelf.base)
-                }
+                self.base.textField?.alpha = 1.0
+                block(self.base)
             })
 
             UIView.animate(withDuration: 0.15, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.01, options: .curveEaseInOut, animations: {
-                [weak self] in
-
-                self?.base.detailButtonTrailingConstraint?.constant = 54.0
-                self?.base.layoutIfNeeded()
+                self.base.detailButtonTrailingConstraint?.constant = 54.0
+                self.base.layoutIfNeeded()
             }, completion: nil)
+
         case .disappeared:
             UIView.animate(withDuration: 0.1, animations: {
-                [weak self] in
-
-                self?.base.textField?.alpha = 0.0
-
-                if let strongSelf = self {
-                    block(strongSelf.base)
-                }
+                self.base.textField?.alpha = 0.0
+                block(self.base)
             })
 
             UIView.animate(withDuration: 0.15, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.01, options: .curveEaseInOut, animations: {
-                [weak self] in
-
-                self?.base.detailButtonTrailingConstraint?.constant = 0.0
-                self?.base.layoutIfNeeded()
+                self.base.detailButtonTrailingConstraint?.constant = 0.0
+                self.base.layoutIfNeeded()
             }, completion: nil)
         }
+    }
+
+    func beginEditing() {
+        base.textField?.becomeFirstResponder()
+    }
+
+    func endEditing() {
+        base.textField?.resignFirstResponder()
     }
 
     fileprivate func setup() {
@@ -147,8 +150,9 @@ extension BehaviorExtension where Base: PhoneNumberRecipientComponent {
 
         let detailButton = HighlightableButton()
         detailButton.tag = 315168
+        detailButton.circleCorner = true
         detailButton.contentEdgeInsets = UIEdgeInsets.zero
-        detailButton.setImage(#imageLiteral(resourceName: "users"), for: .normal)
+        detailButton.setImage(#imageLiteral(resourceName: "contactPlaceholder"), for: .normal)
         detailButton.tintColor = .white
         detailButton.setHighlightedTintColor(UIColor.white.withAlphaComponent(0.2))
 

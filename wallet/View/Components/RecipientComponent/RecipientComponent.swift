@@ -40,6 +40,8 @@ class RecipientComponent: UIView, PhoneNumberRecipientComponentDelegate, Address
     fileprivate var phoneRecipientComponent: PhoneNumberRecipientComponent?
     fileprivate var addressRecipientComponent: AddressRecipientComponent?
 
+    private(set) var isEditing: Bool = false
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         custom.setup()
@@ -50,9 +52,13 @@ class RecipientComponent: UIView, PhoneNumberRecipientComponentDelegate, Address
         custom.setup()
     }
 
+    // MARK: - AddressRecipientComponentDelegate
+
     func addressRecipientComponentStatusChanged(_ addressRecipientComponent: AddressRecipientComponent, to status: FormEditingStatus) {
         delegate?.recipientComponentStatusChanged(self, to: status, recipientType: .address)
     }
+
+    // MARK: - PhoneNumberRecipientComponentDelegate
 
     func phoneNumberRecipientComponentStatusChanged(_ phoneNumberRecipientComponent: PhoneNumberRecipientComponent, to status: FormEditingStatus) {
         delegate?.recipientComponentStatusChanged(self, to: status, recipientType: .phone)
@@ -70,6 +76,7 @@ extension BehaviorExtension where Base: RecipientComponent {
     }
 
     func turnLeft() {
+        let isEditing = base.addressRecipientComponent?.custom.isEditing ?? false
         base.phoneRecipientComponent?.custom.set(state: .appeared, animation: {
             [weak self]
             _ in
@@ -78,9 +85,14 @@ extension BehaviorExtension where Base: RecipientComponent {
             self?.base.addressRecipientComponent?.isUserInteractionEnabled = false
         })
         base.addressRecipientComponent?.custom.set(state: .disappeared)
+
+        if isEditing {
+            base.phoneRecipientComponent?.custom.beginEditing()
+        }
     }
 
     func turnRight() {
+        let isEditing = base.phoneRecipientComponent?.custom.isEditing ?? false
         base.addressRecipientComponent?.custom.set(state: .appeared, animation: {
             [weak self]
             view in
@@ -89,6 +101,10 @@ extension BehaviorExtension where Base: RecipientComponent {
             view.isUserInteractionEnabled = true
         })
         base.phoneRecipientComponent?.custom.set(state: .disappeared)
+
+        if isEditing {
+            base.addressRecipientComponent?.custom.beginEditing()
+        }
     }
 
     fileprivate func setup() {
@@ -133,6 +149,7 @@ extension BehaviorExtension where Base: RecipientComponent {
 
         base.layoutIfNeeded()
     }
+
     fileprivate func setupInitialState() {
         base.phoneRecipientComponent?.custom.set(state: .appeared, animation: {
             [weak self]
