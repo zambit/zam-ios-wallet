@@ -297,6 +297,12 @@ class HomeViewController: FloatingViewController, WalletsViewControllerDelegate,
 
         sumLabel?.attributedText = attributedString
         sumLabel?.attributedText = attributedString
+        sumLabel?.sizeToFit()
+
+        if currentState == .open {
+            let sumLabelWidth: CGFloat = sumLabel?.bounds.width ?? 0
+            sumLeftConstraint?.constant = self.view.bounds.width / 2.0 - sumLabelWidth / 2.0
+        }
     }
 
     // MARK: - WalletsViewControllerDelegate

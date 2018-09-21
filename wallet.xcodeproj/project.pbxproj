@@ -170,7 +170,6 @@
 		8C7C338F2149659100EC6C96 /* KYCPersonalInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C338E2149659100EC6C96 /* KYCPersonalInfo.swift */; };
 		8C7C3391214A5ABC00EC6C96 /* Interactions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C3390214A5ABC00EC6C96 /* Interactions.swift */; };
 		8C7C3393214A83A500EC6C96 /* UILabel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C3392214A83A500EC6C96 /* UILabel+Extensions.swift */; };
-		8C7C3395214A882A00EC6C96 /* AdjustableToFitHeightLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C3394214A882A00EC6C96 /* AdjustableToFitHeightLabel.swift */; };
 		8C7C3397214A972200EC6C96 /* SizePresetable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C3396214A972200EC6C96 /* SizePresetable.swift */; };
 		8CA2188F2121D97C0063C188 /* DecimalKeyboardComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CA2188E2121D97B0063C188 /* DecimalKeyboardComponent.xib */; };
 		8CA218922122E8D70063C188 /* SendMoneyComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CA218912122E8D70063C188 /* SendMoneyComponent.xib */; };
@@ -435,7 +434,6 @@
 		8C7C338E2149659100EC6C96 /* KYCPersonalInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KYCPersonalInfo.swift; sourceTree = "<group>"; };
 		8C7C3390214A5ABC00EC6C96 /* Interactions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interactions.swift; sourceTree = "<group>"; };
 		8C7C3392214A83A500EC6C96 /* UILabel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extensions.swift"; sourceTree = "<group>"; };
-		8C7C3394214A882A00EC6C96 /* AdjustableToFitHeightLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdjustableToFitHeightLabel.swift; sourceTree = "<group>"; };
 		8C7C3396214A972200EC6C96 /* SizePresetable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizePresetable.swift; sourceTree = "<group>"; };
 		8CA2188E2121D97B0063C188 /* DecimalKeyboardComponent.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DecimalKeyboardComponent.xib; sourceTree = "<group>"; };
 		8CA218912122E8D70063C188 /* SendMoneyComponent.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SendMoneyComponent.xib; sourceTree = "<group>"; };
@@ -582,20 +580,19 @@
 		8C0919312106205600703224 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				9319BA862129FA9500033A7E /* Animations */,
 				8C7C3341214290AB00EC6C96 /* Buttons */,
-				8C7C3342214290BD00EC6C96 /* ImageViews */,
-				8C7C3352214661C300EC6C96 /* FormCells */,
 				8C6088612111FB0A00470411 /* Components */,
 				8C04BC36211C872E00E90090 /* ContainerView.swift */,
-				8C6088432110A34200470411 /* CustomUI.swift */,
 				8C04BC34211C5AD800E90090 /* CreditCardViewComponent.swift */,
-				9319BA862129FA9500033A7E /* Animations */,
-				8C7C33402142909200EC6C96 /* TextFields */,
+				8C6088432110A34200470411 /* CustomUI.swift */,
+				8C7C3352214661C300EC6C96 /* FormCells */,
 				8CA2191B213442140063C188 /* IllustrationPlaceholder */,
+				8C7C3342214290BD00EC6C96 /* ImageViews */,
 				8CA218BA212573510063C188 /* IndentLabel.swift */,
-				8C7C3394214A882A00EC6C96 /* AdjustableToFitHeightLabel.swift */,
-				8C333D5B210B538700949AC0 /* TextCheckBoxView */,
 				8C7C3396214A972200EC6C96 /* SizePresetable.swift */,
+				8C333D5B210B538700949AC0 /* TextCheckBoxView */,
+				8C7C33402142909200EC6C96 /* TextFields */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1607,7 +1604,6 @@
 				8C7C335A21468F5A00EC6C96 /* KYCPersonalInfoProgress.swift in Sources */,
 				8CA218962122EAF60063C188 /* SegmentedControlComponent.swift in Sources */,
 				8C713B32213FE33600AC2E25 /* EmptyViewController.swift in Sources */,
-				8C7C3395214A882A00EC6C96 /* AdjustableToFitHeightLabel.swift in Sources */,
 				8C713B1F213941FF00AC2E25 /* Networking.swift in Sources */,
 				8CA218D2212738450063C188 /* CheckAnimationView.swift in Sources */,
 				8C333D48210B0F3700949AC0 /* UIViewController+Extensions.swift in Sources */,
