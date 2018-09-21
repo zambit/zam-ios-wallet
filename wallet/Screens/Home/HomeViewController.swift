@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class HomeViewController: DetailOffsetPresentationViewController, WalletsViewControllerDelegate, ContactsHorizontalComponentDelegate {
+class HomeViewController: FloatingViewController, WalletsViewControllerDelegate, ContactsHorizontalComponentDelegate {
 
     var contactsManager: UserContactsManager?
     var userManager: UserDefaultsManager?
@@ -91,7 +91,7 @@ class HomeViewController: DetailOffsetPresentationViewController, WalletsViewCon
         setupStyle()
         setupDefaultStyle()
 
-        hideKeyboardOnTap()
+        isKeyboardHidesOnTap = true
 
         contactsData = contactsManager?.contacts ?? []
 
@@ -99,12 +99,12 @@ class HomeViewController: DetailOffsetPresentationViewController, WalletsViewCon
             self.contactsComponent?.delegate = self
             self.contactsComponent?.contactsCollectionView?.endLoading()
             self.contactsComponent?.prepare(contacts: contactsData)
-            self.detailViewOffset = 350
+            self.floatingViewInitialOffset = 350
 
         } else {
 
             self.contactsComponent?.contactsCollectionView?.endLoading()
-            self.detailViewOffset = 200
+            self.floatingViewInitialOffset = 200
 
             if self.currentState == .closed {
                 self.animate(to: .closed)
@@ -150,10 +150,10 @@ class HomeViewController: DetailOffsetPresentationViewController, WalletsViewCon
     }
 
     private func setupStyle() {
-        detailView?.layer.cornerRadius = 16.0
-        detailView?.clipsToBounds = true
+        floatingView?.layer.cornerRadius = 16.0
+        floatingView?.clipsToBounds = true
 
-        detailView?.backgroundColor = .white
+        floatingView?.backgroundColor = .white
         detailGestureView?.backgroundColor = .clear
 
         detailTitleLabel?.textColor = .darkIndigo
@@ -327,7 +327,7 @@ class HomeViewController: DetailOffsetPresentationViewController, WalletsViewCon
 
     // MARK: - Animation
 
-    override func stateDidChange(_ state: DetailOffsetPresentationViewController.State) {
+    override func stateDidChange(_ state: FloatingViewController.State) {
         super.stateDidChange(state)
 
         // evaluate some values before setting animation
@@ -367,7 +367,7 @@ class HomeViewController: DetailOffsetPresentationViewController, WalletsViewCon
         }
     }
 
-    override func createTransitionAnimatorsIfNeeded(to state: DetailOffsetPresentationViewController.State, duration: TimeInterval) -> [UIViewPropertyAnimator] {
+    override func createTransitionAnimatorsIfNeeded(to state: FloatingViewController.State, duration: TimeInterval) -> [UIViewPropertyAnimator] {
 
         guard let transitionAnimator = super.createTransitionAnimatorsIfNeeded(to: state, duration: duration).first else {
             fatalError()

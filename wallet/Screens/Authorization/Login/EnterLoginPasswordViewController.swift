@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class EnterLoginPasswordViewController: ContinueViewController, LoginPasswordComponentDelegate {
+class EnterLoginPasswordViewController: СonsistentViewController, LoginPasswordComponentDelegate {
 
     var userManager: UserDefaultsManager?
     var authAPI: AuthAPI?
@@ -42,9 +42,9 @@ class EnterLoginPasswordViewController: ContinueViewController, LoginPasswordCom
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        setupDefaultStyle()
-        hideKeyboardOnTap()
+        isKeyboardHidesOnTap = true
 
+        setupDefaultStyle()
         setupViewControllerStyle()
 
         let data = AdditionalTextButtonData(textActive: "Forgot password?")
@@ -53,10 +53,6 @@ class EnterLoginPasswordViewController: ContinueViewController, LoginPasswordCom
         forgotPasswordButton?.addTarget(self, action: #selector(additionalButtonTouchUpInsideEvent(_:)), for: .touchUpInside)
 
         loginPasswordForm?.delegate = self
-
-//        if let maskData = userManager?.getMaskData(), let phone = phone {
-//            title = MaskParser(symbol: maskData.1, space: maskData.2).matchingUnstrict(text: phone, withMask: maskData.0)
-//        }
     }
 
     private func setupViewControllerStyle() {

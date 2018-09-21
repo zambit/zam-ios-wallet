@@ -6,13 +6,12 @@
 //  Copyright © 2018 zamzam. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 /**
  UIViewController providing default continue behaviour: "Round @ContinueButton moving with keyboard during it appears"
  */
-class ContinueViewController: KeyboardBehaviorFollowingViewController {
+class СonsistentViewController: AvoidingViewController {
 
     @IBOutlet var continueButton: RoundContinueButton?
 

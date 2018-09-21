@@ -98,10 +98,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IPD-n3-J1m" customClass="LoginPasswordFormComponent" customModule="wallet" customModuleProvider="target">
-                                <rect key="frame" x="16" y="142" width="288" height="56"/>
+                                <rect key="frame" x="16" y="142" width="288" height="86"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="56" placeholder="YES" id="wqh-4A-Phy"/>
+                                    <constraint firstAttribute="height" constant="86" id="wqh-4A-Phy"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xaL-Vw-Mch" customClass="RoundContinueButton" customModule="wallet" customModuleProvider="target">

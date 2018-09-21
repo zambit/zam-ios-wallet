@@ -30,7 +30,7 @@ class TransactionsHistoryFilterViewController: FlowViewController, WalletNavigab
 
         view.backgroundColor = UIColor.darkIndigo
 
-        hideKeyboardOnTap()
+        isKeyboardHidesOnTap = true
 
         componentsTableView?.allowsSelection = false
         componentsTableView?.backgroundColor = .clear

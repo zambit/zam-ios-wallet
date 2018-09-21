@@ -12,7 +12,7 @@ import UIKit
 /**
  Verifying phone number screen controller. Owns its model and views.
  */
-class VerifyPhoneNumberWithSmsViewController: ContinueViewController, VerificationCodeFormComponentDelegate {
+class VerifyPhoneNumberWithSmsViewController: СonsistentViewController, VerificationCodeFormComponentDelegate {
 
     var verifyAPI: ThreeStepsAPI?
 
@@ -41,7 +41,8 @@ class VerifyPhoneNumberWithSmsViewController: ContinueViewController, Verificati
         super.viewDidLoad()
 
         setupDefaultStyle()
-        hideKeyboardOnTap()
+        
+        isKeyboardHidesOnTap = true
 
         setupViewControllerStyle()
 

@@ -39,7 +39,7 @@ class TransactionsHistoryViewController: FlowViewController, WalletNavigable, UI
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        hideKeyboardOnTap()
+        isKeyboardHidesOnTap = true
 
         let filterBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "filter"), style: .plain, target: self, action: #selector(filterButtonTouchUpInsideEvent(_:)))
         filterBarButtonItem.tintColor = nil

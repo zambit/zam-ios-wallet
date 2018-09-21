@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class SendMoneyViewController: KeyboardBehaviorFollowingViewController, SendMoneyComponentDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, QRCodeScannerViewControllerDelegate {
+class SendMoneyViewController: AvoidingViewController, SendMoneyComponentDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, QRCodeScannerViewControllerDelegate {
 
     var onSend: ((SendingData) -> Void)?
     var onQRScanner: (() -> Void)?
@@ -23,7 +23,7 @@ class SendMoneyViewController: KeyboardBehaviorFollowingViewController, SendMone
     private var wallets: [WalletData] = []
     private var currentIndex: Int?
 
-    override var fastenOffset: CGFloat {
+    override var fastenInitialOffset: CGFloat {
         return 0
     }
 
@@ -49,7 +49,7 @@ class SendMoneyViewController: KeyboardBehaviorFollowingViewController, SendMone
             fatalError()
         }
 
-        hideKeyboardOnTap()
+        isKeyboardHidesOnTap = true
         
         view.applyDefaultGradientHorizontally()
 

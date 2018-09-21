@@ -7,8 +7,10 @@
 //
 
 import AudioToolbox
-import UIKit
 
+/**
+ A struct with few static functions that calls different phone vibrations.
+ */
 struct Interactions {
 
     static func vibrateError() {

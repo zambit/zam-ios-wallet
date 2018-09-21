@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class EnterPhoneLoginPasswordViewController: ContinueViewController, PhoneNumberComponentDelegate, LoginPasswordComponentDelegate {
+class EnterPhoneLoginPasswordViewController: СonsistentViewController, PhoneNumberComponentDelegate, LoginPasswordComponentDelegate {
 
     var userManager: UserDefaultsManager?
     var authAPI: AuthAPI?
@@ -48,7 +48,7 @@ class EnterPhoneLoginPasswordViewController: ContinueViewController, PhoneNumber
         }
 
         setupDefaultStyle()
-        hideKeyboardOnTap()
+        isKeyboardHidesOnTap = true
 
         let data = AdditionalTextButtonData(textActive: "Forgot password?")
         forgotPasswordButton?.configure(data: data)

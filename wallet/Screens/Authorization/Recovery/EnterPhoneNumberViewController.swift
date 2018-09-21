@@ -12,7 +12,7 @@ import UIKit
 /**
  Entering phone number screen controller. Owns its model and views.
  */
-class EnterPhoneNumberViewController: ContinueViewController, PhoneNumberComponentDelegate {
+class EnterPhoneNumberViewController: СonsistentViewController, PhoneNumberComponentDelegate {
 
     var recoveryAPI: RecoveryAPI?
 
@@ -46,7 +46,8 @@ class EnterPhoneNumberViewController: ContinueViewController, PhoneNumberCompone
         }
 
         setupDefaultStyle()
-        hideKeyboardOnTap()
+        
+        isKeyboardHidesOnTap = true
 
         largeTitleLabel?.textColor = .white
 

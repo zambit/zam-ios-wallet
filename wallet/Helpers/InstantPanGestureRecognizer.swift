@@ -18,5 +18,4 @@ class InstantPanGestureRecognizer: UIPanGestureRecognizer {
         super.touchesBegan(touches, with: event)
         self.state = UIGestureRecognizerState.began
     }
-
 }

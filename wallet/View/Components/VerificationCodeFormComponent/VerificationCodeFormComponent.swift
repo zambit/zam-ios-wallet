@@ -81,7 +81,7 @@ class VerificationCodeFormComponent: Component, UITextFieldDelegate {
 
         if let textRange = Range(range, in: text) {
             let updatedText = text.replacingCharacters(in: textRange, with: string)
-            let maskedText = MaskParser(symbol: "X", space: " ").matchingStrict(text: updatedText, withMask: codeMask)
+            let maskedText = StringParser(symbol: "X", space: " ").matchingStrict(text: updatedText, withMask: codeMask)
 
             codeTextField?.text = maskedText
             

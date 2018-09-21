@@ -8,21 +8,10 @@
 
 import UIKit
 
-
 extension UIViewController {
 
     func setupDefaultStyle() {
         self.view.applyGradient(colors: [.backgroundDarker, .backgroundLighter])
-    }
-
-    func hideKeyboardOnTap()
-    {
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(
-            target: self,
-            action: #selector(UIViewController.dismissKeyboard))
-        //tap.cancelsTouchesInView = false
-
-        view.addGestureRecognizer(tap)
     }
 
     @objc

@@ -137,7 +137,7 @@ class ContactsHorizontalComponent: Component, UICollectionViewDataSource, UIColl
         if let data = contact.avatarData, let image = UIImage(data: data) {
             cell.configure(avatar: image, name: contact.name)
         } else {
-            let image = LetterImage(bounds: CGRect(origin: .zero, size: CGSize(width: 32.0, height: 32.0))).generate(string: contact.name, color: UIColor.cornflower.withAlphaComponent(0.4), circular: true, textAttributes: [.font: UIFont.walletFont(ofSize: 12.0, weight: .medium), .foregroundColor: UIColor.white]) ?? #imageLiteral(resourceName: "icEmpty")
+            let image = LettersImageGenerator(bounds: CGRect(origin: .zero, size: CGSize(width: 32.0, height: 32.0))).generate(string: contact.name, color: UIColor.cornflower.withAlphaComponent(0.4), circular: true, textAttributes: [.font: UIFont.walletFont(ofSize: 12.0, weight: .medium), .foregroundColor: UIColor.white]) ?? #imageLiteral(resourceName: "icEmpty")
             cell.configure(avatar: image, name: contact.name)
         }
 
