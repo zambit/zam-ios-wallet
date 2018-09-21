@@ -580,17 +580,17 @@
 		8C0919312106205600703224 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				8C6088432110A34200470411 /* CustomUI.swift */,
+				8C7C3396214A972200EC6C96 /* SizePresetable.swift */,
 				9319BA862129FA9500033A7E /* Animations */,
 				8C7C3341214290AB00EC6C96 /* Buttons */,
 				8C6088612111FB0A00470411 /* Components */,
 				8C04BC36211C872E00E90090 /* ContainerView.swift */,
 				8C04BC34211C5AD800E90090 /* CreditCardViewComponent.swift */,
-				8C6088432110A34200470411 /* CustomUI.swift */,
 				8C7C3352214661C300EC6C96 /* FormCells */,
 				8CA2191B213442140063C188 /* IllustrationPlaceholder */,
 				8C7C3342214290BD00EC6C96 /* ImageViews */,
 				8CA218BA212573510063C188 /* IndentLabel.swift */,
-				8C7C3396214A972200EC6C96 /* SizePresetable.swift */,
 				8C333D5B210B538700949AC0 /* TextCheckBoxView */,
 				8C7C33402142909200EC6C96 /* TextFields */,
 			);

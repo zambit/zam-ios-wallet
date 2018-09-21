@@ -53,8 +53,10 @@ class SendMoneyViewController: AvoidingViewController, UICollectionViewDataSourc
             sendMoneyComponent?.prepare(preset: .superCompact)
         case .medium:
             sendMoneyComponent?.prepare(preset: .compact)
-        case .plus, .extra, .extraLarge:
+        case .plus, .extra:
             sendMoneyComponent?.prepare(preset: .default)
+        case .extraLarge:
+            sendMoneyComponent?.prepare(preset: .large)
         case .unknown:
             fatalError()
         }
@@ -63,20 +65,27 @@ class SendMoneyViewController: AvoidingViewController, UICollectionViewDataSourc
         
         view.applyDefaultGradientHorizontally()
 
-        appearingAnimationBlock = {
-            [weak self] in
+        switch UIDevice.current.screenType {
+        case .extraLarge:
+            break
+        case .unknown:
+            fatalError()
+        default:
+            appearingAnimationBlock = {
+                [weak self] in
 
-            self?.walletsCollectionView?.visibleCells.first?.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
-            self?.walletsCollectionView?.alpha = 0.0
-            self?.titleLabel?.alpha = 0.0
-        }
+                self?.walletsCollectionView?.visibleCells.first?.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
+                self?.walletsCollectionView?.alpha = 0.0
+                self?.titleLabel?.alpha = 0.0
+            }
 
-        disappearingAnimationBlock = {
-            [weak self] in
+            disappearingAnimationBlock = {
+                [weak self] in
 
-            self?.walletsCollectionView?.visibleCells.first?.transform = .identity
-            self?.walletsCollectionView?.alpha = 1.0
-            self?.titleLabel?.alpha = 1.0
+                self?.walletsCollectionView?.visibleCells.first?.transform = .identity
+                self?.walletsCollectionView?.alpha = 1.0
+                self?.titleLabel?.alpha = 1.0
+            }
         }
 
         walletsCollectionView?.register(WalletSmallItemComponent.self , forCellWithReuseIdentifier: "WalletSmallItemComponent")

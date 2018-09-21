@@ -116,10 +116,12 @@ class HomeViewController: FloatingViewController, WalletsViewControllerDelegate,
             detailViewHeight?.constant = 515.0
         case .medium:
             detailViewHeight?.constant = 600.0
-        case .extra, .extraLarge:
+        case .extra:
             detailViewHeight?.constant = 691.0
         case .plus:
             detailViewHeight?.constant = 675.0
+        case .extraLarge:
+            detailViewHeight?.constant = 775.0
         case .unknown:
             fatalError()
         }
