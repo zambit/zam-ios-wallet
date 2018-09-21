@@ -431,6 +431,7 @@ final class MainFlow: ScreenFlow {
 
             let target = strongSelf.transactionDetailScreen
             target.prepare(sendingData: data)
+            target.delegate = vc
 
             strongSelf.migratingNavigationController.custom.presentNavigable(viewController: target, animate: false)
         }
@@ -451,6 +452,8 @@ final class MainFlow: ScreenFlow {
         vc.providesPresentationContextTransitionStyle = true
         vc.onQRScanner = onQRScanner
         vc.onSend = onSend
+        vc.userManager = UserDefaultsManager(keychainConfiguration: WalletKeychainConfiguration())
+        vc.userAPI = UserAPI(provider: UserProvider(environment: WalletEnvironment(), dispatcher: HTTPDispatcher()))
         vc.title = "Send money"
         vc.flow = self
         return vc

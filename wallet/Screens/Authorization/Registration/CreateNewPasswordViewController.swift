@@ -12,7 +12,7 @@ import UIKit
 /**
  Creating new password screen controller. Owns its model and views.
  */
-class CreateNewPasswordViewController: ContinueViewController, NewPasswordFormComponentDelegate {
+class CreateNewPasswordViewController: СonsistentViewController, NewPasswordFormComponentDelegate {
 
     var userManager: UserDefaultsManager?
 
@@ -43,7 +43,8 @@ class CreateNewPasswordViewController: ContinueViewController, NewPasswordFormCo
         super.viewDidLoad()
 
         setupDefaultStyle()
-        hideKeyboardOnTap()
+
+        isKeyboardHidesOnTap = true
 
         setupViewControllerStyle()
 

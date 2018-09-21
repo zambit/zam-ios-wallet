@@ -542,9 +542,9 @@
                         <outlet property="detailGestureView" destination="zcm-Fg-lbF" id="pUL-Je-ar7"/>
                         <outlet property="detailTitleLabel" destination="4m2-kB-JMx" id="gsX-kM-BYk"/>
                         <outlet property="detailTopGestureView" destination="KCm-3x-EWo" id="A2L-cY-o4d"/>
-                        <outlet property="detailView" destination="ba8-TY-ppi" id="w1x-aA-OJu"/>
-                        <outlet property="detailViewBottomConstraint" destination="ZbS-WU-DX3" id="ZXu-aZ-vtn"/>
                         <outlet property="detailViewHeight" destination="euC-Ae-WIx" id="5DH-8X-EAx"/>
+                        <outlet property="floatingView" destination="ba8-TY-ppi" id="REu-fH-ETp"/>
+                        <outlet property="floatingViewBottomConstraint" destination="ZbS-WU-DX3" id="O0q-aK-UPJ"/>
                         <outlet property="sumBtcLabel" destination="GKP-fm-1NX" id="b8p-2i-SWL"/>
                         <outlet property="sumBtcLeftConstraint" destination="rMh-zG-zL3" id="wGv-SE-z90"/>
                         <outlet property="sumLabel" destination="4ZZ-gs-qSx" id="FUT-YA-txd"/>
@@ -975,54 +975,6 @@
             </objects>
             <point key="canvasLocation" x="-1050" y="1410"/>
         </scene>
-        <!--User View Controller-->
-        <scene sceneID="CjJ-WR-eOy">
-            <objects>
-                <viewController storyboardIdentifier="UserViewController" id="rJP-CE-Uyn" customClass="UserViewController" customModule="wallet" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="s4F-eB-BQN">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Phone" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IBc-4V-Glf">
-                                <rect key="frame" x="146.5" y="165" width="82.5" height="36"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Token" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="64i-dB-HCl">
-                                <rect key="frame" x="16" y="243" width="343" height="12"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NiN-K1-hQI">
-                                <rect key="frame" x="171.5" y="275" width="32" height="30"/>
-                                <state key="normal" title="EXIT"/>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="NiN-K1-hQI" firstAttribute="top" secondItem="64i-dB-HCl" secondAttribute="bottom" constant="20" id="DMI-LY-AbP"/>
-                            <constraint firstItem="64i-dB-HCl" firstAttribute="centerX" secondItem="IBc-4V-Glf" secondAttribute="centerX" id="RZq-RM-xIg"/>
-                            <constraint firstItem="IBc-4V-Glf" firstAttribute="centerX" secondItem="s4F-eB-BQN" secondAttribute="centerX" id="XH7-1i-e4b"/>
-                            <constraint firstItem="NiN-K1-hQI" firstAttribute="centerX" secondItem="s4F-eB-BQN" secondAttribute="centerX" id="c3A-f4-I2k"/>
-                            <constraint firstItem="oKY-uj-bnB" firstAttribute="trailing" secondItem="64i-dB-HCl" secondAttribute="trailing" constant="16" id="gPU-52-IvS"/>
-                            <constraint firstItem="64i-dB-HCl" firstAttribute="leading" secondItem="oKY-uj-bnB" secondAttribute="leading" constant="16" id="o1v-xu-920"/>
-                            <constraint firstItem="IBc-4V-Glf" firstAttribute="top" secondItem="oKY-uj-bnB" secondAttribute="top" constant="145" id="oRJ-7d-T7a"/>
-                            <constraint firstItem="64i-dB-HCl" firstAttribute="top" secondItem="IBc-4V-Glf" secondAttribute="bottom" constant="42" id="qaV-rh-xKv"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="oKY-uj-bnB"/>
-                    </view>
-                    <connections>
-                        <outlet property="logoutButton" destination="NiN-K1-hQI" id="47L-km-5Wh"/>
-                        <outlet property="phoneNumberLabel" destination="IBc-4V-Glf" id="G9Y-Qq-RlN"/>
-                        <outlet property="tokenLabel" destination="64i-dB-HCl" id="T1k-Qn-Lqa"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Mux-u7-Ms9" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-4006" y="2894"/>
-        </scene>
         <!--Test View Controller-->
         <scene sceneID="eet-pF-8jq">
             <objects>
@@ -1071,7 +1023,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e25-O7-cBC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2142" y="3802"/>
+            <point key="canvasLocation" x="-4023" y="2932"/>
         </scene>
         <!--Personal Info View Controller-->
         <scene sceneID="IW0-CT-9TG">

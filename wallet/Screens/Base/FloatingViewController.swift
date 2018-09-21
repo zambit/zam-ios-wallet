@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class DetailOffsetPresentationViewController: FlowViewController, WalletNavigable {
+class FloatingViewController: FlowViewController, WalletNavigable {
 
     enum State {
         case closed
@@ -25,18 +25,18 @@ class DetailOffsetPresentationViewController: FlowViewController, WalletNavigabl
         }
     }
 
-    @IBOutlet var detailView: UIView?
-    @IBOutlet var detailViewBottomConstraint: NSLayoutConstraint?
+    @IBOutlet var floatingView: UIView?
+    @IBOutlet var floatingViewBottomConstraint: NSLayoutConstraint?
 
     /**
      Detail view initial offset.
      */
-    var detailViewOffset: CGFloat = 0
+    var floatingViewInitialOffset: CGFloat = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        detailViewOffset = detailViewBottomConstraint?.constant ?? 0
+        floatingViewInitialOffset = floatingViewBottomConstraint?.constant ?? 0
     }
 
     /**
@@ -88,10 +88,10 @@ class DetailOffsetPresentationViewController: FlowViewController, WalletNavigabl
         let transitionAnimator = UIViewPropertyAnimator(duration: duration, dampingRatio: 1, animations: {
             switch state {
             case .open:
-                self.detailViewBottomConstraint?.constant = 50
+                self.floatingViewBottomConstraint?.constant = 50
 
             case .closed:
-                self.detailViewBottomConstraint?.constant = self.detailViewOffset
+                self.floatingViewBottomConstraint?.constant = self.floatingViewInitialOffset
 
             }
             self.view.layoutIfNeeded()
@@ -113,9 +113,9 @@ class DetailOffsetPresentationViewController: FlowViewController, WalletNavigabl
             // manually reset the constraint positions
             switch self.currentState {
             case .open:
-                self.detailViewBottomConstraint?.constant = 50
+                self.floatingViewBottomConstraint?.constant = 50
             case .closed:
-                self.detailViewBottomConstraint?.constant = self.detailViewOffset
+                self.floatingViewBottomConstraint?.constant = self.floatingViewInitialOffset
             }
 
             // remove all running animators
@@ -163,8 +163,8 @@ class DetailOffsetPresentationViewController: FlowViewController, WalletNavigabl
         case .changed:
 
             // variable setup
-            let translation = recognizer.translation(in: detailView)
-            var fraction = -translation.y / detailViewOffset
+            let translation = recognizer.translation(in: floatingView)
+            var fraction = -translation.y / floatingViewInitialOffset
 
             // adjust the fraction for the current state and reversed state
             if currentState == .open { fraction *= -1 }
@@ -178,7 +178,7 @@ class DetailOffsetPresentationViewController: FlowViewController, WalletNavigabl
         case .ended:
 
             // variable setup
-            let yVelocity = recognizer.velocity(in: detailView).y
+            let yVelocity = recognizer.velocity(in: floatingView).y
             let shouldClose = yVelocity > 0
 
             // if there is no motion, continue all animations and exit early

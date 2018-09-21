@@ -108,7 +108,7 @@ class SendMoneyComponent: Component, SizePresetable, SendMoneyAmountComponentDel
             recipientTextFieldTopConstraint?.constant = 10.0
             recipientTextFieldHeightConstraint?.constant = 50.0
 
-        case .compact, .default:
+        case .compact, .default, .large:
             topGreaterThanConstraint?.constant = 17.0
             sendButtonHeightConstraint?.constant = 56.0
             recipientTextFieldTopConstraint?.constant = 20.0

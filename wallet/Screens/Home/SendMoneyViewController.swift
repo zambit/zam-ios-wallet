@@ -9,10 +9,13 @@
 import Foundation
 import UIKit
 
-class SendMoneyViewController: KeyboardBehaviorFollowingViewController, SendMoneyComponentDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, QRCodeScannerViewControllerDelegate {
+class SendMoneyViewController: AvoidingViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, SendMoneyComponentDelegate, TransactionDetailViewControllerDelegate, QRCodeScannerViewControllerDelegate {
 
     var onSend: ((SendingData) -> Void)?
     var onQRScanner: (() -> Void)?
+
+    var userManager: UserDefaultsManager?
+    var userAPI: UserAPI?
 
     @IBOutlet var sendMoneyComponent: SendMoneyComponent?
     @IBOutlet var titleLabel: UILabel?
@@ -23,7 +26,7 @@ class SendMoneyViewController: KeyboardBehaviorFollowingViewController, SendMone
     private var wallets: [WalletData] = []
     private var currentIndex: Int?
 
-    override var fastenOffset: CGFloat {
+    override var fastenInitialOffset: CGFloat {
         return 0
     }
 
@@ -43,13 +46,13 @@ class SendMoneyViewController: KeyboardBehaviorFollowingViewController, SendMone
             sendMoneyComponent?.prepare(preset: .superCompact)
         case .medium:
             sendMoneyComponent?.prepare(preset: .compact)
-        case .plus, .extra:
+        case .plus, .extra, .extraLarge:
             sendMoneyComponent?.prepare(preset: .default)
         case .unknown:
             fatalError()
         }
 
-        hideKeyboardOnTap()
+        isKeyboardHidesOnTap = true
         
         view.applyDefaultGradientHorizontally()
 
@@ -100,6 +103,35 @@ class SendMoneyViewController: KeyboardBehaviorFollowingViewController, SendMone
         self.recipient = recipient
 
         walletsCollectionView?.reloadData()
+    }
+
+    private func updateDataForCurrentWallet() {
+        guard
+            let token = userManager?.getToken(),
+            let phone = userManager?.getPhoneNumber(),
+            let index = currentIndex,
+            let sectionsCount = walletsCollectionView?.numberOfSections,
+            sectionsCount > index else {
+                return
+        }
+
+        let oldWallet = wallets[index]
+        let indexPath = IndexPath(item: 0, section: index)
+
+        guard let walletCell = walletsCollectionView?.cellForItem(at: indexPath) as? WalletSmallItemComponent else {
+            return
+        }
+
+        userAPI?.getWalletInfo(token: token, walletId: oldWallet.id).done {
+            [weak self]
+            wallet in
+
+            self?.wallets[index] = wallet
+            walletCell.configure(image: wallet.coin.image, coinName: wallet.coin.name, coinAddit: wallet.coin.short, phoneNumber: phone, balance: wallet.balance.formatted(currency: .original), fiatBalance: wallet.balance.description(currency: .usd))
+        }.catch {
+            error in
+            print(error)
+        }
     }
 
     private func scrollToCurrentWallet() {
@@ -170,6 +202,10 @@ class SendMoneyViewController: KeyboardBehaviorFollowingViewController, SendMone
             
             self?.onSend?(output)
         }
+    }
+
+    func transactionDetailViewControllerSendingSucceed(_ transactionDetailViewController: TransactionDetailViewController) {
+        updateDataForCurrentWallet()
     }
 
     func qrCodeScannerViewController(_ qrCodeScannerViewController: QRCodeScannerViewController, didFindCode code: String) {

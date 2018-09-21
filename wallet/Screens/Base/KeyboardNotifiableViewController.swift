@@ -14,6 +14,29 @@ class KeyboardNotifiableViewController: UIViewController {
         return _isKeyboardShown
     }
 
+    var isKeyboardHidesOnTap: Bool = false {
+        willSet {
+            guard isKeyboardHidesOnTap != newValue else {
+                return
+            }
+
+            switch newValue {
+            case true:
+                let tap: UITapGestureRecognizer = UITapGestureRecognizer(
+                    target: self,
+                    action: #selector(UIViewController.dismissKeyboard))
+
+                self.view.addGestureRecognizer(tap)
+                self.tapGestureRecognizer = tap
+            case false:
+                self.view.removeGestureRecognizer(tapGestureRecognizer!)
+                self.tapGestureRecognizer = nil
+            }
+        }
+    }
+
+    private var tapGestureRecognizer: UITapGestureRecognizer?
+
     private var _isKeyboardShown: Bool = false
     private var _dismissHandlerAction: () -> Void = {}
 
@@ -42,6 +65,7 @@ class KeyboardNotifiableViewController: UIViewController {
 
         self.dismissKeyboard()
     }
+    
 
     @objc
     private func keyboardDidShow(_ sender: NSNotification) {

@@ -13,10 +13,10 @@ enum SizePreset {
     case superCompact
     case compact
     case `default`
+    case large
 }
 
 protocol SizePresetable {
 
     func prepare(preset: SizePreset)
-
 }

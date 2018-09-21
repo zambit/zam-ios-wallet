@@ -12,7 +12,7 @@ import UIKit
 /**
  Entering new phone number screen controller. Owns its model and views.
  */
-class EnterNewPhoneNumberViewController: ContinueViewController, PhoneNumberComponentDelegate {
+class EnterNewPhoneNumberViewController: СonsistentViewController, PhoneNumberComponentDelegate {
 
     var signupAPI: SignupAPI?
 
@@ -60,7 +60,7 @@ class EnterNewPhoneNumberViewController: ContinueViewController, PhoneNumberComp
         switch UIDevice.current.screenType {
         case .small, .extraSmall:
             phoneNumberComponent?.custom.prepare(preset: .superCompact)
-        case .medium, .extra, .plus:
+        case .medium, .extra, .plus, .extraLarge:
             phoneNumberComponent?.custom.prepare(preset: .default)
         case .unknown:
             fatalError()
@@ -72,7 +72,7 @@ class EnterNewPhoneNumberViewController: ContinueViewController, PhoneNumberComp
         setupTermsItems()
 
         setupDefaultStyle()
-        hideKeyboardOnTap()
+        isKeyboardHidesOnTap = true
 
         largeTitleLabel?.textColor = .white
 

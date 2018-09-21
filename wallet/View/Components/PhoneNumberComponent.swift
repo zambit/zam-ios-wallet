@@ -81,7 +81,7 @@ extension BehaviorExtension: SizePresetable where Base: PhoneNumberComponent {
         case .superCompact:
             base.codeTextFieldWidthConstraint?.constant = 50
             base.codeTextField?.leftPadding = 6.0
-        case .compact, .default:
+        case .compact, .default, .large:
             base.codeTextFieldWidthConstraint?.constant = 80
             base.codeTextField?.leftPadding = 12.0
         }
@@ -248,8 +248,6 @@ extension BehaviorExtension: SizePresetable where Base: PhoneNumberComponent {
         }
 
         checkConditions(with: base.phoneNumberFormatter)
-
-        print(base.resultingString)
     }
 
     fileprivate func phoneNumberChanged() {
@@ -276,8 +274,6 @@ extension BehaviorExtension: SizePresetable where Base: PhoneNumberComponent {
         setupCountryImageAnimationWith(state: state) {}
 
         checkConditions(with: base.phoneNumberFormatter)
-
-        print(base.resultingString)
     }
 
     private func checkConditions(with formatter: PhoneNumberFormatter) {

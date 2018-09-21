@@ -17,7 +17,6 @@ class TestViewController: UIViewController {
         super.viewDidLoad()
 
         setupDefaultStyle()
-        hideKeyboardOnTap()
     }
 
     @IBAction func turnLeft() {

@@ -139,7 +139,7 @@ class CreditCardViewComponent: UIView {
     private func loadData() {
         let num = "5468123412341488"
 
-        let numberParser = MaskParser(symbol: "X", space: " ")
+        let numberParser = StringParser(symbol: "X", space: " ")
 
         let start = num.index(num.startIndex, offsetBy: 4)
         let end = num.index(num.startIndex, offsetBy: 11)

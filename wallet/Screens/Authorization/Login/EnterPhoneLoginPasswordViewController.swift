@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class EnterPhoneLoginPasswordViewController: ContinueViewController, PhoneNumberComponentDelegate, LoginPasswordComponentDelegate {
+class EnterPhoneLoginPasswordViewController: СonsistentViewController, PhoneNumberComponentDelegate, LoginPasswordComponentDelegate {
 
     var userManager: UserDefaultsManager?
     var authAPI: AuthAPI?
@@ -41,14 +41,14 @@ class EnterPhoneLoginPasswordViewController: ContinueViewController, PhoneNumber
         switch UIDevice.current.screenType {
         case .small, .extraSmall:
             phoneNumberComponent?.custom.prepare(preset: .superCompact)
-        case .medium, .extra, .plus:
+        case .medium, .extra, .extraLarge, .plus:
             phoneNumberComponent?.custom.prepare(preset: .default)
         case .unknown:
             fatalError()
         }
 
         setupDefaultStyle()
-        hideKeyboardOnTap()
+        isKeyboardHidesOnTap = true
 
         let data = AdditionalTextButtonData(textActive: "Forgot password?")
         forgotPasswordButton?.configure(data: data)

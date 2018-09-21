@@ -182,7 +182,8 @@ class KYCPersonalInfoViewController: FlowViewController, WalletNavigable, UITabl
                                     self?.checkCellPosition(cell)}
                 )])
         ]
-        hideKeyboardOnTap()
+
+        self.isKeyboardHidesOnTap = true
 
 
         self.tableView?.register(TextFieldCell.self , forCellReuseIdentifier: "TextFieldCell")

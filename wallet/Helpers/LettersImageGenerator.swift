@@ -6,10 +6,12 @@
 //  Copyright © 2018 zamzam. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
-struct LetterImage {
+/**
+ A struct that generates image with character or pair of characters, using for example as avatar for non-avatar contacts.
+ */
+struct LettersImageGenerator {
 
     let bounds: CGRect
 

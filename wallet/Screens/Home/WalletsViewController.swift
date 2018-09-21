@@ -17,7 +17,6 @@ protocol WalletsViewControllerDelegate: class {
 class WalletsViewController: FlowCollectionViewController, UICollectionViewDelegateFlowLayout {
 
     weak var owner: ScreenWalletNavigable?
-
     weak var delegate: WalletsViewControllerDelegate?
 
     var onSendFromWallet: ((_ index: Int, _ wallets: [WalletData], _ recipient: FormattedContactData?, _ phone: String, _ owner: ScreenWalletNavigable) -> Void)?
@@ -143,7 +142,6 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
         }.catch {
             [weak self]
             error in
-            print(error)
 
             self?.refreshControl?.endRefreshing()
         }

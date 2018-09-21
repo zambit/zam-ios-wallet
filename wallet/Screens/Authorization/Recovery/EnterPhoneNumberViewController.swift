@@ -12,7 +12,7 @@ import UIKit
 /**
  Entering phone number screen controller. Owns its model and views.
  */
-class EnterPhoneNumberViewController: ContinueViewController, PhoneNumberComponentDelegate {
+class EnterPhoneNumberViewController: СonsistentViewController, PhoneNumberComponentDelegate {
 
     var recoveryAPI: RecoveryAPI?
 
@@ -39,14 +39,15 @@ class EnterPhoneNumberViewController: ContinueViewController, PhoneNumberCompone
         switch UIDevice.current.screenType {
         case .small, .extraSmall:
             phoneNumberComponent?.custom.prepare(preset: .superCompact)
-        case .medium, .extra, .plus:
+        case .medium, .extra, .extraLarge, .plus:
             phoneNumberComponent?.custom.prepare(preset: .default)
         case .unknown:
             fatalError()
         }
 
         setupDefaultStyle()
-        hideKeyboardOnTap()
+        
+        isKeyboardHidesOnTap = true
 
         largeTitleLabel?.textColor = .white
 

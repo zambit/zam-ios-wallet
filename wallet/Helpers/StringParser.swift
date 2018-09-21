@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct MaskParser {
+struct StringParser {
 
     let symbol: Character
     let space: Character

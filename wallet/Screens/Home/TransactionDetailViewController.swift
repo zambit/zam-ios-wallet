@@ -9,6 +9,11 @@
 import Foundation
 import UIKit
 
+protocol TransactionDetailViewControllerDelegate: class {
+
+    func transactionDetailViewControllerSendingSucceed(_ transactionDetailViewController: TransactionDetailViewController)
+}
+
 class TransactionDetailViewController: FlowViewController, WalletNavigable {
 
     enum State {
@@ -16,6 +21,8 @@ class TransactionDetailViewController: FlowViewController, WalletNavigable {
         case success
         case failure
     }
+
+    weak var delegate: TransactionDetailViewControllerDelegate?
 
     var userAPI: UserAPI?
     var userManager: UserDefaultsManager?
@@ -102,7 +109,7 @@ class TransactionDetailViewController: FlowViewController, WalletNavigable {
             recipientButtonBetweenConstraint?.constant = 46.0
             titleLeftConstraint?.constant = 55.0
             titleRightConstraint?.constant = 55.0
-        case .extra:
+        case .extra, .extraLarge:
             topTitleConstraint?.constant = 44.0
             titleAmountBetweenConstraint?.constant = 107.0
             recipientButtonBetweenConstraint?.constant = 56.0
@@ -246,6 +253,12 @@ class TransactionDetailViewController: FlowViewController, WalletNavigable {
             userAPI?.sendTransaction(token: token, walletId: data.walletId, recipient: recipient, amount: data.amountData.original).done {
                 [weak self]
                 transaction in
+
+                guard let strongSelf = self else {
+                    return
+                }
+
+                self?.delegate?.transactionDetailViewControllerSendingSucceed(strongSelf)
 
                 performWithDelay {
                     self?.sendButton?.custom.setSuccess()

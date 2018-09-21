@@ -1,5 +1,5 @@
 //
-//  KeyboardBehaviourFollowingViewController.swift
+//  AvoidingViewController.swift
 //  wallet
 //
 //  Created by Alexander Ponomarev on 16/08/2018.
@@ -10,14 +10,14 @@ import Foundation
 import UIKit
 
 /**
- UIViewController providing default continue behaviour: "Round @ContinueButton moving with keyboard during it appears"
+ UIViewController providing avoiding keyboard behavior by changing fastenBottomConstraint constant value according keyboard fame during its animation.
  */
-class KeyboardBehaviorFollowingViewController: FlowViewController, WalletNavigable {
+class AvoidingViewController: FlowViewController, WalletNavigable {
 
     var appearingAnimationBlock: () -> Void = {}
     var disappearingAnimationBlock: () -> Void = {}
 
-    var fastenOffset: CGFloat {
+    var fastenInitialOffset: CGFloat {
         return 24
     }
 
@@ -30,12 +30,6 @@ class KeyboardBehaviorFollowingViewController: FlowViewController, WalletNavigab
                                                selector: #selector(notifyKeyboard(_:)),
                                                name: NSNotification.Name.UIKeyboardWillChangeFrame,
                                                object: nil)
-    }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-
-        NotificationCenter.default.removeObserver(self)
     }
 
     @objc
@@ -55,22 +49,16 @@ class KeyboardBehaviorFollowingViewController: FlowViewController, WalletNavigab
         let tabBarOffset: CGFloat = tabBarController == nil ? 0 : -49
 
         UIView.animate(withDuration: duration, delay: TimeInterval(0), options: animationCurve, animations: {
-            [weak self] in
-
-            guard let strongSelf = self else {
-                return
-            }
-
             if let keyboardView = endFrame, keyboardView.origin.y < UIScreen.main.bounds.size.height {
-                strongSelf.appearingAnimationBlock()
-                strongSelf.fastenBottomConstraint?.constant = UIDevice.current.iPhoneX ? keyboardView.size.height + strongSelf.fastenOffset - 32 + tabBarOffset : keyboardView.size.height + strongSelf.fastenOffset + tabBarOffset
+                self.appearingAnimationBlock()
+                self.fastenBottomConstraint?.constant = UIDevice.current.isExtra ? keyboardView.size.height + self.fastenInitialOffset - 32 + tabBarOffset : keyboardView.size.height + self.fastenInitialOffset + tabBarOffset
             } else {
-                strongSelf.disappearingAnimationBlock()
-                strongSelf.fastenBottomConstraint?.constant = strongSelf.fastenOffset
+                self.disappearingAnimationBlock()
+                self.fastenBottomConstraint?.constant = self.fastenInitialOffset
             }
-            self?.view.layoutIfNeeded()
+            self.view.layoutIfNeeded()
 
-            }, completion: nil)
+        }, completion: nil)
     }
 }
 
