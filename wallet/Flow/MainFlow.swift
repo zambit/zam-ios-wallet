@@ -365,6 +365,7 @@ final class MainFlow: ScreenFlow {
 
             let target = strongSelf.sendMoneyScreen
             target.prepare(wallets: wallets, currentIndex: index, recipient: contact, phone: phone)
+            target.delegate = vc
 
             owner.migratingNavigationController?.custom.push(viewController: target)
         }

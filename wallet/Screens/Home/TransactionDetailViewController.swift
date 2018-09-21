@@ -11,7 +11,7 @@ import UIKit
 
 protocol TransactionDetailViewControllerDelegate: class {
 
-    func transactionDetailViewControllerSendingSucceed(_ transactionDetailViewController: TransactionDetailViewController)
+    func transactionDetailViewControllerSendingProceedWithSuccess(_ transactionDetailViewController: TransactionDetailViewController)
 }
 
 class TransactionDetailViewController: FlowViewController, WalletNavigable {
@@ -258,7 +258,7 @@ class TransactionDetailViewController: FlowViewController, WalletNavigable {
                     return
                 }
 
-                self?.delegate?.transactionDetailViewControllerSendingSucceed(strongSelf)
+                self?.delegate?.transactionDetailViewControllerSendingProceedWithSuccess(strongSelf)
 
                 performWithDelay {
                     self?.sendButton?.custom.setSuccess()

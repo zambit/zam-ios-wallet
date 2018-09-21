@@ -14,7 +14,7 @@ protocol WalletsViewControllerDelegate: class {
     func walletsViewControllerCallsUpdateData(_ walletsViewController: WalletsViewController)
 }
 
-class WalletsViewController: FlowCollectionViewController, UICollectionViewDelegateFlowLayout {
+class WalletsViewController: FlowCollectionViewController, UICollectionViewDelegateFlowLayout, SendMoneyViewControllerDelegate {
 
     weak var owner: ScreenWalletNavigable?
     weak var delegate: WalletsViewControllerDelegate?
@@ -70,7 +70,7 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
         onSendFromWallet?(0, wallets, contact, phone, owner)
     }
 
-    // UICollectionView dataSource
+    // MARK: - UICollectionViewDataSource
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
@@ -114,15 +114,21 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
         return cell
     }
 
-    // UICollectionView delegate flow layout
+    // MARK: - UICollectionViewDelegateFlowLayout
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 
         return CGSize(width: collectionView.bounds.width, height: 134.0)
     }
 
+    // MARK: - SendMoneyViewControllerDelegate
+
+    func sendMoneyViewControllerSendingProceedWithSuccess(_ sendMoneyViewController: SendMoneyViewController) {
+        refreshControlValueChangedEvent(self)
+    }
+
     @objc
-    private func refreshControlValueChangedEvent(_ sender: UIRefreshControl) {
+    private func refreshControlValueChangedEvent(_ sender: Any) {
         delegate?.walletsViewControllerCallsUpdateData(self)
         loadData(sender)
     }
