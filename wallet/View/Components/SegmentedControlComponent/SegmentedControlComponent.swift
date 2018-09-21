@@ -73,17 +73,17 @@ class SegmentedControlComponent: Component {
 
         mainSegmentsView = UIView(frame: bounds)
         contentView.addSubview(mainSegmentsView!)
-        contentView.bringSubview(toFront: mainSegmentsView!)
+        contentView.bringSubviewToFront(mainSegmentsView!)
         mainSegmentsView?.frame = bounds
         mainSegmentsView?.autoresizingMask = [.flexibleHeight, .flexibleWidth]
 
         backView = SelectingBackView()
         contentView.addSubview(backView!)
-        contentView.sendSubview(toBack: backView!)
+        contentView.sendSubviewToBack(backView!)
 
         selectedSegmentsView = UIView(frame: bounds)
         contentView.addSubview(selectedSegmentsView!)
-        contentView.bringSubview(toFront: selectedSegmentsView!)
+        contentView.bringSubviewToFront(selectedSegmentsView!)
         selectedSegmentsView?.frame = bounds
         selectedSegmentsView?.autoresizingMask = [.flexibleHeight, .flexibleWidth]
 
@@ -100,8 +100,8 @@ class SegmentedControlComponent: Component {
         segmentNormal.tintColor = iconTintColor
         segmentNormal.setTitleColor(.blueGrey, for: .normal)
         segmentNormal.setTitleColor(UIColor.black.withAlphaComponent(0.1), for: .disabled)
-        segmentNormal.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 8)
-        segmentNormal.titleEdgeInsets = UIEdgeInsetsMake(0, 8, 0, 0)
+        segmentNormal.imageEdgeInsets = UIEdgeInsets.init(top: 0, left: 0, bottom: 0, right: 8)
+        segmentNormal.titleEdgeInsets = UIEdgeInsets.init(top: 0, left: 8, bottom: 0, right: 0)
         segmentNormal.titleLabel?.font = UIFont.walletFont(ofSize: 16.0, weight: .medium)
         segmentNormal.sizeToFit()
         segmentNormal.bounds = CGRect(x: 0, y: 0, width: segmentNormal.bounds.width + 8, height: segmentNormal.bounds.height)
@@ -112,8 +112,8 @@ class SegmentedControlComponent: Component {
         segmentSelected.setTitle(title, for: .normal)
         segmentSelected.setImage(icon, for: .normal)
         segmentSelected.tintColor = selectedTintColor
-        segmentSelected.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 8)
-        segmentSelected.titleEdgeInsets = UIEdgeInsetsMake(0, 8, 0, 0)
+        segmentSelected.imageEdgeInsets = UIEdgeInsets.init(top: 0, left: 0, bottom: 0, right: 8)
+        segmentSelected.titleEdgeInsets = UIEdgeInsets.init(top: 0, left: 8, bottom: 0, right: 0)
         segmentSelected.titleLabel?.font = UIFont.walletFont(ofSize: 16.0, weight: .medium)
         segmentSelected.sizeToFit()
         segmentSelected.bounds = CGRect(x: 0, y: 0, width: segmentSelected.bounds.width + 8, height: segmentSelected.bounds.height)

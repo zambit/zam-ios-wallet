@@ -203,7 +203,7 @@ class HomeViewController: FloatingViewController, WalletsViewControllerDelegate,
 
         detailTopGestureView?.applyGradient(colors: [.white, UIColor.white.withAlphaComponent(0.7), UIColor.white.withAlphaComponent(0.0)], locations: [0.0, 0.75, 1.0])
 
-        embededViewController?.collectionView?.contentInset = UIEdgeInsetsMake(64, 0, 64, 0)
+        embededViewController?.collectionView?.contentInset = UIEdgeInsets.init(top: 64, left: 0, bottom: 64, right: 0)
     }
 
     private func loadData() {

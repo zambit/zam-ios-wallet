@@ -82,7 +82,7 @@ extension BehaviorExtension where Base: PhoneNumberRecipientComponent {
         self.textFieldEditingDidBegin()
 
         if let data = contact.avatarData, let avatar = UIImage(data: data, scale: 0.05) {
-            base.detailButton?.setImage(avatar, for: UIControlState())
+            base.detailButton?.setImage(avatar, for: UIControl.State())
         }
     }
 
@@ -140,7 +140,7 @@ extension BehaviorExtension where Base: PhoneNumberRecipientComponent {
         textField.textAlignment = .center
         textField.attributedPlaceholder =
             NSAttributedString(string: "Phone number",
-                               attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
+                               attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
         textField.adjustsFontSizeToFitWidth = true
         textField.minimumFontSize = 11.0
         textField.autocorrectionType = .no

@@ -17,8 +17,8 @@ class TransactionCellComponent: CellComponent {
     @IBOutlet private var amountLabel: UILabel!
     @IBOutlet private var fiatAmountLabel: UILabel!
 
-    private var titleLabelMainAttributes: [NSAttributedStringKey: Any] = [:]
-    private var titleLabelAdditAttributes: [NSAttributedStringKey: Any] = [:]
+    private var titleLabelMainAttributes: [NSAttributedString.Key: Any] = [:]
+    private var titleLabelAdditAttributes: [NSAttributedString.Key: Any] = [:]
 
     override func setupStyle() {
         super.setupStyle()

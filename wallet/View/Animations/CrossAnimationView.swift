@@ -87,16 +87,16 @@ open class CrossAnimationView: UIView {
         // Set default setting to line
         self.leftLayer.fillColor = UIColor.white.withAlphaComponent(0.0).cgColor
         self.leftLayer.anchorPoint = CGPoint(x: 0, y: 0)
-        self.leftLayer.lineJoin = kCALineJoinRound
-        self.leftLayer.lineCap = kCALineCapRound
+        self.leftLayer.lineJoin = CAShapeLayerLineJoin.round
+        self.leftLayer.lineCap = CAShapeLayerLineCap.round
         self.leftLayer.contentsScale = self.layer.contentsScale
         self.leftLayer.lineWidth = lineWidth
         self.leftLayer.strokeColor = strokeColor.cgColor
 
         self.rightLayer.fillColor = UIColor.white.withAlphaComponent(0.0).cgColor
         self.rightLayer.anchorPoint = CGPoint(x: 0, y: 0)
-        self.rightLayer.lineJoin = kCALineJoinRound
-        self.rightLayer.lineCap = kCALineCapRound
+        self.rightLayer.lineJoin = CAShapeLayerLineJoin.round
+        self.rightLayer.lineCap = CAShapeLayerLineCap.round
         self.rightLayer.contentsScale = self.layer.contentsScale
         self.rightLayer.lineWidth = lineWidth
         self.rightLayer.strokeColor = strokeColor.cgColor

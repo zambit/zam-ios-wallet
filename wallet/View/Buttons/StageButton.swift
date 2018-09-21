@@ -65,13 +65,13 @@ class StageButton: UIButton {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setTitle(nil, for: UIControlState())
+        setTitle(nil, for: UIControl.State())
         custom.setupStyle()
     }
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        setTitle(nil, for: UIControlState())
+        setTitle(nil, for: UIControl.State())
         custom.setupStyle()
     }
 }
