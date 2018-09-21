@@ -9,7 +9,14 @@
 import Foundation
 import UIKit
 
+protocol SendMoneyViewControllerDelegate: class {
+
+    func sendMoneyViewControllerSendingProceedWithSuccess(_ sendMoneyViewController: SendMoneyViewController)
+}
+
 class SendMoneyViewController: AvoidingViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, SendMoneyComponentDelegate, TransactionDetailViewControllerDelegate, QRCodeScannerViewControllerDelegate {
+
+    weak var delegate: SendMoneyViewControllerDelegate?
 
     var onSend: ((SendingData) -> Void)?
     var onQRScanner: (() -> Void)?
@@ -204,8 +211,9 @@ class SendMoneyViewController: AvoidingViewController, UICollectionViewDataSourc
         }
     }
 
-    func transactionDetailViewControllerSendingSucceed(_ transactionDetailViewController: TransactionDetailViewController) {
+    func transactionDetailViewControllerSendingProceedWithSuccess(_ transactionDetailViewController: TransactionDetailViewController) {
         updateDataForCurrentWallet()
+        delegate?.sendMoneyViewControllerSendingProceedWithSuccess(self)
     }
 
     func qrCodeScannerViewController(_ qrCodeScannerViewController: QRCodeScannerViewController, didFindCode code: String) {
