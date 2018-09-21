@@ -38,7 +38,7 @@ class DepositMoneyViewController: FlowViewController, WalletNavigable, DepositMo
             contentHeightConstraint?.constant = 384.0
         case .plus:
             contentHeightConstraint?.constant = 454.0
-        case .extra:
+        case .extra, .extraLarge:
             contentHeightConstraint?.constant = 474.0
         case .unknown:
             fatalError()

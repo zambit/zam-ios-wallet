@@ -32,7 +32,7 @@ class DepositMoneyAddressComponent: Component {
             imageHeightConstraint?.constant = 200.0
         case .plus:
             imageHeightConstraint?.constant = 250.0
-        case .extra:
+        case .extra, .extraLarge:
             imageHeightConstraint?.constant = 270.0
         case .unknown:
             fatalError()

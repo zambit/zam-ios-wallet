@@ -13,12 +13,12 @@ enum DisplayState {
     case disappeared
     case appeared
 
-    var inverted: DisplayState {
+    mutating func toggle() {
         switch self {
         case .appeared:
-            return .disappeared
+            self = .disappeared
         case .disappeared:
-            return .appeared
+            self = .appeared
         }
     }
 }
@@ -72,7 +72,6 @@ extension BehaviorExtension where Base: RecipientComponent {
     }
 
     var phoneNumber: String {
-        print(base.phoneRecipientComponent?.custom.phone)
         return base.phoneRecipientComponent?.custom.phone ?? ""
     }
 

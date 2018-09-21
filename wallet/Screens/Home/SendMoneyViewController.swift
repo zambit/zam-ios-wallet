@@ -46,7 +46,7 @@ class SendMoneyViewController: AvoidingViewController, UICollectionViewDataSourc
             sendMoneyComponent?.prepare(preset: .superCompact)
         case .medium:
             sendMoneyComponent?.prepare(preset: .compact)
-        case .plus, .extra:
+        case .plus, .extra, .extraLarge:
             sendMoneyComponent?.prepare(preset: .default)
         case .unknown:
             fatalError()

@@ -130,5 +130,4 @@ class VerifyPhoneNumberWithSmsViewController: СonsistentViewController, Verific
             print(error)
         }
     }
-
 }

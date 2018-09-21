@@ -50,7 +50,7 @@ class DotsFieldComponent: Component  {
             dotEdge = 16.0
             dotSpacing = 24.0
             break
-        case .extra, .medium, .plus:
+        case .extra, .extraLarge, .medium, .plus:
             dotEdge = 16.0
             dotSpacing = 24.0
         case .unknown:

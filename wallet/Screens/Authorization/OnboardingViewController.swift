@@ -49,6 +49,9 @@ class OnboardingViewController: FlowViewController, WalletNavigable, UICollectio
         case .plus, .extra:
             registrationButtonTopConstraint?.constant = 100.0
             sizePreset = .default
+        case .extraLarge:
+            registrationButtonTopConstraint?.constant = 140.0
+            sizePreset = .large
         case .unknown:
             fatalError()
         }

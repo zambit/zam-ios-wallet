@@ -37,7 +37,7 @@ class IllustrationalPlaceholder: Component, SizePresetable {
             illustrationBottomConstraint?.constant = 5.0
             illustrationTopConstraint?.constant = 0.0
             bottomConstant = -5.0
-        case .compact, .default:
+        case .compact, .default, .large:
             illustrationBottomConstraint?.constant = 10.0
             illustrationTopConstraint?.constant = 0.0
             bottomConstant = -5.0

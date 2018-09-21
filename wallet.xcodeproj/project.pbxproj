@@ -141,6 +141,7 @@
 		8C713B32213FE33600AC2E25 /* EmptyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C713B31213FE33600AC2E25 /* EmptyViewController.swift */; };
 		8C713B34214024CE00AC2E25 /* PhoneNumberFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C713B33214024CE00AC2E25 /* PhoneNumberFormatter.swift */; };
 		8C713B362140327600AC2E25 /* StringProtocol+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C713B352140327600AC2E25 /* StringProtocol+Extensions.swift */; };
+		8C72AD1C2155107A0032ABD2 /* DeviceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C72AD1B2155107A0032ABD2 /* DeviceModel.swift */; };
 		8C7C33472142924D00EC6C96 /* KYCMainScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C33462142924D00EC6C96 /* KYCMainScreenViewController.swift */; };
 		8C7C33492142973C00EC6C96 /* StageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C33482142973C00EC6C96 /* StageButton.swift */; };
 		8C7C334D2142C15100EC6C96 /* KYCPersonalInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C334C2142C15100EC6C96 /* KYCPersonalInfoViewController.swift */; };
@@ -404,6 +405,7 @@
 		8C713B31213FE33600AC2E25 /* EmptyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyViewController.swift; sourceTree = "<group>"; };
 		8C713B33214024CE00AC2E25 /* PhoneNumberFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberFormatter.swift; sourceTree = "<group>"; };
 		8C713B352140327600AC2E25 /* StringProtocol+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StringProtocol+Extensions.swift"; sourceTree = "<group>"; };
+		8C72AD1B2155107A0032ABD2 /* DeviceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceModel.swift; sourceTree = "<group>"; };
 		8C7C33462142924D00EC6C96 /* KYCMainScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KYCMainScreenViewController.swift; sourceTree = "<group>"; };
 		8C7C33482142973C00EC6C96 /* StageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageButton.swift; sourceTree = "<group>"; };
 		8C7C334C2142C15100EC6C96 /* KYCPersonalInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KYCPersonalInfoViewController.swift; sourceTree = "<group>"; };
@@ -865,6 +867,7 @@
 				8CA2190321305EC00063C188 /* GroupType.swift */,
 				8C7C335721466E5800EC6C96 /* GenderType.swift */,
 				8C52FFE02119BE0300EB55EA /* WalletData.swift */,
+				8C72AD1B2155107A0032ABD2 /* DeviceModel.swift */,
 				8CF41D8C2136A1AE006D4FE2 /* TransactionsFilterData.swift */,
 				8CA218CC2126F23B0063C188 /* UserData.swift */,
 				8CA218AC212421150063C188 /* PhoneMaskData.swift */,
@@ -1750,6 +1753,7 @@
 				8C7C334F2142C2F500EC6C96 /* TextFieldCell.swift in Sources */,
 				8C0919812108D99400703224 /* CreateNewPasswordViewController.swift in Sources */,
 				8C0919432106268900703224 /* HTTPDispatcher.swift in Sources */,
+				8C72AD1C2155107A0032ABD2 /* DeviceModel.swift in Sources */,
 				8C333D362109F09800949AC0 /* FirstEnterLoginFlow.swift in Sources */,
 				8C7C337B2147EF1D00EC6C96 /* MediaSheetPickerViewController.swift in Sources */,
 			);

@@ -34,7 +34,7 @@ class MoreViewController: FlowViewController, WalletNavigable {
         switch UIDevice.current.screenType {
         case .extraSmall, .small:
             socialButtonsStackViewBottomConstraint?.constant = 20.0
-        case .medium, .plus, .extra:
+        case .medium, .plus, .extra, .extraLarge:
             socialButtonsStackViewBottomConstraint?.constant = 45.0
         case .unknown:
             fatalError()

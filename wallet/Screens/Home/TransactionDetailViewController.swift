@@ -109,7 +109,7 @@ class TransactionDetailViewController: FlowViewController, WalletNavigable {
             recipientButtonBetweenConstraint?.constant = 46.0
             titleLeftConstraint?.constant = 55.0
             titleRightConstraint?.constant = 55.0
-        case .extra:
+        case .extra, .extraLarge:
             topTitleConstraint?.constant = 44.0
             titleAmountBetweenConstraint?.constant = 107.0
             recipientButtonBetweenConstraint?.constant = 56.0

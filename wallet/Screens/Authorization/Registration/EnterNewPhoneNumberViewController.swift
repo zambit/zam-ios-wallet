@@ -60,7 +60,7 @@ class EnterNewPhoneNumberViewController: СonsistentViewController, PhoneNumberC
         switch UIDevice.current.screenType {
         case .small, .extraSmall:
             phoneNumberComponent?.custom.prepare(preset: .superCompact)
-        case .medium, .extra, .plus:
+        case .medium, .extra, .plus, .extraLarge:
             phoneNumberComponent?.custom.prepare(preset: .default)
         case .unknown:
             fatalError()

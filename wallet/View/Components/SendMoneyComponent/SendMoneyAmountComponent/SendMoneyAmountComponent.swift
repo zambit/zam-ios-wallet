@@ -123,7 +123,7 @@ class SendMoneyAmountComponent: Component, SizePresetable, UITextFieldDelegate {
             valueTextFieldTopConstraint?.constant = 5.0
             valueTextFieldBottomConstraint?.constant = 5.0
             titleLabelHeightConstraint?.constant = 16.0
-        case .compact, .default:
+        case .compact, .default, .large:
             blockchainFee?.custom.setIndent("blockchain fee   ")
             blockchainFee?.font = UIFont.walletFont(ofSize: 14.0, weight: .regular)
             zamzamFee?.font = UIFont.walletFont(ofSize: 14.0, weight: .regular)

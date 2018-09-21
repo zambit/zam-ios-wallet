@@ -75,7 +75,6 @@ class EnterLoginPasswordViewController: СonsistentViewController, LoginPassword
      */
     func prepare(phone: String) {
         self.phone = phone
-        print("Phone: \(phone)")
     }
 
     @objc

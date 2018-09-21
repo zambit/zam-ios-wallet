@@ -22,11 +22,7 @@ class CreatePinViewController: FlowViewController, WalletNavigable, DecimalKeybo
 
     @IBOutlet var verticalBetweenSpacingConstraint: NSLayoutConstraint?
 
-    private var pinText: String = "" {
-        didSet {
-            print(pinText)
-        }
-    }
+    private var pinText: String = ""
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -42,7 +38,7 @@ class CreatePinViewController: FlowViewController, WalletNavigable, DecimalKeybo
             verticalBetweenSpacingConstraint?.constant = 42.0
         case .medium:
             verticalBetweenSpacingConstraint?.constant = 57.0
-        case .extra, .plus:
+        case .extra, .plus, .extraLarge:
             verticalBetweenSpacingConstraint?.constant = 72.0
         case .unknown:
             fatalError()

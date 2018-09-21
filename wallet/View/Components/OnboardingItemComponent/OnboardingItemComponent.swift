@@ -54,6 +54,10 @@ class OnboardingItemComponent: ItemComponent, SizePresetable {
             illustrationImageViewTopConstraint?.constant = 79
             illustrationImageViewBottomConstraint?.constant = 0
             illustrationImageViewHeightConstraint?.constant = 230
+        case .large:
+            illustrationImageViewTopConstraint?.constant = 79
+            illustrationImageViewBottomConstraint?.constant = 0
+            illustrationImageViewHeightConstraint?.constant = 280
         }
     }
 
@@ -80,20 +84,5 @@ class OnboardingItemComponent: ItemComponent, SizePresetable {
 
         textLabel?.numberOfLines = 0
         illustrationImageView?.contentMode = .scaleAspectFill
-
-//        switch UIDevice.current.screenType {
-//        case .extraSmall, .small:
-//            topImageToSafeAreaConstraint?.constant = 20.0
-//            titleLabel?.font = UIFont.systemFont(ofSize: 28.0, weight: .bold)
-//        case .medium:
-//            topImageToSafeAreaConstraint?.constant = 20.0
-//            titleLabel?.font = UIFont.systemFont(ofSize: 34.0, weight: .bold)
-//        case .extra, .plus:
-//            topImageToSafeAreaConstraint?.constant = 79.5
-//            titleLabel?.font = UIFont.systemFont(ofSize: 34.0, weight: .bold)
-//        case .unknown:
-//            print("Error: Unknown screen")
-//            break
-//        }
     }
 }

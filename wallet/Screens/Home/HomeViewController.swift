@@ -116,7 +116,7 @@ class HomeViewController: FloatingViewController, WalletsViewControllerDelegate,
             detailViewHeight?.constant = 515.0
         case .medium:
             detailViewHeight?.constant = 600.0
-        case .extra:
+        case .extra, .extraLarge:
             detailViewHeight?.constant = 691.0
         case .plus:
             detailViewHeight?.constant = 675.0
@@ -170,7 +170,7 @@ class HomeViewController: FloatingViewController, WalletsViewControllerDelegate,
         case .extraSmall, .small:
             sumSymbolFont = UIFont.walletFont(ofSize: 28.0, weight: .medium)
             sumMainFont = UIFont.walletFont(ofSize: 28.0, weight: .regular)
-        case .medium, .extra, .plus:
+        case .medium, .extra, .extraLarge, .plus:
             sumSymbolFont = UIFont.walletFont(ofSize: 36.0, weight: .medium)
             sumMainFont = UIFont.walletFont(ofSize: 36.0, weight: .regular)
         case .unknown:
@@ -272,7 +272,7 @@ class HomeViewController: FloatingViewController, WalletsViewControllerDelegate,
         case .extraSmall, .small:
             sumSymbolFont = UIFont.walletFont(ofSize: 28.0, weight: .regular)
             sumMainFont = UIFont.walletFont(ofSize: 28.0, weight: .medium)
-        case .medium, .extra, .plus:
+        case .medium, .extra, .extraLarge, .plus:
             sumSymbolFont = UIFont.walletFont(ofSize: 36.0, weight: .regular)
             sumMainFont = UIFont.walletFont(ofSize: 36.0, weight: .medium)
         case .unknown:

@@ -53,7 +53,7 @@ class DecimalKeyboardComponent: Component {
             keyboardButtonsHorizontalSpacing = 16.0
             keyboardButtonsVerticalSpacing = 8.0
             break
-        case .extra, .medium, .plus:
+        case .extra, .extraLarge, .medium, .plus:
             keyboardButtonEdge = 72.0
             keyboardButtonsHorizontalSpacing = 32.0
             keyboardButtonsVerticalSpacing = 16.0
