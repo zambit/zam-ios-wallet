@@ -34,7 +34,7 @@ class MoreViewController: FlowViewController, WalletNavigable {
         switch UIDevice.current.screenType {
         case .extraSmall, .small:
             socialButtonsStackViewBottomConstraint?.constant = 20.0
-        case .medium, .plus, .extra:
+        case .medium, .plus, .extra, .extraLarge:
             socialButtonsStackViewBottomConstraint?.constant = 45.0
         case .unknown:
             fatalError()
@@ -83,8 +83,8 @@ class MoreViewController: FlowViewController, WalletNavigable {
         telegramButton?.borderWidth = 2.0
         telegramButton?.borderColor = .skyBlue
         telegramButton?.circleCorner = true
-        telegramButton?.contentEdgeInsets = UIEdgeInsetsMake(15, 26, 15, 15)
-        telegramButton?.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 26)
+        telegramButton?.contentEdgeInsets = UIEdgeInsets.init(top: 15, left: 26, bottom: 15, right: 15)
+        telegramButton?.imageEdgeInsets = UIEdgeInsets.init(top: 0, left: 0, bottom: 0, right: 26)
 
         socialButtonsStackView?.spacing = 26.0
         socialButtonsStackView?.axis = .horizontal

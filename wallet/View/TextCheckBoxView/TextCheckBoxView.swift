@@ -41,7 +41,7 @@ class TextCheckBoxView: UIView {
     }
 
     func configure(text: String, tapableText: [String], tapHandler: @escaping (String) -> Void) {
-        let attributes: [NSAttributedStringKey: Any] = [.font: UIFont.walletFont(ofSize: 13.0, weight: .regular),
+        let attributes: [NSAttributedString.Key: Any] = [.font: UIFont.walletFont(ofSize: 13.0, weight: .regular),
                                                         .foregroundColor: UIColor.white]
         let attributedString = NSAttributedString(string: text, attributes: attributes)
         let underlineString = NSMutableAttributedString(attributedString: attributedString)

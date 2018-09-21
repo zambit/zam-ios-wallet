@@ -14,7 +14,7 @@ class FeatureItemComponent: ItemComponent {
 
     @IBOutlet private var featureButton: MultiStatableButton?
 
-    override var intrinsicContentSize: CGSize  {
+    override var intrinsicContentSize: CGSize {
         if let button = featureButton {
             return button.intrinsicContentSize
         }
@@ -33,7 +33,18 @@ class FeatureItemComponent: ItemComponent {
     override func initFromNib() {
         super.initFromNib()
 
-        featureButton?.contentEdgeInsets = UIEdgeInsetsMake(8.0, 25.0, 8.0, 25.0)
+        if #available(iOS 12.0, *) {
+            contentView.translatesAutoresizingMaskIntoConstraints = false
+
+            // Code below is needed to make the self-sizing cell work when building for iOS 12 from Xcode 10.0:
+            let leftConstraint = contentView.leftAnchor.constraint(equalTo: leftAnchor)
+            let rightConstraint = contentView.rightAnchor.constraint(equalTo: rightAnchor)
+            let topConstraint = contentView.topAnchor.constraint(equalTo: topAnchor)
+            let bottomConstraint = contentView.bottomAnchor.constraint(equalTo: bottomAnchor)
+            NSLayoutConstraint.activate([leftConstraint, rightConstraint, topConstraint, bottomConstraint])
+        }
+
+        featureButton?.contentEdgeInsets = UIEdgeInsets.init(top: 8.0, left: 25.0, bottom: 8.0, right: 25.0)
         featureButton?.layer.borderWidth = 1.5
         featureButton?.layer.borderColor = UIColor.skyBlue.cgColor
         featureButton?.addTarget(self, action: #selector(featureButtonTouchUpInsideEvent(_:)), for: .touchUpInside)
@@ -41,7 +52,9 @@ class FeatureItemComponent: ItemComponent {
 
     func configure(title: String) {
         featureButton?.custom.setup(states: [title, title], colors: [UIColor.white, UIColor.white], backgroundColors: [.clear, .skyBlue])
+        featureButton?.sizeToFit()
         invalidateIntrinsicContentSize()
+        print(intrinsicContentSize)
     }
 
     func select() {

@@ -18,9 +18,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var userDefaultsManager: UserDefaultsManager!
 
 //    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-//        let _vc = ControllerHelper.instantiateViewController(identifier: "SendMoneyViewController", storyboardName: "Main")
+//        let _vc = ControllerHelper.instantiateViewController(identifier: "TestViewController", storyboardName: "Main")
 //
-//        guard let vc = _vc as? SendMoneyViewController else {
+//        guard let vc = _vc as? TestViewController else {
 //            fatalError()
 //        }
 //
@@ -31,20 +31,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        return true
 //    }
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         UIApplication.shared.statusBarStyle = .lightContent
 
-        let _vc = ControllerHelper.instantiateViewController(identifier: "LaunchScreenViewController", storyboardName: "Onboarding")
-
-        guard let vc = _vc as? LaunchScreenViewController else {
-            fatalError()
-        }
-
-        let navigationController = WalletNavigationController(rootViewController: vc)
-
-//        navigation = WalletNavigationController(navigationController: navigationController)
-//        navigation.transitionCoordinator = NavigationControllerTransitionCoordinator(animator: SlideTransitionAnimator())
+        let navigationController = WalletNavigationController()
 
         userDefaultsManager = UserDefaultsManager(keychainConfiguration: WalletKeychainConfiguration())
 

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -19,14 +19,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BZ2-Ck-rOa" customClass="DecimalKeyboardComponent" customModule="wallet" customModuleProvider="target">
-                                <rect key="frame" x="16" y="268" width="382" height="380"/>
+                                <rect key="frame" x="16" y="286" width="382" height="380"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="380" placeholder="YES" id="Che-2h-Akg"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gjf-Ft-3mR" customClass="CreatePinComponent" customModule="wallet" customModuleProvider="target">
-                                <rect key="frame" x="16" y="36" width="382" height="160"/>
+                                <rect key="frame" x="16" y="54" width="382" height="160"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="160" placeholder="YES" id="ZN3-em-Oe3"/>
@@ -38,10 +38,11 @@
                             <constraint firstItem="Gjf-Ft-3mR" firstAttribute="centerX" secondItem="ZUH-iA-1cu" secondAttribute="centerX" id="FPM-hm-Ypa"/>
                             <constraint firstItem="28g-uU-ZNN" firstAttribute="trailing" secondItem="BZ2-Ck-rOa" secondAttribute="trailing" constant="16" id="JZz-rK-zJq"/>
                             <constraint firstItem="BZ2-Ck-rOa" firstAttribute="centerX" secondItem="ZUH-iA-1cu" secondAttribute="centerX" id="M1g-eH-f5o"/>
-                            <constraint firstItem="Gjf-Ft-3mR" firstAttribute="top" secondItem="28g-uU-ZNN" secondAttribute="top" constant="16" id="S4J-10-e17"/>
+                            <constraint firstItem="Gjf-Ft-3mR" firstAttribute="top" relation="greaterThanOrEqual" secondItem="28g-uU-ZNN" secondAttribute="top" constant="16" id="S4J-10-e17"/>
                             <constraint firstItem="BZ2-Ck-rOa" firstAttribute="leading" secondItem="28g-uU-ZNN" secondAttribute="leading" constant="16" id="XAv-NK-N5P"/>
                             <constraint firstItem="Gjf-Ft-3mR" firstAttribute="leading" secondItem="28g-uU-ZNN" secondAttribute="leading" constant="16" id="afb-RH-srt"/>
                             <constraint firstItem="BZ2-Ck-rOa" firstAttribute="top" secondItem="Gjf-Ft-3mR" secondAttribute="bottom" constant="72" id="hbf-Ui-fJm"/>
+                            <constraint firstItem="BZ2-Ck-rOa" firstAttribute="top" secondItem="28g-uU-ZNN" secondAttribute="top" constant="266" id="sfA-V3-wR3"/>
                             <constraint firstItem="28g-uU-ZNN" firstAttribute="trailing" secondItem="Gjf-Ft-3mR" secondAttribute="trailing" constant="16" id="w7E-hQ-a75"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="28g-uU-ZNN"/>
@@ -49,6 +50,7 @@
                     <connections>
                         <outlet property="createPinComponent" destination="Gjf-Ft-3mR" id="0bR-1z-fRT"/>
                         <outlet property="keyboardComponent" destination="BZ2-Ck-rOa" id="56I-d1-qX6"/>
+                        <outlet property="topConstraint" destination="sfA-V3-wR3" id="Ck3-W0-1bu"/>
                         <outlet property="verticalBetweenSpacingConstraint" destination="hbf-Ui-fJm" id="oWr-9T-5AW"/>
                     </connections>
                 </viewController>

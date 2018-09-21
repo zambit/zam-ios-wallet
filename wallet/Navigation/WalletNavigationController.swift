@@ -41,7 +41,7 @@ extension BehaviorExtension where Base: WalletNavigationController {
         base.navigationBar.shadowImage = UIImage()
         base.navigationBar.backgroundColor = .clear
         base.navigationBar.isTranslucent = true
-        base.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
+        base.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
 
         base.navigationItem.hidesBackButton = true
     }
@@ -56,7 +56,7 @@ extension BehaviorExtension where Base: WalletNavigationController {
     }
 
     func pushFromRoot(viewController: ScreenWalletNavigable, animated: Bool = true, direction: WalletNavigationControllerAnimationDirection) {
-        guard base.viewControllers.count > 1 else {
+        guard base.viewControllers.count > 0 else {
             push(viewController: viewController, animated: animated)
             hideBackButton(for: viewController)
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_0" orientation="portrait">
+    <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -15,24 +15,24 @@
             <objects>
                 <viewController storyboardIdentifier="EnterNewPhoneNumberViewController" id="Pyg-73-OqK" customClass="EnterNewPhoneNumberViewController" customModule="wallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="tUF-U7-7TA">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What's your phone number?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U4Y-RM-BPg">
-                                <rect key="frame" x="16" y="36" width="288" height="81.5"/>
+                                <rect key="frame" x="16" y="59.999999999999993" width="343" height="81.333333333333314"/>
                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="34"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qQ8-XH-WUs" customClass="PhoneNumberFormComponent" customModule="wallet" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="142.5" width="320" height="56"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qQ8-XH-WUs" customClass="PhoneNumberComponent" customModule="wallet" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="166.33333333333334" width="375" height="86"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="56" placeholder="YES" id="w2H-ng-OF1"/>
+                                    <constraint firstAttribute="height" constant="86" id="w2H-ng-OF1"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yY4-cD-Qm1" customClass="RoundContinueButton" customModule="wallet" customModuleProvider="target">
-                                <rect key="frame" x="236" y="484" width="60" height="60"/>
+                                <rect key="frame" x="291" y="694" width="60" height="60"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="60" id="UBg-LH-KT8"/>
@@ -40,7 +40,7 @@
                                 </constraints>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="OBf-Zh-HeM">
-                                <rect key="frame" x="16" y="214.5" width="250" height="200"/>
+                                <rect key="frame" x="16" y="268.33333333333331" width="305" height="200"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="200" placeholder="YES" id="W1d-wb-Ork"/>
                                 </constraints>
@@ -67,7 +67,7 @@
                         <outlet property="continueButton" destination="yY4-cD-Qm1" id="biH-RX-QAM"/>
                         <outlet property="fastenBottomConstraint" destination="tw1-mZ-PDp" id="fHr-sl-L2t"/>
                         <outlet property="largeTitleLabel" destination="U4Y-RM-BPg" id="Fbq-nU-Gfe"/>
-                        <outlet property="phoneNumberForm" destination="qQ8-XH-WUs" id="q4o-aW-0v8"/>
+                        <outlet property="phoneNumberComponent" destination="qQ8-XH-WUs" id="q4o-aW-0v8"/>
                         <outlet property="termsStackView" destination="OBf-Zh-HeM" id="UKy-to-pon"/>
                     </connections>
                 </viewController>
@@ -80,24 +80,24 @@
             <objects>
                 <viewController storyboardIdentifier="VerifyPhoneNumberWithSmsViewController" id="M2G-cM-Sue" customClass="VerifyPhoneNumberWithSmsViewController" customModule="wallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="19j-Om-sn0">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Verification with sms-code" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5C8-LU-ILM">
-                                <rect key="frame" x="16" y="36" width="288" height="81.5"/>
+                                <rect key="frame" x="16" y="59.999999999999993" width="343" height="81.333333333333314"/>
                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="34"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3FS-X7-4ZV" customClass="VerificationCodeFormComponent" customModule="wallet" customModuleProvider="target">
-                                <rect key="frame" x="16" y="142" width="288" height="56"/>
+                                <rect key="frame" x="16" y="166" width="343" height="56"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="56" id="RVY-1x-yy0"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fDU-AV-0sT" customClass="RoundContinueButton" customModule="wallet" customModuleProvider="target">
-                                <rect key="frame" x="236" y="484" width="60" height="60"/>
+                                <rect key="frame" x="291" y="694" width="60" height="60"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="60" id="B9j-sb-fwq"/>
@@ -105,11 +105,11 @@
                                 </constraints>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w2q-jJ-o6c" customClass="AdditionalTextButton" customModule="wallet" customModuleProvider="target">
-                                <rect key="frame" x="24" y="497" width="54" height="34"/>
+                                <rect key="frame" x="24" y="707" width="54" height="34"/>
                                 <state key="normal" title="Button"/>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Helper text" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VAD-Gv-oSN">
-                                <rect key="frame" x="16" y="206" width="74" height="17"/>
+                                <rect key="frame" x="16" y="230" width="74" height="17"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -151,24 +151,24 @@
             <objects>
                 <viewController storyboardIdentifier="CreateNewPasswordViewController" id="O4A-O5-OzH" customClass="CreateNewPasswordViewController" customModule="wallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Cx1-kA-TRG">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create a new password" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HrH-uf-gIy">
-                                <rect key="frame" x="16" y="36" width="288" height="81.5"/>
+                                <rect key="frame" x="16" y="59.999999999999993" width="343" height="81.333333333333314"/>
                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="34"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SE1-m1-7P3" customClass="NewPasswordFormComponent" customModule="wallet" customModuleProvider="target">
-                                <rect key="frame" x="16" y="142" width="288" height="146"/>
+                                <rect key="frame" x="16" y="166" width="343" height="146"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="146" placeholder="YES" id="o3U-HE-MCg"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VGq-BV-aTL" customClass="RoundContinueButton" customModule="wallet" customModuleProvider="target">
-                                <rect key="frame" x="236" y="484" width="60" height="60"/>
+                                <rect key="frame" x="291" y="694" width="60" height="60"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="gX7-8r-GKb"/>

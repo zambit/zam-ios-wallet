@@ -41,8 +41,8 @@ class SpinningAnimationLayer: CAShapeLayer {
         self.strokeColor = strokeColor.cgColor
         self.lineWidth = lineWidth
 
-        self.lineJoin = kCALineJoinRound
-        self.lineCap = kCALineCapRound
+        self.lineJoin = CAShapeLayerLineJoin.round
+        self.lineCap = CAShapeLayerLineCap.round
     }
 
     private func animate() {
@@ -58,7 +58,7 @@ class SpinningAnimationLayer: CAShapeLayer {
         let animation = CAAnimationGroup()
 
         animation.animations = [rotateAnimation]
-        animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
+        animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
         animation.duration = duration
         animation.repeatCount = HUGE
         animation.isRemovedOnCompletion = false

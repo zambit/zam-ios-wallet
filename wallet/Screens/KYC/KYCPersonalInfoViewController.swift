@@ -32,8 +32,8 @@ class KYCPersonalInfoViewController: FlowViewController, WalletNavigable, UITabl
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
 
     override func viewDidLoad() {
@@ -182,7 +182,8 @@ class KYCPersonalInfoViewController: FlowViewController, WalletNavigable, UITabl
                                     self?.checkCellPosition(cell)}
                 )])
         ]
-        hideKeyboardOnTap()
+
+        self.isKeyboardHidesOnTap = true
 
 
         self.tableView?.register(TextFieldCell.self , forCellReuseIdentifier: "TextFieldCell")
@@ -398,7 +399,7 @@ class KYCPersonalInfoViewController: FlowViewController, WalletNavigable, UITabl
             return
         }
 
-        guard let keyboardFrameValue = notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue else {
+        guard let keyboardFrameValue = notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue else {
             return
         }
 

@@ -54,6 +54,7 @@ class TransactionsFeatureFilterComponent: CellComponent, UICollectionViewDataSou
         titleLabel?.textAlignment = .left
 
         featuresButtonsCollectionViewLayout?.estimatedItemSize = CGSize(width: 1.0, height: 1.0)
+        featuresButtonsCollectionViewLayout?.itemSize = UICollectionViewFlowLayout.automaticSize
         featuresButtonsCollectionView?.backgroundColor = .clear
         featuresButtonsCollectionView?.delegate = self
         featuresButtonsCollectionView?.dataSource = self

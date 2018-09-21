@@ -102,7 +102,7 @@ class KYCMainScreenViewController: FlowViewController, WalletNavigable {
             bottomPlaceholderTopConstraint?.constant = 17.0
 
             buttonsType = .large
-        case .extra, .plus:
+        case .extra, .extraLarge, .plus:
             topPlaceholderComponent?.font = UIFont.walletFont(ofSize: 14.0, weight: .medium)
             topPlaceholderComponent?.prepare(preset: .default)
             topPlaceholderHeightConstraint?.constant = 250.0

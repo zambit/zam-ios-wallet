@@ -52,9 +52,12 @@ class EnterPinViewController: FlowViewController, WalletNavigable, DecimalKeyboa
         case .medium:
             verticalBetweenSpacingConstraint?.constant = 72
             topConstraint?.constant = 200
-        case .plus,.extra:
+        case .plus, .extra:
             verticalBetweenSpacingConstraint?.constant = 72
             topConstraint?.constant = 266
+        case .extraLarge:
+            verticalBetweenSpacingConstraint?.constant = 72
+            topConstraint?.constant = 320
         case .unknown:
             fatalError()
         }

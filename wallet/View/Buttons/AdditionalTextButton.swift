@@ -65,8 +65,6 @@ class AdditionalTextButton: UIButton, CustomUI, CountdownTimerDelegate {
     }
 
     required init?(coder aDecoder: NSCoder) {
-        print(aDecoder)
-
         super.init(coder: aDecoder)
         setupStyle()
     }

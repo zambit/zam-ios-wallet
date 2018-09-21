@@ -93,12 +93,12 @@ class DecimalButton: UIButton, CustomUI {
         self.layer.cornerRadius = self.bounds.width / 2
     }
 
-    private var titleAttributes: [NSAttributedStringKey: Any] {
+    private var titleAttributes: [NSAttributedString.Key: Any] {
         let font = UIFont.systemFont(ofSize: 34.0, weight: .regular)
         let color = UIColor.white
         return [
-            NSAttributedStringKey.font: font,
-            NSAttributedStringKey.foregroundColor: color
+            NSAttributedString.Key.font: font,
+            NSAttributedString.Key.foregroundColor: color
         ]
     }
     

@@ -20,7 +20,7 @@ class MultiStatableButton: UIButton, CustomUI {
             ) {
 
             if let image = images.first {
-                parent?.setImage(image, for: UIControlState())
+                parent?.setImage(image, for: UIControl.State())
             }
             parent?.sizeToFit()
 
@@ -119,17 +119,17 @@ class MultiStatableButton: UIButton, CustomUI {
     // MARK: - Overrides
     override func tintColorDidChange() {
         if nil == currentColor {
-            setTitleColor(tintColor, for: UIControlState())
+            setTitleColor(tintColor, for: UIControl.State())
         }
     }
 
     // MARK: - Private
     private func setupCurrentState() {
         let currentTitle = states[currentStateIndex]
-        setTitle(currentTitle.isEmpty ? nil : currentTitle, for: UIControlState())
-        setTitleColor(currentColor ?? tintColor, for: UIControlState())
+        setTitle(currentTitle.isEmpty ? nil : currentTitle, for: UIControl.State())
+        setTitleColor(currentColor ?? tintColor, for: UIControl.State())
         backgroundColor = currentBackgroundColor ?? .clear
-        setImage(currentToggleImage ?? currentImage, for: UIControlState())
+        setImage(currentToggleImage ?? currentImage, for: UIControl.State())
     }
 
     private var currentColor: UIColor? {

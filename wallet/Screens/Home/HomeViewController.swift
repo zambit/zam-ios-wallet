@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class HomeViewController: DetailOffsetPresentationViewController, WalletsViewControllerDelegate, ContactsHorizontalComponentDelegate {
+class HomeViewController: FloatingViewController, WalletsViewControllerDelegate, ContactsHorizontalComponentDelegate {
 
     var contactsManager: UserContactsManager?
     var userManager: UserDefaultsManager?
@@ -91,7 +91,7 @@ class HomeViewController: DetailOffsetPresentationViewController, WalletsViewCon
         setupStyle()
         setupDefaultStyle()
 
-        hideKeyboardOnTap()
+        isKeyboardHidesOnTap = true
 
         contactsData = contactsManager?.contacts ?? []
 
@@ -99,12 +99,12 @@ class HomeViewController: DetailOffsetPresentationViewController, WalletsViewCon
             self.contactsComponent?.delegate = self
             self.contactsComponent?.contactsCollectionView?.endLoading()
             self.contactsComponent?.prepare(contacts: contactsData)
-            self.detailViewOffset = 350
+            self.floatingViewInitialOffset = 350
 
         } else {
 
             self.contactsComponent?.contactsCollectionView?.endLoading()
-            self.detailViewOffset = 200
+            self.floatingViewInitialOffset = 200
 
             if self.currentState == .closed {
                 self.animate(to: .closed)
@@ -120,6 +120,8 @@ class HomeViewController: DetailOffsetPresentationViewController, WalletsViewCon
             detailViewHeight?.constant = 691.0
         case .plus:
             detailViewHeight?.constant = 675.0
+        case .extraLarge:
+            detailViewHeight?.constant = 775.0
         case .unknown:
             fatalError()
         }
@@ -150,10 +152,10 @@ class HomeViewController: DetailOffsetPresentationViewController, WalletsViewCon
     }
 
     private func setupStyle() {
-        detailView?.layer.cornerRadius = 16.0
-        detailView?.clipsToBounds = true
+        floatingView?.layer.cornerRadius = 16.0
+        floatingView?.clipsToBounds = true
 
-        detailView?.backgroundColor = .white
+        floatingView?.backgroundColor = .white
         detailGestureView?.backgroundColor = .clear
 
         detailTitleLabel?.textColor = .darkIndigo
@@ -170,7 +172,7 @@ class HomeViewController: DetailOffsetPresentationViewController, WalletsViewCon
         case .extraSmall, .small:
             sumSymbolFont = UIFont.walletFont(ofSize: 28.0, weight: .medium)
             sumMainFont = UIFont.walletFont(ofSize: 28.0, weight: .regular)
-        case .medium, .extra, .plus:
+        case .medium, .extra, .extraLarge, .plus:
             sumSymbolFont = UIFont.walletFont(ofSize: 36.0, weight: .medium)
             sumMainFont = UIFont.walletFont(ofSize: 36.0, weight: .regular)
         case .unknown:
@@ -201,7 +203,7 @@ class HomeViewController: DetailOffsetPresentationViewController, WalletsViewCon
 
         detailTopGestureView?.applyGradient(colors: [.white, UIColor.white.withAlphaComponent(0.7), UIColor.white.withAlphaComponent(0.0)], locations: [0.0, 0.75, 1.0])
 
-        embededViewController?.collectionView?.contentInset = UIEdgeInsetsMake(64, 0, 64, 0)
+        embededViewController?.collectionView?.contentInset = UIEdgeInsets.init(top: 64, left: 0, bottom: 64, right: 0)
     }
 
     private func loadData() {
@@ -272,7 +274,7 @@ class HomeViewController: DetailOffsetPresentationViewController, WalletsViewCon
         case .extraSmall, .small:
             sumSymbolFont = UIFont.walletFont(ofSize: 28.0, weight: .regular)
             sumMainFont = UIFont.walletFont(ofSize: 28.0, weight: .medium)
-        case .medium, .extra, .plus:
+        case .medium, .extra, .extraLarge, .plus:
             sumSymbolFont = UIFont.walletFont(ofSize: 36.0, weight: .regular)
             sumMainFont = UIFont.walletFont(ofSize: 36.0, weight: .medium)
         case .unknown:
@@ -297,6 +299,12 @@ class HomeViewController: DetailOffsetPresentationViewController, WalletsViewCon
 
         sumLabel?.attributedText = attributedString
         sumLabel?.attributedText = attributedString
+        sumLabel?.sizeToFit()
+
+        if currentState == .open {
+            let sumLabelWidth: CGFloat = sumLabel?.bounds.width ?? 0
+            sumLeftConstraint?.constant = self.view.bounds.width / 2.0 - sumLabelWidth / 2.0
+        }
     }
 
     // MARK: - WalletsViewControllerDelegate
@@ -308,18 +316,26 @@ class HomeViewController: DetailOffsetPresentationViewController, WalletsViewCon
     // MARK: - ContactsHorizontalComponentDelegate
 
     func contactsHorizontalComponent(_ contactsHorizontalComponent: ContactsHorizontalComponent, itemWasTapped contactData: ContactData) {
+
         contactsHorizontalComponent.isUserInteractionEnabled = false
         dismissKeyboard {
             [weak self] in
 
-            contactsHorizontalComponent.isUserInteractionEnabled = true
-            self?.embededViewController?.onSendWithContact(contactData)
+            contactData.toFormatted {
+                formatted in
+
+                contactsHorizontalComponent.isUserInteractionEnabled = true
+
+                if let formatted = formatted {
+                    self?.embededViewController?.onSendWithContact(formatted)
+                }
+            }
         }
     }
 
     // MARK: - Animation
 
-    override func stateDidChange(_ state: DetailOffsetPresentationViewController.State) {
+    override func stateDidChange(_ state: FloatingViewController.State) {
         super.stateDidChange(state)
 
         // evaluate some values before setting animation
@@ -359,7 +375,7 @@ class HomeViewController: DetailOffsetPresentationViewController, WalletsViewCon
         }
     }
 
-    override func createTransitionAnimatorsIfNeeded(to state: DetailOffsetPresentationViewController.State, duration: TimeInterval) -> [UIViewPropertyAnimator] {
+    override func createTransitionAnimatorsIfNeeded(to state: FloatingViewController.State, duration: TimeInterval) -> [UIViewPropertyAnimator] {
 
         guard let transitionAnimator = super.createTransitionAnimatorsIfNeeded(to: state, duration: duration).first else {
             fatalError()

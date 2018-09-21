@@ -26,19 +26,19 @@ class ContainerView: UIView {
         self.owner = owner
         self.embededViewController = viewController
 
-        owner.addChildViewController(viewController)
+        owner.addChild(viewController)
 
         addSubview(viewController.view)
 
         viewController.view.frame = bounds
         viewController.view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
 
-        viewController.didMove(toParentViewController: owner)
+        viewController.didMove(toParent: owner)
     }
 
     deinit {
         embededViewController?.view.removeFromSuperview()
-        embededViewController?.removeFromParentViewController()
+        embededViewController?.removeFromParent()
     }
 
 

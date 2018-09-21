@@ -30,7 +30,7 @@ class TransactionsHistoryFilterViewController: FlowViewController, WalletNavigab
 
         view.backgroundColor = UIColor.darkIndigo
 
-        hideKeyboardOnTap()
+        isKeyboardHidesOnTap = true
 
         componentsTableView?.allowsSelection = false
         componentsTableView?.backgroundColor = .clear
@@ -54,7 +54,7 @@ class TransactionsHistoryFilterViewController: FlowViewController, WalletNavigab
         }
 
         datesComponent.prepare(groupings: groupings, selectedIndexes: currentGroup)
-        datesComponent.insets = UIEdgeInsetsMake(0.0, 0.0, 10.0, 0.0)
+        datesComponent.insets = UIEdgeInsets.init(top: 0.0, left: 0.0, bottom: 10.0, right: 0.0)
         datesComponent.onFilterChanged = {
             [weak self]
             selectedDates in
@@ -72,7 +72,7 @@ class TransactionsHistoryFilterViewController: FlowViewController, WalletNavigab
 
         let dateIntervalComponent = TransactionsDateIntervalFilterComponent(frame: .zero)
         dateIntervalComponent.setTitle("Select dates")
-        dateIntervalComponent.insets = UIEdgeInsetsMake(0.0, 0.0, 10.0, 0.0)
+        dateIntervalComponent.insets = UIEdgeInsets.init(top: 0.0, left: 0.0, bottom: 10.0, right: 0.0)
 
         var fromDate: Date?
         if let fromString = filterData.fromTime, let fromDouble = Double(fromString) {
@@ -114,7 +114,7 @@ class TransactionsHistoryFilterViewController: FlowViewController, WalletNavigab
         }
 
         directionsComponent.prepare(directions: directions, selectedIndexes: currentDirection)
-        directionsComponent.insets = UIEdgeInsetsMake(0.0, 0.0, 10.0, 0.0)
+        directionsComponent.insets = UIEdgeInsets.init(top: 0.0, left: 0.0, bottom: 10.0, right: 0.0)
         directionsComponent.onFilterChanged = {
             [weak self]
             selectedDirections in
@@ -143,7 +143,7 @@ class TransactionsHistoryFilterViewController: FlowViewController, WalletNavigab
         }
 
         coinsComponent.prepare(coins: coins, selectedIndexes: currentCoin)
-        coinsComponent.insets = UIEdgeInsetsMake(0.0, 0.0, 10.0, 0.0)
+        coinsComponent.insets = UIEdgeInsets.init(top: 0.0, left: 0.0, bottom: 10.0, right: 0.0)
         coinsComponent.onFilterChanged = {
             [weak self]
             selectedCoins in

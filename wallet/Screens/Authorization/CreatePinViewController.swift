@@ -20,13 +20,10 @@ class CreatePinViewController: FlowViewController, WalletNavigable, DecimalKeybo
     @IBOutlet var keyboardComponent: DecimalKeyboardComponent?
     @IBOutlet var createPinComponent: CreatePinComponent?
 
+    @IBOutlet var topConstraint: NSLayoutConstraint?
     @IBOutlet var verticalBetweenSpacingConstraint: NSLayoutConstraint?
 
-    private var pinText: String = "" {
-        didSet {
-            print(pinText)
-        }
-    }
+    private var pinText: String = ""
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -40,10 +37,16 @@ class CreatePinViewController: FlowViewController, WalletNavigable, DecimalKeybo
         switch UIDevice.current.screenType {
         case .small, .extraSmall:
             verticalBetweenSpacingConstraint?.constant = 42.0
+            topConstraint?.constant = 150
         case .medium:
-            verticalBetweenSpacingConstraint?.constant = 57.0
+            verticalBetweenSpacingConstraint?.constant = 72.0
+            topConstraint?.constant = 200
         case .extra, .plus:
             verticalBetweenSpacingConstraint?.constant = 72.0
+            topConstraint?.constant = 266
+        case .extraLarge:
+            verticalBetweenSpacingConstraint?.constant = 72.0
+            topConstraint?.constant = 320
         case .unknown:
             fatalError()
         }

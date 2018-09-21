@@ -37,20 +37,7 @@ class LoginPasswordFormComponent: UIView {
     @IBOutlet private var passwordTextField: UITextField?
     @IBOutlet private var helperTextLabel: UILabel?
 
-    @IBOutlet private var passwordTextFieldHeightConstraint: NSLayoutConstraint?
-
     weak var delegate: LoginPasswordComponentDelegate?
-    
-    var textFieldHeight: CGFloat {
-        get {
-            return passwordTextFieldHeightConstraint?.constant ?? 0
-        }
-        
-        set {
-            passwordTextFieldHeightConstraint?.constant = newValue
-            self.layoutIfNeeded()
-        }
-    }
 
     var password: String {
         guard let text = passwordTextField?.text else {
@@ -132,8 +119,8 @@ class LoginPasswordFormComponent: UIView {
         let placeholderColor = UIColor.white.withAlphaComponent(0.2)
         let placeholderFont = UIFont.systemFont(ofSize: 20, weight: .regular)
         let placeholderAttributedParameters = [
-            NSAttributedStringKey.font: placeholderFont,
-            NSAttributedStringKey.foregroundColor: placeholderColor
+            NSAttributedString.Key.font: placeholderFont,
+            NSAttributedString.Key.foregroundColor: placeholderColor
         ]
 
         let passwordPlaceholderString = NSAttributedString(string: "Password", attributes: placeholderAttributedParameters)

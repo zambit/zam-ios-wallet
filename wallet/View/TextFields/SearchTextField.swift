@@ -115,7 +115,7 @@ class SearchTextField: UITextField {
                 return
             }
 
-            self?.bringSubview(toFront: detailButton)
+            self?.bringSubviewToFront(detailButton)
         })
     }
 
@@ -142,7 +142,7 @@ class SearchTextField: UITextField {
                 return
             }
 
-            self?.bringSubview(toFront: detailImage)
+            self?.bringSubviewToFront(detailImage)
         })
     }
 }

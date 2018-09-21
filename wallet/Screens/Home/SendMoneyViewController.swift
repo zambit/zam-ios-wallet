@@ -9,21 +9,31 @@
 import Foundation
 import UIKit
 
-class SendMoneyViewController: KeyboardBehaviorFollowingViewController, SendMoneyComponentDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, QRCodeScannerViewControllerDelegate {
+protocol SendMoneyViewControllerDelegate: class {
 
-    var onSend: ((SendMoneyData) -> Void)?
+    func sendMoneyViewControllerSendingProceedWithSuccess(_ sendMoneyViewController: SendMoneyViewController)
+}
+
+class SendMoneyViewController: AvoidingViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, SendMoneyComponentDelegate, TransactionDetailViewControllerDelegate, QRCodeScannerViewControllerDelegate {
+
+    weak var delegate: SendMoneyViewControllerDelegate?
+
+    var onSend: ((SendingData) -> Void)?
     var onQRScanner: (() -> Void)?
+
+    var userManager: UserDefaultsManager?
+    var userAPI: UserAPI?
 
     @IBOutlet var sendMoneyComponent: SendMoneyComponent?
     @IBOutlet var titleLabel: UILabel?
     @IBOutlet var walletsCollectionView: UICollectionView?
 
-    private var recipient: ContactData?
+    private var recipient: FormattedContactData?
     private var phone: String?
     private var wallets: [WalletData] = []
     private var currentIndex: Int?
 
-    override var fastenOffset: CGFloat {
+    override var fastenInitialOffset: CGFloat {
         return 0
     }
 
@@ -45,28 +55,37 @@ class SendMoneyViewController: KeyboardBehaviorFollowingViewController, SendMone
             sendMoneyComponent?.prepare(preset: .compact)
         case .plus, .extra:
             sendMoneyComponent?.prepare(preset: .default)
+        case .extraLarge:
+            sendMoneyComponent?.prepare(preset: .large)
         case .unknown:
             fatalError()
         }
 
-        hideKeyboardOnTap()
+        isKeyboardHidesOnTap = true
         
         view.applyDefaultGradientHorizontally()
 
-        appearingAnimationBlock = {
-            [weak self] in
+        switch UIDevice.current.screenType {
+        case .extraLarge:
+            break
+        case .unknown:
+            fatalError()
+        default:
+            appearingAnimationBlock = {
+                [weak self] in
 
-            self?.walletsCollectionView?.visibleCells.first?.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
-            self?.walletsCollectionView?.alpha = 0.0
-            self?.titleLabel?.alpha = 0.0
-        }
+                self?.walletsCollectionView?.visibleCells.first?.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
+                self?.walletsCollectionView?.alpha = 0.0
+                self?.titleLabel?.alpha = 0.0
+            }
 
-        disappearingAnimationBlock = {
-            [weak self] in
+            disappearingAnimationBlock = {
+                [weak self] in
 
-            self?.walletsCollectionView?.visibleCells.first?.transform = .identity
-            self?.walletsCollectionView?.alpha = 1.0
-            self?.titleLabel?.alpha = 1.0
+                self?.walletsCollectionView?.visibleCells.first?.transform = .identity
+                self?.walletsCollectionView?.alpha = 1.0
+                self?.titleLabel?.alpha = 1.0
+            }
         }
 
         walletsCollectionView?.register(WalletSmallItemComponent.self , forCellWithReuseIdentifier: "WalletSmallItemComponent")
@@ -92,7 +111,7 @@ class SendMoneyViewController: KeyboardBehaviorFollowingViewController, SendMone
         sendMoneyComponent?.delegate = self
     }
 
-    func prepare(wallets: [WalletData], currentIndex: Int, recipient: ContactData? = nil, phone: String) {
+    func prepare(wallets: [WalletData], currentIndex: Int, recipient: FormattedContactData? = nil, phone: String) {
         self.phone = phone
         self.wallets = wallets
         self.currentIndex = currentIndex
@@ -100,6 +119,35 @@ class SendMoneyViewController: KeyboardBehaviorFollowingViewController, SendMone
         self.recipient = recipient
 
         walletsCollectionView?.reloadData()
+    }
+
+    private func updateDataForCurrentWallet() {
+        guard
+            let token = userManager?.getToken(),
+            let phone = userManager?.getPhoneNumber(),
+            let index = currentIndex,
+            let sectionsCount = walletsCollectionView?.numberOfSections,
+            sectionsCount > index else {
+                return
+        }
+
+        let oldWallet = wallets[index]
+        let indexPath = IndexPath(item: 0, section: index)
+
+        guard let walletCell = walletsCollectionView?.cellForItem(at: indexPath) as? WalletSmallItemComponent else {
+            return
+        }
+
+        userAPI?.getWalletInfo(token: token, walletId: oldWallet.id).done {
+            [weak self]
+            wallet in
+
+            self?.wallets[index] = wallet
+            walletCell.configure(image: wallet.coin.image, coinName: wallet.coin.name, coinAddit: wallet.coin.short, phoneNumber: phone, balance: wallet.balance.formatted(currency: .original), fiatBalance: wallet.balance.description(currency: .usd))
+        }.catch {
+            error in
+            print(error)
+        }
     }
 
     private func scrollToCurrentWallet() {
@@ -164,13 +212,17 @@ class SendMoneyViewController: KeyboardBehaviorFollowingViewController, SendMone
         self.sendMoneyComponent?.prepare(coinType: wallet.coin, walletId: wallet.id)
     }
 
-    func sendMoneyComponentRequestSending(_ sendMoneyComponent: SendMoneyComponent, sendMoneyData: SendMoneyData) {
-        dismissKeyboard()
-        
+    func sendMoneyComponentRequestSending(_ sendMoneyComponent: SendMoneyComponent, output: SendingData) {
         dismissKeyboard {
             [weak self] in
-            self?.onSend?(sendMoneyData)
+            
+            self?.onSend?(output)
         }
+    }
+
+    func transactionDetailViewControllerSendingProceedWithSuccess(_ transactionDetailViewController: TransactionDetailViewController) {
+        updateDataForCurrentWallet()
+        delegate?.sendMoneyViewControllerSendingProceedWithSuccess(self)
     }
 
     func qrCodeScannerViewController(_ qrCodeScannerViewController: QRCodeScannerViewController, didFindCode code: String) {

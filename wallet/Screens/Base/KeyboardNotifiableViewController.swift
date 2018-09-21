@@ -14,6 +14,29 @@ class KeyboardNotifiableViewController: UIViewController {
         return _isKeyboardShown
     }
 
+    var isKeyboardHidesOnTap: Bool = false {
+        willSet {
+            guard isKeyboardHidesOnTap != newValue else {
+                return
+            }
+
+            switch newValue {
+            case true:
+                let tap: UITapGestureRecognizer = UITapGestureRecognizer(
+                    target: self,
+                    action: #selector(UIViewController.dismissKeyboard))
+
+                self.view.addGestureRecognizer(tap)
+                self.tapGestureRecognizer = tap
+            case false:
+                self.view.removeGestureRecognizer(tapGestureRecognizer!)
+                self.tapGestureRecognizer = nil
+            }
+        }
+    }
+
+    private var tapGestureRecognizer: UITapGestureRecognizer?
+
     private var _isKeyboardShown: Bool = false
     private var _dismissHandlerAction: () -> Void = {}
 
@@ -22,12 +45,12 @@ class KeyboardNotifiableViewController: UIViewController {
 
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(keyboardDidShow(_:)),
-                                               name: NSNotification.Name.UIKeyboardDidShow,
+                                               name: UIResponder.keyboardDidShowNotification,
                                                object: nil)
 
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(keyboardDidHide(_:)),
-                                               name: NSNotification.Name.UIKeyboardDidHide,
+                                               name: UIResponder.keyboardDidHideNotification,
                                                object: nil)
     }
 
@@ -35,11 +58,14 @@ class KeyboardNotifiableViewController: UIViewController {
         self._dismissHandlerAction = handler
 
         guard isKeyboardShown else {
-            return handler()
+            self._dismissHandlerAction()
+            self._dismissHandlerAction = {}
+            return
         }
 
         self.dismissKeyboard()
     }
+    
 
     @objc
     private func keyboardDidShow(_ sender: NSNotification) {
