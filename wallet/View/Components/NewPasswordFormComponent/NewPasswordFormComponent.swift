@@ -108,8 +108,8 @@ class NewPasswordFormComponent: UIView {
         let placeholderColor = UIColor.white.withAlphaComponent(0.2)
         let placeholderFont = UIFont.systemFont(ofSize: 20, weight: .regular)
         let placeholderAttributedParameters = [
-            NSAttributedStringKey.font: placeholderFont,
-            NSAttributedStringKey.foregroundColor: placeholderColor
+            NSAttributedString.Key.font: placeholderFont,
+            NSAttributedString.Key.foregroundColor: placeholderColor
         ]
 
         let passwordPlaceholderString = NSAttributedString(string: "Password", attributes: placeholderAttributedParameters)

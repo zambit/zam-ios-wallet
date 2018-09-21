@@ -404,7 +404,7 @@ final class MainFlow: ScreenFlow {
 
             let activityViewController = UIActivityViewController(activityItems: [address], applicationActivities: nil)
 
-            activityViewController.excludedActivityTypes = [ UIActivityType.airDrop, UIActivityType.postToFacebook ]
+            activityViewController.excludedActivityTypes = [ UIActivity.ActivityType.airDrop, UIActivity.ActivityType.postToFacebook ]
 
             vc.present(activityViewController, animated: true, completion: nil)
         }

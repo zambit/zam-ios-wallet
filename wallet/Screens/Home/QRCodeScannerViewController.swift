@@ -86,7 +86,7 @@ class QRCodeScannerViewController: FlowViewController, WalletNavigable {
             qrCodeFrameView.layer.borderColor = UIColor.green.cgColor
             qrCodeFrameView.layer.borderWidth = 2
             view.addSubview(qrCodeFrameView)
-            view.bringSubview(toFront: qrCodeFrameView)
+            view.bringSubviewToFront(qrCodeFrameView)
         }
     }
 
@@ -161,7 +161,7 @@ class OverlayView: UIView {
         path.addRect(bounds)
 
         layer.path = path
-        layer.fillRule = kCAFillRuleEvenOdd
+        layer.fillRule = CAShapeLayerFillRule.evenOdd
         self.layer.mask = layer
     }
 }

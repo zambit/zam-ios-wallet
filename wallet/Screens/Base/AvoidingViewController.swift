@@ -28,7 +28,7 @@ class AvoidingViewController: FlowViewController, WalletNavigable {
 
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(notifyKeyboard(_:)),
-                                               name: NSNotification.Name.UIKeyboardWillChangeFrame,
+                                               name: UIResponder.keyboardWillChangeFrameNotification,
                                                object: nil)
     }
 
@@ -39,12 +39,12 @@ class AvoidingViewController: FlowViewController, WalletNavigable {
             return
         }
 
-        let endFrame = (userInfoNotification[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
+        let endFrame = (userInfoNotification[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
 
-        let duration: TimeInterval = (userInfoNotification[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue ?? 0
-        let animationCurveRawNSN = userInfoNotification[UIKeyboardAnimationCurveUserInfoKey] as? NSNumber
-        let animationCurveRaw = animationCurveRawNSN?.uintValue ?? UIViewAnimationOptions.curveEaseInOut.rawValue
-        let animationCurve: UIViewAnimationOptions = UIViewAnimationOptions(rawValue: animationCurveRaw)
+        let duration: TimeInterval = (userInfoNotification[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue ?? 0
+        let animationCurveRawNSN = userInfoNotification[UIResponder.keyboardAnimationCurveUserInfoKey] as? NSNumber
+        let animationCurveRaw = animationCurveRawNSN?.uintValue ?? UIView.AnimationOptions.curveEaseInOut.rawValue
+        let animationCurve: UIView.AnimationOptions = UIView.AnimationOptions(rawValue: animationCurveRaw)
 
         let tabBarOffset: CGFloat = tabBarController == nil ? 0 : -49
 

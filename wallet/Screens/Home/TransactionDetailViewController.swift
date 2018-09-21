@@ -338,13 +338,13 @@ class TransactionDetailViewController: FlowViewController, WalletNavigable {
         }
 
         view.addSubview(background)
-        view.sendSubview(toBack: background)
+        view.sendSubviewToBack(background)
 
         view.insertSubview(effectView, aboveSubview: background)
 
         UIView.animate(withDuration: 0.8) {
             background.alpha = 1.0
-            effectView.effect = UIBlurEffect(style: UIBlurEffectStyle.dark)
+            effectView.effect = UIBlurEffect(style: UIBlurEffect.Style.dark)
         }
     }
 }

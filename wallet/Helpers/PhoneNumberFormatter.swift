@@ -42,12 +42,8 @@ class PhoneNumberFormatter {
 
     func getCompleted(from string: String, completion: @escaping (PhoneNumber?) -> Void) {
         let target = self
+        
         DispatchQueue.global(qos: .default).async {
-            [weak self] in
-
-            guard let strongSelf = self else {
-                return completion(nil)
-            }
 
             let parsed = try? target.formatter.parse(string)
 

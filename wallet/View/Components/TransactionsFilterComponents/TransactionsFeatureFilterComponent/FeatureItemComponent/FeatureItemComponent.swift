@@ -44,7 +44,7 @@ class FeatureItemComponent: ItemComponent {
             NSLayoutConstraint.activate([leftConstraint, rightConstraint, topConstraint, bottomConstraint])
         }
 
-        featureButton?.contentEdgeInsets = UIEdgeInsetsMake(8.0, 25.0, 8.0, 25.0)
+        featureButton?.contentEdgeInsets = UIEdgeInsets.init(top: 8.0, left: 25.0, bottom: 8.0, right: 25.0)
         featureButton?.layer.borderWidth = 1.5
         featureButton?.layer.borderColor = UIColor.skyBlue.cgColor
         featureButton?.addTarget(self, action: #selector(featureButtonTouchUpInsideEvent(_:)), for: .touchUpInside)

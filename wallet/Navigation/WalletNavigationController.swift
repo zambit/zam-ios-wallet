@@ -41,7 +41,7 @@ extension BehaviorExtension where Base: WalletNavigationController {
         base.navigationBar.shadowImage = UIImage()
         base.navigationBar.backgroundColor = .clear
         base.navigationBar.isTranslucent = true
-        base.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
+        base.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
 
         base.navigationItem.hidesBackButton = true
     }

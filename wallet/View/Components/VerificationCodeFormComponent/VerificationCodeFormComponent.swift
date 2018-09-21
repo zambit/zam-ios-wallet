@@ -46,8 +46,8 @@ class VerificationCodeFormComponent: Component, UITextFieldDelegate {
         let placeholderColor = UIColor.white.withAlphaComponent(0.2)
         let placeholderFont = UIFont.systemFont(ofSize: 24, weight: .bold)
         let placeholderAttributedParameters = [
-            NSAttributedStringKey.font: placeholderFont,
-            NSAttributedStringKey.foregroundColor: placeholderColor]
+            NSAttributedString.Key.font: placeholderFont,
+            NSAttributedString.Key.foregroundColor: placeholderColor]
 
         let placeholderString = NSAttributedString(string: "• •   • •   • •", attributes: placeholderAttributedParameters)
         self.codeTextField?.attributedPlaceholder = placeholderString

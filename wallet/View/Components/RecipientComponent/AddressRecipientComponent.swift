@@ -130,7 +130,7 @@ extension BehaviorExtension where Base: AddressRecipientComponent {
         textField.textAlignment = .center
         textField.attributedPlaceholder =
             NSAttributedString(string: "Address",
-                               attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
+                               attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
         textField.adjustsFontSizeToFitWidth = true
         textField.minimumFontSize = 11.0
         textField.autocorrectionType = .no

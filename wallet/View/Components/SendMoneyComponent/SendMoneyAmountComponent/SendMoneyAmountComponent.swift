@@ -73,7 +73,7 @@ class SendMoneyAmountComponent: Component, SizePresetable, UITextFieldDelegate {
         valueTextField?.tintColor = .darkIndigo
         valueTextField?.keyboardType = .decimalPad
         valueTextField?.attributedPlaceholder =
-            NSAttributedString(string: NumberFormatter.walletAmount.string(from: 0.0)!, attributes: [NSAttributedStringKey.foregroundColor: UIColor.darkIndigo])
+            NSAttributedString(string: NumberFormatter.walletAmount.string(from: 0.0)!, attributes: [NSAttributedString.Key.foregroundColor: UIColor.darkIndigo])
 
         altValueLabel?.font = UIFont.walletFont(ofSize: 14.0, weight: .regular)
         altValueLabel?.textAlignment = .center

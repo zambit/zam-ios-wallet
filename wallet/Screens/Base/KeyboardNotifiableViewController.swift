@@ -45,12 +45,12 @@ class KeyboardNotifiableViewController: UIViewController {
 
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(keyboardDidShow(_:)),
-                                               name: NSNotification.Name.UIKeyboardDidShow,
+                                               name: UIResponder.keyboardDidShowNotification,
                                                object: nil)
 
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(keyboardDidHide(_:)),
-                                               name: NSNotification.Name.UIKeyboardDidHide,
+                                               name: UIResponder.keyboardDidHideNotification,
                                                object: nil)
     }
 

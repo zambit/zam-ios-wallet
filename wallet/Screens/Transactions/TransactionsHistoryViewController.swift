@@ -300,7 +300,7 @@ class TransactionsHistoryViewController: FlowViewController, WalletNavigable, UI
         footerView.backgroundColor = UIColor.clear
 
         // set up activity indicator
-        let activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+        let activityIndicatorView = UIActivityIndicatorView(style: .gray)
         activityIndicatorView.center = CGPoint(x: self.view.frame.width/2, y:22)
         activityIndicatorView.hidesWhenStopped = true
 

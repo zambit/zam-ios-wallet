@@ -19,13 +19,13 @@ class WalletSmallItemComponent: ItemComponent {
 
     @IBOutlet private var pageControl: UIPageControl?
 
-    private var coinNameLabelMainAttributes: [NSAttributedStringKey: Any] = [:]
-    private var coinNameLabelAdditAttributes: [NSAttributedStringKey: Any] = [:]
+    private var coinNameLabelMainAttributes: [NSAttributedString.Key: Any] = [:]
+    private var coinNameLabelAdditAttributes: [NSAttributedString.Key: Any] = [:]
 
     override func initFromNib() {
         super.initFromNib()
 
-        insets = UIEdgeInsetsMake(7.0, 16.0, 7.0, 16.0)
+        insets = UIEdgeInsets.init(top: 7.0, left: 16.0, bottom: 7.0, right: 16.0)
     }
 
     override func layoutSubviews() {

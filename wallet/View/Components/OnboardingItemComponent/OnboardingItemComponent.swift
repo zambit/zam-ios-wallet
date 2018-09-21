@@ -20,8 +20,8 @@ class OnboardingItemComponent: ItemComponent, SizePresetable {
     @IBOutlet private var illustrationImageViewBottomConstraint: NSLayoutConstraint?
     @IBOutlet private var illustrationImageViewHeightConstraint: NSLayoutConstraint?
 
-    private var textAttributes: [NSAttributedStringKey: Any] = [:]
-    private var additionalTextAttributes: [NSAttributedStringKey: Any] = [:]
+    private var textAttributes: [NSAttributedString.Key: Any] = [:]
+    private var additionalTextAttributes: [NSAttributedString.Key: Any] = [:]
 
     func configure(data: OnboardingItemData) {
         self.configure(image: data.image, text: data.text, additional: data.additionalText)
