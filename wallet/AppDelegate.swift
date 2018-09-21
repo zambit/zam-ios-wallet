@@ -37,11 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         let _vc = ControllerHelper.instantiateViewController(identifier: "LaunchScreenViewController", storyboardName: "Onboarding")
 
-        guard let vc = _vc as? LaunchScreenViewController else {
-            fatalError()
-        }
-
-        let navigationController = WalletNavigationController(rootViewController: vc)
+        let navigationController = WalletNavigationController()
 
         userDefaultsManager = UserDefaultsManager(keychainConfiguration: WalletKeychainConfiguration())
 
