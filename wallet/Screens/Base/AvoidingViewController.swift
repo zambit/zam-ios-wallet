@@ -51,7 +51,7 @@ class AvoidingViewController: FlowViewController, WalletNavigable {
         UIView.animate(withDuration: duration, delay: TimeInterval(0), options: animationCurve, animations: {
             if let keyboardView = endFrame, keyboardView.origin.y < UIScreen.main.bounds.size.height {
                 self.appearingAnimationBlock()
-                self.fastenBottomConstraint?.constant = UIDevice.current.isExtra ? keyboardView.size.height + self.fastenInitialOffset - 32 + tabBarOffset : keyboardView.size.height + self.fastenInitialOffset + tabBarOffset
+                self.fastenBottomConstraint?.constant = UIDevice.current.isExtra ? keyboardView.size.height + self.fastenInitialOffset - 34 + tabBarOffset : keyboardView.size.height + self.fastenInitialOffset + tabBarOffset
             } else {
                 self.disappearingAnimationBlock()
                 self.fastenBottomConstraint?.constant = self.fastenInitialOffset

@@ -35,13 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         UIApplication.shared.statusBarStyle = .lightContent
 
-        let _vc = ControllerHelper.instantiateViewController(identifier: "LaunchScreenViewController", storyboardName: "Onboarding")
-
-        guard let vc = _vc as? LaunchScreenViewController else {
-            fatalError()
-        }
-
-        let navigationController = WalletNavigationController(rootViewController: vc)
+        let navigationController = WalletNavigationController()
 
         userDefaultsManager = UserDefaultsManager(keychainConfiguration: WalletKeychainConfiguration())
 

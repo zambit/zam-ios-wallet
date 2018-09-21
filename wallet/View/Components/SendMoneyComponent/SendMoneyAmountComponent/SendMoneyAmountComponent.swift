@@ -137,15 +137,20 @@ class SendMoneyAmountComponent: Component, SizePresetable, UITextFieldDelegate {
             case .compact:
                 topGreaterThanConstraint?.constant = 15
                 feesBottomGreaterThanConstraint?.constant = 0
+                topInitialConstraint?.constant = 35.0
             case .default:
                 topGreaterThanConstraint?.constant = 35
                 feesBottomGreaterThanConstraint?.constant = 20
+                topInitialConstraint?.constant = 35.0
+            case .large:
+                topGreaterThanConstraint?.constant = 25
+                feesBottomGreaterThanConstraint?.constant = 0
+                topInitialConstraint?.constant = 25
             default:
                 break
             }
 
             valueTextFieldHeightConstraint?.constant = 54.0
-            topInitialConstraint?.constant = 35.0
             valueTextFieldTopConstraint?.constant = 10.0
             valueTextFieldBottomConstraint?.constant = 10.0
             titleLabelHeightConstraint?.constant = 19.5

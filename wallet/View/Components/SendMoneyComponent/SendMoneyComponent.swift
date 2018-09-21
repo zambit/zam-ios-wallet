@@ -73,10 +73,10 @@ class SendMoneyComponent: Component, SizePresetable, SendMoneyAmountComponentDel
             if let label = toLabel {
                 segmentedControlComponent?.leftAnchor.constraint(equalTo: label.rightAnchor, constant: 10.0).isActive = true
             }
-        case .medium, .plus, .extra:
+        case .medium, .plus, .extra, .extraLarge:
             segmentedControlComponent?.alignment = .center
             segmentedControlComponent?.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 0.0).isActive = true
-        default:
+        case .unknown:
             fatalError()
         }
 

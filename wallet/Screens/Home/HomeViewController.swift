@@ -116,10 +116,12 @@ class HomeViewController: FloatingViewController, WalletsViewControllerDelegate,
             detailViewHeight?.constant = 515.0
         case .medium:
             detailViewHeight?.constant = 600.0
-        case .extra, .extraLarge:
+        case .extra:
             detailViewHeight?.constant = 691.0
         case .plus:
             detailViewHeight?.constant = 675.0
+        case .extraLarge:
+            detailViewHeight?.constant = 775.0
         case .unknown:
             fatalError()
         }
@@ -297,6 +299,12 @@ class HomeViewController: FloatingViewController, WalletsViewControllerDelegate,
 
         sumLabel?.attributedText = attributedString
         sumLabel?.attributedText = attributedString
+        sumLabel?.sizeToFit()
+
+        if currentState == .open {
+            let sumLabelWidth: CGFloat = sumLabel?.bounds.width ?? 0
+            sumLeftConstraint?.constant = self.view.bounds.width / 2.0 - sumLabelWidth / 2.0
+        }
     }
 
     // MARK: - WalletsViewControllerDelegate

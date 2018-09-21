@@ -113,7 +113,7 @@ class EnterLoginPasswordViewController: СonsistentViewController, LoginPassword
                         fatalError()
                     }
 
-                    self?.loginPasswordForm?.helperText = fail.message
+                    self?.loginPasswordForm?.helperText = fail.message.capitalizingFirst
                 case .undefinedServerFailureResponse:
 
                     self?.loginPasswordForm?.helperText = "Undefined error"

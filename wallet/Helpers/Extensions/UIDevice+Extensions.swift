@@ -130,7 +130,7 @@ extension UIDevice {
 extension UIDevice {
 
     var isExtra: Bool {
-        return screenType == .extra
+        return screenType == .extra || screenType == .extraLarge
     }
 
     enum ScreenType {
