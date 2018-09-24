@@ -27,6 +27,7 @@ class EnterPinViewController: FlowViewController, WalletNavigable, DecimalKeyboa
     @IBOutlet var topConstraint: NSLayoutConstraint?
     @IBOutlet var verticalBetweenSpacingConstraint: NSLayoutConstraint?
 
+    private var pinForm: PinForm?
     private var pinText: String = ""
 
     private var phone: String?
@@ -77,6 +78,44 @@ class EnterPinViewController: FlowViewController, WalletNavigable, DecimalKeyboa
 
         keyboardComponent?.delegate = self
 
+        do {
+            guard let pin = try userManager?.getPin() else {
+                return
+            }
+
+            self.pinForm = PinForm(compared: pin,
+                                   enterHandler: {
+                                    [weak self] in
+                                    self?.dotsFieldComponent?.fillLast()
+            },
+                                   deleteHandler: {
+                                    [weak self] in
+                                    self?.dotsFieldComponent?.unfillLast()
+            },
+                                   completionHandler: {
+                                    [weak self] in
+
+                                    self?.dotsFieldComponent?.fillAll()
+                                    self?.dotsFieldComponent?.fillingEnabled = false
+
+                                    self?.authorize()
+            },
+                                   wrongHandler: {
+                                    [weak self] in
+
+                                    self?.dotsFieldComponent?.endLoading()
+                                    self?.dotsFieldComponent?.fillingEnabled = false
+                                    self?.dotsFieldComponent?.showFailure {
+                                        self?.dotsFieldComponent?.unfillAll()
+                                        self?.dotsFieldComponent?.fillingEnabled = true
+                                    }
+
+                                    Interactions.vibrateError()
+            })
+        } catch {
+            fatalError("Unexpected flow")
+        }
+
         setupDefaultStyle()
     }
 
@@ -87,86 +126,9 @@ class EnterPinViewController: FlowViewController, WalletNavigable, DecimalKeyboa
     func decimalKeyboardComponent(_ decimalKeyboardComponent: DecimalKeyboardComponent, keyWasTapped key: DecimalKeyboardComponent.Key) {
         switch key {
         case .zero, .one, .two, .three, .four, .five, .six, .seven, .eight, .nine:
-            guard let filled = dotsFieldComponent?.fillLast(), filled else {
-                return
-            }
-
-            pinText.append(key.rawValue)
-
-            if let dotsField = dotsFieldComponent,
-                dotsField.filledCount == dotsField.dotsMaxCount {
-
-                switch checkPin(pinText) {
-                case true:
-                    dotsFieldComponent?.fillAll()
-                    dotsFieldComponent?.fillingEnabled = false
-
-                    guard let token = userManager?.getToken() else {
-                        return
-                    }
-
-                    dotsFieldComponent?.beginLoading()
-
-                    authAPI?.checkIfUserAuthorized(token: token).done {
-                        [weak self]
-                        phone in
-
-                        self?.authAPI?.refreshToken(token: token).done {
-                            token in
-
-                            self?.userManager?.save(token: token)
-
-                            performWithDelay {
-                                UserContactsManager.default.fetchContacts({ _ in
-                                    self?.dotsFieldComponent?.endLoading()
-                                    self?.onContinue?()
-                                })
-                            }
-                        }.catch {
-                            error in
-
-                            performWithDelay {
-                                self?.dotsFieldComponent?.endLoading()
-                                self?.onLoginForm?(phone)
-                            }
-
-                        }
-                    }.catch {
-                        [weak self]
-                        error in
-
-                        guard let strongSelf = self else {
-                            return
-                        }
-
-                        guard let phone = strongSelf.phone else {
-                            fatalError("Error on catching checkingIfUserAuthorized")
-                        }
-
-                        performWithDelay {
-                            self?.dotsFieldComponent?.endLoading()
-                            self?.onLoginForm?(phone)
-                        }
-                    }
-                case false:
-                    dotsFieldComponent?.endLoading()
-                    dotsFieldComponent?.fillingEnabled = false
-                    dotsFieldComponent?.showFailure {
-                        [weak self] in
-                        self?.dotsFieldComponent?.unfillAll()
-                        self?.dotsFieldComponent?.fillingEnabled = true
-                    }
-
-                    pinText = ""
-                    Interactions.vibrateError()
-                }
-
-            }
+            pinForm?.enter(key.rawValue)
         case .remove:
-            dotsFieldComponent?.unfillLast()
-            if !pinText.isEmpty {
-                pinText.removeLast()
-            }
+            pinForm?.remove()
         case .touchId, .faceId:
             biometricAuthenticationRequest()
         case .empty:
@@ -174,74 +136,12 @@ class EnterPinViewController: FlowViewController, WalletNavigable, DecimalKeyboa
         }
     }
 
-    private func checkPin(_ pin: String) -> Bool {
-        do {
-            let saved = try userManager?.getPin()
-
-            if let savedPin = saved {
-                return pin == savedPin
-            }
-        } catch let error {
-            fatalError("Error on receiving saved pin: \(error)")
-        }
-
-        return false
-    }
-
     private func biometricAuthenticationRequest() {
         biometricAuth?.authenticateUser(reason: "Please use your fingerprint to sign in", success: {
             [weak self] in
 
             self?.dotsFieldComponent?.fillAll()
-
-            guard let token = self?.userManager?.getToken() else {
-                return
-            }
-
-            self?.dotsFieldComponent?.beginLoading()
-
-            self?.authAPI?.checkIfUserAuthorized(token: token).done {
-                phone in
-
-                self?.authAPI?.refreshToken(token: token).done {
-                    token in
-
-                    self?.userManager?.save(token: token)
-
-                    performWithDelay {
-                        UserContactsManager.default.fetchContacts({ _ in
-                            self?.dotsFieldComponent?.endLoading()
-                            self?.onContinue?()
-                        })
-                    }
-                }.catch {
-                    error in
-
-                    performWithDelay {
-                        self?.dotsFieldComponent?.endLoading()
-                        self?.onLoginForm?(phone)
-                    }
-
-                }
-            }.catch {
-                [weak self]
-                error in
-
-                guard let strongSelf = self else {
-                    return
-                }
-
-                guard let phone = strongSelf.phone else {
-                    fatalError("Error on catching checkingIfUserAuthorized")
-                }
-
-                strongSelf.userManager?.clearToken()
-
-                performWithDelay {
-                    self?.dotsFieldComponent?.endLoading()
-                    self?.onLoginForm?(phone)
-                }
-            }
+            self?.authorize()
         }, failure: {
             [weak self]
             error in
@@ -253,6 +153,57 @@ class EnterPinViewController: FlowViewController, WalletNavigable, DecimalKeyboa
                 self?.keyboardComponent?.detailButton?.isEnabled = false
             }
         })
+    }
+
+    private func authorize() {
+        guard let token = userManager?.getToken() else {
+            return
+        }
+
+        dotsFieldComponent?.beginLoading()
+
+        authAPI?.checkIfUserAuthorized(token: token).done {
+            [weak self]
+            phone in
+
+            self?.authAPI?.refreshToken(token: token).done {
+                token in
+
+                self?.userManager?.save(token: token)
+
+                performWithDelay {
+                    UserContactsManager.default.fetchContacts({ _ in
+                        self?.dotsFieldComponent?.endLoading()
+                        self?.onContinue?()
+                    })
+                }
+            }.catch {
+                error in
+
+                performWithDelay {
+                    self?.dotsFieldComponent?.endLoading()
+                    self?.onLoginForm?(phone)
+                }
+            }
+        }.catch {
+            [weak self]
+            error in
+
+            guard let strongSelf = self else {
+                return
+            }
+
+            guard let phone = strongSelf.phone else {
+                fatalError("Error on catching checkingIfUserAuthorized")
+            }
+
+            strongSelf.userManager?.clearToken()
+
+            performWithDelay {
+                self?.dotsFieldComponent?.endLoading()
+                self?.onLoginForm?(phone)
+            }
+        }
     }
 
     @objc
