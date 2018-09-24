@@ -50,7 +50,7 @@ class VerifyPhoneNumberWithSmsViewController: СonsistentViewController, Verific
         let timerParams = AdditionalTextButtonData.TimerParameters(seconds: 60, textInactiveSecondsIndex: index)
         let data = AdditionalTextButtonData(textActive: "Send code again", textInactive: "Send code again in ", timerParams: timerParams)
 
-        sendVerificationCodeAgainButton?.configure(data: data)
+        sendVerificationCodeAgainButton?.custom.configure(data: data)
         sendVerificationCodeAgainButton?.addTarget(self, action: #selector(additionalButtonTouchUpInsideEvent(_:)), for: .touchUpInside)
 
         verificationCodeFormComponent?.delegate = self
