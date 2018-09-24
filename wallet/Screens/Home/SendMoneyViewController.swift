@@ -48,7 +48,7 @@ class SendMoneyViewController: AvoidingViewController, UICollectionViewDataSourc
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        switch UIDevice.current.screenType {
+        switch UIScreen.main.type {
         case .small, .extraSmall:
             sendMoneyComponent?.prepare(preset: .superCompact)
         case .medium:
@@ -65,7 +65,7 @@ class SendMoneyViewController: AvoidingViewController, UICollectionViewDataSourc
         
         view.applyDefaultGradientHorizontally()
 
-        switch UIDevice.current.screenType {
+        switch UIScreen.main.type {
         case .extraLarge:
             break
         case .unknown:

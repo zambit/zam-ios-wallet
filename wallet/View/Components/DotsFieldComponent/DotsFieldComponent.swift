@@ -45,7 +45,7 @@ class DotsFieldComponent: Component  {
     override func initFromNib() {
         super.initFromNib()
 
-        switch UIDevice.current.screenType {
+        switch UIScreen.main.type {
         case .extraSmall, .small:
             dotEdge = 16.0
             dotSpacing = 24.0

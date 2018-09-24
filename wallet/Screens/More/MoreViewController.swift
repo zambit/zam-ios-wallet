@@ -31,7 +31,7 @@ class MoreViewController: FlowViewController, WalletNavigable {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        switch UIDevice.current.screenType {
+        switch UIScreen.main.type {
         case .extraSmall, .small:
             socialButtonsStackViewBottomConstraint?.constant = 20.0
         case .medium, .plus, .extra, .extraLarge:

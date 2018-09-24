@@ -53,7 +53,6 @@ final class MainFlow: ScreenFlow {
 
         let onExit: () -> Void = {
             [weak self] in
-
             self?.onboardingFlow.begin()
         }
         
