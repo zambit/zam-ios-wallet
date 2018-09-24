@@ -111,7 +111,7 @@ class HomeViewController: FloatingViewController, WalletsViewControllerDelegate,
             }
         }
 
-        switch UIDevice.current.screenType {
+        switch UIScreen.main.type {
         case .small, .extraSmall:
             detailViewHeight?.constant = 515.0
         case .medium:
@@ -168,7 +168,7 @@ class HomeViewController: FloatingViewController, WalletsViewControllerDelegate,
         var sumSymbolFont: UIFont = UIFont()
         var sumMainFont: UIFont = UIFont()
 
-        switch UIDevice.current.screenType {
+        switch UIScreen.main.type {
         case .extraSmall, .small:
             sumSymbolFont = UIFont.walletFont(ofSize: 28.0, weight: .medium)
             sumMainFont = UIFont.walletFont(ofSize: 28.0, weight: .regular)
@@ -270,7 +270,7 @@ class HomeViewController: FloatingViewController, WalletsViewControllerDelegate,
         var sumSymbolFont: UIFont = UIFont()
         var sumMainFont: UIFont = UIFont()
 
-        switch UIDevice.current.screenType {
+        switch UIScreen.main.type {
         case .extraSmall, .small:
             sumSymbolFont = UIFont.walletFont(ofSize: 28.0, weight: .regular)
             sumMainFont = UIFont.walletFont(ofSize: 28.0, weight: .medium)

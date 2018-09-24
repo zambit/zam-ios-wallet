@@ -91,7 +91,7 @@ class TransactionDetailViewController: FlowViewController, WalletNavigable {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        switch UIDevice.current.screenType {
+        switch UIScreen.main.type {
         case .small, .extraSmall:
             topTitleConstraint?.constant = 0.0
             titleAmountBetweenConstraint?.constant = 47.0

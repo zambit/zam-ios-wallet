@@ -67,7 +67,7 @@ class SendMoneyComponent: Component, SizePresetable, SendMoneyAmountComponentDel
         segmentedControlComponent?.segmentsHorizontalMargin = 15.0
         segmentedControlComponent?.segmentsHorizontalSpacing = 5.0
 
-        switch UIDevice.current.screenType {
+        switch UIScreen.main.type {
         case .extraSmall, .small:
             segmentedControlComponent?.alignment = .left
             if let label = toLabel {

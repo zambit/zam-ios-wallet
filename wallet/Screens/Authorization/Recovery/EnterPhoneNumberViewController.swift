@@ -36,7 +36,7 @@ class EnterPhoneNumberViewController: СonsistentViewController, PhoneNumberComp
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        switch UIDevice.current.screenType {
+        switch UIScreen.main.type {
         case .small, .extraSmall:
             phoneNumberComponent?.custom.prepare(preset: .superCompact)
         case .medium, .extra, .extraLarge, .plus:
