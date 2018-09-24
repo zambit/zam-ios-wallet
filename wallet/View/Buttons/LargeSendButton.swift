@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class LargeSendButton: UIButton, CustomUI {
+class LargeSendButton: UIButton {
 
     enum SendState {
         case initial
@@ -18,120 +18,115 @@ class LargeSendButton: UIButton, CustomUI {
         case failure
     }
 
-    private var loadingView: UIView!
-    private var successView: CheckAnimationView!
-    private var failureView: CrossAnimationView!
+    fileprivate var loadingView: UIView!
+    fileprivate var successView: CheckAnimationView!
+    fileprivate var failureView: CrossAnimationView!
 
-    struct CustomBehaviour {
-        weak var parent: LargeSendButton?
-
-        func setLoading() {
-            parent?.setTitle("", for: .normal)
-            parent?.setImage(#imageLiteral(resourceName: "icEmpty"), for: .normal)
-            parent?.loadingView.isHidden = false
-
-            parent?.sendState = .loading
-        }
-
-        func setSuccess() {
-            UIView.animate(withDuration: 0.05) {
-                self.parent?.backgroundColor = .white
-            }
-            
-            parent?.loadingView.isHidden = true
-            parent?.successView.isHidden = false
-
-            parent?.successView.drawCheck(nil)
-
-            parent?.sendState = .success
-        }
-
-        func setFailure() {
-            UIView.animate(withDuration: 0.05) {
-                self.parent?.backgroundColor = .white
-            }
-
-            parent?.loadingView.isHidden = true
-            parent?.failureView.isHidden = false
-
-            parent?.failureView.drawCross(nil)
-
-            parent?.sendState = .failure
-        }
-    }
-
-    var custom: CustomBehaviour {
-        return CustomBehaviour(parent: self)
-    }
-
-    private(set) var sendState: SendState = .initial
+    fileprivate(set) var sendState: SendState = .initial
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        setupLayouts()
+        custom.setupLayouts()
     }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupStyle()
-        setupAnimationView()
+        custom.setupStyle()
+        custom.setupAnimationView()
     }
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        setupStyle()
-        setupAnimationView()
+        custom.setupStyle()
+        custom.setupAnimationView()
+    }
+}
+
+extension BehaviorExtension where Base: LargeSendButton {
+
+    func setLoading() {
+        base.setTitle("", for: .normal)
+        base.setImage(#imageLiteral(resourceName: "icEmpty"), for: .normal)
+        base.loadingView.isHidden = false
+
+        base.sendState = .loading
     }
 
-    private func setupStyle() {
-        self.setTitle("Send", for: .normal)
-        self.setTitleColor(.white, for: .normal)
-        self.titleLabel?.font = UIFont.walletFont(ofSize: 24.0, weight: .bold)
+    func setSuccess() {
+        UIView.animate(withDuration: 0.05) {
+            self.base.backgroundColor = .white
+        }
 
-        self.backgroundColor = .paleOliveGreen
+        base.loadingView.isHidden = true
+        base.successView.isHidden = false
 
-        self.layer.masksToBounds = false
-        self.layer.shadowColor = UIColor.black.cgColor
-        self.layer.shadowOffset = CGSize(width: 0.0, height: 19.0)
-        self.layer.shadowRadius = 9.0
-        self.layer.shadowOpacity = 0.08
+        base.successView.drawCheck(nil)
+
+        base.sendState = .success
     }
 
-    private func setupLayouts() {
-        self.layer.cornerRadius = self.bounds.width / 2
+    func setFailure() {
+        UIView.animate(withDuration: 0.05) {
+            self.base.backgroundColor = .white
+        }
+
+        base.loadingView.isHidden = true
+        base.failureView.isHidden = false
+
+        base.failureView.drawCross(nil)
+
+        base.sendState = .failure
     }
 
-    private func setupAnimationView() {
-        let side: CGFloat = min(bounds.width, bounds.height) / 100 * 35
+    fileprivate func setupStyle() {
+        base.setTitle("Send", for: .normal)
+        base.setTitleColor(.white, for: .normal)
+        base.titleLabel?.font = UIFont.walletFont(ofSize: 24.0, weight: .bold)
 
-        let frame = CGRect(x: (bounds.width - side) / 2,
-                           y: (bounds.height - side) / 2,
+        base.backgroundColor = .paleOliveGreen
+
+        base.layer.masksToBounds = false
+        base.layer.shadowColor = UIColor.black.cgColor
+        base.layer.shadowOffset = CGSize(width: 0.0, height: 19.0)
+        base.layer.shadowRadius = 9.0
+        base.layer.shadowOpacity = 0.08
+    }
+
+    fileprivate func setupLayouts() {
+        base.layer.cornerRadius = base.bounds.width / 2
+    }
+
+    fileprivate func setupAnimationView() {
+        let side: CGFloat = min(base.bounds.width, base.bounds.height) / 100 * 35
+
+        let frame = CGRect(x: (base.bounds.width - side) / 2,
+                           y: (base.bounds.height - side) / 2,
                            width: side,
                            height: side)
-        self.loadingView = UIView(frame: frame)
-        self.loadingView.layer.sublayers = nil
+        base.loadingView = UIView(frame: frame)
+        base.loadingView.layer.sublayers = nil
 
         let animationFrame = CGRect(x: 0,
                                     y: 0,
                                     width: side,
                                     height: side)
         let animation = SpinningAnimationLayer(frame: animationFrame, color: .white, lineWidth: 4.0)
-        self.loadingView.layer.addSublayer(animation)
-        self.loadingView.isHidden = true
-        self.loadingView.isUserInteractionEnabled = false
+        base.loadingView.layer.addSublayer(animation)
+        base.loadingView.isHidden = true
+        base.loadingView.isUserInteractionEnabled = false
 
-        self.addSubview(loadingView)
+        base.addSubview(base.loadingView)
 
-        self.successView = CheckAnimationView(frame: bounds.insetBy(dx: 20.0, dy: 20.0), strokeColor: .paleOliveGreen, lineWidth: 5.0)
-        self.successView.isHidden = true
-        self.successView.isUserInteractionEnabled = false
+        base.successView = CheckAnimationView(frame: base.bounds.insetBy(dx: 20.0, dy: 20.0), strokeColor: .paleOliveGreen, lineWidth: 5.0)
+        base.successView.isHidden = true
+        base.successView.isUserInteractionEnabled = false
 
-        self.addSubview(successView)
+        base.addSubview(base.successView)
 
-        self.failureView = CrossAnimationView(frame: bounds.insetBy(dx: 25.0, dy: 25.0), strokeColor: .pigPink, lineWidth: 5.0)
-        self.failureView.isHidden = true
-        self.failureView.isUserInteractionEnabled = false
+        base.failureView = CrossAnimationView(frame: base.bounds.insetBy(dx: 25.0, dy: 25.0), strokeColor: .pigPink, lineWidth: 5.0)
+        base.failureView.isHidden = true
+        base.failureView.isUserInteractionEnabled = false
 
-        self.addSubview(failureView)
+        base.addSubview(base.failureView)
     }
 }

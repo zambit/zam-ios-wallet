@@ -114,7 +114,6 @@
 		8C52FFF2211AF1FD00EB55EA /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C52FFF1211AF1FD00EB55EA /* HomeViewController.swift */; };
 		8C52FFFE211B252F00EB55EA /* InstantPanGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C52FFFD211B252F00EB55EA /* InstantPanGestureRecognizer.swift */; };
 		8C6088402110634700470411 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C60883F2110634700470411 /* UserDefaultsManager.swift */; };
-		8C6088442110A34200470411 /* CustomUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6088432110A34200470411 /* CustomUI.swift */; };
 		8C6088482110A75100470411 /* AdditionalTextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6088472110A75100470411 /* AdditionalTextButton.swift */; };
 		8C60884A2110B42A00470411 /* CountdownTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6088492110B42A00470411 /* CountdownTimer.swift */; };
 		8C60884C2111A20B00470411 /* LoginPasswordFormComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C60884B2111A20B00470411 /* LoginPasswordFormComponent.swift */; };
@@ -379,7 +378,6 @@
 		8C52FFF1211AF1FD00EB55EA /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		8C52FFFD211B252F00EB55EA /* InstantPanGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstantPanGestureRecognizer.swift; sourceTree = "<group>"; };
 		8C60883F2110634700470411 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
-		8C6088432110A34200470411 /* CustomUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUI.swift; sourceTree = "<group>"; };
 		8C6088472110A75100470411 /* AdditionalTextButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalTextButton.swift; sourceTree = "<group>"; };
 		8C6088492110B42A00470411 /* CountdownTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownTimer.swift; sourceTree = "<group>"; };
 		8C60884B2111A20B00470411 /* LoginPasswordFormComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPasswordFormComponent.swift; sourceTree = "<group>"; };
@@ -584,7 +582,6 @@
 		8C0919312106205600703224 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				8C6088432110A34200470411 /* CustomUI.swift */,
 				8C7C3396214A972200EC6C96 /* SizePresetable.swift */,
 				9319BA862129FA9500033A7E /* Animations */,
 				8C7C3341214290AB00EC6C96 /* Buttons */,
@@ -1636,7 +1633,6 @@
 				8C2314512150EA53007340E7 /* PartialPhoneNumberCodeTextField.swift in Sources */,
 				8CA218F3213007650063C188 /* TransactionsPageData.swift in Sources */,
 				8C52FFFE211B252F00EB55EA /* InstantPanGestureRecognizer.swift in Sources */,
-				8C6088442110A34200470411 /* CustomUI.swift in Sources */,
 				8C60885E2111F28000470411 /* EnterNewPhoneNumberViewController.swift in Sources */,
 				8CA2192721354D370063C188 /* TransactionsDateIntervalFilterComponent.swift in Sources */,
 				8C713B1D2138408700AC2E25 /* OutputButton.swift in Sources */,

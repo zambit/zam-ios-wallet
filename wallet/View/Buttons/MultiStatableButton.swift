@@ -8,113 +8,15 @@
 
 import UIKit
 
-class MultiStatableButton: UIButton, CustomUI {
-
-    struct CustomBehaviour {
-        weak var parent: MultiStatableButton?
-
-        func setup(images: [UIImage?],
-                   states: [String],
-                   colors: [UIColor?] = [],
-                   backgroundColors: [UIColor?] = []
-            ) {
-
-            if let image = images.first {
-                parent?.setImage(image, for: UIControl.State())
-            }
-            parent?.sizeToFit()
-
-            parent?.images = images
-            parent?.states = states
-            parent?.colors = colors
-            parent?.backgroundColors = backgroundColors
-
-            parent?.setupCurrentState()
-        }
-
-        func setup(
-            image: UIImage? = nil,
-            states: [String],
-            colors: [UIColor?] = [],
-            backgroundColors: [UIColor?] = []
-            ) {
-            self.setup(images: [image], states: states, colors: colors, backgroundColors: backgroundColors)
-        }
-
-        // MARK: - Manual Control
-
-        func toggle() {
-            self.currentStateIndex = (currentStateIndex + 1) % states.count
-        }
-
-        var currentStateIndex: Int {
-            get {
-                return parent!.currentStateIndex
-            }
-
-            nonmutating set {
-                parent!.currentStateIndex = newValue
-                parent!.setupCurrentState()
-            }
-        }
-
-        var colors: [UIColor?] {
-            get {
-                return parent!.colors
-            }
-
-            nonmutating set {
-                parent!.colors = newValue
-                parent!.setupCurrentState()
-            }
-        }
-
-        var backgroundColors: [UIColor?] {
-            get {
-                return parent!.backgroundColors
-            }
-
-            nonmutating set {
-                parent!.backgroundColors = newValue
-                parent!.setupCurrentState()
-            }
-        }
-
-        var images: [UIImage?] {
-            get {
-                return parent!.images
-            }
-
-            nonmutating set {
-                parent!.images = newValue
-                parent!.setupCurrentState()
-            }
-        }
-
-        var states: [String] {
-            get {
-                return parent!.states
-            }
-
-            nonmutating set {
-                parent!.states = newValue
-                parent!.currentStateIndex %= newValue.count
-                parent!.setupCurrentState()
-            }
-        }
-    }
-
-    var custom: MultiStatableButton.CustomBehaviour {
-        return CustomBehaviour(parent: self)
-    }
+class MultiStatableButton: UIButton {
 
     // MARK: - Custom behaviour data
 
-    private var currentStateIndex: Int = 0
-    private var colors: [UIColor?] = []
-    private var backgroundColors: [UIColor?] = []
-    private var images: [UIImage?] = []
-    private var states: [String] = []
+    fileprivate var currentStateIndex: Int = 0
+    fileprivate var colors: [UIColor?] = []
+    fileprivate var backgroundColors: [UIColor?] = []
+    fileprivate var images: [UIImage?] = []
+    fileprivate var states: [String] = []
 
     // MARK: - Overrides
     override func tintColorDidChange() {
@@ -124,7 +26,7 @@ class MultiStatableButton: UIButton, CustomUI {
     }
 
     // MARK: - Private
-    private func setupCurrentState() {
+    fileprivate func setupCurrentState() {
         let currentTitle = states[currentStateIndex]
         setTitle(currentTitle.isEmpty ? nil : currentTitle, for: UIControl.State())
         setTitleColor(currentColor ?? tintColor, for: UIControl.State())
@@ -142,5 +44,99 @@ class MultiStatableButton: UIButton, CustomUI {
 
     private var currentToggleImage: UIImage? {
         return currentStateIndex < images.count ? images[currentStateIndex] : nil
+    }
+}
+
+extension BehaviorExtension where Base: MultiStatableButton {
+
+    func setup(images: [UIImage?],
+               states: [String],
+               colors: [UIColor?] = [],
+               backgroundColors: [UIColor?] = []
+        ) {
+
+        if let image = images.first {
+            base.setImage(image, for: UIControl.State())
+        }
+
+        base.sizeToFit()
+
+        base.images = images
+        base.states = states
+        base.colors = colors
+        base.backgroundColors = backgroundColors
+
+        base.setupCurrentState()
+    }
+
+    func setup(
+        image: UIImage? = nil,
+        states: [String],
+        colors: [UIColor?] = [],
+        backgroundColors: [UIColor?] = []
+        ) {
+        self.setup(images: [image], states: states, colors: colors, backgroundColors: backgroundColors)
+    }
+
+    // MARK: - Manual Control
+
+    func toggle() {
+        self.currentStateIndex = (currentStateIndex + 1) % states.count
+    }
+
+    var currentStateIndex: Int {
+        get {
+            return base.currentStateIndex
+        }
+
+        set {
+            base.currentStateIndex = newValue
+            base.setupCurrentState()
+        }
+    }
+
+    var colors: [UIColor?] {
+        get {
+            return base.colors
+        }
+
+        set {
+            base.colors = newValue
+            base.setupCurrentState()
+        }
+    }
+
+    var backgroundColors: [UIColor?] {
+        get {
+            return base.backgroundColors
+        }
+
+        set {
+            base.backgroundColors = newValue
+            base.setupCurrentState()
+        }
+    }
+
+    var images: [UIImage?] {
+        get {
+            return base.images
+        }
+
+        set {
+            base.images = newValue
+            base.setupCurrentState()
+        }
+    }
+
+    var states: [String] {
+        get {
+            return base.states
+        }
+
+        set {
+            base.states = newValue
+            base.currentStateIndex %= newValue.count
+            base.setupCurrentState()
+        }
     }
 }
