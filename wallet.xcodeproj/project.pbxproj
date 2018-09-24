@@ -70,6 +70,7 @@
 		8C2314682153E461007340E7 /* FormattedContactData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2314672153E461007340E7 /* FormattedContactData.swift */; };
 		8C2D276321590124004CE1F8 /* UIScreen+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2D276221590124004CE1F8 /* UIScreen+Extensions.swift */; };
 		8C2D27652159014F004CE1F8 /* ScreenType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2D27642159014F004CE1F8 /* ScreenType.swift */; };
+		8C2D2767215913B1004CE1F8 /* PinForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2D2766215913B1004CE1F8 /* PinForm.swift */; };
 		8C333D342109F02000949AC0 /* ScreenFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D332109F02000949AC0 /* ScreenFlow.swift */; };
 		8C333D362109F09800949AC0 /* FirstEnterLoginFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D352109F09800949AC0 /* FirstEnterLoginFlow.swift */; };
 		8C333D382109F3D500949AC0 /* OnboardingFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D372109F3D500949AC0 /* OnboardingFlow.swift */; };
@@ -184,7 +185,6 @@
 		8CA218A5212333B20063C188 /* IconableTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA218A4212333B20063C188 /* IconableTextField.swift */; };
 		8CA218A7212342B90063C188 /* CircleImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA218A6212342B90063C188 /* CircleImageView.swift */; };
 		8CA218A9212343760063C188 /* UIImageView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA218A8212343760063C188 /* UIImageView+Extensions.swift */; };
-		8CA218AD212421150063C188 /* PhoneMaskData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA218AC212421150063C188 /* PhoneMaskData.swift */; };
 		8CA218AF212479040063C188 /* SendMoneyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA218AE212479040063C188 /* SendMoneyButton.swift */; };
 		8CA218B821248FA50063C188 /* SendMoneyAmountComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA218B721248FA50063C188 /* SendMoneyAmountComponent.swift */; };
 		8CA218BB212573510063C188 /* IndentLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA218BA212573510063C188 /* IndentLabel.swift */; };
@@ -333,6 +333,7 @@
 		8C2314672153E461007340E7 /* FormattedContactData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormattedContactData.swift; sourceTree = "<group>"; };
 		8C2D276221590124004CE1F8 /* UIScreen+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScreen+Extensions.swift"; sourceTree = "<group>"; };
 		8C2D27642159014F004CE1F8 /* ScreenType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenType.swift; sourceTree = "<group>"; };
+		8C2D2766215913B1004CE1F8 /* PinForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinForm.swift; sourceTree = "<group>"; };
 		8C333D332109F02000949AC0 /* ScreenFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenFlow.swift; sourceTree = "<group>"; };
 		8C333D352109F09800949AC0 /* FirstEnterLoginFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstEnterLoginFlow.swift; sourceTree = "<group>"; };
 		8C333D372109F3D500949AC0 /* OnboardingFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFlow.swift; sourceTree = "<group>"; };
@@ -450,7 +451,6 @@
 		8CA218A4212333B20063C188 /* IconableTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconableTextField.swift; sourceTree = "<group>"; };
 		8CA218A6212342B90063C188 /* CircleImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleImageView.swift; sourceTree = "<group>"; };
 		8CA218A8212343760063C188 /* UIImageView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extensions.swift"; sourceTree = "<group>"; };
-		8CA218AC212421150063C188 /* PhoneMaskData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneMaskData.swift; sourceTree = "<group>"; };
 		8CA218AE212479040063C188 /* SendMoneyButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMoneyButton.swift; sourceTree = "<group>"; };
 		8CA218B721248FA50063C188 /* SendMoneyAmountComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMoneyAmountComponent.swift; sourceTree = "<group>"; };
 		8CA218BA212573510063C188 /* IndentLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndentLabel.swift; sourceTree = "<group>"; };
@@ -865,6 +865,7 @@
 				8C231460215283DA007340E7 /* FormEditingStatus.swift */,
 				8CA2190121304B730063C188 /* DirectionType.swift */,
 				8C2D27642159014F004CE1F8 /* ScreenType.swift */,
+				8C2D2766215913B1004CE1F8 /* PinForm.swift */,
 				8CA219052133ED4E0063C188 /* GroupingType.swift */,
 				8CA2190321305EC00063C188 /* GroupType.swift */,
 				8C7C335721466E5800EC6C96 /* GenderType.swift */,
@@ -872,7 +873,6 @@
 				8C72AD1B2155107A0032ABD2 /* DeviceModel.swift */,
 				8CF41D8C2136A1AE006D4FE2 /* TransactionsFilterData.swift */,
 				8CA218CC2126F23B0063C188 /* UserData.swift */,
-				8CA218AC212421150063C188 /* PhoneMaskData.swift */,
 				9319BA842129A07A00033A7E /* TransactionData.swift */,
 				8C7C338A21493A3600EC6C96 /* KYCStatus.swift */,
 				8C7C338C21493CD400EC6C96 /* KYCPersonalInfoData.swift */,
@@ -1580,7 +1580,6 @@
 				8C231445214BFC0E007340E7 /* ExternalLinks.swift in Sources */,
 				8C52FFE62119D1CC00EB55EA /* WalletItemComponent.swift in Sources */,
 				8CA218C92126D4FD0063C188 /* TransactionDetailViewController.swift in Sources */,
-				8CA218AD212421150063C188 /* PhoneMaskData.swift in Sources */,
 				8CA218DB212D892A0063C188 /* ContactData.swift in Sources */,
 				8C6088402110634700470411 /* UserDefaultsManager.swift in Sources */,
 				8CA218A5212333B20063C188 /* IconableTextField.swift in Sources */,
@@ -1681,6 +1680,7 @@
 				8C7C33472142924D00EC6C96 /* KYCMainScreenViewController.swift in Sources */,
 				8CA2189F2122F9E40063C188 /* SelectingBackView.swift in Sources */,
 				8C7C33712147C47000EC6C96 /* PickersAssets.swift in Sources */,
+				8C2D2767215913B1004CE1F8 /* PinForm.swift in Sources */,
 				8C7C33752147C7EA00EC6C96 /* UIApplication+Extensions.swift in Sources */,
 				8C0919412106264200703224 /* Dispatcher.swift in Sources */,
 				8C52FFE12119BE0400EB55EA /* WalletData.swift in Sources */,

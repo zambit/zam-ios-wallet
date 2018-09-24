@@ -35,19 +35,15 @@ struct ContactData {
         let formatter = PhoneNumberFormatter()
 
         guard let phoneNumber = phoneNumbers.first else {
-            return block(nil)
+            let formattedContact = FormattedContactData(name: self.name, avatarData: self.avatarData, formattedPhoneNumber: nil)
+            return block(formattedContact)
         }
 
         formatter.getCompleted(from: phoneNumber) {
             phone in
 
-            if let formattedPhone = phone?.formattedString {
-                let formattedContact = FormattedContactData(name: self.name, avatarData: self.avatarData, formattedPhoneNumber: formattedPhone)
-                block(formattedContact)
-                return
-            }
-
-            block(nil)
+            let formattedContact = FormattedContactData(name: self.name, avatarData: self.avatarData, formattedPhoneNumber: phone?.formattedString)
+            block(formattedContact)
         }
     }
 }
