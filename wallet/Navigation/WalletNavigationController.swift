@@ -70,29 +70,27 @@ extension BehaviorExtension where Base: WalletNavigationController {
             base.pushViewController(viewController, animated: animated)
             hideBackButton(for: viewController)
 
-            guard let root = base.viewControllers.first else {
-                return
-            }
-
-            let newHierarchy = [root, viewController]
+            let newHierarchy = [viewController]
             base.setViewControllers(newHierarchy, animated: false)
             
         case .back:
 
-            guard
-                let currentViewController = base.viewControllers.last,
-                let root = base.viewControllers.first else {
-                    return
+            guard let currentViewController = base.viewControllers.last else {
+                return
             }
 
-            let newHierarchy = [root, viewController, currentViewController]
+            let newHierarchy = [viewController, currentViewController]
             base.setViewControllers(newHierarchy, animated: false)
             base.popViewController(animated: animated)
 
             hideBackButton(for: viewController)
         }
 
-        (viewController as? WalletTabBarController)?.navigationController?.setNavigationBarHidden(true, animated: false)
+        if let tabBarController = viewController as? WalletTabBarController {
+            tabBarController.navigationController?.setNavigationBarHidden(true, animated: false)
+        } else {
+            viewController.navigationController?.setNavigationBarHidden(false, animated: false)
+        }
     }
 
     func popViewController(animated: Bool) {
