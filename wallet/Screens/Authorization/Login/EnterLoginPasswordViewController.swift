@@ -49,7 +49,7 @@ class EnterLoginPasswordViewController: СonsistentViewController, LoginPassword
 
         let data = AdditionalTextButtonData(textActive: "Forgot password?")
 
-        forgotPasswordButton?.configure(data: data)
+        forgotPasswordButton?.custom.configure(data: data)
         forgotPasswordButton?.addTarget(self, action: #selector(additionalButtonTouchUpInsideEvent(_:)), for: .touchUpInside)
 
         loginPasswordForm?.delegate = self

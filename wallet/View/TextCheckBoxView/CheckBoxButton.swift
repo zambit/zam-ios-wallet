@@ -9,31 +9,20 @@
 import Foundation
 import UIKit
 
-protocol CheckBox: class {
+class CheckBoxButton: UIButton {
 
-    var onImage: UIImage { get }
-    var offImage: UIImage { get }
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        custom.setupStyle()
+    }
 
-    var isChecked: Bool { get set }
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        custom.setupStyle()
+    }
 }
 
-class CheckBoxButton: UIButton, CustomUI {
-
-    struct CustomBehaviour {
-        weak var parent: CheckBoxButton?
-
-        var isChecked: Bool {
-            return parent?.isSelected ?? false
-        }
-
-        func setChecked(_ checked: Bool) {
-            parent?.isSelected = checked
-        }
-    }
-
-    var custom: CheckBoxButton.CustomBehaviour {
-        return CustomBehaviour(parent: self)
-    }
+extension BehaviorExtension where Base: CheckBoxButton {
 
     var onImage: UIImage {
         return #imageLiteral(resourceName: "icCheckboxDone")
@@ -43,20 +32,18 @@ class CheckBoxButton: UIButton, CustomUI {
         return #imageLiteral(resourceName: "icCheckboxDo")
     }
 
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setupStyle()
+    var isChecked: Bool {
+        return base.isSelected
     }
 
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        setupStyle()
+    func setChecked(_ checked: Bool) {
+        base.isSelected = checked
     }
 
-    private func setupStyle() {
-        self.setImage(onImage, for: .selected)
-        self.setImage(offImage, for: .normal)
-        
-        self.backgroundColor = .clear
+    fileprivate func setupStyle() {
+        base.setImage(onImage, for: .selected)
+        base.setImage(offImage, for: .normal)
+
+        base.backgroundColor = .clear
     }
 }
