@@ -11,18 +11,18 @@ import UIKit
 extension UIScreen {
 
     var type: ScreenType {
-        switch UIScreen.main.nativeBounds.height {
-        case 960:
+        switch UIScreen.main.bounds.height {
+        case 480:
             return .extraSmall
-        case 1136:
+        case 568:
             return .small
-        case 1334:
+        case 667:
             return .medium
-        case 1920, 2208:
+        case 736:
             return .plus
-        case 2436:
+        case 812:
             return .extra
-        case 1792, 2688:
+        case 896:
             return .extraLarge
         default:
             return .unknown
