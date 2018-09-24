@@ -31,7 +31,7 @@ class DepositMoneyViewController: FlowViewController, WalletNavigable, DepositMo
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        switch UIDevice.current.screenType {
+        switch UIScreen.main.type {
         case .extraSmall, .small:
             contentHeightConstraint?.constant = 284.0
         case .medium:

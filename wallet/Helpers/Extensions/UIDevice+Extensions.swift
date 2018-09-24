@@ -6,7 +6,6 @@
 //  Copyright © 2018 zamzam. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 /**
@@ -131,16 +130,6 @@ extension UIDevice {
 
     var isExtra: Bool {
         return screenType == .extra || screenType == .extraLarge
-    }
-
-    enum ScreenType {
-        case extraSmall
-        case small
-        case medium
-        case plus
-        case extra
-        case extraLarge
-        case unknown
     }
 
     var screenType: ScreenType {

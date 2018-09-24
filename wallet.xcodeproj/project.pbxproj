@@ -68,6 +68,8 @@
 		8C23146321528C70007340E7 /* PhoneNumberTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C23146221528C70007340E7 /* PhoneNumberTextField.swift */; };
 		8C231464215293B8007340E7 /* PhoneNumberRecipientComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C23145C21526FEF007340E7 /* PhoneNumberRecipientComponent.swift */; };
 		8C2314682153E461007340E7 /* FormattedContactData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2314672153E461007340E7 /* FormattedContactData.swift */; };
+		8C2D276321590124004CE1F8 /* UIScreen+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2D276221590124004CE1F8 /* UIScreen+Extensions.swift */; };
+		8C2D27652159014F004CE1F8 /* ScreenType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2D27642159014F004CE1F8 /* ScreenType.swift */; };
 		8C333D342109F02000949AC0 /* ScreenFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D332109F02000949AC0 /* ScreenFlow.swift */; };
 		8C333D362109F09800949AC0 /* FirstEnterLoginFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D352109F09800949AC0 /* FirstEnterLoginFlow.swift */; };
 		8C333D382109F3D500949AC0 /* OnboardingFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D372109F3D500949AC0 /* OnboardingFlow.swift */; };
@@ -329,6 +331,8 @@
 		8C231460215283DA007340E7 /* FormEditingStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormEditingStatus.swift; sourceTree = "<group>"; };
 		8C23146221528C70007340E7 /* PhoneNumberTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberTextField.swift; sourceTree = "<group>"; };
 		8C2314672153E461007340E7 /* FormattedContactData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormattedContactData.swift; sourceTree = "<group>"; };
+		8C2D276221590124004CE1F8 /* UIScreen+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScreen+Extensions.swift"; sourceTree = "<group>"; };
+		8C2D27642159014F004CE1F8 /* ScreenType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenType.swift; sourceTree = "<group>"; };
 		8C333D332109F02000949AC0 /* ScreenFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenFlow.swift; sourceTree = "<group>"; };
 		8C333D352109F09800949AC0 /* FirstEnterLoginFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstEnterLoginFlow.swift; sourceTree = "<group>"; };
 		8C333D372109F3D500949AC0 /* OnboardingFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFlow.swift; sourceTree = "<group>"; };
@@ -586,9 +590,9 @@
 				8C7C3341214290AB00EC6C96 /* Buttons */,
 				8C6088612111FB0A00470411 /* Components */,
 				8C04BC36211C872E00E90090 /* ContainerView.swift */,
+				8CA2191B213442140063C188 /* IllustrationPlaceholder */,
 				8C04BC34211C5AD800E90090 /* CreditCardViewComponent.swift */,
 				8C7C3352214661C300EC6C96 /* FormCells */,
-				8CA2191B213442140063C188 /* IllustrationPlaceholder */,
 				8C7C3342214290BD00EC6C96 /* ImageViews */,
 				8CA218BA212573510063C188 /* IndentLabel.swift */,
 				8C333D5B210B538700949AC0 /* TextCheckBoxView */,
@@ -860,6 +864,7 @@
 				8CA218FD21303BC30063C188 /* TransactionStatus.swift */,
 				8C231460215283DA007340E7 /* FormEditingStatus.swift */,
 				8CA2190121304B730063C188 /* DirectionType.swift */,
+				8C2D27642159014F004CE1F8 /* ScreenType.swift */,
 				8CA219052133ED4E0063C188 /* GroupingType.swift */,
 				8CA2190321305EC00063C188 /* GroupType.swift */,
 				8C7C335721466E5800EC6C96 /* GenderType.swift */,
@@ -1300,6 +1305,7 @@
 				8C333D41210A094500949AC0 /* UIColor+Additions.swift */,
 				8CA218EA212DC2DB0063C188 /* UIColor+Extensions.swift */,
 				8CF5F93921144BE80083B36A /* UIDevice+Extensions.swift */,
+				8C2D276221590124004CE1F8 /* UIScreen+Extensions.swift */,
 				8C04BC29211C4F4000E90090 /* UIFont+Additions.swift */,
 				8C04BC422121C23200E90090 /* UIImage+Extensions.swift */,
 				8CA218A8212343760063C188 /* UIImageView+Extensions.swift */,
@@ -1690,6 +1696,7 @@
 				8CA218A1212304590063C188 /* SendMoneyViewController.swift in Sources */,
 				8C0919832109CC2000703224 /* EnterLoginPasswordViewController.swift in Sources */,
 				8C2314532150EA66007340E7 /* PartialPhoneNumberTextField.swift in Sources */,
+				8C2D27652159014F004CE1F8 /* ScreenType.swift in Sources */,
 				8C713B0D2136EA9E00AC2E25 /* UIAlertController+Extensions.swift in Sources */,
 				8C7C33732147C67C00EC6C96 /* ItemWithImage.swift in Sources */,
 				8C0919562107362300703224 /* CodableSuccess.swift in Sources */,
@@ -1751,6 +1758,7 @@
 				8C0919812108D99400703224 /* CreateNewPasswordViewController.swift in Sources */,
 				8C0919432106268900703224 /* HTTPDispatcher.swift in Sources */,
 				8C72AD1C2155107A0032ABD2 /* DeviceModel.swift in Sources */,
+				8C2D276321590124004CE1F8 /* UIScreen+Extensions.swift in Sources */,
 				8C333D362109F09800949AC0 /* FirstEnterLoginFlow.swift in Sources */,
 				8C7C337B2147EF1D00EC6C96 /* MediaSheetPickerViewController.swift in Sources */,
 			);

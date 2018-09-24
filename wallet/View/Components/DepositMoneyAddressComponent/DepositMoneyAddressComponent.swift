@@ -25,7 +25,7 @@ class DepositMoneyAddressComponent: Component {
     override func initFromNib() {
         super.initFromNib()
 
-        switch UIDevice.current.screenType {
+        switch UIScreen.main.type {
         case .extraSmall, .small:
             imageHeightConstraint?.constant = 100.0
         case .medium:

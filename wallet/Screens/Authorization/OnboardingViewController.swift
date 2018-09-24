@@ -39,7 +39,7 @@ class OnboardingViewController: FlowViewController, WalletNavigable, UICollectio
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        switch UIDevice.current.screenType {
+        switch UIScreen.main.type {
         case .extraSmall, .small:
             registrationButtonTopConstraint?.constant = 25.0
             sizePreset = .superCompact

@@ -42,19 +42,19 @@ class CreatePinComponent: Component, UICollectionViewDataSource, UICollectionVie
     override func initFromNib() {
         super.initFromNib()
 
-        switch UIDevice.current.screenType {
-        case .extraSmall, .small:
-            self.heightAnchor.constraint(equalToConstant: 80.0).isActive = true
-            break
-        case .medium:
-            self.heightAnchor.constraint(equalToConstant: 145.0).isActive = true
-            break
-        case .extra, .plus, .extraLarge:
-            self.heightAnchor.constraint(equalToConstant: 180.0).isActive = true
-            break
-        case .unknown:
-            break
-        }
+//        switch UIScreen.main.type {
+//        case .extraSmall, .small:
+//            self.heightAnchor.constraint(equalToConstant: 80.0).isActive = true
+//            break
+//        case .medium:
+//            self.heightAnchor.constraint(equalToConstant: 145.0).isActive = true
+//            break
+//        case .extra, .plus, .extraLarge:
+//            self.heightAnchor.constraint(equalToConstant: 180.0).isActive = true
+//            break
+//        case .unknown:
+//            break
+//        }
 
         createPinStages = [
             CreatePinStageData(title: "Create PIN-code", codeLength: 4),

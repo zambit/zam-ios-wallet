@@ -34,7 +34,7 @@ class CreatePinViewController: FlowViewController, WalletNavigable, DecimalKeybo
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        switch UIDevice.current.screenType {
+        switch UIScreen.main.type {
         case .small, .extraSmall:
             verticalBetweenSpacingConstraint?.constant = 42.0
             topConstraint?.constant = 150

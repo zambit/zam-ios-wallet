@@ -45,7 +45,7 @@ class EnterPinViewController: FlowViewController, WalletNavigable, DecimalKeyboa
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        switch UIDevice.current.screenType {
+        switch UIScreen.main.type {
         case .extraSmall, .small:
             verticalBetweenSpacingConstraint?.constant = 42
             topConstraint?.constant = 150
@@ -56,8 +56,8 @@ class EnterPinViewController: FlowViewController, WalletNavigable, DecimalKeyboa
             verticalBetweenSpacingConstraint?.constant = 72
             topConstraint?.constant = 266
         case .extraLarge:
-            verticalBetweenSpacingConstraint?.constant = 72
-            topConstraint?.constant = 320
+            verticalBetweenSpacingConstraint?.constant = 92
+            topConstraint?.constant = 340
         case .unknown:
             fatalError()
         }

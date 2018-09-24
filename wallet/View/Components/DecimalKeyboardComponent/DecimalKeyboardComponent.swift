@@ -47,7 +47,7 @@ class DecimalKeyboardComponent: Component {
     override func initFromNib() {
         super.initFromNib()
 
-        switch UIDevice.current.screenType {
+        switch UIScreen.main.type {
         case .extraSmall, .small:
             keyboardButtonEdge = 72.0
             keyboardButtonsHorizontalSpacing = 16.0

@@ -26,11 +26,8 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gjf-Ft-3mR" customClass="CreatePinComponent" customModule="wallet" customModuleProvider="target">
-                                <rect key="frame" x="16" y="54" width="382" height="160"/>
+                                <rect key="frame" x="16" y="36" width="382" height="178"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="160" placeholder="YES" id="ZN3-em-Oe3"/>
-                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -38,7 +35,7 @@
                             <constraint firstItem="Gjf-Ft-3mR" firstAttribute="centerX" secondItem="ZUH-iA-1cu" secondAttribute="centerX" id="FPM-hm-Ypa"/>
                             <constraint firstItem="28g-uU-ZNN" firstAttribute="trailing" secondItem="BZ2-Ck-rOa" secondAttribute="trailing" constant="16" id="JZz-rK-zJq"/>
                             <constraint firstItem="BZ2-Ck-rOa" firstAttribute="centerX" secondItem="ZUH-iA-1cu" secondAttribute="centerX" id="M1g-eH-f5o"/>
-                            <constraint firstItem="Gjf-Ft-3mR" firstAttribute="top" relation="greaterThanOrEqual" secondItem="28g-uU-ZNN" secondAttribute="top" constant="16" id="S4J-10-e17"/>
+                            <constraint firstItem="Gjf-Ft-3mR" firstAttribute="top" secondItem="28g-uU-ZNN" secondAttribute="top" constant="16" id="S4J-10-e17"/>
                             <constraint firstItem="BZ2-Ck-rOa" firstAttribute="leading" secondItem="28g-uU-ZNN" secondAttribute="leading" constant="16" id="XAv-NK-N5P"/>
                             <constraint firstItem="Gjf-Ft-3mR" firstAttribute="leading" secondItem="28g-uU-ZNN" secondAttribute="leading" constant="16" id="afb-RH-srt"/>
                             <constraint firstItem="BZ2-Ck-rOa" firstAttribute="top" secondItem="Gjf-Ft-3mR" secondAttribute="bottom" constant="72" id="hbf-Ui-fJm"/>

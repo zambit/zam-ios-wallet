@@ -85,7 +85,7 @@ class KYCMainScreenViewController: FlowViewController, WalletNavigable {
 
         var buttonsType: StageButtonType
 
-        switch UIDevice.current.screenType {
+        switch UIScreen.main.type {
         case .small, .extraSmall:
             topPlaceholderComponent?.font = UIFont.walletFont(ofSize: 12.0, weight: .medium)
             topPlaceholderComponent?.prepare(preset: .superCompact)
