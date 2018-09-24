@@ -174,6 +174,7 @@ class EnterPinViewController: FlowViewController, WalletNavigable, DecimalKeyboa
                 performWithDelay {
                     UserContactsManager.default.fetchContacts({ _ in
                         self?.dotsFieldComponent?.endLoading()
+                        self?.dotsFieldComponent?.unfillAll()
                         self?.onContinue?()
                     })
                 }
@@ -182,6 +183,7 @@ class EnterPinViewController: FlowViewController, WalletNavigable, DecimalKeyboa
 
                 performWithDelay {
                     self?.dotsFieldComponent?.endLoading()
+                    self?.dotsFieldComponent?.unfillAll()
                     self?.onLoginForm?(phone)
                 }
             }
