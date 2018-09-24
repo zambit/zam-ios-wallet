@@ -154,23 +154,17 @@ class ContactsHorizontalComponent: Component, UICollectionViewDataSource, UIColl
         return cell
     }
 
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-
-    }
-
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         guard let contactCell = cell as? ContactItemComponent else {
             fatalError()
         }
 
         contactCell.setupStyle()
-        contactCell.layoutIfNeeded()
     }
 
     // MARK: - UICollectionViewDelegateFlowLayout
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-
         return CGSize(width: 88.0, height: 88.0)
     }
 

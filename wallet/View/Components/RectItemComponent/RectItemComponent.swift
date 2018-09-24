@@ -16,10 +16,6 @@ class RectItemComponent: ItemComponent {
     @IBOutlet private var avatarImageView: RoundedImageView!
     @IBOutlet private var nameLabel: UILabel!
 
-    override var intrinsicContentSize: CGSize {
-        return CGSize(width: 88.0 + insets.left + insets.right, height: 88.0 + insets.top + insets.bottom)
-    }
-
     override func layoutSubviews() {
         super.layoutSubviews()
 

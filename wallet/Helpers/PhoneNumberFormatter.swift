@@ -239,7 +239,11 @@ class PhoneNumberFormatter {
 
     var formatted: String {
         get {
-            return partialFormatter.formatPartial("+\(number ?? "")")
+            if let number = number {
+                return partialFormatter.formatPartial("+\(number)")
+            }
+
+            return ""
         }
     }
 
