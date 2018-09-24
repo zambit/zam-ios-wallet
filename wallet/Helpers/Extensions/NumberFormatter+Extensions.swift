@@ -29,7 +29,7 @@ extension NumberFormatter {
         formatter.numberStyle = .decimal
         formatter.alwaysShowsDecimalSeparator = true
         formatter.minimumFractionDigits = 1
-        formatter.maximumFractionDigits = 6
+        formatter.maximumFractionDigits = 8
 
         return formatter
     }

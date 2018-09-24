@@ -12,5 +12,5 @@ struct FormattedContactData {
 
     var name: String
     var avatarData: Data?
-    var formattedPhoneNumber: String
+    var formattedPhoneNumber: String?
 }
