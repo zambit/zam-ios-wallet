@@ -1,5 +1,5 @@
 //
-//  AdditionalTextButton.swift
+//  TimerButton.swift
 //  wallet
 //
 //  Created by  me on 31/07/2018.
@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-struct AdditionalTextButtonData {
+struct TimerButtonData {
 
     struct TimerParameters {
         var seconds: Int
@@ -33,7 +33,7 @@ struct AdditionalTextButtonData {
     }
 }
 
-class AdditionalTextButton: UIButton, CountdownTimerDelegate {
+class TimerButton: UIButton, CountdownTimerDelegate {
 
     fileprivate var textActive: String = ""
     fileprivate var textInactive: String = ""
@@ -73,9 +73,9 @@ class AdditionalTextButton: UIButton, CountdownTimerDelegate {
     }
 }
 
-extension BehaviorExtension where Base: AdditionalTextButton {
+extension BehaviorExtension where Base: TimerButton {
 
-    func configure(data: AdditionalTextButtonData) {
+    func configure(data: TimerButtonData) {
         base.textActive = data.textActive
         base.textInactive = data.textInactive
 

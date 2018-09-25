@@ -15,8 +15,8 @@ class DepositMoneyAddressComponent: Component {
 
     @IBOutlet private var qrImageView: UIImageView?
     @IBOutlet private var addressLabel: UILabel?
-    @IBOutlet private var copyAddressButton: OutputButton?
-    @IBOutlet private var shareAddressButton: OutputButton?
+    @IBOutlet private var copyAddressButton: ImageButton?
+    @IBOutlet private var shareAddressButton: ImageButton?
 
     @IBOutlet private var imageHeightConstraint: NSLayoutConstraint?
 
@@ -80,12 +80,12 @@ class DepositMoneyAddressComponent: Component {
     }
 
     @objc
-    private func copyAddressButtonTouchUpInsideEvent(_ sender: OutputButton) {
+    private func copyAddressButtonTouchUpInsideEvent(_ sender: ImageButton) {
         UIPasteboard.general.string = address ?? ""
     }
 
     @objc
-    private func shareAddressButtonTouchUpInsideEvent(_ sender: OutputButton) {
+    private func shareAddressButtonTouchUpInsideEvent(_ sender: ImageButton) {
         guard let address = address else {
             return
         }

@@ -34,7 +34,7 @@ class TransactionDetailViewController: FlowViewController, WalletNavigable {
     @IBOutlet private var amountDetailLabel: UILabel?
     @IBOutlet private var recipientPhoneLabel: UILabel?
     @IBOutlet private var recipientNameLabel: UILabel?
-    @IBOutlet private var sendButton: LargeSendButton?
+    @IBOutlet private var sendButton: SendButton?
     @IBOutlet private var errorMessageLabel: UILabel?
 
     @IBOutlet private var closeButton: UIButton?
@@ -226,7 +226,7 @@ class TransactionDetailViewController: FlowViewController, WalletNavigable {
     }
 
     @objc
-    private func sendButtonTouchUpInsideEvent(_ sender: LargeSendButton) {
+    private func sendButtonTouchUpInsideEvent(_ sender: SendButton) {
         switch sender.sendState {
         case .initial:
             guard let token = userManager?.getToken() else {

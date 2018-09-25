@@ -30,7 +30,7 @@ class OnboardingViewController: FlowViewController, WalletNavigable, UICollectio
 
     @IBOutlet var pagesCollectionView: UICollectionView?
     @IBOutlet var pageControl: UIPageControl?
-    @IBOutlet var registrationButton: OnboardingLargeButton?
+    @IBOutlet var registrationButton: LargeButton?
     @IBOutlet var loginButton: UIButton?
 
     @IBOutlet private var registrationButtonTopConstraint: NSLayoutConstraint?

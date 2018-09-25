@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -16,7 +11,7 @@
             <objects>
                 <collectionViewController storyboardIdentifier="WalletsViewController" id="uFN-ex-TVA" customClass="WalletsViewController" customModule="wallet" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" id="V2V-Nz-6Ol">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="c68-3l-ktK" customClass="OverlappingFlowLayout" customModule="wallet" customModuleProvider="target">
@@ -41,15 +36,15 @@
             <objects>
                 <viewController storyboardIdentifier="SendMoneyViewController" id="vgm-QO-NmE" customClass="SendMoneyViewController" customModule="wallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ixK-ov-4yC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2YV-v8-nPf" customClass="SendMoneyComponent" customModule="wallet" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="125" width="375" height="542"/>
+                                <rect key="frame" x="0.0" y="125" width="600" height="475"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wbp-u8-nax">
-                                <rect key="frame" x="0.0" y="81" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="81" width="600" height="44"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" priority="750" constant="44" id="wTL-lF-r0c"/>
@@ -62,7 +57,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="gkV-cN-TUf">
-                                <rect key="frame" x="0.0" y="40" width="375" height="90"/>
+                                <rect key="frame" x="0.0" y="40" width="600" height="90"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="90" id="clN-Zj-bsf"/>
@@ -111,35 +106,35 @@
             <objects>
                 <viewController storyboardIdentifier="TransactionDetailViewController" id="f0r-eD-IeY" customClass="TransactionDetailViewController" customModule="wallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="k8E-dd-Ebl">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xGR-al-sHs">
-                                <rect key="frame" x="55" y="64" width="265" height="20.5"/>
+                                <rect key="frame" x="55" y="64" width="490" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LI1-9g-ORJ">
-                                <rect key="frame" x="16" y="191.5" width="343" height="21"/>
+                                <rect key="frame" x="16" y="191.5" width="568" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AXt-zT-hyB">
-                                <rect key="frame" x="166.5" y="222.5" width="42" height="21"/>
+                                <rect key="frame" x="279" y="222.5" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rdf-Qv-8bf">
-                                <rect key="frame" x="166.5" y="294.5" width="42" height="21"/>
+                                <rect key="frame" x="279" y="294.5" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RmK-rZ-uuD" customClass="LargeSendButton" customModule="wallet" customModuleProvider="target">
-                                <rect key="frame" x="131.5" y="371.5" width="112" height="112"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RmK-rZ-uuD" customClass="SendButton" customModule="wallet" customModuleProvider="target">
+                                <rect key="frame" x="244" y="371.5" width="112" height="112"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="112" id="dRS-tB-msu"/>
                                     <constraint firstAttribute="height" constant="112" id="yNs-9g-ROS"/>
@@ -147,17 +142,17 @@
                                 <state key="normal" title="Button"/>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PEI-Lx-5qv">
-                                <rect key="frame" x="188" y="505.5" width="0.0" height="0.0"/>
+                                <rect key="frame" x="300" y="505.5" width="0.0" height="0.0"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GtQ-u4-AZE">
-                                <rect key="frame" x="168.5" y="527.5" width="39" height="30"/>
+                                <rect key="frame" x="280.5" y="527.5" width="39" height="30"/>
                                 <state key="normal" title="Close"/>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5pL-53-FOi">
-                                <rect key="frame" x="166.5" y="270.5" width="42" height="21"/>
+                                <rect key="frame" x="279" y="270.5" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -211,11 +206,11 @@
             <objects>
                 <viewController storyboardIdentifier="TransactionsHistoryViewController" id="I7i-NY-Tf7" customClass="TransactionsHistoryViewController" customModule="wallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="UzF-AV-9az">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ywp-uk-DtS">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                             <searchBar contentMode="redraw" searchBarStyle="minimal" translatesAutoresizingMaskIntoConstraints="NO" id="99N-Z6-auC">
@@ -265,35 +260,35 @@
             <objects>
                 <viewController storyboardIdentifier="KYCMainScreenViewController" id="7uq-rL-R3a" customClass="KYCMainScreenViewController" customModule="wallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="vV6-PT-WNB">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wTa-tO-a5W">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hlN-uQ-fsq" customClass="IllustrationalPlaceholder" customModule="wallet" customModuleProvider="target">
-                                        <rect key="frame" x="17" y="0.0" width="341" height="250"/>
+                                        <rect key="frame" x="17" y="0.0" width="566" height="250"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="250" id="myU-w5-9L1"/>
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fj6-TG-G0N" customClass="StageButton" customModule="wallet" customModuleProvider="target">
-                                        <rect key="frame" x="17" y="265" width="341" height="75"/>
+                                        <rect key="frame" x="17" y="265" width="566" height="75"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="75" id="Zpu-Jt-QqM"/>
                                         </constraints>
                                         <state key="normal" title="Button"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HVf-FQ-IAQ" customClass="StageButton" customModule="wallet" customModuleProvider="target">
-                                        <rect key="frame" x="17" y="355" width="341" height="75"/>
+                                        <rect key="frame" x="17" y="355" width="566" height="75"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="75" id="rqE-OZ-FBg"/>
                                         </constraints>
                                         <state key="normal" title="Button"/>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0jg-iP-FvN">
-                                        <rect key="frame" x="30" y="452" width="315" height="21"/>
+                                        <rect key="frame" x="30" y="452" width="540" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -346,11 +341,11 @@
             <objects>
                 <viewController storyboardIdentifier="TransactionsHistoryFilterViewController" id="o7v-5Q-uQ7" customClass="TransactionsHistoryFilterViewController" customModule="wallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="6Tn-Rj-9qf">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="k6a-PT-gCn">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                         </subviews>
@@ -376,7 +371,7 @@
             <objects>
                 <viewController storyboardIdentifier="QRCodeScannerViewController" id="gOb-eH-at0" customClass="QRCodeScannerViewController" customModule="wallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="e4o-Uh-Jd3">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="bZy-MI-C6f"/>
@@ -391,18 +386,18 @@
             <objects>
                 <viewController storyboardIdentifier="DepositMoneyViewController" id="cSy-FY-bn8" customClass="DepositMoneyViewController" customModule="wallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hSw-wz-rpa">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6M8-op-lee" customClass="DepositMoneyAddressComponent" customModule="wallet" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="193" width="375" height="474"/>
+                                <rect key="frame" x="0.0" y="126" width="600" height="474"/>
                                 <color key="backgroundColor" red="0.60285807530000002" green="1" blue="0.75562033740000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" priority="998" constant="474" id="Y7G-1E-aad"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xVl-jA-onZ" customClass="DepositMoneyMethodComponent" customModule="wallet" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="20" width="375" height="173"/>
+                                <rect key="frame" x="0.0" y="20" width="600" height="106"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                         </subviews>
@@ -434,7 +429,7 @@
             <objects>
                 <viewController storyboardIdentifier="HomeViewController" id="Ump-hs-UvL" customClass="HomeViewController" customModule="wallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bLY-3t-y3W">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="124598" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="4ZZ-gs-qSx">
@@ -456,7 +451,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GYg-SV-76M" customClass="CreditCardViewComponent" customModule="wallet" customModuleProvider="target">
-                                <rect key="frame" x="231" y="36" width="200" height="138"/>
+                                <rect key="frame" x="456" y="36" width="200" height="138"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="RVW-1L-i2D"/>
@@ -464,24 +459,24 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r57-Sk-lhr" customClass="ContactsHorizontalComponent" customModule="wallet" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="190" width="375" height="171"/>
+                                <rect key="frame" x="0.0" y="190" width="600" height="171"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="171" id="BhD-ae-zqu"/>
                                 </constraints>
                             </view>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ba8-TY-ppi">
-                                <rect key="frame" x="0.0" y="293" width="375" height="724"/>
+                                <rect key="frame" x="0.0" y="226" width="600" height="724"/>
                                 <subviews>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zcm-Fg-lbF">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="724"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="724"/>
                                         <color key="backgroundColor" red="1" green="0.99806826780000002" blue="0.67137100199999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     </view>
                                     <containerView opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cQI-ZW-QpH" customClass="ContainerView" customModule="wallet" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="724"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="724"/>
                                     </containerView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KCm-3x-EWo">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="64"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4m2-kB-JMx">
                                                 <rect key="frame" x="16" y="28" width="56.5" height="26.5"/>
@@ -564,48 +559,48 @@
             <objects>
                 <viewController storyboardIdentifier="MoreViewController" id="OXY-hi-nQn" customClass="MoreViewController" customModule="wallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="SVb-g8-3Zn">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6gK-Qv-G2Z">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5iH-0f-8DR" customClass="MenuButton" customModule="wallet" customModuleProvider="target">
-                                        <rect key="frame" x="17" y="30" width="341" height="59"/>
+                                        <rect key="frame" x="17" y="30" width="566" height="59"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="59" id="4Bn-Ye-8Kf"/>
                                         </constraints>
                                         <state key="normal" title="Button"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lam-2T-aan" customClass="MenuButton" customModule="wallet" customModuleProvider="target">
-                                        <rect key="frame" x="17" y="104" width="341" height="59"/>
+                                        <rect key="frame" x="17" y="104" width="566" height="59"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="59" id="0RA-Ai-42N"/>
                                         </constraints>
                                         <state key="normal" title="Button"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dnb-mu-K81" customClass="MenuButton" customModule="wallet" customModuleProvider="target">
-                                        <rect key="frame" x="17" y="178" width="341" height="59"/>
+                                        <rect key="frame" x="17" y="178" width="566" height="59"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="59" id="eT7-iz-qH0"/>
                                         </constraints>
                                         <state key="normal" title="Button"/>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mi8-1m-Iru">
-                                        <rect key="frame" x="17" y="596" width="341" height="21"/>
+                                        <rect key="frame" x="17" y="529" width="566" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zpM-RK-jPe">
-                                        <rect key="frame" x="87" y="526" width="200" height="25"/>
+                                        <rect key="frame" x="200" y="459" width="200" height="25"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="200" placeholder="YES" id="u5S-eX-FIG"/>
                                             <constraint firstAttribute="height" constant="25" id="zSS-e7-9Ri"/>
                                         </constraints>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8ph-jb-2xS" customClass="HighlightableButton" customModule="wallet" customModuleProvider="target">
-                                        <rect key="frame" x="48" y="439" width="279" height="59"/>
+                                        <rect key="frame" x="160.5" y="372" width="279" height="59"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="59" id="0DQ-BQ-U3o"/>
                                             <constraint firstAttribute="width" constant="279" id="5xF-Zz-gYi"/>
@@ -663,28 +658,28 @@
             <objects>
                 <viewController storyboardIdentifier="KYCUploadDocumentsMenuViewController" id="pu4-UA-zEG" customClass="KYCUploadDocumentsMenuViewController" customModule="wallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="t17-Na-EdJ">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="daC-qe-Fse">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QTQ-ih-rN3" customClass="StageButton" customModule="wallet" customModuleProvider="target">
-                                        <rect key="frame" x="17" y="21" width="341" height="75"/>
+                                        <rect key="frame" x="17" y="21" width="566" height="75"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="75" id="eyE-og-Bzn"/>
                                         </constraints>
                                         <state key="normal" title="Button"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zQU-Kh-8F9" customClass="StageButton" customModule="wallet" customModuleProvider="target">
-                                        <rect key="frame" x="17" y="203" width="341" height="75"/>
+                                        <rect key="frame" x="17" y="203" width="566" height="75"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="75" id="Uri-FB-m0W"/>
                                         </constraints>
                                         <state key="normal" title="Button"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tZO-CV-skW" customClass="StageButton" customModule="wallet" customModuleProvider="target">
-                                        <rect key="frame" x="17" y="112" width="341" height="75"/>
+                                        <rect key="frame" x="17" y="112" width="566" height="75"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="75" id="ZVh-9s-5o9"/>
                                         </constraints>
@@ -730,40 +725,40 @@
             <objects>
                 <viewController storyboardIdentifier="KYCUploadPrivateDocumentViewController" id="kcD-uc-6wX" customClass="KYCUploadPrivateDocumentViewController" customModule="wallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="J7r-iw-RO1">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="as9-fR-rSK">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ved-ee-kMD" customClass="IllustrationalPlaceholder" customModule="wallet" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="20" width="375" height="230"/>
+                                <rect key="frame" x="0.0" y="20" width="600" height="230"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="230" id="da2-rd-TE1"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yaT-aA-Dwu">
-                                <rect key="frame" x="24" y="240" width="327" height="21"/>
+                                <rect key="frame" x="24" y="240" width="552" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iJW-EK-73M">
-                                <rect key="frame" x="24" y="273" width="327" height="20.5"/>
+                                <rect key="frame" x="24" y="273" width="552" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3hJ-lo-acI">
-                                <rect key="frame" x="24" y="475" width="327" height="90"/>
+                                <rect key="frame" x="24" y="408" width="552" height="90"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="90" id="VhM-Qw-iMM"/>
                                 </constraints>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dgu-De-Jxe" customClass="StageButton" customModule="wallet" customModuleProvider="target">
-                                <rect key="frame" x="24" y="589" width="327" height="46"/>
+                                <rect key="frame" x="24" y="522" width="552" height="46"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="46" id="QOR-7W-XQT"/>
                                 </constraints>
@@ -814,40 +809,40 @@
             <objects>
                 <viewController storyboardIdentifier="KYCUploadSelfieViewController" id="iLk-w9-Uyq" customClass="KYCUploadSelfieViewController" customModule="wallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="W5M-Xr-cRW">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l69-MY-6ol">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hiG-Di-UMC" customClass="IllustrationalPlaceholder" customModule="wallet" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="20" width="375" height="230"/>
+                                <rect key="frame" x="0.0" y="20" width="600" height="230"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="230" id="VXE-mK-3hn"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eAV-Xp-S1M">
-                                <rect key="frame" x="24" y="240" width="327" height="21"/>
+                                <rect key="frame" x="24" y="240" width="552" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u7I-iI-qtt">
-                                <rect key="frame" x="24" y="273" width="327" height="20.5"/>
+                                <rect key="frame" x="24" y="273" width="552" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="muF-Sy-chO">
-                                <rect key="frame" x="24" y="475" width="327" height="90"/>
+                                <rect key="frame" x="24" y="408" width="327" height="90"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="90" id="VBj-ER-aHe"/>
                                 </constraints>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ekU-Ex-lfh" customClass="StageButton" customModule="wallet" customModuleProvider="target">
-                                <rect key="frame" x="24" y="589" width="327" height="46"/>
+                                <rect key="frame" x="24" y="522" width="552" height="46"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="46" id="lIo-98-3sK"/>
                                 </constraints>
@@ -897,40 +892,40 @@
             <objects>
                 <viewController storyboardIdentifier="KYCUploadAddressDocumentViewController" id="3aK-3b-9O2" customClass="KYCUploadAddressDocumentViewController" customModule="wallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="aTf-q0-8K1">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ea3-78-pa2">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XUQ-RB-tbm" customClass="IllustrationalPlaceholder" customModule="wallet" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="20" width="375" height="230"/>
+                                <rect key="frame" x="0.0" y="20" width="600" height="230"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="230" id="6l9-Uq-UDi"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rjx-ge-h19">
-                                <rect key="frame" x="24" y="240" width="327" height="21"/>
+                                <rect key="frame" x="24" y="240" width="552" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o89-cq-ViB">
-                                <rect key="frame" x="24" y="273" width="327" height="20.5"/>
+                                <rect key="frame" x="24" y="273" width="552" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rcy-tc-Zk5">
-                                <rect key="frame" x="24" y="475" width="327" height="90"/>
+                                <rect key="frame" x="24" y="408" width="327" height="90"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="90" id="O11-cx-nJf"/>
                                 </constraints>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FDK-SV-q1T" customClass="StageButton" customModule="wallet" customModuleProvider="target">
-                                <rect key="frame" x="24" y="589" width="327" height="46"/>
+                                <rect key="frame" x="24" y="522" width="552" height="46"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="46" id="6n2-Rw-raA"/>
                                 </constraints>
@@ -980,25 +975,25 @@
             <objects>
                 <viewController storyboardIdentifier="TestViewController" id="bTe-cU-TZ6" customClass="TestViewController" customModule="wallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8PS-Qx-K7u">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qlK-mw-HKt" customClass="RecipientComponent" customModule="wallet" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="45" width="375" height="56"/>
+                                <rect key="frame" x="0.0" y="45" width="600" height="56"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="56" id="l7C-z6-vcZ"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tW5-w7-Gbl">
-                                <rect key="frame" x="132.5" y="318.5" width="30" height="30"/>
+                                <rect key="frame" x="245" y="285" width="30" height="30"/>
                                 <state key="normal" title="left"/>
                                 <connections>
                                     <action selector="turnLeft" destination="bTe-cU-TZ6" eventType="touchUpInside" id="JgL-0i-pv1"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EYq-fE-Hjx">
-                                <rect key="frame" x="211.5" y="318.5" width="32" height="30"/>
+                                <rect key="frame" x="324" y="285" width="32" height="30"/>
                                 <state key="normal" title="right"/>
                                 <connections>
                                     <action selector="turnRight" destination="bTe-cU-TZ6" eventType="touchUpInside" id="Gpq-N4-x6m"/>
@@ -1030,14 +1025,14 @@
             <objects>
                 <viewController storyboardIdentifier="KYCPersonalInfoViewController" id="rTM-Gz-NuH" customClass="KYCPersonalInfoViewController" customModule="wallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="F9q-U7-jU4">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Ne-MW-F7o">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" contentInsetAdjustmentBehavior="never" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="Pea-UB-nru">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                             </tableView>
                         </subviews>
