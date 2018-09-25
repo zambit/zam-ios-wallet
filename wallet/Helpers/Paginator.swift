@@ -45,11 +45,16 @@ public class Paginator<Element> {
     /**
      All results in the order they were received.
      */
-    public var results: [Element] = []
+    public var results: [Element] = [] {
+        didSet {
+            print(results.count)
+        }
+    }
 
     /// Shortcuts for the block signatures
     public typealias FetchHandlerType = (_ paginator: Paginator<Element>, _ pageSize: Int, _ nextPage: String?) -> ()
     public typealias ResultsHandler = (Paginator, [Element], [Element]) -> ()
+    public typealias RefreshHandler = (Paginator, [Element]) -> ()
     public typealias ResetHandler = (Paginator) -> ()
     public typealias FailureHandler = (Paginator) -> ()
 
@@ -64,6 +69,12 @@ public class Paginator<Element> {
      for a given page and `isInitialPage` boolean flag.
      */
     public var resultsHandler: ResultsHandler
+
+    /**
+     The resetHandler is called by `reset()`.  Here you can define a callback to be called after
+     the paginator has been reset.
+     */
+    public var refreshHandler: RefreshHandler?
 
     /**
      The resetHandler is called by `reset()`.  Here you can define a callback to be called after
@@ -91,12 +102,14 @@ public class Paginator<Element> {
     public init(pageSize: Int,
                 fetchHandler: @escaping FetchHandlerType,
                 resultsHandler: @escaping ResultsHandler,
+                refreshHandler: RefreshHandler? = nil,
                 resetHandler: ResetHandler? = nil,
                 failureHandler: FailureHandler? = nil) {
 
         self.pageSize = pageSize
         self.fetchHandler = fetchHandler
         self.resultsHandler = resultsHandler
+        self.refreshHandler = refreshHandler
         self.failureHandler = failureHandler
         self.resetHandler = resetHandler
         self.setDefaultValues()
@@ -104,13 +117,14 @@ public class Paginator<Element> {
     }
 
     /**
-     Sets default values for total, page, and results.  Called by `reset()` and `init`
+     Boolean indicating all pages have been fetched
      */
-    private func setDefaultValues() {
-        next = nil
-        page = 0
-        requestStatus = .None
-        results = []
+    public var reachedLastPage: Bool {
+        if requestStatus == .None {
+            return false
+        }
+
+        return next == ""
     }
 
     /**
@@ -122,25 +136,18 @@ public class Paginator<Element> {
     }
 
     /**
-     Reset the Paginator, clears all results and sets total and page to 0.
+     Refresh all elements by fetching first page and calling `RefreshHandler` on completion.
      */
-    public func reload() {
-        fetchFirstPage()
+    public func refresh() {
+        next = nil
+        page = 0
+        requestStatus = .None
+        fetchNextPage()
     }
 
     /**
-     reachedLastPage: Bool - Boolean indicating all pages have been fetched
-     */
-    public var reachedLastPage: Bool {
-        if requestStatus == .None {
-            return false
-        }
-
-        return next == ""
-    }
-
-    /**
-     Fetch the first page.  If requestStatus is not .None, the paginator will be reset.
+     Fetch the first page. If requestStatus is not .None, the paginator will be reset.
+     Don't use this method for `pulling-to-refresh`.
      */
     public func fetchFirstPage() {
         reset()
@@ -170,12 +177,17 @@ public class Paginator<Element> {
     public func receivedResults(results: [Element], next: String) {
         let old = self.results
 
-        self.results.append(contentsOf: results)
         self.next = next
         page += 1
         requestStatus = .Done
 
-        resultsHandler(self, old, results)
+        if page > 1 {
+            self.results.append(contentsOf: results)
+            resultsHandler(self, old, results)
+        } else {
+            self.results = results
+            refreshHandler?(self, results)
+        }
     }
 
     /**
@@ -187,4 +199,14 @@ public class Paginator<Element> {
         failureHandler?(self)
     }
 
+    /**
+     Sets default values for total, page, and results.  Called by `reset()` and `init`
+     */
+    private func setDefaultValues() {
+        next = nil
+        page = 0
+        requestStatus = .None
+        results = []
+        print("setDefaultValues()")
+    }
 }

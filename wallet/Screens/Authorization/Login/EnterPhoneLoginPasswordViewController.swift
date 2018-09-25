@@ -21,7 +21,7 @@ class EnterPhoneLoginPasswordViewController: СonsistentViewController, PhoneNum
     @IBOutlet var largeTitleLabel: UILabel?
     @IBOutlet var phoneNumberComponent: PhoneNumberComponent?
     @IBOutlet var loginPasswordFormComponent: LoginPasswordFormComponent?
-    @IBOutlet var forgotPasswordButton: AdditionalTextButton?
+    @IBOutlet var forgotPasswordButton: TimerButton?
 
     private var phoneNumberCompletionFlag: Bool = false
     private var loginPasswordCompletionFlag: Bool = false
@@ -50,8 +50,8 @@ class EnterPhoneLoginPasswordViewController: СonsistentViewController, PhoneNum
         setupDefaultStyle()
         isKeyboardHidesOnTap = true
 
-        let data = AdditionalTextButtonData(textActive: "Forgot password?")
-        forgotPasswordButton?.configure(data: data)
+        let data = TimerButtonData(textActive: "Forgot password?")
+        forgotPasswordButton?.custom.configure(data: data)
         forgotPasswordButton?.addTarget(self, action: #selector(additionalButtonTouchUpInsideEvent(_:)), for: .touchUpInside)
 
         largeTitleLabel?.textColor = .white
@@ -142,7 +142,7 @@ class EnterPhoneLoginPasswordViewController: СonsistentViewController, PhoneNum
     }
 
     @objc
-    private func additionalButtonTouchUpInsideEvent(_ sender: AdditionalTextButton) {
+    private func additionalButtonTouchUpInsideEvent(_ sender: TimerButton) {
         onRecovery?()
     }
 }

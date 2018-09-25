@@ -78,12 +78,12 @@
 		8C333D3E2109FD1000949AC0 /* OnboardingItemComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C333D3D2109FD1000949AC0 /* OnboardingItemComponent.xib */; };
 		8C333D40210A08A600949AC0 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D3F210A08A600949AC0 /* UIView+Extensions.swift */; };
 		8C333D42210A094500949AC0 /* UIColor+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D41210A094500949AC0 /* UIColor+Additions.swift */; };
-		8C333D44210B001500949AC0 /* OnboardingLargeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D43210B001500949AC0 /* OnboardingLargeButton.swift */; };
+		8C333D44210B001500949AC0 /* LargeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D43210B001500949AC0 /* LargeButton.swift */; };
 		8C333D48210B0F3700949AC0 /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D47210B0F3700949AC0 /* UIViewController+Extensions.swift */; };
 		8C333D4A210B1C4300949AC0 /* TextCheckBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D49210B1C4300949AC0 /* TextCheckBoxView.swift */; };
 		8C333D4C210B1D3500949AC0 /* CheckBoxButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D4B210B1D3500949AC0 /* CheckBoxButton.swift */; };
 		8C333D4E210B272D00949AC0 /* TextCheckBoxView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C333D4D210B272D00949AC0 /* TextCheckBoxView.xib */; };
-		8C333D54210B394800949AC0 /* RoundContinueButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D53210B394800949AC0 /* RoundContinueButton.swift */; };
+		8C333D54210B394800949AC0 /* NextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D53210B394800949AC0 /* NextButton.swift */; };
 		8C333D56210B4EF400949AC0 /* VerificationCodeFormComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D55210B4EF400949AC0 /* VerificationCodeFormComponent.swift */; };
 		8C333D58210B4F7D00949AC0 /* VerificationCodeFormComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C333D57210B4F7D00949AC0 /* VerificationCodeFormComponent.xib */; };
 		8C333D5E210B5E1600949AC0 /* NewPasswordFormView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C333D5D210B5E1600949AC0 /* NewPasswordFormView.xib */; };
@@ -91,7 +91,7 @@
 		8C333D66210B6E7600949AC0 /* UITextField+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D64210B619200949AC0 /* UITextField+Extensions.swift */; };
 		8C333D68210B72A100949AC0 /* СonsistentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D67210B72A100949AC0 /* СonsistentViewController.swift */; };
 		8C333D6F210F00E600949AC0 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D6E210F00E600949AC0 /* String+Extensions.swift */; };
-		8C333D77210F50E000949AC0 /* CountryIconImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D76210F50E000949AC0 /* CountryIconImageView.swift */; };
+		8C333D77210F50E000949AC0 /* CountryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D76210F50E000949AC0 /* CountryView.swift */; };
 		8C333D7B210F767100949AC0 /* FlowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D7A210F767100949AC0 /* FlowViewController.swift */; };
 		8C34616B20EF8FA700746724 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C34616A20EF8FA700746724 /* AppDelegate.swift */; };
 		8C34617020EF8FA700746724 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C34616E20EF8FA700746724 /* Main.storyboard */; };
@@ -114,8 +114,7 @@
 		8C52FFF2211AF1FD00EB55EA /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C52FFF1211AF1FD00EB55EA /* HomeViewController.swift */; };
 		8C52FFFE211B252F00EB55EA /* InstantPanGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C52FFFD211B252F00EB55EA /* InstantPanGestureRecognizer.swift */; };
 		8C6088402110634700470411 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C60883F2110634700470411 /* UserDefaultsManager.swift */; };
-		8C6088442110A34200470411 /* CustomUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6088432110A34200470411 /* CustomUI.swift */; };
-		8C6088482110A75100470411 /* AdditionalTextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6088472110A75100470411 /* AdditionalTextButton.swift */; };
+		8C6088482110A75100470411 /* TimerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6088472110A75100470411 /* TimerButton.swift */; };
 		8C60884A2110B42A00470411 /* CountdownTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6088492110B42A00470411 /* CountdownTimer.swift */; };
 		8C60884C2111A20B00470411 /* LoginPasswordFormComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C60884B2111A20B00470411 /* LoginPasswordFormComponent.swift */; };
 		8C60884E2111A22D00470411 /* LoginPasswordFormView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C60884D2111A22D00470411 /* LoginPasswordFormView.xib */; };
@@ -134,7 +133,7 @@
 		8C713B162138068600AC2E25 /* DepositMoneyAddressComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C713B152138068600AC2E25 /* DepositMoneyAddressComponent.swift */; };
 		8C713B1821380AE800AC2E25 /* DepositMoneyAddressComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C713B1721380AE800AC2E25 /* DepositMoneyAddressComponent.xib */; };
 		8C713B1B21380CE200AC2E25 /* DepositMoneyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C713B1A21380CE200AC2E25 /* DepositMoneyViewController.swift */; };
-		8C713B1D2138408700AC2E25 /* OutputButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C713B1C2138408700AC2E25 /* OutputButton.swift */; };
+		8C713B1D2138408700AC2E25 /* ImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C713B1C2138408700AC2E25 /* ImageButton.swift */; };
 		8C713B1F213941FF00AC2E25 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C713B1E213941FF00AC2E25 /* Networking.swift */; };
 		8C713B212139911D00AC2E25 /* QRCodeScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C713B202139911D00AC2E25 /* QRCodeScannerViewController.swift */; };
 		8C713B2A213EC69D00AC2E25 /* WalletNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C713B29213EC69D00AC2E25 /* WalletNavigationController.swift */; };
@@ -182,8 +181,6 @@
 		8CA2189D2122EEDE0063C188 /* SegmentedControlElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA2189C2122EEDE0063C188 /* SegmentedControlElement.swift */; };
 		8CA2189F2122F9E40063C188 /* SelectingBackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA2189E2122F9E40063C188 /* SelectingBackView.swift */; };
 		8CA218A1212304590063C188 /* SendMoneyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA218A0212304590063C188 /* SendMoneyViewController.swift */; };
-		8CA218A5212333B20063C188 /* IconableTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA218A4212333B20063C188 /* IconableTextField.swift */; };
-		8CA218A7212342B90063C188 /* CircleImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA218A6212342B90063C188 /* CircleImageView.swift */; };
 		8CA218A9212343760063C188 /* UIImageView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA218A8212343760063C188 /* UIImageView+Extensions.swift */; };
 		8CA218AF212479040063C188 /* SendMoneyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA218AE212479040063C188 /* SendMoneyButton.swift */; };
 		8CA218B821248FA50063C188 /* SendMoneyAmountComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA218B721248FA50063C188 /* SendMoneyAmountComponent.swift */; };
@@ -194,7 +191,7 @@
 		8CA218C92126D4FD0063C188 /* TransactionDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA218C82126D4FD0063C188 /* TransactionDetailViewController.swift */; };
 		8CA218CB2126D5E00063C188 /* NumberFormatter+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA218CA2126D5E00063C188 /* NumberFormatter+Extensions.swift */; };
 		8CA218CD2126F23B0063C188 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA218CC2126F23B0063C188 /* UserData.swift */; };
-		8CA218D0212737210063C188 /* LargeSendButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA218CE212719990063C188 /* LargeSendButton.swift */; };
+		8CA218D0212737210063C188 /* SendButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA218CE212719990063C188 /* SendButton.swift */; };
 		8CA218D2212738450063C188 /* CheckAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA218D1212738450063C188 /* CheckAnimationView.swift */; };
 		8CA218D6212D61EB0063C188 /* BiometricIDAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA218D5212D61EB0063C188 /* BiometricIDAuth.swift */; };
 		8CA218D9212D889A0063C188 /* UserContactsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA218D8212D889A0063C188 /* UserContactsManager.swift */; };
@@ -341,12 +338,12 @@
 		8C333D3D2109FD1000949AC0 /* OnboardingItemComponent.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OnboardingItemComponent.xib; sourceTree = "<group>"; };
 		8C333D3F210A08A600949AC0 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		8C333D41210A094500949AC0 /* UIColor+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Additions.swift"; sourceTree = "<group>"; };
-		8C333D43210B001500949AC0 /* OnboardingLargeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingLargeButton.swift; sourceTree = "<group>"; };
+		8C333D43210B001500949AC0 /* LargeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeButton.swift; sourceTree = "<group>"; };
 		8C333D47210B0F3700949AC0 /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
 		8C333D49210B1C4300949AC0 /* TextCheckBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextCheckBoxView.swift; sourceTree = "<group>"; };
 		8C333D4B210B1D3500949AC0 /* CheckBoxButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBoxButton.swift; sourceTree = "<group>"; };
 		8C333D4D210B272D00949AC0 /* TextCheckBoxView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextCheckBoxView.xib; sourceTree = "<group>"; };
-		8C333D53210B394800949AC0 /* RoundContinueButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundContinueButton.swift; sourceTree = "<group>"; };
+		8C333D53210B394800949AC0 /* NextButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextButton.swift; sourceTree = "<group>"; };
 		8C333D55210B4EF400949AC0 /* VerificationCodeFormComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationCodeFormComponent.swift; sourceTree = "<group>"; };
 		8C333D57210B4F7D00949AC0 /* VerificationCodeFormComponent.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VerificationCodeFormComponent.xib; sourceTree = "<group>"; };
 		8C333D5D210B5E1600949AC0 /* NewPasswordFormView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewPasswordFormView.xib; sourceTree = "<group>"; };
@@ -354,7 +351,7 @@
 		8C333D64210B619200949AC0 /* UITextField+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extensions.swift"; sourceTree = "<group>"; };
 		8C333D67210B72A100949AC0 /* СonsistentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "СonsistentViewController.swift"; sourceTree = "<group>"; };
 		8C333D6E210F00E600949AC0 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
-		8C333D76210F50E000949AC0 /* CountryIconImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryIconImageView.swift; sourceTree = "<group>"; };
+		8C333D76210F50E000949AC0 /* CountryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryView.swift; sourceTree = "<group>"; };
 		8C333D7A210F767100949AC0 /* FlowViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowViewController.swift; sourceTree = "<group>"; };
 		8C34616720EF8FA700746724 /* wallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = wallet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C34616A20EF8FA700746724 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -379,8 +376,7 @@
 		8C52FFF1211AF1FD00EB55EA /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		8C52FFFD211B252F00EB55EA /* InstantPanGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstantPanGestureRecognizer.swift; sourceTree = "<group>"; };
 		8C60883F2110634700470411 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
-		8C6088432110A34200470411 /* CustomUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUI.swift; sourceTree = "<group>"; };
-		8C6088472110A75100470411 /* AdditionalTextButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalTextButton.swift; sourceTree = "<group>"; };
+		8C6088472110A75100470411 /* TimerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerButton.swift; sourceTree = "<group>"; };
 		8C6088492110B42A00470411 /* CountdownTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownTimer.swift; sourceTree = "<group>"; };
 		8C60884B2111A20B00470411 /* LoginPasswordFormComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPasswordFormComponent.swift; sourceTree = "<group>"; };
 		8C60884D2111A22D00470411 /* LoginPasswordFormView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginPasswordFormView.xib; sourceTree = "<group>"; };
@@ -399,7 +395,7 @@
 		8C713B152138068600AC2E25 /* DepositMoneyAddressComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepositMoneyAddressComponent.swift; sourceTree = "<group>"; };
 		8C713B1721380AE800AC2E25 /* DepositMoneyAddressComponent.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DepositMoneyAddressComponent.xib; sourceTree = "<group>"; };
 		8C713B1A21380CE200AC2E25 /* DepositMoneyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepositMoneyViewController.swift; sourceTree = "<group>"; };
-		8C713B1C2138408700AC2E25 /* OutputButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputButton.swift; sourceTree = "<group>"; };
+		8C713B1C2138408700AC2E25 /* ImageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageButton.swift; sourceTree = "<group>"; };
 		8C713B1E213941FF00AC2E25 /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
 		8C713B202139911D00AC2E25 /* QRCodeScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeScannerViewController.swift; sourceTree = "<group>"; };
 		8C713B29213EC69D00AC2E25 /* WalletNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletNavigationController.swift; sourceTree = "<group>"; };
@@ -448,8 +444,6 @@
 		8CA2189C2122EEDE0063C188 /* SegmentedControlElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedControlElement.swift; sourceTree = "<group>"; };
 		8CA2189E2122F9E40063C188 /* SelectingBackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectingBackView.swift; sourceTree = "<group>"; };
 		8CA218A0212304590063C188 /* SendMoneyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMoneyViewController.swift; sourceTree = "<group>"; };
-		8CA218A4212333B20063C188 /* IconableTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconableTextField.swift; sourceTree = "<group>"; };
-		8CA218A6212342B90063C188 /* CircleImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleImageView.swift; sourceTree = "<group>"; };
 		8CA218A8212343760063C188 /* UIImageView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extensions.swift"; sourceTree = "<group>"; };
 		8CA218AE212479040063C188 /* SendMoneyButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMoneyButton.swift; sourceTree = "<group>"; };
 		8CA218B721248FA50063C188 /* SendMoneyAmountComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMoneyAmountComponent.swift; sourceTree = "<group>"; };
@@ -460,7 +454,7 @@
 		8CA218C82126D4FD0063C188 /* TransactionDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailViewController.swift; sourceTree = "<group>"; };
 		8CA218CA2126D5E00063C188 /* NumberFormatter+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NumberFormatter+Extensions.swift"; sourceTree = "<group>"; };
 		8CA218CC2126F23B0063C188 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
-		8CA218CE212719990063C188 /* LargeSendButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeSendButton.swift; sourceTree = "<group>"; };
+		8CA218CE212719990063C188 /* SendButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendButton.swift; sourceTree = "<group>"; };
 		8CA218D1212738450063C188 /* CheckAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckAnimationView.swift; sourceTree = "<group>"; };
 		8CA218D5212D61EB0063C188 /* BiometricIDAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiometricIDAuth.swift; sourceTree = "<group>"; };
 		8CA218D8212D889A0063C188 /* UserContactsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserContactsManager.swift; sourceTree = "<group>"; };
@@ -584,7 +578,6 @@
 		8C0919312106205600703224 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				8C6088432110A34200470411 /* CustomUI.swift */,
 				8C7C3396214A972200EC6C96 /* SizePresetable.swift */,
 				9319BA862129FA9500033A7E /* Animations */,
 				8C7C3341214290AB00EC6C96 /* Buttons */,
@@ -1018,7 +1011,6 @@
 				8C2314522150EA66007340E7 /* PartialPhoneNumberTextField.swift */,
 				8C23146221528C70007340E7 /* PhoneNumberTextField.swift */,
 				8C7C33502142C73900EC6C96 /* FloatTextField.swift */,
-				8CA218A4212333B20063C188 /* IconableTextField.swift */,
 				8CA218E6212DA8300063C188 /* SearchTextField.swift */,
 			);
 			path = TextFields;
@@ -1027,12 +1019,12 @@
 		8C7C3341214290AB00EC6C96 /* Buttons */ = {
 			isa = PBXGroup;
 			children = (
-				8C6088472110A75100470411 /* AdditionalTextButton.swift */,
+				8C6088472110A75100470411 /* TimerButton.swift */,
 				8CA21930213561C70063C188 /* MultiStatableButton.swift */,
-				8C713B1C2138408700AC2E25 /* OutputButton.swift */,
-				8CA218CE212719990063C188 /* LargeSendButton.swift */,
-				8C333D43210B001500949AC0 /* OnboardingLargeButton.swift */,
-				8C333D53210B394800949AC0 /* RoundContinueButton.swift */,
+				8C713B1C2138408700AC2E25 /* ImageButton.swift */,
+				8CA218CE212719990063C188 /* SendButton.swift */,
+				8C333D43210B001500949AC0 /* LargeButton.swift */,
+				8C333D53210B394800949AC0 /* NextButton.swift */,
 				8C231446214C0058007340E7 /* HighlightableButton.swift */,
 				8C7C33482142973C00EC6C96 /* StageButton.swift */,
 				8C231442214BE6FE007340E7 /* MenuButton.swift */,
@@ -1044,9 +1036,8 @@
 		8C7C3342214290BD00EC6C96 /* ImageViews */ = {
 			isa = PBXGroup;
 			children = (
-				8CA218A6212342B90063C188 /* CircleImageView.swift */,
 				8CA218E8212DB0210063C188 /* RoundedImageView.swift */,
-				8C333D76210F50E000949AC0 /* CountryIconImageView.swift */,
+				8C333D76210F50E000949AC0 /* CountryView.swift */,
 			);
 			path = ImageViews;
 			sourceTree = "<group>";
@@ -1396,7 +1387,7 @@
 				8C34616320EF8FA700746724 /* Sources */,
 				8C34616420EF8FA700746724 /* Frameworks */,
 				8C34616520EF8FA700746724 /* Resources */,
-				4C67692F34AE6F68E056DB05 /* [CP] Embed Pods Frameworks */,
+				BA705755A156339EB24227E2 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1507,13 +1498,14 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		4C67692F34AE6F68E056DB05 /* [CP] Embed Pods Frameworks */ = {
+		BA705755A156339EB24227E2 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-wallet/Pods-wallet-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/DifferenceKit/DifferenceKit.framework",
 				"${BUILT_PRODUCTS_DIR}/ESTabBarController-swift/ESTabBarController_swift.framework",
 				"${BUILT_PRODUCTS_DIR}/FlagKit/FlagKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Hero/Hero.framework",
@@ -1522,6 +1514,7 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DifferenceKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ESTabBarController_swift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FlagKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Hero.framework",
@@ -1541,7 +1534,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8CA21937213591BB0063C188 /* TransactionsCoinFilterComponent.swift in Sources */,
-				8CA218A7212342B90063C188 /* CircleImageView.swift in Sources */,
 				8CA2191F213549DD0063C188 /* TransactionsHistoryFilterViewController.swift in Sources */,
 				8C52FFEA2119DA2700EB55EA /* CellComponent.swift in Sources */,
 				8CF5F942211457200083B36A /* Component.swift in Sources */,
@@ -1582,7 +1574,6 @@
 				8CA218C92126D4FD0063C188 /* TransactionDetailViewController.swift in Sources */,
 				8CA218DB212D892A0063C188 /* ContactData.swift in Sources */,
 				8C6088402110634700470411 /* UserDefaultsManager.swift in Sources */,
-				8CA218A5212333B20063C188 /* IconableTextField.swift in Sources */,
 				8CA2190221304B730063C188 /* DirectionType.swift in Sources */,
 				8C4413D4211993B400C9689C /* CoinType.swift in Sources */,
 				8CA218FE21303BC30063C188 /* TransactionStatus.swift in Sources */,
@@ -1628,7 +1619,7 @@
 				8CA218E9212DB0210063C188 /* RoundedImageView.swift in Sources */,
 				8C713B34214024CE00AC2E25 /* PhoneNumberFormatter.swift in Sources */,
 				8CA218CD2126F23B0063C188 /* UserData.swift in Sources */,
-				8CA218D0212737210063C188 /* LargeSendButton.swift in Sources */,
+				8CA218D0212737210063C188 /* SendButton.swift in Sources */,
 				8CF41D892135973F006D4FE2 /* RectItemComponent.swift in Sources */,
 				8CF5F931211345320083B36A /* MainFlow.swift in Sources */,
 				8C09196221076B7000703224 /* RecoveryProvider.swift in Sources */,
@@ -1636,10 +1627,9 @@
 				8C2314512150EA53007340E7 /* PartialPhoneNumberCodeTextField.swift in Sources */,
 				8CA218F3213007650063C188 /* TransactionsPageData.swift in Sources */,
 				8C52FFFE211B252F00EB55EA /* InstantPanGestureRecognizer.swift in Sources */,
-				8C6088442110A34200470411 /* CustomUI.swift in Sources */,
 				8C60885E2111F28000470411 /* EnterNewPhoneNumberViewController.swift in Sources */,
 				8CA2192721354D370063C188 /* TransactionsDateIntervalFilterComponent.swift in Sources */,
-				8C713B1D2138408700AC2E25 /* OutputButton.swift in Sources */,
+				8C713B1D2138408700AC2E25 /* ImageButton.swift in Sources */,
 				8CF5F93A21144BE80083B36A /* UIDevice+Extensions.swift in Sources */,
 				8C7C338B21493A3600EC6C96 /* KYCStatus.swift in Sources */,
 				8CA219122134259F0063C188 /* Date+Extensions.swift in Sources */,
@@ -1686,7 +1676,7 @@
 				8C52FFE12119BE0400EB55EA /* WalletData.swift in Sources */,
 				8CA218F82130192E0063C188 /* TransactionsHistoryViewController.swift in Sources */,
 				8C7C33812147EFFB00EC6C96 /* ItemWithPhoto.swift in Sources */,
-				8C333D77210F50E000949AC0 /* CountryIconImageView.swift in Sources */,
+				8C333D77210F50E000949AC0 /* CountryView.swift in Sources */,
 				8C333D6F210F00E600949AC0 /* String+Extensions.swift in Sources */,
 				8CA218CB2126D5E00063C188 /* NumberFormatter+Extensions.swift in Sources */,
 				8C09196F21089FB200703224 /* AuthProvider.swift in Sources */,
@@ -1708,7 +1698,7 @@
 				8C7C334D2142C15100EC6C96 /* KYCPersonalInfoViewController.swift in Sources */,
 				8CA218BD2125A34B0063C188 /* AvoidingViewController.swift in Sources */,
 				8C23144B214FCA90007340E7 /* KeyboardNotifiableViewController.swift in Sources */,
-				8C333D54210B394800949AC0 /* RoundContinueButton.swift in Sources */,
+				8C333D54210B394800949AC0 /* NextButton.swift in Sources */,
 				8CF5F95B21149E460083B36A /* CreatePinComponent.swift in Sources */,
 				8C23144D21500529007340E7 /* PhoneNumberComponent.swift in Sources */,
 				8CA2191D21344C730063C188 /* Array+Extensions.swift in Sources */,
@@ -1719,7 +1709,7 @@
 				8C713B362140327600AC2E25 /* StringProtocol+Extensions.swift in Sources */,
 				8C34616B20EF8FA700746724 /* AppDelegate.swift in Sources */,
 				8CA2191821343FE10063C188 /* IllustrationalPlaceholder.swift in Sources */,
-				8C333D44210B001500949AC0 /* OnboardingLargeButton.swift in Sources */,
+				8C333D44210B001500949AC0 /* LargeButton.swift in Sources */,
 				8CA219402135949C0063C188 /* CoinItemComponent.swift in Sources */,
 				8CA218D6212D61EB0063C188 /* BiometricIDAuth.swift in Sources */,
 				8CA218EF212DCC030063C188 /* LettersImageGenerator.swift in Sources */,
@@ -1743,7 +1733,7 @@
 				8CA218AF212479040063C188 /* SendMoneyButton.swift in Sources */,
 				8C09193B210623F200703224 /* Environment.swift in Sources */,
 				8C2314552150FF6A007340E7 /* TestViewController.swift in Sources */,
-				8C6088482110A75100470411 /* AdditionalTextButton.swift in Sources */,
+				8C6088482110A75100470411 /* TimerButton.swift in Sources */,
 				8C7C33602146ACBE00EC6C96 /* KYCUploadDocumentsMenuViewController.swift in Sources */,
 				8C333D56210B4EF400949AC0 /* VerificationCodeFormComponent.swift in Sources */,
 				8C09196D21089FA700703224 /* AuthRequest.swift in Sources */,

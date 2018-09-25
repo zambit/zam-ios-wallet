@@ -9,48 +9,41 @@
 import Foundation
 import UIKit
 
-class IndentLabel: UILabel, CustomUI {
+class IndentLabel: UILabel {
 
-    struct CustomBehaviour {
-        weak var parent: IndentLabel?
+    fileprivate var indent: String?
 
-        func setIndent(_ indent: String) {
-            guard
-                let parent = parent,
-                let text = parent.text else {
-                return
-            }
+}
 
-            if let oldIndent = parent.indent,
-                let oldIndentRange = text.range(of: oldIndent) {
-                parent.text?.removeSubrange(oldIndentRange)
-            }
+extension BehaviorExtension where Base: IndentLabel {
 
-            parent.text?.addPrefixIfNeeded(indent)
-            parent.indent = indent
+    func setIndent(_ indent: String) {
+        guard let text = base.text else {
+            return
         }
 
-        func setText(_ text: String) {
-            if let indent = parent?.indent {
-                parent?.text = "\(indent)\(text)"
-            } else {
-                parent?.text = text
-            }
+        if let oldIndent = base.indent,
+            let oldIndentRange = text.range(of: oldIndent) {
+            base.text?.removeSubrange(oldIndentRange)
         }
 
-        var text: String? {
-            if let indent = parent?.indent, let text = parent?.text, text.count >= indent.count {
-                return text[indent.count..<text.count]
-            }
+        base.text?.addPrefixIfNeeded(indent)
+        base.indent = indent
+    }
 
-            return parent?.text
+    func setText(_ text: String) {
+        if let indent = base.indent {
+            base.text = "\(indent)\(text)"
+        } else {
+            base.text = text
         }
     }
 
-    var custom: CustomBehaviour {
-        return CustomBehaviour(parent: self)
+    var text: String? {
+        if let indent = base.indent, let text = base.text, text.count >= indent.count {
+            return text[indent.count..<text.count]
+        }
+
+        return base.text
     }
-
-    private var indent: String?
-
 }

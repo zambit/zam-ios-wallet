@@ -1,5 +1,5 @@
 //
-//  AdditionalTextButton.swift
+//  TimerButton.swift
 //  wallet
 //
 //  Created by  me on 31/07/2018.
@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-struct AdditionalTextButtonData {
+struct TimerButtonData {
 
     struct TimerParameters {
         var seconds: Int
@@ -33,63 +33,24 @@ struct AdditionalTextButtonData {
     }
 }
 
-class AdditionalTextButton: UIButton, CustomUI, CountdownTimerDelegate {
+class TimerButton: UIButton, CountdownTimerDelegate {
 
-    struct CustomBehaviour {
-        weak var parent: AdditionalTextButton?
+    fileprivate var textActive: String = ""
+    fileprivate var textInactive: String = ""
 
-        func setEnabled(_ enabled: Bool) {
-            if !enabled {
-                parent?.timer?.begin()
-            }
-
-            parent?.isEnabled = enabled
-        }
-    }
-
-    var custom: CustomBehaviour {
-        return CustomBehaviour(parent: self)
-    }
-
-    private var textActive: String = ""
-    private var textInactive: String = ""
-
-    private var timer: CountdownTimer?
-    private var textInactiveTimeIndex: String.Index?
+    fileprivate var timer: CountdownTimer?
+    fileprivate var textInactiveTimeIndex: String.Index?
 
     private var countableSeconds: Int = 0
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupStyle()
+        custom.setupStyle()
     }
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        setupStyle()
-    }
-
-    func configure(data: AdditionalTextButtonData) {
-        self.textActive = data.textActive
-        self.textInactive = data.textInactive
-
-        setTitle(textActive, for: .normal)
-        setTitle(textInactive, for: .disabled)
-
-        contentHorizontalAlignment = .left
-
-        if let timerParams = data.timerParams {
-            self.timer = CountdownTimer(seconds: timerParams.seconds)
-            self.timer?.delegate = self
-            self.textInactiveTimeIndex = timerParams.textInactiveSecondsIndex
-        }
-    }
-
-    private func setupStyle() {
-        self.titleLabel?.font = UIFont.systemFont(ofSize: 16.0, weight: .regular)
-        self.setTitleColor(UIColor.flatBlue, for: .disabled)
-        self.setTitleColor(UIColor.flatBlue, for: .highlighted)
-        self.setTitleColor(UIColor.skyBlue, for: .normal)
+        custom.setupStyle()
     }
 
     func countdownTimer(_ countdownTimer: CountdownTimer, timeRemaining: CountdownTimer.Time) {
@@ -109,5 +70,39 @@ class AdditionalTextButton: UIButton, CustomUI, CountdownTimerDelegate {
     func countdownTimerWasCompleted(_ countdownTimer: CountdownTimer) {
         self.setTitle(textInactive, for: .disabled)
         custom.setEnabled(true)
+    }
+}
+
+extension BehaviorExtension where Base: TimerButton {
+
+    func configure(data: TimerButtonData) {
+        base.textActive = data.textActive
+        base.textInactive = data.textInactive
+
+        base.setTitle(base.textActive, for: .normal)
+        base.setTitle(base.textInactive, for: .disabled)
+
+        base.contentHorizontalAlignment = .left
+
+        if let timerParams = data.timerParams {
+            base.timer = CountdownTimer(seconds: timerParams.seconds)
+            base.timer?.delegate = base
+            base.textInactiveTimeIndex = timerParams.textInactiveSecondsIndex
+        }
+    }
+
+    func setEnabled(_ enabled: Bool) {
+        if !enabled {
+            base.timer?.begin()
+        }
+
+        base.isEnabled = enabled
+    }
+
+    fileprivate func setupStyle() {
+        base.titleLabel?.font = UIFont.systemFont(ofSize: 16.0, weight: .regular)
+        base.setTitleColor(UIColor.flatBlue, for: .disabled)
+        base.setTitleColor(UIColor.flatBlue, for: .highlighted)
+        base.setTitleColor(UIColor.skyBlue, for: .normal)
     }
 }

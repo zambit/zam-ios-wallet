@@ -13,7 +13,7 @@ import UIKit
  */
 class СonsistentViewController: AvoidingViewController {
 
-    @IBOutlet var continueButton: RoundContinueButton?
+    @IBOutlet var continueButton: NextButton?
 
     override func viewDidLoad() {
         super.viewDidLoad()

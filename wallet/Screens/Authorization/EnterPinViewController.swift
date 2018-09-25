@@ -35,6 +35,10 @@ class EnterPinViewController: FlowViewController, WalletNavigable, DecimalKeyboa
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
+        pinForm?.clear()
+        dotsFieldComponent?.unfillAll()
+        dotsFieldComponent?.fillingEnabled = true
+
         migratingNavigationController?.custom.addRightBarItemButton(for: self, title: "EXIT", target: self, action: #selector(exitButtonTouchEvent(_:)))
     }
 
@@ -198,8 +202,6 @@ class EnterPinViewController: FlowViewController, WalletNavigable, DecimalKeyboa
             guard let phone = strongSelf.phone else {
                 fatalError("Error on catching checkingIfUserAuthorized")
             }
-
-            strongSelf.userManager?.clearToken()
 
             performWithDelay {
                 self?.dotsFieldComponent?.endLoading()
