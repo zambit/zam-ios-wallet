@@ -126,7 +126,8 @@ class VerifyPhoneNumberWithSmsViewController: СonsistentViewController, Verific
 
         verifyAPI?.sendVerificationCode(to: phone, referrerPhone: nil).done {
             //...
-        }.catch { error in
+        }.catch {
+            error in
             print(error)
         }
     }

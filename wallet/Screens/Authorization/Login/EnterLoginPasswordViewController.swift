@@ -97,6 +97,7 @@ class EnterLoginPasswordViewController: СonsistentViewController, LoginPassword
                 })
             }
 
+            self?.userManager?.clearToken()
             self?.userManager?.save(phone: phone, token: authToken)
         }.catch {
             [weak self]

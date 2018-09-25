@@ -58,15 +58,13 @@ class TransactionsHistoryViewController: FlowViewController, WalletNavigable, UI
         topRefreshControl = UIRefreshControl()
         topRefreshControl?.addTarget(self, action: #selector(refreshControlValueChangedEvent(_:)), for: .valueChanged)
         topRefreshControl?.layer.zPosition = -2
-        historyTableView?.insertSubview(topRefreshControl!, at: 0)
-
-        topRefreshControl?.beginRefreshing()
+        historyTableView?.refreshControl = topRefreshControl
 
         self.setupTableViewFooter()
 
         let formatter = PhoneNumberFormatter()
 
-        self.paginator = Paginator<TransactionsGroupData>(pageSize: 15, fetchHandler: {
+        self.paginator = Paginator<TransactionsGroupData>(pageSize: 20, fetchHandler: {
             [weak self]
             (paginator: Paginator, pageSize: Int, nextPage: String?) in
 
@@ -95,22 +93,6 @@ class TransactionsHistoryViewController: FlowViewController, WalletNavigable, UI
             (paginator, old, new) in
 
             self?.topRefreshControl?.endRefreshing()
-
-            if paginator.results.isEmpty {
-                self?.setupPlaceholder()
-            } else {
-                self?.removePlaceholder()
-            }
-
-            paginator.results.forEach {
-                print("\(DateInterval.walletString(from: $0.dateInterval)) \($0.transactions.count)")
-            }
-
-            if old.isEmpty {
-                self?.historyTableView?.reloadData()
-                self?.updateTableViewFooter()
-                return
-            }
 
             // Pagination
 
@@ -155,6 +137,20 @@ class TransactionsHistoryViewController: FlowViewController, WalletNavigable, UI
             self?.historyTableView?.endUpdates()
 
             self?.updateTableViewFooter()
+        }, refreshHandler: {
+            [weak self]
+            paginator, results in
+
+            self?.topRefreshControl?.endRefreshing()
+
+            if results.isEmpty {
+                self?.setupPlaceholder()
+            } else {
+                self?.removePlaceholder()
+            }
+
+            self?.historyTableView?.reloadData()
+            self?.updateTableViewFooter()
         }, failureHandler: {
             [weak self]
             paginator in
@@ -174,10 +170,12 @@ class TransactionsHistoryViewController: FlowViewController, WalletNavigable, UI
                     [weak self]
                     contacts in
 
+                    self?.topRefreshControl?.beginRefreshing()
                     self?.contactsData = contacts
                     self?.paginator?.fetchFirstPage()
                 }
             } else {
+                self.topRefreshControl?.beginRefreshing()
                 self.contactsData = contacts
                 self.paginator?.fetchFirstPage()
             }
@@ -192,7 +190,7 @@ class TransactionsHistoryViewController: FlowViewController, WalletNavigable, UI
                 topRefreshControl?.beginRefreshing(in: tableView)
             }
 
-            paginator?.reload()
+            paginator?.refresh()
         }
     }
 
@@ -356,7 +354,7 @@ class TransactionsHistoryViewController: FlowViewController, WalletNavigable, UI
     private func refreshControlValueChangedEvent(_ sender: UIRefreshControl) {
         setupTableViewFooter()
         topRefreshControl?.beginRefreshing()
-        paginator?.reload()
+        paginator?.refresh()
     }
 
     @objc
