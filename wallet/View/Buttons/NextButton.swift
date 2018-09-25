@@ -12,7 +12,7 @@ import UIKit
 /**
  Button appropriates large button from Onboarding screen. Blue title on middle. Blue arrow_icon on right. Round corners. Size defines outside class.
  */
-class RoundContinueButton: UIButton {
+class NextButton: UIButton {
 
     fileprivate var loadingView: UIView!
 
@@ -34,7 +34,7 @@ class RoundContinueButton: UIButton {
     }
 }
 
-extension BehaviorExtension where Base: RoundContinueButton {
+extension BehaviorExtension where Base: NextButton {
 
     func setEnabled(_ enabled: Bool) {
         base.isUserInteractionEnabled = enabled

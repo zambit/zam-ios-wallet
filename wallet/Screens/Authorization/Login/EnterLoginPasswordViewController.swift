@@ -22,7 +22,7 @@ class EnterLoginPasswordViewController: СonsistentViewController, LoginPassword
 
     @IBOutlet var largeTitleLabel: UILabel?
     @IBOutlet var loginPasswordForm: LoginPasswordFormComponent?
-    @IBOutlet var forgotPasswordButton: AdditionalTextButton?
+    @IBOutlet var forgotPasswordButton: TimerButton?
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -47,7 +47,7 @@ class EnterLoginPasswordViewController: СonsistentViewController, LoginPassword
         setupDefaultStyle()
         setupViewControllerStyle()
 
-        let data = AdditionalTextButtonData(textActive: "Forgot password?")
+        let data = TimerButtonData(textActive: "Forgot password?")
 
         forgotPasswordButton?.custom.configure(data: data)
         forgotPasswordButton?.addTarget(self, action: #selector(additionalButtonTouchUpInsideEvent(_:)), for: .touchUpInside)
@@ -97,6 +97,7 @@ class EnterLoginPasswordViewController: СonsistentViewController, LoginPassword
                 })
             }
 
+            self?.userManager?.clearToken()
             self?.userManager?.save(phone: phone, token: authToken)
         }.catch {
             [weak self]
@@ -123,7 +124,7 @@ class EnterLoginPasswordViewController: СonsistentViewController, LoginPassword
     }
 
     @objc
-    private func additionalButtonTouchUpInsideEvent(_ sender: AdditionalTextButton) {
+    private func additionalButtonTouchUpInsideEvent(_ sender: TimerButton) {
         guard let phone = self.phone else {
             return
         }
