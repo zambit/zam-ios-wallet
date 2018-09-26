@@ -58,7 +58,7 @@ final class MainFlow: ScreenFlow {
         
         vc.onExit = onExit
         vc.userManager = UserDefaultsManager(keychainConfiguration: WalletKeychainConfiguration())
-        vc.authAPI = AuthAPI(provider: AuthProvider(environment: WalletEnvironment(), dispatcher: HTTPDispatcher()))
+        vc.authAPI = AuthAPI(provider: Provider(environment: WalletEnvironment(), dispatcher: HTTPDispatcher()))
         vc.flow = self
         return vc
     }
@@ -105,7 +105,7 @@ final class MainFlow: ScreenFlow {
         }
 
         vc.userManager = UserDefaultsManager(keychainConfiguration: WalletKeychainConfiguration())
-        vc.userAPI = UserAPI(provider: UserProvider(environment: WalletEnvironment(), dispatcher: HTTPDispatcher()))
+        vc.userAPI = UserAPI(provider: Provider(environment: WalletEnvironment(), dispatcher: HTTPDispatcher()))
         vc.onKyc0 = onKyc0
         vc.onKyc1 = onKyc1
         vc.title = "Identify verification"
@@ -135,7 +135,7 @@ final class MainFlow: ScreenFlow {
         }
 
         vc.userManager = UserDefaultsManager(keychainConfiguration: WalletKeychainConfiguration())
-        vc.userAPI = UserAPI(provider: UserProvider(environment: WalletEnvironment(), dispatcher: HTTPDispatcher()))
+        vc.userAPI = UserAPI(provider: Provider(environment: WalletEnvironment(), dispatcher: HTTPDispatcher()))
         vc.onSend = onSend
         vc.title = "KYC0"
         vc.flow = self
@@ -296,7 +296,7 @@ final class MainFlow: ScreenFlow {
         vc.onFilter = onFilter
         vc.contactsManager = UserContactsManager.default
         vc.userManager = UserDefaultsManager(keychainConfiguration: WalletKeychainConfiguration())
-        vc.userAPI = UserAPI(provider: UserProvider(environment: WalletEnvironment(), dispatcher: HTTPDispatcher()))
+        vc.userAPI = UserAPI(provider: Provider(environment: WalletEnvironment(), dispatcher: HTTPDispatcher()))
         vc.title = "Transactions"
         vc.flow = self
         return vc
@@ -342,7 +342,7 @@ final class MainFlow: ScreenFlow {
         vc.embededViewController?.owner = vc
         vc.contactsManager = UserContactsManager.default
         vc.userManager = UserDefaultsManager(keychainConfiguration: WalletKeychainConfiguration())
-        vc.userAPI = UserAPI(provider: UserProvider(environment: WalletEnvironment(), dispatcher: HTTPDispatcher()))
+        vc.userAPI = UserAPI(provider: Provider(environment: WalletEnvironment(), dispatcher: HTTPDispatcher()))
         vc.flow = self
         return vc
     }
@@ -386,7 +386,7 @@ final class MainFlow: ScreenFlow {
         vc.onSendFromWallet = onSendFromWallet
         vc.onDepositToWallet = onDepositToWallet
         vc.userManager = UserDefaultsManager(keychainConfiguration: WalletKeychainConfiguration())
-        vc.userAPI = UserAPI(provider: UserProvider(environment: WalletEnvironment(), dispatcher: HTTPDispatcher()))
+        vc.userAPI = UserAPI(provider: Provider(environment: WalletEnvironment(), dispatcher: HTTPDispatcher()))
         vc.flow = self
         return vc
     }
@@ -453,7 +453,7 @@ final class MainFlow: ScreenFlow {
         vc.onQRScanner = onQRScanner
         vc.onSend = onSend
         vc.userManager = UserDefaultsManager(keychainConfiguration: WalletKeychainConfiguration())
-        vc.userAPI = UserAPI(provider: UserProvider(environment: WalletEnvironment(), dispatcher: HTTPDispatcher()))
+        vc.userAPI = UserAPI(provider: Provider(environment: WalletEnvironment(), dispatcher: HTTPDispatcher()))
         vc.title = "Send money"
         vc.flow = self
         return vc
@@ -479,7 +479,7 @@ final class MainFlow: ScreenFlow {
 
         vc.onClose = onClose
         vc.userManager = UserDefaultsManager(keychainConfiguration: WalletKeychainConfiguration())
-        vc.userAPI = UserAPI(provider: UserProvider(environment: WalletEnvironment(), dispatcher: HTTPDispatcher()))
+        vc.userAPI = UserAPI(provider: Provider(environment: WalletEnvironment(), dispatcher: HTTPDispatcher()))
         vc.modalPresentationStyle = .overFullScreen
         vc.flow = self
         return vc
