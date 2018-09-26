@@ -1,5 +1,5 @@
 //
-//  DispatcherNetworkLayerTests.swift
+//  ProviderNetworkLayerTests.swift
 //  walletNetworkLayerTests
 //
 //  Created by Александр Пономарев on 26/09/2018.
@@ -9,50 +9,52 @@
 import XCTest
 @testable import wallet
 
-class DispatcherNetworkLayerTests: XCTestCase {
-
-    override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
+class ProviderNetworkLayerTests: XCTestCase {
 
     func testSuccessfulResponse() {
+        // given
         // Create dispatcher mock and assign test succesful response data
         var dispatcher = DispatcherMock()
         let data = Data(bytes: [0, 1, 0, 1])
         dispatcher.response = Response(reponse: nil, data: data, error: nil)
 
-        //
+        // Create provider with dispatcher and environment mocks
+        let provider = Provider(environment: EnvironmentMock(), dispatcher: dispatcher)
+
+        // when
         let expectedResponse: Response? = Response.data(data)
-        dispatcher.dispatch(request: RequestMock(), with: EnvironmentMock()).done {
+        provider.execute(RequestMock()).done {
             response in
 
+            // then
             XCTAssertEqual(response, expectedResponse)
-            }.catch {
-                _ in
-
-                XCTFail()
+        }.catch {
+            _ in
+             // then
+            XCTFail()
         }
     }
 
     func testFailureResponse() {
+        // given
         // Create dispatcher mock and assign test failure response data
         var dispatcher = DispatcherMock()
         let error = DispatcherNetworkLayerTestsError.responseError
         dispatcher.response = Response(reponse: nil, data: nil, error: error)
 
+        // Create provider with dispatcher and environment mocks
+        let provider = Provider(environment: EnvironmentMock(), dispatcher: dispatcher)
+
+        // when
         let expectedResponse: Response? = Response.error(error)
-        dispatcher.dispatch(request: RequestMock(), with: EnvironmentMock()).done {
+        provider.execute(RequestMock()).done {
             response in
-
+            // Assert
             XCTAssertEqual(response, expectedResponse)
-            }.catch {
-                _ in
+        }.catch {
+            _ in
 
-                XCTFail()
+            XCTFail()
         }
     }
 }

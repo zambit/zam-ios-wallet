@@ -263,7 +263,7 @@
 		9307AC72215BCDAA0093DB68 /* EnvironmentMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9307AC71215BCDAA0093DB68 /* EnvironmentMock.swift */; };
 		9307AC74215BD7AB0093DB68 /* RequestMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9307AC73215BD7AB0093DB68 /* RequestMock.swift */; };
 		9307AC76215BDBEB0093DB68 /* Response+TestsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9307AC75215BDBEB0093DB68 /* Response+TestsExtensions.swift */; };
-		9307AC7A215BE0730093DB68 /* DispatcherNetworkLayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9307AC79215BE0730093DB68 /* DispatcherNetworkLayerTests.swift */; };
+		9307AC7A215BE0730093DB68 /* ProviderNetworkLayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9307AC79215BE0730093DB68 /* ProviderNetworkLayerTests.swift */; };
 		9319BA852129A07A00033A7E /* TransactionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9319BA842129A07A00033A7E /* TransactionData.swift */; };
 		9319BAA6212A0AC200033A7E /* CrossAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9319BAA5212A0AC200033A7E /* CrossAnimationView.swift */; };
 /* End PBXBuildFile section */
@@ -542,7 +542,7 @@
 		9307AC71215BCDAA0093DB68 /* EnvironmentMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentMock.swift; sourceTree = "<group>"; };
 		9307AC73215BD7AB0093DB68 /* RequestMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestMock.swift; sourceTree = "<group>"; };
 		9307AC75215BDBEB0093DB68 /* Response+TestsExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Response+TestsExtensions.swift"; sourceTree = "<group>"; };
-		9307AC79215BE0730093DB68 /* DispatcherNetworkLayerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatcherNetworkLayerTests.swift; sourceTree = "<group>"; };
+		9307AC79215BE0730093DB68 /* ProviderNetworkLayerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderNetworkLayerTests.swift; sourceTree = "<group>"; };
 		9319BA842129A07A00033A7E /* TransactionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionData.swift; sourceTree = "<group>"; };
 		9319BAA5212A0AC200033A7E /* CrossAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrossAnimationView.swift; sourceTree = "<group>"; };
 		ACA56559587AEA1EE2113A79 /* Pods-wallet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wallet.release.xcconfig"; path = "Pods/Target Support Files/Pods-wallet/Pods-wallet.release.xcconfig"; sourceTree = "<group>"; };
@@ -1390,14 +1390,30 @@
 			isa = PBXGroup;
 			children = (
 				9307AC65215BC1990093DB68 /* walletNetworkLayerTests.swift */,
-				9307AC79215BE0730093DB68 /* DispatcherNetworkLayerTests.swift */,
-				9307AC6F215BC7D90093DB68 /* DispatcherMock.swift */,
-				9307AC71215BCDAA0093DB68 /* EnvironmentMock.swift */,
-				9307AC73215BD7AB0093DB68 /* RequestMock.swift */,
-				9307AC75215BDBEB0093DB68 /* Response+TestsExtensions.swift */,
+				9307AC79215BE0730093DB68 /* ProviderNetworkLayerTests.swift */,
+				9307AC7C215BF36F0093DB68 /* Extensions */,
+				9307AC7B215BF3650093DB68 /* Mocks */,
 				9307AC67215BC1990093DB68 /* Info.plist */,
 			);
 			path = walletNetworkLayerTests;
+			sourceTree = "<group>";
+		};
+		9307AC7B215BF3650093DB68 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				9307AC6F215BC7D90093DB68 /* DispatcherMock.swift */,
+				9307AC71215BCDAA0093DB68 /* EnvironmentMock.swift */,
+				9307AC73215BD7AB0093DB68 /* RequestMock.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
+		9307AC7C215BF36F0093DB68 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				9307AC75215BDBEB0093DB68 /* Response+TestsExtensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		9319BA862129FA9500033A7E /* Animations */ = {
@@ -1864,7 +1880,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9307AC72215BCDAA0093DB68 /* EnvironmentMock.swift in Sources */,
-				9307AC7A215BE0730093DB68 /* DispatcherNetworkLayerTests.swift in Sources */,
+				9307AC7A215BE0730093DB68 /* ProviderNetworkLayerTests.swift in Sources */,
 				9307AC70215BC7D90093DB68 /* DispatcherMock.swift in Sources */,
 				9307AC66215BC1990093DB68 /* walletNetworkLayerTests.swift in Sources */,
 				9307AC76215BDBEB0093DB68 /* Response+TestsExtensions.swift in Sources */,
@@ -2026,7 +2042,10 @@
 				DEVELOPMENT_TEAM = PEYKHN6GF6;
 				INFOPLIST_FILE = wallet/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = zamzam.wallet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2045,7 +2064,10 @@
 				DEVELOPMENT_TEAM = PEYKHN6GF6;
 				INFOPLIST_FILE = wallet/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = zamzam.wallet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2063,7 +2085,11 @@
 				DEVELOPMENT_TEAM = PEYKHN6GF6;
 				INFOPLIST_FILE = walletNetworkLayerTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = zamzam.wallet.walletNetworkLayerTests;
@@ -2083,7 +2109,11 @@
 				DEVELOPMENT_TEAM = PEYKHN6GF6;
 				INFOPLIST_FILE = walletNetworkLayerTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = zamzam.wallet.walletNetworkLayerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
