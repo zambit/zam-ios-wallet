@@ -222,7 +222,12 @@ struct UserAPI: NetworkService {
     }
 
     func getTransactions(token: String, filter: TransactionsFilterData = TransactionsFilterData(), phoneNumberFormatter: PhoneNumberFormatter? = nil, localContacts: [ContactData]? = nil) -> Promise<GroupedTransactionsPageData>  {
-        return provider.execute(.getTransactions(token: token, coin: filter.coin?.rawValue, walletId: filter.walletId, recipient: filter.recipient, direction: filter.direction?.rawValue, fromTime: filter.fromTime, untilTime: filter.untilTime, page: filter.page, count: filter.count, group: filter.group.rawValue))
+
+        // Get timezone
+        let timezoneOffset = Float(TimeZone.current.secondsFromGMT()) / 3600.0
+        let timezoneOffsetString = NumberFormatter.output.string(from: NSNumber(value: timezoneOffset))
+
+        return provider.execute(.getTransactions(token: token, coin: filter.coin?.rawValue, walletId: filter.walletId, recipient: filter.recipient, direction: filter.direction?.rawValue, fromTime: filter.fromTime, untilTime: filter.untilTime, timezone: timezoneOffsetString, page: filter.page, count: filter.count, group: filter.group.rawValue))
             .then {
                 (response: Response) -> Promise<GroupedTransactionsPageData> in
 
