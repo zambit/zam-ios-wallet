@@ -102,15 +102,14 @@ class VerifyPhoneNumberWithSmsViewController: СonsistentViewController, Verific
                 if let serverError = error as? WalletResponseError {
                     switch serverError {
                     case .serverFailureResponse(errors: let fails):
-                        guard let fail = fails.first else {
-                            fatalError()
-                        }
+                        self?.verificationCodeHelperText?.text = fails.first?.message.capitalizingFirst ?? ""
 
-                        self?.verificationCodeHelperText?.text = fail.message.capitalizingFirst
                     case .undefinedServerFailureResponse:
-
                         self?.verificationCodeHelperText?.text = "Undefined error"
+                        
                     }
+                } else {
+                    self?.verificationCodeHelperText?.text = "Connection failed"
                 }
             }
         }

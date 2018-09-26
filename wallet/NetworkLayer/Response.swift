@@ -55,7 +55,7 @@ enum Response {
         case .data(let data):
             let decoder = JSONDecoder()
 
-            print("Data content: \(String(data: data, encoding: String.Encoding.utf8))")
+            print("Data content: \(String(data: data, encoding: String.Encoding.utf8) ?? "")")
 
             do {
                 let fail = try decoder.decode(Failure.self, from: data)

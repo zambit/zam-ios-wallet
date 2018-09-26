@@ -46,6 +46,17 @@ class NewPasswordFormComponent: UIView {
         }
     }
 
+    var helperText: String {
+        get {
+            return helperTextLabel?.text ?? ""
+        }
+
+        set {
+            helperTextLabel?.text = newValue
+        }
+    }
+
+
     var password: String {
         guard let text = passwordTextField?.text else {
             return ""

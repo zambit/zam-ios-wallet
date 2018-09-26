@@ -32,12 +32,10 @@ struct UserDefaultsManager {
 
     func save(token: String) {
         userDefaults.set(token, forKey: UserDefaultsKey.token.rawValue)
-        print("WalletUserDefaultsManager: token \(token) saved")
     }
 
     func save(phoneNumber: String) {
         userDefaults.set(phoneNumber, forKey: UserDefaultsKey.phoneNumber.rawValue)
-        print("WalletUserDefaultsManager: phone number \(phoneNumber) saved")
     }
 
     func save(pin: String, for accountName: String) throws {
@@ -46,7 +44,6 @@ struct UserDefaultsManager {
                                                 accessGroup: keychainConfiguration.accessGroup)
 
         try passwordItem.savePassword(pin)
-        print("WalletUserDefaultsManager: pin \(pin) saved")
     }
 
     func save(phone: String, token: String) {
@@ -96,8 +93,6 @@ struct UserDefaultsManager {
 
     func clearToken() {
         userDefaults.removeObject(forKey: UserDefaultsKey.token.rawValue)
-
-        print("WalletUserDefaultsManager: token deleted")
     }
 
     func clearUserData() throws {
@@ -110,8 +105,6 @@ struct UserDefaultsManager {
         }
         userDefaults.removeObject(forKey: UserDefaultsKey.token.rawValue)
         userDefaults.removeObject(forKey: UserDefaultsKey.phoneNumber.rawValue)
-
-        print("WalletUserDefaultsManager: user data deleted")
     }
 
     func clearPin() throws {
@@ -124,7 +117,6 @@ struct UserDefaultsManager {
                                                 accessGroup: keychainConfiguration.accessGroup)
 
         try passwordItem.deleteItem()
-        print("WalletUserDefaultsManager: pin deleted")
     }
 
     var isUserAuthorized: Bool {

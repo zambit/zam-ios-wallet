@@ -45,11 +45,7 @@ public class Paginator<Element> {
     /**
      All results in the order they were received.
      */
-    public var results: [Element] = [] {
-        didSet {
-            print(results.count)
-        }
-    }
+    public var results: [Element] = []
 
     /// Shortcuts for the block signatures
     public typealias FetchHandlerType = (_ paginator: Paginator<Element>, _ pageSize: Int, _ nextPage: String?) -> ()
@@ -206,6 +202,5 @@ public class Paginator<Element> {
         page = 0
         requestStatus = .None
         results = []
-        print("setDefaultValues()")
     }
 }

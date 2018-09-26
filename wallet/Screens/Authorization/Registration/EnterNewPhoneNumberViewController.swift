@@ -118,6 +118,7 @@ class EnterNewPhoneNumberViewController: СonsistentViewController, PhoneNumberC
                 guard let strongSelf = self else {
                     return
                 }
+
                 strongSelf.continueButton?.custom.setEnabled(strongSelf.phoneNumberValid && strongSelf.allTermsAccepted)
             }, for: .check)
 
@@ -143,22 +144,21 @@ class EnterNewPhoneNumberViewController: СonsistentViewController, PhoneNumberC
             [weak self]
             error in
 
+            performWithDelay {
+                self?.continueButton?.custom.setLoading(false)
+            }
+
             if let serverError = error as? WalletResponseError {
                 switch serverError {
                 case .serverFailureResponse(errors: let fails):
-                    guard let fail = fails.first else {
-                        fatalError()
-                    }
+                    self?.phoneNumberComponent?.custom.setHelperText(fails.first?.message.capitalizingFirst ?? "")
 
-                    self?.phoneNumberComponent?.custom.setHelperText(fail.message.capitalizingFirst)
                 case .undefinedServerFailureResponse:
-
                     self?.phoneNumberComponent?.custom.setHelperText("Undefined error")
+                    
                 }
-            }
-
-            performWithDelay {
-                self?.continueButton?.custom.setLoading(false)
+            } else {
+                self?.phoneNumberComponent?.custom.setHelperText("Connection failed")
             }
         }
     }

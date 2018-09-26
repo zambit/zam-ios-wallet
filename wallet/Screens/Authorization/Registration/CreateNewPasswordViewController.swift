@@ -96,39 +96,64 @@ class CreateNewPasswordViewController: СonsistentViewController, NewPasswordFor
             break
         case (true, false):
             recoveryAPI?.providePassword(password, confirmation: confirmation, for: phone, recoveryToken: token).done {
-                    [weak self] in
+                [weak self] in
 
-                    self?.dismissKeyboard {
-                        self?.continueButton?.custom.setLoading(false)
-                        self?.onContinue?(phone)
+                self?.dismissKeyboard {
+                    self?.continueButton?.custom.setLoading(false)
+                    self?.onContinue?(phone)
+                }
+            }.catch {
+                [weak self]
+                error in
+
+                performWithDelay {
+                    self?.continueButton?.custom.setLoading(false)
+                }
+
+                if let serverError = error as? WalletResponseError {
+                    switch serverError {
+                    case .serverFailureResponse(errors: let fails):
+                        self?.newPasswordFormComponent?.helperText = fails.first?.message.capitalizingFirst ?? ""
+
+                    case .undefinedServerFailureResponse:
+                        self?.newPasswordFormComponent?.helperText = "Undefined error"
+                        
                     }
-
-                }.catch {
-                    [weak self]
-                    error in
-
-                    performWithDelay {
-                        self?.continueButton?.custom.setLoading(false)
-                    }
+                } else {
+                    self?.newPasswordFormComponent?.helperText = "Connection failed"
+                }
             }
         case (false, true):
             signupAPI?.providePassword(password, confirmation: confirmation, for: phone, signupToken: token).done {
-                    [weak self]
-                    authToken in
+                [weak self]
+                authToken in
 
-                    self?.dismissKeyboard {
-                        self?.continueButton?.custom.setLoading(false)
-                        self?.onContinue?(authToken)
+                self?.dismissKeyboard {
+                    self?.continueButton?.custom.setLoading(false)
+                    self?.onContinue?(authToken)
+                }
+
+                self?.userManager?.save(phone: phone, token: authToken)
+            }.catch {
+                [weak self]
+                error in
+
+                performWithDelay {
+                    self?.continueButton?.custom.setLoading(false)
+                }
+
+                if let serverError = error as? WalletResponseError {
+                    switch serverError {
+                    case .serverFailureResponse(errors: let fails):
+                        self?.newPasswordFormComponent?.helperText = fails.first?.message.capitalizingFirst ?? ""
+
+                    case .undefinedServerFailureResponse:
+                        self?.newPasswordFormComponent?.helperText = "Undefined error"
+
                     }
-
-                    self?.userManager?.save(phone: phone, token: authToken)
-                }.catch {
-                    [weak self]
-                    error in
-
-                    performWithDelay {
-                        self?.continueButton?.custom.setLoading(false)
-                    }
+                } else {
+                    self?.newPasswordFormComponent?.helperText = "Connection failed"
+                }
             }
         case (false, false):
             break
