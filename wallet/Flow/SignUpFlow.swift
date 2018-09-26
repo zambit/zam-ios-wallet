@@ -43,7 +43,7 @@ final class SignUpFlow: ScreenFlow {
         }
 
         vc.onContinue = onContinue
-        vc.signupAPI = SignupAPI(provider: SignupProvider(environment: WalletEnvironment(), dispatcher: HTTPDispatcher()))
+        vc.signupAPI = SignupAPI(provider: Provider(environment: WalletEnvironment(), dispatcher: HTTPDispatcher()))
         vc.flow = self
         return vc
     }
@@ -70,7 +70,7 @@ final class SignUpFlow: ScreenFlow {
         }
 
         vc.onContinue = onContinue
-        vc.verifyAPI = SignupAPI(provider: SignupProvider(environment: WalletEnvironment(), dispatcher: HTTPDispatcher()))
+        vc.verifyAPI = SignupAPI(provider: Provider(environment: WalletEnvironment(), dispatcher: HTTPDispatcher()))
         vc.flow = self
         return vc
     }
@@ -89,7 +89,7 @@ final class SignUpFlow: ScreenFlow {
             self?.createPinFlow.begin()
         }
         vc.onContinue = onContinue
-        vc.signupAPI = SignupAPI(provider: SignupProvider(environment: WalletEnvironment(), dispatcher: HTTPDispatcher()))
+        vc.signupAPI = SignupAPI(provider: Provider(environment: WalletEnvironment(), dispatcher: HTTPDispatcher()))
         vc.userManager = UserDefaultsManager(keychainConfiguration: WalletKeychainConfiguration())
         vc.title = "Registration"
         vc.flow = self

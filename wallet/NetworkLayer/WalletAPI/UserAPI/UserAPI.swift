@@ -11,14 +11,14 @@ import PromiseKit
 
 struct UserAPI: NetworkService {
 
-    private let provider: UserProvider
+    private let provider: Provider
 
-    init(provider: UserProvider) {
+    init(provider: Provider) {
         self.provider = provider
     }
 
     func getUserInfo(token: String, coin: CoinType?) -> Promise<UserData> {
-        return provider.execute(.userInfo(token: token, coin: coin?.rawValue))
+        return provider.execute(UserRequest.userInfo(token: token, coin: coin?.rawValue))
             .then {
                 (response: Response) -> Promise<UserData> in
 
@@ -59,7 +59,7 @@ struct UserAPI: NetworkService {
     }
 
     func createWallet(token: String, coin: CoinType, walletName: String?) -> Promise<WalletData> {
-        return provider.execute(.createWallet(token: token, coin: coin.rawValue, walletName: walletName))
+        return provider.execute(UserRequest.createWallet(token: token, coin: coin.rawValue, walletName: walletName))
             .then {
                 (response: Response) -> Promise<WalletData> in
 
@@ -100,7 +100,7 @@ struct UserAPI: NetworkService {
     }
 
     func getWallets(token: String, coin: CoinType? = nil, id: String? = nil, page: String? = nil, count: Int? = nil) -> Promise<[WalletData]> {
-        return provider.execute(.getUserWallets(token: token, coin: coin?.rawValue, walletId: id, page: page, count: count))
+        return provider.execute(UserRequest.getUserWallets(token: token, coin: coin?.rawValue, walletId: id, page: page, count: count))
             .then {
                 (response: Response) -> Promise<[WalletData]> in
 
@@ -140,7 +140,7 @@ struct UserAPI: NetworkService {
     }
 
     func getWalletInfo(token: String, walletId: String) -> Promise<WalletData> {
-        return provider.execute(.getUserWalletInfo(token: token, walletId: walletId))
+        return provider.execute(UserRequest.getUserWalletInfo(token: token, walletId: walletId))
             .then {
                 (response: Response) -> Promise<WalletData> in
 
@@ -181,7 +181,7 @@ struct UserAPI: NetworkService {
     }
 
     func sendTransaction(token: String, walletId: String, recipient: String, amount: Decimal) -> Promise<TransactionData>  {
-        return provider.execute(.sendTransaction(token: token, walletId: walletId, recipient: recipient, amount: amount))
+        return provider.execute(UserRequest.sendTransaction(token: token, walletId: walletId, recipient: recipient, amount: amount))
             .then {
                 (response: Response) -> Promise<TransactionData> in
 
@@ -227,7 +227,7 @@ struct UserAPI: NetworkService {
         let timezoneOffset = Float(TimeZone.current.secondsFromGMT()) / 3600.0
         let timezoneOffsetString = NumberFormatter.output.string(from: NSNumber(value: timezoneOffset))
 
-        return provider.execute(.getTransactions(token: token, coin: filter.coin?.rawValue, walletId: filter.walletId, recipient: filter.recipient, direction: filter.direction?.rawValue, fromTime: filter.fromTime, untilTime: filter.untilTime, timezone: timezoneOffsetString, page: filter.page, count: filter.count, group: filter.group.rawValue))
+        return provider.execute(UserRequest.getTransactions(token: token, coin: filter.coin?.rawValue, walletId: filter.walletId, recipient: filter.recipient, direction: filter.direction?.rawValue, fromTime: filter.fromTime, untilTime: filter.untilTime, timezone: timezoneOffsetString, page: filter.page, count: filter.count, group: filter.group.rawValue))
             .then {
                 (response: Response) -> Promise<GroupedTransactionsPageData> in
 
@@ -319,7 +319,7 @@ struct UserAPI: NetworkService {
     }
 
     func getKYCPersonalInfo(token: String) -> Promise<KYCPersonalInfo> {
-        return provider.execute(.getKYCPersonalInfo(token: token))
+        return provider.execute(UserRequest.getKYCPersonalInfo(token: token))
             .then {
                 (response: Response) -> Promise<KYCPersonalInfo> in
 
@@ -364,7 +364,7 @@ struct UserAPI: NetworkService {
     }
 
     func sendKYCPersonalInfo(token: String, email: String, firstName: String, lastName: String, birthDate: Date, gender: GenderType, country: String, city: String, region: String, street: String, house: String, postalCode: Int) -> Promise<Void> {
-        return provider.execute(.sendKYCPersonalInfo(token: token, email: email, firstName: firstName, lastName: lastName, birthDate: String(Int(birthDate.unixTimestamp)), sex: gender.rawValue, country: country, city: city, region: region, street: street, house: house, postalCode: postalCode))
+        return provider.execute(UserRequest.sendKYCPersonalInfo(token: token, email: email, firstName: firstName, lastName: lastName, birthDate: String(Int(birthDate.unixTimestamp)), sex: gender.rawValue, country: country, city: city, region: region, street: street, house: house, postalCode: postalCode))
             .then {
                 (response: Response) -> Promise<Void> in
 

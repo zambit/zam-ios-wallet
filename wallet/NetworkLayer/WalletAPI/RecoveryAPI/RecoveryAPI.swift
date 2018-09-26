@@ -14,9 +14,9 @@ import PromiseKit
  */
 struct RecoveryAPI: NetworkService, ThreeStepsAPI {
 
-    private let provider: RecoveryProvider
+    private let provider: Provider
 
-    init(provider: RecoveryProvider) {
+    init(provider: Provider) {
         self.provider = provider
     }
 
@@ -24,7 +24,7 @@ struct RecoveryAPI: NetworkService, ThreeStepsAPI {
      Start user password recovery by sending verification code via SMS.
      */
     func sendVerificationCode(to phone: String, referrerPhone: String? = nil) -> Promise<Void> {
-        return provider.execute(.start(phone: phone))
+        return provider.execute(RecoveryRequest.start(phone: phone))
             .then {
                 (response: Response) -> Promise<Void> in
 
@@ -64,7 +64,7 @@ struct RecoveryAPI: NetworkService, ThreeStepsAPI {
      Verifies user password recovery by passing SMS Code which has been sent previously.
      */
     func verifyPhoneNumber(_ phone: String, withCode verificationCode: String) -> Promise<String> {
-        return provider.execute(.verify(phone: phone, verificationCode: verificationCode))
+        return provider.execute(RecoveryRequest.verify(phone: phone, verificationCode: verificationCode))
             .then {
                 (response: Response) -> Promise<String> in
 
@@ -103,7 +103,7 @@ struct RecoveryAPI: NetworkService, ThreeStepsAPI {
      Finish password recovery by setting user password, this request requires Recovery Token.
      */
     func providePassword(_ password: String, confirmation: String, for phone: String, recoveryToken: String) -> Promise<Void> {
-        return provider.execute(.finish(phone: phone, recoveryToken: recoveryToken, newPassword: password, newPasswordConfirmation: confirmation))
+        return provider.execute(RecoveryRequest.finish(phone: phone, recoveryToken: recoveryToken, newPassword: password, newPasswordConfirmation: confirmation))
             .then {
                 (response: Response) -> Promise<Void> in
 
