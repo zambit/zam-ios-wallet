@@ -184,4 +184,90 @@ class AuthServiceNetworkLayerTests: XCTestCase {
             }
         }
     }
+
+    func testCheckingIfUserAuthorizedSucceed() {
+        // given
+        // Create dispatcher mock and assign test succesful response data
+        var dispatcher = DispatcherMock()
+
+        // Construct response codable object
+        let phone = "+79999999999"
+        let tokenCodable = CodableSuccessAuthorizedPhoneResponse.Phone(phone: phone)
+        let responseCodable =  CodableSuccessAuthorizedPhoneResponse(result: true, data: tokenCodable)
+
+        // Encoding response to data
+        let encoder = JSONEncoder()
+        let data = try! encoder.encode(responseCodable)
+
+        dispatcher.response = Response(reponse: nil, data: data, error: nil)
+
+        // Create provider with dispatcher and environment mocks
+        let provider = Provider(environment: EnvironmentMock(), dispatcher: dispatcher)
+
+        // Create auth service with mocked provider
+        let authAPI = AuthAPI(provider: provider)
+
+        let token = "token"
+
+        //when
+        authAPI.checkIfUserAuthorized(token: token).done {
+            response in
+            //then
+            XCTAssertEqual(phone, response)
+        }.catch {
+            _ in
+            //then
+            XCTFail("Response should be succeed, not failure")
+        }
+    }
+
+    func testCheckingIfUserAuthorizedFailure() {
+        // given
+        // Create dispatcher mock and assign test succesful response data
+        var dispatcher = DispatcherMock()
+
+        // Construct response codable object
+        let error = "Test message"
+        let codableError = CodableFailure.Error.init(name: nil, input: nil, message: error)
+        let responseCodable = CodableFailure(result: false, message: nil, errors: [codableError])
+
+        // Encoding response to data
+        let encoder = JSONEncoder()
+        let data = try! encoder.encode(responseCodable)
+
+        dispatcher.response = Response(reponse: nil, data: data, error: nil)
+
+        // Create provider with dispatcher and environment mocks
+        let provider = Provider(environment: EnvironmentMock(), dispatcher: dispatcher)
+
+        // Create auth service with mocked provider
+        let authAPI = AuthAPI(provider: provider)
+
+        let token = "token"
+
+        //when
+        let expectedResponse: CodableFailure.Error? = codableError
+        authAPI.checkIfUserAuthorized(token: token).done {
+            _ in
+            // then
+            XCTFail("Response should be a failure, not success")
+        }.catch {
+            e in
+
+            guard let response = e as? WalletResponseError else {
+                XCTFail("Wrong fail response type")
+                return
+            }
+
+            switch response {
+            case .serverFailureResponse(errors: let errors):
+                // then
+                let error = errors.first
+                XCTAssertEqual(expectedResponse, error)
+            case .undefinedServerFailureResponse:
+                // then
+                XCTFail("Wrong fail response type")
+            }
+        }
+    }
 }
