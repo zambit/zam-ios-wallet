@@ -10,6 +10,13 @@ import Foundation
 
 extension NumberFormatter {
 
+    static var output: NumberFormatter {
+        let formatter = NumberFormatter()
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+
+        return formatter
+    }
+
     static var walletAmountShort: NumberFormatter {
         let formatter = NumberFormatter()
         formatter.locale = Locale.current
