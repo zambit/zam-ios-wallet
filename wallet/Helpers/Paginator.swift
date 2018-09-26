@@ -113,7 +113,6 @@ public class Paginator<Element> {
         self.failureHandler = failureHandler
         self.resetHandler = resetHandler
         self.setDefaultValues()
-
     }
 
     /**
@@ -124,7 +123,7 @@ public class Paginator<Element> {
             return false
         }
 
-        return next == ""
+        return next == "" || next == nil
     }
 
     /**
