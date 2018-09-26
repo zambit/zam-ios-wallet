@@ -90,14 +90,13 @@ class EnterPhoneNumberViewController: СonsistentViewController, PhoneNumberComp
                 if let serverError = error as? WalletResponseError {
                     switch serverError {
                     case .serverFailureResponse(errors: let fails):
-                        guard let fail = fails.first else {
-                            fatalError()
-                        }
-
-                        self?.phoneNumberComponent?.custom.setHelperText(fail.message.capitalizingFirst)
+                        self?.phoneNumberComponent?.custom.setHelperText(fails.first?.message.capitalizingFirst ?? "")
+                        
                     case .undefinedServerFailureResponse:
                         self?.phoneNumberComponent?.custom.setHelperText("Undefined error")
                     }
+                } else {
+                    self?.phoneNumberComponent?.custom.setHelperText("Connection failed")
                 }
             }
         }

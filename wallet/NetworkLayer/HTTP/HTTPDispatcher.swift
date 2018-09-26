@@ -19,9 +19,8 @@ struct HTTPDispatcher: Dispatcher {
             do {
                 let urlRequest = try prepareURLRequest(for: request, with: environment)
 
-                print(urlRequest.url)
-                print(urlRequest.allHTTPHeaderFields)
-                print(String(data: urlRequest.httpBody ?? Data(), encoding: String.Encoding.utf8))
+                print(urlRequest.url ?? "")
+                print(String(data: urlRequest.httpBody ?? Data(), encoding: String.Encoding.utf8) ?? "")
 
                 let task = self.session.dataTask(with: urlRequest) { data, response, error in
 
@@ -58,8 +57,6 @@ struct HTTPDispatcher: Dispatcher {
 
         let fullURLString = "\(environment.host)/\(request.path)"
 
-        print(fullURLString)
-
         guard let fullURL = URL(string: fullURLString) else {
             throw HTTPDispatcherError.badURL
         }
@@ -68,8 +65,6 @@ struct HTTPDispatcher: Dispatcher {
 
         switch request.parameters {
         case .body(let params)?:
-//            let encoder = JSONEncoder()
-//            urlRequest.httpBody = try encoder.encode(params)
             urlRequest.httpBody = try JSONSerialization.data(withJSONObject: params, options: [])
 
         case .url(let params)?:

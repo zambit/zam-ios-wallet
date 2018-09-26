@@ -128,15 +128,14 @@ class EnterPhoneLoginPasswordViewController: СonsistentViewController, PhoneNum
             if let serverError = error as? WalletResponseError {
                 switch serverError {
                 case .serverFailureResponse(errors: let fails):
-                    guard let fail = fails.first else {
-                        fatalError()
-                    }
-
-                    self?.loginPasswordFormComponent?.helperText = fail.message.capitalizingFirst
+                    self?.loginPasswordFormComponent?.helperText = fails.first?.message.capitalizingFirst ?? ""
+                    
                 case .undefinedServerFailureResponse:
 
                     self?.loginPasswordFormComponent?.helperText = "Undefined error"
                 }
+            } else {
+                self?.loginPasswordFormComponent?.helperText = "Connection failed"
             }
         }
     }
