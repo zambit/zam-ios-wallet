@@ -19,44 +19,15 @@ class walletNetworkLayerTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testSuccessfulResponse() {
-        // Create dispatcher mock and assign test succesful response data
-        var dispatcher = DispatcherMock()
-        let data = Data(bytes: [0, 1, 0, 1])
-        dispatcher.response = Response(reponse: nil, data: data, error: nil)
-
-
-        let expectedResponse: Response? = Response.data(data)
-        dispatcher.dispatch(request: RequestMock(), with: EnvironmentMock()).done {
-            response in
-
-            XCTAssertEqual(response, expectedResponse)
-        }.catch {
-            _ in
-
-            XCTFail()
-        }
+    func testExample() {
+        // This is an example of a functional test case.
+        // Use XCTAssert and related functions to verify your tests produce the correct results.
     }
 
-    func testFailureResponse() {
-        // Create dispatcher mock and assign test failure response data
-        var dispatcher = DispatcherMock()
-        let error = walletNetworkLayerTestsError.responseError
-        dispatcher.response = Response(reponse: nil, data: nil, error: error)
-
-        let expectedResponse: Response? = Response.error(error)
-        dispatcher.dispatch(request: RequestMock(), with: EnvironmentMock()).done {
-            response in
-
-            XCTAssertEqual(response, expectedResponse)
-        }.catch {
-            _ in
-
-            XCTFail()
+    func testPerformanceExample() {
+        // This is an example of a performance test case.
+        self.measure {
+            // Put the code you want to measure the time of here.
         }
     }
-}
-
-enum walletNetworkLayerTestsError: Error {
-    case responseError
 }
