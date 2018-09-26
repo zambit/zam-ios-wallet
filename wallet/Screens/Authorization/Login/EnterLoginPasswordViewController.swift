@@ -110,15 +110,13 @@ class EnterLoginPasswordViewController: СonsistentViewController, LoginPassword
             if let serverError = error as? WalletResponseError {
                 switch serverError {
                 case .serverFailureResponse(errors: let fails):
-                    guard let fail = fails.first else {
-                        fatalError()
-                    }
+                    self?.loginPasswordForm?.helperText = fails.first?.message.capitalizingFirst ?? ""
 
-                    self?.loginPasswordForm?.helperText = fail.message.capitalizingFirst
                 case .undefinedServerFailureResponse:
-
                     self?.loginPasswordForm?.helperText = "Undefined error"
                 }
+            } else {
+                self?.loginPasswordForm?.helperText = "Connection failed"
             }
         }
     }
@@ -165,7 +163,7 @@ class EnterLoginPasswordViewController: СonsistentViewController, LoginPassword
             if let _ = error as? WalletResponseError {
                 exit()
             } else {
-                self?.loginPasswordForm?.helperText = "Network problems"
+                self?.loginPasswordForm?.helperText = "Connection failed"
             }
         }
 
