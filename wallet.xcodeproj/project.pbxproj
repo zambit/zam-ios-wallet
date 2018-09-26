@@ -264,6 +264,8 @@
 		9307AC74215BD7AB0093DB68 /* RequestMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9307AC73215BD7AB0093DB68 /* RequestMock.swift */; };
 		9307AC76215BDBEB0093DB68 /* Response+TestsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9307AC75215BDBEB0093DB68 /* Response+TestsExtensions.swift */; };
 		9307AC7A215BE0730093DB68 /* ProviderNetworkLayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9307AC79215BE0730093DB68 /* ProviderNetworkLayerTests.swift */; };
+		9307AC7E215BF6DB0093DB68 /* AuthServiceNetworkLayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9307AC7D215BF6DB0093DB68 /* AuthServiceNetworkLayerTests.swift */; };
+		9307AC80215BFCAF0093DB68 /* CodableFailure.Type+TestsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9307AC7F215BFCAF0093DB68 /* CodableFailure.Type+TestsExtensions.swift */; };
 		9319BA852129A07A00033A7E /* TransactionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9319BA842129A07A00033A7E /* TransactionData.swift */; };
 		9319BAA6212A0AC200033A7E /* CrossAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9319BAA5212A0AC200033A7E /* CrossAnimationView.swift */; };
 /* End PBXBuildFile section */
@@ -543,6 +545,8 @@
 		9307AC73215BD7AB0093DB68 /* RequestMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestMock.swift; sourceTree = "<group>"; };
 		9307AC75215BDBEB0093DB68 /* Response+TestsExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Response+TestsExtensions.swift"; sourceTree = "<group>"; };
 		9307AC79215BE0730093DB68 /* ProviderNetworkLayerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderNetworkLayerTests.swift; sourceTree = "<group>"; };
+		9307AC7D215BF6DB0093DB68 /* AuthServiceNetworkLayerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthServiceNetworkLayerTests.swift; sourceTree = "<group>"; };
+		9307AC7F215BFCAF0093DB68 /* CodableFailure.Type+TestsExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CodableFailure.Type+TestsExtensions.swift"; sourceTree = "<group>"; };
 		9319BA842129A07A00033A7E /* TransactionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionData.swift; sourceTree = "<group>"; };
 		9319BAA5212A0AC200033A7E /* CrossAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrossAnimationView.swift; sourceTree = "<group>"; };
 		ACA56559587AEA1EE2113A79 /* Pods-wallet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wallet.release.xcconfig"; path = "Pods/Target Support Files/Pods-wallet/Pods-wallet.release.xcconfig"; sourceTree = "<group>"; };
@@ -1391,6 +1395,7 @@
 			children = (
 				9307AC65215BC1990093DB68 /* walletNetworkLayerTests.swift */,
 				9307AC79215BE0730093DB68 /* ProviderNetworkLayerTests.swift */,
+				9307AC7D215BF6DB0093DB68 /* AuthServiceNetworkLayerTests.swift */,
 				9307AC7C215BF36F0093DB68 /* Extensions */,
 				9307AC7B215BF3650093DB68 /* Mocks */,
 				9307AC67215BC1990093DB68 /* Info.plist */,
@@ -1412,6 +1417,7 @@
 			isa = PBXGroup;
 			children = (
 				9307AC75215BDBEB0093DB68 /* Response+TestsExtensions.swift */,
+				9307AC7F215BFCAF0093DB68 /* CodableFailure.Type+TestsExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1882,8 +1888,10 @@
 				9307AC72215BCDAA0093DB68 /* EnvironmentMock.swift in Sources */,
 				9307AC7A215BE0730093DB68 /* ProviderNetworkLayerTests.swift in Sources */,
 				9307AC70215BC7D90093DB68 /* DispatcherMock.swift in Sources */,
+				9307AC80215BFCAF0093DB68 /* CodableFailure.Type+TestsExtensions.swift in Sources */,
 				9307AC66215BC1990093DB68 /* walletNetworkLayerTests.swift in Sources */,
 				9307AC76215BDBEB0093DB68 /* Response+TestsExtensions.swift in Sources */,
+				9307AC7E215BF6DB0093DB68 /* AuthServiceNetworkLayerTests.swift in Sources */,
 				9307AC74215BD7AB0093DB68 /* RequestMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
