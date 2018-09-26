@@ -50,6 +50,7 @@ class TransactionsHistoryViewController: FlowViewController, WalletNavigable, UI
 
         self.historyTableView?.register(TransactionsGroupHeaderComponent.self, forHeaderFooterViewReuseIdentifier: "TransactionsGroupHeaderComponent")
         self.historyTableView?.register(TransactionCellComponent.self , forCellReuseIdentifier: "TransactionCellComponent")
+        self.historyTableView?.allowsSelection = false
         self.historyTableView?.delegate = self
         self.historyTableView?.dataSource = self
 
