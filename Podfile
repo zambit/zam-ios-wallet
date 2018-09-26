@@ -7,7 +7,6 @@ target 'wallet' do
   pod 'PhoneNumberKit', '~> 2.1'
   pod 'ESTabBarController-swift'
   pod 'Hero'
-  pod 'DifferenceKit'
 
   target 'walletNetworkLayerTests' do
       inherit! :search_paths
