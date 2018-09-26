@@ -45,7 +45,7 @@ class AuthServiceNetworkLayerTests: XCTestCase {
         }.catch {
             _ in
             // then
-            XCTFail()
+            XCTFail("Response should be succeed, not failure")
         }
     }
 
@@ -80,7 +80,7 @@ class AuthServiceNetworkLayerTests: XCTestCase {
             response in
 
             // then
-            XCTFail()
+            XCTFail("Response should be a failure, not success")
         }.catch {
             e in
 
@@ -101,4 +101,87 @@ class AuthServiceNetworkLayerTests: XCTestCase {
         }
     }
 
+    func testSigningOutSucceed() {
+        // given
+        // Create dispatcher mock and assign test succesful response data
+        var dispatcher = DispatcherMock()
+
+        // Construct response codable object
+        let responseCodable = CodableSuccessEmptyResponse(result: true)
+
+        // Encoding response to data
+        let encoder = JSONEncoder()
+        let data = try! encoder.encode(responseCodable)
+
+        dispatcher.response = Response(reponse: nil, data: data, error: nil)
+
+        // Create provider with dispatcher and environment mocks
+        let provider = Provider(environment: EnvironmentMock(), dispatcher: dispatcher)
+
+        // Create auth service with mocked provider
+        let authAPI = AuthAPI(provider: provider)
+
+        let token = "token"
+
+        //when
+        authAPI.signOut(token: token).done {
+
+            // then
+            XCTAssert(true)
+        }.catch {
+            _ in
+
+            // then
+            XCTFail("Response should be succeed, not failure")
+        }
+    }
+
+    func testSigningOutFailure() {
+        // given
+        // Create dispatcher mock and assign test succesful response data
+        var dispatcher = DispatcherMock()
+
+        // Construct response codable object
+        let error = "Test message"
+        let codableError = CodableFailure.Error.init(name: nil, input: nil, message: error)
+        let responseCodable = CodableFailure(result: false, message: nil, errors: [codableError])
+
+        // Encoding response to data
+        let encoder = JSONEncoder()
+        let data = try! encoder.encode(responseCodable)
+
+        dispatcher.response = Response(reponse: nil, data: data, error: nil)
+
+        // Create provider with dispatcher and environment mocks
+        let provider = Provider(environment: EnvironmentMock(), dispatcher: dispatcher)
+
+        // Create auth service with mocked provider
+        let authAPI = AuthAPI(provider: provider)
+
+        let token = "token"
+
+        //when
+        let expectedResponse: CodableFailure.Error? = codableError
+        authAPI.signOut(token: token).done {
+            // then
+            XCTFail("Response should be a failure, not success")
+        }.catch {
+            e in
+
+            guard let response = e as? WalletResponseError else {
+                XCTFail("Wrong fail response type")
+                return
+            }
+
+            switch response {
+            case .serverFailureResponse(errors: let errors):
+                // then
+                let error = errors.first
+                XCTAssertEqual(expectedResponse, error)
+            case .undefinedServerFailureResponse:
+                // then
+                XCTFail("Wrong fail response type")
+            }
+        }
+    }
 }
