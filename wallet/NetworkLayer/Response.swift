@@ -12,6 +12,7 @@ import Foundation
  Enum provides universal object to handle server response and work with it.
  */
 enum Response {
+
     case data(Data)
     case error(Error)
 

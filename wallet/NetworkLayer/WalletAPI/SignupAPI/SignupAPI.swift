@@ -14,9 +14,9 @@ import PromiseKit
  */
 struct SignupAPI: NetworkService, ThreeStepsAPI {
 
-    private let provider: SignupProvider
+    private let provider: Provider
 
-    init(provider: SignupProvider) {
+    init(provider: Provider) {
         self.provider = provider
     }
 
@@ -24,7 +24,7 @@ struct SignupAPI: NetworkService, ThreeStepsAPI {
      Start user account creation by sending verification code via SMS.
      */
     func sendVerificationCode(to phone: String, referrerPhone: String? = nil) -> Promise<Void> {
-        return provider.execute(.start(phone: phone, referrerPhone: referrerPhone))
+        return provider.execute(SignupRequest.start(phone: phone, referrerPhone: referrerPhone))
             .then {
                 (response: Response) -> Promise<Void> in
 
@@ -64,7 +64,7 @@ struct SignupAPI: NetworkService, ThreeStepsAPI {
      Verifies user account by passing SMS Code which has been sent previously.
      */
     func verifyPhoneNumber(_ phone: String, withCode verificationCode: String) -> Promise<String> {
-        return provider.execute(.verify(phone: phone, verificationCode: verificationCode))
+        return provider.execute(SignupRequest.verify(phone: phone, verificationCode: verificationCode))
             .then {
                 (response: Response) -> Promise<String> in
 
@@ -103,7 +103,7 @@ struct SignupAPI: NetworkService, ThreeStepsAPI {
      Finish account creation by setting user password, this request requires SignUp Token.
      */
     func providePassword(_ password: String, confirmation: String, for phone: String, signupToken: String) -> Promise<String> {
-        return provider.execute(.finish(phone: phone, signupToken: signupToken, password: password, passwordConfirmation: confirmation))
+        return provider.execute(SignupRequest.finish(phone: phone, signupToken: signupToken, password: password, passwordConfirmation: confirmation))
             .then {
                 (response: Response) -> Promise<String> in
 

@@ -11,7 +11,5 @@
  */
 protocol NetworkService {
 
-    associatedtype APIProvider: Provider
-
-    init(provider: APIProvider)
+    init(provider: Provider)
 }

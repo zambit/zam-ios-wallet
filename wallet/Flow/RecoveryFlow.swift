@@ -43,7 +43,7 @@ final class RecoveryFlow: ScreenFlow {
         }
 
         vc.onContinue = onContinue
-        vc.recoveryAPI = RecoveryAPI(provider: RecoveryProvider(environment: WalletEnvironment(), dispatcher: HTTPDispatcher()))
+        vc.recoveryAPI = RecoveryAPI(provider: Provider(environment: WalletEnvironment(), dispatcher: HTTPDispatcher()))
         vc.flow = self
         return vc
     }
@@ -70,7 +70,7 @@ final class RecoveryFlow: ScreenFlow {
         }
 
         vc.onContinue = onContinue
-        vc.verifyAPI = RecoveryAPI(provider: RecoveryProvider(environment: WalletEnvironment(), dispatcher: HTTPDispatcher()))
+        vc.verifyAPI = RecoveryAPI(provider: Provider(environment: WalletEnvironment(), dispatcher: HTTPDispatcher()))
         vc.flow = self
         return vc
     }
@@ -95,7 +95,7 @@ final class RecoveryFlow: ScreenFlow {
             target.begin()
         }
         vc.onContinue = onContinue
-        vc.recoveryAPI = RecoveryAPI(provider: RecoveryProvider(environment: WalletEnvironment(), dispatcher: HTTPDispatcher()))
+        vc.recoveryAPI = RecoveryAPI(provider: Provider(environment: WalletEnvironment(), dispatcher: HTTPDispatcher()))
         vc.userManager = UserDefaultsManager(keychainConfiguration: WalletKeychainConfiguration())
         vc.title = "New password"
         vc.flow = self
