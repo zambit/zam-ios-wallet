@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct KYCPersonalInfoData {
+struct KYCPersonalInfoData: Equatable {
 
     let email: String
     let firstName: String

@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct GroupedTransactionsPageData {
+struct GroupedTransactionsPageData: Equatable {
 
     let next: String?
     let transactions: [TransactionsGroupData]

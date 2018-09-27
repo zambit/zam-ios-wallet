@@ -6,7 +6,7 @@
 //  Copyright © 2018 zamzam. All rights reserved.
 //
 
-enum GenderType: String {
+enum GenderType: String, Equatable {
     case male
     case female
     case undefined

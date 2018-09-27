@@ -9,7 +9,7 @@
 import Foundation
 import PromiseKit
 
-struct TransactionsGroupData {
+struct TransactionsGroupData: Equatable {
 
     let dateInterval: DateInterval
     let amount: BalanceData

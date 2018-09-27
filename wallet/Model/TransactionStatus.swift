@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum TransactionStatus: String {
+enum TransactionStatus: String, Equatable {
     case waiting
     case decline
     case pending
