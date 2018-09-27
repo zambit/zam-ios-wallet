@@ -9,26 +9,7 @@
 import XCTest
 @testable import wallet
 
-class UserServiceNetworkLayerTests: XCTestCase {
-
-    /**
-     Build provider object with dispatcher mock that returns 'response'.
-     */
-    private func buildProviderWith<R: Codable>(response: R) -> Provider {
-        // Create dispatcher mock and assign test succesful response data
-        var dispatcher = DispatcherMock()
-
-        // Encoding response to data
-        let encoder = JSONEncoder()
-        let data = try! encoder.encode(response)
-
-        dispatcher.response = Response(reponse: nil, data: data, error: nil)
-
-        // Create provider with dispatcher and environment mocks
-        let provider = Provider(environment: EnvironmentMock(), dispatcher: dispatcher)
-
-        return provider
-    }
+class UserServiceNetworkLayerTests: ServiceNetworkLayerTests {
 
     /**
      Test succeed performance of `getUserInfo(token: coin:)` method.
