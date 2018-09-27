@@ -43,6 +43,8 @@ class KYCPersonalInfoViewController: FlowViewController, WalletNavigable, UITabl
             ("Personal info",
              [TextFieldCellData(placeholder: "Email",
                                 keyboardType: .emailAddress,
+                                autocapitalizationType: .none,
+                                autocorrectionType: .no,
                                 action: .editingChanged({ [weak self]
                                     textField in
 
@@ -54,6 +56,8 @@ class KYCPersonalInfoViewController: FlowViewController, WalletNavigable, UITabl
                 ),
               TextFieldCellData(placeholder: "First name",
                                 keyboardType: .default,
+                                autocapitalizationType: .words,
+                                autocorrectionType: .no,
                                 action: .editingChanged({ [weak self]
                                     textField in
 
@@ -65,6 +69,8 @@ class KYCPersonalInfoViewController: FlowViewController, WalletNavigable, UITabl
                 ),
               TextFieldCellData(placeholder: "Last name",
                                 keyboardType: .default,
+                                autocapitalizationType: .words,
+                                autocorrectionType: .no,
                                 action: .editingChanged({ [weak self]
                                     textField in
 
@@ -76,6 +82,8 @@ class KYCPersonalInfoViewController: FlowViewController, WalletNavigable, UITabl
                 ),
               TextFieldCellData(placeholder: "Date of birth",
                                 keyboardType: nil,
+                                autocapitalizationType: .none,
+                                autocorrectionType: .no,
                                 action: .tap({ [weak self] textField in
 
                                     self?.dismissKeyboard()
@@ -93,6 +101,8 @@ class KYCPersonalInfoViewController: FlowViewController, WalletNavigable, UITabl
                 ),
               TextFieldCellData(placeholder: "Gender",
                                 keyboardType: nil,
+                                autocapitalizationType: .words,
+                                autocorrectionType: .no,
                                 action: .tap({ [weak self] textField in
 
                                     self?.dismissKeyboard()
@@ -117,6 +127,8 @@ class KYCPersonalInfoViewController: FlowViewController, WalletNavigable, UITabl
             ("Personal address",
              [TextFieldCellData(placeholder: "Country",
                                 keyboardType: .default,
+                                autocapitalizationType: .words,
+                                autocorrectionType: .no,
                                 action: .editingChanged({ [weak self]
                                     textField in
 
@@ -128,6 +140,8 @@ class KYCPersonalInfoViewController: FlowViewController, WalletNavigable, UITabl
                 ),
               TextFieldCellData(placeholder: "City",
                                 keyboardType: .default,
+                                autocapitalizationType: .words,
+                                autocorrectionType: .no,
                                 action: .editingChanged({ [weak self]
                                     textField in
 
@@ -139,6 +153,8 @@ class KYCPersonalInfoViewController: FlowViewController, WalletNavigable, UITabl
                 ),
               TextFieldCellData(placeholder: "State / Region",
                                 keyboardType: .default,
+                                autocapitalizationType: .words,
+                                autocorrectionType: .no,
                                 action: .editingChanged({ [weak self]
                                     textField in
 
@@ -150,6 +166,8 @@ class KYCPersonalInfoViewController: FlowViewController, WalletNavigable, UITabl
                 ),
               TextFieldCellData(placeholder: "Street",
                                 keyboardType: .default,
+                                autocapitalizationType: .none,
+                                autocorrectionType: .no,
                                 action: .editingChanged({ [weak self]
                                     textField in
 
@@ -161,6 +179,8 @@ class KYCPersonalInfoViewController: FlowViewController, WalletNavigable, UITabl
                 ),
               TextFieldCellData(placeholder: "House number",
                                 keyboardType: .default,
+                                autocapitalizationType: .none,
+                                autocorrectionType: .no,
                                 action: .editingChanged({ [weak self]
                                     textField in
 
@@ -172,6 +192,8 @@ class KYCPersonalInfoViewController: FlowViewController, WalletNavigable, UITabl
                 ),
               TextFieldCellData(placeholder: "Postal code",
                                 keyboardType: .numberPad,
+                                autocapitalizationType: .none,
+                                autocorrectionType: .no,
                                 action: .editingChanged({ [weak self]
                                     textField in
 
