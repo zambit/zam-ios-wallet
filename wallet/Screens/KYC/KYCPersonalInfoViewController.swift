@@ -361,6 +361,9 @@ class KYCPersonalInfoViewController: FlowViewController, WalletNavigable, UITabl
 
         if position.y + cell.bounds.height + 15 > window.bounds.height - 350 {
             currentIndexPath = tableView?.indexPath(for: cell)
+            if isKeyboardShown, let height = keyboardHeight {
+                scrollToShowField(keyboardHeight: height)
+            }
         } else {
             currentIndexPath = nil
         }
@@ -409,38 +412,44 @@ class KYCPersonalInfoViewController: FlowViewController, WalletNavigable, UITabl
         }
     }
 
-    private var contentOffsetBeforeKeeyboard: CGPoint?
-
-    @objc
-    private func keyboardWillShow(notification: NSNotification) {
+    private func scrollToShowField(keyboardHeight: CGFloat) {
         guard
             let tableView = tableView,
             let safeArea = safeAreaView,
             let indexPath = currentIndexPath,
             let cell = tableView.cellForRow(at: indexPath) else {
-            return
+                return
         }
 
+        tableView.isScrollEnabled = false
+
+        let cellPosition = cell.convert(cell.bounds.origin, to: safeArea)
+        let bottomSpace = tableView.height - cellPosition.y - cell.height - 15.0
+
+        let targetOffset = CGPoint(x: 0, y: tableView.contentOffset.y + keyboardHeight - bottomSpace)
+        tableView.setContentOffset(targetOffset, animated: true)
+    }
+
+    @objc
+    private func keyboardWillShow(notification: NSNotification) {
         guard let keyboardFrameValue = notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue else {
             return
         }
 
         let keyboardFrame = view.convert(keyboardFrameValue.cgRectValue, from: nil)
 
-        contentOffsetBeforeKeeyboard = tableView.contentOffset
-
-        let cellPosition = cell.convert(cell.bounds.origin, to: safeArea)
-        let bottomSpace = tableView.height - cellPosition.y - cell.height - 15.0
-
-        tableView.contentOffset = CGPoint(x: 0, y: tableView.contentOffset.y + keyboardFrame.size.height - bottomSpace)
+        scrollToShowField(keyboardHeight: keyboardFrame.height)
     }
 
     @objc
-    private func keyboardWillHide(notification:NSNotification) {
-        guard let contentOffset = contentOffsetBeforeKeeyboard else {
+    private func keyboardWillHide(notification: NSNotification) {
+        guard let tableView = tableView else {
             return
         }
 
-        tableView?.contentOffset = contentOffset
+        let offset = tableView.contentOffset.y > tableView.maxContentOffset.y ? tableView.maxContentOffset : tableView.contentOffset
+
+        tableView.setContentOffset(offset, animated: false)
+        tableView.isScrollEnabled = true
     }
 }
