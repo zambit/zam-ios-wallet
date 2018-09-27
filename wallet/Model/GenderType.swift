@@ -13,11 +13,11 @@ enum GenderType: String, Equatable {
 
     var formatted: String {
         switch self {
-        case male:
+        case .male:
             return "Male"
-        case female:
+        case .female:
             return "Female"
-        case undefined:
+        case .undefined:
             return "Undefined"
         }
     }
