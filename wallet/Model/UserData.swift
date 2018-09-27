@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct UserData {
+struct UserData: Equatable {
 
     let id: String
     let phone: String

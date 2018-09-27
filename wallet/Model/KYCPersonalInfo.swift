@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct KYCPersonalInfo {
+struct KYCPersonalInfo: Equatable {
 
     let status: KYCStatus
     let data: KYCPersonalInfoData?

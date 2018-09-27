@@ -23,7 +23,7 @@ struct CodableFailure: Codable {
         case errors
     }
 
-    struct Error: Codable {
+    struct Error: Codable, Equatable {
         let name: String?
         let input: String?
         let message: String

@@ -170,6 +170,10 @@
 		8C7C3391214A5ABC00EC6C96 /* Interactions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C3390214A5ABC00EC6C96 /* Interactions.swift */; };
 		8C7C3393214A83A500EC6C96 /* UILabel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C3392214A83A500EC6C96 /* UILabel+Extensions.swift */; };
 		8C7C3397214A972200EC6C96 /* SizePresetable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C3396214A972200EC6C96 /* SizePresetable.swift */; };
+		8C7DE663215CCEB900824A4B /* UserServiceNetworkLayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7DE662215CCEB900824A4B /* UserServiceNetworkLayerTests.swift */; };
+		8C7DE667215CFE8000824A4B /* RecoveryServiceNetworkLayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7DE666215CFE8000824A4B /* RecoveryServiceNetworkLayerTests.swift */; };
+		8C7DE669215CFEC500824A4B /* ServiceNetworkLayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7DE668215CFEC500824A4B /* ServiceNetworkLayerTests.swift */; };
+		8C7DE66B215D068B00824A4B /* SignUpServiceNetworkLayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7DE66A215D068B00824A4B /* SignUpServiceNetworkLayerTests.swift */; };
 		8CA2188F2121D97C0063C188 /* DecimalKeyboardComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CA2188E2121D97B0063C188 /* DecimalKeyboardComponent.xib */; };
 		8CA218922122E8D70063C188 /* SendMoneyComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CA218912122E8D70063C188 /* SendMoneyComponent.xib */; };
 		8CA218942122EAC90063C188 /* SendMoneyComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA218932122EAC90063C188 /* SendMoneyComponent.swift */; };
@@ -265,7 +269,6 @@
 		9307AC76215BDBEB0093DB68 /* Response+TestsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9307AC75215BDBEB0093DB68 /* Response+TestsExtensions.swift */; };
 		9307AC7A215BE0730093DB68 /* ProviderNetworkLayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9307AC79215BE0730093DB68 /* ProviderNetworkLayerTests.swift */; };
 		9307AC7E215BF6DB0093DB68 /* AuthServiceNetworkLayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9307AC7D215BF6DB0093DB68 /* AuthServiceNetworkLayerTests.swift */; };
-		9307AC80215BFCAF0093DB68 /* CodableFailure.Type+TestsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9307AC7F215BFCAF0093DB68 /* CodableFailure.Type+TestsExtensions.swift */; };
 		9319BA852129A07A00033A7E /* TransactionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9319BA842129A07A00033A7E /* TransactionData.swift */; };
 		9319BAA6212A0AC200033A7E /* CrossAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9319BAA5212A0AC200033A7E /* CrossAnimationView.swift */; };
 /* End PBXBuildFile section */
@@ -449,6 +452,10 @@
 		8C7C3390214A5ABC00EC6C96 /* Interactions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interactions.swift; sourceTree = "<group>"; };
 		8C7C3392214A83A500EC6C96 /* UILabel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extensions.swift"; sourceTree = "<group>"; };
 		8C7C3396214A972200EC6C96 /* SizePresetable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizePresetable.swift; sourceTree = "<group>"; };
+		8C7DE662215CCEB900824A4B /* UserServiceNetworkLayerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserServiceNetworkLayerTests.swift; sourceTree = "<group>"; };
+		8C7DE666215CFE8000824A4B /* RecoveryServiceNetworkLayerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecoveryServiceNetworkLayerTests.swift; sourceTree = "<group>"; };
+		8C7DE668215CFEC500824A4B /* ServiceNetworkLayerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceNetworkLayerTests.swift; sourceTree = "<group>"; };
+		8C7DE66A215D068B00824A4B /* SignUpServiceNetworkLayerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpServiceNetworkLayerTests.swift; sourceTree = "<group>"; };
 		8CA2188E2121D97B0063C188 /* DecimalKeyboardComponent.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DecimalKeyboardComponent.xib; sourceTree = "<group>"; };
 		8CA218912122E8D70063C188 /* SendMoneyComponent.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SendMoneyComponent.xib; sourceTree = "<group>"; };
 		8CA218932122EAC90063C188 /* SendMoneyComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMoneyComponent.swift; sourceTree = "<group>"; };
@@ -546,7 +553,6 @@
 		9307AC75215BDBEB0093DB68 /* Response+TestsExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Response+TestsExtensions.swift"; sourceTree = "<group>"; };
 		9307AC79215BE0730093DB68 /* ProviderNetworkLayerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderNetworkLayerTests.swift; sourceTree = "<group>"; };
 		9307AC7D215BF6DB0093DB68 /* AuthServiceNetworkLayerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthServiceNetworkLayerTests.swift; sourceTree = "<group>"; };
-		9307AC7F215BFCAF0093DB68 /* CodableFailure.Type+TestsExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CodableFailure.Type+TestsExtensions.swift"; sourceTree = "<group>"; };
 		9319BA842129A07A00033A7E /* TransactionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionData.swift; sourceTree = "<group>"; };
 		9319BAA5212A0AC200033A7E /* CrossAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrossAnimationView.swift; sourceTree = "<group>"; };
 		ACA56559587AEA1EE2113A79 /* Pods-wallet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wallet.release.xcconfig"; path = "Pods/Target Support Files/Pods-wallet/Pods-wallet.release.xcconfig"; sourceTree = "<group>"; };
@@ -894,31 +900,31 @@
 		8C4413D22119936100C9689C /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				8C04BC442121D48E00E90090 /* BalanceData.swift */,
 				8C4413D3211993B400C9689C /* CoinType.swift */,
-				8CA218FD21303BC30063C188 /* TransactionStatus.swift */,
-				8C231460215283DA007340E7 /* FormEditingStatus.swift */,
+				8CA218DA212D892A0063C188 /* ContactData.swift */,
+				8C72AD1B2155107A0032ABD2 /* DeviceModel.swift */,
 				8CA2190121304B730063C188 /* DirectionType.swift */,
-				8C2D27642159014F004CE1F8 /* ScreenType.swift */,
-				8C2D2766215913B1004CE1F8 /* PinForm.swift */,
+				8C231444214BFC0E007340E7 /* ExternalLinks.swift */,
+				8C2314672153E461007340E7 /* FormattedContactData.swift */,
+				8C231460215283DA007340E7 /* FormEditingStatus.swift */,
+				8C7C335721466E5800EC6C96 /* GenderType.swift */,
+				8CA219072133EE910063C188 /* GroupedTransactionsPageData.swift */,
 				8CA219052133ED4E0063C188 /* GroupingType.swift */,
 				8CA2190321305EC00063C188 /* GroupType.swift */,
-				8C7C335721466E5800EC6C96 /* GenderType.swift */,
-				8C52FFE02119BE0300EB55EA /* WalletData.swift */,
-				8C72AD1B2155107A0032ABD2 /* DeviceModel.swift */,
-				8CF41D8C2136A1AE006D4FE2 /* TransactionsFilterData.swift */,
-				8CA218CC2126F23B0063C188 /* UserData.swift */,
-				9319BA842129A07A00033A7E /* TransactionData.swift */,
-				8C7C338A21493A3600EC6C96 /* KYCStatus.swift */,
-				8C7C338C21493CD400EC6C96 /* KYCPersonalInfoData.swift */,
 				8C7C338E2149659100EC6C96 /* KYCPersonalInfo.swift */,
+				8C7C338C21493CD400EC6C96 /* KYCPersonalInfoData.swift */,
+				8C7C338A21493A3600EC6C96 /* KYCStatus.swift */,
+				8C2D2766215913B1004CE1F8 /* PinForm.swift */,
+				8C2D27642159014F004CE1F8 /* ScreenType.swift */,
+				8C52FFE22119C1CF00EB55EA /* TermData.swift */,
+				9319BA842129A07A00033A7E /* TransactionData.swift */,
+				8CF41D8C2136A1AE006D4FE2 /* TransactionsFilterData.swift */,
 				8CA219092133EEF40063C188 /* TransactionsGroupData.swift */,
 				8CA218F2213007650063C188 /* TransactionsPageData.swift */,
-				8CA219072133EE910063C188 /* GroupedTransactionsPageData.swift */,
-				8C04BC442121D48E00E90090 /* BalanceData.swift */,
-				8CA218DA212D892A0063C188 /* ContactData.swift */,
-				8C2314672153E461007340E7 /* FormattedContactData.swift */,
-				8C231444214BFC0E007340E7 /* ExternalLinks.swift */,
-				8C52FFE22119C1CF00EB55EA /* TermData.swift */,
+				8CA218FD21303BC30063C188 /* TransactionStatus.swift */,
+				8CA218CC2126F23B0063C188 /* UserData.swift */,
+				8C52FFE02119BE0300EB55EA /* WalletData.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1395,7 +1401,11 @@
 			children = (
 				9307AC65215BC1990093DB68 /* walletNetworkLayerTests.swift */,
 				9307AC79215BE0730093DB68 /* ProviderNetworkLayerTests.swift */,
+				8C7DE668215CFEC500824A4B /* ServiceNetworkLayerTests.swift */,
 				9307AC7D215BF6DB0093DB68 /* AuthServiceNetworkLayerTests.swift */,
+				8C7DE662215CCEB900824A4B /* UserServiceNetworkLayerTests.swift */,
+				8C7DE666215CFE8000824A4B /* RecoveryServiceNetworkLayerTests.swift */,
+				8C7DE66A215D068B00824A4B /* SignUpServiceNetworkLayerTests.swift */,
 				9307AC7C215BF36F0093DB68 /* Extensions */,
 				9307AC7B215BF3650093DB68 /* Mocks */,
 				9307AC67215BC1990093DB68 /* Info.plist */,
@@ -1417,7 +1427,6 @@
 			isa = PBXGroup;
 			children = (
 				9307AC75215BDBEB0093DB68 /* Response+TestsExtensions.swift */,
-				9307AC7F215BFCAF0093DB68 /* CodableFailure.Type+TestsExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1885,13 +1894,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C7DE669215CFEC500824A4B /* ServiceNetworkLayerTests.swift in Sources */,
 				9307AC72215BCDAA0093DB68 /* EnvironmentMock.swift in Sources */,
 				9307AC7A215BE0730093DB68 /* ProviderNetworkLayerTests.swift in Sources */,
 				9307AC70215BC7D90093DB68 /* DispatcherMock.swift in Sources */,
-				9307AC80215BFCAF0093DB68 /* CodableFailure.Type+TestsExtensions.swift in Sources */,
+				8C7DE66B215D068B00824A4B /* SignUpServiceNetworkLayerTests.swift in Sources */,
 				9307AC66215BC1990093DB68 /* walletNetworkLayerTests.swift in Sources */,
 				9307AC76215BDBEB0093DB68 /* Response+TestsExtensions.swift in Sources */,
+				8C7DE663215CCEB900824A4B /* UserServiceNetworkLayerTests.swift in Sources */,
 				9307AC7E215BF6DB0093DB68 /* AuthServiceNetworkLayerTests.swift in Sources */,
+				8C7DE667215CFE8000824A4B /* RecoveryServiceNetworkLayerTests.swift in Sources */,
 				9307AC74215BD7AB0093DB68 /* RequestMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
