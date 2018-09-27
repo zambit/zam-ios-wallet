@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class LargeSendButton: UIButton {
+class SendButton: UIButton {
 
     enum SendState {
         case initial
@@ -42,7 +42,7 @@ class LargeSendButton: UIButton {
     }
 }
 
-extension BehaviorExtension where Base: LargeSendButton {
+extension BehaviorExtension where Base: SendButton {
 
     func setLoading() {
         base.setTitle("", for: .normal)

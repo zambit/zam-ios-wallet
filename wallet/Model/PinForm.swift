@@ -59,4 +59,8 @@ class PinForm {
             deleteHandler()
         }
     }
+
+    func clear() {
+        progress = ""
+    }
 }

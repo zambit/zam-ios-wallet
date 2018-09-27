@@ -14,9 +14,9 @@ import PromiseKit
  */
 struct AuthAPI: NetworkService {
 
-    private let provider: AuthProvider
+    private let provider: Provider
 
-    init(provider: AuthProvider) {
+    init(provider: Provider) {
         self.provider = provider
     }
 
@@ -24,7 +24,7 @@ struct AuthAPI: NetworkService {
      Authorize user and get auth token, works only for full-verified user accounts
      */
     func signIn(phone: String, password: String) -> Promise<String> {
-        return provider.execute(.signIn(phone: phone, password: password))
+        return provider.execute(AuthRequest.signIn(phone: phone, password: password))
             .then {
                 (response: Response) -> Promise<String> in
 
@@ -64,7 +64,7 @@ struct AuthAPI: NetworkService {
      */
     @discardableResult
     func signOut(token: String) -> Promise<Void> {
-        return provider.execute(.signOut(token: token))
+        return provider.execute(AuthRequest.signOut(token: token))
             .then {
                 (response: Response) -> Promise<Void> in
 
@@ -104,7 +104,7 @@ struct AuthAPI: NetworkService {
      Checks if user authorized, returns his phone on success
      */
     func checkIfUserAuthorized(token: String) -> Promise<String> {
-        return provider.execute(.checkAuthorized(token: token))
+        return provider.execute(AuthRequest.checkAuthorized(token: token))
             .then {
                 (response: Response) -> Promise<String> in
 
@@ -144,7 +144,7 @@ struct AuthAPI: NetworkService {
      Confirm user phone
      */
     func confirmUserPhone(token: String, link: String) -> Promise<String> {
-        return provider.execute(.confirmUserPhone(token: token, confirmationId: link))
+        return provider.execute(AuthRequest.confirmUserPhone(token: token, confirmationId: link))
             .then {
                 (response: Response) -> Promise<String> in
 
@@ -184,7 +184,7 @@ struct AuthAPI: NetworkService {
      Create new user from pending transaction
      */
     func createNewUserFromPendingTransaction(token: String, link: String) -> Promise <String> {
-        return provider.execute(.createNewUserFromPendingTransaction(token: token, recvInvitationId: link))
+        return provider.execute(AuthRequest.createNewUserFromPendingTransaction(token: token, recvInvitationId: link))
             .then {
                 (response: Response) -> Promise<String> in
 
@@ -221,7 +221,7 @@ struct AuthAPI: NetworkService {
     }
 
     func refreshToken(token: String) -> Promise<String> {
-        return provider.execute(.refreshToken(token: token))
+        return provider.execute(AuthRequest.refreshToken(token: token))
             .then {
                 (response: Response) -> Promise<String> in
 

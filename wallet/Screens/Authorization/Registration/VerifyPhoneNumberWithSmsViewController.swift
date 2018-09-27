@@ -26,7 +26,7 @@ class VerifyPhoneNumberWithSmsViewController: СonsistentViewController, Verific
     @IBOutlet var largeTitleLabel: UILabel?
     @IBOutlet var verificationCodeFormComponent: VerificationCodeFormComponent?
     @IBOutlet var verificationCodeHelperText: UILabel?
-    @IBOutlet var sendVerificationCodeAgainButton: AdditionalTextButton?
+    @IBOutlet var sendVerificationCodeAgainButton: TimerButton?
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -47,8 +47,8 @@ class VerifyPhoneNumberWithSmsViewController: СonsistentViewController, Verific
         setupViewControllerStyle()
 
         let index = String.Index(encodedOffset: 19)
-        let timerParams = AdditionalTextButtonData.TimerParameters(seconds: 60, textInactiveSecondsIndex: index)
-        let data = AdditionalTextButtonData(textActive: "Send code again", textInactive: "Send code again in ", timerParams: timerParams)
+        let timerParams = TimerButtonData.TimerParameters(seconds: 60, textInactiveSecondsIndex: index)
+        let data = TimerButtonData(textActive: "Send code again", textInactive: "Send code again in ", timerParams: timerParams)
 
         sendVerificationCodeAgainButton?.custom.configure(data: data)
         sendVerificationCodeAgainButton?.addTarget(self, action: #selector(additionalButtonTouchUpInsideEvent(_:)), for: .touchUpInside)
@@ -102,22 +102,21 @@ class VerifyPhoneNumberWithSmsViewController: СonsistentViewController, Verific
                 if let serverError = error as? WalletResponseError {
                     switch serverError {
                     case .serverFailureResponse(errors: let fails):
-                        guard let fail = fails.first else {
-                            fatalError()
-                        }
+                        self?.verificationCodeHelperText?.text = fails.first?.message.capitalizingFirst ?? ""
 
-                        self?.verificationCodeHelperText?.text = fail.message.capitalizingFirst
                     case .undefinedServerFailureResponse:
-
                         self?.verificationCodeHelperText?.text = "Undefined error"
+                        
                     }
+                } else {
+                    self?.verificationCodeHelperText?.text = "Connection failed"
                 }
             }
         }
     }
 
     @objc
-    private func additionalButtonTouchUpInsideEvent(_ sender: AdditionalTextButton) {
+    private func additionalButtonTouchUpInsideEvent(_ sender: TimerButton) {
         guard let phone = self.phone else {
             return
         }
@@ -126,7 +125,8 @@ class VerifyPhoneNumberWithSmsViewController: СonsistentViewController, Verific
 
         verifyAPI?.sendVerificationCode(to: phone, referrerPhone: nil).done {
             //...
-        }.catch { error in
+        }.catch {
+            error in
             print(error)
         }
     }

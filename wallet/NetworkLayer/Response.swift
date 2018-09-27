@@ -12,6 +12,7 @@ import Foundation
  Enum provides universal object to handle server response and work with it.
  */
 enum Response {
+
     case data(Data)
     case error(Error)
 
@@ -55,7 +56,7 @@ enum Response {
         case .data(let data):
             let decoder = JSONDecoder()
 
-            print("Data content: \(String(data: data, encoding: String.Encoding.utf8))")
+            print("Data content: \(String(data: data, encoding: String.Encoding.utf8) ?? "")")
 
             do {
                 let fail = try decoder.decode(Failure.self, from: data)

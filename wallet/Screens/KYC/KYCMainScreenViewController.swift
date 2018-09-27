@@ -71,7 +71,6 @@ class KYCMainScreenViewController: FlowViewController, WalletNavigable {
             }
         }.catch {
             error in
-
             print(error)
         }
 

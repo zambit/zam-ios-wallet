@@ -22,7 +22,7 @@ class EnterLoginPasswordViewController: СonsistentViewController, LoginPassword
 
     @IBOutlet var largeTitleLabel: UILabel?
     @IBOutlet var loginPasswordForm: LoginPasswordFormComponent?
-    @IBOutlet var forgotPasswordButton: AdditionalTextButton?
+    @IBOutlet var forgotPasswordButton: TimerButton?
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -47,7 +47,7 @@ class EnterLoginPasswordViewController: СonsistentViewController, LoginPassword
         setupDefaultStyle()
         setupViewControllerStyle()
 
-        let data = AdditionalTextButtonData(textActive: "Forgot password?")
+        let data = TimerButtonData(textActive: "Forgot password?")
 
         forgotPasswordButton?.custom.configure(data: data)
         forgotPasswordButton?.addTarget(self, action: #selector(additionalButtonTouchUpInsideEvent(_:)), for: .touchUpInside)
@@ -97,6 +97,7 @@ class EnterLoginPasswordViewController: СonsistentViewController, LoginPassword
                 })
             }
 
+            self?.userManager?.clearToken()
             self?.userManager?.save(phone: phone, token: authToken)
         }.catch {
             [weak self]
@@ -109,21 +110,19 @@ class EnterLoginPasswordViewController: СonsistentViewController, LoginPassword
             if let serverError = error as? WalletResponseError {
                 switch serverError {
                 case .serverFailureResponse(errors: let fails):
-                    guard let fail = fails.first else {
-                        fatalError()
-                    }
+                    self?.loginPasswordForm?.helperText = fails.first?.message.capitalizingFirst ?? ""
 
-                    self?.loginPasswordForm?.helperText = fail.message.capitalizingFirst
                 case .undefinedServerFailureResponse:
-
                     self?.loginPasswordForm?.helperText = "Undefined error"
                 }
+            } else {
+                self?.loginPasswordForm?.helperText = "Connection failed"
             }
         }
     }
 
     @objc
-    private func additionalButtonTouchUpInsideEvent(_ sender: AdditionalTextButton) {
+    private func additionalButtonTouchUpInsideEvent(_ sender: TimerButton) {
         guard let phone = self.phone else {
             return
         }
@@ -164,7 +163,7 @@ class EnterLoginPasswordViewController: СonsistentViewController, LoginPassword
             if let _ = error as? WalletResponseError {
                 exit()
             } else {
-                self?.loginPasswordForm?.helperText = "Network problems"
+                self?.loginPasswordForm?.helperText = "Connection failed"
             }
         }
 

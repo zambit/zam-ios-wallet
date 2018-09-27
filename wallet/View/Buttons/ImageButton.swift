@@ -1,5 +1,5 @@
 //
-//  OutputButton.swift
+//  ImageButton.swift
 //  wallet
 //
 //  Created by Alexander Ponomarev on 30/08/2018.
@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class OutputButton: UIButton
+class ImageButton: UIButton
 {
 
     override func titleRect(forContentRect contentRect: CGRect) -> CGRect {

@@ -65,7 +65,7 @@ final class SecondEnterLoginFlow: ScreenFlow {
         vc.onExit = onExit
         vc.onContinue = onContinue
         vc.onRecovery = onRecovery
-        vc.authAPI = AuthAPI(provider: AuthProvider(environment: WalletEnvironment(), dispatcher: HTTPDispatcher()))
+        vc.authAPI = AuthAPI(provider: Provider(environment: WalletEnvironment(), dispatcher: HTTPDispatcher()))
         vc.userManager = UserDefaultsManager(keychainConfiguration: WalletKeychainConfiguration())
         vc.prepare(phone: phone)
         vc.title = phone
