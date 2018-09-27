@@ -11,7 +11,7 @@ import Foundation
 /**
  Struct represents user wallet.
  */
-struct WalletData {
+struct WalletData: Equatable {
 
     let id: String
     let name: String

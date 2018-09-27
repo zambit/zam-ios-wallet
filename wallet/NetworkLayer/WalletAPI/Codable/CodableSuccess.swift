@@ -264,7 +264,6 @@ struct CodableUser: Codable {
     }
 
     struct CodableWallets: Codable {
-
         let count: Int
         let totalBalance: CodableBalance
 

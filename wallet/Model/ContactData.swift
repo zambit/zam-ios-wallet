@@ -9,7 +9,7 @@
 import Foundation
 import ContactsUI
 
-struct ContactData {
+struct ContactData: Equatable {
 
     var name: String
     var avatarData: Data?

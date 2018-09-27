@@ -8,13 +8,13 @@
 
 import Foundation
 
-enum TransactionParticipantType {
+enum TransactionParticipantType: Equatable {
     case sender
     case recipient
     case none
 }
 
-struct TransactionData {
+struct TransactionData: Equatable {
 
     let id: String
     let direction: DirectionType
