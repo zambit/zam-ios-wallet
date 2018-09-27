@@ -208,6 +208,7 @@ class SendMoneyViewController: AvoidingViewController, UICollectionViewDataSourc
             return
         }
 
+        self.currentIndex = indexPath.section
         let wallet = wallets[indexPath.section]
         self.sendMoneyComponent?.prepare(coinType: wallet.coin, walletId: wallet.id)
     }
