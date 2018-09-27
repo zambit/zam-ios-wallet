@@ -10,6 +10,10 @@ import UIKit
 
 class KeyboardNotifiableViewController: UIViewController {
 
+    var keyboardHeight: CGFloat? {
+        return _keyboardHeight
+    }
+
     var isKeyboardShown: Bool {
         return _isKeyboardShown
     }
@@ -37,6 +41,7 @@ class KeyboardNotifiableViewController: UIViewController {
 
     private var tapGestureRecognizer: UITapGestureRecognizer?
 
+    private var _keyboardHeight: CGFloat?
     private var _isKeyboardShown: Bool = false
     private var _dismissHandlerAction: () -> Void = {}
 
@@ -70,11 +75,17 @@ class KeyboardNotifiableViewController: UIViewController {
     @objc
     private func keyboardDidShow(_ sender: NSNotification) {
         _isKeyboardShown = true
+
+        if let keyboardValue = sender.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue {
+            let keyboardFrame = view.convert(keyboardValue.cgRectValue, from: nil)
+            _keyboardHeight = keyboardFrame.height
+        }
     }
 
     @objc
     private func keyboardDidHide(_ sender: NSNotification) {
         _isKeyboardShown = false
+        _keyboardHeight = nil
         _dismissHandlerAction()
 
         self._dismissHandlerAction = {}

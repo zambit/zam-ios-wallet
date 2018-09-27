@@ -175,6 +175,7 @@
 		8C7DE669215CFEC500824A4B /* ServiceNetworkLayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7DE668215CFEC500824A4B /* ServiceNetworkLayerTests.swift */; };
 		8C7DE66B215D068B00824A4B /* SignUpServiceNetworkLayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7DE66A215D068B00824A4B /* SignUpServiceNetworkLayerTests.swift */; };
 		8C7DE66C215D0E6800824A4B /* FloatTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C33502142C73900EC6C96 /* FloatTextField.swift */; };
+		8C7DE66E215D36F200824A4B /* UIScrollView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7DE66D215D36F200824A4B /* UIScrollView+Extensions.swift */; };
 		8CA2188F2121D97C0063C188 /* DecimalKeyboardComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CA2188E2121D97B0063C188 /* DecimalKeyboardComponent.xib */; };
 		8CA218922122E8D70063C188 /* SendMoneyComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CA218912122E8D70063C188 /* SendMoneyComponent.xib */; };
 		8CA218942122EAC90063C188 /* SendMoneyComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA218932122EAC90063C188 /* SendMoneyComponent.swift */; };
@@ -457,6 +458,7 @@
 		8C7DE666215CFE8000824A4B /* RecoveryServiceNetworkLayerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecoveryServiceNetworkLayerTests.swift; sourceTree = "<group>"; };
 		8C7DE668215CFEC500824A4B /* ServiceNetworkLayerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceNetworkLayerTests.swift; sourceTree = "<group>"; };
 		8C7DE66A215D068B00824A4B /* SignUpServiceNetworkLayerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpServiceNetworkLayerTests.swift; sourceTree = "<group>"; };
+		8C7DE66D215D36F200824A4B /* UIScrollView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Extensions.swift"; sourceTree = "<group>"; };
 		8CA2188E2121D97B0063C188 /* DecimalKeyboardComponent.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DecimalKeyboardComponent.xib; sourceTree = "<group>"; };
 		8CA218912122E8D70063C188 /* SendMoneyComponent.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SendMoneyComponent.xib; sourceTree = "<group>"; };
 		8CA218932122EAC90063C188 /* SendMoneyComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMoneyComponent.swift; sourceTree = "<group>"; };
@@ -1345,6 +1347,7 @@
 				8CA218EA212DC2DB0063C188 /* UIColor+Extensions.swift */,
 				8CF5F93921144BE80083B36A /* UIDevice+Extensions.swift */,
 				8C2D276221590124004CE1F8 /* UIScreen+Extensions.swift */,
+				8C7DE66D215D36F200824A4B /* UIScrollView+Extensions.swift */,
 				8C04BC29211C4F4000E90090 /* UIFont+Additions.swift */,
 				8C04BC422121C23200E90090 /* UIImage+Extensions.swift */,
 				8CA218A8212343760063C188 /* UIImageView+Extensions.swift */,
@@ -1869,6 +1872,7 @@
 				8CA2191621342D720063C188 /* HeaderFooterComponent.swift in Sources */,
 				8CF5F93F211456D50083B36A /* DecimalKeyboardComponent.swift in Sources */,
 				8CA218AF212479040063C188 /* SendMoneyButton.swift in Sources */,
+				8C7DE66E215D36F200824A4B /* UIScrollView+Extensions.swift in Sources */,
 				8C09193B210623F200703224 /* Environment.swift in Sources */,
 				8C2314552150FF6A007340E7 /* TestViewController.swift in Sources */,
 				8C6088482110A75100470411 /* TimerButton.swift in Sources */,
