@@ -15,7 +15,7 @@ class TextFieldCell: UITableViewCell, UITextFieldDelegate {
     private var onEditing: ((UITextField) -> Void)?
     private var onBegin: ((TextFieldCell) -> Void)?
 
-    private(set) var textField: UITextField!
+    private(set) var textField: FloatTextField!
 
     private var indexPath: IndexPath?
 
@@ -32,14 +32,13 @@ class TextFieldCell: UITableViewCell, UITextFieldDelegate {
     }
 
     private func setupSubviews() {
-        textField = UITextField()
+        textField = FloatTextField()
         textField.font = UIFont.walletFont(ofSize: 16.0, weight: .regular)
         textField.textColor = .darkIndigo
         textField.backgroundColor = .white
         textField.layer.cornerRadius = 8.0
         textField.layer.borderWidth = 2.0
         textField.layer.borderColor = UIColor.black.withAlphaComponent(0.1).cgColor
-        textField.leftPadding = 16.0
 
         contentView.addSubview(textField)
 
@@ -51,8 +50,10 @@ class TextFieldCell: UITableViewCell, UITextFieldDelegate {
     }
 
     func configure(with data: TextFieldCellData) {
-        textField.placeholder = data.placeholder
+        textField.custom.setup(placeholder: data.placeholder)
         textField.keyboardType = data.keyboardType ?? .default
+        textField.autocapitalizationType = data.autocapitalizationType ?? .none
+        textField.autocorrectionType = data.autocorrectionType ?? .default
 
         if let action = data.action {
             switch action {
@@ -72,7 +73,7 @@ class TextFieldCell: UITableViewCell, UITextFieldDelegate {
     }
 
     func set(text: String) {
-        self.textField.text = text
+        self.textField.custom.setup(text: text)
     }
 
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {

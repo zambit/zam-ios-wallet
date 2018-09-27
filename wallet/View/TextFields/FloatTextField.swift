@@ -12,43 +12,49 @@ import UIKit
 class FloatTextField: UITextField, UITextFieldDelegate {
 
     enum FloatingState {
-        case small
-        case normal
+        case editing
+        case placeholder
     }
 
-    var floatingState: FloatingState = .normal
+    fileprivate(set) var floatingState: FloatingState = .placeholder
+    fileprivate(set) var floatingPlaceholder: String?
 
-    var floatingPlaceholder: String? {
+    fileprivate var placeholderLabel: UILabel?
+    fileprivate var placeholderLabelTopConstraint: NSLayoutConstraint?
+
+    fileprivate var floatingPlaceholderLabel: UILabel?
+    fileprivate var floatingPlaceholderLabelTopConstraint: NSLayoutConstraint?
+
+    override var placeholder: String? {
         didSet {
-            if floatingState == .normal {
-                custom.setupSubviews()
-            }
+            self.placeholder = nil
         }
     }
 
-    var placeholderLabel: UILabel?
-    var placeholderLabelBottomConstraint: NSLayoutConstraint?
+    override var text: String? {
+        didSet {
+            custom.setup(text: text)
+        }
+    }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-
         super.delegate = self
     }
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-
         super.delegate = self
     }
 
-    var padding = UIEdgeInsets(top: 15, left: 0, bottom: 0, right: 0)
+    fileprivate var padding = UIEdgeInsets(top: 20, left: 16, bottom: 0, right: 0)
 
     override func textRect(forBounds bounds: CGRect) -> CGRect {
-        return UIEdgeInsetsInsetRect(bounds, padding)
+        return bounds.inset(by: padding)
     }
 
     override func editingRect(forBounds bounds: CGRect) -> CGRect {
-        return UIEdgeInsetsInsetRect(bounds, padding)
+        return bounds.inset(by: padding)
     }
 
     //MARK: UITextfieldDelegate
@@ -67,7 +73,7 @@ class FloatTextField: UITextField, UITextFieldDelegate {
     open func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         let shouldBeginEditing = _delegate?.textFieldShouldBeginEditing?(textField) ?? true
         if shouldBeginEditing {
-            custom.changeState(to: .small)
+            custom.changeState(to: .editing)
         }
         return shouldBeginEditing
     }
@@ -79,7 +85,7 @@ class FloatTextField: UITextField, UITextFieldDelegate {
     open func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         let shouldEndEditing = _delegate?.textFieldShouldEndEditing?(textField) ?? true
         if shouldEndEditing, (textField.text ?? "").isEmpty {
-            custom.changeState(to: .normal)
+            custom.changeState(to: .placeholder)
         }
         return shouldEndEditing
     }
@@ -101,55 +107,91 @@ extension BehaviorExtension where Base: FloatTextField {
 
     func setup(placeholder: String) {
         base.floatingPlaceholder = placeholder
-        base.placeholder = ""
+        setupSubviews()
     }
 
-    func setupSubviews() {
+    func setup(text: String?) {
+        if base.text != text {
+            base.text = text
+        }
+
+        if (text ?? "").isEmpty {
+            self.base.floatingPlaceholderLabel?.alpha = 0
+            self.base.floatingPlaceholderLabelTopConstraint?.constant = 28.0
+
+            self.base.placeholderLabel?.alpha = 1
+            self.base.placeholderLabelTopConstraint?.constant = 0
+        } else {
+            self.base.floatingPlaceholderLabel?.alpha = 1.0
+            self.base.floatingPlaceholderLabelTopConstraint?.constant = 10.0
+
+            self.base.placeholderLabel?.alpha = 0
+            self.base.placeholderLabelTopConstraint?.constant = -10
+        }
+    }
+
+    fileprivate func setupSubviews() {
         base.viewWithTag(16121)?.removeFromSuperview()
+        base.viewWithTag(13242)?.removeFromSuperview()
+
+        let floatingPlaceholderLabel = UILabel()
+        floatingPlaceholderLabel.font = UIFont.walletFont(ofSize: 12.0, weight: .regular)
+        floatingPlaceholderLabel.textColor = .blueGrey
+        floatingPlaceholderLabel.tag = 16121
+        floatingPlaceholderLabel.text = base.floatingPlaceholder
+        floatingPlaceholderLabel.alpha = 0.0
+
+        base.addSubview(floatingPlaceholderLabel)
+
+        floatingPlaceholderLabel.translatesAutoresizingMaskIntoConstraints = false
+
+        floatingPlaceholderLabel.leadingAnchor.constraint(equalTo: base.leadingAnchor, constant: 16.0).isActive = true
+        base.floatingPlaceholderLabelTopConstraint = floatingPlaceholderLabel.topAnchor.constraint(equalTo: base.topAnchor, constant: 28.0)
+        base.floatingPlaceholderLabelTopConstraint?.isActive = true
+
+        base.floatingPlaceholderLabel = floatingPlaceholderLabel
+
 
         let placeholderLabel = UILabel()
-        placeholderLabel.font = UIFont.walletFont(ofSize: 18.0, weight: .regular)
+        placeholderLabel.font = UIFont.walletFont(ofSize: 16.0, weight: .regular)
         placeholderLabel.textColor = .blueGrey
-        placeholderLabel.tag = 16121
+        placeholderLabel.tag = 13242
         placeholderLabel.text = base.floatingPlaceholder
 
         base.addSubview(placeholderLabel)
-        base.bringSubview(toFront: placeholderLabel)
+        base.bringSubviewToFront(placeholderLabel)
 
         placeholderLabel.translatesAutoresizingMaskIntoConstraints = false
 
-        placeholderLabel.leftAnchor.constraint(equalTo: base.leftAnchor, constant: 16.0).isActive = true
-        placeholderLabel.topAnchor.constraint(equalTo: base.topAnchor, constant: 4.0).isActive = true
-        base.placeholderLabelBottomConstraint = placeholderLabel.bottomAnchor.constraint(equalTo: base.bottomAnchor, constant: -4.0)
-        base.placeholderLabelBottomConstraint?.isActive = true
-        //placeholderLabel.centerYAnchor.constraint(equalTo: base.centerYAnchor).isActive = true
+        placeholderLabel.leadingAnchor.constraint(equalTo: base.leadingAnchor, constant: 16.0).isActive = true
+        placeholderLabel.trailingAnchor.constraint(equalTo: base.trailingAnchor, constant: -16.0).isActive = true
+        base.placeholderLabelTopConstraint = placeholderLabel.centerYAnchor.constraint(equalTo: base.centerYAnchor)
+        base.placeholderLabelTopConstraint?.isActive = true
 
         base.placeholderLabel = placeholderLabel
     }
 
-    func changeState(to state: Base.FloatingState) {
+    fileprivate func changeState(to state: Base.FloatingState) {
         base.floatingState = state
 
         UIView.animate(withDuration: 0.15) {
-            [weak self] in
-
-            guard let strongBase = self?.base else {
-                return
-            }
-
             switch state {
-            case .normal:
-                strongBase.placeholderLabel?.layer.anchorPoint = .zero
-                strongBase.placeholderLabel?.transform = .identity
-                strongBase.placeholderLabelBottomConstraint?.constant = -4.0
+            case .placeholder:
+                self.base.floatingPlaceholderLabel?.alpha = 0
+                self.base.floatingPlaceholderLabelTopConstraint?.constant = 28.0
 
-            case .small:
-                strongBase.placeholderLabel?.layer.anchorPoint = CGPoint.zero
-                strongBase.placeholderLabel?.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
-                strongBase.placeholderLabelBottomConstraint?.constant = -45.0
+                self.base.placeholderLabel?.alpha = 1
+                self.base.placeholderLabelTopConstraint?.constant = 0
+
+            case .editing:
+                self.base.floatingPlaceholderLabel?.alpha = 1.0
+                self.base.floatingPlaceholderLabelTopConstraint?.constant = 10.0
+
+                self.base.placeholderLabel?.alpha = 0
+                self.base.placeholderLabelTopConstraint?.constant = -10
             }
 
-            strongBase.layoutIfNeeded()
+            self.base.layoutIfNeeded()
         }
     }
 }

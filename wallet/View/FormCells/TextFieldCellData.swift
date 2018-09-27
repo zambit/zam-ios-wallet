@@ -17,6 +17,8 @@ struct TextFieldCellData {
 
     let placeholder: String
     let keyboardType: UIKeyboardType?
+    let autocapitalizationType: UITextAutocapitalizationType?
+    let autocorrectionType: UITextAutocorrectionType?
 
     let action: TextFieldCellDataAction?
     let beginEditingAction: ((TextFieldCell) -> Void)?

@@ -174,6 +174,7 @@
 		8C7DE667215CFE8000824A4B /* RecoveryServiceNetworkLayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7DE666215CFE8000824A4B /* RecoveryServiceNetworkLayerTests.swift */; };
 		8C7DE669215CFEC500824A4B /* ServiceNetworkLayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7DE668215CFEC500824A4B /* ServiceNetworkLayerTests.swift */; };
 		8C7DE66B215D068B00824A4B /* SignUpServiceNetworkLayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7DE66A215D068B00824A4B /* SignUpServiceNetworkLayerTests.swift */; };
+		8C7DE66C215D0E6800824A4B /* FloatTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C33502142C73900EC6C96 /* FloatTextField.swift */; };
 		8CA2188F2121D97C0063C188 /* DecimalKeyboardComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CA2188E2121D97B0063C188 /* DecimalKeyboardComponent.xib */; };
 		8CA218922122E8D70063C188 /* SendMoneyComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CA218912122E8D70063C188 /* SendMoneyComponent.xib */; };
 		8CA218942122EAC90063C188 /* SendMoneyComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA218932122EAC90063C188 /* SendMoneyComponent.swift */; };
@@ -1675,6 +1676,7 @@
 			files = (
 				8CA21937213591BB0063C188 /* TransactionsCoinFilterComponent.swift in Sources */,
 				8CA2191F213549DD0063C188 /* TransactionsHistoryFilterViewController.swift in Sources */,
+				8C7DE66C215D0E6800824A4B /* FloatTextField.swift in Sources */,
 				8C52FFEA2119DA2700EB55EA /* CellComponent.swift in Sources */,
 				8CF5F942211457200083B36A /* Component.swift in Sources */,
 				8CA218EB212DC2DB0063C188 /* UIColor+Extensions.swift in Sources */,

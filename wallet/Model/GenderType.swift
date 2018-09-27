@@ -10,4 +10,15 @@ enum GenderType: String, Equatable {
     case male
     case female
     case undefined
+
+    var formatted: String {
+        switch self {
+        case male:
+            return "Male"
+        case female:
+            return "Female"
+        case undefined:
+            return "Undefined"
+        }
+    }
 }

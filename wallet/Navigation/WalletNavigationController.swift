@@ -11,6 +11,10 @@ import Hero
 
 class WalletNavigationController: UINavigationController {
 
+    var custom: BehaviorExtension<WalletNavigationController> {
+        return BehaviorExtension<WalletNavigationController>(self)
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.custom.setupStyle()
