@@ -47,6 +47,8 @@ class FloatingViewController: FlowViewController, WalletNavigable {
         }
     }
 
+    private(set) var isAnimationInProgress: Bool = false
+
     /**
      Pan gesture recognizers that contols animation.
      */
@@ -78,6 +80,10 @@ class FloatingViewController: FlowViewController, WalletNavigable {
      */
     func stateDidChange(_ state: State) {
         // state did change
+
+        if isAnimationInProgress {
+            isAnimationInProgress = false
+        }
     }
 
     /**
@@ -151,6 +157,8 @@ class FloatingViewController: FlowViewController, WalletNavigable {
         switch recognizer.state {
         case .began:
 
+            isAnimationInProgress = true
+
             // start the animations
             let animators = createTransitionAnimatorsIfNeeded(to: currentState.opposite, duration: 1)
             animateTransitionsIfNeeded(animators)
@@ -191,11 +199,19 @@ class FloatingViewController: FlowViewController, WalletNavigable {
             // reverse the animations based on their current state and pan motion
             switch currentState {
             case .open:
-                if let animator = runningAnimators.first, animator.isReversed && !shouldClose { runningAnimators.forEach { $0.isReversed = !$0.isReversed } }
+                if let animator = runningAnimators.first, !animator.isReversed && !shouldClose { runningAnimators.forEach { $0.isReversed = !$0.isReversed } }
                 if let animator = runningAnimators.first, animator.isReversed && shouldClose { runningAnimators.forEach { $0.isReversed = !$0.isReversed } }
             case .closed:
-                if let animator = runningAnimators.first, animator.isReversed && shouldClose { runningAnimators.forEach { $0.isReversed = !$0.isReversed } }
-                if let animator = runningAnimators.first, animator.isReversed && !shouldClose { runningAnimators.forEach { $0.isReversed = !$0.isReversed } }
+                if let animator = runningAnimators.first, !animator.isReversed && shouldClose {
+                    runningAnimators.forEach {
+                        $0.isReversed = !$0.isReversed
+                    }
+                }
+                if let animator = runningAnimators.first, animator.isReversed && !shouldClose {
+                    runningAnimators.forEach {
+                        $0.isReversed = !$0.isReversed
+                    }
+                }
             }
 
             // continue all animations
