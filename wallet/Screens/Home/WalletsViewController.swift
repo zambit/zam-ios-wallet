@@ -9,15 +9,37 @@
 import Foundation
 import UIKit
 
+typealias WalletsCollectionViewController = (UIViewController & WalletsCollection)
+
+/**
+ Protocol that provides interface to control wallets collection from it's owner screen.
+ */
+protocol WalletsCollection {
+
+    var delegate: WalletsViewControllerDelegate? { get set }
+
+    var owner: ScreenWalletNavigable? { get set }
+
+    var isTopExpanded: Bool { get }
+
+    func setContentInsets(_ insets: UIEdgeInsets)
+
+    func scrollToTop()
+
+    func sendWithContact(_ contact: FormattedContactData)
+}
+
 protocol WalletsViewControllerDelegate: class {
 
     func walletsViewControllerCallsUpdateData(_ walletsViewController: WalletsViewController)
+
+    func walletsViewControllerScrollingEvent(_ walletsViewController: WalletsViewController, panGestureRecognizer: UIPanGestureRecognizer, offset: CGPoint)
 }
 
-class WalletsViewController: FlowCollectionViewController, UICollectionViewDelegateFlowLayout, SendMoneyViewControllerDelegate {
+class WalletsViewController: FlowCollectionViewController, UICollectionViewDelegateFlowLayout, SendMoneyViewControllerDelegate, WalletsCollection {
 
-    weak var owner: ScreenWalletNavigable?
-    weak var delegate: WalletsViewControllerDelegate?
+    private weak var _owner: ScreenWalletNavigable?
+    private weak var _delegate: WalletsViewControllerDelegate?
 
     var onSendFromWallet: ((_ index: Int, _ wallets: [WalletData], _ recipient: FormattedContactData?, _ phone: String, _ owner: ScreenWalletNavigable) -> Void)?
     var onDepositToWallet: ((_ index: Int, _ wallets: [WalletData], _ phone: String, _ owner: ScreenWalletNavigable) -> Void)?
@@ -50,24 +72,65 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
         refreshControl?.addTarget(self, action: #selector(refreshControlValueChangedEvent(_:)), for: .valueChanged)
         refreshControl?.layer.zPosition = -2
         collectionView?.insertSubview(refreshControl!, at: 0)
+
+        collectionView?.panGestureRecognizer.addTarget(self, action: #selector(collectionViewPanGestureEvent(recognizer:)))
     }
 
-    func scrollWalletsToTop() {
-        var newContentOffset: CGPoint = .zero
+    // MARK: - WalletsCollection
 
-        if let insets = collectionView?.contentInset {
-            newContentOffset = CGPoint(x: 0.0, y: -insets.top)
+    var delegate: WalletsViewControllerDelegate? {
+        get {
+            return _delegate
         }
 
-        collectionView?.setContentOffset(newContentOffset, animated: false)
+        set {
+            _delegate = newValue
+        }
     }
 
-    func onSendWithContact(_ contact: FormattedContactData) {
-        guard let phone = phone, let owner = owner else {
+    var owner: ScreenWalletNavigable? {
+        get {
+            return _owner
+        }
+
+        set {
+            _owner = newValue
+        }
+    }
+
+    var isTopExpanded: Bool {
+        return collectionView.contentOffset.y < -collectionView.contentInset.top
+    }
+
+    func setContentInsets(_ insets: UIEdgeInsets) {
+        collectionView.contentInset = insets
+    }
+
+    func scrollToTop() {
+        let newContentOffset = CGPoint(x: 0.0, y: -collectionView.contentInset.top)
+        collectionView.setContentOffset(newContentOffset, animated: false)
+    }
+
+    func sendWithContact(_ contact: FormattedContactData) {
+        guard let phone = phone, let owner = _owner else {
             return
         }
 
         onSendFromWallet?(0, wallets, contact, phone, owner)
+    }
+
+    // MARK: - UIPanGestureRecognizer
+
+    @objc
+    func collectionViewPanGestureEvent(recognizer: UIPanGestureRecognizer) {
+        guard let collectionView = collectionView else {
+            return
+        }
+
+        let translation = recognizer.translation(in: collectionView)
+        let clearOffset = CGPoint(x: translation.x, y: translation.y + collectionView.contentInset.top - collectionView.contentInset.bottom)
+
+        _delegate?.walletsViewControllerScrollingEvent(self, panGestureRecognizer: recognizer, offset: clearOffset)
     }
 
     // MARK: - UICollectionViewDataSource
@@ -96,7 +159,7 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
         cell.onSendButtonTap = {
             [weak self] in
 
-            guard let strongSelf = self, let owner = strongSelf.owner else {
+            guard let strongSelf = self, let owner = strongSelf._owner else {
                 return
             }
 
@@ -105,7 +168,7 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
         cell.onDepositButtonTap = {
             [weak self] in
 
-            guard let strongSelf = self, let owner = strongSelf.owner else {
+            guard let strongSelf = self, let owner = strongSelf._owner else {
                 return
             }
 
@@ -129,7 +192,7 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
 
     @objc
     private func refreshControlValueChangedEvent(_ sender: Any) {
-        delegate?.walletsViewControllerCallsUpdateData(self)
+        _delegate?.walletsViewControllerCallsUpdateData(self)
         loadData(sender)
     }
 
