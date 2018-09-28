@@ -335,6 +335,10 @@ class HomeViewController: FloatingViewController, WalletsViewControllerDelegate,
                 // translate wallets collections view gesture recognizer to floating handler
                 floatingPanGestureEvent(recognizer: panGestureRecognizer)
             case .ended:
+                // holds wallets collection view offset stable while floating view moves
+                let point = CGPoint(x: 0.0, y: -walletsViewController.collectionView.contentInset.top)
+                walletsViewController.collectionView.contentOffset = point
+
                 // translate wallets collections view gesture recognizer to floating handler
                 floatingPanGestureEvent(recognizer: panGestureRecognizer)
             default:
