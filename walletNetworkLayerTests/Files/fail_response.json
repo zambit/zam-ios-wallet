@@ -1,0 +1,10 @@
+{
+    "result": false,
+    "errors": [
+        {
+            "message": "failure message",
+            "name": "target",
+            "input": "body"
+        }
+    ]
+}
