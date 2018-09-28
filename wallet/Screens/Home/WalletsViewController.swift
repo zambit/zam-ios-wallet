@@ -11,11 +11,16 @@ import UIKit
 
 typealias WalletsCollectionViewController = (UIViewController & WalletsCollection)
 
+/**
+ Protocol that provides interface to control wallets collection from it's owner screen.
+ */
 protocol WalletsCollection {
 
     var delegate: WalletsViewControllerDelegate? { get set }
 
     var owner: ScreenWalletNavigable? { get set }
+
+    var isTopExpanded: Bool { get }
 
     func setContentInsets(_ insets: UIEdgeInsets)
 
@@ -71,7 +76,7 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
         collectionView?.panGestureRecognizer.addTarget(self, action: #selector(collectionViewPanGestureEvent(recognizer:)))
     }
 
-    // MARK: -
+    // MARK: - WalletsCollection
 
     var delegate: WalletsViewControllerDelegate? {
         get {
@@ -93,18 +98,17 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
         }
     }
 
+    var isTopExpanded: Bool {
+        return collectionView.contentOffset.y < -collectionView.contentInset.top
+    }
+
     func setContentInsets(_ insets: UIEdgeInsets) {
-        collectionView?.contentInset = insets
+        collectionView.contentInset = insets
     }
 
     func scrollToTop() {
-        var newContentOffset: CGPoint = .zero
-
-        if let insets = collectionView?.contentInset {
-            newContentOffset = CGPoint(x: 0.0, y: -insets.top)
-        }
-
-        collectionView?.setContentOffset(newContentOffset, animated: false)
+        let newContentOffset = CGPoint(x: 0.0, y: -collectionView.contentInset.top)
+        collectionView.setContentOffset(newContentOffset, animated: false)
     }
 
     func sendWithContact(_ contact: FormattedContactData) {

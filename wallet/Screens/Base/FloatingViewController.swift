@@ -76,7 +76,7 @@ class FloatingViewController: FlowViewController, WalletNavigable {
     }
 
     /**
-     State changing event handler. Provide access for observing currentState property.
+     State did changing event handler. Provide access for observing currentState property.
      */
     func stateDidChange(_ state: State) {
         // state did change
@@ -84,6 +84,13 @@ class FloatingViewController: FlowViewController, WalletNavigable {
         if isAnimationInProgress {
             isAnimationInProgress = false
         }
+    }
+
+    /**
+     State begin changing event handler. Provide access for observing currentState property.
+     */
+    func stateChangingBegin(_ state: State) {
+        isAnimationInProgress = true
     }
 
     /**
@@ -157,7 +164,7 @@ class FloatingViewController: FlowViewController, WalletNavigable {
         switch recognizer.state {
         case .began:
 
-            isAnimationInProgress = true
+            stateChangingBegin(currentState.opposite)
 
             // start the animations
             let animators = createTransitionAnimatorsIfNeeded(to: currentState.opposite, duration: 1)

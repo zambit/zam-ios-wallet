@@ -243,10 +243,11 @@ class HomeViewController: FloatingViewController, WalletsViewControllerDelegate,
 
         sumLabel?.attributedText = attributedString
         sumLabel?.attributedText = attributedString
-        sumLabel?.sizeToFit()
 
-        if currentState == .open {
-            let sumLabelWidth: CGFloat = sumLabel?.bounds.width ?? 0
+        if currentState == .open, !isAnimationInProgress {
+            sumLabel?.sizeToFit()
+
+            let sumLabelWidth = sumLabel?.bounds.width ?? 0.0
             sumLeftConstraint?.constant = self.view.bounds.width / 2.0 - sumLabelWidth / 2.0
         }
     }
@@ -365,6 +366,14 @@ class HomeViewController: FloatingViewController, WalletsViewControllerDelegate,
     }
 
     // MARK: - FloatingViewController
+
+    override func stateChangingBegin(_ state: FloatingViewController.State) {
+        super.stateChangingBegin(state)
+
+        if let embeded = embededViewController, embeded.isTopExpanded {
+            embededViewController?.scrollToTop()
+        }
+    }
 
     override func stateDidChange(_ state: FloatingViewController.State) {
         super.stateDidChange(state)
