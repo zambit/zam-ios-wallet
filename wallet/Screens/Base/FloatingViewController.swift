@@ -35,7 +35,6 @@ class FloatingViewController: FlowViewController, WalletNavigable {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         floatingViewInitialOffset = floatingViewBottomConstraint?.constant ?? 0
     }
 
@@ -51,9 +50,9 @@ class FloatingViewController: FlowViewController, WalletNavigable {
     /**
      Pan gesture recognizers that contols animation.
      */
-    var panRecognizer: InstantPanGestureRecognizer {
+    var floatingPanGestureRecognizer: InstantPanGestureRecognizer {
         let recognizer = InstantPanGestureRecognizer()
-        recognizer.addTarget(self, action: #selector(panGestureEvent(recognizer:)))
+        recognizer.addTarget(self, action: #selector(floatingPanGestureEvent(recognizer:)))
         return recognizer
     }
 
@@ -67,7 +66,9 @@ class FloatingViewController: FlowViewController, WalletNavigable {
      */
     private var animationProgress: [CGFloat] = []
 
-    func animate(to state: State) {
+    /**
+     */
+    func set(state: State) {
         let animators = createTransitionAnimatorsIfNeeded(to: state, duration: 1)
         animateTransitionsIfNeeded(animators)
     }
@@ -143,10 +144,10 @@ class FloatingViewController: FlowViewController, WalletNavigable {
     }
 
     /**
-     Private pan gesture event handler that controls transition.
+     Pan gesture recognizer event handler that controls transition state.
      */
     @objc
-    private func panGestureEvent(recognizer: UIPanGestureRecognizer) {
+    func floatingPanGestureEvent(recognizer: UIPanGestureRecognizer) {
         switch recognizer.state {
         case .began:
 
@@ -168,7 +169,7 @@ class FloatingViewController: FlowViewController, WalletNavigable {
 
             // adjust the fraction for the current state and reversed state
             if currentState == .open { fraction *= -1 }
-            if runningAnimators[0].isReversed { fraction *= -1 }
+            if let animator = runningAnimators.first, animator.isReversed { fraction *= -1 }
 
             // apply the new fraction
             for (index, animator) in runningAnimators.enumerated() {
@@ -190,11 +191,11 @@ class FloatingViewController: FlowViewController, WalletNavigable {
             // reverse the animations based on their current state and pan motion
             switch currentState {
             case .open:
-                if !shouldClose && !runningAnimators[0].isReversed { runningAnimators.forEach { $0.isReversed = !$0.isReversed } }
-                if shouldClose && runningAnimators[0].isReversed { runningAnimators.forEach { $0.isReversed = !$0.isReversed } }
+                if let animator = runningAnimators.first, animator.isReversed && !shouldClose { runningAnimators.forEach { $0.isReversed = !$0.isReversed } }
+                if let animator = runningAnimators.first, animator.isReversed && shouldClose { runningAnimators.forEach { $0.isReversed = !$0.isReversed } }
             case .closed:
-                if shouldClose && !runningAnimators[0].isReversed { runningAnimators.forEach { $0.isReversed = !$0.isReversed } }
-                if !shouldClose && runningAnimators[0].isReversed { runningAnimators.forEach { $0.isReversed = !$0.isReversed } }
+                if let animator = runningAnimators.first, animator.isReversed && shouldClose { runningAnimators.forEach { $0.isReversed = !$0.isReversed } }
+                if let animator = runningAnimators.first, animator.isReversed && !shouldClose { runningAnimators.forEach { $0.isReversed = !$0.isReversed } }
             }
 
             // continue all animations
@@ -204,5 +205,4 @@ class FloatingViewController: FlowViewController, WalletNavigable {
             ()
         }
     }
-
 }

@@ -15,13 +15,14 @@ class HomeViewController: FloatingViewController, WalletsViewControllerDelegate,
     var userManager: UserDefaultsManager?
     var userAPI: UserAPI?
 
-    var embededViewController: WalletsViewController? {
+    var embededViewController: WalletsCollectionViewController? {
         didSet {
             guard let embeded = embededViewController else {
                 return
             }
 
             walletsContainerView?.set(viewController: embeded, owner: self)
+            embededViewController?.delegate = self
         }
     }
 
@@ -60,8 +61,9 @@ class HomeViewController: FloatingViewController, WalletsViewControllerDelegate,
     // MARK: - Data
 
     private var totalBalance: BalanceData?
-
     private var contactsData: [ContactData] = []
+
+    private var isContactsLoading: Bool = false
 
     // MARK: - View Controller Lifecycle
 
@@ -82,8 +84,6 @@ class HomeViewController: FloatingViewController, WalletsViewControllerDelegate,
             contactsComponent?.contactsCollectionView?.endLoading()
         }
     }
-
-    private var isContactsLoading: Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -107,7 +107,7 @@ class HomeViewController: FloatingViewController, WalletsViewControllerDelegate,
             self.floatingViewInitialOffset = 200
 
             if self.currentState == .closed {
-                self.animate(to: .closed)
+                self.set(state: .closed)
             }
         }
 
@@ -129,14 +129,14 @@ class HomeViewController: FloatingViewController, WalletsViewControllerDelegate,
         cardViewOffset = cardOffsetConstraint?.constant ?? 0
         sumLeftLabelOffset = sumLeftConstraint?.constant ?? 0
 
-        detailGestureView?.addGestureRecognizer(panRecognizer)
-        detailTopGestureView?.addGestureRecognizer(panRecognizer)
+        detailGestureView?.addGestureRecognizer(floatingPanGestureRecognizer)
+        detailTopGestureView?.addGestureRecognizer(floatingPanGestureRecognizer)
 
         walletsContainerView?.isUserInteractionEnabled = true
 
         if let embeded = embededViewController {
             walletsContainerView?.set(viewController: embeded, owner: self)
-            embeded.delegate = self
+            embededViewController?.delegate = self
         }
 
         view.clipsToBounds = true
@@ -150,6 +150,8 @@ class HomeViewController: FloatingViewController, WalletsViewControllerDelegate,
             drawIndicator(in: detailTopView, center: point)
         }
     }
+
+    // MARK: - ViewController's Style
 
     private func setupStyle() {
         floatingView?.layer.cornerRadius = 16.0
@@ -203,8 +205,53 @@ class HomeViewController: FloatingViewController, WalletsViewControllerDelegate,
 
         detailTopGestureView?.applyGradient(colors: [.white, UIColor.white.withAlphaComponent(0.7), UIColor.white.withAlphaComponent(0.0)], locations: [0.0, 0.75, 1.0])
 
-        embededViewController?.collectionView?.contentInset = UIEdgeInsets.init(top: 64, left: 0, bottom: 64, right: 0)
+        let insets = UIEdgeInsets(top: 64, left: 0, bottom: 64, right: 0)
+        embededViewController?.setContentInsets(insets)
     }
+
+    private func setupTotalBalanceLabel(text: String, primaryStyleRange: CountableRange<Int>, fractionStyleRange: CountableRange<Int>) {
+
+        var sumSymbolFont: UIFont = UIFont()
+        var sumMainFont: UIFont = UIFont()
+
+        switch UIScreen.main.type {
+        case .extraSmall, .small:
+            sumSymbolFont = UIFont.walletFont(ofSize: 28.0, weight: .regular)
+            sumMainFont = UIFont.walletFont(ofSize: 28.0, weight: .medium)
+        case .medium, .extra, .extraLarge, .plus:
+            sumSymbolFont = UIFont.walletFont(ofSize: 36.0, weight: .regular)
+            sumMainFont = UIFont.walletFont(ofSize: 36.0, weight: .medium)
+        case .unknown:
+            fatalError()
+        }
+
+        let attributedString = NSMutableAttributedString(string: text, attributes: [
+            .font: sumSymbolFont,
+            .foregroundColor: UIColor.skyBlue
+            ])
+
+        attributedString.addAttributes([
+            .font: sumMainFont,
+            .foregroundColor: UIColor.white,
+            .kern: -1.5
+            ], range: NSRange(location: primaryStyleRange.lowerBound, length: primaryStyleRange.count))
+
+        attributedString.addAttributes([
+            .font: UIFont.walletFont(ofSize: 18.0, weight: .regular),
+            .foregroundColor: UIColor.skyBlue
+            ], range: NSRange(location: fractionStyleRange.lowerBound, length: fractionStyleRange.count))
+
+        sumLabel?.attributedText = attributedString
+        sumLabel?.attributedText = attributedString
+        sumLabel?.sizeToFit()
+
+        if currentState == .open {
+            let sumLabelWidth: CGFloat = sumLabel?.bounds.width ?? 0
+            sumLeftConstraint?.constant = self.view.bounds.width / 2.0 - sumLabelWidth / 2.0
+        }
+    }
+
+    // MARK: - Load data
 
     private func loadData() {
         guard let token = userManager?.getToken() else {
@@ -265,52 +312,38 @@ class HomeViewController: FloatingViewController, WalletsViewControllerDelegate,
         sumBtcLabel?.text = "\(totalBalance.formatted(currency: .original)) \(totalBalance.coin.short.uppercased())"
     }
 
-    private func setupTotalBalanceLabel(text: String, primaryStyleRange: CountableRange<Int>, fractionStyleRange: CountableRange<Int>) {
-
-        var sumSymbolFont: UIFont = UIFont()
-        var sumMainFont: UIFont = UIFont()
-
-        switch UIScreen.main.type {
-        case .extraSmall, .small:
-            sumSymbolFont = UIFont.walletFont(ofSize: 28.0, weight: .regular)
-            sumMainFont = UIFont.walletFont(ofSize: 28.0, weight: .medium)
-        case .medium, .extra, .extraLarge, .plus:
-            sumSymbolFont = UIFont.walletFont(ofSize: 36.0, weight: .regular)
-            sumMainFont = UIFont.walletFont(ofSize: 36.0, weight: .medium)
-        case .unknown:
-            fatalError()
-        }
-
-        let attributedString = NSMutableAttributedString(string: text, attributes: [
-            .font: sumSymbolFont,
-            .foregroundColor: UIColor.skyBlue
-            ])
-
-        attributedString.addAttributes([
-            .font: sumMainFont,
-            .foregroundColor: UIColor.white,
-            .kern: -1.5
-            ], range: NSRange(location: primaryStyleRange.lowerBound, length: primaryStyleRange.count))
-
-        attributedString.addAttributes([
-            .font: UIFont.walletFont(ofSize: 18.0, weight: .regular),
-            .foregroundColor: UIColor.skyBlue
-            ], range: NSRange(location: fractionStyleRange.lowerBound, length: fractionStyleRange.count))
-
-        sumLabel?.attributedText = attributedString
-        sumLabel?.attributedText = attributedString
-        sumLabel?.sizeToFit()
-
-        if currentState == .open {
-            let sumLabelWidth: CGFloat = sumLabel?.bounds.width ?? 0
-            sumLeftConstraint?.constant = self.view.bounds.width / 2.0 - sumLabelWidth / 2.0
-        }
-    }
 
     // MARK: - WalletsViewControllerDelegate
 
     func walletsViewControllerCallsUpdateData(_ walletsViewController: WalletsViewController) {
         loadData()
+    }
+
+    func walletsViewControllerScrollingEvent(_ walletsViewController: WalletsViewController, panGestureRecognizer: UIPanGestureRecognizer, offset: CGPoint) {
+        switch currentState {
+        case .closed:
+            switch panGestureRecognizer.state {
+            case .began:
+                // translate wallets collections view gesture recognizer to floating handler
+                floatingPanGestureEvent(recognizer: panGestureRecognizer)
+            case .changed:
+                if offset.y < 0.0 {
+                    // holds wallets collection view offset stable while floating view moves
+                    let point = CGPoint(x: 0.0, y: -walletsViewController.collectionView.contentInset.top)
+                    walletsViewController.collectionView.contentOffset = point
+
+                    // translate wallets collections view gesture recognizer to floating handler
+                    floatingPanGestureEvent(recognizer: panGestureRecognizer)
+                }
+            case .ended:
+                // translate wallets collections view gesture recognizer to floating handler
+                floatingPanGestureEvent(recognizer: panGestureRecognizer)
+            default:
+                ()
+            }
+        default:
+            ()
+        }
     }
 
     // MARK: - ContactsHorizontalComponentDelegate
@@ -327,13 +360,13 @@ class HomeViewController: FloatingViewController, WalletsViewControllerDelegate,
                 contactsHorizontalComponent.isUserInteractionEnabled = true
 
                 if let formatted = formatted {
-                    self?.embededViewController?.onSendWithContact(formatted)
+                    self?.embededViewController?.sendWithContact(formatted)
                 }
             }
         }
     }
 
-    // MARK: - Animation
+    // MARK: - FloatingViewController
 
     override func stateDidChange(_ state: FloatingViewController.State) {
         super.stateDidChange(state)
@@ -367,7 +400,7 @@ class HomeViewController: FloatingViewController, WalletsViewControllerDelegate,
             self.sumTitleLabel?.alpha = 1.0
             self.sumTitleLeftConstraint?.constant = 16.0
 
-            self.embededViewController?.scrollWalletsToTop()
+            self.embededViewController?.scrollToTop()
 
             self.contactsComponent?.resetLayouts()
 
@@ -415,7 +448,7 @@ class HomeViewController: FloatingViewController, WalletsViewControllerDelegate,
                 self.sumTitleLabel?.alpha = 1.0
                 self.sumTitleLeftConstraint?.constant = 16.0
 
-                self.embededViewController?.scrollWalletsToTop()
+                self.embededViewController?.scrollToTop()
 
                 self.contactsComponent?.scrollContactsBack()
                 self.contactsComponent?.resetLayouts()
