@@ -77,16 +77,24 @@ class UserServiceNetworkLayerTests: ServiceNetworkLayerTests {
             let token = "token"
 
             //when
+            let expectation = XCTestExpectation(description: "Test successful responsing for getting user info")
+
             userAPI.getUserInfo(token: token, coin: nil).done {
                 response in
 
                 // then
                 XCTAssertEqual(response, comparingObject)
+
+                expectation.fulfill()
             }.catch {
                 _ in
                 // then
                 XCTFail("Response should be succeed, not failure")
+
+                expectation.fulfill()
             }
+
+            wait(for: [expectation], timeout: 2.0)
         } catch let error {
             XCTFail("Wrong json stub format: \(error)")
         }
@@ -109,11 +117,15 @@ class UserServiceNetworkLayerTests: ServiceNetworkLayerTests {
             let token = "token"
 
             //when
+            let expectation = XCTestExpectation(description: "Test failure responsing for getting user info")
+
             userAPI.getUserInfo(token: token, coin: nil).done {
-                response in
+                _ in
 
                 // then
                 XCTFail("Response should be a failure, not success")
+
+                expectation.fulfill()
             }.catch {
                 e in
 
@@ -123,7 +135,11 @@ class UserServiceNetworkLayerTests: ServiceNetworkLayerTests {
                 }
 
                 XCTAssertEqual(response, stub.failureObject)
+
+                expectation.fulfill()
             }
+
+            wait(for: [expectation], timeout: 2.0)
         } catch let error {
             XCTFail("Wrong json stub format: \(error)")
         }
@@ -148,15 +164,23 @@ class UserServiceNetworkLayerTests: ServiceNetworkLayerTests {
             let token = "token"
 
             //when
+            let expectation = XCTestExpectation(description: "Test successful responsing for getting wallets")
+
             userAPI.getWallets(token: token).done {
                 response in
                 // then
                 XCTAssertEqual(response, comparingObject)
+
+                expectation.fulfill()
             }.catch {
                 _ in
                 // then
                 XCTFail("Response should be succeed, not failure")
+
+                expectation.fulfill()
             }
+
+            wait(for: [expectation], timeout: 2.0)
         } catch let error {
             XCTFail("Wrong json stub format: \(error)")
         }
@@ -179,10 +203,14 @@ class UserServiceNetworkLayerTests: ServiceNetworkLayerTests {
             let token = "token"
 
             //when
+            let expectation = XCTestExpectation(description: "Test failure responsing for getting wallets")
+
             userAPI.getWallets(token: token).done {
-                response in
+                _ in
                 // then
                 XCTFail("Response should be a failure, not success")
+
+                expectation.fulfill()
             }.catch {
                 e in
 
@@ -192,7 +220,11 @@ class UserServiceNetworkLayerTests: ServiceNetworkLayerTests {
                 }
 
                 XCTAssertEqual(response, stub.failureObject)
+
+                expectation.fulfill()
             }
+
+            wait(for: [expectation], timeout: 2.0)
         } catch let error {
             XCTFail("Wrong json stub format: \(error)")
         }
@@ -217,15 +249,24 @@ class UserServiceNetworkLayerTests: ServiceNetworkLayerTests {
             let token = "token"
             let walletId = "129"
 
+            // when
+            let expectation = XCTestExpectation(description: "Test successful responsing for getting wallet info")
+
             userAPI.getWalletInfo(token: token, walletId: walletId).done {
                 response in
                 // then
                 XCTAssertEqual(response, comparingObject)
+
+                expectation.fulfill()
             }.catch {
                 _ in
                 // then
                 XCTFail("Response should be succeed, not failure")
+
+                expectation.fulfill()
             }
+
+            wait(for: [expectation], timeout: 2.0)
         } catch let error {
             XCTFail("Wrong json stub format: \(error)")
         }
@@ -236,7 +277,7 @@ class UserServiceNetworkLayerTests: ServiceNetworkLayerTests {
      */
     func testGettingWalletInfoFailure() {
         // given
-        let stub = UserServiceNetworkLayerStubs.getWalletInfo
+        let stub = UserServiceNetworkLayerStubs.failure
 
         do {
             // Build provider with response test json file
@@ -249,10 +290,14 @@ class UserServiceNetworkLayerTests: ServiceNetworkLayerTests {
             let walletId = "129"
 
             //when
+            let expectation = XCTestExpectation(description: "Test failure responsing for getting wallet info")
+
             userAPI.getWalletInfo(token: token, walletId: walletId).done {
                 response in
                 // then
                 XCTFail("Response should be a failure, not success")
+
+                expectation.fulfill()
             }.catch {
                 e in
 
@@ -262,7 +307,11 @@ class UserServiceNetworkLayerTests: ServiceNetworkLayerTests {
                 }
 
                 XCTAssertEqual(response, stub.failureObject)
+
+                expectation.fulfill()
             }
+
+            wait(for: [expectation], timeout: 2.0)
         } catch let error {
             XCTFail("Wrong json stub format: \(error)")
         }
@@ -274,7 +323,7 @@ class UserServiceNetworkLayerTests: ServiceNetworkLayerTests {
     func testSendingTransactionSucceed() {
         // given
         let stub = UserServiceNetworkLayerStubs.sendTransaction
-        let preparedBalance = BalanceData(coin: .btc, usd: 0.001, original: 6.61251)
+        let preparedBalance = BalanceData(coin: .btc, usd: 6.61251, original: 0.001)
         let comparingObject = TransactionData(id: "409", direction: .outgoing, status: .pending, coin: .btc, participantType: .recipient, participant: "+79111511111", amount: preparedBalance)
 
         do {
@@ -289,15 +338,24 @@ class UserServiceNetworkLayerTests: ServiceNetworkLayerTests {
             let amount: Decimal = 0.001
             let recipient = "+79111511111"
 
+            // when
+            let expectation = XCTestExpectation(description: "Test successful responsing for sending transaction")
+
             userAPI.sendTransaction(token: token, walletId: walletId, recipient: recipient, amount: amount).done {
                 response in
                 // then
                 XCTAssertEqual(response, comparingObject)
+
+                expectation.fulfill()
             }.catch {
                 _ in
                 // then
                 XCTFail("Response should be succeed, not failure")
+
+                expectation.fulfill()
             }
+
+            wait(for: [expectation], timeout: 2.0)
         } catch let error {
             XCTFail("Wrong json stub format: \(error)")
         }
@@ -323,10 +381,14 @@ class UserServiceNetworkLayerTests: ServiceNetworkLayerTests {
             let recipient = "+79111511111"
 
             //when
+            let expectation = XCTestExpectation(description: "Test failure responsing for sending transaction")
+
             userAPI.sendTransaction(token: token, walletId: walletId, recipient: recipient, amount: amount).done {
                 response in
                 // then
                 XCTFail("Response should be a failure, not success")
+
+                expectation.fulfill()
             }.catch {
                 e in
 
@@ -336,7 +398,11 @@ class UserServiceNetworkLayerTests: ServiceNetworkLayerTests {
                 }
 
                 XCTAssertEqual(response, stub.failureObject)
+
+                expectation.fulfill()
             }
+
+            wait(for: [expectation], timeout: 2.0)
         } catch let error {
             XCTFail("Wrong json stub format: \(error)")
         }
@@ -364,15 +430,23 @@ class UserServiceNetworkLayerTests: ServiceNetworkLayerTests {
             let token = "token"
 
             //when
+            let expectation = XCTestExpectation(description: "Test successful responsing for getting transactions")
+
             userAPI.getTransactions(token: token).done {
                 response in
                 // then
                 XCTAssertEqual(response, comparingObject)
+
+                expectation.fulfill()
             }.catch {
                 _ in
                 // then
                 XCTFail("Response should be succeed, not failure")
+
+                expectation.fulfill()
             }
+
+            wait(for: [expectation], timeout: 2.0)
         } catch let error {
             XCTFail("Wrong json stub format: \(error)")
         }
@@ -395,10 +469,15 @@ class UserServiceNetworkLayerTests: ServiceNetworkLayerTests {
             let token = "token"
 
             //when
+            let expectation = XCTestExpectation(description: "Test failure responsing for getting transactions")
+
             userAPI.getTransactions(token: token).done {
-                response in
+                _ in
+
                 // then
                 XCTFail("Response should be a failure, not success")
+
+                expectation.fulfill()
             }.catch {
                 e in
 
@@ -408,7 +487,11 @@ class UserServiceNetworkLayerTests: ServiceNetworkLayerTests {
                 }
 
                 XCTAssertEqual(response, stub.failureObject)
+
+                expectation.fulfill()
             }
+
+            wait(for: [expectation], timeout: 2.0)
         } catch let error {
             XCTFail("Wrong json stub format: \(error)")
         }
@@ -433,15 +516,23 @@ class UserServiceNetworkLayerTests: ServiceNetworkLayerTests {
             let token = "token"
 
             //when
+            let expectation = XCTestExpectation(description: "Test successful responsing for getting kyc personal info")
+
             userAPI.getKYCPersonalInfo(token: token).done {
                 response in
                 // then
                 XCTAssertEqual(response, comparingObject)
+
+                expectation.fulfill()
             }.catch {
                 _ in
                 // then
                 XCTFail("Response should be succeed, not failure")
+
+                expectation.fulfill()
             }
+
+            wait(for: [expectation], timeout: 2.0)
         } catch let error {
             XCTFail("Wrong json stub format: \(error)")
         }
@@ -464,10 +555,15 @@ class UserServiceNetworkLayerTests: ServiceNetworkLayerTests {
             let token = "token"
 
             //when
+            let expectation = XCTestExpectation(description: "Test failure responsing for getting kyc personal info")
+
             userAPI.getKYCPersonalInfo(token: token).done {
-                response in
+                _ in
+
                 // then
                 XCTFail("Response should be a failure, not success")
+
+                expectation.fulfill()
             }.catch {
                 e in
 
@@ -476,8 +572,13 @@ class UserServiceNetworkLayerTests: ServiceNetworkLayerTests {
                     return
                 }
 
+                // then
                 XCTAssertEqual(response, stub.failureObject)
+
+                expectation.fulfill()
             }
+
+            wait(for: [expectation], timeout: 2.0)
         } catch let error {
             XCTFail("Wrong json stub format: \(error)")
         }
@@ -511,15 +612,23 @@ class UserServiceNetworkLayerTests: ServiceNetworkLayerTests {
             let postalCode = 123
 
             //when
+            let expectation = XCTestExpectation(description: "Test successful responsing for sending kyc personal info")
+
             userAPI.sendKYCPersonalInfo(token: token, email: email, firstName: firstName, lastName: lastName, birthDate: birthDate, gender: gender, country: country, city: city, region: region, street: street, house: house, postalCode: postalCode).done {
                 response in
                 // then
                 XCTAssertTrue(true)
+
+                expectation.fulfill()
             }.catch {
                 _ in
                 // then
                 XCTFail("Response should be succeed, not failure")
+
+                expectation.fulfill()
             }
+
+            wait(for: [expectation], timeout: 2.0)
         } catch let error {
             XCTFail("Wrong json stub format: \(error)")
         }
@@ -553,10 +662,15 @@ class UserServiceNetworkLayerTests: ServiceNetworkLayerTests {
             let postalCode = 123
 
             //when
+            let expectation = XCTestExpectation(description: "Test failure responsing for sending kyc personal info")
+
             userAPI.sendKYCPersonalInfo(token: token, email: email, firstName: firstName, lastName: lastName, birthDate: birthDate, gender: gender, country: country, city: city, region: region, street: street, house: house, postalCode: postalCode).done {
-                response in
+                _ in
+
                 // then
                 XCTFail("Response should be a failure, not success")
+
+                expectation.fulfill()
             }.catch {
                 e in
 
@@ -565,8 +679,13 @@ class UserServiceNetworkLayerTests: ServiceNetworkLayerTests {
                     return
                 }
 
+                // then
                 XCTAssertEqual(response, stub.failureObject)
+
+                expectation.fulfill()
             }
+
+            wait(for: [expectation], timeout: 2.0)
         } catch let error {
             XCTFail("Wrong json stub format: \(error)")
         }
