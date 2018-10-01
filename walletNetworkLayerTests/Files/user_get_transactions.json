@@ -1,0 +1,34 @@
+{
+    "result": true,
+    "data": {
+        "total_count": 55,
+        "count": 1,
+        "next": "382",
+        "transactions": [
+            {
+                "start_date": 1537995600,
+                "end_date": 1538082000,
+                "total_amount": {
+                    "btc": "-0.039",
+                    "usd": "-257.5587300000000"
+                },
+                "items": [
+                    {
+                        "id": "408",
+                        "wallet_id": "19",
+                        "direction": "outgoing",
+                        "status": "success",
+                        "coin": "btc",
+                        "recipient": "+79111511111",
+                        "type": "internal",
+                        "amount": {
+                            "btc": "0.039",
+                            "usd": "257.5587300000000"
+                        },
+                        "created_at": 1538059980
+                    }
+                ]
+            }
+        ]
+    }
+}

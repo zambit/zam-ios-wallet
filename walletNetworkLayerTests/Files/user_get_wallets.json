@@ -1,0 +1,19 @@
+{
+    "result": true,
+    "data": {
+        "count": 1,
+        "next": "",
+        "wallets": [
+            {
+                "id": "128",
+                "coin": "btc",
+                "wallet_name": "BTC wallet",
+                "address": "2N9tSiDXRZbP7xzfvC8fruveZXjrRqerXeD",
+                "balances": {
+                    "btc": "0.0",
+                    "usd": "0.0"
+                }
+            }
+        ]
+    }
+}

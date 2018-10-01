@@ -1,0 +1,17 @@
+{
+    "result": true,
+    "data": {
+        "id": "",
+        "phone": "+79111111111",
+        "status": "active",
+        "kyc": "",
+        "registered_at": 1538143682,
+        "wallets": {
+            "count": 3,
+            "total_balance": {
+                "btc": "0.0",
+                "usd": "0.0"
+            }
+        }
+    }
+}

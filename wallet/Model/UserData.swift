@@ -29,6 +29,14 @@ struct UserData: Equatable {
             throw UserDataError.balanceFormatError
         }
     }
+
+    init(id: String, phone: String, status: String, registeredAt: Decimal, balances: [BalanceData]) {
+        self.id = id
+        self.phone = phone
+        self.status = status
+        self.registeredAt = registeredAt
+        self.balances = balances
+    }
 }
 
 enum UserDataError: Error {

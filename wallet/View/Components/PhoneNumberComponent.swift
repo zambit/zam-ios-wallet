@@ -99,6 +99,7 @@ extension BehaviorExtension: SizePresetable where Base: PhoneNumberComponent {
         setupSubviews()
 
         base.codeTextField?.text = base.phoneNumberFormatter.defaultCode
+        base.phoneNumberFormatter.number = base.phoneNumberFormatter.defaultCode
         setupCountryImageAnimationWith(state: CountryImageAnimationTask.show(country: base.phoneNumberFormatter.defaultRegion)) {}
     }
 
@@ -228,6 +229,12 @@ extension BehaviorExtension: SizePresetable where Base: PhoneNumberComponent {
 
         let country = base.phoneNumberFormatter.region
         base.phoneNumberFormatter.number = code
+
+        // determine if entered code is cleared identify by formatter
+        if base.phoneNumberFormatter.code == nil || (base.phoneNumberFormatter.code?.count ?? 0) + 1 != code.count {
+            base.phoneNumberFormatter.number = ""
+        }
+
         let newCountry = base.phoneNumberFormatter.region
 
         let state = CountryImageAnimationTask.taskFrom(
@@ -239,12 +246,22 @@ extension BehaviorExtension: SizePresetable where Base: PhoneNumberComponent {
 
         // divide between parts
 
-        if newCountry != nil, newCountry != country {
+        if newCountry != country {
             let phone = base.phoneTextField?.text ?? ""
-            base.phoneNumberFormatter.number = code + phone
-            base.resultingString = base.phoneNumberFormatter.formatted
-            base.phoneTextField?.text = base.resultingString.deletingPrefix(code).deletingLeading(character: " ")
-            base.phoneTextField?.becomeFirstResponder()
+
+            if newCountry != nil {
+                // if code becomes be undefined after last entering update main part and change focus to it
+
+                base.phoneNumberFormatter.number = code + phone
+                base.resultingString = base.phoneNumberFormatter.formatted
+                base.phoneTextField?.text = base.resultingString.deletingPrefix(code).deletingLeading(character: " ")
+                base.phoneTextField?.becomeFirstResponder()
+            } else {
+                // if code becomes be undefined reset all formatting of main part
+
+                base.resultingString = code + PhoneNumberFormatter.trivialString(from: phone)
+                base.phoneTextField?.text = PhoneNumberFormatter.trivialString(from: phone)
+            }
         }
 
         checkConditions(with: base.phoneNumberFormatter)
@@ -258,20 +275,18 @@ extension BehaviorExtension: SizePresetable where Base: PhoneNumberComponent {
 
         let string = code + phone
 
-        let country = base.phoneNumberFormatter.region
-
         base.phoneNumberFormatter.number = string
-        base.resultingString = base.phoneNumberFormatter.formatted
-        base.phoneTextField?.text = base.resultingString.deletingPrefix(code).deletingLeading(character: " ")
 
-        let newCountry = base.phoneNumberFormatter.region
+        // determine if entered code is cleared identify by formatter
+        if base.phoneNumberFormatter.code == nil || (base.phoneNumberFormatter.code?.count ?? 0) + 1 != code.count {
+            base.phoneNumberFormatter.number = ""
 
-        let state = CountryImageAnimationTask.taskFrom(
-            oldCountryNameValue: country,
-            newCountryNameValue: newCountry
-        )
-
-        setupCountryImageAnimationWith(state: state) {}
+            base.resultingString = code + PhoneNumberFormatter.trivialString(from: phone)
+            base.phoneTextField?.text = PhoneNumberFormatter.trivialString(from: phone)
+        } else {
+            base.resultingString = base.phoneNumberFormatter.formatted
+            base.phoneTextField?.text = base.resultingString.deletingPrefix(code).deletingLeading(character: " ")
+        }
 
         checkConditions(with: base.phoneNumberFormatter)
     }

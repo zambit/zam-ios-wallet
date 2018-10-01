@@ -176,6 +176,8 @@
 		8C7DE66B215D068B00824A4B /* SignUpServiceNetworkLayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7DE66A215D068B00824A4B /* SignUpServiceNetworkLayerTests.swift */; };
 		8C7DE66C215D0E6800824A4B /* FloatTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C33502142C73900EC6C96 /* FloatTextField.swift */; };
 		8C7DE66E215D36F200824A4B /* UIScrollView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7DE66D215D36F200824A4B /* UIScrollView+Extensions.swift */; };
+		8C7DE671215E671600824A4B /* StubsLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7DE670215E671600824A4B /* StubsLoader.swift */; };
+		8C7DE673215E6BEB00824A4B /* Files in Resources */ = {isa = PBXBuildFile; fileRef = 8C7DE672215E6BEB00824A4B /* Files */; };
 		8CA2188F2121D97C0063C188 /* DecimalKeyboardComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CA2188E2121D97B0063C188 /* DecimalKeyboardComponent.xib */; };
 		8CA218922122E8D70063C188 /* SendMoneyComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CA218912122E8D70063C188 /* SendMoneyComponent.xib */; };
 		8CA218942122EAC90063C188 /* SendMoneyComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA218932122EAC90063C188 /* SendMoneyComponent.swift */; };
@@ -459,6 +461,8 @@
 		8C7DE668215CFEC500824A4B /* ServiceNetworkLayerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceNetworkLayerTests.swift; sourceTree = "<group>"; };
 		8C7DE66A215D068B00824A4B /* SignUpServiceNetworkLayerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpServiceNetworkLayerTests.swift; sourceTree = "<group>"; };
 		8C7DE66D215D36F200824A4B /* UIScrollView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Extensions.swift"; sourceTree = "<group>"; };
+		8C7DE670215E671600824A4B /* StubsLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubsLoader.swift; sourceTree = "<group>"; };
+		8C7DE672215E6BEB00824A4B /* Files */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Files; sourceTree = "<group>"; };
 		8CA2188E2121D97B0063C188 /* DecimalKeyboardComponent.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DecimalKeyboardComponent.xib; sourceTree = "<group>"; };
 		8CA218912122E8D70063C188 /* SendMoneyComponent.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SendMoneyComponent.xib; sourceTree = "<group>"; };
 		8CA218932122EAC90063C188 /* SendMoneyComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMoneyComponent.swift; sourceTree = "<group>"; };
@@ -1147,6 +1151,26 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		8C7DE66F215E66E800824A4B /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				8C7DE670215E671600824A4B /* StubsLoader.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		8C7DE674215E7CA400824A4B /* NetworkServicesTests */ = {
+			isa = PBXGroup;
+			children = (
+				8C7DE668215CFEC500824A4B /* ServiceNetworkLayerTests.swift */,
+				9307AC7D215BF6DB0093DB68 /* AuthServiceNetworkLayerTests.swift */,
+				8C7DE662215CCEB900824A4B /* UserServiceNetworkLayerTests.swift */,
+				8C7DE666215CFE8000824A4B /* RecoveryServiceNetworkLayerTests.swift */,
+				8C7DE66A215D068B00824A4B /* SignUpServiceNetworkLayerTests.swift */,
+			);
+			path = NetworkServicesTests;
+			sourceTree = "<group>";
+		};
 		8CA218902122E8880063C188 /* SendMoneyComponent */ = {
 			isa = PBXGroup;
 			children = (
@@ -1403,13 +1427,11 @@
 		9307AC64215BC1990093DB68 /* walletNetworkLayerTests */ = {
 			isa = PBXGroup;
 			children = (
+				8C7DE672215E6BEB00824A4B /* Files */,
 				9307AC65215BC1990093DB68 /* walletNetworkLayerTests.swift */,
 				9307AC79215BE0730093DB68 /* ProviderNetworkLayerTests.swift */,
-				8C7DE668215CFEC500824A4B /* ServiceNetworkLayerTests.swift */,
-				9307AC7D215BF6DB0093DB68 /* AuthServiceNetworkLayerTests.swift */,
-				8C7DE662215CCEB900824A4B /* UserServiceNetworkLayerTests.swift */,
-				8C7DE666215CFE8000824A4B /* RecoveryServiceNetworkLayerTests.swift */,
-				8C7DE66A215D068B00824A4B /* SignUpServiceNetworkLayerTests.swift */,
+				8C7DE674215E7CA400824A4B /* NetworkServicesTests */,
+				8C7DE66F215E66E800824A4B /* Helpers */,
 				9307AC7C215BF36F0093DB68 /* Extensions */,
 				9307AC7B215BF3650093DB68 /* Mocks */,
 				9307AC67215BC1990093DB68 /* Info.plist */,
@@ -1584,6 +1606,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C7DE673215E6BEB00824A4B /* Files in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1908,6 +1931,7 @@
 				9307AC66215BC1990093DB68 /* walletNetworkLayerTests.swift in Sources */,
 				9307AC76215BDBEB0093DB68 /* Response+TestsExtensions.swift in Sources */,
 				8C7DE663215CCEB900824A4B /* UserServiceNetworkLayerTests.swift in Sources */,
+				8C7DE671215E671600824A4B /* StubsLoader.swift in Sources */,
 				9307AC7E215BF6DB0093DB68 /* AuthServiceNetworkLayerTests.swift in Sources */,
 				8C7DE667215CFE8000824A4B /* RecoveryServiceNetworkLayerTests.swift in Sources */,
 				9307AC74215BD7AB0093DB68 /* RequestMock.swift in Sources */,
