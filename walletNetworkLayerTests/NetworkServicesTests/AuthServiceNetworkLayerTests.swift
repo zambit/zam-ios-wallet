@@ -68,16 +68,24 @@ class AuthServiceNetworkLayerTests: ServiceNetworkLayerTests {
             let password = "password"
 
             //when
+            let expectation = XCTestExpectation(description: "Test successful responsing for signing in")
+
             authAPI.signIn(phone: phone, password: password).done {
                 response in
 
                 // then
                 XCTAssertEqual(response, comparingObject)
+
+                expectation.fulfill()
             }.catch {
                 _ in
                 // then
                 XCTFail("Response should be succeed, not failure")
+
+                expectation.fulfill()
             }
+
+            wait(for: [expectation], timeout: 2.0)
         } catch let error {
             XCTFail("Wrong json stub format: \(error)")
         }
@@ -101,10 +109,14 @@ class AuthServiceNetworkLayerTests: ServiceNetworkLayerTests {
             let password = "password"
 
             //when
+            let expectation = XCTestExpectation(description: "Test failure responsing for signing in")
+
             authAPI.signIn(phone: phone, password: password).done {
                 _ in
                 // then
                 XCTFail("Response should be a failure, not success")
+
+                expectation.fulfill()
             }.catch {
                 e in
 
@@ -113,8 +125,13 @@ class AuthServiceNetworkLayerTests: ServiceNetworkLayerTests {
                     return
                 }
 
+                // then
                 XCTAssertEqual(response, stub.failureObject)
+
+                expectation.fulfill()
             }
+
+            wait(for: [expectation], timeout: 2.0)
         } catch let error {
             XCTFail("Wrong json stub format: \(error)")
         }
@@ -138,14 +155,22 @@ class AuthServiceNetworkLayerTests: ServiceNetworkLayerTests {
             let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1MzgyMzAxMDMsImlhdCI6MTUzODE0MzcwMywiaWQiOjEwNywicGVyc2lzdEtleSI6IjIyOWI4NTFjLTM2YTItNDlmOS05NjVlLWJlZmFhNTkzMzlmYSIsInBob25lIjoiKzc5MTExMTExMTExIn0.6qiuEpHnZukwKH9kBvKIqecOSJga67LT-lixZNfLrHg"
 
             //when
+            let expectation = XCTestExpectation(description: "Test successful responsing for signing out")
+
             authAPI.signOut(token: token).done {
                 // then
                 XCTAssertTrue(comparingObject)
+
+                expectation.fulfill()
             }.catch {
                 _ in
                 // then
                 XCTFail("Response should be succeed, not failure")
+
+                expectation.fulfill()
             }
+
+            wait(for: [expectation], timeout: 2.0)
         } catch let error {
             XCTFail("Wrong json stub format: \(error)")
         }
@@ -168,9 +193,13 @@ class AuthServiceNetworkLayerTests: ServiceNetworkLayerTests {
             let token = "token"
 
             //when
+            let expectation = XCTestExpectation(description: "Test failure responsing for signing out")
+
             authAPI.signOut(token: token).done {
                 // then
                 XCTFail("Response should be a failure, not success")
+
+                expectation.fulfill()
             }.catch {
                 e in
 
@@ -179,8 +208,13 @@ class AuthServiceNetworkLayerTests: ServiceNetworkLayerTests {
                     return
                 }
 
+                // then
                 XCTAssertEqual(response, stub.failureObject)
+
+                expectation.fulfill()
             }
+
+            wait(for: [expectation], timeout: 2.0)
         } catch let error {
             XCTFail("Wrong json stub format: \(error)")
         }
@@ -204,15 +238,23 @@ class AuthServiceNetworkLayerTests: ServiceNetworkLayerTests {
             let token = "token"
 
             //when
+            let expectation = XCTestExpectation(description: "Test successful responsing for checking authorized")
+
             authAPI.checkIfUserAuthorized(token: token).done {
                 response in
                 //then
                 XCTAssertEqual(response, comparingObject)
+
+                expectation.fulfill()
             }.catch {
                 _ in
                 //then
                 XCTFail("Response should be succeed, not failure")
+
+                expectation.fulfill()
             }
+
+            wait(for: [expectation], timeout: 2.0)
         } catch let error {
             XCTFail("Wrong json stub format: \(error)")
         }
@@ -235,10 +277,14 @@ class AuthServiceNetworkLayerTests: ServiceNetworkLayerTests {
             let token = "token"
 
             //when
+            let expectation = XCTestExpectation(description: "Test failure responsing for checking authorized")
+
             authAPI.checkIfUserAuthorized(token: token).done {
                 _ in
                 // then
                 XCTFail("Response should be a failure, not success")
+
+                expectation.fulfill()
             }.catch {
                 e in
 
@@ -247,84 +293,15 @@ class AuthServiceNetworkLayerTests: ServiceNetworkLayerTests {
                     return
                 }
 
+                // then
                 XCTAssertEqual(response, stub.failureObject)
+
+                expectation.fulfill()
             }
+
+            wait(for: [expectation], timeout: 2.0)
         } catch let error {
             XCTFail("Wrong json stub format: \(error)")
-        }
-    }
-
-    /**
-     Test succeed performance of `confirmUserPhone(token:link:)` method.
-     */
-    func testConfirmingUserPhoneSucceed() {
-        // given
-        // Construct response codable object
-        let newToken = "newToken"
-        let tokenCodable = CodableSuccessAuthTokenResponse.Token(token: newToken)
-        let responseCodable =  CodableSuccessAuthTokenResponse(result: true, data: tokenCodable)
-
-        // Build provider with mocking response data
-        let provider = buildProviderWith(response: responseCodable)
-
-        // Create auth service with mocked provider
-        let authAPI = AuthAPI(provider: provider)
-
-        let token = "token"
-
-        //when
-        authAPI.confirmUserPhone(token: token, link: "").done {
-            response in
-            //then
-            XCTAssertEqual(newToken, response)
-        }.catch {
-            _ in
-            //then
-            XCTFail("Response should be succeed, not failure")
-        }
-    }
-
-    /**
-     Test failed performance of `confirmUserPhone(token:link:)` method.
-     */
-    func testConfirmingUserPhoneFailure() {
-        // given
-        // Construct response codable object
-        let error = "Test message"
-        let codableError = CodableFailure.Error.init(name: nil, input: nil, message: error)
-        let responseCodable = CodableFailure(result: false, message: nil, errors: [codableError])
-
-        // Build provider with mocking response data
-        let provider = buildProviderWith(response: responseCodable)
-
-        // Create auth service with mocked provider
-        let authAPI = AuthAPI(provider: provider)
-
-        let token = "token"
-
-        //when
-        let expectedResponse: CodableFailure.Error? = codableError
-        authAPI.confirmUserPhone(token: token, link: "").done {
-            _ in
-            // then
-            XCTFail("Response should be a failure, not success")
-        }.catch {
-            e in
-
-            guard let response = e as? WalletResponseError else {
-                XCTFail("Wrong fail response type")
-                return
-            }
-
-            switch response {
-            case .serverFailureResponse(errors: let errors):
-                // then
-                let error = errors.first
-                XCTAssertEqual(expectedResponse, error)
-            case .undefinedServerFailureResponse:
-                // then
-                XCTFail("Wrong fail response type")
-            }
         }
     }
 
@@ -346,16 +323,24 @@ class AuthServiceNetworkLayerTests: ServiceNetworkLayerTests {
             let token = "token"
 
             //when
+            let expectation = XCTestExpectation(description: "Test successful responsing for refreshing token")
+
             authAPI.refreshToken(token: token).done {
                 response in
 
                 // then
                 XCTAssertEqual(response, comparingObject)
+
+                expectation.fulfill()
             }.catch {
                 _ in
                 // then
                 XCTFail("Response should be succeed, not failure")
+
+                expectation.fulfill()
             }
+
+            wait(for: [expectation], timeout: 2.0)
         } catch let error {
             XCTFail("Wrong json stub format: \(error)")
         }
@@ -378,10 +363,14 @@ class AuthServiceNetworkLayerTests: ServiceNetworkLayerTests {
             let token = "token"
 
             //when
+            let expectation = XCTestExpectation(description: "Test failure responsing for refreshing token")
+
             authAPI.refreshToken(token: token).done {
                 _ in
                 // then
                 XCTFail("Response should be a failure, not success")
+
+                expectation.fulfill()
             }.catch {
                 e in
 
@@ -390,8 +379,13 @@ class AuthServiceNetworkLayerTests: ServiceNetworkLayerTests {
                         return
                 }
 
+                // then
                 XCTAssertEqual(response, stub.failureObject)
+
+                expectation.fulfill()
             }
+
+            wait(for: [expectation], timeout: 2.0)
         } catch let error {
             XCTFail("Wrong json stub format: \(error)")
         }
