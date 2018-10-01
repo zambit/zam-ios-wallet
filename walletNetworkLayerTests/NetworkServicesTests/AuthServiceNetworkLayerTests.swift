@@ -31,16 +31,8 @@ enum AuthServiceNetworkLayerStubs {
         }
     }
 
-    var comparingObject: Any? {
+    var failureObject: WalletResponseError? {
         switch self {
-        case .signIn:
-            return "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1MzgyMzAxMDMsImlhdCI6MTUzODE0MzcwMywiaWQiOjEwNywicGVyc2lzdEtleSI6IjIyOWI4NTFjLTM2YTItNDlmOS05NjVlLWJlZmFhNTkzMzlmYSIsInBob25lIjoiKzc5MTExMTExMTExIn0.6qiuEpHnZukwKH9kBvKIqecOSJga67LT-lixZNfLrHg"
-        case .signOut:
-            return nil
-        case .checkIfUserAuthorized:
-            return "+79111111111"
-        case .refreshToken:
-            return "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1MzgyMzU2MDQsImlhdCI6MTUzODE0OTIwNCwiaWQiOjEwNywicGVyc2lzdEtleSI6IjY2YWRiOTFlLWM4NDMtNDI1Yi05ODRhLTg0NTM2MTIyOWEyNSIsInBob25lIjoiKzc5MTExMTExMTExIn0.hIA9iAUO9wx1WH35_qmy1VWHnjahKKos44SRnQH4EP0"
         case .failure:
             let error = "failure message"
             let name = "target"
@@ -49,6 +41,8 @@ enum AuthServiceNetworkLayerStubs {
             let codableError = CodableFailure.Error(name: name, input: input, message: error)
             let responseError = WalletResponseError.serverFailureResponse(errors: [codableError])
             return responseError
+        default:
+            return nil
         }
     }
 }
@@ -61,6 +55,7 @@ class AuthServiceNetworkLayerTests: ServiceNetworkLayerTests {
     func testSigningInSucceed() {
         // given
         let stub = AuthServiceNetworkLayerStubs.signIn
+        let comparingObject = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1MzgyMzAxMDMsImlhdCI6MTUzODE0MzcwMywiaWQiOjEwNywicGVyc2lzdEtleSI6IjIyOWI4NTFjLTM2YTItNDlmOS05NjVlLWJlZmFhNTkzMzlmYSIsInBob25lIjoiKzc5MTExMTExMTExIn0.6qiuEpHnZukwKH9kBvKIqecOSJga67LT-lixZNfLrHg"
 
         do {
             // Build provider with response test json file
@@ -77,7 +72,7 @@ class AuthServiceNetworkLayerTests: ServiceNetworkLayerTests {
                 response in
 
                 // then
-                XCTAssertEqual(response, stub.comparingObject as! String)
+                XCTAssertEqual(response, comparingObject)
             }.catch {
                 _ in
                 // then
@@ -113,14 +108,12 @@ class AuthServiceNetworkLayerTests: ServiceNetworkLayerTests {
             }.catch {
                 e in
 
-                guard
-                    let response = e as? WalletResponseError,
-                    let comparing = stub.comparingObject as? WalletResponseError else {
+                guard let response = e as? WalletResponseError else {
                     XCTFail("Wrong fail response type")
                     return
                 }
 
-                XCTAssertEqual(response, comparing)
+                XCTAssertEqual(response, stub.failureObject)
             }
         } catch let error {
             XCTFail("Wrong json stub format: \(error)")
@@ -133,6 +126,7 @@ class AuthServiceNetworkLayerTests: ServiceNetworkLayerTests {
     func testSigningOutSucceed() {
         // given
         let stub = AuthServiceNetworkLayerStubs.signOut
+        let comparingObject = true
 
         do {
             // Build provider with response test json file
@@ -146,7 +140,7 @@ class AuthServiceNetworkLayerTests: ServiceNetworkLayerTests {
             //when
             authAPI.signOut(token: token).done {
                 // then
-                XCTAssert(stub.comparingObject == nil)
+                XCTAssertTrue(comparingObject)
             }.catch {
                 _ in
                 // then
@@ -180,14 +174,12 @@ class AuthServiceNetworkLayerTests: ServiceNetworkLayerTests {
             }.catch {
                 e in
 
-                guard
-                    let response = e as? WalletResponseError,
-                    let comparing = stub.comparingObject as? WalletResponseError else {
-                        XCTFail("Wrong fail response type")
-                        return
+                guard let response = e as? WalletResponseError else {
+                    XCTFail("Wrong fail response type")
+                    return
                 }
 
-                XCTAssertEqual(response, comparing)
+                XCTAssertEqual(response, stub.failureObject)
             }
         } catch let error {
             XCTFail("Wrong json stub format: \(error)")
@@ -200,6 +192,7 @@ class AuthServiceNetworkLayerTests: ServiceNetworkLayerTests {
     func testCheckingIfUserAuthorizedSucceed() {
         // given
         let stub = AuthServiceNetworkLayerStubs.checkIfUserAuthorized
+        let comparingObject = "+79111111111"
 
         do {
             // Build provider with response test json file
@@ -214,7 +207,7 @@ class AuthServiceNetworkLayerTests: ServiceNetworkLayerTests {
             authAPI.checkIfUserAuthorized(token: token).done {
                 response in
                 //then
-                XCTAssertEqual(response, stub.comparingObject as! String)
+                XCTAssertEqual(response, comparingObject)
             }.catch {
                 _ in
                 //then
@@ -249,14 +242,12 @@ class AuthServiceNetworkLayerTests: ServiceNetworkLayerTests {
             }.catch {
                 e in
 
-                guard
-                    let response = e as? WalletResponseError,
-                    let comparing = stub.comparingObject as? WalletResponseError else {
-                        XCTFail("Wrong fail response type")
-                        return
+                guard let response = e as? WalletResponseError else {
+                    XCTFail("Wrong fail response type")
+                    return
                 }
 
-                XCTAssertEqual(response, comparing)
+                XCTAssertEqual(response, stub.failureObject)
             }
         } catch let error {
             XCTFail("Wrong json stub format: \(error)")
@@ -343,6 +334,7 @@ class AuthServiceNetworkLayerTests: ServiceNetworkLayerTests {
     func testRefreshingTokenSucceed() {
         // given
         let stub = AuthServiceNetworkLayerStubs.refreshToken
+        let comparingObject = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1MzgyMzU2MDQsImlhdCI6MTUzODE0OTIwNCwiaWQiOjEwNywicGVyc2lzdEtleSI6IjY2YWRiOTFlLWM4NDMtNDI1Yi05ODRhLTg0NTM2MTIyOWEyNSIsInBob25lIjoiKzc5MTExMTExMTExIn0.hIA9iAUO9wx1WH35_qmy1VWHnjahKKos44SRnQH4EP0"
 
         do {
             // Build provider with response test json file
@@ -358,7 +350,7 @@ class AuthServiceNetworkLayerTests: ServiceNetworkLayerTests {
                 response in
 
                 // then
-                XCTAssertEqual(response, stub.comparingObject as! String)
+                XCTAssertEqual(response, comparingObject)
             }.catch {
                 _ in
                 // then
@@ -393,14 +385,12 @@ class AuthServiceNetworkLayerTests: ServiceNetworkLayerTests {
             }.catch {
                 e in
 
-                guard
-                    let response = e as? WalletResponseError,
-                    let comparing = stub.comparingObject as? WalletResponseError else {
+                guard let response = e as? WalletResponseError else {
                         XCTFail("Wrong fail response type")
                         return
                 }
 
-                XCTAssertEqual(response, comparing)
+                XCTAssertEqual(response, stub.failureObject)
             }
         } catch let error {
             XCTFail("Wrong json stub format: \(error)")
