@@ -99,6 +99,7 @@ extension BehaviorExtension: SizePresetable where Base: PhoneNumberComponent {
         setupSubviews()
 
         base.codeTextField?.text = base.phoneNumberFormatter.defaultCode
+        base.phoneNumberFormatter.number = base.phoneNumberFormatter.defaultCode
         setupCountryImageAnimationWith(state: CountryImageAnimationTask.show(country: base.phoneNumberFormatter.defaultRegion)) {}
     }
 
