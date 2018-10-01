@@ -89,7 +89,7 @@ class RecoveryServiceNetworkLayerTests: ServiceNetworkLayerTests {
      */
     func testSendingVerificationCodeFailure() {
         // given
-        let stub = AuthServiceNetworkLayerStubs.failure
+        let stub = RecoveryServiceNetworkLayerStubs.failure
 
         do {
             // Build provider with response test json file
@@ -173,7 +173,7 @@ class RecoveryServiceNetworkLayerTests: ServiceNetworkLayerTests {
      */
     func testVerifyingPhoneNumberFailure() {
         // given
-        let stub = AuthServiceNetworkLayerStubs.failure
+        let stub = RecoveryServiceNetworkLayerStubs.failure
 
         do {
             // Build provider with response test json file
@@ -261,7 +261,7 @@ class RecoveryServiceNetworkLayerTests: ServiceNetworkLayerTests {
      */
     func testProvidingPasswordFailure() {
         // given
-        let stub = AuthServiceNetworkLayerStubs.failure
+        let stub = RecoveryServiceNetworkLayerStubs.failure
 
         do {
             // Build provider with response test json file

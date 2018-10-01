@@ -105,7 +105,7 @@ class UserServiceNetworkLayerTests: ServiceNetworkLayerTests {
      */
     func testGettingUserInfoFailure() {
         // given
-        let stub = AuthServiceNetworkLayerStubs.failure
+        let stub = UserServiceNetworkLayerStubs.failure
 
         do {
             // Build provider with response test json file
@@ -191,7 +191,7 @@ class UserServiceNetworkLayerTests: ServiceNetworkLayerTests {
      */
     func testGettingWalletsFailure() {
         // given
-        let stub = AuthServiceNetworkLayerStubs.failure
+        let stub = UserServiceNetworkLayerStubs.failure
 
         do {
             // Build provider with response test json file
