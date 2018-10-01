@@ -9,6 +9,41 @@
 import XCTest
 @testable import wallet
 
+enum RecoveryServiceNetworkLayerStubs {
+    case sendVerificationCode
+    case verifyPhoneNumber
+    case providePassword
+    case failure
+
+    var resourceName: String {
+        switch self {
+        case .sendVerificationCode:
+            return "recovery_send_verification"
+        case .verifyPhoneNumber:
+            return "recovery_verify_phone"
+        case .providePassword:
+            return "recovery_provide_password"
+        case .failure:
+            return "fail_response"
+        }
+    }
+
+    var failureObject: WalletResponseError? {
+        switch self {
+        case .failure:
+            let error = "failure message"
+            let name = "target"
+            let input = "body"
+
+            let codableError = CodableFailure.Error(name: name, input: input, message: error)
+            let responseError = WalletResponseError.serverFailureResponse(errors: [codableError])
+            return responseError
+        default:
+            return nil
+        }
+    }
+}
+
 class RecoveryServiceNetworkLayerTests: ServiceNetworkLayerTests {
 
     /**
@@ -16,25 +51,36 @@ class RecoveryServiceNetworkLayerTests: ServiceNetworkLayerTests {
      */
     func testSendingVerificationCodeSucceed() {
         // given
-        // Construct response codable object
-        let responseCodable = CodableSuccessEmptyResponse(result: true)
+        let stub = RecoveryServiceNetworkLayerStubs.sendVerificationCode
 
-        // Build provider with mocking response data
-        let provider = buildProviderWith(response: responseCodable)
+        do {
+            // Build provider with response test json file
+            let provider = try buildProviderWith(resourceName: stub.resourceName)
 
-        // Create auth service with mocked provider
-        let recoveryAPI = RecoveryAPI(provider: provider)
+            // Create auth service with mocked provider
+            let recoveryAPI = RecoveryAPI(provider: provider)
 
-        let phone = "+79999999999"
+            let phone = "+79111111111"
 
-        //when
-        recoveryAPI.sendVerificationCode(to: phone).done {
-            // then
-            XCTAssertTrue(true)
-        }.catch {
-            _ in
-            // then
-            XCTFail("Response should be succeed, not failure")
+            //when
+            let expectation = XCTestExpectation(description: "Test successful responsing for sending verification code")
+
+            recoveryAPI.sendVerificationCode(to: phone).done {
+                // then
+                XCTAssertTrue(true)
+
+                expectation.fulfill()
+            }.catch {
+                _ in
+                // then
+                XCTFail("Response should be succeed, not failure")
+
+                expectation.fulfill()
+            }
+
+            wait(for: [expectation], timeout: 2.0)
+        } catch let error {
+            XCTFail("Wrong json stub format: \(error)")
         }
     }
 
@@ -43,42 +89,41 @@ class RecoveryServiceNetworkLayerTests: ServiceNetworkLayerTests {
      */
     func testSendingVerificationCodeFailure() {
         // given
-        // Construct response codable object
-        let error = "Test message"
-        let codableError = CodableFailure.Error.init(name: nil, input: nil, message: error)
-        let responseCodable = CodableFailure(result: false, message: nil, errors: [codableError])
+        let stub = AuthServiceNetworkLayerStubs.failure
 
-        // Build provider with mocking response data
-        let provider = buildProviderWith(response: responseCodable)
+        do {
+            // Build provider with response test json file
+            let provider = try buildProviderWith(resourceName: stub.resourceName)
 
-        // Create auth service with mocked provider
-        let recoveryAPI = RecoveryAPI(provider: provider)
+            // Create auth service with mocked provider
+            let recoveryAPI = RecoveryAPI(provider: provider)
 
-        let phone = "+79999999999"
+            let phone = "+79111111111"
 
-        //when
-        let expectedResponse: CodableFailure.Error? = codableError
-        recoveryAPI.sendVerificationCode(to: phone).done {
-            _ in
-            // then
-            XCTFail("Response should be a failure, not success")
-        }.catch {
-            e in
+            //when
+            let expectation = XCTestExpectation(description: "Test fail responsing for sending verification code")
 
-            guard let response = e as? WalletResponseError else {
-                XCTFail("Wrong fail response type")
-                return
+            recoveryAPI.sendVerificationCode(to: phone).done {
+                // then
+                XCTFail("Response should be a failure, not success")
+
+                expectation.fulfill()
+            }.catch {
+                e in
+
+                guard let response = e as? WalletResponseError else {
+                    XCTFail("Wrong fail response type")
+                    return
+                }
+
+                XCTAssertEqual(response, stub.failureObject)
+
+                expectation.fulfill()
             }
 
-            switch response {
-            case .serverFailureResponse(errors: let errors):
-                // then
-                let error = errors.first
-                XCTAssertEqual(expectedResponse, error)
-            case .undefinedServerFailureResponse:
-                // then
-                XCTFail("Wrong fail response type")
-            }
+            wait(for: [expectation], timeout: 2.0)
+        } catch let error {
+            XCTFail("Wrong json stub format: \(error)")
         }
     }
 
@@ -87,29 +132,39 @@ class RecoveryServiceNetworkLayerTests: ServiceNetworkLayerTests {
      */
     func testVerifyingPhoneNumberSucceed() {
         // given
-        // Construct response codable object
-        let token = "token"
-        let recoveryTokenCodable = CodableSuccessRecoveryTokenResponse.RecoveryToken(token: token)
-        let responseCodable = CodableSuccessRecoveryTokenResponse(result: true, data: recoveryTokenCodable)
+        let stub = RecoveryServiceNetworkLayerStubs.verifyPhoneNumber
+        let comparingObject = "d97ece27be1c42b4984fd7de08bb8de0"
 
-        // Build provider with mocking response data
-        let provider = buildProviderWith(response: responseCodable)
+        do {
+            // Build provider with response test json file
+            let provider = try buildProviderWith(resourceName: stub.resourceName)
 
-        // Create auth service with mocked provider
-        let recoveryAPI = RecoveryAPI(provider: provider)
+            // Create auth service with mocked provider
+            let recoveryAPI = RecoveryAPI(provider: provider)
 
-        let phone = "+79999999999"
-        let code = "123456"
+            let phone = "+79111111111"
+            let code = "123456"
 
-        //when
-        recoveryAPI.verifyPhoneNumber(phone, withCode: code).done {
-            response in
-            // then
-            XCTAssertEqual(response, token)
-        }.catch {
-            _ in
-            // then
-            XCTFail("Response should be succeed, not failure")
+            //when
+            let expectation = XCTestExpectation(description: "Test successful responsing for verifying phone number")
+
+            recoveryAPI.verifyPhoneNumber(phone, withCode: code).done {
+                response in
+                // then
+                XCTAssertEqual(response, comparingObject)
+
+                expectation.fulfill()
+            }.catch {
+                _ in
+                // then
+                XCTFail("Response should be succeed, not failure")
+
+                expectation.fulfill()
+            }
+
+            wait(for: [expectation], timeout: 2.0)
+        } catch let error {
+            XCTFail("Wrong json stub format: \(error)")
         }
     }
 
@@ -118,43 +173,45 @@ class RecoveryServiceNetworkLayerTests: ServiceNetworkLayerTests {
      */
     func testVerifyingPhoneNumberFailure() {
         // given
-        // Construct response codable object
-        let error = "Test message"
-        let codableError = CodableFailure.Error.init(name: nil, input: nil, message: error)
-        let responseCodable = CodableFailure(result: false, message: nil, errors: [codableError])
+        let stub = AuthServiceNetworkLayerStubs.failure
 
-        // Build provider with mocking response data
-        let provider = buildProviderWith(response: responseCodable)
+        do {
+            // Build provider with response test json file
+            let provider = try buildProviderWith(resourceName: stub.resourceName)
 
-        // Create auth service with mocked provider
-        let recoveryAPI = RecoveryAPI(provider: provider)
+            // Create auth service with mocked provider
+            let recoveryAPI = RecoveryAPI(provider: provider)
 
-        let phone = "+79999999999"
-        let code = "123456"
+            let phone = "+79111111111"
+            let code = "123456"
 
-        //when
-        let expectedResponse: CodableFailure.Error? = codableError
-        recoveryAPI.verifyPhoneNumber(phone, withCode: code).done {
-            _ in
-            // then
-            XCTFail("Response should be a failure, not success")
-        }.catch {
-            e in
+            //when
+            let expectation = XCTestExpectation(description: "Test fail responsing for verifying phone number")
 
-            guard let response = e as? WalletResponseError else {
-                XCTFail("Wrong fail response type")
-                return
+            recoveryAPI.verifyPhoneNumber(phone, withCode: code).done {
+                _ in
+
+                // then
+                XCTFail("Response should be a failure, not success")
+
+                expectation.fulfill()
+            }.catch {
+                e in
+
+                guard let response = e as? WalletResponseError else {
+                    XCTFail("Wrong fail response type")
+                    return
+                }
+
+                // then
+                XCTAssertEqual(response, stub.failureObject)
+
+                expectation.fulfill()
             }
 
-            switch response {
-            case .serverFailureResponse(errors: let errors):
-                // then
-                let error = errors.first
-                XCTAssertEqual(expectedResponse, error)
-            case .undefinedServerFailureResponse:
-                // then
-                XCTFail("Wrong fail response type")
-            }
+            wait(for: [expectation], timeout: 2.0)
+        } catch let error {
+            XCTFail("Wrong json stub format: \(error)")
         }
     }
 
@@ -163,28 +220,39 @@ class RecoveryServiceNetworkLayerTests: ServiceNetworkLayerTests {
      */
     func testProvidingPasswordSucceed() {
         // given
-        // Construct response codable object
-        let responseCodable = CodableSuccessEmptyResponse(result: true)
+        let stub = RecoveryServiceNetworkLayerStubs.providePassword
 
-        // Build provider with mocking response data
-        let provider = buildProviderWith(response: responseCodable)
+        do {
+            // Build provider with response test json file
+            let provider = try buildProviderWith(resourceName: stub.resourceName)
 
-        // Create auth service with mocked provider
-        let recoveryAPI = RecoveryAPI(provider: provider)
+            // Create auth service with mocked provider
+            let recoveryAPI = RecoveryAPI(provider: provider)
 
-        let password = "123456"
-        let confirmation = "123456"
-        let phone = "+79999999999"
-        let token = "token"
+            let password = "123456"
+            let confirmation = "123456"
+            let phone = "+79111111111"
+            let token = "d97ece27be1c42b4984fd7de08bb8de0"
 
-        //when
-        recoveryAPI.providePassword(password, confirmation: confirmation, for: phone, recoveryToken: token).done {
-            // then
-            XCTAssertTrue(true)
-        }.catch {
-            _ in
-            // then
-            XCTFail("Response should be succeed, not failure")
+            //when
+            let expectation = XCTestExpectation(description: "Test successful responsing for providing password")
+
+            recoveryAPI.providePassword(password, confirmation: confirmation, for: phone, recoveryToken: token).done {
+                // then
+                XCTAssertTrue(true)
+
+                expectation.fulfill()
+            }.catch {
+                _ in
+                // then
+                XCTFail("Response should be succeed, not failure")
+
+                expectation.fulfill()
+            }
+
+            wait(for: [expectation], timeout: 2.0)
+        } catch let error {
+            XCTFail("Wrong json stub format: \(error)")
         }
     }
 
@@ -193,45 +261,47 @@ class RecoveryServiceNetworkLayerTests: ServiceNetworkLayerTests {
      */
     func testProvidingPasswordFailure() {
         // given
-        // Construct response codable object
-        let error = "Test message"
-        let codableError = CodableFailure.Error.init(name: nil, input: nil, message: error)
-        let responseCodable = CodableFailure(result: false, message: nil, errors: [codableError])
+        let stub = AuthServiceNetworkLayerStubs.failure
 
-        // Build provider with mocking response data
-        let provider = buildProviderWith(response: responseCodable)
+        do {
+            // Build provider with response test json file
+            let provider = try buildProviderWith(resourceName: stub.resourceName)
 
-        // Create auth service with mocked provider
-        let recoveryAPI = RecoveryAPI(provider: provider)
+            // Create auth service with mocked provider
+            let recoveryAPI = RecoveryAPI(provider: provider)
 
-        let password = "123456"
-        let confirmation = "123456"
-        let phone = "+79999999999"
-        let token = "token"
+            let password = "123456"
+            let confirmation = "123456"
+            let phone = "+79111111111"
+            let token = "d97ece27be1c42b4984fd7de08bb8de0"
 
-        //when
-        let expectedResponse: CodableFailure.Error? = codableError
-        recoveryAPI.providePassword(password, confirmation: confirmation, for: phone, recoveryToken: token).done {
-            _ in
-            // then
-            XCTFail("Response should be a failure, not success")
-        }.catch {
-            e in
+            //when
+            let expectation = XCTestExpectation(description: "Test failure responsing for providing password")
 
-            guard let response = e as? WalletResponseError else {
-                XCTFail("Wrong fail response type")
-                return
+            recoveryAPI.providePassword(password, confirmation: confirmation, for: phone, recoveryToken: token).done {
+                _ in
+
+                // then
+                XCTFail("Response should be a failure, not success")
+
+                expectation.fulfill()
+            }.catch {
+                e in
+
+                guard let response = e as? WalletResponseError else {
+                    XCTFail("Wrong fail response type")
+                    return
+                }
+
+                // then
+                XCTAssertEqual(response, stub.failureObject)
+
+                expectation.fulfill()
             }
 
-            switch response {
-            case .serverFailureResponse(errors: let errors):
-                // then
-                let error = errors.first
-                XCTAssertEqual(expectedResponse, error)
-            case .undefinedServerFailureResponse:
-                // then
-                XCTFail("Wrong fail response type")
-            }
+            wait(for: [expectation], timeout: 2.0)
+        } catch let error {
+            XCTFail("Wrong json stub format: \(error)")
         }
     }
 }
