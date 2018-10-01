@@ -34,7 +34,7 @@ enum UserServiceNetworkLayerStubs {
         case .getKYCPersonalInfo:
             return "user_get_kyc_personal_info"
         case .sendKYCPersonalInfo:
-            return "user_send_kyc_personal_info"
+            return "successful_empty_response"
         case .failure:
             return "fail_response"
         }

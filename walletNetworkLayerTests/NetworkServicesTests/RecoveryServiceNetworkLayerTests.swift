@@ -18,11 +18,11 @@ enum RecoveryServiceNetworkLayerStubs {
     var resourceName: String {
         switch self {
         case .sendVerificationCode:
-            return "recovery_send_verification"
+            return "successful_empty_response"
         case .verifyPhoneNumber:
             return "recovery_verify_phone"
         case .providePassword:
-            return "recovery_provide_password"
+            return "successful_empty_response"
         case .failure:
             return "fail_response"
         }

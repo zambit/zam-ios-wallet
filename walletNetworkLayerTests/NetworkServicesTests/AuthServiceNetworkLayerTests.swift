@@ -21,7 +21,7 @@ enum AuthServiceNetworkLayerStubs {
         case .signIn:
             return "auth_signin"
         case .signOut:
-            return "auth_signout"
+            return "successful_empty_response"
         case .checkIfUserAuthorized:
             return "auth_check_authorized"
         case .refreshToken:
