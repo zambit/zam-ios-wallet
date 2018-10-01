@@ -1,0 +1,21 @@
+{
+    "result": true,
+    "data": {
+        "status": "pending",
+        "personal_data": {
+            "email": "test@mail.ru",
+            "first_name": "Name",
+            "last_name": "Surname",
+            "birth_date": 717552000,
+            "sex": "male",
+            "country": "Test",
+            "address": {
+                "city": "Test",
+                "house": "14",
+                "postal_code": 644122,
+                "region": "Test Region",
+                "street": "test street"
+            }
+        }
+    }
+}

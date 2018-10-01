@@ -25,6 +25,11 @@ struct KYCPersonalInfo: Equatable {
             self.data = nil
         }
     }
+
+    init(status: KYCStatus, data: KYCPersonalInfoData?) {
+        self.status = status
+        self.data = data
+    }
 }
 
 enum KYCPersonalInfoError: Error {

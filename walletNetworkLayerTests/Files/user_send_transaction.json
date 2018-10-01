@@ -1,0 +1,19 @@
+{
+	"result":true,
+	"data": {
+		"transaction": {
+			"id":"409",
+			"wallet_id":"19",
+			"direction":"outgoing",
+			"status":"pending",
+			"coin":"btc",
+			"recipient":"+79111511111",
+			"type":"internal",
+			"amount": {
+				"btc":"0.001",
+				"usd":"6.612510000000000"
+			},
+			"created_at":1538382482
+		}
+	}
+}

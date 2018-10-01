@@ -1,0 +1,15 @@
+{
+    "result": true,
+    "data": {
+        "wallet": {
+            "id": "129",
+            "coin": "bch",
+            "wallet_name": "BCH wallet",
+            "address": "qzvrz7wxxk8flh6fu3fdlqywwu3nypcqys5lckpxff",
+            "balances": {
+                "bch": "0.0",
+                "usd": "0.0"
+            }
+        }
+    }
+}
