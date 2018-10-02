@@ -377,6 +377,10 @@ class HomeViewController: FloatingViewController, WalletsViewControllerDelegate,
         if let embeded = embededViewController, embeded.isTopExpanded {
             embededViewController?.scrollToTop()
         }
+
+        if state == .closed {
+            embededViewController?.isScrollEnabled = false
+        }
     }
 
     override func stateDidChange(_ state: FloatingViewController.State) {
@@ -385,6 +389,8 @@ class HomeViewController: FloatingViewController, WalletsViewControllerDelegate,
         // evaluate some values before setting animation
 
         let sumLabelWidth: CGFloat = sumLabel?.bounds.width ?? 0
+
+        embededViewController?.isScrollEnabled = true
 
         switch state {
         case .open:

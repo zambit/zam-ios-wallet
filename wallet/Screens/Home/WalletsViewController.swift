@@ -22,6 +22,8 @@ protocol WalletsCollection {
 
     var isTopExpanded: Bool { get }
 
+    var isScrollEnabled: Bool { get set }
+
     func setContentInsets(_ insets: UIEdgeInsets)
 
     func scrollToTop()
@@ -100,6 +102,16 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
 
     var isTopExpanded: Bool {
         return collectionView.contentOffset.y < -collectionView.contentInset.top
+    }
+
+    var isScrollEnabled: Bool {
+        get {
+            return collectionView.isScrollEnabled
+        }
+
+        set {
+            collectionView.isScrollEnabled = newValue
+        }
     }
 
     func setContentInsets(_ insets: UIEdgeInsets) {
