@@ -90,4 +90,19 @@ class WalletSmallItemComponent: ItemComponent {
         pageControl?.currentPage = currentIndex
         pageControl?.numberOfPages = count
     }
+
+    func setupChart(layer: CALayer) {
+        layer.zPosition = -1
+        layer.cornerRadius = 12.0
+        layer.masksToBounds = true
+        layer.name = "chart"
+
+        view.layer.sublayers?.forEach({
+            if $0.name == "chart" {
+                $0.removeFromSuperlayer()
+            }
+        })
+
+        view.layer.addSublayer(layer)
+    }
 }

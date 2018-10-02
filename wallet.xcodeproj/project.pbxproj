@@ -178,6 +178,8 @@
 		8C7DE66E215D36F200824A4B /* UIScrollView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7DE66D215D36F200824A4B /* UIScrollView+Extensions.swift */; };
 		8C7DE671215E671600824A4B /* StubsLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7DE670215E671600824A4B /* StubsLoader.swift */; };
 		8C7DE673215E6BEB00824A4B /* Files in Resources */ = {isa = PBXBuildFile; fileRef = 8C7DE672215E6BEB00824A4B /* Files */; };
+		8C7DE67621636CAE00824A4B /* ChartLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7DE67521636CAE00824A4B /* ChartLayer.swift */; };
+		8C7DE678216370C700824A4B /* UIBezierPath+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7DE677216370C700824A4B /* UIBezierPath+Extensions.swift */; };
 		8CA2188F2121D97C0063C188 /* DecimalKeyboardComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CA2188E2121D97B0063C188 /* DecimalKeyboardComponent.xib */; };
 		8CA218922122E8D70063C188 /* SendMoneyComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CA218912122E8D70063C188 /* SendMoneyComponent.xib */; };
 		8CA218942122EAC90063C188 /* SendMoneyComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA218932122EAC90063C188 /* SendMoneyComponent.swift */; };
@@ -463,6 +465,8 @@
 		8C7DE66D215D36F200824A4B /* UIScrollView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Extensions.swift"; sourceTree = "<group>"; };
 		8C7DE670215E671600824A4B /* StubsLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubsLoader.swift; sourceTree = "<group>"; };
 		8C7DE672215E6BEB00824A4B /* Files */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Files; sourceTree = "<group>"; };
+		8C7DE67521636CAE00824A4B /* ChartLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartLayer.swift; sourceTree = "<group>"; };
+		8C7DE677216370C700824A4B /* UIBezierPath+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBezierPath+Extensions.swift"; sourceTree = "<group>"; };
 		8CA2188E2121D97B0063C188 /* DecimalKeyboardComponent.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DecimalKeyboardComponent.xib; sourceTree = "<group>"; };
 		8CA218912122E8D70063C188 /* SendMoneyComponent.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SendMoneyComponent.xib; sourceTree = "<group>"; };
 		8CA218932122EAC90063C188 /* SendMoneyComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMoneyComponent.swift; sourceTree = "<group>"; };
@@ -624,6 +628,7 @@
 				8C713B1E213941FF00AC2E25 /* Networking.swift */,
 				8C52FFEF211AE19300EB55EA /* OverlappingFlowLayout.swift */,
 				8CA218F6213018DA0063C188 /* Paginator.swift */,
+				8C7DE67521636CAE00824A4B /* ChartLayer.swift */,
 				8C713B33214024CE00AC2E25 /* PhoneNumberFormatter.swift */,
 				8C7C336D2147C43800EC6C96 /* Pickers */,
 				8CF5F929211307010083B36A /* Timers */,
@@ -1365,6 +1370,7 @@
 				8C7C33782147E60200EC6C96 /* PHAsset+Extensions.swift */,
 				8C333D6E210F00E600949AC0 /* String+Extensions.swift */,
 				8C713B352140327600AC2E25 /* StringProtocol+Extensions.swift */,
+				8C7DE677216370C700824A4B /* UIBezierPath+Extensions.swift */,
 				8C713B0C2136EA9E00AC2E25 /* UIAlertController+Extensions.swift */,
 				8C7C33742147C7EA00EC6C96 /* UIApplication+Extensions.swift */,
 				8C333D41210A094500949AC0 /* UIColor+Additions.swift */,
@@ -1830,6 +1836,7 @@
 				8C6088602111F35E00470411 /* EnterPhoneNumberViewController.swift in Sources */,
 				8C6088512111A95100470411 /* Conditions.swift in Sources */,
 				8C52FFF0211AE19300EB55EA /* OverlappingFlowLayout.swift in Sources */,
+				8C7DE67621636CAE00824A4B /* ChartLayer.swift in Sources */,
 				8C7C33792147E60200EC6C96 /* PHAsset+Extensions.swift in Sources */,
 				9319BAA6212A0AC200033A7E /* CrossAnimationView.swift in Sources */,
 				8C7C33472142924D00EC6C96 /* KYCMainScreenViewController.swift in Sources */,
@@ -1870,6 +1877,7 @@
 				8CA218B821248FA50063C188 /* SendMoneyAmountComponent.swift in Sources */,
 				8C09195F21076B5D00703224 /* RecoveryAPI.swift in Sources */,
 				8C713B162138068600AC2E25 /* DepositMoneyAddressComponent.swift in Sources */,
+				8C7DE678216370C700824A4B /* UIBezierPath+Extensions.swift in Sources */,
 				8C713B362140327600AC2E25 /* StringProtocol+Extensions.swift in Sources */,
 				8C34616B20EF8FA700746724 /* AppDelegate.swift in Sources */,
 				8CA2191821343FE10063C188 /* IllustrationalPlaceholder.swift in Sources */,
