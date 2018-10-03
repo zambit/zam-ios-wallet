@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import Crashlytics
 
 class KYCMainScreenViewController: FlowViewController, WalletNavigable {
 
@@ -71,7 +72,8 @@ class KYCMainScreenViewController: FlowViewController, WalletNavigable {
             }
         }.catch {
             error in
-            print(error)
+
+            Crashlytics.sharedInstance().recordError(error)
         }
 
         kyc1Button?.custom.setEnabled(false)

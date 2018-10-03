@@ -9,6 +9,7 @@
 import UIKit
 import AVFoundation
 import AudioToolbox
+import Crashlytics
 
 protocol QRCodeScannerViewControllerDelegate: class {
 
@@ -66,7 +67,7 @@ class QRCodeScannerViewController: FlowViewController, WalletNavigable {
 
         } catch {
             // If any error occurs, simply print it out and don't continue any more.
-            print(error)
+            Crashlytics.sharedInstance().recordError(error)
             return
         }
 
@@ -129,12 +130,10 @@ extension QRCodeScannerViewController: AVCaptureMetadataOutputObjectsDelegate {
             qrCodeFrameView?.frame = barCodeObject!.bounds
 
             if let result = metadataObj.stringValue {
-                //launchApp(decodedURL: result)
                 print(result)
                 delegate?.qrCodeScannerViewController(self, didFindCode: result)
                 Interactions.vibrateSuccess()
                 onClose?(self)
-                //messageLabel.text = metadataObj.stringValue
             }
         }
     }

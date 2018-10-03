@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import Crashlytics
 
 class MoreViewController: FlowViewController, WalletNavigable {
 
@@ -185,6 +186,8 @@ class MoreViewController: FlowViewController, WalletNavigable {
             exit()
         }.catch {
             error in
+
+            Crashlytics.sharedInstance().recordError(error)
             exit()
         }
     }
