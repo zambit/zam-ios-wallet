@@ -366,3 +366,35 @@ struct CodableKYCPersonalInfo: Codable {
         }
     }
 }
+
+struct CodableHistoricalData: Codable {
+    let data: [CodableHistoricalDataObject]
+    let timeFrom: Double
+    let timeTo: Double
+
+    private enum CodingKeys: String, CodingKey {
+        case data = "Data"
+        case timeFrom = "TimeFrom"
+        case timeTo = "TimeTo"
+    }
+}
+
+struct CodableHistoricalDataObject: Codable {
+    let time: Double
+    let close: Decimal
+    let high: Decimal
+    let low: Decimal
+    let open: Decimal
+    let volumeFrom: Decimal
+    let volumeTo: Decimal
+
+    private enum CodingKeys: String, CodingKey {
+        case time
+        case close
+        case high
+        case low
+        case open
+        case volumeFrom = "volumefrom"
+        case volumeTo = "volumeto"
+    }
+}

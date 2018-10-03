@@ -24,7 +24,7 @@ enum RecoveryServiceNetworkLayerStubs {
         case .providePassword:
             return "successful_empty_response"
         case .failure:
-            return "fail_response"
+            return "wallet_fail_response"
         }
     }
 
@@ -35,7 +35,7 @@ enum RecoveryServiceNetworkLayerStubs {
             let name = "target"
             let input = "body"
 
-            let codableError = CodableFailure.Error(name: name, input: input, message: error)
+            let codableError = CodableWalletFailure.Error(name: name, input: input, message: error)
             let responseError = WalletResponseError.serverFailureResponse(errors: [codableError])
             return responseError
         default:

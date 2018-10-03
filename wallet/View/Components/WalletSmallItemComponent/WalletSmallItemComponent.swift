@@ -90,4 +90,22 @@ class WalletSmallItemComponent: ItemComponent {
         pageControl?.currentPage = currentIndex
         pageControl?.numberOfPages = count
     }
+
+    func setupChart(points: [ChartLayer.Point]) {
+        let layer = ChartLayer(size: view.size, points: points)
+        layer.insets = UIEdgeInsets(top: 30.0, left: 0.0, bottom: 20.0, right: 0.0)
+
+        layer.zPosition = -1
+        layer.cornerRadius = 12.0
+        layer.masksToBounds = true
+        layer.name = "chart"
+
+        view.layer.sublayers?.forEach({
+            if $0.name == "chart" {
+                $0.removeFromSuperlayer()
+            }
+        })
+
+        view.layer.addSublayer(layer)
+    }
 }

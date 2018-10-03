@@ -27,7 +27,7 @@ enum AuthServiceNetworkLayerStubs {
         case .refreshToken:
             return "auth_refresh_token"
         case .failure:
-            return "fail_response"
+            return "wallet_fail_response"
         }
     }
 
@@ -38,7 +38,7 @@ enum AuthServiceNetworkLayerStubs {
             let name = "target"
             let input = "body"
 
-            let codableError = CodableFailure.Error(name: name, input: input, message: error)
+            let codableError = CodableWalletFailure.Error(name: name, input: input, message: error)
             let responseError = WalletResponseError.serverFailureResponse(errors: [codableError])
             return responseError
         default:

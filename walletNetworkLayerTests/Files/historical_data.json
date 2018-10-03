@@ -1,0 +1,21 @@
+{
+	"Response": "Success",
+	"Type": 100,
+	"Aggregated": false,
+	"Data": [{
+				"time": 1535846400,
+				"close": 7301.26,
+				"high": 7384.38,
+				"low": 7144.71,
+				"open": 7203.46,
+				"volumefrom": 61424.38,
+				"volumeto": 447453370.83
+	}],
+	"TimeTo": 1538438400,
+	"TimeFrom": 1535846400,
+	"FirstValueInArray": true,
+	"ConversionType": {
+						"type": "direct",
+						"conversionSymbol": ""
+	}
+}
