@@ -35,7 +35,7 @@ struct UserAPI: NetworkService {
                             }
                         }
 
-                        let failure: (CodableFailure) -> Void = { f in
+                        let failure: (CodableWalletFailure) -> Void = { f in
                             guard f.errors.count > 0 else {
                                 let error = WalletResponseError.undefinedServerFailureResponse
                                 seal.reject(error)
@@ -76,7 +76,7 @@ struct UserAPI: NetworkService {
                             }
                         }
 
-                        let failure: (CodableFailure) -> Void = { f in
+                        let failure: (CodableWalletFailure) -> Void = { f in
                             guard f.errors.count > 0 else {
                                 let error = WalletResponseError.undefinedServerFailureResponse
                                 seal.reject(error)
@@ -116,7 +116,7 @@ struct UserAPI: NetworkService {
                             seal.fulfill(wallets)
                         }
 
-                        let failure: (CodableFailure) -> Void = { f in
+                        let failure: (CodableWalletFailure) -> Void = { f in
                             guard f.errors.count > 0 else {
                                 let error = WalletResponseError.undefinedServerFailureResponse
                                 seal.reject(error)
@@ -157,7 +157,7 @@ struct UserAPI: NetworkService {
                             }
                         }
 
-                        let failure: (CodableFailure) -> Void = { f in
+                        let failure: (CodableWalletFailure) -> Void = { f in
                             guard f.errors.count > 0 else {
                                 let error = WalletResponseError.undefinedServerFailureResponse
                                 seal.reject(error)
@@ -198,7 +198,7 @@ struct UserAPI: NetworkService {
                             }
                         }
 
-                        let failure: (CodableFailure) -> Void = { f in
+                        let failure: (CodableWalletFailure) -> Void = { f in
                             guard f.errors.count > 0 else {
                                 let error = WalletResponseError.undefinedServerFailureResponse
                                 seal.reject(error)
@@ -295,7 +295,7 @@ struct UserAPI: NetworkService {
                             }
                         }
 
-                        let failure: (CodableFailure) -> Void = { f in
+                        let failure: (CodableWalletFailure) -> Void = { f in
                             guard f.errors.count > 0 else {
                                 let error = WalletResponseError.undefinedServerFailureResponse
                                 seal.reject(error)
@@ -336,7 +336,7 @@ struct UserAPI: NetworkService {
                             }
                         }
 
-                        let failure: (CodableFailure) -> Void = { f in
+                        let failure: (CodableWalletFailure) -> Void = { f in
                             guard f.errors.count > 0 else {
                                 let error = WalletResponseError.undefinedServerFailureResponse
                                 seal.reject(error)
@@ -376,7 +376,7 @@ struct UserAPI: NetworkService {
                             seal.fulfill(())
                         }
 
-                        let failure: (CodableFailure) -> Void = { f in
+                        let failure: (CodableWalletFailure) -> Void = { f in
                             guard f.errors.count > 0 else {
                                 let error = WalletResponseError.undefinedServerFailureResponse
                                 seal.reject(error)

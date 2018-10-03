@@ -36,7 +36,7 @@ struct AuthAPI: NetworkService {
                             seal.fulfill(s.data.token)
                         }
 
-                        let failure: (CodableFailure) -> Void = { f in
+                        let failure: (CodableWalletFailure) -> Void = { f in
                             guard f.errors.count > 0 else {
                                 let error = WalletResponseError.undefinedServerFailureResponse
                                 seal.reject(error)
@@ -76,7 +76,7 @@ struct AuthAPI: NetworkService {
                             seal.fulfill(())
                         }
 
-                        let failure: (CodableFailure) -> Void = { f in
+                        let failure: (CodableWalletFailure) -> Void = { f in
                             guard f.errors.count > 0 else {
                                 let error = WalletResponseError.undefinedServerFailureResponse
                                 seal.reject(error)
@@ -116,7 +116,7 @@ struct AuthAPI: NetworkService {
                             seal.fulfill(s.data.phone)
                         }
 
-                        let failure: (CodableFailure) -> Void = { f in
+                        let failure: (CodableWalletFailure) -> Void = { f in
                             guard f.errors.count > 0 else {
                                 let error = WalletResponseError.undefinedServerFailureResponse
                                 seal.reject(error)
@@ -156,7 +156,7 @@ struct AuthAPI: NetworkService {
                             seal.fulfill(s.data.token)
                         }
 
-                        let failure: (CodableFailure) -> Void = { f in
+                        let failure: (CodableWalletFailure) -> Void = { f in
                             guard f.errors.count > 0 else {
                                 let error = WalletResponseError.undefinedServerFailureResponse
                                 seal.reject(error)
@@ -196,7 +196,7 @@ struct AuthAPI: NetworkService {
                             seal.fulfill(s.data.token)
                         }
 
-                        let failure: (CodableFailure) -> Void = { f in
+                        let failure: (CodableWalletFailure) -> Void = { f in
                             guard f.errors.count > 0 else {
                                 let error = WalletResponseError.undefinedServerFailureResponse
                                 seal.reject(error)
@@ -233,7 +233,7 @@ struct AuthAPI: NetworkService {
                             seal.fulfill(s.data.token)
                         }
 
-                        let failure: (CodableFailure) -> Void = { f in
+                        let failure: (CodableWalletFailure) -> Void = { f in
                             guard f.errors.count > 0 else {
                                 let error = WalletResponseError.undefinedServerFailureResponse
                                 seal.reject(error)

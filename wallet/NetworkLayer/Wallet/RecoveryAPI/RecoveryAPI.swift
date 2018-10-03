@@ -1,5 +1,5 @@
 //
-//  SignupAPI.swift
+//  RecoveryAPI.swift
 //  wallet
 //
 //  Created by  me on 24/07/2018.
@@ -10,9 +10,9 @@ import Foundation
 import PromiseKit
 
 /**
- Signing up API. Provides requests for sending verification code to phone, verifing phone and providing password.
+ Recovery password API. Provides requests for sending verification code to phone, verifing recovering account password and providing new password.
  */
-struct SignupAPI: NetworkService, ThreeStepsAPI {
+struct RecoveryAPI: NetworkService, ThreeStepsAPI {
 
     private let provider: Provider
 
@@ -21,10 +21,10 @@ struct SignupAPI: NetworkService, ThreeStepsAPI {
     }
 
     /**
-     Start user account creation by sending verification code via SMS.
+     Start user password recovery by sending verification code via SMS.
      */
     func sendVerificationCode(to phone: String, referrerPhone: String? = nil) -> Promise<Void> {
-        return provider.execute(SignupRequest.start(phone: phone, referrerPhone: referrerPhone))
+        return provider.execute(RecoveryRequest.start(phone: phone))
             .then {
                 (response: Response) -> Promise<Void> in
 
@@ -36,7 +36,7 @@ struct SignupAPI: NetworkService, ThreeStepsAPI {
                             seal.fulfill(())
                         }
 
-                        let failure: (CodableFailure) -> Void = { f in
+                        let failure: (CodableWalletFailure) -> Void = { f in
                             guard f.errors.count > 0 else {
                                 let error = WalletResponseError.undefinedServerFailureResponse
                                 seal.reject(error)
@@ -61,10 +61,10 @@ struct SignupAPI: NetworkService, ThreeStepsAPI {
     }
 
     /**
-     Verifies user account by passing SMS Code which has been sent previously.
+     Verifies user password recovery by passing SMS Code which has been sent previously.
      */
     func verifyPhoneNumber(_ phone: String, withCode verificationCode: String) -> Promise<String> {
-        return provider.execute(SignupRequest.verify(phone: phone, verificationCode: verificationCode))
+        return provider.execute(RecoveryRequest.verify(phone: phone, verificationCode: verificationCode))
             .then {
                 (response: Response) -> Promise<String> in
 
@@ -72,11 +72,11 @@ struct SignupAPI: NetworkService, ThreeStepsAPI {
                     switch response {
                     case .data(_):
 
-                        let success: (CodableSuccessSignUpTokenResponse) -> Void = { s in
+                        let success: (CodableSuccessRecoveryTokenResponse) -> Void = { s in
                             seal.fulfill(s.data.token)
                         }
 
-                        let failure: (CodableFailure) -> Void = { f in
+                        let failure: (CodableWalletFailure) -> Void = { f in
                             guard f.errors.count > 0 else {
                                 let error = WalletResponseError.undefinedServerFailureResponse
                                 seal.reject(error)
@@ -100,22 +100,22 @@ struct SignupAPI: NetworkService, ThreeStepsAPI {
     }
 
     /**
-     Finish account creation by setting user password, this request requires SignUp Token.
+     Finish password recovery by setting user password, this request requires Recovery Token.
      */
-    func providePassword(_ password: String, confirmation: String, for phone: String, signupToken: String) -> Promise<String> {
-        return provider.execute(SignupRequest.finish(phone: phone, signupToken: signupToken, password: password, passwordConfirmation: confirmation))
+    func providePassword(_ password: String, confirmation: String, for phone: String, recoveryToken: String) -> Promise<Void> {
+        return provider.execute(RecoveryRequest.finish(phone: phone, recoveryToken: recoveryToken, newPassword: password, newPasswordConfirmation: confirmation))
             .then {
-                (response: Response) -> Promise<String> in
+                (response: Response) -> Promise<Void> in
 
                 return Promise { seal in
                     switch response {
                     case .data(_):
 
-                        let success: (CodableSuccessAuthTokenResponse) -> Void = { s in
-                            seal.fulfill(s.data.token)
+                        let success: (CodableSuccessEmptyResponse) -> Void = { s in
+                            seal.fulfill(())
                         }
 
-                        let failure: (CodableFailure) -> Void = { f in
+                        let failure: (CodableWalletFailure) -> Void = { f in
                             guard f.errors.count > 0 else {
                                 let error = WalletResponseError.undefinedServerFailureResponse
                                 seal.reject(error)

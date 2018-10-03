@@ -1,5 +1,5 @@
 //
-//  ErrorResponse.swift
+//  CodableFailure.swift
 //  wallet
 //
 //  Created by  me on 24/07/2018.
@@ -11,7 +11,7 @@ import Foundation
 /**
  This struct imitating default json failure response from Wallet Remote API.
  */
-struct CodableFailure: Codable {
+struct CodableWalletFailure: Codable {
 
     let result: Bool
     let message: String?
@@ -33,5 +33,19 @@ struct CodableFailure: Codable {
             case input
             case message
         }
+    }
+}
+
+/**
+ This struct imitating default json failure response from Cryptocompare API.
+ */
+struct CodableCryptocompareFailure: Codable {
+
+    let response: String
+    let message: String
+
+    private enum CodingKeys: String, CodingKey {
+        case response = "Response"
+        case message = "Message"
     }
 }

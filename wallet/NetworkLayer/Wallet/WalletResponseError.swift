@@ -9,6 +9,6 @@
 import Foundation
 
 enum WalletResponseError: Error, Equatable {
-    case serverFailureResponse(errors: [CodableFailure.Error])
+    case serverFailureResponse(errors: [CodableWalletFailure.Error])
     case undefinedServerFailureResponse
 }
