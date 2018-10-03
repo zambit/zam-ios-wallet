@@ -1,0 +1,7 @@
+{
+	"Response": "Error",
+	"Message": "failure message",
+	"Type": 1,
+	"Aggregated": false,
+	"Data": []
+}

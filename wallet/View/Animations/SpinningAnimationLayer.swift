@@ -65,5 +65,4 @@ class SpinningAnimationLayer: CAShapeLayer {
 
         self.add(animation, forKey: "animation")
     }
-
 }

@@ -387,6 +387,7 @@ final class MainFlow: ScreenFlow {
         vc.onDepositToWallet = onDepositToWallet
         vc.userManager = UserDefaultsManager(keychainConfiguration: WalletKeychainConfiguration())
         vc.userAPI = UserAPI(provider: Provider(environment: WalletEnvironment(), dispatcher: HTTPDispatcher()))
+        vc.historyAPI = HistoryAPI(provider: Provider(environment: CryptocompareEnvironment(), dispatcher: HTTPDispatcher()))
         vc.flow = self
         return vc
     }
