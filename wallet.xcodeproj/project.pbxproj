@@ -180,6 +180,11 @@
 		8C7DE673215E6BEB00824A4B /* Files in Resources */ = {isa = PBXBuildFile; fileRef = 8C7DE672215E6BEB00824A4B /* Files */; };
 		8C7DE67621636CAE00824A4B /* ChartLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7DE67521636CAE00824A4B /* ChartLayer.swift */; };
 		8C7DE678216370C700824A4B /* UIBezierPath+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7DE677216370C700824A4B /* UIBezierPath+Extensions.swift */; };
+		8C7DE67B2164BE9B00824A4B /* CryptocompareEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7DE67A2164BE9B00824A4B /* CryptocompareEnvironment.swift */; };
+		8C7DE67E2164BF0500824A4B /* HistoryRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7DE67D2164BF0500824A4B /* HistoryRequest.swift */; };
+		8C7DE6802164BF0E00824A4B /* HistoryAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7DE67F2164BF0E00824A4B /* HistoryAPI.swift */; };
+		8C7DE6822164C5F800824A4B /* CoinDailyPriceData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7DE6812164C5F800824A4B /* CoinDailyPriceData.swift */; };
+		8C7DE6862164CAD400824A4B /* CryptocompareResponseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7DE6852164CAD400824A4B /* CryptocompareResponseError.swift */; };
 		8CA2188F2121D97C0063C188 /* DecimalKeyboardComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CA2188E2121D97B0063C188 /* DecimalKeyboardComponent.xib */; };
 		8CA218922122E8D70063C188 /* SendMoneyComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CA218912122E8D70063C188 /* SendMoneyComponent.xib */; };
 		8CA218942122EAC90063C188 /* SendMoneyComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA218932122EAC90063C188 /* SendMoneyComponent.swift */; };
@@ -467,6 +472,11 @@
 		8C7DE672215E6BEB00824A4B /* Files */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Files; sourceTree = "<group>"; };
 		8C7DE67521636CAE00824A4B /* ChartLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartLayer.swift; sourceTree = "<group>"; };
 		8C7DE677216370C700824A4B /* UIBezierPath+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBezierPath+Extensions.swift"; sourceTree = "<group>"; };
+		8C7DE67A2164BE9B00824A4B /* CryptocompareEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptocompareEnvironment.swift; sourceTree = "<group>"; };
+		8C7DE67D2164BF0500824A4B /* HistoryRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryRequest.swift; sourceTree = "<group>"; };
+		8C7DE67F2164BF0E00824A4B /* HistoryAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryAPI.swift; sourceTree = "<group>"; };
+		8C7DE6812164C5F800824A4B /* CoinDailyPriceData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinDailyPriceData.swift; sourceTree = "<group>"; };
+		8C7DE6852164CAD400824A4B /* CryptocompareResponseError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptocompareResponseError.swift; sourceTree = "<group>"; };
 		8CA2188E2121D97B0063C188 /* DecimalKeyboardComponent.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DecimalKeyboardComponent.xib; sourceTree = "<group>"; };
 		8CA218912122E8D70063C188 /* SendMoneyComponent.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SendMoneyComponent.xib; sourceTree = "<group>"; };
 		8CA218932122EAC90063C188 /* SendMoneyComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMoneyComponent.swift; sourceTree = "<group>"; };
@@ -679,7 +689,8 @@
 				8C09193E210625E500703224 /* Provider.swift */,
 				8C0919402106264200703224 /* Dispatcher.swift */,
 				8C091948210714D800703224 /* NetworkService.swift */,
-				8C091947210714AA00703224 /* WalletAPI */,
+				8C7DE6792164BC7D00824A4B /* Cryptocompare */,
+				8C091947210714AA00703224 /* Wallet */,
 				8C0919442106284900703224 /* HTTP */,
 			);
 			path = NetworkLayer;
@@ -693,7 +704,7 @@
 			path = HTTP;
 			sourceTree = "<group>";
 		};
-		8C091947210714AA00703224 /* WalletAPI */ = {
+		8C091947210714AA00703224 /* Wallet */ = {
 			isa = PBXGroup;
 			children = (
 				8C09194C2107214300703224 /* WalletEnvironment.swift */,
@@ -705,7 +716,7 @@
 				8C09195D21076B0800703224 /* SignupAPI */,
 				8C0919542107347300703224 /* Codable */,
 			);
-			path = WalletAPI;
+			path = Wallet;
 			sourceTree = "<group>";
 		};
 		8C0919542107347300703224 /* Codable */ = {
@@ -935,6 +946,7 @@
 				8CA219092133EEF40063C188 /* TransactionsGroupData.swift */,
 				8CA218F2213007650063C188 /* TransactionsPageData.swift */,
 				8CA218FD21303BC30063C188 /* TransactionStatus.swift */,
+				8C7DE6812164C5F800824A4B /* CoinDailyPriceData.swift */,
 				8CA218CC2126F23B0063C188 /* UserData.swift */,
 				8C52FFE02119BE0300EB55EA /* WalletData.swift */,
 			);
@@ -1174,6 +1186,25 @@
 				8C7DE66A215D068B00824A4B /* SignUpServiceNetworkLayerTests.swift */,
 			);
 			path = NetworkServicesTests;
+			sourceTree = "<group>";
+		};
+		8C7DE6792164BC7D00824A4B /* Cryptocompare */ = {
+			isa = PBXGroup;
+			children = (
+				8C7DE67A2164BE9B00824A4B /* CryptocompareEnvironment.swift */,
+				8C7DE6852164CAD400824A4B /* CryptocompareResponseError.swift */,
+				8C7DE67C2164BEEC00824A4B /* HistoryAPI */,
+			);
+			path = Cryptocompare;
+			sourceTree = "<group>";
+		};
+		8C7DE67C2164BEEC00824A4B /* HistoryAPI */ = {
+			isa = PBXGroup;
+			children = (
+				8C7DE67D2164BF0500824A4B /* HistoryRequest.swift */,
+				8C7DE67F2164BF0E00824A4B /* HistoryAPI.swift */,
+			);
+			path = HistoryAPI;
 			sourceTree = "<group>";
 		};
 		8CA218902122E8880063C188 /* SendMoneyComponent */ = {
@@ -1729,6 +1760,7 @@
 				8C091938210622AA00703224 /* Request.swift in Sources */,
 				8C7C337F2147EF9800EC6C96 /* PhotoLayout.swift in Sources */,
 				8C333D382109F3D500949AC0 /* OnboardingFlow.swift in Sources */,
+				8C7DE6862164CAD400824A4B /* CryptocompareResponseError.swift in Sources */,
 				8C6088652112027300470411 /* ThreeStepsAPI.swift in Sources */,
 				8C091949210714D800703224 /* NetworkService.swift in Sources */,
 				8C713B30213FD4A500AC2E25 /* WalletTabBarItem.swift in Sources */,
@@ -1854,6 +1886,7 @@
 				8C04BC3921219D0600E90090 /* Drawing.swift in Sources */,
 				8C4413D02118A8EC00C9689C /* KeychainConfiguration.swift in Sources */,
 				8CA218942122EAC90063C188 /* SendMoneyComponent.swift in Sources */,
+				8C7DE6822164C5F800824A4B /* CoinDailyPriceData.swift in Sources */,
 				8CA218A1212304590063C188 /* SendMoneyViewController.swift in Sources */,
 				8C0919832109CC2000703224 /* EnterLoginPasswordViewController.swift in Sources */,
 				8C2314532150EA66007340E7 /* PartialPhoneNumberTextField.swift in Sources */,
@@ -1866,6 +1899,8 @@
 				8CF5F95221148D800083B36A /* DotsFieldComponent.swift in Sources */,
 				8C7C3397214A972200EC6C96 /* SizePresetable.swift in Sources */,
 				8C09197B2108D66100703224 /* SignUpFlow.swift in Sources */,
+				8C7DE67E2164BF0500824A4B /* HistoryRequest.swift in Sources */,
+				8C7DE6802164BF0E00824A4B /* HistoryAPI.swift in Sources */,
 				8C7C334D2142C15100EC6C96 /* KYCPersonalInfoViewController.swift in Sources */,
 				8CA218BD2125A34B0063C188 /* AvoidingViewController.swift in Sources */,
 				8C23144B214FCA90007340E7 /* KeyboardNotifiableViewController.swift in Sources */,
@@ -1895,6 +1930,7 @@
 				8C0919532107320800703224 /* CodableFailure.swift in Sources */,
 				8C04BC2A211C4F4000E90090 /* UIFont+Additions.swift in Sources */,
 				8C04BC432121C23200E90090 /* UIImage+Extensions.swift in Sources */,
+				8C7DE67B2164BE9B00824A4B /* CryptocompareEnvironment.swift in Sources */,
 				8C7C33772147E3B500EC6C96 /* CurrencyCell.swift in Sources */,
 				8CF41D8F2136B842006D4FE2 /* TransactionsDirectionFilterComponent.swift in Sources */,
 				8CA21931213561C70063C188 /* MultiStatableButton.swift in Sources */,
