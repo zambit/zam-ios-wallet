@@ -91,7 +91,10 @@ class WalletSmallItemComponent: ItemComponent {
         pageControl?.numberOfPages = count
     }
 
-    func setupChart(layer: CALayer) {
+    func setupChart(points: [ChartLayer.Point]) {
+        let layer = ChartLayer(size: view.size, points: points)
+        layer.insets = UIEdgeInsets(top: 30.0, left: 0.0, bottom: 20.0, right: 0.0)
+
         layer.zPosition = -1
         layer.cornerRadius = 12.0
         layer.masksToBounds = true

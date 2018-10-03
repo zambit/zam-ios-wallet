@@ -117,4 +117,3 @@ class ChartLayer: CAShapeLayer {
         addSublayer(strokeLayer)
     }
 }
-

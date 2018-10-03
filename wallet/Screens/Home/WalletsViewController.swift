@@ -165,40 +165,20 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
         }
 
         guard let phone = phone else {
-            fatalError()
+            fatalError("Phone is nil")
         }
 
-        let size = CGSize(width: collectionView.bounds.width - 32, height: 120.0)
-
-//        let chart = ChartLayer(size: size, points: [
-//            ChartLayer.Point(x: 1535846400, y: 7301.26),
-//            ChartLayer.Point(x: 1535932800, y: 7270.05),
-//            ChartLayer.Point(x: 1536019200, y: 7369.86),
-//            ChartLayer.Point(x: 1536105600, y: 6705.03),
-//            ChartLayer.Point(x: 1536192000, y: 6411.78),
-//            ChartLayer.Point(x: 1536364800, y: 6200.16),
-//            ChartLayer.Point(x: 1536451200, y: 6249.07),
-//            ChartLayer.Point(x: 1536537600, y: 6324.43),
-//            ChartLayer.Point(x: 1536624000, y: 6295.54),
-//            ChartLayer.Point(x: 1536710400, y: 6337.11),
-//            ChartLayer.Point(x: 1536796800, y: 6492),
-//            ChartLayer.Point(x: 1536883200, y: 6486.01),
-//            ChartLayer.Point(x: 1536969600, y: 6522.08),
-//            ChartLayer.Point(x: 1537056000, y: 6502.44),
-//            ChartLayer.Point(x: 1537142400, y: 6261.48),
-//            ChartLayer.Point(x: 1537228800, y: 6346.44),
-//            ChartLayer.Point(x: 1537315200, y: 6398.8),
-//            ChartLayer.Point(x: 1537401600, y: 6505.9)
-//            ])
-
-        let chart = ChartLayer(size: size, points: walletsChartsPoints[indexPath.item])
-        chart.insets = UIEdgeInsets(top: 30.0, left: 0.0, bottom: 20.0, right: 0.0)
-        cell.setupChart(layer: chart)
-
         let wallet = wallets[indexPath.item]
+
         cell.configure(image: wallet.coin.image,
                        coinName: wallet.coin.name,
-                       coinAddit: wallet.coin.short, phoneNumber: phone, balance: wallet.balance.formatted(currency: .original), fiatBalance: wallet.balance.description(currency: .usd))
+                       coinAddit: wallet.coin.short,
+                       phoneNumber: phone,
+                       balance: wallet.balance.formatted(currency: .original),
+                       fiatBalance: wallet.balance.description(currency: .usd))
+
+        cell.setupChart(points: walletsChartsPoints[indexPath.item])
+
         cell.onSendButtonTap = {
             [weak self] in
 
@@ -223,7 +203,6 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
     // MARK: - UICollectionViewDelegateFlowLayout
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-
         return CGSize(width: collectionView.bounds.width, height: 134.0)
     }
 
@@ -239,6 +218,11 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
         loadData(sender)
     }
 
+    // MARK: - Load data
+
+    /**
+     Load wallets, assign it to private property and update collection view.
+     */
     private func loadData(_ sender: Any) {
         guard let token = userManager?.getToken() else {
             return
@@ -248,35 +232,67 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
             [weak self]
             wallets in
 
-            self?.wallets = wallets
-            self?.walletsChartsPoints = [[ChartLayer.Point]](repeating: [], count: 30)
+            guard let strongSelf = self else {
+                return
+            }
 
-            let group = DispatchGroup()
+            let oldCount = strongSelf.wallets.count
+            let newCount = wallets.count
 
-            wallets.enumerated().forEach({
-                w in
+            strongSelf.wallets = wallets
 
-                group.enter()
+            if oldCount != newCount {
 
-                self?.historyAPI?.getHistoricalDailyData(for: w.element.coin, days: 30).done {
-                    days in
-
-                    self?.walletsChartsPoints[w.offset] = days.map( { return ChartLayer.Point(x: $0.time.unixTimestamp, y: Double(truncating: $0.closePrice as NSNumber)) })
-                    group.leave()
-                }.catch {
-                    error in
-                }
-            })
-
-            group.notify(queue: .main) {
-                self?.collectionView?.reloadData()
-                self?.refreshControl?.endRefreshing()
+                strongSelf.loadChartsPoints(completion: {
+                    _ in
+                    strongSelf.collectionView?.reloadData()
+                    strongSelf.refreshControl?.endRefreshing()
+                })
+            } else {
+                strongSelf.collectionView?.reloadData()
+                strongSelf.refreshControl?.endRefreshing()
             }
         }.catch {
             [weak self]
             error in
 
             self?.refreshControl?.endRefreshing()
+        }
+    }
+
+    /**
+     Load wallets history points to build chart, assign it to private property and call completion block.
+     */
+    private func loadChartsPoints(completion: @escaping ([[ChartLayer.Point]]) -> Void) {
+        guard let historyAPI = historyAPI else {
+            return
+        }
+
+        self.walletsChartsPoints = [[ChartLayer.Point]](repeating: [], count: wallets.count)
+
+        let group = DispatchGroup()
+        for i in wallets.enumerated() {
+            group.enter()
+
+            historyAPI.getHistoricalDailyData(for: i.element.coin, days: 30).done {
+                [weak self]
+                days in
+
+                self?.walletsChartsPoints[i.offset] = days.map {
+                    return ChartLayer.Point(x: $0.time.unixTimestamp,
+                                            y: Double(truncating: $0.closePrice as NSNumber))
+                }
+                group.leave()
+            }.catch {
+                error in
+
+                print(error)
+                group.leave()
+            }
+        }
+
+        group.notify(queue: .main) {
+            completion(self.walletsChartsPoints)
         }
     }
 }
