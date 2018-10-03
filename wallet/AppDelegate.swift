@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -14,31 +15,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     var mainScreenFlow: ScreenFlow!
-    //var navigation: WalletNavigationController!
     var userDefaultsManager: UserDefaultsManager!
 
-//    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-//        let _vc = ControllerHelper.instantiateViewController(identifier: "TestViewController", storyboardName: "Main")
-//
-//        guard let vc = _vc as? TestViewController else {
-//            fatalError()
-//        }
-//
-//        self.window = UIWindow(frame: UIScreen.main.bounds)
-//        self.window?.rootViewController = vc
-//        self.window?.makeKeyAndVisible()
-//
-//        return true
-//    }
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
-        UIApplication.shared.statusBarStyle = .lightContent
 
-        let navigationController = WalletNavigationController()
+        FirebaseApp.configure()
+
+        UIApplication.shared.statusBarStyle = .lightContent
 
         userDefaultsManager = UserDefaultsManager(keychainConfiguration: WalletKeychainConfiguration())
 
+        let navigationController = WalletNavigationController()
         switch (userDefaultsManager.isPhoneVerified, userDefaultsManager.isPinCreated) {
         case (true, true):
             guard let phone = userDefaultsManager.getPhoneNumber() else {
@@ -65,9 +52,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         case (false, true):
             fatalError()
         case (false, false):
-            //let screenFlow = OnboardingFlow(navigationController: navigation)
-
             let screenFlow = OnboardingFlow(migratingNavigationController: navigationController)
+
             self.mainScreenFlow = screenFlow
             self.mainScreenFlow.begin(animated: false)
             break
