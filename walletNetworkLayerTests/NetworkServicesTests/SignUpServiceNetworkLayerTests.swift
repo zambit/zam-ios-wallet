@@ -24,7 +24,7 @@ enum SignUpServiceNetworkLayerStubs {
         case .providePassword:
             return "signup_provide_password"
         case .failure:
-            return "fail_response"
+            return "wallet_fail_response"
         }
     }
 

@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum CryptocompareResponseError: Error {
+enum CryptocompareResponseError: Error, Equatable {
     case serverFailureResponse(message: String)
     case undefinedServerFailureResponse
 }

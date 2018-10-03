@@ -24,7 +24,7 @@ enum RecoveryServiceNetworkLayerStubs {
         case .providePassword:
             return "successful_empty_response"
         case .failure:
-            return "fail_response"
+            return "wallet_fail_response"
         }
     }
 

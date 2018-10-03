@@ -185,6 +185,7 @@
 		8C7DE6802164BF0E00824A4B /* HistoryAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7DE67F2164BF0E00824A4B /* HistoryAPI.swift */; };
 		8C7DE6822164C5F800824A4B /* CoinDailyPriceData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7DE6812164C5F800824A4B /* CoinDailyPriceData.swift */; };
 		8C7DE6862164CAD400824A4B /* CryptocompareResponseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7DE6852164CAD400824A4B /* CryptocompareResponseError.swift */; };
+		8C7DE6882164EF8000824A4B /* HistoryServiceNetworkLayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7DE6872164EF8000824A4B /* HistoryServiceNetworkLayerTests.swift */; };
 		8CA2188F2121D97C0063C188 /* DecimalKeyboardComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CA2188E2121D97B0063C188 /* DecimalKeyboardComponent.xib */; };
 		8CA218922122E8D70063C188 /* SendMoneyComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CA218912122E8D70063C188 /* SendMoneyComponent.xib */; };
 		8CA218942122EAC90063C188 /* SendMoneyComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA218932122EAC90063C188 /* SendMoneyComponent.swift */; };
@@ -477,6 +478,7 @@
 		8C7DE67F2164BF0E00824A4B /* HistoryAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryAPI.swift; sourceTree = "<group>"; };
 		8C7DE6812164C5F800824A4B /* CoinDailyPriceData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinDailyPriceData.swift; sourceTree = "<group>"; };
 		8C7DE6852164CAD400824A4B /* CryptocompareResponseError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptocompareResponseError.swift; sourceTree = "<group>"; };
+		8C7DE6872164EF8000824A4B /* HistoryServiceNetworkLayerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryServiceNetworkLayerTests.swift; sourceTree = "<group>"; };
 		8CA2188E2121D97B0063C188 /* DecimalKeyboardComponent.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DecimalKeyboardComponent.xib; sourceTree = "<group>"; };
 		8CA218912122E8D70063C188 /* SendMoneyComponent.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SendMoneyComponent.xib; sourceTree = "<group>"; };
 		8CA218932122EAC90063C188 /* SendMoneyComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMoneyComponent.swift; sourceTree = "<group>"; };
@@ -714,7 +716,6 @@
 				8C09196B21089EDF00703224 /* AuthAPI */,
 				8C09196021076B6000703224 /* RecoveryAPI */,
 				8C09195D21076B0800703224 /* SignupAPI */,
-				8C0919542107347300703224 /* Codable */,
 			);
 			path = Wallet;
 			sourceTree = "<group>";
@@ -949,6 +950,7 @@
 				8C7DE6812164C5F800824A4B /* CoinDailyPriceData.swift */,
 				8CA218CC2126F23B0063C188 /* UserData.swift */,
 				8C52FFE02119BE0300EB55EA /* WalletData.swift */,
+				8C0919542107347300703224 /* Codable */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1184,6 +1186,7 @@
 				8C7DE662215CCEB900824A4B /* UserServiceNetworkLayerTests.swift */,
 				8C7DE666215CFE8000824A4B /* RecoveryServiceNetworkLayerTests.swift */,
 				8C7DE66A215D068B00824A4B /* SignUpServiceNetworkLayerTests.swift */,
+				8C7DE6872164EF8000824A4B /* HistoryServiceNetworkLayerTests.swift */,
 			);
 			path = NetworkServicesTests;
 			sourceTree = "<group>";
@@ -1972,6 +1975,7 @@
 				9307AC7A215BE0730093DB68 /* ProviderNetworkLayerTests.swift in Sources */,
 				9307AC70215BC7D90093DB68 /* DispatcherMock.swift in Sources */,
 				8C7DE66B215D068B00824A4B /* SignUpServiceNetworkLayerTests.swift in Sources */,
+				8C7DE6882164EF8000824A4B /* HistoryServiceNetworkLayerTests.swift in Sources */,
 				9307AC66215BC1990093DB68 /* walletNetworkLayerTests.swift in Sources */,
 				9307AC76215BDBEB0093DB68 /* Response+TestsExtensions.swift in Sources */,
 				8C7DE663215CCEB900824A4B /* UserServiceNetworkLayerTests.swift in Sources */,

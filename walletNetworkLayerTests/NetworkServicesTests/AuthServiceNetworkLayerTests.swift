@@ -27,7 +27,7 @@ enum AuthServiceNetworkLayerStubs {
         case .refreshToken:
             return "auth_refresh_token"
         case .failure:
-            return "fail_response"
+            return "wallet_fail_response"
         }
     }
 
