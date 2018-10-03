@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import Crashlytics
 
 typealias WalletsCollectionViewController = (UIViewController & WalletsCollection)
 
@@ -286,7 +287,8 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
             }.catch {
                 error in
 
-                print(error)
+                Crashlytics.sharedInstance().recordError(error)
+                
                 group.leave()
             }
         }

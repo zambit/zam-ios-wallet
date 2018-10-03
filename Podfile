@@ -7,6 +7,9 @@ target 'wallet' do
   pod 'PhoneNumberKit', '~> 2.1'
   pod 'ESTabBarController-swift'
   pod 'Hero'
+  pod 'Firebase/Core'
+  pod 'Fabric', '~> 1.7.11'
+  pod 'Crashlytics', '~> 3.10.7'
 
   target 'walletNetworkLayerTests' do
       inherit! :search_paths

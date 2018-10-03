@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import Crashlytics
 
 protocol SendMoneyViewControllerDelegate: class {
 
@@ -146,7 +147,8 @@ class SendMoneyViewController: AvoidingViewController, UICollectionViewDataSourc
             walletCell.configure(image: wallet.coin.image, coinName: wallet.coin.name, coinAddit: wallet.coin.short, phoneNumber: phone, balance: wallet.balance.formatted(currency: .original), fiatBalance: wallet.balance.description(currency: .usd))
         }.catch {
             error in
-            print(error)
+            
+            Crashlytics.sharedInstance().recordError(error)
         }
     }
 

@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import Crashlytics
 
 /**
  Verifying phone number screen controller. Owns its model and views.
@@ -127,7 +128,8 @@ class VerifyPhoneNumberWithSmsViewController: СonsistentViewController, Verific
             //...
         }.catch {
             error in
-            print(error)
+
+            Crashlytics.sharedInstance().recordError(error)
         }
     }
 }
