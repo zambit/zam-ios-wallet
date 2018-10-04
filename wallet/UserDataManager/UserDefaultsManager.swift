@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Crashlytics
 
 enum UserDataManagerError: Error {
     case noSavedPhoneForRemovingPin
@@ -35,6 +36,9 @@ struct UserDefaultsManager {
     }
 
     func save(phoneNumber: String) {
+        // set crashlytics user id as his phone number
+        Crashlytics.sharedInstance().setUserIdentifier(phoneNumber)
+
         userDefaults.set(phoneNumber, forKey: UserDefaultsKey.phoneNumber.rawValue)
     }
 
@@ -42,7 +46,6 @@ struct UserDefaultsManager {
         let passwordItem = KeychainPasswordItem(service: keychainConfiguration.serviceName,
                                                 account: accountName,
                                                 accessGroup: keychainConfiguration.accessGroup)
-
         try passwordItem.savePassword(pin)
     }
 

@@ -19,9 +19,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
+        // configure firebase analytics
         FirebaseApp.configure()
 
-        UIApplication.shared.statusBarStyle = .lightContent
+        // enable debug mode for crashlytics
+        Crashlytics.sharedInstance().debugMode = true
 
         userDefaultsManager = UserDefaultsManager(keychainConfiguration: WalletKeychainConfiguration())
 
@@ -29,8 +31,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         switch (userDefaultsManager.isPhoneVerified, userDefaultsManager.isPinCreated) {
         case (true, true):
             guard let phone = userDefaultsManager.getPhoneNumber() else {
-                fatalError()
+                fatalError("isPhoneVerified property lies")
             }
+
+            // set crashlytics user id as his phone number
+            Crashlytics.sharedInstance().setUserIdentifier(phone)
 
             let screenFlow = EnterPinFlow(migratingNavigationController: navigationController)
             screenFlow.prepare(phone: phone)
@@ -40,8 +45,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             break
         case (true, false):
             guard let phone = userDefaultsManager.getPhoneNumber() else {
-                fatalError()
+                fatalError("isPhoneVerified property lies")
             }
+
+            // set crashlytics user id as his phone number
+            Crashlytics.sharedInstance().setUserIdentifier(phone)
 
             let screenFlow = SecondEnterLoginFlow(migratingNavigationController: navigationController)
             screenFlow.prepare(phone: phone)
@@ -50,7 +58,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.mainScreenFlow.begin(animated: false)
             break
         case (false, true):
-            fatalError()
+            fatalError("Unexpected initial state")
         case (false, false):
             let screenFlow = OnboardingFlow(migratingNavigationController: navigationController)
 
