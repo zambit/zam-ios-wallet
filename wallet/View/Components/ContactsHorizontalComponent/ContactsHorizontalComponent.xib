@@ -14,8 +14,6 @@
             <connections>
                 <outlet property="contactsCollectionView" destination="C4g-74-L5x" id="MtT-dG-s8W"/>
                 <outlet property="contentView" destination="iN0-l3-epB" id="TPz-Qo-KVj"/>
-                <outlet property="leftOffsetConstraint" destination="89A-7R-eIH" id="y91-VC-waM"/>
-                <outlet property="rightOffsetConstraint" destination="pPn-bd-qmF" id="dpI-Dx-bcx"/>
                 <outlet property="searchTextField" destination="cgQ-hr-vaP" id="mZ2-bK-eSE"/>
                 <outlet property="titleLabel" destination="mIx-bb-0xQ" id="sZH-dH-8zh"/>
             </connections>
