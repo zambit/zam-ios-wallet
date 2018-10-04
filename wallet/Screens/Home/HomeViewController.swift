@@ -26,10 +26,59 @@ class HomeViewController: FloatingViewController, WalletsViewControllerDelegate,
         }
     }
 
+    lazy var viewsAnimationBlock: (State) -> Void = {
+        [weak self]
+        state in
+
+        guard let strongSelf = self else {
+            return
+        }
+
+        let sumLabelWidth: CGFloat = strongSelf.sumLabel?.bounds.width ?? 0
+
+        switch state {
+        case .open:
+            strongSelf.sumLabel?.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
+            strongSelf.sumLeftConstraint?.constant = strongSelf.view.bounds.width / 2.0 - sumLabelWidth / 2.0
+            strongSelf.sumTopConstraint?.constant = 0.0
+
+            strongSelf.sumBtcLabel?.alpha = 0.0
+            strongSelf.sumBtcLeftConstraint?.constant = strongSelf.view.bounds.width / 2.0 - (sumLabelWidth / 2.0) * 0.7
+
+            strongSelf.sumTitleLabel?.alpha = 0.0
+            strongSelf.sumTitleLeftConstraint?.constant = strongSelf.view.bounds.width / 2.0 - (sumLabelWidth / 2.0) * 0.7
+
+            strongSelf.contactsComponent?.alpha = 0.0
+            strongSelf.contactsComponentTopConstraint?.constant = 56.0
+
+            strongSelf.cardOffsetConstraint?.constant = -60
+
+        case .closed:
+            strongSelf.sumLabel?.transform = .identity
+            strongSelf.sumLeftConstraint?.constant = 16.0
+            strongSelf.sumTopConstraint?.constant = 55.0
+
+            strongSelf.sumBtcLabel?.alpha = 1.0
+            strongSelf.sumBtcLeftConstraint?.constant = 16.0
+
+            strongSelf.sumTitleLabel?.alpha = 1.0
+            strongSelf.sumTitleLeftConstraint?.constant = 16.0
+
+            strongSelf.embededViewController?.scrollToTop()
+
+            strongSelf.contactsComponent?.alpha = 1.0
+            strongSelf.contactsComponentTopConstraint?.constant = 16.0
+
+            strongSelf.cardOffsetConstraint?.constant = strongSelf.cardViewInitialOffset
+        }
+        strongSelf.view.layoutIfNeeded()
+    }
+
     // MARK: - Outlets
 
     @IBOutlet var contactsComponent: ContactsHorizontalComponent?
-
+    @IBOutlet var contactsComponentTopConstraint: NSLayoutConstraint?
+    
     @IBOutlet var detailViewHeight: NSLayoutConstraint?
 
     @IBOutlet var detailGestureView: UIView?
@@ -54,9 +103,7 @@ class HomeViewController: FloatingViewController, WalletsViewControllerDelegate,
 
     // MARK: - Sizing constraints
 
-    private var cardViewOffset: CGFloat = 0
-    private var sumLeftLabelOffset: CGFloat = 0
-    private var sumLeftTargetLabelOffset: CGFloat = 0
+    private var cardViewInitialOffset: CGFloat = 0
 
     // MARK: - Data
 
@@ -65,7 +112,7 @@ class HomeViewController: FloatingViewController, WalletsViewControllerDelegate,
 
     private var isContactsLoading: Bool = false
 
-    // MARK: - View Controller Lifecycle
+    // MARK: - UIViewController Lifecycle
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -126,8 +173,7 @@ class HomeViewController: FloatingViewController, WalletsViewControllerDelegate,
             fatalError()
         }
 
-        cardViewOffset = cardOffsetConstraint?.constant ?? 0
-        sumLeftLabelOffset = sumLeftConstraint?.constant ?? 0
+        cardViewInitialOffset = cardOffsetConstraint?.constant ?? 0
 
         detailGestureView?.addGestureRecognizer(floatingPanGestureRecognizer)
         detailTopGestureView?.addGestureRecognizer(floatingPanGestureRecognizer)
@@ -151,7 +197,7 @@ class HomeViewController: FloatingViewController, WalletsViewControllerDelegate,
         }
     }
 
-    // MARK: - ViewController's Style
+    // MARK: - Screen Style
 
     private func setupStyle() {
         floatingView?.layer.cornerRadius = 16.0
@@ -249,6 +295,8 @@ class HomeViewController: FloatingViewController, WalletsViewControllerDelegate,
 
             let sumLabelWidth = sumLabel?.bounds.width ?? 0.0
             sumLeftConstraint?.constant = self.view.bounds.width / 2.0 - sumLabelWidth / 2.0
+            sumTitleLeftConstraint?.constant = self.view.bounds.width / 2.0 - (sumLabelWidth / 2.0) * 0.7
+            sumBtcLeftConstraint?.constant = self.view.bounds.width / 2.0 - (sumLabelWidth / 2.0) * 0.7
         }
     }
 
@@ -381,48 +429,17 @@ class HomeViewController: FloatingViewController, WalletsViewControllerDelegate,
         if state == .closed {
             embededViewController?.isScrollEnabled = false
         }
+
+        contactsComponent?.isUserInteractionEnabled = false
     }
 
     override func stateDidChange(_ state: FloatingViewController.State) {
         super.stateDidChange(state)
 
-        // evaluate some values before setting animation
-
-        let sumLabelWidth: CGFloat = sumLabel?.bounds.width ?? 0
-
         embededViewController?.isScrollEnabled = true
+        contactsComponent?.isUserInteractionEnabled = true
 
-        switch state {
-        case .open:
-            self.sumLabel?.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
-            self.sumLeftConstraint?.constant = self.view.bounds.width / 2.0 - sumLabelWidth / 2.0
-            self.sumTopConstraint?.constant = 0.0
-
-            self.sumBtcLeftConstraint?.constant = -(self.sumLabel?.bounds.width ?? 200.0)
-
-            self.sumTitleLabel?.alpha = 0.0
-            self.sumTitleLeftConstraint?.constant = self.view.bounds.width / 2.0 - (sumLabelWidth / 2.0) * 0.7
-
-            self.contactsComponent?.changeLayouts()
-
-            self.cardOffsetConstraint?.constant = -60
-
-        case .closed:
-            self.sumLabel?.transform = .identity
-            self.sumLeftConstraint?.constant = 16.0
-            self.sumTopConstraint?.constant = 55.0
-
-            self.sumBtcLeftConstraint?.constant = 16.0
-
-            self.sumTitleLabel?.alpha = 1.0
-            self.sumTitleLeftConstraint?.constant = 16.0
-
-            self.embededViewController?.scrollToTop()
-
-            self.contactsComponent?.resetLayouts()
-
-            self.cardOffsetConstraint?.constant = self.cardViewOffset
-        }
+        viewsAnimationBlock(state)
     }
 
     override func createTransitionAnimatorsIfNeeded(to state: FloatingViewController.State, duration: TimeInterval) -> [UIViewPropertyAnimator] {
@@ -433,46 +450,9 @@ class HomeViewController: FloatingViewController, WalletsViewControllerDelegate,
 
         self.contactsComponent?.searchTextField?.resignFirstResponder()
 
-        // evaluate some values before setting animation
-
-        let sumLabelWidth: CGFloat = sumLabel?.bounds.width ?? 0
-
         // an animator for the transition
         transitionAnimator.addAnimations {
-            switch state {
-            case .open:
-                self.sumLabel?.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
-                self.sumLeftConstraint?.constant = self.view.bounds.width / 2.0 - sumLabelWidth / 2.0
-                self.sumTopConstraint?.constant = 0.0
-
-                self.sumBtcLeftConstraint?.constant = -(self.sumLabel?.bounds.width ?? 200.0)
-
-                self.sumTitleLabel?.alpha = 0.0
-                self.sumTitleLeftConstraint?.constant = self.view.bounds.width / 2.0 - (sumLabelWidth / 2.0) * 0.7
-
-                self.contactsComponent?.scrollContactsToHide()
-                self.contactsComponent?.changeLayouts()
-
-                self.cardOffsetConstraint?.constant = -60
-
-            case .closed:
-                self.sumLabel?.transform = .identity
-                self.sumLeftConstraint?.constant = 16.0
-                self.sumTopConstraint?.constant = 55.0
-
-                self.sumBtcLeftConstraint?.constant = 16.0
-
-                self.sumTitleLabel?.alpha = 1.0
-                self.sumTitleLeftConstraint?.constant = 16.0
-
-                self.embededViewController?.scrollToTop()
-
-                self.contactsComponent?.scrollContactsBack()
-                self.contactsComponent?.resetLayouts()
-
-                self.cardOffsetConstraint?.constant = self.cardViewOffset
-            }
-            self.view.layoutIfNeeded()
+            self.viewsAnimationBlock(state)
         }
 
         return [transitionAnimator]
