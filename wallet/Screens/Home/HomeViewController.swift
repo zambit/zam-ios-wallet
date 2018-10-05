@@ -316,6 +316,11 @@ class HomeViewController: FloatingViewController, WalletsViewControllerDelegate,
     // MARK: - HomeController
 
     func performSendFromWallet(index: Int, wallets: [WalletData], phone: String, recipient: FormattedContactData? = nil) {
+        floatingView?.hero.id = "floatingView"
+        floatingView?.hero.modifiers = [.useLayerRenderSnapshot]
+        detailTopGestureView?.hero.modifiers = [.fade]
+        walletsContainerView?.hero.modifiers = [.fade]
+
         self.onSendFromWallet?(index, wallets, recipient, phone)
     }
 
@@ -337,6 +342,7 @@ class HomeViewController: FloatingViewController, WalletsViewControllerDelegate,
 
     func sendMoneyViewControllerSendingProceedWithSuccess(_ sendMoneyViewController: SendMoneyViewController) {
         loadData()
+
         walletsCollectionViewController?.reload()
     }
 

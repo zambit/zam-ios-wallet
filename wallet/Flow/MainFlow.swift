@@ -351,7 +351,7 @@ final class MainFlow: ScreenFlow {
             target.delegate = vc
             target.advancedTransitionDelegate = vc
 
-            vc.migratingNavigationController?.custom.push(viewController: target)
+            vc.migratingNavigationController?.custom.pushAdvancedly(viewController: target)
         }
 
         let onDepositToWallet: (Int, [WalletData], String) -> Void = {
@@ -365,7 +365,7 @@ final class MainFlow: ScreenFlow {
             let target = strongSelf.depositMoneyScreen
             target.prepare(wallets: wallets, currentIndex: index, phone: phone)
 
-            vc.migratingNavigationController?.custom.push(viewController: target)
+            vc.migratingNavigationController?.custom.pushAdvancedly(viewController: target)
         }
 
         vc.onSendFromWallet = onSendFromWallet

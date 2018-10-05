@@ -50,6 +50,9 @@ class SendMoneyViewController: AvoidingViewController, UICollectionViewDataSourc
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.hero.isEnabled = true
+        self.sendMoneyComponent?.contentView.hero.id = "floatingView"
+
         switch UIScreen.main.type {
         case .small, .extraSmall:
             sendMoneyComponent?.prepare(preset: .superCompact)
@@ -260,7 +263,7 @@ class SendMoneyViewController: AvoidingViewController, UICollectionViewDataSourc
             }
 
             (walletsCollectionView?.cellForItem(at: IndexPath(item: 0, section: index)) as? WalletSmallItemComponent)?.setTargetToAnimation()
-            
+
             advancedTransitionDelegate?.advancedTransitionWillBegin(from: self, params: ["walletIndex": index])
         }
 
