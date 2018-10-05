@@ -18,6 +18,7 @@ protocol SendMoneyViewControllerDelegate: class {
 class SendMoneyViewController: AvoidingViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, SendMoneyComponentDelegate, TransactionDetailViewControllerDelegate, QRCodeScannerViewControllerDelegate {
 
     weak var delegate: SendMoneyViewControllerDelegate?
+    weak var advancedTransitionDelegate: AdvancedTransitionDelegate?
 
     var onSend: ((SendingData) -> Void)?
     var onQRScanner: (() -> Void)?
@@ -110,6 +111,10 @@ class SendMoneyViewController: AvoidingViewController, UICollectionViewDataSourc
 
         sendMoneyComponent?.onQRCodeScanning = onQRScanner
         sendMoneyComponent?.delegate = self
+
+        hero.isEnabled = true
+
+        migratingNavigationController?.custom.addBackButton(for: self, target: self, action: #selector(backButtonTouchUpInsideEvent(_:)))
     }
 
     func prepare(wallets: [WalletData], currentIndex: Int, recipient: FormattedContactData? = nil, phone: String) {
@@ -184,6 +189,10 @@ class SendMoneyViewController: AvoidingViewController, UICollectionViewDataSourc
             return UICollectionViewCell()
         }
 
+        if let currentIndex = currentIndex, indexPath.section == currentIndex {
+            cell.setTargetToAnimation()
+        }
+
         let wallet = wallets[indexPath.section]
         cell.configure(image: wallet.coin.image, coinName: wallet.coin.name, coinAddit: wallet.coin.short, phoneNumber: phone, balance: wallet.balance.formatted(currency: .original), fiatBalance: wallet.balance.description(currency: .usd))
         cell.setupPages(currentIndex: indexPath.section, count: wallets.count)
@@ -238,5 +247,23 @@ class SendMoneyViewController: AvoidingViewController, UICollectionViewDataSourc
         if let index = currentIndex, wallets.count > index {
             sendMoneyComponent?.prepare(address: "", coinType: wallets[index].coin, walletId: wallets[index].id)
         }
+    }
+
+    @objc
+    private func backButtonTouchUpInsideEvent(_ sender: Any) {
+        if let index = currentIndex {
+
+            walletsCollectionView?.visibleCells.compactMap {
+                return $0 as? WalletSmallItemComponent
+            }.forEach {
+                $0.removeTargetToAnimation()
+            }
+
+            (walletsCollectionView?.cellForItem(at: IndexPath(item: 0, section: index)) as? WalletSmallItemComponent)?.setTargetToAnimation()
+            
+            advancedTransitionDelegate?.advancedTransitionWillBegin(from: self, params: ["walletIndex": index])
+        }
+
+        migratingNavigationController?.popViewController(animated: true)
     }
 }

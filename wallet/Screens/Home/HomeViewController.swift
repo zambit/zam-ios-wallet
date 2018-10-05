@@ -9,20 +9,33 @@
 import Foundation
 import UIKit
 
-class HomeViewController: FloatingViewController, WalletsViewControllerDelegate, ContactsHorizontalComponentDelegate {
+/**
+ Protocol that provides interface to call some methods of home screen.
+ */
+protocol HomeController: class {
+
+    func performSendFromWallet(index: Int, wallets: [WalletData], phone: String, recipient: FormattedContactData?)
+
+    func performDepositFromWallet(index: Int, wallets: [WalletData], phone: String)
+}
+
+class HomeViewController: FloatingViewController, WalletsViewControllerDelegate, ContactsHorizontalComponentDelegate, AdvancedTransitionDelegate, SendMoneyViewControllerDelegate, HomeController {
 
     var contactsManager: UserContactsManager?
     var userManager: UserDefaultsManager?
     var userAPI: UserAPI?
 
-    var embededViewController: WalletsCollectionViewController? {
+    var onSendFromWallet: ((_ index: Int, _ wallets: [WalletData], _ recipient: FormattedContactData?, _ phone: String) -> Void)?
+    var onDepositToWallet: ((_ index: Int, _ wallets: [WalletData], _ phone: String) -> Void)?
+
+    var walletsCollectionViewController: WalletsCollectionViewController? {
         didSet {
-            guard let embeded = embededViewController else {
+            guard let embeded = walletsCollectionViewController else {
                 return
             }
 
             walletsContainerView?.set(viewController: embeded, owner: self)
-            embededViewController?.delegate = self
+            walletsCollectionViewController?.delegate = self
         }
     }
 
@@ -64,7 +77,7 @@ class HomeViewController: FloatingViewController, WalletsViewControllerDelegate,
             strongSelf.sumTitleLabel?.alpha = 1.0
             strongSelf.sumTitleLeftConstraint?.constant = 16.0
 
-            strongSelf.embededViewController?.scrollToTop()
+            strongSelf.walletsCollectionViewController?.scrollToTop()
 
             strongSelf.contactsComponent?.alpha = 1.0
             strongSelf.contactsComponentTopConstraint?.constant = 16.0
@@ -180,9 +193,9 @@ class HomeViewController: FloatingViewController, WalletsViewControllerDelegate,
 
         walletsContainerView?.isUserInteractionEnabled = true
 
-        if let embeded = embededViewController {
+        if let embeded = walletsCollectionViewController {
             walletsContainerView?.set(viewController: embeded, owner: self)
-            embededViewController?.delegate = self
+            walletsCollectionViewController?.delegate = self
         }
 
         view.clipsToBounds = true
@@ -252,7 +265,7 @@ class HomeViewController: FloatingViewController, WalletsViewControllerDelegate,
         detailTopGestureView?.applyGradient(colors: [.white, UIColor.white.withAlphaComponent(0.7), UIColor.white.withAlphaComponent(0.0)], locations: [0.0, 0.75, 1.0])
 
         let insets = UIEdgeInsets(top: 64, left: 0, bottom: 64, right: 0)
-        embededViewController?.setContentInsets(insets)
+        walletsCollectionViewController?.contentInsets = insets
     }
 
     private func setupTotalBalanceLabel(text: String, primaryStyleRange: CountableRange<Int>, fractionStyleRange: CountableRange<Int>) {
@@ -298,6 +311,33 @@ class HomeViewController: FloatingViewController, WalletsViewControllerDelegate,
             sumTitleLeftConstraint?.constant = self.view.bounds.width / 2.0 - (sumLabelWidth / 2.0) * 0.7
             sumBtcLeftConstraint?.constant = self.view.bounds.width / 2.0 - (sumLabelWidth / 2.0) * 0.7
         }
+    }
+
+    // MARK: - HomeController
+
+    func performSendFromWallet(index: Int, wallets: [WalletData], phone: String, recipient: FormattedContactData? = nil) {
+        self.onSendFromWallet?(index, wallets, recipient, phone)
+    }
+
+    func performDepositFromWallet(index: Int, wallets: [WalletData], phone: String) {
+        self.onDepositToWallet?(index, wallets, phone)
+    }
+
+    // MARK: - AdvancedTransitionDelegate
+
+    func advancedTransitionWillBegin(from viewController: FlowViewController, params: [String : Any]) {
+        guard let index = params["walletIndex"] as? Int else {
+            return
+        }
+
+        walletsCollectionViewController?.prepareToAnimation(cellIndex: index)
+    }
+
+    // MARK: - SendMoneyViewControllerDelegate
+
+    func sendMoneyViewControllerSendingProceedWithSuccess(_ sendMoneyViewController: SendMoneyViewController) {
+        loadData()
+        walletsCollectionViewController?.reload()
     }
 
     // MARK: - Load data
@@ -400,8 +440,8 @@ class HomeViewController: FloatingViewController, WalletsViewControllerDelegate,
     // MARK: - ContactsHorizontalComponentDelegate
 
     func contactsHorizontalComponent(_ contactsHorizontalComponent: ContactsHorizontalComponent, itemWasTapped contactData: ContactData) {
-
         contactsHorizontalComponent.isUserInteractionEnabled = false
+
         dismissKeyboard {
             [weak self] in
 
@@ -411,7 +451,7 @@ class HomeViewController: FloatingViewController, WalletsViewControllerDelegate,
                 contactsHorizontalComponent.isUserInteractionEnabled = true
 
                 if let formatted = formatted {
-                    self?.embededViewController?.sendWithContact(formatted)
+                    self?.walletsCollectionViewController?.sendTo(contact: formatted)
                 }
             }
         }
@@ -422,12 +462,12 @@ class HomeViewController: FloatingViewController, WalletsViewControllerDelegate,
     override func stateChangingBegin(_ state: FloatingViewController.State) {
         super.stateChangingBegin(state)
 
-        if let embeded = embededViewController, embeded.isTopExpanded {
-            embededViewController?.scrollToTop()
+        if let embeded = walletsCollectionViewController, embeded.isTopExpanded {
+            walletsCollectionViewController?.scrollToTop()
         }
 
         if state == .closed {
-            embededViewController?.isScrollEnabled = false
+            walletsCollectionViewController?.isScrollEnabled = false
         }
 
         contactsComponent?.isUserInteractionEnabled = false
@@ -436,7 +476,7 @@ class HomeViewController: FloatingViewController, WalletsViewControllerDelegate,
     override func stateDidChange(_ state: FloatingViewController.State) {
         super.stateDidChange(state)
 
-        embededViewController?.isScrollEnabled = true
+        walletsCollectionViewController?.isScrollEnabled = true
         contactsComponent?.isUserInteractionEnabled = true
 
         viewsAnimationBlock(state)

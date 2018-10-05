@@ -108,4 +108,23 @@ class WalletSmallItemComponent: ItemComponent {
 
         view.layer.addSublayer(layer)
     }
+
+    func setTargetToAnimation() {
+        self.view.hero.id = "walletView"
+        self.view.hero.modifiers = [.arc(intensity: 1)]
+        self.iconImageView.hero.id = "walletIconImageView"
+        self.coinNameLabel.hero.id = "walletCoinNameLabel"
+        self.phoneNumberLabel.hero.id = "walletPhoneNumberLabel"
+        self.balanceLabel.hero.id = "walletBalanceLabel"
+        self.fiatBalanceLabel.hero.id = "walletFiatBalanceLabel"
+    }
+
+    func removeTargetToAnimation() {
+        self.view.hero.id = nil
+        self.iconImageView.hero.id = nil
+        self.coinNameLabel.hero.id = nil
+        self.phoneNumberLabel.hero.id = nil
+        self.balanceLabel.hero.id = nil
+        self.fiatBalanceLabel.hero.id = nil
+    }
 }
