@@ -11,8 +11,11 @@ import UIKit
 
 class DepositMoneyViewController: FlowViewController, WalletNavigable, DepositMoneyMethodComponentDelegate {
 
+    weak var advancedTransitionDelegate: AdvancedTransitionDelegate?
+
     var onShare: ((String) -> Void)?
 
+    @IBOutlet private var backgroundView: UIView!
     @IBOutlet private var methodControllerComponent: DepositMoneyMethodComponent?
     @IBOutlet private var addressContentComponent: DepositMoneyAddressComponent?
 
@@ -30,6 +33,9 @@ class DepositMoneyViewController: FlowViewController, WalletNavigable, DepositMo
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        self.hero.isEnabled = true
+        self.backgroundView.hero.id = "floatingView"
 
         switch UIScreen.main.type {
         case .extraSmall, .small:
@@ -52,6 +58,8 @@ class DepositMoneyViewController: FlowViewController, WalletNavigable, DepositMo
         if let wallets = wallets, let index = currentIndex, let phone = phone {
             methodControllerComponent?.prepare(wallets: wallets, currentIndex: index, phone: phone)
         }
+
+        migratingNavigationController?.custom.addBackButton(for: self, target: self, action: #selector(backButtonTouchUpInsideEvent(_:)))
     }
 
     func prepare(wallets: [WalletData], currentIndex: Int, phone: String) {
@@ -77,6 +85,7 @@ class DepositMoneyViewController: FlowViewController, WalletNavigable, DepositMo
     }
 
     func depositMoneyMethodWalletChanged(_ depositMoneyMethodSelected: DepositMoneyMethodComponent, toIndex: Int, wallets: [WalletData]) {
+        currentIndex = toIndex
 
         addressContentComponent?.prepare(address: wallets[toIndex].address)
     }
@@ -84,6 +93,17 @@ class DepositMoneyViewController: FlowViewController, WalletNavigable, DepositMo
     func depositMoneyMethodCardChanged(_ depositMoneyMethodSelected: DepositMoneyMethodComponent, toCardId: String) {
 
         //..
+    }
+
+    @objc
+    private func backButtonTouchUpInsideEvent(_ sender: Any) {
+        if let index = currentIndex {
+            methodControllerComponent?.prepareForAnimation()
+
+            advancedTransitionDelegate?.advancedTransitionWillBegin(from: self, params: ["walletIndex": index])
+        }
+
+        migratingNavigationController?.popViewController(animated: true)
     }
     
 }

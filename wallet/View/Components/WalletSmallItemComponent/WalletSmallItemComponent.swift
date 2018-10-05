@@ -12,7 +12,7 @@ import UIKit
 class WalletSmallItemComponent: ItemComponent {
     
     @IBOutlet private var iconImageView: UIImageView!
-    @IBOutlet private var coinNameLabel: UILabel!
+    @IBOutlet var coinNameLabel: UILabel!
     @IBOutlet private var phoneNumberLabel: UILabel!
     @IBOutlet private var balanceLabel: UILabel!
     @IBOutlet private var fiatBalanceLabel: UILabel!

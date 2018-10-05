@@ -55,7 +55,7 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
 
     private var wallets: [WalletData] = []
     private var walletsChartsPoints: [[ChartLayer.Point]] = []
-    private var phone: String = ""
+    private var phone: String!
 
     private var refreshControl: UIRefreshControl?
 
