@@ -162,7 +162,6 @@ class HomeViewController: FloatingViewController, WalletsViewControllerDelegate,
             self.floatingViewInitialOffset = 350
 
         } else {
-
             self.contactsComponent?.contactsCollectionView?.endLoading()
             self.floatingViewInitialOffset = 200
 
@@ -317,7 +316,7 @@ class HomeViewController: FloatingViewController, WalletsViewControllerDelegate,
 
     func performSendFromWallet(index: Int, wallets: [WalletData], phone: String, recipient: FormattedContactData? = nil) {
         floatingView?.hero.id = "floatingView"
-        floatingView?.hero.modifiers = [.useLayerRenderSnapshot]
+        floatingView?.hero.modifiers = [.useScaleBasedSizeChange]
         detailTopGestureView?.hero.modifiers = [.fade]
         walletsContainerView?.hero.modifiers = [.fade]
 
@@ -325,6 +324,11 @@ class HomeViewController: FloatingViewController, WalletsViewControllerDelegate,
     }
 
     func performDepositFromWallet(index: Int, wallets: [WalletData], phone: String) {
+        floatingView?.hero.id = "floatingView"
+        floatingView?.hero.modifiers = [.useScaleBasedSizeChange]
+        detailTopGestureView?.hero.modifiers = [.fade]
+        walletsContainerView?.hero.modifiers = [.fade]
+
         self.onDepositToWallet?(index, wallets, phone)
     }
 

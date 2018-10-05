@@ -42,8 +42,6 @@ class SendMoneyViewController: AvoidingViewController, UICollectionViewDataSourc
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        scrollToCurrentWallet()
-
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
 
@@ -111,11 +109,14 @@ class SendMoneyViewController: AvoidingViewController, UICollectionViewDataSourc
 
         walletsCollectionView?.layoutIfNeeded()
         walletsCollectionView?.reloadData()
+        walletsCollectionView?.performBatchUpdates(nil) {
+            [weak self] _ in
+
+            self?.scrollToCurrentWallet()
+        }
 
         sendMoneyComponent?.onQRCodeScanning = onQRScanner
         sendMoneyComponent?.delegate = self
-
-        hero.isEnabled = true
 
         migratingNavigationController?.custom.addBackButton(for: self, target: self, action: #selector(backButtonTouchUpInsideEvent(_:)))
     }
