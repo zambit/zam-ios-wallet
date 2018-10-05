@@ -58,7 +58,6 @@
 		8C23144D21500529007340E7 /* PhoneNumberComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C23144C21500529007340E7 /* PhoneNumberComponent.swift */; };
 		8C2314512150EA53007340E7 /* PartialPhoneNumberCodeTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2314502150EA53007340E7 /* PartialPhoneNumberCodeTextField.swift */; };
 		8C2314532150EA66007340E7 /* PartialPhoneNumberTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2314522150EA66007340E7 /* PartialPhoneNumberTextField.swift */; };
-		8C2314552150FF6A007340E7 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2314542150FF6A007340E7 /* TestViewController.swift */; };
 		8C23145B21526C9A007340E7 /* RecipientComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C23145A21526C9A007340E7 /* RecipientComponent.swift */; };
 		8C23145F21527095007340E7 /* AddressRecipientComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C23145E21527095007340E7 /* AddressRecipientComponent.swift */; };
 		8C231461215283DA007340E7 /* FormEditingStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C231460215283DA007340E7 /* FormEditingStatus.swift */; };
@@ -187,6 +186,7 @@
 		8C7DE6862164CAD400824A4B /* CryptocompareResponseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7DE6852164CAD400824A4B /* CryptocompareResponseError.swift */; };
 		8C7DE6882164EF8000824A4B /* HistoryServiceNetworkLayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7DE6872164EF8000824A4B /* HistoryServiceNetworkLayerTests.swift */; };
 		8C7DE68F2166104000824A4B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C7DE68E2166104000824A4B /* GoogleService-Info.plist */; };
+		8C7DE6932167916B00824A4B /* AdvancedTransitionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7DE6922167916B00824A4B /* AdvancedTransitionDelegate.swift */; };
 		8CA2188F2121D97C0063C188 /* DecimalKeyboardComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CA2188E2121D97B0063C188 /* DecimalKeyboardComponent.xib */; };
 		8CA218922122E8D70063C188 /* SendMoneyComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CA218912122E8D70063C188 /* SendMoneyComponent.xib */; };
 		8CA218942122EAC90063C188 /* SendMoneyComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA218932122EAC90063C188 /* SendMoneyComponent.swift */; };
@@ -350,7 +350,6 @@
 		8C23144C21500529007340E7 /* PhoneNumberComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberComponent.swift; sourceTree = "<group>"; };
 		8C2314502150EA53007340E7 /* PartialPhoneNumberCodeTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartialPhoneNumberCodeTextField.swift; sourceTree = "<group>"; };
 		8C2314522150EA66007340E7 /* PartialPhoneNumberTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartialPhoneNumberTextField.swift; sourceTree = "<group>"; };
-		8C2314542150FF6A007340E7 /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		8C23145A21526C9A007340E7 /* RecipientComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipientComponent.swift; sourceTree = "<group>"; };
 		8C23145C21526FEF007340E7 /* PhoneNumberRecipientComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberRecipientComponent.swift; sourceTree = "<group>"; };
 		8C23145E21527095007340E7 /* AddressRecipientComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressRecipientComponent.swift; sourceTree = "<group>"; };
@@ -481,6 +480,7 @@
 		8C7DE6852164CAD400824A4B /* CryptocompareResponseError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptocompareResponseError.swift; sourceTree = "<group>"; };
 		8C7DE6872164EF8000824A4B /* HistoryServiceNetworkLayerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryServiceNetworkLayerTests.swift; sourceTree = "<group>"; };
 		8C7DE68E2166104000824A4B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		8C7DE6922167916B00824A4B /* AdvancedTransitionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvancedTransitionDelegate.swift; sourceTree = "<group>"; };
 		8CA2188E2121D97B0063C188 /* DecimalKeyboardComponent.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DecimalKeyboardComponent.xib; sourceTree = "<group>"; };
 		8CA218912122E8D70063C188 /* SendMoneyComponent.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SendMoneyComponent.xib; sourceTree = "<group>"; };
 		8CA218932122EAC90063C188 /* SendMoneyComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMoneyComponent.swift; sourceTree = "<group>"; };
@@ -629,6 +629,7 @@
 		8C09192B21061ED800703224 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				8C7DE6922167916B00824A4B /* AdvancedTransitionDelegate.swift */,
 				8CA218D7212D68510063C188 /* Authentication */,
 				8C6088502111A95100470411 /* Conditions.swift */,
 				8C09192C21061F3600703224 /* ControllerHelper.swift */,
@@ -890,7 +891,6 @@
 			isa = PBXGroup;
 			children = (
 				8C34616A20EF8FA700746724 /* AppDelegate.swift */,
-				8C2314542150FF6A007340E7 /* TestViewController.swift */,
 				8C04BC2B211C4FB200E90090 /* Fonts */,
 				8C60883E2110632100470411 /* UserDataManager */,
 				8CF5F92A21130BB50083B36A /* Navigation */,
@@ -1971,8 +1971,8 @@
 				8CA218AF212479040063C188 /* SendMoneyButton.swift in Sources */,
 				8C7DE66E215D36F200824A4B /* UIScrollView+Extensions.swift in Sources */,
 				8C09193B210623F200703224 /* Environment.swift in Sources */,
-				8C2314552150FF6A007340E7 /* TestViewController.swift in Sources */,
 				8C6088482110A75100470411 /* TimerButton.swift in Sources */,
+				8C7DE6932167916B00824A4B /* AdvancedTransitionDelegate.swift in Sources */,
 				8C7C33602146ACBE00EC6C96 /* KYCUploadDocumentsMenuViewController.swift in Sources */,
 				8C333D56210B4EF400949AC0 /* VerificationCodeFormComponent.swift in Sources */,
 				8C09196D21089FA700703224 /* AuthRequest.swift in Sources */,

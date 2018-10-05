@@ -338,8 +338,40 @@ final class MainFlow: ScreenFlow {
             fatalError()
         }
 
-        vc.embededViewController = walletsScreen
-        vc.embededViewController?.owner = vc
+        let onSendFromWallet: (Int, [WalletData], FormattedContactData?, String) -> Void = {
+            [weak self]
+            index, wallets, contact, phone in
+
+            guard let strongSelf = self else {
+                return
+            }
+
+            let target = strongSelf.sendMoneyScreen
+            target.prepare(wallets: wallets, currentIndex: index, recipient: contact, phone: phone)
+            target.delegate = vc
+            target.advancedTransitionDelegate = vc
+
+            vc.migratingNavigationController?.custom.pushAdvancedly(viewController: target)
+        }
+
+        let onDepositToWallet: (Int, [WalletData], String) -> Void = {
+            [weak self]
+            index, wallets, phone in
+
+            guard let strongSelf = self else {
+                return
+            }
+
+            let target = strongSelf.depositMoneyScreen
+            target.prepare(wallets: wallets, currentIndex: index, phone: phone)
+
+            vc.migratingNavigationController?.custom.pushAdvancedly(viewController: target)
+        }
+
+        vc.onSendFromWallet = onSendFromWallet
+        vc.onDepositToWallet = onDepositToWallet
+        vc.walletsCollectionViewController = walletsScreen
+        vc.walletsCollectionViewController?.owner = vc
         vc.contactsManager = UserContactsManager.default
         vc.userManager = UserDefaultsManager(keychainConfiguration: WalletKeychainConfiguration())
         vc.userAPI = UserAPI(provider: Provider(environment: WalletEnvironment(), dispatcher: HTTPDispatcher()))
@@ -354,37 +386,6 @@ final class MainFlow: ScreenFlow {
             fatalError()
         }
 
-        let onSendFromWallet: (Int, [WalletData], FormattedContactData?, String, ScreenWalletNavigable) -> Void = {
-            [weak self]
-            index, wallets, contact, phone, owner in
-
-            guard let strongSelf = self else {
-                return
-            }
-
-            let target = strongSelf.sendMoneyScreen
-            target.prepare(wallets: wallets, currentIndex: index, recipient: contact, phone: phone)
-            target.delegate = vc
-
-            owner.migratingNavigationController?.custom.push(viewController: target)
-        }
-
-        let onDepositToWallet: (Int, [WalletData], String, ScreenWalletNavigable) -> Void = {
-            [weak self]
-            index, wallets, phone, owner in
-
-            guard let strongSelf = self else {
-                return
-            }
-
-            let target = strongSelf.depositMoneyScreen
-            target.prepare(wallets: wallets, currentIndex: index, phone: phone)
-
-            owner.migratingNavigationController?.custom.push(viewController: target)
-        }
-
-        vc.onSendFromWallet = onSendFromWallet
-        vc.onDepositToWallet = onDepositToWallet
         vc.userManager = UserDefaultsManager(keychainConfiguration: WalletKeychainConfiguration())
         vc.userAPI = UserAPI(provider: Provider(environment: WalletEnvironment(), dispatcher: HTTPDispatcher()))
         vc.historyAPI = HistoryAPI(provider: Provider(environment: CryptocompareEnvironment(), dispatcher: HTTPDispatcher()))
