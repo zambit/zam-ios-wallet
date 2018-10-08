@@ -93,11 +93,7 @@ class SendMoneyViewController: AvoidingViewController, WalletsCollectionComponen
         titleLabel?.text = "From"
 
         if let currentIndex = currentIndex, let phone = phone {
-            self.prepare(wallets: wallets, currentIndex: currentIndex, phone: phone)
-        }
-
-        if let index = currentIndex, wallets.count > index {
-            sendMoneyComponent?.prepare(recipient: recipient, coinType: wallets[index].coin, walletId: wallets[index].id)
+            self.prepare(wallets: wallets, currentIndex: currentIndex, recipient: recipient, phone: phone)
         }
 
         sendMoneyComponent?.onQRCodeScanning = onQRScanner
@@ -117,6 +113,8 @@ class SendMoneyViewController: AvoidingViewController, WalletsCollectionComponen
 
         let itemsData = wallets.map { WalletItemData(data: $0, phoneNumber: phone) }
         walletsCollectionComponent?.custom.prepare(cards: itemsData, current: currentIndex)
+
+        sendMoneyComponent?.prepare(recipient: recipient, coinType: wallets[currentIndex].coin, walletId: wallets[currentIndex].id)
     }
 
     private func updateDataForCurrentWallet() {
