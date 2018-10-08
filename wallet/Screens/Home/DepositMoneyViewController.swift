@@ -101,6 +101,7 @@ class DepositMoneyViewController: FlowViewController, WalletNavigable, Segmented
 
         let itemsData = wallets.map { WalletItemData(data: $0, phoneNumber: phone) }
         walletsCollectionComponent?.custom.prepare(cards: itemsData, current: currentIndex)
+        addressContentComponent?.prepare(address: wallets[currentIndex].address)
     }
 
     // MARK: - SegmentedControlComponentDelegate
@@ -108,7 +109,10 @@ class DepositMoneyViewController: FlowViewController, WalletNavigable, Segmented
     func segmentedControlComponent(_ segmentedControlComponent: SegmentedControlComponent, currentIndexChangedTo index: Int) {
         switch index {
         case 0:
-            addressContentComponent?.prepare(address: wallets[index].address)
+            guard let currentIndex = currentIndex else {
+                return
+            }
+            addressContentComponent?.prepare(address: wallets[currentIndex].address)
         case 1:
             //...
             break
