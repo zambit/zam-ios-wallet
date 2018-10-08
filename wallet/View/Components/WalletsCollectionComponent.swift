@@ -22,10 +22,17 @@ class WalletsCollectionComponent: UIView, UICollectionViewDataSource, UICollecti
 
     fileprivate var collectionView: UICollectionView!
     fileprivate var data: [Item.ConfiguratingType] = []
-    fileprivate var currentIndex: Int = 0
+    fileprivate(set) var currentIndex: Int = 0
 
     var currentItem: Item? {
         return collectionView.visibleCells.first as? Item
+    }
+
+    var currentItemData: Item.ConfiguratingType? {
+        guard currentIndex < data.count else {
+            return nil
+        }
+        return data[currentIndex]
     }
 
     override init(frame: CGRect) {
