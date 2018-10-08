@@ -120,34 +120,29 @@ class SendMoneyViewController: AvoidingViewController, WalletsCollectionComponen
     }
 
     private func updateDataForCurrentWallet() {
-//        guard
-//            let token = userManager?.getToken(),
-//            let phone = userManager?.getPhoneNumber(),
-//            let index = currentIndex,
-//            let sectionsCount = walletsCollectionView?.numberOfSections,
-//            sectionsCount > index else {
-//                return
-//        }
-//
-//        let oldWallet = wallets[index]
-//        let indexPath = IndexPath(item: 0, section: index)
-//
-//        guard let walletCell = walletsCollectionView?.cellForItem(at: indexPath) as? WalletSmallItemComponent else {
-//            return
-//        }
-//
-//        userAPI?.getWalletInfo(token: token, walletId: oldWallet.id).done {
-//            [weak self]
-//            wallet in
-//
-//            self?.wallets[index] = wallet
-//            let itemData = WalletItemData(data: wallet, phoneNumber: phone)
-//            walletCell.configure(with: itemData)
-//        }.catch {
-//            error in
-//
-//            Crashlytics.sharedInstance().recordError(error)
-//        }
+        guard
+            let token = userManager?.getToken(),
+            let phone = userManager?.getPhoneNumber(),
+            let currentIndex = walletsCollectionComponent?.currentIndex,
+            let currentCell = walletsCollectionComponent?.currentItem
+            else {
+                return
+        }
+
+        let wallet = wallets[currentIndex]
+
+        userAPI?.getWalletInfo(token: token, walletId: wallet.id).done {
+            [weak self]
+            wallet in
+
+            self?.wallets[currentIndex] = wallet
+            let itemData = WalletItemData(data: wallet, phoneNumber: phone)
+            currentCell.configure(with: itemData)
+        }.catch {
+            error in
+
+            Crashlytics.sharedInstance().recordError(error)
+        }
     }
 
     // MARK: - WalletsCollectionComponentDelegate
