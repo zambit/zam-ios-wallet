@@ -85,6 +85,20 @@ class DepositMoneyMethodComponent: Component, SegmentedControlComponentDelegate,
         delegate?.depositMoneyMethodSelected(self, method: .address)
     }
 
+    func prepareForAnimation() {
+        guard let index = currentIndex else {
+            return
+        }
+
+        walletsCollectionView?.visibleCells.compactMap {
+            return $0 as? WalletSmallItemComponent
+        }.forEach {
+            $0.removeTargetToAnimation()
+        }
+
+        (walletsCollectionView?.cellForItem(at: IndexPath(item: 0, section: index)) as? WalletSmallItemComponent)?.setTargetToAnimation()
+    }
+
     // MARK: - Private methods
 
     private func scrollToCurrentWallet() {
@@ -93,7 +107,6 @@ class DepositMoneyMethodComponent: Component, SegmentedControlComponentDelegate,
         }
 
         let indexPath = IndexPath(item: 0, section: index)
-
         walletsCollectionView?.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
     }
 
@@ -118,8 +131,12 @@ class DepositMoneyMethodComponent: Component, SegmentedControlComponentDelegate,
             return UICollectionViewCell()
         }
 
-        let wallet = wallets[indexPath.section]
-        cell.configure(image: wallet.coin.image, coinName: wallet.coin.name, coinAddit: wallet.coin.short, phoneNumber: phone, balance: wallet.balance.formatted(currency: .original), fiatBalance: wallet.balance.description(currency: .usd))
+        if let currentIndex = currentIndex, indexPath.section == currentIndex {
+            cell.setTargetToAnimation()
+        }
+
+        let itemData = WalletItemData(data: wallets[indexPath.section], phoneNumber: phone)
+        cell.configure(with: itemData)
         cell.setupPages(currentIndex: indexPath.section, count: wallets.count)
         return cell
     }
@@ -148,6 +165,7 @@ class DepositMoneyMethodComponent: Component, SegmentedControlComponentDelegate,
             return
         }
 
+        self.currentIndex = indexPath.section
         delegate?.depositMoneyMethodWalletChanged(self, toIndex: indexPath.section, wallets: wallets)
     }
 

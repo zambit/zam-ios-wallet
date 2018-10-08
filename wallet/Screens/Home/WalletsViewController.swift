@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import Crashlytics
+import Hero
 
 typealias WalletsCollectionViewController = (UIViewController & WalletsCollection)
 
@@ -19,17 +20,21 @@ protocol WalletsCollection {
 
     var delegate: WalletsViewControllerDelegate? { get set }
 
-    var owner: ScreenWalletNavigable? { get set }
+    var owner: HomeController? { get set }
 
     var isTopExpanded: Bool { get }
 
     var isScrollEnabled: Bool { get set }
 
-    func setContentInsets(_ insets: UIEdgeInsets)
+    var contentInsets: UIEdgeInsets { get set }
 
     func scrollToTop()
 
-    func sendWithContact(_ contact: FormattedContactData)
+    func sendTo(contact: FormattedContactData)
+
+    func prepareToAnimation(cellIndex: Int)
+
+    func reload()
 }
 
 protocol WalletsViewControllerDelegate: class {
@@ -39,13 +44,10 @@ protocol WalletsViewControllerDelegate: class {
     func walletsViewControllerScrollingEvent(_ walletsViewController: WalletsViewController, panGestureRecognizer: UIPanGestureRecognizer, offset: CGPoint)
 }
 
-class WalletsViewController: FlowCollectionViewController, UICollectionViewDelegateFlowLayout, SendMoneyViewControllerDelegate, WalletsCollection {
+class WalletsViewController: FlowCollectionViewController, UICollectionViewDelegateFlowLayout, WalletsCollection {
 
-    private weak var _owner: ScreenWalletNavigable?
+    private weak var _owner: HomeController?
     private weak var _delegate: WalletsViewControllerDelegate?
-
-    var onSendFromWallet: ((_ index: Int, _ wallets: [WalletData], _ recipient: FormattedContactData?, _ phone: String, _ owner: ScreenWalletNavigable) -> Void)?
-    var onDepositToWallet: ((_ index: Int, _ wallets: [WalletData], _ phone: String, _ owner: ScreenWalletNavigable) -> Void)?
 
     var userManager: UserDefaultsManager?
     var userAPI: UserAPI?
@@ -53,7 +55,7 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
 
     private var wallets: [WalletData] = []
     private var walletsChartsPoints: [[ChartLayer.Point]] = []
-    private var phone: String?
+    private var phone: String!
 
     private var refreshControl: UIRefreshControl?
 
@@ -69,7 +71,10 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
         collectionView?.delegate = self
         collectionView?.dataSource = self
 
-        phone = userManager?.getPhoneNumber()
+        guard let phone = userManager?.getPhoneNumber() else {
+            fatalError()
+        }
+        self.phone = phone
 
         loadData(self)
 
@@ -93,7 +98,7 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
         }
     }
 
-    var owner: ScreenWalletNavigable? {
+    var owner: HomeController? {
         get {
             return _owner
         }
@@ -117,8 +122,14 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
         }
     }
 
-    func setContentInsets(_ insets: UIEdgeInsets) {
-        collectionView.contentInset = insets
+    var contentInsets: UIEdgeInsets {
+        get {
+            return collectionView.contentInset
+        }
+
+        set {
+            collectionView.contentInset = newValue
+        }
     }
 
     func scrollToTop() {
@@ -126,12 +137,22 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
         collectionView.setContentOffset(newContentOffset, animated: false)
     }
 
-    func sendWithContact(_ contact: FormattedContactData) {
-        guard let phone = phone, let owner = _owner else {
+    func sendTo(contact: FormattedContactData) {
+        prepareToAnimation(cellIndex: 0)
+        owner?.performSendFromWallet(index: 0, wallets: wallets, phone: phone, recipient: contact)
+    }
+
+    func prepareToAnimation(cellIndex: Int) {
+        let indexPath = IndexPath(item: cellIndex, section: 0)
+        guard let cell = collectionView.cellForItem(at: indexPath) as? WalletSmallItemComponent else {
             return
         }
 
-        onSendFromWallet?(0, wallets, contact, phone, owner)
+        prepareCellForAnimation(cell)
+    }
+
+    func reload() {
+        loadData(self)
     }
 
     // MARK: - UIPanGestureRecognizer
@@ -165,19 +186,10 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
             fatalError()
         }
 
-        guard let phone = phone else {
-            fatalError("Phone is nil")
-        }
+        let itemData = WalletItemData(data: wallets[indexPath.item], phoneNumber: phone)
 
-        let wallet = wallets[indexPath.item]
-
-        cell.configure(image: wallet.coin.image,
-                       coinName: wallet.coin.name,
-                       coinAddit: wallet.coin.short,
-                       phoneNumber: phone,
-                       balance: wallet.balance.formatted(currency: .original),
-                       fiatBalance: wallet.balance.description(currency: .usd))
-
+        cell.configure(with: itemData)
+        
         cell.setupChart(points: walletsChartsPoints[indexPath.item])
 
         cell.onSendButtonTap = {
@@ -187,8 +199,10 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
                 return
             }
 
-            strongSelf.onSendFromWallet?(indexPath.item, strongSelf.wallets, nil, phone, owner)
+            strongSelf.prepareCellForAnimation(cell)
+            owner.performSendFromWallet(index: indexPath.item, wallets: strongSelf.wallets, phone: strongSelf.phone, recipient: nil)
         }
+
         cell.onDepositButtonTap = {
             [weak self] in
 
@@ -196,7 +210,8 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
                 return
             }
 
-            strongSelf.onDepositToWallet?(indexPath.item, strongSelf.wallets, phone, owner)
+            strongSelf.prepareCellForAnimation(cell)
+            owner.performDepositFromWallet(index: indexPath.item, wallets: strongSelf.wallets, phone: strongSelf.phone)
         }
         return cell
     }
@@ -207,15 +222,12 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
         return CGSize(width: collectionView.bounds.width, height: 134.0)
     }
 
-    // MARK: - SendMoneyViewControllerDelegate
-
-    func sendMoneyViewControllerSendingProceedWithSuccess(_ sendMoneyViewController: SendMoneyViewController) {
-        refreshControlValueChangedEvent(self)
-    }
+    // MARK: - Refresh
 
     @objc
     private func refreshControlValueChangedEvent(_ sender: Any) {
         _delegate?.walletsViewControllerCallsUpdateData(self)
+
         loadData(sender)
     }
 
@@ -296,5 +308,15 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
         group.notify(queue: .main) {
             completion(self.walletsChartsPoints)
         }
+    }
+
+    private func prepareCellForAnimation(_ cell: WalletSmallItemComponent) {
+        collectionView.visibleCells.compactMap {
+            return $0 as? WalletSmallItemComponent
+        }.forEach {
+            $0.removeTargetToAnimation()
+        }
+
+        cell.setTargetToAnimation()
     }
 }

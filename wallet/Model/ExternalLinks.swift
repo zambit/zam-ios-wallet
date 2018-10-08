@@ -21,7 +21,7 @@ enum ExternalLinks {
     var url: URL {
         switch self {
         case .telegram:
-            return URL(string: "https://t.me/zamzambank")!
+            return URL(string: "https://t.me/zamzamchat")!
         case .twitter:
             return URL(string: "https://twitter.com/zamzambank")!
         case .medium:

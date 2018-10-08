@@ -38,8 +38,7 @@ extension BehaviorExtension where Base: WalletNavigationController {
     }
 
     func setupStyle() {
-        base.hero.isEnabled = true
-        base.hero.navigationAnimationType = .selectBy(presenting: .slide(direction: .left), dismissing: .slide(direction: .right))
+        setDefaultNavigationAnimationType()
 
         base.navigationBar.setBackgroundImage(UIImage(), for: .default)
         base.navigationBar.shadowImage = UIImage()
@@ -50,6 +49,11 @@ extension BehaviorExtension where Base: WalletNavigationController {
         base.navigationItem.hidesBackButton = true
     }
 
+    private func setDefaultNavigationAnimationType() {
+        base.hero.isEnabled = true
+        base.hero.navigationAnimationType = .selectBy(presenting: .slide(direction: .left), dismissing: .slide(direction: .right))
+    }
+
     func push(viewController: ScreenWalletNavigable, animated: Bool = true) {
         base.pushViewController(viewController, animated: animated)
         hideBackButton(for: viewController)
@@ -57,6 +61,14 @@ extension BehaviorExtension where Base: WalletNavigationController {
         if base.viewControllers.count > 1 {
             addBackButton(for: viewController)
         }
+    }
+
+    func pushAdvancedly(viewController: ScreenWalletNavigable) {
+        Hero.shared.containerColor = .clear
+        base.hero.isEnabled = true
+        base.hero.navigationAnimationType = .selectBy(presenting: .fade, dismissing: .fade)
+
+        push(viewController: viewController)
     }
 
     func pushFromRoot(viewController: ScreenWalletNavigable, animated: Bool = true, direction: WalletNavigationControllerAnimationDirection) {

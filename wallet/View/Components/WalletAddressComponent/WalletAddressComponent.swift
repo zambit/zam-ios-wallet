@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class DepositMoneyAddressComponent: Component {
+class WalletAddressComponent: Component {
 
     var onShare: ((String) -> Void)?
 

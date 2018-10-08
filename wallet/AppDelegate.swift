@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import Hero
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,6 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var userDefaultsManager: UserDefaultsManager!
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+
+        //HeroDebugPlugin.isEnabled = true
 
         // configure firebase analytics
         FirebaseApp.configure()
