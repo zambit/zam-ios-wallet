@@ -186,15 +186,10 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
             fatalError()
         }
 
-        let wallet = wallets[indexPath.item]
+        let itemData = WalletItemData(data: wallets[indexPath.item], phoneNumber: phone)
 
-        cell.configure(image: wallet.coin.image,
-                       coinName: wallet.coin.name,
-                       coinAddit: wallet.coin.short,
-                       phoneNumber: phone,
-                       balance: wallet.balance.formatted(currency: .original),
-                       fiatBalance: wallet.balance.description(currency: .usd))
-
+        cell.configure(with: itemData)
+        
         cell.setupChart(points: walletsChartsPoints[indexPath.item])
 
         cell.onSendButtonTap = {

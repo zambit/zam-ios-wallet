@@ -9,8 +9,8 @@
 import Foundation
 import UIKit
 
-class WalletSmallItemComponent: ItemComponent {
-    
+class WalletSmallItemComponent: ItemComponent, Configurable {
+
     @IBOutlet private var iconImageView: UIImageView!
     @IBOutlet var coinNameLabel: UILabel!
     @IBOutlet private var phoneNumberLabel: UILabel!
@@ -71,19 +71,19 @@ class WalletSmallItemComponent: ItemComponent {
         self.view.layer.shadowOpacity = 0.5
     }
 
-    func configure(image: UIImage, coinName: String, coinAddit: String, phoneNumber: String, balance: String, fiatBalance: String) {
-        let coinNameText = NSAttributedString(string: coinName, attributes: coinNameLabelMainAttributes)
-        let coinAdditText = NSAttributedString(string: " \(coinAddit)", attributes: coinNameLabelAdditAttributes)
+    func configure(with data: WalletItemData) {
+        let coinNameText = NSAttributedString(string: data.name, attributes: coinNameLabelMainAttributes)
+        let coinAdditText = NSAttributedString(string: " \(data.short)", attributes: coinNameLabelAdditAttributes)
 
         let mutableCoinText = NSMutableAttributedString(attributedString: coinNameText)
         mutableCoinText.append(coinAdditText)
 
         coinNameLabel.attributedText = mutableCoinText
 
-        iconImageView.image = image
-        phoneNumberLabel.text = phoneNumber
-        balanceLabel.text = String(describing: balance)
-        fiatBalanceLabel.text = String(describing: fiatBalance)
+        iconImageView.image = data.icon
+        phoneNumberLabel.text = data.phoneNumber
+        balanceLabel.text = String(describing: data.balance)
+        fiatBalanceLabel.text = String(describing: data.fiatBalance)
     }
 
     func setupPages(currentIndex: Int, count: Int) {

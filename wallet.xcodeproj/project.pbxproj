@@ -126,8 +126,8 @@
 		8C713B0F2137E54100AC2E25 /* UIRefreshControl+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C713B0E2137E54100AC2E25 /* UIRefreshControl+Extensions.swift */; };
 		8C713B112137F95200AC2E25 /* DepositMoneyMethodComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C713B102137F95200AC2E25 /* DepositMoneyMethodComponent.swift */; };
 		8C713B132138009B00AC2E25 /* DepositMoneyMethodComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C713B122138009B00AC2E25 /* DepositMoneyMethodComponent.xib */; };
-		8C713B162138068600AC2E25 /* DepositMoneyAddressComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C713B152138068600AC2E25 /* DepositMoneyAddressComponent.swift */; };
-		8C713B1821380AE800AC2E25 /* DepositMoneyAddressComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C713B1721380AE800AC2E25 /* DepositMoneyAddressComponent.xib */; };
+		8C713B162138068600AC2E25 /* WalletAddressComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C713B152138068600AC2E25 /* WalletAddressComponent.swift */; };
+		8C713B1821380AE800AC2E25 /* WalletAddressComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C713B1721380AE800AC2E25 /* WalletAddressComponent.xib */; };
 		8C713B1B21380CE200AC2E25 /* DepositMoneyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C713B1A21380CE200AC2E25 /* DepositMoneyViewController.swift */; };
 		8C713B1D2138408700AC2E25 /* ImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C713B1C2138408700AC2E25 /* ImageButton.swift */; };
 		8C713B1F213941FF00AC2E25 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C713B1E213941FF00AC2E25 /* Networking.swift */; };
@@ -187,6 +187,9 @@
 		8C7DE6882164EF8000824A4B /* HistoryServiceNetworkLayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7DE6872164EF8000824A4B /* HistoryServiceNetworkLayerTests.swift */; };
 		8C7DE68F2166104000824A4B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C7DE68E2166104000824A4B /* GoogleService-Info.plist */; };
 		8C7DE6932167916B00824A4B /* AdvancedTransitionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7DE6922167916B00824A4B /* AdvancedTransitionDelegate.swift */; };
+		8C7DE695216B58E900824A4B /* WalletsCollectionComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7DE694216B58E900824A4B /* WalletsCollectionComponent.swift */; };
+		8C7DE697216B605600824A4B /* Configurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7DE696216B605600824A4B /* Configurable.swift */; };
+		8C7DE699216B61DB00824A4B /* WalletItemData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7DE698216B61DB00824A4B /* WalletItemData.swift */; };
 		8CA2188F2121D97C0063C188 /* DecimalKeyboardComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CA2188E2121D97B0063C188 /* DecimalKeyboardComponent.xib */; };
 		8CA218922122E8D70063C188 /* SendMoneyComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CA218912122E8D70063C188 /* SendMoneyComponent.xib */; };
 		8CA218942122EAC90063C188 /* SendMoneyComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA218932122EAC90063C188 /* SendMoneyComponent.swift */; };
@@ -420,8 +423,8 @@
 		8C713B0E2137E54100AC2E25 /* UIRefreshControl+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIRefreshControl+Extensions.swift"; sourceTree = "<group>"; };
 		8C713B102137F95200AC2E25 /* DepositMoneyMethodComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepositMoneyMethodComponent.swift; sourceTree = "<group>"; };
 		8C713B122138009B00AC2E25 /* DepositMoneyMethodComponent.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DepositMoneyMethodComponent.xib; sourceTree = "<group>"; };
-		8C713B152138068600AC2E25 /* DepositMoneyAddressComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepositMoneyAddressComponent.swift; sourceTree = "<group>"; };
-		8C713B1721380AE800AC2E25 /* DepositMoneyAddressComponent.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DepositMoneyAddressComponent.xib; sourceTree = "<group>"; };
+		8C713B152138068600AC2E25 /* WalletAddressComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletAddressComponent.swift; sourceTree = "<group>"; };
+		8C713B1721380AE800AC2E25 /* WalletAddressComponent.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletAddressComponent.xib; sourceTree = "<group>"; };
 		8C713B1A21380CE200AC2E25 /* DepositMoneyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepositMoneyViewController.swift; sourceTree = "<group>"; };
 		8C713B1C2138408700AC2E25 /* ImageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageButton.swift; sourceTree = "<group>"; };
 		8C713B1E213941FF00AC2E25 /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
@@ -481,6 +484,9 @@
 		8C7DE6872164EF8000824A4B /* HistoryServiceNetworkLayerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryServiceNetworkLayerTests.swift; sourceTree = "<group>"; };
 		8C7DE68E2166104000824A4B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8C7DE6922167916B00824A4B /* AdvancedTransitionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvancedTransitionDelegate.swift; sourceTree = "<group>"; };
+		8C7DE694216B58E900824A4B /* WalletsCollectionComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletsCollectionComponent.swift; sourceTree = "<group>"; };
+		8C7DE696216B605600824A4B /* Configurable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configurable.swift; sourceTree = "<group>"; };
+		8C7DE698216B61DB00824A4B /* WalletItemData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletItemData.swift; sourceTree = "<group>"; };
 		8CA2188E2121D97B0063C188 /* DecimalKeyboardComponent.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DecimalKeyboardComponent.xib; sourceTree = "<group>"; };
 		8CA218912122E8D70063C188 /* SendMoneyComponent.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SendMoneyComponent.xib; sourceTree = "<group>"; };
 		8CA218932122EAC90063C188 /* SendMoneyComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMoneyComponent.swift; sourceTree = "<group>"; };
@@ -1001,11 +1007,13 @@
 			children = (
 				8CF5F941211457200083B36A /* Component.swift */,
 				8CF5F9622114AB000083B36A /* ItemComponent.swift */,
+				8C7DE696216B605600824A4B /* Configurable.swift */,
 				8C52FFE92119DA2700EB55EA /* CellComponent.swift */,
 				8CA2191521342D720063C188 /* HeaderFooterComponent.swift */,
 				8C23144C21500529007340E7 /* PhoneNumberComponent.swift */,
+				8C7DE694216B58E900824A4B /* WalletsCollectionComponent.swift */,
 				8CA219102134208B0063C188 /* TransactionsGroupHeaderComponent */,
-				8C713B1921380CC000AC2E25 /* DepositMoneyAddressComponent */,
+				8C713B1921380CC000AC2E25 /* WalletAddressComponent */,
 				8C713B14213800A000AC2E25 /* DepositMoneyMethodComponent */,
 				8CA218E5212DA5400063C188 /* RectItemComponent */,
 				8CA2192021354C8F0063C188 /* TransactionsFilterComponents */,
@@ -1036,13 +1044,13 @@
 			path = DepositMoneyMethodComponent;
 			sourceTree = "<group>";
 		};
-		8C713B1921380CC000AC2E25 /* DepositMoneyAddressComponent */ = {
+		8C713B1921380CC000AC2E25 /* WalletAddressComponent */ = {
 			isa = PBXGroup;
 			children = (
-				8C713B152138068600AC2E25 /* DepositMoneyAddressComponent.swift */,
-				8C713B1721380AE800AC2E25 /* DepositMoneyAddressComponent.xib */,
+				8C713B152138068600AC2E25 /* WalletAddressComponent.swift */,
+				8C713B1721380AE800AC2E25 /* WalletAddressComponent.xib */,
 			);
-			path = DepositMoneyAddressComponent;
+			path = WalletAddressComponent;
 			sourceTree = "<group>";
 		};
 		8C7C333D2142904900EC6C96 /* Authorization */ = {
@@ -1263,6 +1271,7 @@
 		8CA218C72125AD380063C188 /* WalletSmallItemComponent */ = {
 			isa = PBXGroup;
 			children = (
+				8C7DE698216B61DB00824A4B /* WalletItemData.swift */,
 				8CA218C32125AD130063C188 /* WalletSmallItemComponent.swift */,
 				8CA218C52125AD230063C188 /* WalletSmallItemComponent.xib */,
 			);
@@ -1627,7 +1636,7 @@
 				8C04BC31211C4FC100E90090 /* MavenPro-Bold.ttf in Resources */,
 				8C60884E2111A22D00470411 /* LoginPasswordFormView.xib in Resources */,
 				8CA2191A213442100063C188 /* IllustrationalPlaceholder.xib in Resources */,
-				8C713B1821380AE800AC2E25 /* DepositMoneyAddressComponent.xib in Resources */,
+				8C713B1821380AE800AC2E25 /* WalletAddressComponent.xib in Resources */,
 				8C713B132138009B00AC2E25 /* DepositMoneyMethodComponent.xib in Resources */,
 				8C091900210601F300703224 /* Recovery.storyboard in Resources */,
 				8C04BC32211C4FC100E90090 /* MavenPro-Black.ttf in Resources */,
@@ -1894,6 +1903,7 @@
 				8C7C33662146C62200EC6C96 /* KYCUploadPrivateDocumentViewController.swift in Sources */,
 				8C09196A2108951F00703224 /* WalletResponseError.swift in Sources */,
 				8C7C338521480AA300EC6C96 /* CAGradientLayer+Extensions.swift in Sources */,
+				8C7DE699216B61DB00824A4B /* WalletItemData.swift in Sources */,
 				8CA218A9212343760063C188 /* UIImageView+Extensions.swift in Sources */,
 				8C6088602111F35E00470411 /* EnterPhoneNumberViewController.swift in Sources */,
 				8C6088512111A95100470411 /* Conditions.swift in Sources */,
@@ -1932,6 +1942,7 @@
 				8C7DE67E2164BF0500824A4B /* HistoryRequest.swift in Sources */,
 				8C7DE6802164BF0E00824A4B /* HistoryAPI.swift in Sources */,
 				8C7C334D2142C15100EC6C96 /* KYCPersonalInfoViewController.swift in Sources */,
+				8C7DE695216B58E900824A4B /* WalletsCollectionComponent.swift in Sources */,
 				8CA218BD2125A34B0063C188 /* AvoidingViewController.swift in Sources */,
 				8C23144B214FCA90007340E7 /* KeyboardNotifiableViewController.swift in Sources */,
 				8C333D54210B394800949AC0 /* NextButton.swift in Sources */,
@@ -1941,7 +1952,7 @@
 				8C09197121089FBB00703224 /* AuthAPI.swift in Sources */,
 				8CA218B821248FA50063C188 /* SendMoneyAmountComponent.swift in Sources */,
 				8C09195F21076B5D00703224 /* RecoveryAPI.swift in Sources */,
-				8C713B162138068600AC2E25 /* DepositMoneyAddressComponent.swift in Sources */,
+				8C713B162138068600AC2E25 /* WalletAddressComponent.swift in Sources */,
 				8C7DE678216370C700824A4B /* UIBezierPath+Extensions.swift in Sources */,
 				8C713B362140327600AC2E25 /* StringProtocol+Extensions.swift in Sources */,
 				8C34616B20EF8FA700746724 /* AppDelegate.swift in Sources */,
@@ -1952,6 +1963,7 @@
 				8CA218EF212DCC030063C188 /* LettersImageGenerator.swift in Sources */,
 				8C7C3391214A5ABC00EC6C96 /* Interactions.swift in Sources */,
 				8C333D342109F02000949AC0 /* ScreenFlow.swift in Sources */,
+				8C7DE697216B605600824A4B /* Configurable.swift in Sources */,
 				8C09194B210716C500703224 /* SignupRequest.swift in Sources */,
 				8C60884A2110B42A00470411 /* CountdownTimer.swift in Sources */,
 				8CA219082133EE910063C188 /* GroupedTransactionsPageData.swift in Sources */,
