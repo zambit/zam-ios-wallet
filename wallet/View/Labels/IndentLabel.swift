@@ -12,7 +12,6 @@ import UIKit
 class IndentLabel: UILabel {
 
     fileprivate var indent: String?
-
 }
 
 extension BehaviorExtension where Base: IndentLabel {

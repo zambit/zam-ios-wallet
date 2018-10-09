@@ -11,7 +11,7 @@ import AudioToolbox
 /**
  A struct with few static functions that calls different phone vibrations.
  */
-struct Interactions {
+struct InteractionsHelper {
 
     static func vibrateError() {
         AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))

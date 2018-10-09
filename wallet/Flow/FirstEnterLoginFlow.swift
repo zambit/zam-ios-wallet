@@ -11,14 +11,14 @@ import UIKit
 
 final class FirstEnterLoginFlow: ScreenFlow {
 
-    unowned var migratingNavigationController: WalletNavigationController
+    unowned var navigationController: WalletNavigationController
 
-    init(migratingNavigationController: WalletNavigationController) {
-        self.migratingNavigationController = migratingNavigationController
+    init(navigationController: WalletNavigationController) {
+        self.navigationController = navigationController
     }
 
     func begin() {
-        self.migratingNavigationController.custom.push(viewController: enterPhoneLoginPasswordScreen)
+        self.navigationController.custom.push(viewController: enterPhoneLoginPasswordScreen)
     }
 
     private var enterPhoneLoginPasswordScreen: EnterPhoneLoginPasswordViewController {
@@ -61,22 +61,22 @@ final class FirstEnterLoginFlow: ScreenFlow {
     }
 
     private var createPinFlow: CreatePinFlow? {
-        let flow = CreatePinFlow(migratingNavigationController: migratingNavigationController)
+        let flow = CreatePinFlow(navigationController: navigationController)
         return flow
     }
 
     private var userFlow: MainFlow? {
-        let flow = MainFlow(migratingNavigationController: migratingNavigationController)
+        let flow = MainFlow(navigationController: navigationController)
         return flow
     }
 
     private var recoveryFlow: RecoveryFlow? {
-        let flow = RecoveryFlow(migratingNavigationController: migratingNavigationController)
+        let flow = RecoveryFlow(navigationController: navigationController)
         return flow
     }
 
     private var onboardingFlow: OnboardingFlow {
-        let flow = OnboardingFlow(migratingNavigationController: migratingNavigationController)
+        let flow = OnboardingFlow(navigationController: navigationController)
         return flow
     }
 }

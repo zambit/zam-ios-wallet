@@ -62,7 +62,7 @@ class CreateNewPasswordViewController: СonsistentViewController, NewPasswordFor
         // ...
     }
 
-    func newPasswordFormComponent(_ newPasswordFormComponent: NewPasswordFormComponent, dontSatisfyTheCondition: PasswordsCondition) {
+    func newPasswordFormComponent(_ newPasswordFormComponent: NewPasswordFormComponent, dontSatisfyTheCondition: Conditions.Password) {
         continueButton?.custom.setEnabled(false)
     }
 

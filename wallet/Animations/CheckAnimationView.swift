@@ -1,5 +1,5 @@
 //
-//  DoneAnimationLayer.swift
+//  CheckAnimationView.swift
 //  wallet
 //
 //  Created by Alexander Ponomarev on 17/08/2018.
@@ -11,11 +11,11 @@ import UIKit
 
 open class CheckAnimationView: UIView {
 
-    // MARK: - private variables
+    // MARK: - Private variables
 
-    fileprivate let lineLayer: CAShapeLayer = CAShapeLayer()
+    private let lineLayer: CAShapeLayer = CAShapeLayer()
 
-    // MARK: - public methods
+    // MARK: - Public methods
 
     convenience init(frame: CGRect = .zero, strokeColor: UIColor, lineWidth: CGFloat) {
         self.init(frame: frame)
@@ -65,10 +65,9 @@ open class CheckAnimationView: UIView {
         self.lineLayer.path = nil
     }
 
-    // MARK: - private methods
+    // MARK: - Private methods
 
     private func setupStyle(strokeColor: UIColor = .black, lineWidth: CGFloat = 8.0) {
-        // Initialize properties
         self.clipsToBounds = true
 
         // Set default setting to line

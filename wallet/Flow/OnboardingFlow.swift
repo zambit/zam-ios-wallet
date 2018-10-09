@@ -14,18 +14,18 @@ import UIKit
  */
 final class OnboardingFlow: ScreenFlow {
 
-    unowned var migratingNavigationController: WalletNavigationController
+    unowned var navigationController: WalletNavigationController
 
-    init(migratingNavigationController: WalletNavigationController) {
-        self.migratingNavigationController = migratingNavigationController
+    init(navigationController: WalletNavigationController) {
+        self.navigationController = navigationController
     }
 
     func begin() {
-        self.migratingNavigationController.custom.pushFromRoot(viewController: onboardingScreen, direction: .back)
+        self.navigationController.custom.pushFromRoot(viewController: onboardingScreen, direction: .back)
     }
 
     func begin(animated: Bool) {
-        self.migratingNavigationController.custom.pushFromRoot(viewController: onboardingScreen, animated: animated, direction: .back)
+        self.navigationController.custom.pushFromRoot(viewController: onboardingScreen, animated: animated, direction: .back)
     }
 
     private var onboardingScreen: OnboardingViewController {
@@ -62,12 +62,12 @@ final class OnboardingFlow: ScreenFlow {
     }
 
     private var loginFlow: FirstEnterLoginFlow {
-        let flow = FirstEnterLoginFlow(migratingNavigationController: migratingNavigationController)
+        let flow = FirstEnterLoginFlow(navigationController: navigationController)
         return flow
     }
 
     private var signupFlow: SignUpFlow {
-        let flow = SignUpFlow(migratingNavigationController: migratingNavigationController)
+        let flow = SignUpFlow(navigationController: navigationController)
         return flow
     }
 

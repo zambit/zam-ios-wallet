@@ -13,18 +13,18 @@ final class EnterPinFlow: ScreenFlow {
 
     private var phone: String?
 
-    unowned var migratingNavigationController: WalletNavigationController
+    unowned var navigationController: WalletNavigationController
 
-    init(migratingNavigationController: WalletNavigationController) {
-        self.migratingNavigationController = migratingNavigationController
+    init(navigationController: WalletNavigationController) {
+        self.navigationController = navigationController
     }
 
     func begin() {
-        self.migratingNavigationController.custom.pushFromRoot(viewController: enterPinScreen, direction: .forward)
+        self.navigationController.custom.pushFromRoot(viewController: enterPinScreen, direction: .forward)
     }
 
     func begin(animated: Bool) {
-        self.migratingNavigationController.custom.pushFromRoot(viewController: enterPinScreen, animated: animated, direction: .forward)
+        self.navigationController.custom.pushFromRoot(viewController: enterPinScreen, animated: animated, direction: .forward)
     }
 
     func prepare(phone: String) {
@@ -77,17 +77,17 @@ final class EnterPinFlow: ScreenFlow {
     }
 
     private var userFlow: MainFlow {
-        let flow = MainFlow(migratingNavigationController: migratingNavigationController)
+        let flow = MainFlow(navigationController: navigationController)
         return flow
     }
 
     private var onboardingFlow: OnboardingFlow {
-        let flow = OnboardingFlow(migratingNavigationController: migratingNavigationController)
+        let flow = OnboardingFlow(navigationController: navigationController)
         return flow
     }
 
     private var secondLoginFlow: SecondEnterLoginFlow? {
-        let flow = SecondEnterLoginFlow(migratingNavigationController: migratingNavigationController)
+        let flow = SecondEnterLoginFlow(navigationController: navigationController)
         return flow
     }
 }

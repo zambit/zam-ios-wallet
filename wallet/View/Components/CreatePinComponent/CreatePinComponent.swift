@@ -109,7 +109,7 @@ class CreatePinComponent: Component, UICollectionViewDataSource, UICollectionVie
             if let stageDotsField = currentPinStage?.dotsFieldComponent,
                 stageDotsField.filledCount == stageDotsField.dotsMaxCount {
 
-                currentPinStage?.dotsFieldComponent?.fillingEnabled = false
+                currentPinStage?.dotsFieldComponent?.interactionsEnabled = false
 
                 if pinText == pinConfirmationText {
                     currentPinStage?.dotsFieldComponent?.showSuccess()
@@ -121,7 +121,7 @@ class CreatePinComponent: Component, UICollectionViewDataSource, UICollectionVie
 
                         self?.pinConfirmationText = ""
                         self?.currentPinStage?.dotsFieldComponent?.unfillAll()
-                        self?.currentPinStage?.dotsFieldComponent?.fillingEnabled = true
+                        self?.currentPinStage?.dotsFieldComponent?.interactionsEnabled = true
                     }
                 }
             }
@@ -131,12 +131,19 @@ class CreatePinComponent: Component, UICollectionViewDataSource, UICollectionVie
     }
 
     func removeLast() {
-        guard let unfilled = currentPinStage?.dotsFieldComponent?.unfillLast(), unfilled else {
+        guard let dots = currentPinStage?.dotsFieldComponent else {
+            return
+        }
+
+        guard dots.unfillLast() else {
             switch currentStageIndex {
             case 0:
                 return
             case 1:
-                moveToPreviousStage(animated: true)
+                if dots.filledCount == 0 {
+                    moveToPreviousStage(animated: true)
+                }
+
                 return
             default:
                 fatalError()

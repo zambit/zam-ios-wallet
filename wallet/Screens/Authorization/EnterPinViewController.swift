@@ -37,9 +37,9 @@ class EnterPinViewController: FlowViewController, WalletNavigable, DecimalKeyboa
 
         pinForm?.clear()
         dotsFieldComponent?.unfillAll()
-        dotsFieldComponent?.fillingEnabled = true
+        dotsFieldComponent?.interactionsEnabled = true
 
-        migratingNavigationController?.custom.addRightBarItemButton(for: self, title: "EXIT", target: self, action: #selector(exitButtonTouchEvent(_:)))
+        walletNavigationController?.custom.addRightBarItemButton(for: self, title: "EXIT", target: self, action: #selector(exitButtonTouchEvent(_:)))
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -100,7 +100,7 @@ class EnterPinViewController: FlowViewController, WalletNavigable, DecimalKeyboa
                                     [weak self] in
 
                                     self?.dotsFieldComponent?.fillAll()
-                                    self?.dotsFieldComponent?.fillingEnabled = false
+                                    self?.dotsFieldComponent?.interactionsEnabled = false
 
                                     self?.authorize()
             },
@@ -108,13 +108,13 @@ class EnterPinViewController: FlowViewController, WalletNavigable, DecimalKeyboa
                                     [weak self] in
 
                                     self?.dotsFieldComponent?.endLoading()
-                                    self?.dotsFieldComponent?.fillingEnabled = false
+                                    self?.dotsFieldComponent?.interactionsEnabled = false
                                     self?.dotsFieldComponent?.showFailure {
                                         self?.dotsFieldComponent?.unfillAll()
-                                        self?.dotsFieldComponent?.fillingEnabled = true
+                                        self?.dotsFieldComponent?.interactionsEnabled = true
                                     }
 
-                                    Interactions.vibrateError()
+                                    InteractionsHelper.vibrateError()
             })
         } catch {
             fatalError("Unexpected flow")

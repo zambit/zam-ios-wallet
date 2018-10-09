@@ -11,14 +11,14 @@ import UIKit
 
 final class SignUpFlow: ScreenFlow {
 
-    unowned var migratingNavigationController: WalletNavigationController
+    unowned var navigationController: WalletNavigationController
 
-    init(migratingNavigationController: WalletNavigationController) {
-        self.migratingNavigationController = migratingNavigationController
+    init(navigationController: WalletNavigationController) {
+        self.navigationController = navigationController
     }
 
     func begin() {
-        self.migratingNavigationController.custom.push(viewController: enterNewPhoneNumberScreen)
+        self.navigationController.custom.push(viewController: enterNewPhoneNumberScreen)
     }
 
     private var enterNewPhoneNumberScreen: EnterNewPhoneNumberViewController {
@@ -39,7 +39,7 @@ final class SignUpFlow: ScreenFlow {
             let target = strongSelf.verifyPhoneNumberWithSmsScreen
             target.prepare(phone: phone)
 
-            strongSelf.migratingNavigationController.custom.push(viewController: target)
+            strongSelf.navigationController.custom.push(viewController: target)
         }
 
         vc.onContinue = onContinue
@@ -66,7 +66,7 @@ final class SignUpFlow: ScreenFlow {
             let target = strongSelf.createNewPasswordScreen
             target.prepare(phone: phone, token: signUpToken)
 
-            strongSelf.migratingNavigationController.custom.push(viewController: target)
+            strongSelf.navigationController.custom.push(viewController: target)
         }
 
         vc.onContinue = onContinue
@@ -97,12 +97,12 @@ final class SignUpFlow: ScreenFlow {
     }
 
     private var createPinFlow: CreatePinFlow {
-        let flow = CreatePinFlow(migratingNavigationController: migratingNavigationController)
+        let flow = CreatePinFlow(navigationController: navigationController)
         return flow
     }
 
     private var userFlow: MainFlow? {
-        let flow = MainFlow(migratingNavigationController: migratingNavigationController)
+        let flow = MainFlow(navigationController: navigationController)
         return flow
     }
 }

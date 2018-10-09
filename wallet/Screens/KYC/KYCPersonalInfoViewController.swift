@@ -275,7 +275,12 @@ class KYCPersonalInfoViewController: FlowViewController, WalletNavigable, UITabl
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = TextFieldCell()
+        let _cell = tableView.dequeueReusableCell(withIdentifier: "TextFieldCell", for: indexPath)
+
+        guard let cell = _cell as? TextFieldCell else {
+            fatalError()
+        }
+
         cell.configure(with: forms[indexPath.section].1[indexPath.row])
         cell.set(text: progress.getTextFor(indexPath: indexPath) ?? "")
         cell.isUserInteractionEnabled = personalInfoData == nil
@@ -389,7 +394,7 @@ class KYCPersonalInfoViewController: FlowViewController, WalletNavigable, UITabl
             error in
 
             self?.dismissKeyboard {
-                Interactions.vibrateError()
+                InteractionsHelper.vibrateError()
                 self?.sendButton?.custom.endLoading()
 
                 if let serverError = error as? WalletResponseError {

@@ -26,13 +26,11 @@ class SpinningAnimationLayer: CAShapeLayer {
         self.frame = frame
 
         self.setupStyle(strokeColor: color, lineWidth: lineWidth)
-        self.animate()
     }
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.setupStyle()
-        self.animate()
     }
 
     private func setupStyle(strokeColor: UIColor = .cornflower, lineWidth: CGFloat = 2.0) {
@@ -45,7 +43,7 @@ class SpinningAnimationLayer: CAShapeLayer {
         self.lineCap = CAShapeLayerLineCap.round
     }
 
-    private func animate() {
+    func animate() {
         let duration: CFTimeInterval = 0.75
 
         // Rotate animation

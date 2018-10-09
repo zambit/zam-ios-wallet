@@ -65,7 +65,7 @@ class EnterPhoneLoginPasswordViewController: СonsistentViewController, PhoneNum
 
     // MARK: - PhoneNumberComponentDelegate
 
-    func phoneNumberComponent(_ phoneNumberComponent: PhoneNumberComponent, dontSatisfyTheCondition: PhoneCondition) {
+    func phoneNumberComponent(_ phoneNumberComponent: PhoneNumberComponent, dontSatisfyTheCondition: Conditions.Phone) {
         phoneNumberCompletionFlag = false
         continueButton?.custom.setEnabled(false)
     }
@@ -81,7 +81,7 @@ class EnterPhoneLoginPasswordViewController: СonsistentViewController, PhoneNum
 
     // MARK: - LoginPasswordFormComponentDelegate
 
-    func loginPasswordFormComponent(_ loginPasswordFormComponent: LoginPasswordFormComponent, dontSatisfyTheCondition: PasswordsCondition) {
+    func loginPasswordFormComponent(_ loginPasswordFormComponent: LoginPasswordFormComponent, dontSatisfyTheCondition: Conditions.Password) {
         loginPasswordCompletionFlag = false
         continueButton?.custom.setEnabled(false)
     }
@@ -142,6 +142,10 @@ class EnterPhoneLoginPasswordViewController: СonsistentViewController, PhoneNum
 
     @objc
     private func additionalButtonTouchUpInsideEvent(_ sender: TimerButton) {
-        onRecovery?()
+        dismissKeyboard {
+            [weak self] in
+
+            self?.onRecovery?()
+        }
     }
 }

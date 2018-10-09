@@ -13,7 +13,7 @@ protocol NewPasswordFormComponentDelegate: class {
 
     func newPasswordFormComponentEditingChange(_ newPasswordFormComponent: NewPasswordFormComponent)
 
-    func newPasswordFormComponent(_ newPasswordFormComponent: NewPasswordFormComponent, dontSatisfyTheCondition: PasswordsCondition)
+    func newPasswordFormComponent(_ newPasswordFormComponent: NewPasswordFormComponent, dontSatisfyTheCondition: Conditions.Password)
 
     func newPasswordFormComponentSatisfiesAllConditions(_ newPasswordFormComponent: NewPasswordFormComponent)
 
@@ -192,7 +192,7 @@ class NewPasswordFormComponent: UIView {
             self.helperTextLabel?.text = ""
             delegate?.newPasswordFormComponentSatisfiesAllConditions(self)
         case (true, false):
-            let failedCondition = PasswordsCondition.passwordMatchesSymbolsCount
+            let failedCondition = Conditions.Password.passwordMatchesSymbolsCount
             helperTextDelayTimer?.addOperation {
                 [weak self] in
 
@@ -206,7 +206,7 @@ class NewPasswordFormComponent: UIView {
 
             delegate?.newPasswordFormComponent(self, dontSatisfyTheCondition: failedCondition)
         case (false, true):
-            let failedCondition = PasswordsCondition.passwordFieldsMatch
+            let failedCondition = Conditions.Password.passwordFieldsMatch
 
             helperTextDelayTimer?.addOperation {
                 [weak self] in
@@ -221,7 +221,7 @@ class NewPasswordFormComponent: UIView {
 
             delegate?.newPasswordFormComponent(self, dontSatisfyTheCondition: failedCondition)
         case (false, false):
-            let failedCondition = PasswordsCondition.passwordMatchesSymbolsCount
+            let failedCondition = Conditions.Password.passwordMatchesSymbolsCount
 
             helperTextDelayTimer?.addOperation {
                 [weak self] in

@@ -40,6 +40,4 @@ class ContainerView: UIView {
         embededViewController?.view.removeFromSuperview()
         embededViewController?.removeFromParent()
     }
-
-
 }

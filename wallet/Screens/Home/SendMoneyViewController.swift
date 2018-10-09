@@ -101,7 +101,7 @@ class SendMoneyViewController: AvoidingViewController, WalletsCollectionComponen
 
         walletsCollectionComponent?.delegate = self
 
-        migratingNavigationController?.custom.addBackButton(for: self, target: self, action: #selector(backButtonTouchUpInsideEvent(_:)))
+        walletNavigationController?.custom.addBackButton(for: self, target: self, action: #selector(backButtonTouchUpInsideEvent(_:)))
     }
 
     func prepare(wallets: [WalletData], currentIndex: Int, recipient: FormattedContactData? = nil, phone: String) {
@@ -193,7 +193,7 @@ class SendMoneyViewController: AvoidingViewController, WalletsCollectionComponen
         dismissKeyboard {
             [weak self] in
             
-            self?.migratingNavigationController?.popViewController(animated: true)
+            self?.walletNavigationController?.popViewController(animated: true)
         }
     }
 }

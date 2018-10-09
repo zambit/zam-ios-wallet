@@ -13,18 +13,18 @@ final class SecondEnterLoginFlow: ScreenFlow {
 
     private var phone: String?
 
-    unowned var migratingNavigationController: WalletNavigationController
+    unowned var navigationController: WalletNavigationController
 
-    init(migratingNavigationController: WalletNavigationController) {
-        self.migratingNavigationController = migratingNavigationController
+    init(navigationController: WalletNavigationController) {
+        self.navigationController = navigationController
     }
 
     func begin() {
-        self.migratingNavigationController.custom.push(viewController: enterLoginPasswordScreen)
+        self.navigationController.custom.push(viewController: enterLoginPasswordScreen)
     }
 
     func begin(animated: Bool) {
-        self.migratingNavigationController.custom.push(viewController: enterLoginPasswordScreen, animated: animated)
+        self.navigationController.custom.push(viewController: enterLoginPasswordScreen, animated: animated)
     }
 
     func prepare(phone: String) {
@@ -74,22 +74,22 @@ final class SecondEnterLoginFlow: ScreenFlow {
     }
 
     private var createPinFlow: CreatePinFlow {
-        let flow = CreatePinFlow(migratingNavigationController: migratingNavigationController)
+        let flow = CreatePinFlow(navigationController: navigationController)
         return flow
     }
 
     private var userFlow: MainFlow {
-        let flow = MainFlow(migratingNavigationController: migratingNavigationController)
+        let flow = MainFlow(navigationController: navigationController)
         return flow
     }
 
     private var recoveryFlow: RecoveryFlow {
-        let flow = RecoveryFlow(migratingNavigationController: migratingNavigationController)
+        let flow = RecoveryFlow(navigationController: navigationController)
         return flow
     }
 
     private var onboardingFlow: OnboardingFlow {
-        let flow = OnboardingFlow(migratingNavigationController: migratingNavigationController)
+        let flow = OnboardingFlow(navigationController: navigationController)
         return flow
     }
 }

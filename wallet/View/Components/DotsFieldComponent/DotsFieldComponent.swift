@@ -30,7 +30,7 @@ class DotsFieldComponent: Component  {
         return currentDotIndex
     }
 
-    var fillingEnabled: Bool = true
+    var interactionsEnabled: Bool = true
 
     private(set) var currentDotIndex: Int = 0
 
@@ -81,7 +81,7 @@ class DotsFieldComponent: Component  {
 
     @discardableResult
     func fillLast() -> Bool {
-        guard currentDotIndex < dotsMaxCount, fillingEnabled else {
+        guard currentDotIndex < dotsMaxCount, interactionsEnabled else {
             return false
         }
 
@@ -93,7 +93,7 @@ class DotsFieldComponent: Component  {
 
     @discardableResult
     func unfillLast() -> Bool {
-        guard currentDotIndex > 0, fillingEnabled else {
+        guard currentDotIndex > 0, interactionsEnabled else {
             return false
         }
 

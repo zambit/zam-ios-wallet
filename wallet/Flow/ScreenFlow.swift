@@ -13,7 +13,7 @@ import UIKit
  */
 protocol ScreenFlow {
 
-    init(migratingNavigationController: WalletNavigationController)
+    init(navigationController: WalletNavigationController)
 
     func begin()
 
@@ -26,5 +26,4 @@ extension ScreenFlow {
     func begin(animated: Bool) {
         begin()
     }
-
 }

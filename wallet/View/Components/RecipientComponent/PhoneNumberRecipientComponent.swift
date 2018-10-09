@@ -196,6 +196,8 @@ extension BehaviorExtension where Base: PhoneNumberRecipientComponent {
     }
 
     fileprivate func textFieldEditingChanged() {
+        base.textField?.text?.addPrefixIfNeeded("+")
+        
         guard let phone = base.textField?.text, phone.count > 1 else {
             base.resultingString = ""
             return

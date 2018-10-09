@@ -84,7 +84,7 @@ class TransactionDetailViewController: FlowViewController, WalletNavigable {
                 return
             }
 
-            strongSelf.migratingNavigationController?.custom.addBackButton(for: strongSelf, target: strongSelf, action: #selector(strongSelf.closeButtonTouchUpInsideEvent(_:)))
+            strongSelf.walletNavigationController?.custom.addBackButton(for: strongSelf, target: strongSelf, action: #selector(strongSelf.closeButtonTouchUpInsideEvent(_:)))
         })
     }
 
@@ -204,7 +204,7 @@ class TransactionDetailViewController: FlowViewController, WalletNavigable {
             //errorMessageLabel?.sizeToFit()
             closeButton?.isHidden = false
 
-            migratingNavigationController?.custom.hideBackButton(for: self)
+            walletNavigationController?.custom.hideBackButton(for: self)
         case .success:
             let attributedString = NSMutableAttributedString(string: "Transaction completed", attributes: [
                 .font: UIFont.walletFont(ofSize: 40.0, weight: .bold),
@@ -221,7 +221,7 @@ class TransactionDetailViewController: FlowViewController, WalletNavigable {
             errorMessageLabel?.sizeToFit()
             closeButton?.isHidden = false
 
-            migratingNavigationController?.custom.hideBackButton(for: self)
+            walletNavigationController?.custom.hideBackButton(for: self)
         }
     }
 
@@ -296,7 +296,7 @@ class TransactionDetailViewController: FlowViewController, WalletNavigable {
 
     @objc
     private func closeButtonTouchUpInsideEvent(_ sender: UIButton) {
-        migratingNavigationController?.custom.hideBackButton(for: self)
+        walletNavigationController?.custom.hideBackButton(for: self)
 
         UIView.animate(withDuration: 0.8, animations: {
             [weak self] in

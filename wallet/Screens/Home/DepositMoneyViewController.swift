@@ -91,7 +91,7 @@ class DepositMoneyViewController: FlowViewController, WalletNavigable, Segmented
         walletsCollectionComponent?.delegate = self
         segmentedControlComponent?.delegate = self
 
-        migratingNavigationController?.custom.addBackButton(for: self, target: self, action: #selector(backButtonTouchUpInsideEvent(_:)))
+        walletNavigationController?.custom.addBackButton(for: self, target: self, action: #selector(backButtonTouchUpInsideEvent(_:)))
     }
 
     func prepare(wallets: [WalletData], currentIndex: Int, phone: String) {
@@ -137,6 +137,6 @@ class DepositMoneyViewController: FlowViewController, WalletNavigable, Segmented
             advancedTransitionDelegate?.advancedTransitionWillBegin(from: self, params: ["walletIndex": index])
         }
 
-        migratingNavigationController?.popViewController(animated: true)
+        walletNavigationController?.popViewController(animated: true)
     }
 }

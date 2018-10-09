@@ -41,7 +41,7 @@ class QRCodeScannerViewController: FlowViewController, WalletNavigable {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        migratingNavigationController?.custom.addBackButton(for: self, target: self, action: #selector(closeButtonTouchUpInsideEvent(_:)))
+        walletNavigationController?.custom.addBackButton(for: self, target: self, action: #selector(closeButtonTouchUpInsideEvent(_:)))
 
         // Get the back-facing camera for capturing videos
         guard let captureDevice = AVCaptureDevice.default(for: .video) else {
@@ -132,7 +132,7 @@ extension QRCodeScannerViewController: AVCaptureMetadataOutputObjectsDelegate {
             if let result = metadataObj.stringValue {
                 print(result)
                 delegate?.qrCodeScannerViewController(self, didFindCode: result)
-                Interactions.vibrateSuccess()
+                InteractionsHelper.vibrateSuccess()
                 onClose?(self)
             }
         }
