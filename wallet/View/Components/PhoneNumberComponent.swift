@@ -277,7 +277,7 @@ extension BehaviorExtension: SizePresetable where Base: PhoneNumberComponent {
 
         base.phoneNumberFormatter.number = string
 
-        // determine if entered code is cleared identify by formatter
+        // determine if entered code was clearly identified by formatter
         if base.phoneNumberFormatter.code == nil || (base.phoneNumberFormatter.code?.count ?? 0) + 1 != code.count {
             base.phoneNumberFormatter.number = ""
 

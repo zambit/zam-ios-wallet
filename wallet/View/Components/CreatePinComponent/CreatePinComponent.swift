@@ -143,7 +143,7 @@ class CreatePinComponent: Component, UICollectionViewDataSource, UICollectionVie
                 if dots.filledCount == 0 {
                     moveToPreviousStage(animated: true)
                 }
-                
+
                 return
             default:
                 fatalError()
