@@ -49,6 +49,7 @@ extension UIView {
 
         let animationFrame = CGRect(x: 0, y: 0, width: 20.0, height: 20.0)
         let animation = SpinningAnimationLayer(frame: animationFrame, color: .skyBlue)
+        animation.animate()
 
         loadingView.layer.addSublayer(animation)
         loadingView.tag = 121514
@@ -70,7 +71,6 @@ extension UIView {
         let loadingView = superview?.viewWithTag(121514)
         loadingView?.removeFromSuperview()
     }
-
 }
 
 extension UIView {

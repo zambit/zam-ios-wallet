@@ -30,8 +30,6 @@ class PhoneNumberFormatter {
 
     private var _number: String?
 
-    private var codeAlternatives: [String: String] = ["+8": "+7"]
-
     init(_ number: String? = nil, withPrefix: Bool = true) {
         self.formatter = PhoneNumberKit()
         self.partialFormatter = PartialFormatter(phoneNumberKit: formatter, withPrefix: withPrefix)
@@ -153,15 +151,6 @@ class PhoneNumberFormatter {
             let separated = newValue?.components(separatedBy: allowedCharacters.inverted)
             let string = separated?.joined(separator: "")
             _number = string
-
-//            let formatted = partialFormatter.formatPartial("+\(newValue ?? "")").split(separator: " ")
-//            if let excludeCode = formatted.first,
-//                let alternative = codeAlternatives[String(excludeCode)] {
-//                let alt = formatted.dropFirst().joined(separator: "").components(separatedBy: allowedCharacters.inverted).joined(separator: "")
-//                _number = alternative + alt
-//            } else {
-//                _number = string
-//            }
         }
     }
 

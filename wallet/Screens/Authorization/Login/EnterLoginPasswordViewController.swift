@@ -27,7 +27,7 @@ class EnterLoginPasswordViewController: СonsistentViewController, LoginPassword
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        migratingNavigationController?.custom.addRightBarItemButton(for: self, title: "EXIT", target: self, action: #selector(exitButtonTouchEvent(_:)))
+        walletNavigationController?.custom.addRightBarItemButton(for: self, title: "EXIT", target: self, action: #selector(exitButtonTouchEvent(_:)))
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -62,7 +62,7 @@ class EnterLoginPasswordViewController: СonsistentViewController, LoginPassword
         continueButton?.addTarget(self, action: #selector(continueButtonTouchUpInsideEvent(_:)), for: .touchUpInside)
     }
 
-    func loginPasswordFormComponent(_ loginPasswordFormView: LoginPasswordFormComponent, dontSatisfyTheCondition: PasswordsCondition) {
+    func loginPasswordFormComponent(_ loginPasswordFormView: LoginPasswordFormComponent, dontSatisfyTheCondition: Conditions.Password) {
         continueButton?.custom.setEnabled(false)
     }
 

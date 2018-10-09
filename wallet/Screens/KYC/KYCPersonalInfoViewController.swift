@@ -394,7 +394,7 @@ class KYCPersonalInfoViewController: FlowViewController, WalletNavigable, UITabl
             error in
 
             self?.dismissKeyboard {
-                Interactions.vibrateError()
+                InteractionsHelper.vibrateError()
                 self?.sendButton?.custom.endLoading()
 
                 if let serverError = error as? WalletResponseError {

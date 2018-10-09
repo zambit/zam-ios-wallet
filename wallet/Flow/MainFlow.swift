@@ -11,14 +11,14 @@ import UIKit
 
 final class MainFlow: ScreenFlow {
 
-    unowned var migratingNavigationController: WalletNavigationController
+    unowned var navigationController: WalletNavigationController
 
-    init(migratingNavigationController: WalletNavigationController) {
-        self.migratingNavigationController = migratingNavigationController
+    init(navigationController: WalletNavigationController) {
+        self.navigationController = navigationController
     }
 
     func begin() {
-        self.migratingNavigationController.custom.pushFromRoot(viewController: walletTabBar, direction: .forward)
+        self.navigationController.custom.pushFromRoot(viewController: walletTabBar, direction: .forward)
     }
 
     private var walletTabBar: WalletTabBarController {
@@ -64,7 +64,7 @@ final class MainFlow: ScreenFlow {
     }
 
     private var onboardingFlow: OnboardingFlow {
-        let flow = OnboardingFlow(migratingNavigationController: migratingNavigationController)
+        let flow = OnboardingFlow(navigationController: navigationController)
         return flow
     }
 
@@ -90,7 +90,7 @@ final class MainFlow: ScreenFlow {
             if let data = data {
                 target.prepare(data: data)
             }
-            vc.migratingNavigationController?.custom.push(viewController: target)
+            vc.walletNavigationController?.custom.push(viewController: target)
         }
 
         let onKyc1: () -> Void = {
@@ -101,7 +101,7 @@ final class MainFlow: ScreenFlow {
             }
 
             let target = strongSelf.uploadDocumentsMenuScreen
-            vc.migratingNavigationController?.custom.push(viewController: target)
+            vc.walletNavigationController?.custom.push(viewController: target)
         }
 
         vc.userManager = UserDefaultsManager(keychainConfiguration: WalletKeychainConfiguration())
@@ -123,7 +123,7 @@ final class MainFlow: ScreenFlow {
         let onSend: (KYCStatus) -> Void = {
             state in
 
-            vc.migratingNavigationController?.custom.popBack(nextViewController: {
+            vc.walletNavigationController?.custom.popBack(nextViewController: {
                 next in
 
                 guard let back = next as? KYCMainScreenViewController else {
@@ -157,7 +157,7 @@ final class MainFlow: ScreenFlow {
             }
 
             let target = strongSelf.uploadPrivateDocumentScreen
-            vc.migratingNavigationController?.custom.push(viewController: target)
+            vc.walletNavigationController?.custom.push(viewController: target)
         }
 
         let onSecondDocument: () -> Void = {
@@ -168,7 +168,7 @@ final class MainFlow: ScreenFlow {
             }
 
             let target = strongSelf.uploadSelfieScreen
-            vc.migratingNavigationController?.custom.push(viewController: target)
+            vc.walletNavigationController?.custom.push(viewController: target)
         }
 
         let onThirdDocument: () -> Void = {
@@ -179,7 +179,7 @@ final class MainFlow: ScreenFlow {
             }
 
             let target = strongSelf.uploadAddressDocumentScreen
-            vc.migratingNavigationController?.custom.push(viewController: target)
+            vc.walletNavigationController?.custom.push(viewController: target)
         }
 
         vc.onFirstDocument = onFirstDocument
@@ -200,7 +200,7 @@ final class MainFlow: ScreenFlow {
         let onSend: (KYCStatus) -> Void = {
             state in
 
-            vc.migratingNavigationController?.custom.popBack(nextViewController: {
+            vc.walletNavigationController?.custom.popBack(nextViewController: {
                 next in
 
                 guard let back = next as? KYCUploadDocumentsMenuViewController else {
@@ -227,7 +227,7 @@ final class MainFlow: ScreenFlow {
         let onSend: (KYCStatus) -> Void = {
             state in
 
-            vc.migratingNavigationController?.custom.popBack(nextViewController: {
+            vc.walletNavigationController?.custom.popBack(nextViewController: {
                 next in
 
                 guard let back = next as? KYCUploadDocumentsMenuViewController  else {
@@ -254,7 +254,7 @@ final class MainFlow: ScreenFlow {
         let onSend: (KYCStatus) -> Void = {
             state in
 
-            vc.migratingNavigationController?.custom.popBack(nextViewController: {
+            vc.walletNavigationController?.custom.popBack(nextViewController: {
                 next in
 
                 guard let back = next as? KYCUploadDocumentsMenuViewController  else {
@@ -290,7 +290,7 @@ final class MainFlow: ScreenFlow {
 
             let target = strongSelf.transactionsFilterScreen
             target.prepare(filterData: filterData)
-            vc.migratingNavigationController?.custom.push(viewController: target)
+            vc.walletNavigationController?.custom.push(viewController: target)
         }
 
         vc.onFilter = onFilter
@@ -312,7 +312,7 @@ final class MainFlow: ScreenFlow {
         let onDone: (TransactionsFilterData) -> Void = {
             filterData in
 
-            vc.migratingNavigationController?.custom.popBack(nextViewController: {
+            vc.walletNavigationController?.custom.popBack(nextViewController: {
                 next in
 
                 guard let target = next as? TransactionsHistoryViewController else {
@@ -351,7 +351,7 @@ final class MainFlow: ScreenFlow {
             target.delegate = vc
             target.advancedTransitionDelegate = vc
 
-            vc.migratingNavigationController?.custom.pushAdvancedly(viewController: target)
+            vc.walletNavigationController?.custom.pushAdvancedly(viewController: target)
         }
 
         let onDepositToWallet: (Int, [WalletData], String) -> Void = {
@@ -366,7 +366,7 @@ final class MainFlow: ScreenFlow {
             target.prepare(wallets: wallets, currentIndex: index, phone: phone)
             target.advancedTransitionDelegate = vc
 
-            vc.migratingNavigationController?.custom.pushAdvancedly(viewController: target)
+            vc.walletNavigationController?.custom.pushAdvancedly(viewController: target)
         }
 
         vc.onSendFromWallet = onSendFromWallet
@@ -436,7 +436,7 @@ final class MainFlow: ScreenFlow {
             target.prepare(sendingData: data)
             target.delegate = vc
 
-            strongSelf.migratingNavigationController.custom.presentNavigable(viewController: target, animate: false)
+            strongSelf.navigationController.custom.presentNavigable(viewController: target, animate: false)
         }
 
         let onQRScanner: () -> Void = {
@@ -448,7 +448,7 @@ final class MainFlow: ScreenFlow {
 
             let target = strongSelf.qrScannerScreen
             target.delegate = vc
-            strongSelf.migratingNavigationController.custom.presentNavigable(viewController: target, animate: true)
+            strongSelf.navigationController.custom.presentNavigable(viewController: target, animate: true)
         }
 
         vc.definesPresentationContext = true
@@ -477,7 +477,7 @@ final class MainFlow: ScreenFlow {
                 return
             }
 
-            strongSelf.migratingNavigationController.custom.dismissPresentedViewController()
+            strongSelf.navigationController.custom.dismissPresentedViewController()
         }
 
         vc.onClose = onClose
@@ -503,7 +503,7 @@ final class MainFlow: ScreenFlow {
                 return
             }
 
-            strongSelf.migratingNavigationController.custom.dismissPresentedViewController()
+            strongSelf.navigationController.custom.dismissPresentedViewController()
         }
 
         vc.modalPresentationStyle = .custom

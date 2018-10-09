@@ -11,7 +11,7 @@ import Foundation
 /**
  CountdownTimer delegate that provides some methods for receiving changing time event and completion event.
  */
-protocol CountdownTimerDelegate: class {
+public protocol CountdownTimerDelegate: class {
 
     func countdownTimer(_ countdownTimer: CountdownTimer, timeRemaining: CountdownTimer.Time)
 
@@ -21,9 +21,9 @@ protocol CountdownTimerDelegate: class {
 /**
  Timer that provides convinient interface to control and present counting down.
  */
-class CountdownTimer {
+public class CountdownTimer {
 
-    struct Time {
+    public struct Time {
         var seconds: Int
         var minutes: Int
 
@@ -33,18 +33,18 @@ class CountdownTimer {
         }
     }
 
-    var delegate: CountdownTimerDelegate?
+    public weak var delegate: CountdownTimerDelegate?
 
     private var timer: Timer = Timer()
     private let seconds: Int
 
     private var secondsRemaining: Int = 1
 
-    init(seconds: Int) {
+    public init(seconds: Int) {
         self.seconds = seconds
     }
 
-    func begin() {
+    public func begin() {
         self.secondsRemaining = seconds
         self.timer = Timer.scheduledTimer(timeInterval: 1,
                                           target: self,
@@ -56,7 +56,7 @@ class CountdownTimer {
         self.delegate?.countdownTimer(self, timeRemaining: time)
     }
 
-    func stop() {
+    public func stop() {
         timer.invalidate()
         delegate?.countdownTimerWasCompleted(self)
     }

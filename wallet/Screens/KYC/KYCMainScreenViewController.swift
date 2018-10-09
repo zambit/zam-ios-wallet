@@ -77,8 +77,6 @@ class KYCMainScreenViewController: FlowViewController, WalletNavigable {
         }
 
         kyc1Button?.custom.setEnabled(false)
-
-        //migratingNavigationController?.setNavigationBarHidden(false, animated: false)
     }
 
     override func viewDidLoad() {

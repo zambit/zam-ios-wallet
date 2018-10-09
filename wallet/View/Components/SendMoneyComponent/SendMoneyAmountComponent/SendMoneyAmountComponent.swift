@@ -101,7 +101,7 @@ class SendMoneyAmountComponent: Component, SizePresetable, UITextFieldDelegate {
             let x = view.bounds.width / 2
             let point = CGPoint(x: x, y: y)
 
-            drawSeparator(in: view, center: point, width: view.bounds.width)
+            DrawingHelper.drawSeparator(in: view, center: point, width: view.bounds.width)
         }
     }
 

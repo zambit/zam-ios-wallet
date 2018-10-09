@@ -17,7 +17,7 @@ class PhoneNumberTextField: UITextField, UITextFieldDelegate {
         set {
             if let value = newValue {
                 let number = value.filter {
-                    "1234567890 -()+".contains($0)
+                    "1234567890 -+()".contains($0)
                 }
 
                 super.text = number
@@ -83,7 +83,7 @@ class PhoneNumberTextField: UITextField, UITextFieldDelegate {
             return false
         }
 
-        // determine if it's user enter phone key by key 
+        // determine if it's user enter phone key by key
         guard string.count != 1 else {
             let characterSet = CharacterSet(charactersIn: string)
             return allowedCharacters.isSuperset(of: characterSet)

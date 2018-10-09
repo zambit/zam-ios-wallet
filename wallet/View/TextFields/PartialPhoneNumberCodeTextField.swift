@@ -1,5 +1,5 @@
 //
-//  PhoneNumberCodeTextField.swift
+//  PartialPhoneNumberCodeTextField.swift
 //  wallet
 //
 //  Created by Alexander Ponomarev on 18/09/2018.

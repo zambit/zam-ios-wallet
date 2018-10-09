@@ -28,7 +28,7 @@ class CreatePinViewController: FlowViewController, WalletNavigable, DecimalKeybo
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        migratingNavigationController?.custom.addRightBarItemButton(for: self, title: "SKIP", target: self, action: #selector(skipButtonTouchEvent(_:)))
+        walletNavigationController?.custom.addRightBarItemButton(for: self, title: "SKIP", target: self, action: #selector(skipButtonTouchEvent(_:)))
     }
 
     override func viewDidLoad() {
@@ -95,7 +95,7 @@ class CreatePinViewController: FlowViewController, WalletNavigable, DecimalKeybo
     }
 
     func createPinComponentWrongConfirmation(_ createPinComponent: CreatePinComponent) {
-        Interactions.vibrateError()
+        InteractionsHelper.vibrateError()
     }
 
     @objc

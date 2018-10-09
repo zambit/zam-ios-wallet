@@ -205,7 +205,7 @@ class HomeViewController: FloatingViewController, WalletsViewControllerDelegate,
 
         if let detailTopView = detailTopGestureView {
             let point = CGPoint(x: detailTopView.bounds.width / 2.0, y: detailTopView.bounds.height / 4.0)
-            drawIndicator(in: detailTopView, center: point)
+            DrawingHelper.drawIndicator(in: detailTopView, center: point)
         }
     }
 

@@ -40,7 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             // set crashlytics user id as his phone number
             Crashlytics.sharedInstance().setUserIdentifier(phone)
 
-            let screenFlow = EnterPinFlow(migratingNavigationController: navigationController)
+            let screenFlow = EnterPinFlow(navigationController: navigationController)
             screenFlow.prepare(phone: phone)
 
             self.mainScreenFlow = screenFlow
@@ -54,7 +54,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             // set crashlytics user id as his phone number
             Crashlytics.sharedInstance().setUserIdentifier(phone)
 
-            let screenFlow = SecondEnterLoginFlow(migratingNavigationController: navigationController)
+            let screenFlow = SecondEnterLoginFlow(navigationController: navigationController)
             screenFlow.prepare(phone: phone)
 
             self.mainScreenFlow = screenFlow
@@ -63,7 +63,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         case (false, true):
             fatalError("Unexpected initial state")
         case (false, false):
-            let screenFlow = OnboardingFlow(migratingNavigationController: navigationController)
+            let screenFlow = OnboardingFlow(navigationController: navigationController)
 
             self.mainScreenFlow = screenFlow
             self.mainScreenFlow.begin(animated: false)
