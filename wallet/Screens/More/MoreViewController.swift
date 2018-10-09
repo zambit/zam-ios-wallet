@@ -63,6 +63,11 @@ class MoreViewController: FlowViewController, WalletNavigable {
         telegramButton?.addTarget(self, action: #selector(telegramButtonTouchUpInsideEvent(_:)), for: .touchUpInside)
 
         setupStyle()
+
+        if let dictionary = Bundle.main.infoDictionary,
+            let version = dictionary["CFBundleShortVersionString"] as? String {
+            versLabel?.text = "zam.wallet v. \(version)"
+        }
     }
 
     private func setupStyle() {
@@ -93,7 +98,6 @@ class MoreViewController: FlowViewController, WalletNavigable {
         socialButtonsStackView?.distribution = .equalSpacing
 
         versLabel?.font = UIFont.walletFont(ofSize: 12.0, weight: .regular)
-        versLabel?.text = "zam.wallet alfa v. 0.0.1"
         versLabel?.textColor = UIColor.black.withAlphaComponent(0.1)
     }
 

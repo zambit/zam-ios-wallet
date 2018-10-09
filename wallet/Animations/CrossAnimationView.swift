@@ -11,12 +11,12 @@ import UIKit
 
 open class CrossAnimationView: UIView {
 
-    // MARK: - private variables
+    // MARK: - Private variables
 
-    fileprivate let leftLayer: CAShapeLayer = CAShapeLayer()
-    fileprivate let rightLayer: CAShapeLayer = CAShapeLayer()
+    private let leftLayer: CAShapeLayer = CAShapeLayer()
+    private let rightLayer: CAShapeLayer = CAShapeLayer()
 
-    // MARK: - public methods
+    // MARK: - Public methods
 
     convenience init(frame: CGRect = .zero, strokeColor: UIColor, lineWidth: CGFloat) {
         self.init(frame: frame)
@@ -78,10 +78,9 @@ open class CrossAnimationView: UIView {
         self.rightLayer.path = nil
     }
 
-    // MARK: - private methods
+    // MARK: - Private methods
 
     private func setupStyle(strokeColor: UIColor = .black, lineWidth: CGFloat = 8.0) {
-        // Initialize properties
         self.clipsToBounds = true
 
         // Set default setting to line

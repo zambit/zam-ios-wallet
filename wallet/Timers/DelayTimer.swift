@@ -23,12 +23,20 @@ class DelayTimer {
         self.delay = delay
     }
 
+    /**
+     Add operation to operations list.
+     */
     @discardableResult
     func addOperation(target: Any? = nil, _ block: @escaping () -> Void) -> DelayTimer {
         operations.append((target,block))
         return self
     }
 
+    /**
+     Fire timer. Perform all operations from list after delay if timer wont fired again.
+
+     To stop timer just call `fire()` without adding operations after last call.
+     */
     func fire() {
         self.timer.invalidate()
 

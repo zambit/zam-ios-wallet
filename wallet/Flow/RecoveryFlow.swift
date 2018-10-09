@@ -11,14 +11,14 @@ import UIKit
 
 final class RecoveryFlow: ScreenFlow {
 
-    unowned var migratingNavigationController: WalletNavigationController
+    unowned var navigationController: WalletNavigationController
 
-    init(migratingNavigationController: WalletNavigationController) {
-        self.migratingNavigationController = migratingNavigationController
+    init(navigationController: WalletNavigationController) {
+        self.navigationController = navigationController
     }
 
     func begin() {
-        self.migratingNavigationController.custom.push(viewController: enterPhoneNumberScreen)
+        self.navigationController.custom.push(viewController: enterPhoneNumberScreen)
     }
 
     private var enterPhoneNumberScreen: EnterPhoneNumberViewController {
@@ -39,7 +39,7 @@ final class RecoveryFlow: ScreenFlow {
             let target = strongSelf.verifyPhoneNumberWithSmsScreen
             target.prepare(phone: phone)
 
-            strongSelf.migratingNavigationController.custom.push(viewController: target)
+            strongSelf.navigationController.custom.push(viewController: target)
         }
 
         vc.onContinue = onContinue
@@ -66,7 +66,7 @@ final class RecoveryFlow: ScreenFlow {
             let target = strongSelf.createNewPasswordScreen
             target.prepare(phone: phone, token: recoveryToken)
 
-            strongSelf.migratingNavigationController.custom.push(viewController: target)
+            strongSelf.navigationController.custom.push(viewController: target)
         }
 
         vc.onContinue = onContinue
@@ -103,7 +103,7 @@ final class RecoveryFlow: ScreenFlow {
     }
 
     private var secondLoginFlow: SecondEnterLoginFlow {
-        let flow = SecondEnterLoginFlow(migratingNavigationController: migratingNavigationController)
+        let flow = SecondEnterLoginFlow(navigationController: navigationController)
         return flow
     }
 }

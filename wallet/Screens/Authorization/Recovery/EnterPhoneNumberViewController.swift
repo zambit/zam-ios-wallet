@@ -58,7 +58,7 @@ class EnterPhoneNumberViewController: СonsistentViewController, PhoneNumberComp
 
     // MARK: - PhoneNumberComponentDelegate
 
-    func phoneNumberComponent(_ phoneNumberComponent: PhoneNumberComponent, dontSatisfyTheCondition: PhoneCondition) {
+    func phoneNumberComponent(_ phoneNumberComponent: PhoneNumberComponent, dontSatisfyTheCondition: Conditions.Phone) {
         continueButton?.custom.setEnabled(false)
     }
 

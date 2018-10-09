@@ -64,7 +64,6 @@ extension BehaviorExtension where Base: WalletNavigationController {
     }
 
     func pushAdvancedly(viewController: ScreenWalletNavigable) {
-        Hero.shared.containerColor = .clear
         base.hero.isEnabled = true
         base.hero.navigationAnimationType = .selectBy(presenting: .fade, dismissing: .fade)
 

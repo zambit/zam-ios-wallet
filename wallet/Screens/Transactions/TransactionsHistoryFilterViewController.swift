@@ -22,7 +22,7 @@ class TransactionsHistoryFilterViewController: FlowViewController, WalletNavigab
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        migratingNavigationController?.custom.addRightBarItemButton(for: self, title: "DONE", target: self, action: #selector(doneButtonTouchEvent(_:)))
+        walletNavigationController?.custom.addRightBarItemButton(for: self, title: "DONE", target: self, action: #selector(doneButtonTouchEvent(_:)))
     }
 
     override func viewDidLoad() {

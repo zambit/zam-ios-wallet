@@ -15,7 +15,7 @@ protocol LoginPasswordComponentDelegate: class {
 
     func loginPasswordFormComponentEditingChange(_ loginPasswordFormComponent: LoginPasswordFormComponent)
 
-    func loginPasswordFormComponent(_ loginPasswordFormComponent: LoginPasswordFormComponent, dontSatisfyTheCondition: PasswordsCondition)
+    func loginPasswordFormComponent(_ loginPasswordFormComponent: LoginPasswordFormComponent, dontSatisfyTheCondition: Conditions.Password)
 
     func loginPasswordFormComponentSatisfiesAllConditions(_ loginPasswordFormComponent: LoginPasswordFormComponent)
 
@@ -151,7 +151,7 @@ class LoginPasswordFormComponent: UIView {
             helperTextWithDelegateCheck = ""
             delegate?.loginPasswordFormComponentSatisfiesAllConditions(self)
         case false:
-            let failedCondition = PasswordsCondition.passwordMatchesSymbolsCount
+            let failedCondition = Conditions.Password.passwordMatchesSymbolsCount
 
             helperTextDelayTimer?.addOperation {
                 [weak self] in

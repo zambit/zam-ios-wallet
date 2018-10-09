@@ -40,11 +40,15 @@ class FloatTextField: UITextField, UITextFieldDelegate {
     override init(frame: CGRect) {
         super.init(frame: frame)
         super.delegate = self
+
+        custom.setupSubviews()
     }
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         super.delegate = self
+
+        custom.setupSubviews()
     }
 
     fileprivate var padding = UIEdgeInsets(top: 20, left: 16, bottom: 0, right: 0)
@@ -107,7 +111,8 @@ extension BehaviorExtension where Base: FloatTextField {
 
     func setup(placeholder: String) {
         base.floatingPlaceholder = placeholder
-        setupSubviews()
+        base.floatingPlaceholderLabel?.text = placeholder
+        base.placeholderLabel?.text = placeholder
     }
 
     func setup(text: String?) {

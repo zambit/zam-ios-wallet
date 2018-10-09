@@ -77,13 +77,19 @@ class PartialPhoneNumberTextField: UITextField, UITextFieldDelegate {
     // MARK: - UITextFieldDelegate
 
     open func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
         // allow delegate to intervene
         guard _delegate?.textField?(textField, shouldChangeCharactersIn: range, replacementString: string) ?? true else {
             return false
         }
 
-        let characterSet = CharacterSet(charactersIn: string)
-        return allowedCharacters.isSuperset(of: characterSet)
+        // determine if it's user enter phone key by key
+        guard string.count != 1 else {
+            let characterSet = CharacterSet(charactersIn: string)
+            return allowedCharacters.isSuperset(of: characterSet)
+        }
+
+        return true
     }
 
     open func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {

@@ -86,7 +86,7 @@ class EnterNewPhoneNumberViewController: СonsistentViewController, PhoneNumberC
 
     // PhoneNumberComponentDelegate
 
-    func phoneNumberComponent(_ phoneNumberComponent: PhoneNumberComponent, dontSatisfyTheCondition: PhoneCondition) {
+    func phoneNumberComponent(_ phoneNumberComponent: PhoneNumberComponent, dontSatisfyTheCondition: Conditions.Phone) {
         phoneNumberValid = false
         continueButton?.custom.setEnabled(false)
     }

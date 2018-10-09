@@ -14,7 +14,7 @@ protocol PhoneNumberComponentDelegate: class {
 
     func phoneNumberComponentCanChangeHelperText(_ phoneNumberComponent: PhoneNumberComponent) -> Bool
 
-    func phoneNumberComponent(_ phoneNumberComponent: PhoneNumberComponent, dontSatisfyTheCondition: PhoneCondition)
+    func phoneNumberComponent(_ phoneNumberComponent: PhoneNumberComponent, dontSatisfyTheCondition: Conditions.Phone)
 
     func phoneNumberComponentSatisfiesAllConditions(_ phoneNumberComponent: PhoneNumberComponent)
 }
@@ -277,7 +277,7 @@ extension BehaviorExtension: SizePresetable where Base: PhoneNumberComponent {
 
         base.phoneNumberFormatter.number = string
 
-        // determine if entered code is cleared identify by formatter
+        // determine if entered code was clearly identified by formatter
         if base.phoneNumberFormatter.code == nil || (base.phoneNumberFormatter.code?.count ?? 0) + 1 != code.count {
             base.phoneNumberFormatter.number = ""
 
@@ -299,7 +299,7 @@ extension BehaviorExtension: SizePresetable where Base: PhoneNumberComponent {
                 setHelperTextWithCheck("")
                 base.delegate?.phoneNumberComponentSatisfiesAllConditions(base)
             case false:
-                let failedCondition = PhoneCondition.phoneLengthMatchesMask
+                let failedCondition = Conditions.Phone.phoneLengthMatchesMask
 
                 base.helperTextDelayTimer.addOperation(target: self) {
                     [weak self] in
@@ -315,7 +315,7 @@ extension BehaviorExtension: SizePresetable where Base: PhoneNumberComponent {
                 base.delegate?.phoneNumberComponent(base, dontSatisfyTheCondition: failedCondition)
             }
         } else {
-            let failedCondition = PhoneCondition.phoneNumberHaveValidCode
+            let failedCondition = Conditions.Phone.phoneNumberHaveValidCode
 
             base.helperTextDelayTimer.addOperation(target: self) {
                 [weak self] in

@@ -111,6 +111,7 @@ extension BehaviorExtension where Base: SendButton {
                                     width: side,
                                     height: side)
         let animation = SpinningAnimationLayer(frame: animationFrame, color: .white, lineWidth: 4.0)
+        animation.animate()
         base.loadingView.layer.addSublayer(animation)
         base.loadingView.isHidden = true
         base.loadingView.isUserInteractionEnabled = false

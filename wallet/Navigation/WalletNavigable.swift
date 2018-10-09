@@ -12,18 +12,18 @@ typealias ScreenWalletNavigable = UIViewController & WalletNavigable
 
 protocol WalletNavigable where Self: UIViewController {
     
-    var migratingNavigationController: WalletNavigationController? { get }
+    var walletNavigationController: WalletNavigationController? { get }
 
-    var migratingTabBarController: WalletTabBarController? { get }
+    var walletTabBarController: WalletTabBarController? { get }
 }
 
 extension WalletNavigable {
 
-    weak var migratingNavigationController: WalletNavigationController? {
+    weak var walletNavigationController: WalletNavigationController? {
         return navigationController as? WalletNavigationController
     }
 
-    weak var migratingTabBarController: WalletTabBarController? {
+    weak var walletTabBarController: WalletTabBarController? {
         return tabBarController as? WalletTabBarController
     }
 }

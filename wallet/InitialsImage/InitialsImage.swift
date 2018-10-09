@@ -1,5 +1,5 @@
 //
-//  LetterImage.swift
+//  InitialsImage.swift
 //  wallet
 //
 //  Created by Alexander Ponomarev on 22/08/2018.
@@ -9,13 +9,13 @@
 import UIKit
 
 /**
- A struct that generates image with character or pair of characters, using for example as avatar for non-avatar contacts.
+ A struct that generates image from person's name or name + surname.
  */
-struct LettersImageGenerator {
+public struct InitialsImage {
 
-    let bounds: CGRect
+    public let bounds: CGRect
 
-    func generate(string: String?,
+    public func generate(string: String?,
                        color: UIColor? = nil,
                        circular: Bool = false,
                        textAttributes: [NSAttributedString.Key: Any]? = nil) -> UIImage? {
@@ -24,7 +24,6 @@ struct LettersImageGenerator {
                               color: color ?? .random,
                               circular: circular,
                               textAttributes:textAttributes)
-
         return image
     }
 
@@ -67,5 +66,4 @@ struct LettersImageGenerator {
 
         return image
     }
-
 }
