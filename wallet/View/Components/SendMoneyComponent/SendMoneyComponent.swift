@@ -122,6 +122,7 @@ class SendMoneyComponent: Component, SizePresetable, SendMoneyAmountComponentDel
         self.walletId = walletId
         
         sendMoneyAmountComponent?.prepare(coinType: coinType)
+        updateSendingData(for: coinType)
 
         if let recipient = recipient {
             recipientComponent?.custom.setup(contact: recipient)
@@ -133,6 +134,8 @@ class SendMoneyComponent: Component, SizePresetable, SendMoneyAmountComponentDel
         self.walletId = walletId
 
         sendMoneyAmountComponent?.prepare(coinType: coinType)
+        updateSendingData(for: coinType)
+
         recipientComponent?.custom.setup(address: address)
         updateSendingData(for: .address)
     }
@@ -177,6 +180,21 @@ class SendMoneyComponent: Component, SizePresetable, SendMoneyAmountComponentDel
         case .invalid:
             recipientData = nil
             sendButton?.customAppearance.setEnabled(false)
+        }
+    }
+
+    // MARK: - Update sending data
+
+    private func updateSendingData(for coinType: CoinType) {
+        guard let amountData = amountData else {
+            return
+        }
+
+        self.amountData = BalanceData(coin: coinType, usd: amountData.usd, original: amountData.original)
+
+        if let output = sendingData {
+            sendButton?.customAppearance.setEnabled(true)
+            sendButton?.customAppearance.provideData(amount: "\(output.amountData.formatted(currency: .original)) \(output.amountData.coin.short.uppercased())", alternative: "")
         }
     }
 
