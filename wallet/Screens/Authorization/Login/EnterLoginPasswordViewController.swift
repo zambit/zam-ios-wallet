@@ -127,7 +127,11 @@ class EnterLoginPasswordViewController: СonsistentViewController, LoginPassword
             return
         }
 
-        onRecovery?(phone)
+        dismissKeyboard {
+            [weak self] in
+            
+            self?.onRecovery?(phone)
+        }
     }
 
     @objc

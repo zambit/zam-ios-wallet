@@ -142,6 +142,10 @@ class EnterPhoneLoginPasswordViewController: СonsistentViewController, PhoneNum
 
     @objc
     private func additionalButtonTouchUpInsideEvent(_ sender: TimerButton) {
-        onRecovery?()
+        dismissKeyboard {
+            [weak self] in
+
+            self?.onRecovery?()
+        }
     }
 }
