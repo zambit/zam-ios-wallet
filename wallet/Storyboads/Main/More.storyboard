@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--More View Controller-->
+        <scene sceneID="ePg-P9-Ade">
+            <objects>
+                <viewController storyboardIdentifier="MoreViewController" id="9sy-cq-TAd" customClass="MoreViewController" customModule="wallet" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="fpB-RV-aNW">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="37C-e6-ngc">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B7l-Xr-KB2" customClass="MenuButton" customModule="wallet" customModuleProvider="target">
+                                        <rect key="frame" x="17" y="30" width="341" height="59"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="59" id="b9I-ia-Nhe"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="teC-jB-ftY" customClass="MenuButton" customModule="wallet" customModuleProvider="target">
+                                        <rect key="frame" x="17" y="104" width="341" height="59"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="59" id="RAu-qq-HgO"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kJf-4p-lxG" customClass="MenuButton" customModule="wallet" customModuleProvider="target">
+                                        <rect key="frame" x="17" y="178" width="341" height="59"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="59" id="gQh-8G-o1y"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jlo-sf-ZTh">
+                                        <rect key="frame" x="17" y="596" width="341" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="umT-1R-P6I">
+                                        <rect key="frame" x="87.5" y="526" width="200" height="25"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="25" id="6ZI-MU-Dq0"/>
+                                            <constraint firstAttribute="width" constant="200" placeholder="YES" id="bir-Y2-xwt"/>
+                                        </constraints>
+                                    </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XEb-vb-Px9" customClass="HighlightableButton" customModule="wallet" customModuleProvider="target">
+                                        <rect key="frame" x="48" y="439" width="279" height="59"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="279" id="fUc-Kc-AHs"/>
+                                            <constraint firstAttribute="height" constant="59" id="jYE-IT-fA4"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="B7l-Xr-KB2" firstAttribute="leading" secondItem="37C-e6-ngc" secondAttribute="leading" constant="17" id="Dkh-tG-vNj"/>
+                                    <constraint firstAttribute="trailing" secondItem="jlo-sf-ZTh" secondAttribute="trailing" constant="17" id="HmP-HF-XGX"/>
+                                    <constraint firstItem="teC-jB-ftY" firstAttribute="leading" secondItem="37C-e6-ngc" secondAttribute="leading" constant="17" id="MEH-1u-rgZ"/>
+                                    <constraint firstItem="jlo-sf-ZTh" firstAttribute="leading" secondItem="37C-e6-ngc" secondAttribute="leading" constant="17" id="Nza-Fb-mef"/>
+                                    <constraint firstItem="umT-1R-P6I" firstAttribute="centerX" secondItem="37C-e6-ngc" secondAttribute="centerX" id="Qgn-u1-sQD"/>
+                                    <constraint firstItem="kJf-4p-lxG" firstAttribute="top" secondItem="teC-jB-ftY" secondAttribute="bottom" constant="15" id="Sp6-7p-zse"/>
+                                    <constraint firstAttribute="trailing" secondItem="teC-jB-ftY" secondAttribute="trailing" constant="17" id="Urz-is-jl7"/>
+                                    <constraint firstItem="jlo-sf-ZTh" firstAttribute="top" secondItem="umT-1R-P6I" secondAttribute="bottom" constant="45" id="ZMO-8c-N3g"/>
+                                    <constraint firstAttribute="trailing" secondItem="B7l-Xr-KB2" secondAttribute="trailing" constant="17" id="Zbh-ZC-NLI"/>
+                                    <constraint firstItem="teC-jB-ftY" firstAttribute="top" secondItem="B7l-Xr-KB2" secondAttribute="bottom" constant="15" id="bFh-pB-ahR"/>
+                                    <constraint firstItem="kJf-4p-lxG" firstAttribute="leading" secondItem="37C-e6-ngc" secondAttribute="leading" constant="17" id="d79-Q8-qUE"/>
+                                    <constraint firstItem="XEb-vb-Px9" firstAttribute="centerX" secondItem="37C-e6-ngc" secondAttribute="centerX" id="eBv-W0-HvI"/>
+                                    <constraint firstAttribute="bottom" secondItem="jlo-sf-ZTh" secondAttribute="bottom" constant="30" id="fDJ-2l-utg"/>
+                                    <constraint firstItem="B7l-Xr-KB2" firstAttribute="top" secondItem="37C-e6-ngc" secondAttribute="top" constant="30" id="kwm-nW-WyT"/>
+                                    <constraint firstItem="umT-1R-P6I" firstAttribute="top" secondItem="XEb-vb-Px9" secondAttribute="bottom" constant="28" id="nra-H5-4CK"/>
+                                    <constraint firstAttribute="trailing" secondItem="kJf-4p-lxG" secondAttribute="trailing" constant="17" id="xaO-y3-STj"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="37C-e6-ngc" firstAttribute="trailing" secondItem="MXG-P2-ilV" secondAttribute="trailing" id="5Pm-2F-jcC"/>
+                            <constraint firstItem="37C-e6-ngc" firstAttribute="leading" secondItem="MXG-P2-ilV" secondAttribute="leading" id="YVK-RY-B2s"/>
+                            <constraint firstItem="37C-e6-ngc" firstAttribute="top" secondItem="MXG-P2-ilV" secondAttribute="top" id="aWW-Hy-aJ8"/>
+                            <constraint firstItem="37C-e6-ngc" firstAttribute="bottom" secondItem="MXG-P2-ilV" secondAttribute="bottom" id="bO5-6T-r6h"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="MXG-P2-ilV"/>
+                    </view>
+                    <connections>
+                        <outlet property="backgroundView" destination="37C-e6-ngc" id="CeO-IH-lFY"/>
+                        <outlet property="baseCurrencyButton" destination="kJf-4p-lxG" id="7UI-Rv-0eT"/>
+                        <outlet property="changePasswordButton" destination="B7l-Xr-KB2" id="lax-SJ-GRo"/>
+                        <outlet property="socialButtonsStackView" destination="umT-1R-P6I" id="nON-lP-ShZ"/>
+                        <outlet property="socialButtonsStackViewBottomConstraint" destination="ZMO-8c-N3g" id="mHx-vy-dfY"/>
+                        <outlet property="supportButton" destination="teC-jB-ftY" id="x17-tU-2TL"/>
+                        <outlet property="telegramButton" destination="XEb-vb-Px9" id="nCU-g2-GbN"/>
+                        <outlet property="versLabel" destination="jlo-sf-ZTh" id="FuO-uT-5qC"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yNp-Af-VvV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-4023.1999999999998" y="2159.3703148425789"/>
+        </scene>
+    </scenes>
+</document>

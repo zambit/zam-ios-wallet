@@ -59,8 +59,6 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
 
     private var refreshControl: UIRefreshControl?
 
-    private var savedWalletsContentOffset: CGPoint = .zero
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -76,12 +74,12 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
         }
         self.phone = phone
 
-        loadData(self)
-
         refreshControl = UIRefreshControl()
         refreshControl?.addTarget(self, action: #selector(refreshControlValueChangedEvent(_:)), for: .valueChanged)
         refreshControl?.layer.zPosition = -2
-        collectionView?.insertSubview(refreshControl!, at: 0)
+        collectionView?.refreshControl = refreshControl
+
+        loadData(self)
 
         collectionView?.panGestureRecognizer.addTarget(self, action: #selector(collectionViewPanGestureEvent(recognizer:)))
     }
@@ -227,7 +225,6 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
     @objc
     private func refreshControlValueChangedEvent(_ sender: Any) {
         _delegate?.walletsViewControllerCallsUpdateData(self)
-
         loadData(sender)
     }
 
@@ -238,6 +235,7 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
      */
     private func loadData(_ sender: Any) {
         guard let token = userManager?.getToken() else {
+            refreshControl?.endRefreshing()
             return
         }
 

@@ -104,18 +104,15 @@ class SearchTextField: UITextField {
     @objc
     private func editingDidBegin(_ sender: SearchTextField) {
         UIView.animate(withDuration: 0.2, animations: {
-
             sender.normalDetailImageView?.alpha = 0.0
             sender.editingDetailButton?.alpha = 1.0
         }, completion: {
-            [weak self]
             _ in
 
             guard let detailButton = sender.editingDetailButton else {
                 return
             }
-
-            self?.bringSubviewToFront(detailButton)
+            self.bringSubviewToFront(detailButton)
         })
     }
 
@@ -130,19 +127,15 @@ class SearchTextField: UITextField {
         self.layoutIfNeeded()
         
         UIView.animate(withDuration: 0.2, animations: {
-
             sender.normalDetailImageView?.alpha = 1.0
             sender.editingDetailButton?.alpha = 0.0
-
         }, completion: {
-            [weak self]
             _ in
 
             guard let detailImage = sender.normalDetailImageView else {
                 return
             }
-
-            self?.bringSubviewToFront(detailImage)
+            self.bringSubviewToFront(detailImage)
         })
     }
 }
