@@ -646,7 +646,15 @@
 				8C713B1E213941FF00AC2E25 /* Networking.swift */,
 				8C52FFEF211AE19300EB55EA /* OverlappingFlowLayout.swift */,
 				8CF5F92E211327EB0083B36A /* StringParser.swift */,
+				9319BA862129FA9500033A7E /* Animations */,
+				8CA218D7212D68510063C188 /* Authentication */,
 				8CF5F93B21144BED0083B36A /* Extensions */,
+				8C7DE69D216CFD3600824A4B /* Graphics */,
+				8C7DE69A216CF63500824A4B /* InitialsImage */,
+				8C7DE69C216CF90700824A4B /* Paginator */,
+				8C7DE69B216CF76900824A4B /* PhoneNumber */,
+				8C7C336D2147C43800EC6C96 /* Pickers */,
+				8CF5F929211307010083B36A /* Timers */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -889,14 +897,6 @@
 			isa = PBXGroup;
 			children = (
 				8C34616A20EF8FA700746724 /* AppDelegate.swift */,
-				8CA218D7212D68510063C188 /* Authentication */,
-				9319BA862129FA9500033A7E /* Animations */,
-				8C7DE69D216CFD3600824A4B /* Graphics */,
-				8C7C336D2147C43800EC6C96 /* Pickers */,
-				8C7DE69A216CF63500824A4B /* InitialsImage */,
-				8CF5F929211307010083B36A /* Timers */,
-				8C7DE69C216CF90700824A4B /* Paginator */,
-				8C7DE69B216CF76900824A4B /* PhoneNumber */,
 				8C04BC2B211C4FB200E90090 /* Fonts */,
 				8C60883E2110632100470411 /* UserDataManager */,
 				8CF5F92A21130BB50083B36A /* Navigation */,
