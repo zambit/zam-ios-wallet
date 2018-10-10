@@ -90,7 +90,6 @@
 		8C333D77210F50E000949AC0 /* CountryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D76210F50E000949AC0 /* CountryView.swift */; };
 		8C333D7B210F767100949AC0 /* FlowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C333D7A210F767100949AC0 /* FlowViewController.swift */; };
 		8C34616B20EF8FA700746724 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C34616A20EF8FA700746724 /* AppDelegate.swift */; };
-		8C34617020EF8FA700746724 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C34616E20EF8FA700746724 /* Main.storyboard */; };
 		8C34617220EF8FA900746724 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8C34617120EF8FA900746724 /* Assets.xcassets */; };
 		8C34617520EF8FA900746724 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C34617320EF8FA900746724 /* LaunchScreen.storyboard */; };
 		8C4413C4211882FC00C9689C /* CreatePinFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4413C3211882FC00C9689C /* CreatePinFlow.swift */; };
@@ -191,6 +190,10 @@
 		8C7DE697216B605600824A4B /* Configurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7DE696216B605600824A4B /* Configurable.swift */; };
 		8C7DE699216B61DB00824A4B /* WalletItemData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7DE698216B61DB00824A4B /* WalletItemData.swift */; };
 		8C7DE6A1216D08E500824A4B /* SpinningAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7DE6A0216D08E500824A4B /* SpinningAnimationView.swift */; };
+		8C7DE6CF216E132400824A4B /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C7DE6CE216E132400824A4B /* Home.storyboard */; };
+		8C7DE6D3216E136000824A4B /* More.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C7DE6D2216E136000824A4B /* More.storyboard */; };
+		8C7DE6D5216E138C00824A4B /* History.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C7DE6D4216E138C00824A4B /* History.storyboard */; };
+		8C7DE6D7216E139300824A4B /* Verify.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C7DE6D6216E139300824A4B /* Verify.storyboard */; };
 		8CA2188F2121D97C0063C188 /* DecimalKeyboardComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CA2188E2121D97B0063C188 /* DecimalKeyboardComponent.xib */; };
 		8CA218922122E8D70063C188 /* SendMoneyComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CA218912122E8D70063C188 /* SendMoneyComponent.xib */; };
 		8CA218942122EAC90063C188 /* SendMoneyComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA218932122EAC90063C188 /* SendMoneyComponent.swift */; };
@@ -387,7 +390,6 @@
 		8C333D7A210F767100949AC0 /* FlowViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowViewController.swift; sourceTree = "<group>"; };
 		8C34616720EF8FA700746724 /* wallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = wallet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C34616A20EF8FA700746724 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		8C34616F20EF8FA700746724 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8C34617120EF8FA900746724 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8C34617420EF8FA900746724 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8C34617620EF8FA900746724 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -489,6 +491,10 @@
 		8C7DE696216B605600824A4B /* Configurable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configurable.swift; sourceTree = "<group>"; };
 		8C7DE698216B61DB00824A4B /* WalletItemData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletItemData.swift; sourceTree = "<group>"; };
 		8C7DE6A0216D08E500824A4B /* SpinningAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinningAnimationView.swift; sourceTree = "<group>"; };
+		8C7DE6CE216E132400824A4B /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
+		8C7DE6D2216E136000824A4B /* More.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = More.storyboard; sourceTree = "<group>"; };
+		8C7DE6D4216E138C00824A4B /* History.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = History.storyboard; sourceTree = "<group>"; };
+		8C7DE6D6216E139300824A4B /* Verify.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Verify.storyboard; sourceTree = "<group>"; };
 		8CA2188E2121D97B0063C188 /* DecimalKeyboardComponent.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DecimalKeyboardComponent.xib; sourceTree = "<group>"; };
 		8CA218912122E8D70063C188 /* SendMoneyComponent.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SendMoneyComponent.xib; sourceTree = "<group>"; };
 		8CA218932122EAC90063C188 /* SendMoneyComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMoneyComponent.swift; sourceTree = "<group>"; };
@@ -676,7 +682,7 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		8C0919322106206100703224 /* Screens */ = {
+		8C0919322106206100703224 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				8C60883C21105A0F00470411 /* Base */,
@@ -688,7 +694,7 @@
 				8C7C33452142922000EC6C96 /* KYC */,
 				8C23143F214BE5E5007340E7 /* More */,
 			);
-			path = Screens;
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 		8C091939210622AF00703224 /* NetworkLayer */ = {
@@ -904,16 +910,10 @@
 				8C4413D22119936100C9689C /* Model */,
 				8C091939210622AF00703224 /* NetworkLayer */,
 				8C0919792108D64E00703224 /* Flow */,
-				8C0919322106206100703224 /* Screens */,
+				8C0919322106206100703224 /* Controllers */,
 				8C0919312106205600703224 /* View */,
+				8C7DE6D9216E159E00824A4B /* Storyboads */,
 				8C34617120EF8FA900746724 /* Assets.xcassets */,
-				8C34617320EF8FA900746724 /* LaunchScreen.storyboard */,
-				8C34616E20EF8FA700746724 /* Main.storyboard */,
-				8C0918F92105F75200703224 /* Onboarding.storyboard */,
-				8C0918FB2105F75900703224 /* Login.storyboard */,
-				8C0918FD2105F76200703224 /* Registration.storyboard */,
-				8C0918FF210601F300703224 /* Recovery.storyboard */,
-				8CF5F945211479830083B36A /* Pin.storyboard */,
 				8C34617620EF8FA900746724 /* Info.plist */,
 				8C7DE68E2166104000824A4B /* GoogleService-Info.plist */,
 			);
@@ -1261,6 +1261,31 @@
 				8CA218BA212573510063C188 /* IndentLabel.swift */,
 			);
 			path = Labels;
+			sourceTree = "<group>";
+		};
+		8C7DE6D8216E139A00824A4B /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				8C7DE6CE216E132400824A4B /* Home.storyboard */,
+				8C7DE6D4216E138C00824A4B /* History.storyboard */,
+				8C7DE6D6216E139300824A4B /* Verify.storyboard */,
+				8C7DE6D2216E136000824A4B /* More.storyboard */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		8C7DE6D9216E159E00824A4B /* Storyboads */ = {
+			isa = PBXGroup;
+			children = (
+				8C34617320EF8FA900746724 /* LaunchScreen.storyboard */,
+				8C0918F92105F75200703224 /* Onboarding.storyboard */,
+				8C0918FB2105F75900703224 /* Login.storyboard */,
+				8C0918FD2105F76200703224 /* Registration.storyboard */,
+				8C0918FF210601F300703224 /* Recovery.storyboard */,
+				8CF5F945211479830083B36A /* Pin.storyboard */,
+				8C7DE6D8216E139A00824A4B /* Main */,
+			);
+			path = Storyboads;
 			sourceTree = "<group>";
 		};
 		8CA218902122E8880063C188 /* SendMoneyComponent */ = {
@@ -1663,6 +1688,7 @@
 				8C34617520EF8FA900746724 /* LaunchScreen.storyboard in Resources */,
 				8CF5F95921149E380083B36A /* CreatePinComponent.xib in Resources */,
 				8CA2190F213420870063C188 /* TransactionsGroupHeaderComponent.xib in Resources */,
+				8C7DE6D5216E138C00824A4B /* History.storyboard in Resources */,
 				8C0918FE2105F76200703224 /* Registration.storyboard in Resources */,
 				8C34617220EF8FA900746724 /* Assets.xcassets in Resources */,
 				8C0918FA2105F75200703224 /* Onboarding.storyboard in Resources */,
@@ -1673,13 +1699,16 @@
 				8CA2192921354ECF0063C188 /* TransactionsDateIntervalFilterComponent.xib in Resources */,
 				8CF5F946211479830083B36A /* Pin.storyboard in Resources */,
 				8CA218DF212D93670063C188 /* ContactsHorizontalComponent.xib in Resources */,
+				8C7DE6CF216E132400824A4B /* Home.storyboard in Resources */,
 				8C04BC30211C4FC100E90090 /* MavenPro-Medium.ttf in Resources */,
 				8C0918FC2105F75900703224 /* Login.storyboard in Resources */,
 				8C333D58210B4F7D00949AC0 /* VerificationCodeFormComponent.xib in Resources */,
 				8C04BC31211C4FC100E90090 /* MavenPro-Bold.ttf in Resources */,
 				8C60884E2111A22D00470411 /* LoginPasswordFormView.xib in Resources */,
+				8C7DE6D3216E136000824A4B /* More.storyboard in Resources */,
 				8CA2191A213442100063C188 /* IllustrationalPlaceholder.xib in Resources */,
 				8C713B1821380AE800AC2E25 /* WalletAddressComponent.xib in Resources */,
+				8C7DE6D7216E139300824A4B /* Verify.storyboard in Resources */,
 				8C713B132138009B00AC2E25 /* DepositMoneyMethodComponent.xib in Resources */,
 				8C091900210601F300703224 /* Recovery.storyboard in Resources */,
 				8C04BC32211C4FC100E90090 /* MavenPro-Black.ttf in Resources */,
@@ -1695,7 +1724,6 @@
 				8CA218922122E8D70063C188 /* SendMoneyComponent.xib in Resources */,
 				8CA2193521356C380063C188 /* FeatureItemComponent.xib in Resources */,
 				8CF41D882135973F006D4FE2 /* RectItemComponent.xib in Resources */,
-				8C34617020EF8FA700746724 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2080,14 +2108,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		8C34616E20EF8FA700746724 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				8C34616F20EF8FA700746724 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		8C34617320EF8FA900746724 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
