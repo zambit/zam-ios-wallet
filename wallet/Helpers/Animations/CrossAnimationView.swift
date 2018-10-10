@@ -11,12 +11,8 @@ import UIKit
 
 open class CrossAnimationView: UIView {
 
-    // MARK: - Private variables
-
     private let leftLayer: CAShapeLayer = CAShapeLayer()
     private let rightLayer: CAShapeLayer = CAShapeLayer()
-
-    // MARK: - Public methods
 
     convenience init(frame: CGRect = .zero, strokeColor: UIColor, lineWidth: CGFloat) {
         self.init(frame: frame)

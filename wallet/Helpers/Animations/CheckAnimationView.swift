@@ -11,11 +11,7 @@ import UIKit
 
 open class CheckAnimationView: UIView {
 
-    // MARK: - Private variables
-
     private let lineLayer: CAShapeLayer = CAShapeLayer()
-
-    // MARK: - Public methods
 
     convenience init(frame: CGRect = .zero, strokeColor: UIColor, lineWidth: CGFloat) {
         self.init(frame: frame)

@@ -76,13 +76,11 @@ class WalletItemComponent: WalletSmallItemComponent {
         switch sender.state {
         case .began:
             UIView.animate(withDuration: 0.5) {
-                [weak self] in
-                self?.view.transform = .init(scaleX: 0.95, y: 0.95)
+                self.view.transform = .init(scaleX: 0.95, y: 0.95)
             }
         case .ended:
             UIView.animate(withDuration: 0.5) {
-                [weak self] in
-                self?.view.transform = .identity
+                self.view.transform = .identity
             }
         default:
             return

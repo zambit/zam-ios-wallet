@@ -45,7 +45,7 @@ final class MainFlow: ScreenFlow {
     // MARK: - MoreTabBarItem
 
     private var moreScreen: MoreViewController {
-        let _vc = ControllerHelper.instantiateViewController(identifier: "MoreViewController", storyboardName: "Main")
+        let _vc = ControllerHelper.instantiateViewController(identifier: "MoreViewController", storyboardName: "More")
 
         guard let vc = _vc as? MoreViewController else {
             fatalError()
@@ -71,7 +71,7 @@ final class MainFlow: ScreenFlow {
     // MARK: - KYCTabBarItem
 
     private var mainKYCScreen: KYCMainScreenViewController {
-        let _vc = ControllerHelper.instantiateViewController(identifier: "KYCMainScreenViewController", storyboardName: "Main")
+        let _vc = ControllerHelper.instantiateViewController(identifier: "KYCMainScreenViewController", storyboardName: "Verify")
 
         guard let vc = _vc as? KYCMainScreenViewController else {
             fatalError()
@@ -114,7 +114,7 @@ final class MainFlow: ScreenFlow {
     }
 
     private var personalInfoScreen: KYCPersonalInfoViewController {
-        let _vc = ControllerHelper.instantiateViewController(identifier: "KYCPersonalInfoViewController", storyboardName: "Main")
+        let _vc = ControllerHelper.instantiateViewController(identifier: "KYCPersonalInfoViewController", storyboardName: "Verify")
 
         guard let vc = _vc as? KYCPersonalInfoViewController else {
             fatalError()
@@ -143,7 +143,7 @@ final class MainFlow: ScreenFlow {
     }
 
     private var uploadDocumentsMenuScreen: KYCUploadDocumentsMenuViewController {
-        let _vc = ControllerHelper.instantiateViewController(identifier: "KYCUploadDocumentsMenuViewController", storyboardName: "Main")
+        let _vc = ControllerHelper.instantiateViewController(identifier: "KYCUploadDocumentsMenuViewController", storyboardName: "Verify")
 
         guard let vc = _vc as? KYCUploadDocumentsMenuViewController else {
             fatalError()
@@ -191,7 +191,7 @@ final class MainFlow: ScreenFlow {
     }
 
     private var uploadPrivateDocumentScreen: KYCUploadPrivateDocumentViewController {
-        let _vc = ControllerHelper.instantiateViewController(identifier: "KYCUploadPrivateDocumentViewController", storyboardName: "Main")
+        let _vc = ControllerHelper.instantiateViewController(identifier: "KYCUploadPrivateDocumentViewController", storyboardName: "Verify")
 
         guard let vc = _vc as? KYCUploadPrivateDocumentViewController else {
             fatalError()
@@ -218,7 +218,7 @@ final class MainFlow: ScreenFlow {
     }
 
     private var uploadSelfieScreen: KYCUploadSelfieViewController {
-        let _vc = ControllerHelper.instantiateViewController(identifier: "KYCUploadSelfieViewController", storyboardName: "Main")
+        let _vc = ControllerHelper.instantiateViewController(identifier: "KYCUploadSelfieViewController", storyboardName: "Verify")
 
         guard let vc = _vc as? KYCUploadSelfieViewController else {
             fatalError()
@@ -245,7 +245,7 @@ final class MainFlow: ScreenFlow {
     }
 
     private var uploadAddressDocumentScreen: KYCUploadAddressDocumentViewController {
-        let _vc = ControllerHelper.instantiateViewController(identifier: "KYCUploadAddressDocumentViewController", storyboardName: "Main")
+        let _vc = ControllerHelper.instantiateViewController(identifier: "KYCUploadAddressDocumentViewController", storyboardName: "Verify")
 
         guard let vc = _vc as? KYCUploadAddressDocumentViewController else {
             fatalError()
@@ -274,7 +274,7 @@ final class MainFlow: ScreenFlow {
     // MARK: - TransactionsTabBarItem
 
     private var transactionsScreen: TransactionsHistoryViewController {
-        let _vc = ControllerHelper.instantiateViewController(identifier: "TransactionsHistoryViewController", storyboardName: "Main")
+        let _vc = ControllerHelper.instantiateViewController(identifier: "TransactionsHistoryViewController", storyboardName: "History")
 
         guard let vc = _vc as? TransactionsHistoryViewController else {
             fatalError()
@@ -303,7 +303,7 @@ final class MainFlow: ScreenFlow {
     }
 
     private var transactionsFilterScreen: TransactionsHistoryFilterViewController {
-        let _vc = ControllerHelper.instantiateViewController(identifier: "TransactionsHistoryFilterViewController", storyboardName: "Main")
+        let _vc = ControllerHelper.instantiateViewController(identifier: "TransactionsHistoryFilterViewController", storyboardName: "History")
 
         guard let vc = _vc as? TransactionsHistoryFilterViewController else {
             fatalError()
@@ -332,7 +332,7 @@ final class MainFlow: ScreenFlow {
     // MARK: - HomeTabBarItem
 
     private var homeScreen: HomeViewController {
-        let _vc = ControllerHelper.instantiateViewController(identifier: "HomeViewController", storyboardName: "Main")
+        let _vc = ControllerHelper.instantiateViewController(identifier: "HomeViewController", storyboardName: "Home")
 
         guard let vc = _vc as? HomeViewController else {
             fatalError()
@@ -381,7 +381,7 @@ final class MainFlow: ScreenFlow {
     }
 
     private var walletsScreen: WalletsViewController {
-        let _vc = ControllerHelper.instantiateViewController(identifier: "WalletsViewController", storyboardName: "Main")
+        let _vc = ControllerHelper.instantiateViewController(identifier: "WalletsViewController", storyboardName: "Home")
 
         guard let vc = _vc as? WalletsViewController else {
             fatalError()
@@ -395,7 +395,7 @@ final class MainFlow: ScreenFlow {
     }
 
     private var depositMoneyScreen: DepositMoneyViewController {
-        let _vc = ControllerHelper.instantiateViewController(identifier: "DepositMoneyViewController", storyboardName: "Main")
+        let _vc = ControllerHelper.instantiateViewController(identifier: "DepositMoneyViewController", storyboardName: "Home")
 
         guard let vc = _vc as? DepositMoneyViewController else {
             fatalError()
@@ -418,7 +418,7 @@ final class MainFlow: ScreenFlow {
     }
 
     private var sendMoneyScreen: SendMoneyViewController {
-        let _vc = ControllerHelper.instantiateViewController(identifier: "SendMoneyViewController", storyboardName: "Main")
+        let _vc = ControllerHelper.instantiateViewController(identifier: "SendMoneyViewController", storyboardName: "Home")
 
         guard let vc = _vc as? SendMoneyViewController else {
             fatalError()
@@ -463,7 +463,7 @@ final class MainFlow: ScreenFlow {
     }
 
     private var transactionDetailScreen: TransactionDetailViewController {
-        let _vc = ControllerHelper.instantiateViewController(identifier: "TransactionDetailViewController", storyboardName: "Main")
+        let _vc = ControllerHelper.instantiateViewController(identifier: "TransactionDetailViewController", storyboardName: "Home")
 
         guard let vc = _vc as? TransactionDetailViewController else {
             fatalError()
@@ -489,7 +489,7 @@ final class MainFlow: ScreenFlow {
     }
 
     private var qrScannerScreen: QRCodeScannerViewController {
-        let _vc = ControllerHelper.instantiateViewController(identifier: "QRCodeScannerViewController", storyboardName: "Main")
+        let _vc = ControllerHelper.instantiateViewController(identifier: "QRCodeScannerViewController", storyboardName: "Home")
 
         guard let vc = _vc as? QRCodeScannerViewController else {
             fatalError()

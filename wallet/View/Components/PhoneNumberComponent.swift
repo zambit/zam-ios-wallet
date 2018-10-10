@@ -377,12 +377,10 @@ extension BehaviorExtension: SizePresetable where Base: PhoneNumberComponent {
             base.imageViewLeadingConstraint?.constant = 0
 
             UIView.animate(withDuration: 0.2, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.01, options: .curveEaseInOut, animations: {
-                [weak self] in
+                self.base.imageViewLeadingConstraint?.constant = -60
+                self.base.textFieldTrailingConstraint?.constant = -76
 
-                self?.base.imageViewLeadingConstraint?.constant = -60
-                self?.base.textFieldTrailingConstraint?.constant = -76
-
-                self?.base.layoutIfNeeded()
+                self.base.layoutIfNeeded()
             }, completion: {
                 _ in
                 handler()
@@ -392,12 +390,10 @@ extension BehaviorExtension: SizePresetable where Base: PhoneNumberComponent {
             base.imageViewLeadingConstraint?.constant = -60
 
             UIView.animate(withDuration: 0.2, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.01, options: .curveEaseInOut, animations: {
-                [weak self] in
+                self.base.imageViewLeadingConstraint?.constant = 0
+                self.base.textFieldTrailingConstraint?.constant = -16
 
-                self?.base.imageViewLeadingConstraint?.constant = 0
-                self?.base.textFieldTrailingConstraint?.constant = -16
-
-                self?.base.layoutIfNeeded()
+                self.base.layoutIfNeeded()
             }, completion: {
                 _ in
                 handler()
