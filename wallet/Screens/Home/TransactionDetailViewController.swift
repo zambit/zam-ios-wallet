@@ -67,24 +67,15 @@ class TransactionDetailViewController: FlowViewController, WalletNavigable {
         overlayBlurredBackgroundView()
 
         UIView.animate(withDuration: 0.3, animations: {
-            [weak self] in
-
-            self?.titleLabel?.alpha = 1.0
-            self?.amountLabel?.alpha = 1.0
-            self?.amountDetailLabel?.alpha = 1.0
-            self?.recipientPhoneLabel?.alpha = 1.0
-            self?.recipientNameLabel?.alpha = 1.0
-            self?.sendButton?.alpha = 1.0
-
+            self.titleLabel?.alpha = 1.0
+            self.amountLabel?.alpha = 1.0
+            self.amountDetailLabel?.alpha = 1.0
+            self.recipientPhoneLabel?.alpha = 1.0
+            self.recipientNameLabel?.alpha = 1.0
+            self.sendButton?.alpha = 1.0
         }, completion: {
-            [weak self]
             _ in
-
-            guard let strongSelf = self else {
-                return
-            }
-
-            strongSelf.walletNavigationController?.custom.addBackButton(for: strongSelf, target: strongSelf, action: #selector(strongSelf.closeButtonTouchUpInsideEvent(_:)))
+            self.walletNavigationController?.custom.addBackButton(for: self, target: self, action: #selector(self.closeButtonTouchUpInsideEvent(_:)))
         })
     }
 
@@ -299,28 +290,21 @@ class TransactionDetailViewController: FlowViewController, WalletNavigable {
         walletNavigationController?.custom.hideBackButton(for: self)
 
         UIView.animate(withDuration: 0.8, animations: {
-            [weak self] in
+            self.titleLabel?.alpha = 0.0
+            self.amountLabel?.alpha = 0.0
+            self.amountDetailLabel?.alpha = 0.0
+            self.recipientPhoneLabel?.alpha = 0.0
+            self.recipientNameLabel?.alpha = 0.0
+            self.sendButton?.alpha = 0.0
+            self.errorMessageLabel?.alpha = 0.0
+            self.closeButton?.alpha = 0.0
 
-            self?.titleLabel?.alpha = 0.0
-            self?.amountLabel?.alpha = 0.0
-            self?.amountDetailLabel?.alpha = 0.0
-            self?.recipientPhoneLabel?.alpha = 0.0
-            self?.recipientNameLabel?.alpha = 0.0
-            self?.sendButton?.alpha = 0.0
-            self?.errorMessageLabel?.alpha = 0.0
-            self?.closeButton?.alpha = 0.0
-
-            self?.effectView?.alpha = 0.0
-            self?.backgroundView?.alpha = 0.0
+            self.effectView?.alpha = 0.0
+            self.backgroundView?.alpha = 0.0
         }, completion: {
-            [weak self]
             _ in
 
-            guard let strongSelf = self else {
-                return
-            }
-
-            strongSelf.onClose?(strongSelf)
+            self.onClose?(self)
         })
     }
 

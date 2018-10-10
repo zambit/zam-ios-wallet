@@ -42,7 +42,6 @@ class PhoneNumberFormatter {
         let target = self
         
         DispatchQueue.global(qos: .default).async {
-
             let parsed = try? target.formatter.parse(string)
 
             if let parsed = parsed, !parsed.notParsed() {

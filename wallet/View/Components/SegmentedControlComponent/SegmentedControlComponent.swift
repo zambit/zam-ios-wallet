@@ -144,25 +144,14 @@ class SegmentedControlComponent: Component {
         delegate?.segmentedControlComponent(self, willChangeTo: index)
 
         UIView.animate(withDuration: 0.2, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.001, options: .curveEaseOut, animations: {
-            [weak self] in
-
-            guard let strongSelf = self else {
-                return
-            }
-
-            back.bounds.size.width = strongSelf.segments[index].width + strongSelf.segmentsHorizontalMargin * 2
-            back.center = strongSelf.segments[index].center
-            back.backgroundColor = strongSelf.segments[index].backColor
+            back.bounds.size.width = self.segments[index].width + self.segmentsHorizontalMargin * 2
+            back.center = self.segments[index].center
+            back.backgroundColor = self.segments[index].backColor
         }, completion: {
-            [weak self]
             _ in
 
-            guard let strongSelf = self else {
-                return
-            }
-
-            strongSelf.currentIndex = index
-            strongSelf.delegate?.segmentedControlComponent(strongSelf, currentIndexChangedTo: strongSelf.currentIndex)
+            self.currentIndex = index
+            self.delegate?.segmentedControlComponent(self, currentIndexChangedTo: self.currentIndex)
         })
     }
 
