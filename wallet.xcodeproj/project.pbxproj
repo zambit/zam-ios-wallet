@@ -194,6 +194,7 @@
 		8C7DE6D3216E136000824A4B /* More.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C7DE6D2216E136000824A4B /* More.storyboard */; };
 		8C7DE6D5216E138C00824A4B /* History.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C7DE6D4216E138C00824A4B /* History.storyboard */; };
 		8C7DE6D7216E139300824A4B /* Verify.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C7DE6D6216E139300824A4B /* Verify.storyboard */; };
+		8C7DE6DB216E203200824A4B /* WalletDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7DE6DA216E203200824A4B /* WalletDetailsViewController.swift */; };
 		8CA2188F2121D97C0063C188 /* DecimalKeyboardComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CA2188E2121D97B0063C188 /* DecimalKeyboardComponent.xib */; };
 		8CA218922122E8D70063C188 /* SendMoneyComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CA218912122E8D70063C188 /* SendMoneyComponent.xib */; };
 		8CA218942122EAC90063C188 /* SendMoneyComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA218932122EAC90063C188 /* SendMoneyComponent.swift */; };
@@ -495,6 +496,7 @@
 		8C7DE6D2216E136000824A4B /* More.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = More.storyboard; sourceTree = "<group>"; };
 		8C7DE6D4216E138C00824A4B /* History.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = History.storyboard; sourceTree = "<group>"; };
 		8C7DE6D6216E139300824A4B /* Verify.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Verify.storyboard; sourceTree = "<group>"; };
+		8C7DE6DA216E203200824A4B /* WalletDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletDetailsViewController.swift; sourceTree = "<group>"; };
 		8CA2188E2121D97B0063C188 /* DecimalKeyboardComponent.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DecimalKeyboardComponent.xib; sourceTree = "<group>"; };
 		8CA218912122E8D70063C188 /* SendMoneyComponent.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SendMoneyComponent.xib; sourceTree = "<group>"; };
 		8CA218932122EAC90063C188 /* SendMoneyComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMoneyComponent.swift; sourceTree = "<group>"; };
@@ -1073,6 +1075,7 @@
 			children = (
 				8C52FFF1211AF1FD00EB55EA /* HomeViewController.swift */,
 				8C52FFEB2119E09200EB55EA /* WalletsViewController.swift */,
+				8C7DE6DA216E203200824A4B /* WalletDetailsViewController.swift */,
 				8CA218A0212304590063C188 /* SendMoneyViewController.swift */,
 				8C713B1A21380CE200AC2E25 /* DepositMoneyViewController.swift */,
 				8CA218C82126D4FD0063C188 /* TransactionDetailViewController.swift */,
@@ -2009,6 +2012,7 @@
 				8C231464215293B8007340E7 /* PhoneNumberRecipientComponent.swift in Sources */,
 				8CF41D8B21359776006D4FE2 /* ContactItemComponent.swift in Sources */,
 				8CF5F95221148D800083B36A /* DotsFieldComponent.swift in Sources */,
+				8C7DE6DB216E203200824A4B /* WalletDetailsViewController.swift in Sources */,
 				8C7C3397214A972200EC6C96 /* SizePresetable.swift in Sources */,
 				8C09197B2108D66100703224 /* SignUpFlow.swift in Sources */,
 				8C7DE67E2164BF0500824A4B /* HistoryRequest.swift in Sources */,
