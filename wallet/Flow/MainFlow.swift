@@ -380,7 +380,8 @@ final class MainFlow: ScreenFlow {
             let target = strongSelf.walletDetailsScreen
             //target.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
 
-            strongSelf.navigationController.custom.present(viewController: target, animate: false)
+            //strongSelf.navigationController.custom.present(viewController: target, animate: false)
+            vc.walletNavigationController?.custom.pushAdvancedly(viewController: target)
         }
 
         vc.onSendFromWallet = onSendFromWallet
@@ -423,7 +424,8 @@ final class MainFlow: ScreenFlow {
                 return
             }
 
-            strongSelf.navigationController.custom.dismissPresentedViewController()
+            //strongSelf.navigationController.custom.dismissPresentedViewController()
+            vc.walletNavigationController?.custom.popViewController(animated: true)
         }
 
         vc.onExit = onExit

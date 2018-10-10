@@ -25,8 +25,8 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable, UITableV
 
         self.hero.isEnabled = true
 
-        self.view.backgroundColor = .clear
-        self.view.isOpaque = false
+        self.setupDefaultStyle()
+        //self.view.isOpaque = false
 
         self.tableView?.hero.id = "floatingView"
         self.tableView?.backgroundColor = .white
