@@ -337,7 +337,7 @@ class HomeViewController: FloatingViewController, WalletsViewControllerDelegate,
 
     func performWalletDetails(index: Int, wallets: [WalletData], phone: String) {
         floatingView?.hero.id = "floatingView"
-        floatingView?.hero.modifiers = [.useScaleBasedSizeChange]
+        floatingView?.hero.modifiers = [.useScaleBasedSizeChange, .timingFunction(.easeInOut)]
         detailTopGestureView?.hero.modifiers = [.fade]
         walletsContainerView?.hero.modifiers = [.fade]
 
