@@ -215,6 +215,17 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
             strongSelf.prepareCellForAnimation(cell)
             owner.performDepositFromWallet(index: indexPath.item, wallets: strongSelf.wallets, phone: strongSelf.phone)
         }
+
+        cell.onCardLongPress = {
+            [weak self] in
+
+            guard let strongSelf = self, let owner = strongSelf._owner else {
+                return
+            }
+
+            strongSelf.prepareCellForAnimation(cell)
+            owner.performWalletDetails(index: indexPath.item, wallets: strongSelf.wallets, phone: strongSelf.phone)
+        }
         return cell
     }
 

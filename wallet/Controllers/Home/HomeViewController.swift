@@ -17,6 +17,8 @@ protocol HomeController: class {
     func performSendFromWallet(index: Int, wallets: [WalletData], phone: String, recipient: FormattedContactData?)
 
     func performDepositFromWallet(index: Int, wallets: [WalletData], phone: String)
+
+    func performWalletDetails(index: Int, wallets: [WalletData], phone: String)
 }
 
 class HomeViewController: FloatingViewController, WalletsViewControllerDelegate, ContactsHorizontalComponentDelegate, AdvancedTransitionDelegate, SendMoneyViewControllerDelegate, HomeController {
@@ -27,6 +29,7 @@ class HomeViewController: FloatingViewController, WalletsViewControllerDelegate,
 
     var onSendFromWallet: ((_ index: Int, _ wallets: [WalletData], _ recipient: FormattedContactData?, _ phone: String) -> Void)?
     var onDepositToWallet: ((_ index: Int, _ wallets: [WalletData], _ phone: String) -> Void)?
+    var onWalletDetails: ((_ index: Int, _ wallets: [WalletData], _ phone: String) -> Void)?
 
     var walletsCollectionViewController: WalletsCollectionViewController? {
         didSet {
@@ -208,7 +211,7 @@ class HomeViewController: FloatingViewController, WalletsViewControllerDelegate,
     // MARK: - Screen Style
 
     private func setupStyle() {
-        floatingView?.layer.cornerRadius = 16.0
+        floatingView?.cornerRadius = 16.0
         floatingView?.clipsToBounds = true
 
         floatingView?.backgroundColor = .white
@@ -326,6 +329,15 @@ class HomeViewController: FloatingViewController, WalletsViewControllerDelegate,
         walletsContainerView?.hero.modifiers = [.fade]
 
         self.onDepositToWallet?(index, wallets, phone)
+    }
+
+    func performWalletDetails(index: Int, wallets: [WalletData], phone: String) {
+        floatingView?.hero.id = "floatingView"
+        floatingView?.hero.modifiers = [.useScaleBasedSizeChange]
+        detailTopGestureView?.hero.modifiers = [.fade]
+        walletsContainerView?.hero.modifiers = [.fade]
+
+        self.onWalletDetails?(index, wallets, phone)
     }
 
     // MARK: - AdvancedTransitionDelegate
