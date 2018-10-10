@@ -11,11 +11,7 @@ import UIKit
 
 open class SpinningAnimationView: UIView {
 
-    // MARK: - Private variables
-
     private var spinningLayer: SpinningAnimationLayer!
-
-    // MARK: - Public methods
 
     convenience init(frame: CGRect = .zero, strokeColor: UIColor, lineWidth: CGFloat) {
         self.init(frame: frame)

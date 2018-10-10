@@ -9,6 +9,9 @@
 import Foundation
 import PhoneNumberKit
 
+/**
+ *  Complete phone number structure that provides some detail info.
+ */
 struct PhoneNumber: Equatable {
     let numberString: String
     let formattedString: String
@@ -16,8 +19,16 @@ struct PhoneNumber: Equatable {
     let region: String?
 }
 
+/**
+ * Phone number formatter, providing interface to extract detail information, format partial and full phone numbers.
+ */
 class PhoneNumberFormatter {
 
+    /**
+     *  Format input free format string to only numbers format.
+     *
+     *  - parameter formatted: Free format string
+     */
     static func trivialString(from formatted: String) -> String {
         let allowedCharacters = CharacterSet(charactersIn: "1234567890")
         let separated = formatted.components(separatedBy: allowedCharacters.inverted)
@@ -30,6 +41,11 @@ class PhoneNumberFormatter {
 
     private var _number: String?
 
+    /**
+     *  Init formatter with specified number, if it's exist, or without to be available for partial formatting.
+     *
+     *  - parameter number: Initial number value.
+     */
     init(_ number: String? = nil, withPrefix: Bool = true) {
         self.formatter = PhoneNumberKit()
         self.partialFormatter = PartialFormatter(phoneNumberKit: formatter, withPrefix: withPrefix)
@@ -38,6 +54,14 @@ class PhoneNumberFormatter {
         self.number = number
     }
 
+    /**
+     *  Get completed phone number structure with detail information from given phone number string if it's valid.
+     *
+     *  It's asynchronous operation, and returns result with completion block.
+     *
+     *  - parameter string: Phone number to be converting to completed.
+     *  - parameter completion: Result of creating completed structure from given phone number.
+     */
     func getCompleted(from string: String, completion: @escaping (PhoneNumber?) -> Void) {
         let target = self
         
@@ -64,6 +88,14 @@ class PhoneNumberFormatter {
         }
     }
 
+    /**
+     *  Get completed phone numbers structures with detail information if phones is valid.
+     *
+     *  It's asynchronous operation, and returns result with completion block.
+     *
+     *  - parameter array: Array of phone numbers to be converting to completed.
+     *  - parameter completion: Result of creating completed structures from given array of phone numbers.
+     */
     func getCompleted(from array: [String], completion: @escaping ([PhoneNumber?]) -> Void) {
         DispatchQueue.global(qos: .background).async {
             [weak self] in
@@ -140,6 +172,9 @@ class PhoneNumberFormatter {
 
     // MARK: - Setters
 
+    /**
+     * Set phone number for formatter.
+     */
     var number: String? {
         get {
             let separated = _number?.components(separatedBy: allowedCharacters.inverted)
@@ -153,46 +188,11 @@ class PhoneNumberFormatter {
         }
     }
 
-    var code: String? {
-        get {
-            if let numeric = numericCode {
-                return String(numeric)
-            }
+    // MARK: - Default values
 
-            return nil
-        }
-
-        set {
-            let newCode = newValue ?? ""
-
-            let allowedCharacters = CharacterSet(charactersIn: "1234567890")
-            let separated = newCode.components(separatedBy: allowedCharacters.inverted)
-            let clearCode = separated.joined(separator: "")
-
-            guard let number = self.number else {
-                self.number = clearCode
-                return
-            }
-
-            guard let oldCode = code else {
-                self.number?.addPrefixIfNeeded(clearCode)
-                return
-            }
-
-            var mutableNumber = number
-
-            if mutableNumber.hasPrefix(oldCode) {
-                let endIndex = mutableNumber.endIndex(of: oldCode)!
-                mutableNumber.removeSubrange(mutableNumber.startIndex...endIndex)
-            }
-
-            mutableNumber.insert(contentsOf: newCode, at: mutableNumber.startIndex)
-            self.number = number
-        }
-    }
-
-    // MARK: - Default region and code values
-
+    /**
+     * Default phone code defined from user's device mobile information. Doesn't depend on formatter's phone.
+     */
     var defaultCode: String? {
         if let numCode = formatter.countryCode(for: partialFormatter.currentRegion) {
             return String(numCode)
@@ -201,16 +201,38 @@ class PhoneNumberFormatter {
         return nil
     }
 
+    /**
+     * Default phone region defined from user's device mobile information. Doesn't depend on formatter's phone.
+     */
     var defaultRegion: String {
         return partialFormatter.currentRegion
     }
 
     // MARK: - Getters
 
+    /**
+     * Detect if current formatter's phone number is valid. It shows if partial entering completed.
+     */
     var isValid: Bool {
         return completed != nil
     }
 
+    /**
+     * Code part of the phone.
+     */
+    var code: String? {
+        get {
+            if let numeric = numericCode {
+                return String(numeric)
+            }
+
+            return nil
+        }
+    }
+
+    /**
+     * Completed phone number structure with detail information from formatter's phone number string if it's valid.
+     */
     var completed: PhoneNumber? {
         guard let num = number, let object = try? formatter.parse(num) else {
             return nil
@@ -225,6 +247,9 @@ class PhoneNumberFormatter {
                            region: formatter.mainCountry(forCode: object.countryCode))
     }
 
+    /**
+     * Formatted phone number string contains symbols: +, (, ), -.
+     */
     var formatted: String {
         get {
             if let number = number {
@@ -235,6 +260,9 @@ class PhoneNumberFormatter {
         }
     }
 
+    /**
+     * Region of formatter's phone number. Can be defined only by code part.
+     */
     var region: String? {
         guard let numCode = numericCode else {
             return nil
