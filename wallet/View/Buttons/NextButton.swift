@@ -89,6 +89,7 @@ extension BehaviorExtension where Base: NextButton {
                                     width: side,
                                     height: side)
         let animation = SpinningAnimationLayer(frame: animationFrame, color: .cornflower)
+        animation.animate()
         base.loadingView.layer.addSublayer(animation)
         base.loadingView.isHidden = true
 
