@@ -12,7 +12,7 @@ import PromiseKit
 /**
  Recovery password API. Provides requests for sending verification code to phone, verifing recovering account password and providing new password.
  */
-struct RecoveryAPI: NetworkService, ThreeStepsAPI {
+struct RecoveryAPI: NetworkService, CreatePasswordProcess {
 
     private let provider: Provider
 
