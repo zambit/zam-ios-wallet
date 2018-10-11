@@ -378,6 +378,9 @@ final class MainFlow: ScreenFlow {
             }
 
             let target = strongSelf.walletDetailsScreen
+            target.sendDelegate = vc
+            target.advancedTransitionDelegate = vc
+            target.prepare(wallets: wallets, currentIndex: index, phone: phone)
             //target.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
 
             //strongSelf.navigationController.custom.present(viewController: target, animate: false)
@@ -417,17 +420,50 @@ final class MainFlow: ScreenFlow {
             fatalError()
         }
 
-        let onExit: () -> Void = {
-            [weak self] in
+        let onSendFromWallet: (Int, [WalletData], String) -> Void = {
+            [weak self]
+            index, wallets, phone in
 
             guard let strongSelf = self else {
                 return
             }
 
+            let target = strongSelf.sendMoneyScreen
+            target.prepare(wallets: wallets, currentIndex: index, phone: phone)
+            target.delegate = vc
+            target.advancedTransitionDelegate = vc
+
+            vc.walletNavigationController?.custom.pushAdvancedly(viewController: target)
+        }
+
+        let onDepositToWallet: (Int, [WalletData], String) -> Void = {
+            [weak self]
+            index, wallets, phone in
+
+            guard let strongSelf = self else {
+                return
+            }
+
+            let target = strongSelf.depositMoneyScreen
+            target.prepare(wallets: wallets, currentIndex: index, phone: phone)
+            target.advancedTransitionDelegate = vc
+
+            vc.walletNavigationController?.custom.pushAdvancedly(viewController: target)
+        }
+
+        let onExit: () -> Void = {
+            //[weak self] in
+
+//            guard let strongSelf = self else {
+//                return
+//            }
+
             //strongSelf.navigationController.custom.dismissPresentedViewController()
             vc.walletNavigationController?.custom.popViewController(animated: true)
         }
 
+        vc.onSendFromWallet = onSendFromWallet
+        vc.onDepositToWallet = onDepositToWallet
         vc.onExit = onExit
         vc.flow = self
         return vc

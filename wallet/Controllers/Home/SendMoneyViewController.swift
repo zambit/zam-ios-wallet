@@ -13,6 +13,15 @@ import Crashlytics
 protocol SendMoneyViewControllerDelegate: class {
 
     func sendMoneyViewControllerSendingProceedWithSuccess(_ sendMoneyViewController: SendMoneyViewController)
+
+    func sendMoneyViewControllerSendingProceedWithSuccess(_ sendMoneyViewController: SendMoneyViewController, updated data: WalletData, index: Int)
+}
+
+extension SendMoneyViewControllerDelegate {
+
+    func sendMoneyViewControllerSendingProceedWithSuccess(_ sendMoneyViewController: SendMoneyViewController) {}
+
+    func sendMoneyViewControllerSendingProceedWithSuccess(_ sendMoneyViewController: SendMoneyViewController, updated data: WalletData, index: Int) {}
 }
 
 class SendMoneyViewController: AvoidingViewController, WalletsCollectionComponentDelegate, SendMoneyComponentDelegate, TransactionDetailViewControllerDelegate, QRCodeScannerViewControllerDelegate {
@@ -133,9 +142,15 @@ class SendMoneyViewController: AvoidingViewController, WalletsCollectionComponen
             [weak self]
             wallet in
 
+            guard let strongSelf = self else {
+                return
+            }
+
             self?.wallets[currentIndex] = wallet
             let itemData = WalletItemData(data: wallet, phoneNumber: phone)
             currentCell.configure(with: itemData)
+
+            self?.delegate?.sendMoneyViewControllerSendingProceedWithSuccess(strongSelf, updated: wallet, index: currentIndex)
         }.catch {
             error in
 
@@ -146,6 +161,7 @@ class SendMoneyViewController: AvoidingViewController, WalletsCollectionComponen
     // MARK: - WalletsCollectionComponentDelegate
 
     func walletsCollectionComponentCurrentIndexChanged(_ walletsCollectionComponent: WalletsCollectionComponent, to index: Int) {
+        self.currentIndex = index
         self.sendMoneyComponent?.prepare(coinType: wallets[index].coin, walletId: wallets[index].id)
     }
 
