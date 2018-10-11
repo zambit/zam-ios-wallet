@@ -118,7 +118,7 @@
 		8C60885C2111F1A200470411 /* RecoveryFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C60885B2111F1A200470411 /* RecoveryFlow.swift */; };
 		8C60885E2111F28000470411 /* EnterNewPhoneNumberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C60885D2111F28000470411 /* EnterNewPhoneNumberViewController.swift */; };
 		8C6088602111F35E00470411 /* EnterPhoneNumberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C60885F2111F35E00470411 /* EnterPhoneNumberViewController.swift */; };
-		8C6088652112027300470411 /* ThreeStepsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6088642112027300470411 /* ThreeStepsAPI.swift */; };
+		8C6088652112027300470411 /* CreatePasswordProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6088642112027300470411 /* CreatePasswordProcess.swift */; };
 		8C6088672112120100470411 /* SpinningAnimationLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6088662112120100470411 /* SpinningAnimationLayer.swift */; };
 		8C625F882154F9E100BEF1C5 /* LaunchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C625F872154F9E000BEF1C5 /* LaunchScreenViewController.swift */; };
 		8C713B0D2136EA9E00AC2E25 /* UIAlertController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C713B0C2136EA9E00AC2E25 /* UIAlertController+Extensions.swift */; };
@@ -419,7 +419,7 @@
 		8C60885B2111F1A200470411 /* RecoveryFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecoveryFlow.swift; sourceTree = "<group>"; };
 		8C60885D2111F28000470411 /* EnterNewPhoneNumberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterNewPhoneNumberViewController.swift; sourceTree = "<group>"; };
 		8C60885F2111F35E00470411 /* EnterPhoneNumberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterPhoneNumberViewController.swift; sourceTree = "<group>"; };
-		8C6088642112027300470411 /* ThreeStepsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeStepsAPI.swift; sourceTree = "<group>"; };
+		8C6088642112027300470411 /* CreatePasswordProcess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePasswordProcess.swift; sourceTree = "<group>"; };
 		8C6088662112120100470411 /* SpinningAnimationLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinningAnimationLayer.swift; sourceTree = "<group>"; };
 		8C625F872154F9E000BEF1C5 /* LaunchScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchScreenViewController.swift; sourceTree = "<group>"; };
 		8C713B0C2136EA9E00AC2E25 /* UIAlertController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Extensions.swift"; sourceTree = "<group>"; };
@@ -726,7 +726,7 @@
 			children = (
 				8C09194C2107214300703224 /* WalletEnvironment.swift */,
 				8C0919692108951F00703224 /* WalletResponseError.swift */,
-				8C6088642112027300470411 /* ThreeStepsAPI.swift */,
+				8C6088642112027300470411 /* CreatePasswordProcess.swift */,
 				8C0919722108BC6C00703224 /* UserAPI */,
 				8C09196B21089EDF00703224 /* AuthAPI */,
 				8C09196021076B6000703224 /* RecoveryAPI */,
@@ -1871,7 +1871,7 @@
 				8C7C337F2147EF9800EC6C96 /* PhotoLayout.swift in Sources */,
 				8C333D382109F3D500949AC0 /* OnboardingFlow.swift in Sources */,
 				8C7DE6862164CAD400824A4B /* CryptocompareResponseError.swift in Sources */,
-				8C6088652112027300470411 /* ThreeStepsAPI.swift in Sources */,
+				8C6088652112027300470411 /* CreatePasswordProcess.swift in Sources */,
 				8C091949210714D800703224 /* NetworkService.swift in Sources */,
 				8C713B30213FD4A500AC2E25 /* WalletTabBarItem.swift in Sources */,
 				8C0919762108BE6000703224 /* UserRequest.swift in Sources */,
