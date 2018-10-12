@@ -224,6 +224,7 @@
 		8C7DE7192170BA4A00824A4B /* CodableCoinHistoricalDataResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7DE7182170BA4A00824A4B /* CodableCoinHistoricalDataResponse.swift */; };
 		8C7DE71B2170BA5F00824A4B /* CodableCoinHistoricalData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7DE71A2170BA5F00824A4B /* CodableCoinHistoricalData.swift */; };
 		8C7DE71D2170BA7000824A4B /* CodableCoinDataResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7DE71C2170BA7000824A4B /* CodableCoinDataResponse.swift */; };
+		8C7DE7222170D81000824A4B /* Decimal+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7DE7212170D81000824A4B /* Decimal+Extensions.swift */; };
 		8CA2188F2121D97C0063C188 /* DecimalKeyboardComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CA2188E2121D97B0063C188 /* DecimalKeyboardComponent.xib */; };
 		8CA218922122E8D70063C188 /* SendMoneyComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CA218912122E8D70063C188 /* SendMoneyComponent.xib */; };
 		8CA218942122EAC90063C188 /* SendMoneyComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA218932122EAC90063C188 /* SendMoneyComponent.swift */; };
@@ -553,6 +554,7 @@
 		8C7DE7182170BA4A00824A4B /* CodableCoinHistoricalDataResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableCoinHistoricalDataResponse.swift; sourceTree = "<group>"; };
 		8C7DE71A2170BA5F00824A4B /* CodableCoinHistoricalData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableCoinHistoricalData.swift; sourceTree = "<group>"; };
 		8C7DE71C2170BA7000824A4B /* CodableCoinDataResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableCoinDataResponse.swift; sourceTree = "<group>"; };
+		8C7DE7212170D81000824A4B /* Decimal+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Decimal+Extensions.swift"; sourceTree = "<group>"; };
 		8CA2188E2121D97B0063C188 /* DecimalKeyboardComponent.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DecimalKeyboardComponent.xib; sourceTree = "<group>"; };
 		8CA218912122E8D70063C188 /* SendMoneyComponent.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SendMoneyComponent.xib; sourceTree = "<group>"; };
 		8CA218932122EAC90063C188 /* SendMoneyComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMoneyComponent.swift; sourceTree = "<group>"; };
@@ -699,15 +701,17 @@
 		8C09192B21061ED800703224 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				8C2D2766215913B1004CE1F8 /* PinForm.swift */,
 				8C7DE6922167916B00824A4B /* AdvancedTransitionDelegate.swift */,
 				8C6088502111A95100470411 /* Conditions.swift */,
 				8C09192C21061F3600703224 /* ControllerHelper.swift */,
+				8C713B2B213EC77500AC2E25 /* CustomBehavioral.swift */,
 				8C04BC3821219D0600E90090 /* DrawingHelper.swift */,
 				8C52FFFD211B252F00EB55EA /* InstantPanGestureRecognizer.swift */,
 				8C7C3390214A5ABC00EC6C96 /* InteractionsHelper.swift */,
 				8C713B1E213941FF00AC2E25 /* Networking.swift */,
 				8C52FFEF211AE19300EB55EA /* OverlappingFlowLayout.swift */,
+				8C2D2766215913B1004CE1F8 /* PinForm.swift */,
+				8C7C3396214A972200EC6C96 /* SizePresetable.swift */,
 				8CF5F92E211327EB0083B36A /* StringParser.swift */,
 				9319BA862129FA9500033A7E /* Animations */,
 				8CA218D7212D68510063C188 /* Authentication */,
@@ -725,8 +729,6 @@
 		8C0919312106205600703224 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				8C7C3396214A972200EC6C96 /* SizePresetable.swift */,
-				8C713B2B213EC77500AC2E25 /* CustomBehavioral.swift */,
 				8C04BC36211C872E00E90090 /* ContainerView.swift */,
 				8C7DE6E2216F619600824A4B /* WalletDetailsTableViewCells */,
 				8C7C3341214290AB00EC6C96 /* Buttons */,
@@ -1626,6 +1628,7 @@
 				8C7C338421480AA300EC6C96 /* CAGradientLayer+Extensions.swift */,
 				8CA219112134259F0063C188 /* Date+Extensions.swift */,
 				8CA2191321342ABC0063C188 /* DateInterval+Extensions.swift */,
+				8C7DE7212170D81000824A4B /* Decimal+Extensions.swift */,
 				8C4413D521199FFC00C9689C /* Dictionary+Extensions.swift */,
 				8CA218CA2126D5E00063C188 /* NumberFormatter+Extensions.swift */,
 				8C7C33782147E60200EC6C96 /* PHAsset+Extensions.swift */,
@@ -2097,6 +2100,7 @@
 				8C23145F21527095007340E7 /* AddressRecipientComponent.swift in Sources */,
 				8C09192D21061F3600703224 /* ControllerHelper.swift in Sources */,
 				8CA218E9212DB0210063C188 /* RoundedImageView.swift in Sources */,
+				8C7DE7222170D81000824A4B /* Decimal+Extensions.swift in Sources */,
 				8C713B34214024CE00AC2E25 /* PhoneNumberFormatter.swift in Sources */,
 				8CA218CD2126F23B0063C188 /* User.swift in Sources */,
 				8CA218D0212737210063C188 /* SendButton.swift in Sources */,
@@ -2416,14 +2420,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = PEYKHN6GF6;
+				DEVELOPMENT_TEAM = GSJ37ZAC59;
 				INFOPLIST_FILE = wallet/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = zamzam.wallet.test;
+				PRODUCT_BUNDLE_IDENTIFIER = zamzam.wallet.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
@@ -2438,14 +2442,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = PEYKHN6GF6;
+				DEVELOPMENT_TEAM = GSJ37ZAC59;
 				INFOPLIST_FILE = wallet/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = zamzam.wallet.test;
+				PRODUCT_BUNDLE_IDENTIFIER = zamzam.wallet.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;

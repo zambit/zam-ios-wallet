@@ -218,6 +218,7 @@ class HomeViewController: FloatingViewController, WalletsViewControllerDelegate,
         detailGestureView?.backgroundColor = .clear
 
         detailTitleLabel?.textColor = .darkIndigo
+        detailTitleLabel?.font = UIFont.walletFont(ofSize: 22.0, weight: .bold)
         detailTitleLabel?.text = "My accounts"
 
         sumTitleLabel?.font = UIFont.walletFont(ofSize: 12.0, weight: .regular)
@@ -298,7 +299,6 @@ class HomeViewController: FloatingViewController, WalletsViewControllerDelegate,
             .foregroundColor: UIColor.skyBlue
             ], range: NSRange(location: fractionStyleRange.lowerBound, length: fractionStyleRange.count))
 
-        sumLabel?.attributedText = attributedString
         sumLabel?.attributedText = attributedString
 
         if currentState == .open, !isAnimationInProgress {

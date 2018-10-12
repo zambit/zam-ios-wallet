@@ -81,12 +81,12 @@ struct Balance: Equatable {
     func formattedShort(currency: Currency) -> String {
         switch currency {
         case .original:
-            guard let formatted = NumberFormatter.walletAmountShort.string(from: original as NSNumber) else {
+            guard let formatted = original.shortFormatted else {
                 fatalError()
             }
             return formatted
         case .usd:
-            guard let formatted = NumberFormatter.walletAmountShort.string(from: usd as NSNumber) else {
+            guard let formatted = usd.shortFormatted else {
                 fatalError()
             }
             return formatted
@@ -96,12 +96,12 @@ struct Balance: Equatable {
     func formatted(currency: Currency) -> String {
         switch currency {
         case .original:
-            guard let formatted = NumberFormatter.walletAmount.string(from: original as NSNumber) else {
+            guard let formatted = original.formatted else {
                 fatalError()
             }
             return formatted
         case .usd:
-            guard let formatted = NumberFormatter.walletAmount.string(from: usd as NSNumber) else {
+            guard let formatted = usd.formatted else {
                 fatalError()
             }
             return formatted
