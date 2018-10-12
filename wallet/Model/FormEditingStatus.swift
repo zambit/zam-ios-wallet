@@ -7,6 +7,7 @@
 //
 
 enum FormEditingStatus {
+    
     case valid
     case invalid
 }

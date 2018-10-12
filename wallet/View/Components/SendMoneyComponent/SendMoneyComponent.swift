@@ -17,7 +17,7 @@ struct SendingData {
         case phone(String)
     }
 
-    let amountData: BalanceData
+    let amountData: Balance
     let walletId: String
     let recipient: RecipientType
 }
@@ -45,7 +45,7 @@ class SendMoneyComponent: Component, SizePresetable, SendMoneyAmountComponentDel
     @IBOutlet private var recipientTextFieldTopConstraint: NSLayoutConstraint?
     @IBOutlet private var recipientTextFieldHeightConstraint: NSLayoutConstraint?
 
-    private var amountData: BalanceData?
+    private var amountData: Balance?
     private var walletId: String?
     private var recipientData: SendingData.RecipientType?
 
@@ -118,7 +118,7 @@ class SendMoneyComponent: Component, SizePresetable, SendMoneyAmountComponentDel
         layoutIfNeeded()
     }
 
-    func prepare(recipient: FormattedContactData? = nil, coinType: CoinType, walletId: String) {
+    func prepare(recipient: FormattedContact? = nil, coinType: CoinType, walletId: String) {
         self.walletId = walletId
         
         sendMoneyAmountComponent?.prepare(coinType: coinType)
@@ -142,7 +142,7 @@ class SendMoneyComponent: Component, SizePresetable, SendMoneyAmountComponentDel
 
     // MARK: - SendMoneyAmountComponentDelegate
 
-    func sendMoneyAmountComponent(_ sendMoneyAmountComponent: SendMoneyAmountComponent, amountDataEntered data: BalanceData) {
+    func sendMoneyAmountComponent(_ sendMoneyAmountComponent: SendMoneyAmountComponent, amountDataEntered data: Balance) {
         self.amountData = data
 
         if let output = sendingData {
@@ -190,7 +190,7 @@ class SendMoneyComponent: Component, SizePresetable, SendMoneyAmountComponentDel
             return
         }
 
-        self.amountData = BalanceData(coin: coinType, usd: amountData.usd, original: amountData.original)
+        self.amountData = Balance(coin: coinType, usd: amountData.usd, original: amountData.original)
 
         if let output = sendingData {
             sendButton?.customAppearance.setEnabled(true)

@@ -30,7 +30,7 @@ protocol WalletsCollection {
 
     func scrollToTop()
 
-    func sendTo(contact: FormattedContactData)
+    func sendTo(contact: FormattedContact)
 
     func prepareToAnimation(cellIndex: Int)
 
@@ -53,7 +53,7 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
     var userAPI: UserAPI?
     var historyAPI: HistoryAPI?
 
-    private var wallets: [WalletData] = []
+    private var wallets: [Wallet] = []
     private var walletsChartsPoints: [[ChartLayer.Point]] = []
     private var phone: String!
 
@@ -135,7 +135,7 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
         collectionView.setContentOffset(newContentOffset, animated: false)
     }
 
-    func sendTo(contact: FormattedContactData) {
+    func sendTo(contact: FormattedContact) {
         prepareToAnimation(cellIndex: 0)
         owner?.performSendFromWallet(index: 0, wallets: wallets, phone: phone, recipient: contact)
     }

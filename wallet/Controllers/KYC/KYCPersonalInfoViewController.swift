@@ -26,7 +26,7 @@ class KYCPersonalInfoViewController: FlowViewController, WalletNavigable, UITabl
     private var forms: [(String, [TextFieldCellData])] = []
     private var progress: KYCPersonalInfoProgress = KYCPersonalInfoProgress()
 
-    private var personalInfoData: KYCPersonalInfoData?
+    private var personalInfoData: KYCPersonaInfoProperties?
     private var approvingState: KYCStatus = .unloaded
 
     override func viewWillAppear(_ animated: Bool) {

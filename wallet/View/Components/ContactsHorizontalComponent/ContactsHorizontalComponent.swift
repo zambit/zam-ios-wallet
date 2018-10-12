@@ -11,7 +11,7 @@ import UIKit
 
 protocol ContactsHorizontalComponentDelegate: class {
 
-    func contactsHorizontalComponent(_ contactsHorizontalComponent: ContactsHorizontalComponent, itemWasTapped contactData: ContactData)
+    func contactsHorizontalComponent(_ contactsHorizontalComponent: ContactsHorizontalComponent, itemWasTapped contactData: Contact)
 }
 
 class ContactsHorizontalComponent: Component, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, SearchTextFieldDelegate {
@@ -22,8 +22,8 @@ class ContactsHorizontalComponent: Component, UICollectionViewDataSource, UIColl
     @IBOutlet var searchTextField: SearchTextField?
     @IBOutlet var contactsCollectionView: UICollectionView?
 
-    private var contacts: [ContactData] = []
-    private var filteredContacts: [ContactData] = []
+    private var contacts: [Contact] = []
+    private var filteredContacts: [Contact] = []
     private var title: String = "Send by phone"
     
     override func initFromNib() {
@@ -57,7 +57,7 @@ class ContactsHorizontalComponent: Component, UICollectionViewDataSource, UIColl
         contactsCollectionView?.clipsToBounds = false
     }
 
-    func prepare(contacts: [ContactData]) {
+    func prepare(contacts: [Contact]) {
         self.contacts = contacts
         self.filteredContacts = contacts
         componentWasPrepared()

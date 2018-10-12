@@ -64,8 +64,8 @@ class UserServiceNetworkLayerTests: ServiceNetworkLayerTests {
     func testGettingUserInfoSucceed() {
         // given
         let stub = UserServiceNetworkLayerStubs.getUserInfo
-        let preparedBalances = [BalanceData(coin: .btc, usd: 0.0, original: 0.0)]
-        let comparingObject = UserData(id: "", phone: "+79111111111", status: "active", registeredAt: 1538143682, balances: preparedBalances)
+        let preparedBalances = [Balance(coin: .btc, usd: 0.0, original: 0.0)]
+        let comparingObject = User(id: "", phone: "+79111111111", status: "active", registeredAt: 1538143682, balances: preparedBalances)
 
         do {
             // Build provider with response test json file
@@ -151,8 +151,8 @@ class UserServiceNetworkLayerTests: ServiceNetworkLayerTests {
     func testGettingWalletsSucceed() {
         // given
         let stub = UserServiceNetworkLayerStubs.getWallets
-        let preparedBalance = BalanceData(coin: .btc, usd: 0.0, original: 0.0)
-        let comparingObject = [WalletData(id: "128", name: "BTC wallet", coin: .btc, balance: preparedBalance, address: "2N9tSiDXRZbP7xzfvC8fruveZXjrRqerXeD")]
+        let preparedBalance = Balance(coin: .btc, usd: 0.0, original: 0.0)
+        let comparingObject = [Wallet(id: "128", name: "BTC wallet", coin: .btc, balance: preparedBalance, address: "2N9tSiDXRZbP7xzfvC8fruveZXjrRqerXeD")]
 
         do {
             // Build provider with mocking response data
@@ -236,8 +236,8 @@ class UserServiceNetworkLayerTests: ServiceNetworkLayerTests {
     func testGettingWalletInfoSucceed() {
         // given
         let stub = UserServiceNetworkLayerStubs.getWalletInfo
-        let preparedBalance = BalanceData(coin: .bch, usd: 0.0, original: 0.0)
-        let comparingObject = WalletData(id: "129", name: "BCH wallet", coin: .bch, balance: preparedBalance, address: "qzvrz7wxxk8flh6fu3fdlqywwu3nypcqys5lckpxff")
+        let preparedBalance = Balance(coin: .bch, usd: 0.0, original: 0.0)
+        let comparingObject = Wallet(id: "129", name: "BCH wallet", coin: .bch, balance: preparedBalance, address: "qzvrz7wxxk8flh6fu3fdlqywwu3nypcqys5lckpxff")
 
         do {
             // Build provider with response test json file
@@ -323,8 +323,8 @@ class UserServiceNetworkLayerTests: ServiceNetworkLayerTests {
     func testSendingTransactionSucceed() {
         // given
         let stub = UserServiceNetworkLayerStubs.sendTransaction
-        let preparedBalance = BalanceData(coin: .btc, usd: 6.61251, original: 0.001)
-        let comparingObject = TransactionData(id: "409", direction: .outgoing, status: .pending, coin: .btc, participantType: .recipient, participant: "+79111511111", amount: preparedBalance)
+        let preparedBalance = Balance(coin: .btc, usd: 6.61251, original: 0.001)
+        let comparingObject = Transaction(id: "409", direction: .outgoing, status: .pending, coin: .btc, participantType: .recipient, participant: "+79111511111", amount: preparedBalance)
 
         do {
             // Build provider with response test json file
@@ -414,11 +414,11 @@ class UserServiceNetworkLayerTests: ServiceNetworkLayerTests {
     func tesGettingTransactionsSucceed() {
         // given
         let stub = UserServiceNetworkLayerStubs.getTransactions
-        let preparedBalance = BalanceData(coin: .btc, usd: 257.55873, original: 0.039)
-        let preparedTransaction = TransactionData(id: "408", direction: .outgoing, status: .success, coin: .btc, participantType: .recipient, participant: "+79111511111", amount: preparedBalance)
+        let preparedBalance = Balance(coin: .btc, usd: 257.55873, original: 0.039)
+        let preparedTransaction = Transaction(id: "408", direction: .outgoing, status: .success, coin: .btc, participantType: .recipient, participant: "+79111511111", amount: preparedBalance)
         let preparedDateInterval = DateInterval(startUnixTimestamp: 1537995600, endUnixTimestamp: 1538082000)
-        let preparedTransactionsGroup = TransactionsGroupData(dateInterval: preparedDateInterval, amount: preparedBalance, transactions: [preparedTransaction])
-        let comparingObject = GroupedTransactionsPageData(next: "382", transactions: [preparedTransactionsGroup])
+        let preparedTransactionsGroup = TransactionsGroup(dateInterval: preparedDateInterval, amount: preparedBalance, transactions: [preparedTransaction])
+        let comparingObject = GroupedTransactionsPage(next: "382", transactions: [preparedTransactionsGroup])
 
         do {
             // Build provider with response test json file
@@ -503,7 +503,7 @@ class UserServiceNetworkLayerTests: ServiceNetworkLayerTests {
     func testGettingKYCPersonalInfoSucceed() {
         // given
         let stub = UserServiceNetworkLayerStubs.getKYCPersonalInfo
-        let preparedKYCData = KYCPersonalInfoData(email: "test@mail.ru", firstName: "Name", lastName: "Surname", birthDate: Date(unixTimestamp: 717552000.0), gender: .male, country: "Test", city: "Test", region: "Test Region", street: "test street", house: "14", postalCode: 644122)
+        let preparedKYCData = KYCPersonaInfoResult(email: "test@mail.ru", firstName: "Name", lastName: "Surname", birthDate: Date(unixTimestamp: 717552000.0), gender: .male, country: "Test", city: "Test", region: "Test Region", street: "test street", house: "14", postalCode: 644122)
         let comparingObject = KYCPersonalInfo(status: .pending, data: preparedKYCData)
 
         do {

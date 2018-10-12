@@ -14,14 +14,14 @@ protocol SendMoneyViewControllerDelegate: class {
 
     func sendMoneyViewControllerSendingProceedWithSuccess(_ sendMoneyViewController: SendMoneyViewController)
 
-    func sendMoneyViewControllerSendingProceedWithSuccess(_ sendMoneyViewController: SendMoneyViewController, updated data: WalletData, index: Int)
+    func sendMoneyViewControllerSendingProceedWithSuccess(_ sendMoneyViewController: SendMoneyViewController, updated data: Wallet, index: Int)
 }
 
 extension SendMoneyViewControllerDelegate {
 
     func sendMoneyViewControllerSendingProceedWithSuccess(_ sendMoneyViewController: SendMoneyViewController) {}
 
-    func sendMoneyViewControllerSendingProceedWithSuccess(_ sendMoneyViewController: SendMoneyViewController, updated data: WalletData, index: Int) {}
+    func sendMoneyViewControllerSendingProceedWithSuccess(_ sendMoneyViewController: SendMoneyViewController, updated data: Wallet, index: Int) {}
 }
 
 class SendMoneyViewController: AvoidingViewController, WalletsCollectionComponentDelegate, SendMoneyComponentDelegate, TransactionDetailViewControllerDelegate, QRCodeScannerViewControllerDelegate {
@@ -39,9 +39,9 @@ class SendMoneyViewController: AvoidingViewController, WalletsCollectionComponen
     @IBOutlet private var walletsCollectionComponent: WalletsCollectionComponent?
     @IBOutlet private var sendMoneyComponent: SendMoneyComponent?
 
-    private var recipient: FormattedContactData?
+    private var recipient: FormattedContact?
     private var phone: String?
-    private var wallets: [WalletData] = []
+    private var wallets: [Wallet] = []
     private var currentIndex: Int?
 
     override var fastenInitialOffset: CGFloat {
@@ -113,7 +113,7 @@ class SendMoneyViewController: AvoidingViewController, WalletsCollectionComponen
         walletNavigationController?.custom.addBackButton(for: self, target: self, action: #selector(backButtonTouchUpInsideEvent(_:)))
     }
 
-    func prepare(wallets: [WalletData], currentIndex: Int, recipient: FormattedContactData? = nil, phone: String) {
+    func prepare(wallets: [Wallet], currentIndex: Int, recipient: FormattedContact? = nil, phone: String) {
         self.phone = phone
         self.wallets = wallets
         self.currentIndex = currentIndex

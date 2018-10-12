@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct CoinDailyPriceData: Equatable {
+struct CoinDailyPrice: Equatable {
 
     let coin: CoinType
 
@@ -21,7 +21,7 @@ struct CoinDailyPriceData: Equatable {
     let volumeFrom: Decimal
     let volumeTo: Decimal
 
-    init(coin: CoinType, codable: CodableHistoricalDataObject) {
+    init(coin: CoinType, codable: CodableCoinHistoricalData) {
         self.coin = coin
 
         self.time = Date(unixTimestamp: codable.time)

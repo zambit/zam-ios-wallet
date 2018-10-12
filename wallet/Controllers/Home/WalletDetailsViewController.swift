@@ -11,8 +11,8 @@ import UIKit
 
 class WalletDetailsViewController: FlowViewController, WalletNavigable, AdvancedTransitionDelegate, SendMoneyViewControllerDelegate, UITableViewDelegate, UITableViewDataSource, WalletDetailsBriefDelegate {
 
-    var onSendFromWallet: ((_ index: Int, _ wallets: [WalletData], _ phone: String) -> Void)?
-    var onDepositToWallet: ((_ index: Int, _ wallets: [WalletData], _ phone: String) -> Void)?
+    var onSendFromWallet: ((_ index: Int, _ wallets: [Wallet], _ phone: String) -> Void)?
+    var onDepositToWallet: ((_ index: Int, _ wallets: [Wallet], _ phone: String) -> Void)?
     var onExit: (() -> Void)?
 
     class CellsBalancer {
@@ -86,7 +86,7 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable, Advanced
     private var exitButton: HighlightableButton?
 
     private var phone: String?
-    private var wallets: [WalletData]?
+    private var wallets: [Wallet]?
     private var currentIndex: Int?
 
     private lazy var balancer = CellsBalancer(parent: self)
@@ -133,7 +133,7 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable, Advanced
         self.exitButton = exitButton
     }
 
-    func prepare(wallets: [WalletData], currentIndex: Int, phone: String) {
+    func prepare(wallets: [Wallet], currentIndex: Int, phone: String) {
         self.wallets = wallets
         self.currentIndex = currentIndex
         self.phone = phone
@@ -192,7 +192,7 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable, Advanced
         sendDelegate?.sendMoneyViewControllerSendingProceedWithSuccess(sendMoneyViewController)
     }
 
-    func sendMoneyViewControllerSendingProceedWithSuccess(_ sendMoneyViewController: SendMoneyViewController, updated data: WalletData, index: Int) {
+    func sendMoneyViewControllerSendingProceedWithSuccess(_ sendMoneyViewController: SendMoneyViewController, updated data: Wallet, index: Int) {
         wallets?[index] = data
 
         tableView?.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .none)

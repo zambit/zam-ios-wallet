@@ -9,6 +9,7 @@
 import Foundation
 
 enum GroupingType: String {
+    
     case hour
     case day
     case week

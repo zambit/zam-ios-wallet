@@ -25,7 +25,7 @@ class DepositMoneyViewController: FlowViewController, WalletNavigable, Segmented
 
     @IBOutlet private var contentHeightConstraint: NSLayoutConstraint?
 
-    private var wallets: [WalletData] = []
+    private var wallets: [Wallet] = []
     private var phone: String?
     private var currentIndex: Int?
 
@@ -94,7 +94,7 @@ class DepositMoneyViewController: FlowViewController, WalletNavigable, Segmented
         walletNavigationController?.custom.addBackButton(for: self, target: self, action: #selector(backButtonTouchUpInsideEvent(_:)))
     }
 
-    func prepare(wallets: [WalletData], currentIndex: Int, phone: String) {
+    func prepare(wallets: [Wallet], currentIndex: Int, phone: String) {
         self.wallets = wallets
         self.currentIndex = currentIndex
         self.phone = phone

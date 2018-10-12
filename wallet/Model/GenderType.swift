@@ -7,6 +7,7 @@
 //
 
 enum GenderType: String, Equatable {
+    
     case male
     case female
     case undefined
