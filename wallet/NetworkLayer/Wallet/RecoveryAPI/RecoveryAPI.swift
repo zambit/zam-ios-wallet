@@ -32,7 +32,7 @@ struct RecoveryAPI: NetworkService, CreatePasswordProcess {
                     switch response {
                     case .data(_):
 
-                        let success: (CodableSuccessEmptyResponse) -> Void = { _ in
+                        let success: (CodableEmptyResponse) -> Void = { _ in
                             seal.fulfill(())
                         }
 
@@ -72,7 +72,7 @@ struct RecoveryAPI: NetworkService, CreatePasswordProcess {
                     switch response {
                     case .data(_):
 
-                        let success: (CodableSuccessRecoveryTokenResponse) -> Void = { s in
+                        let success: (CodableRecoveryTokenResponse) -> Void = { s in
                             seal.fulfill(s.data.token)
                         }
 
@@ -111,7 +111,7 @@ struct RecoveryAPI: NetworkService, CreatePasswordProcess {
                     switch response {
                     case .data(_):
 
-                        let success: (CodableSuccessEmptyResponse) -> Void = { s in
+                        let success: (CodableEmptyResponse) -> Void = { s in
                             seal.fulfill(())
                         }
 

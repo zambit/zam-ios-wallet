@@ -11,7 +11,7 @@ import UIKit
 
 protocol SendMoneyAmountComponentDelegate: class {
 
-    func sendMoneyAmountComponent(_ sendMoneyAmountComponent: SendMoneyAmountComponent, amountDataEntered data: BalanceData)
+    func sendMoneyAmountComponent(_ sendMoneyAmountComponent: SendMoneyAmountComponent, amountDataEntered data: Balance)
 
     func sendMoneyAmountComponentValueEnteredIncorrectly(_ sendMoneyAmountComponent: SendMoneyAmountComponent)
 }
@@ -179,7 +179,7 @@ class SendMoneyAmountComponent: Component, SizePresetable, UITextFieldDelegate {
 
         if value != amount {
             if value > 0 {
-                let balanceData = BalanceData(coin: coin, usd: 0.0, original: value)
+                let balanceData = Balance(coin: coin, usd: 0.0, original: value)
                 delegate?.sendMoneyAmountComponent(self, amountDataEntered: balanceData)
             } else {
                 delegate?.sendMoneyAmountComponentValueEnteredIncorrectly(self)

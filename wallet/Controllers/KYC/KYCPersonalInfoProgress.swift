@@ -94,7 +94,7 @@ class KYCPersonalInfoProgress {
         }
     }
 
-    var data: KYCPersonalInfoData? {
+    var data: KYCPersonaInfoProperties? {
         if let email = email,
             let firstName = firstName,
             let lastName = lastName,
@@ -108,7 +108,7 @@ class KYCPersonalInfoProgress {
             let postalCodeString = postalCode,
             let postalCode = Int(postalCodeString) {
 
-            return KYCPersonalInfoData(email: email,
+            return KYCPersonaInfoProperties(email: email,
                                       firstName: firstName,
                                       lastName: lastName,
                                       birthDate: birthDate,
@@ -124,7 +124,7 @@ class KYCPersonalInfoProgress {
         return nil
     }
 
-    var completionCallback: ((KYCPersonalInfoData) -> Void)?
+    var completionCallback: ((KYCPersonaInfoProperties) -> Void)?
     var incompletionCallback: (() -> Void)?
 
     var isCompleted: Bool {
@@ -147,7 +147,7 @@ class KYCPersonalInfoProgress {
 
     init() {}
 
-    init(data: KYCPersonalInfoData) {
+    init(data: KYCPersonaInfoProperties) {
         email = data.email
         firstName = data.firstName
         lastName = data.lastName

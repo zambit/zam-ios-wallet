@@ -20,10 +20,7 @@ enum HistoryRequest: Request {
     }
 
     var method: HTTPMethod {
-        switch self {
-        case .getDailyData:
-            return .get
-        }
+        return .get
     }
 
     var parameters: RequestParams? {

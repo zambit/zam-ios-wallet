@@ -11,13 +11,13 @@ import UIKit
 
 class TransactionsHistoryFilterViewController: FlowViewController, WalletNavigable, UITableViewDelegate, UITableViewDataSource {
 
-    var onDone: ((TransactionsFilterData) -> Void)?
+    var onDone: ((TransactionsFilterProperties) -> Void)?
 
     @IBOutlet private var componentsTableView: UITableView?
 
     private var filterComponents: [CellComponent] = []
 
-    private var filterData: TransactionsFilterData?
+    private var filterData: TransactionsFilterProperties?
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -40,7 +40,7 @@ class TransactionsHistoryFilterViewController: FlowViewController, WalletNavigab
         componentsTableView?.dataSource = self
     }
 
-    private func setupComponents(filterData: TransactionsFilterData) {
+    private func setupComponents(filterData: TransactionsFilterProperties) {
 
         // Transaction date component
 
@@ -154,7 +154,7 @@ class TransactionsHistoryFilterViewController: FlowViewController, WalletNavigab
         filterComponents.append(coinsComponent)
     }
 
-    func prepare(filterData: TransactionsFilterData) {
+    func prepare(filterData: TransactionsFilterProperties) {
         self.filterData = filterData
 
         setupComponents(filterData: filterData)

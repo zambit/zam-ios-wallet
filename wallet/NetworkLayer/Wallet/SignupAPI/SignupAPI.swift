@@ -32,7 +32,7 @@ struct SignupAPI: NetworkService, CreatePasswordProcess {
                     switch response {
                     case .data(_):
 
-                        let success: (CodableSuccessEmptyResponse) -> Void = { _ in
+                        let success: (CodableEmptyResponse) -> Void = { _ in
                             seal.fulfill(())
                         }
 
@@ -72,7 +72,7 @@ struct SignupAPI: NetworkService, CreatePasswordProcess {
                     switch response {
                     case .data(_):
 
-                        let success: (CodableSuccessSignUpTokenResponse) -> Void = { s in
+                        let success: (CodableSignupTokenResponse) -> Void = { s in
                             seal.fulfill(s.data.token)
                         }
 
@@ -111,7 +111,7 @@ struct SignupAPI: NetworkService, CreatePasswordProcess {
                     switch response {
                     case .data(_):
 
-                        let success: (CodableSuccessAuthTokenResponse) -> Void = { s in
+                        let success: (CodableTokenResponse) -> Void = { s in
                             seal.fulfill(s.data.token)
                         }
 

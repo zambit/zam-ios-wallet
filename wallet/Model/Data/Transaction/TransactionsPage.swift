@@ -1,5 +1,5 @@
 //
-//  GroupedTransactionsPageData.swift
+//  TransactionsPage.swift
 //  wallet
 //
 //  Created by Alexander Ponomarev on 27/08/2018.
@@ -8,20 +8,20 @@
 
 import Foundation
 
-struct GroupedTransactionsPageData: Equatable {
+struct TransactionsPage: Equatable {
 
     let next: String?
-    let transactions: [TransactionsGroupData]
+    let transactions: [TransactionsGroup]
 
     init(codable: CodableSuccessTransactionsGroupedSearchingResponse.GroupedTransactionsPage) throws {
         self.next = codable.next
 
         self.transactions = try codable.transactions?.map {
-            try TransactionsGroupData(codable: $0)
+            try TransactionsGroup(codable: $0)
         } ?? []
     }
 
-    init(next: String?, transactions: [TransactionsGroupData]) {
+    init(next: String?, transactions: [TransactionsGroup]) {
         self.next = next
         self.transactions = transactions
     }

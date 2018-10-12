@@ -20,7 +20,7 @@ struct WalletItemData {
     let balance: String
     let fiatBalance: String
 
-    init(data: WalletData, phoneNumber: String) {
+    init(data: Wallet, phoneNumber: String) {
         self.name = data.name
         self.icon = data.coin.image
         self.short = data.coin.short

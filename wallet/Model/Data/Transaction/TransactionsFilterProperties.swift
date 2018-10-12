@@ -6,7 +6,7 @@
 //  Copyright © 2018 zamzam. All rights reserved.
 //
 
-struct TransactionsFilterData: Equatable {
+struct TransactionsFilterProperties: Equatable {
 
     var coin: CoinType?
     var walletId: String?

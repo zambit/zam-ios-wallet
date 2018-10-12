@@ -33,7 +33,7 @@ class UserContactsManager {
         phoneNumberFormatter: PhoneNumberFormatter()
     )
 
-    private(set) var contacts: [ContactData] = []
+    private(set) var contacts: [Contact] = []
 
     let contactStore = CNContactStore()
     let fetchKeys: [UserContactFetchKey]
@@ -48,7 +48,7 @@ class UserContactsManager {
         self.phoneNumberFormatter = phoneNumberFormatter
     }
 
-    func fetchContacts(_ completion: @escaping ([ContactData]) -> Void) {
+    func fetchContacts(_ completion: @escaping ([Contact]) -> Void) {
         let success: () -> Void = {
             DispatchQueue.global(qos: .default).async {
                 guard let contacts = try? self.getContacts() else {
@@ -58,7 +58,7 @@ class UserContactsManager {
                     return
                 }
 
-                let result = contacts.map { ContactData(contact: $0) }
+                let result = contacts.map { Contact(contact: $0) }
                 self.contacts = result
 
                 DispatchQueue.main.async {
@@ -90,13 +90,13 @@ class UserContactsManager {
         }
     }
 
-    func enumerateContacts(usingBlock block: @escaping (ContactData) -> Void) throws {
+    func enumerateContacts(usingBlock block: @escaping (Contact) -> Void) throws {
         let fetchRequest = CNContactFetchRequest(keysToFetch: fetchKeys.map { $0.descriptor })
 
         try contactStore.enumerateContacts(with: fetchRequest) {
             (contact, last) in
 
-            block(ContactData(contact: contact))
+            block(Contact(contact: contact))
         }
     }
 

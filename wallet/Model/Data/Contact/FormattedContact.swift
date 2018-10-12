@@ -1,5 +1,5 @@
 //
-//  FormattedContactData.swift
+//  FormattedContact.swift
 //  wallet
 //
 //  Created by Alexander Ponomarev on 20/09/2018.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct FormattedContactData {
+struct FormattedContact {
 
     var name: String
     var avatarData: Data?

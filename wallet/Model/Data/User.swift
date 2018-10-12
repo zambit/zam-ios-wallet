@@ -1,5 +1,5 @@
 //
-//  UserData.swift
+//  User.swift
 //  wallet
 //
 //  Created by Alexander Ponomarev on 17/08/2018.
@@ -8,13 +8,13 @@
 
 import Foundation
 
-struct UserData: Equatable {
+struct User: Equatable {
 
     let id: String
     let phone: String
     let status: String
     let registeredAt: Decimal
-    let balances: [BalanceData]
+    let balances: [Balance]
 
     init(codable: CodableUser) throws {
         self.id = codable.id
@@ -23,14 +23,14 @@ struct UserData: Equatable {
         self.registeredAt = codable.registeredAt
 
         do {
-            let totalBalance = try BalanceData(coin: CoinType.standard, codable: codable.wallets.totalBalance)
+            let totalBalance = try Balance(coin: CoinType.standard, codable: codable.wallets.totalBalance)
             self.balances = [totalBalance]
         } catch {
-            throw UserDataError.balanceFormatError
+            throw UserDataError.balanceInputFormatError
         }
     }
 
-    init(id: String, phone: String, status: String, registeredAt: Decimal, balances: [BalanceData]) {
+    init(id: String, phone: String, status: String, registeredAt: Decimal, balances: [Balance]) {
         self.id = id
         self.phone = phone
         self.status = status
@@ -40,5 +40,6 @@ struct UserData: Equatable {
 }
 
 enum UserDataError: Error {
-    case balanceFormatError
+
+    case balanceInputFormatError
 }

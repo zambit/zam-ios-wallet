@@ -280,7 +280,7 @@ final class MainFlow: ScreenFlow {
             fatalError()
         }
 
-        let onFilter: (TransactionsFilterData) -> Void = {
+        let onFilter: (TransactionsFilterProperties) -> Void = {
             [weak self]
             filterData in
 
@@ -309,7 +309,7 @@ final class MainFlow: ScreenFlow {
             fatalError()
         }
 
-        let onDone: (TransactionsFilterData) -> Void = {
+        let onDone: (TransactionsFilterProperties) -> Void = {
             filterData in
 
             vc.walletNavigationController?.custom.popBack(nextViewController: {
@@ -338,7 +338,7 @@ final class MainFlow: ScreenFlow {
             fatalError()
         }
 
-        let onSendFromWallet: (Int, [WalletData], FormattedContactData?, String) -> Void = {
+        let onSendFromWallet: (Int, [Wallet], FormattedContact?, String) -> Void = {
             [weak self]
             index, wallets, contact, phone in
 
@@ -354,7 +354,7 @@ final class MainFlow: ScreenFlow {
             vc.walletNavigationController?.custom.pushAdvancedly(viewController: target)
         }
 
-        let onDepositToWallet: (Int, [WalletData], String) -> Void = {
+        let onDepositToWallet: (Int, [Wallet], String) -> Void = {
             [weak self]
             index, wallets, phone in
 
@@ -369,7 +369,7 @@ final class MainFlow: ScreenFlow {
             vc.walletNavigationController?.custom.pushAdvancedly(viewController: target)
         }
 
-        let onWalletDetails: (Int, [WalletData], String) -> Void = {
+        let onWalletDetails: (Int, [Wallet], String) -> Void = {
             [weak self]
             index, wallets, phone in
 
@@ -420,7 +420,7 @@ final class MainFlow: ScreenFlow {
             fatalError()
         }
 
-        let onSendFromWallet: (Int, [WalletData], String) -> Void = {
+        let onSendFromWallet: (Int, [Wallet], String) -> Void = {
             [weak self]
             index, wallets, phone in
 
@@ -436,7 +436,7 @@ final class MainFlow: ScreenFlow {
             vc.walletNavigationController?.custom.pushAdvancedly(viewController: target)
         }
 
-        let onDepositToWallet: (Int, [WalletData], String) -> Void = {
+        let onDepositToWallet: (Int, [Wallet], String) -> Void = {
             [weak self]
             index, wallets, phone in
 
