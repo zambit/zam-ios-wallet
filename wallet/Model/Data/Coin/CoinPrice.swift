@@ -65,6 +65,66 @@ struct CoinPrice: Equatable {
 
         self.supply = codable.supply
     }
+
+    enum Properties {
+        case price
+        case marketCap
+        case volumeDay
+        case volume24h
+        case changePct24h
+        case change24h
+        case openDay
+        case highDay
+        case lowDay
+        case open24h
+        case high24h
+        case low24h
+        case supply
+    }
+
+    func description(property: Properties) -> String {
+        var currency: String?
+        var percents: String?
+
+        switch property {
+        case .price:
+            currency = price.formatted
+        case .marketCap:
+            currency = marketCap.formatted
+        case .volumeDay:
+            currency = volumeDay.shortFormatted
+        case .volume24h:
+            currency = volume24h.shortFormatted
+        case .changePct24h:
+            percents = changePct24h.shortFormatted
+        case .change24h:
+            currency = change24h.shortFormatted
+        case .openDay:
+            currency = openDay.shortFormatted
+        case .highDay:
+            currency = highDay.shortFormatted
+        case .lowDay:
+            currency = lowDay.shortFormatted
+        case .open24h:
+            currency = open24h.shortFormatted
+        case .high24h:
+            currency = high24h.shortFormatted
+        case .low24h:
+            currency = low24h.shortFormatted
+        case .supply:
+            currency = supply.formatted
+        }
+
+        if let string = currency {
+            return "\(fiat.symbol) \(string)"
+        }
+
+        if let string = percents {
+            return "\(string)%"
+        }
+
+        fatalError()
+    }
 }
 
 enum CoinPriceError: Error {

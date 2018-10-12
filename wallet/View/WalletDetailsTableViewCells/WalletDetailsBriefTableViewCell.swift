@@ -23,7 +23,7 @@ class WalletDetailsBriefTableViewCell: UITableViewCell, WalletsCollectionCompone
     weak var delegate: WalletDetailsBriefDelegate?
 
     private var coinPriceLabel: UILabel?
-    private var coinPriceDifferenceLabel: UILabel?
+    private var coinChangeLabel: UILabel?
 
     private var walletsCollection: WalletsCollectionComponent?
 
@@ -61,6 +61,20 @@ class WalletDetailsBriefTableViewCell: UITableViewCell, WalletsCollectionCompone
         coinPriceLabel.topAnchor.constraint(equalTo: topAnchor, constant: 18.0).isActive = true
 
         self.coinPriceLabel = coinPriceLabel
+
+
+        let coinChangeLabel = UILabel()
+        coinChangeLabel.hero.modifiers = [.fade]
+        coinChangeLabel.font = UIFont.walletFont(ofSize: 16.0, weight: .regular)
+        coinChangeLabel.textColor = .darkIndigo
+        coinChangeLabel.textAlignment = .right
+
+        self.addSubview(coinChangeLabel)
+        coinChangeLabel.translatesAutoresizingMaskIntoConstraints = false
+        coinChangeLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -26.0).isActive = true
+        coinChangeLabel.bottomAnchor.constraint(equalTo: coinPriceLabel.bottomAnchor).isActive = true
+
+        self.coinChangeLabel = coinChangeLabel
 
 
         let walletsCollection = WalletsCollectionComponent()
@@ -125,9 +139,47 @@ class WalletDetailsBriefTableViewCell: UITableViewCell, WalletsCollectionCompone
         self.sendButton = sendButton
     }
 
-    func configure(price: String, currentIndex: Int, wallets: [WalletItemData]) {
-        self.coinPriceLabel?.text = price
+    func configure(currentIndex: Int, wallets: [WalletItemData]) {
+        self.coinPriceLabel?.text = " "
         self.walletsCollection?.custom.prepare(cards: wallets, current: currentIndex)
+    }
+
+    func update(price: String, change: String, changePct: String, isChangePositive: Bool) {
+        let priceAppending = " (\(isChangePositive ? "+" : "")\(changePct))"
+
+        let priceAttributedString = NSMutableAttributedString(string: price + priceAppending, attributes: [
+            .font: UIFont.walletFont(ofSize: 18.0, weight: .medium),
+            .foregroundColor: UIColor.darkIndigo,
+            .kern: -0.5
+            ])
+
+        priceAttributedString.addAttributes([
+            .font: UIFont.walletFont(ofSize: 16.0, weight: .regular),
+            .foregroundColor: isChangePositive ? UIColor.lightishGreenTwo : UIColor.error
+            ], range: NSRange(location: price.count, length: priceAppending.count))
+
+        self.coinPriceLabel?.attributedText = priceAttributedString
+
+
+        let changePrimary = "\(isChangePositive ? "+" : "")\(change)"
+        let changeAppending = " (24h)"
+
+        let changeAttributedString = NSMutableAttributedString(string: changePrimary + changeAppending, attributes: [
+            .font: UIFont.walletFont(ofSize: 16.0, weight: .regular),
+            .foregroundColor: isChangePositive ? UIColor.lightishGreenTwo : UIColor.error,
+            .kern: -0.5
+            ])
+
+        changeAttributedString.addAttributes([
+            .font: UIFont.walletFont(ofSize: 16.0, weight: .regular),
+            .foregroundColor: UIColor.blueGrey
+            ], range: NSRange(location: changePrimary.count, length: changeAppending.count))
+
+        self.coinChangeLabel?.attributedText = changeAttributedString
+    }
+
+    func update(currentIndex: Int) {
+        self.walletsCollection?.custom.updateCurrentWallet(currentIndex)
     }
 
     func walletsCollectionComponentCurrentIndexChanged(_ walletsCollectionComponent: WalletsCollectionComponent, to index: Int) {

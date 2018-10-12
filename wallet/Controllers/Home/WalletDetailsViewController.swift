@@ -15,13 +15,16 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable, Advanced
     var onDepositToWallet: ((_ index: Int, _ wallets: [Wallet], _ phone: String) -> Void)?
     var onExit: (() -> Void)?
 
+    weak var sendDelegate: SendMoneyViewControllerDelegate?
+    weak var advancedTransitionDelegate: AdvancedTransitionDelegate?
+
+    var priceAPI: PriceAPI?
+
     class CellsBalancer {
 
         unowned var parent: WalletDetailsViewController
 
-        //private var walletDetailsBrief: WalletDetailsBriefTableViewCell?
-        //    private var walletDetailsChart: WalletDetailsBriefTableViewCell?
-        //    private var walletDetailsLists: WalletDetailsBriefTableViewCell?
+        private(set) weak var briefCell: WalletDetailsBriefTableViewCell?
 
         init(parent: WalletDetailsViewController) {
             self.parent = parent
@@ -29,6 +32,10 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable, Advanced
 
         func registerCellsInTableView(_ tableView: UITableView) {
             tableView.register(WalletDetailsBriefTableViewCell.self, forCellReuseIdentifier: "WalletDetailsBriefTableViewCell")
+        }
+
+        func getNumbersOfSections() -> Int {
+            return 1
         }
 
         func getNumberOfRowsInSection(_ section: Int) -> Int {
@@ -49,6 +56,8 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable, Advanced
                     return nil
                 }
 
+                briefCell = cell
+
                 guard
                     let currentIndex = parent.currentIndex,
                     let wallets = parent.wallets,
@@ -61,7 +70,7 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable, Advanced
                 }
 
                 cell.delegate = parent
-                cell.configure(price: "$ 6964", currentIndex: currentIndex, wallets: cards)
+                cell.configure(currentIndex: currentIndex, wallets: cards)
 
                 return cell
             default:
@@ -77,12 +86,14 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable, Advanced
                 return nil
             }
         }
+
+        func reloadBrief() {
+            parent.tableView?.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .none)
+        }
     }
 
-    weak var sendDelegate: SendMoneyViewControllerDelegate?
-    weak var advancedTransitionDelegate: AdvancedTransitionDelegate?
-
     @IBOutlet private var tableView: UITableView?
+
     private var exitButton: HighlightableButton?
 
     private var phone: String?
@@ -93,6 +104,7 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable, Advanced
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         navigationController?.setNavigationBarHidden(true, animated: false)
     }
 
@@ -131,6 +143,8 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable, Advanced
         exitButton.addTarget(self, action: #selector(exitButtonTouchUpInsideEvent(_:)), for: .touchUpInside)
 
         self.exitButton = exitButton
+
+        loadData()
     }
 
     func prepare(wallets: [Wallet], currentIndex: Int, phone: String) {
@@ -139,7 +153,30 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable, Advanced
         self.phone = phone
     }
 
+    func loadData() {
+        guard let currentIndex = currentIndex, let wallets = wallets, wallets.count > currentIndex else {
+            return
+        }
+
+        let wallet = wallets[currentIndex]
+
+        priceAPI?.getCoinPrice(coin: wallet.coin).done {
+            [weak self]
+            coinData in
+
+            self?.balancer.briefCell?.update(price: coinData.description(property: .price), change: coinData.description(property: .change24h), changePct: coinData.description(property: .changePct24h), isChangePositive: coinData.change24h >= 0)
+        }.catch {
+            error in
+
+            print(error)
+        }
+    }
+
     // MARK: - UITableViewDataSource
+
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return balancer.getNumbersOfSections()
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return balancer.getNumberOfRowsInSection(section)
@@ -173,6 +210,8 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable, Advanced
 
     func walletDetailsBriefCurrentWalletChanged(_ walletDetailsBrief: WalletDetailsBriefTableViewCell, to index: Int) {
         self.currentIndex = index
+
+        loadData()
     }
 
     // MARK: - AdvancedTransitionDelegate
@@ -183,7 +222,7 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable, Advanced
         }
 
         currentIndex = index
-        tableView?.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .none)
+        balancer.briefCell?.update(currentIndex: index)
     }
 
     // MARK: - SendMoneyViewControllerDelegate
@@ -195,7 +234,7 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable, Advanced
     func sendMoneyViewControllerSendingProceedWithSuccess(_ sendMoneyViewController: SendMoneyViewController, updated data: Wallet, index: Int) {
         wallets?[index] = data
 
-        tableView?.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .none)
+        balancer.reloadBrief()
     }
 
     // MARK: - Buttons events

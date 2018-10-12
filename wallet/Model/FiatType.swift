@@ -29,6 +29,15 @@ enum FiatType: String, Equatable {
         }
     }
 
+    var symbol: String {
+        switch self {
+        case .usd:
+            return "$"
+        case .eur:
+            return "€"
+        }
+    }
+
     static var standard: FiatType {
         return .usd
     }
