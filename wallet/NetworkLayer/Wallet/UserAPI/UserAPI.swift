@@ -285,7 +285,7 @@ struct UserAPI: NetworkService {
                     switch response {
                     case .data(_):
 
-                        let success: (CodableSuccessTransactionsGroupedSearchingResponse) -> Void = { s in
+                        let success: (CodableGroupedTransactionsPageResponse) -> Void = { s in
                             do {
                                 let page = try TransactionsPage(codable: s.data)
 

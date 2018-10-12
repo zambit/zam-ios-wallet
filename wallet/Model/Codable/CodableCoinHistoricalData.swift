@@ -9,6 +9,7 @@
 import Foundation
 
 struct CodableCoinHistoricalData: Codable {
+    
     let time: Double
     let close: Decimal
     let high: Decimal

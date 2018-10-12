@@ -18,7 +18,7 @@ struct HistoryAPI: NetworkService {
     }
 
     func getHistoricalDailyData(for coin: CoinType, days: Int) -> Promise<[CoinDailyPrice]> {
-        return provider.execute(HistoryRequest.getDailyData(coin: coin.rawValue.uppercased(), toCoin: "USD", limit: days))
+        return provider.execute(HistoryRequest.getDailyData(coin: coin.short, toCoin: FiatType.usd.short, limit: days))
             .then {
                 (response: Response) -> Promise<[CoinDailyPrice]> in
 

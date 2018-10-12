@@ -9,6 +9,7 @@
 import Foundation
 
 struct CodableCoinHistoricalDataResponse: Codable {
+    
     let data: [CodableCoinHistoricalData]
     let timeFrom: Double
     let timeTo: Double
