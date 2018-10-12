@@ -1,5 +1,5 @@
 //
-//  ContactData.swift
+//  Contact.swift
 //  wallet
 //
 //  Created by Alexander Ponomarev on 22/08/2018.
@@ -9,14 +9,19 @@
 import Foundation
 import ContactsUI
 
-struct ContactData: Equatable {
-
+struct Contact: Equatable {
+    
     var name: String
     var avatarData: Data?
     var phoneNumbers: [String] = []
 
     init(contact: CNContact) {
-        self.name = contact.givenName + " " + contact.familyName
+        if contact.givenName.isEmpty && contact.familyName.isEmpty {
+            self.name = contact.organizationName
+        } else {
+            self.name = contact.givenName + " " + contact.familyName
+        }
+
         self.avatarData = contact.thumbnailImageData
 
         phoneNumbers = contact.phoneNumbers.compactMap {
@@ -31,18 +36,18 @@ struct ContactData: Equatable {
         self.phoneNumbers = phoneNumbers
     }
 
-    func toFormatted(_ block: @escaping (FormattedContactData?) -> Void) {
+    func toFormatted(_ block: @escaping (FormattedContact?) -> Void) {
         let formatter = PhoneNumberFormatter()
 
         guard let phoneNumber = phoneNumbers.first else {
-            let formattedContact = FormattedContactData(name: self.name, avatarData: self.avatarData, formattedPhoneNumber: nil)
+            let formattedContact = FormattedContact(name: self.name, avatarData: self.avatarData, formattedPhoneNumber: nil)
             return block(formattedContact)
         }
 
         formatter.getCompleted(from: phoneNumber) {
             phone in
 
-            let formattedContact = FormattedContactData(name: self.name, avatarData: self.avatarData, formattedPhoneNumber: phone?.formattedString)
+            let formattedContact = FormattedContact(name: self.name, avatarData: self.avatarData, formattedPhoneNumber: phone?.formattedString)
             block(formattedContact)
         }
     }

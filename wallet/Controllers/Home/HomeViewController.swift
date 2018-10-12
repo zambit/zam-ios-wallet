@@ -14,9 +14,11 @@ import UIKit
  */
 protocol HomeController: class {
 
-    func performSendFromWallet(index: Int, wallets: [WalletData], phone: String, recipient: FormattedContactData?)
+    func performSendFromWallet(index: Int, wallets: [Wallet], phone: String, recipient: FormattedContact?)
 
-    func performDepositFromWallet(index: Int, wallets: [WalletData], phone: String)
+    func performDepositFromWallet(index: Int, wallets: [Wallet], phone: String)
+
+    func performWalletDetails(index: Int, wallets: [Wallet], phone: String)
 }
 
 class HomeViewController: FloatingViewController, WalletsViewControllerDelegate, ContactsHorizontalComponentDelegate, AdvancedTransitionDelegate, SendMoneyViewControllerDelegate, HomeController {
@@ -25,8 +27,9 @@ class HomeViewController: FloatingViewController, WalletsViewControllerDelegate,
     var userManager: UserDefaultsManager?
     var userAPI: UserAPI?
 
-    var onSendFromWallet: ((_ index: Int, _ wallets: [WalletData], _ recipient: FormattedContactData?, _ phone: String) -> Void)?
-    var onDepositToWallet: ((_ index: Int, _ wallets: [WalletData], _ phone: String) -> Void)?
+    var onSendFromWallet: ((_ index: Int, _ wallets: [Wallet], _ recipient: FormattedContact?, _ phone: String) -> Void)?
+    var onDepositToWallet: ((_ index: Int, _ wallets: [Wallet], _ phone: String) -> Void)?
+    var onWalletDetails: ((_ index: Int, _ wallets: [Wallet], _ phone: String) -> Void)?
 
     var walletsCollectionViewController: WalletsCollectionViewController? {
         didSet {
@@ -120,8 +123,8 @@ class HomeViewController: FloatingViewController, WalletsViewControllerDelegate,
 
     // MARK: - Data
 
-    private var totalBalance: BalanceData?
-    private var contactsData: [ContactData] = []
+    private var totalBalance: Balance?
+    private var contactsData: [Contact] = []
 
     private var isContactsLoading: Bool = false
 
@@ -212,13 +215,14 @@ class HomeViewController: FloatingViewController, WalletsViewControllerDelegate,
     // MARK: - Screen Style
 
     private func setupStyle() {
-        floatingView?.layer.cornerRadius = 16.0
+        floatingView?.cornerRadius = 16.0
         floatingView?.clipsToBounds = true
 
         floatingView?.backgroundColor = .white
         detailGestureView?.backgroundColor = .clear
 
         detailTitleLabel?.textColor = .darkIndigo
+        detailTitleLabel?.font = UIFont.walletFont(ofSize: 22.0, weight: .bold)
         detailTitleLabel?.text = "My accounts"
 
         sumTitleLabel?.font = UIFont.walletFont(ofSize: 12.0, weight: .regular)
@@ -300,7 +304,6 @@ class HomeViewController: FloatingViewController, WalletsViewControllerDelegate,
             ], range: NSRange(location: fractionStyleRange.lowerBound, length: fractionStyleRange.count))
 
         sumLabel?.attributedText = attributedString
-        sumLabel?.attributedText = attributedString
 
         if currentState == .open, !isAnimationInProgress {
             sumLabel?.sizeToFit()
@@ -314,7 +317,7 @@ class HomeViewController: FloatingViewController, WalletsViewControllerDelegate,
 
     // MARK: - HomeController
 
-    func performSendFromWallet(index: Int, wallets: [WalletData], phone: String, recipient: FormattedContactData? = nil) {
+    func performSendFromWallet(index: Int, wallets: [Wallet], phone: String, recipient: FormattedContact? = nil) {
         floatingView?.hero.id = "floatingView"
         floatingView?.hero.modifiers = [.useScaleBasedSizeChange]
         detailTopGestureView?.hero.modifiers = [.fade]
@@ -323,13 +326,22 @@ class HomeViewController: FloatingViewController, WalletsViewControllerDelegate,
         self.onSendFromWallet?(index, wallets, recipient, phone)
     }
 
-    func performDepositFromWallet(index: Int, wallets: [WalletData], phone: String) {
+    func performDepositFromWallet(index: Int, wallets: [Wallet], phone: String) {
         floatingView?.hero.id = "floatingView"
         floatingView?.hero.modifiers = [.useScaleBasedSizeChange]
         detailTopGestureView?.hero.modifiers = [.fade]
         walletsContainerView?.hero.modifiers = [.fade]
 
         self.onDepositToWallet?(index, wallets, phone)
+    }
+
+    func performWalletDetails(index: Int, wallets: [Wallet], phone: String) {
+        floatingView?.hero.id = "floatingView"
+        floatingView?.hero.modifiers = [.useScaleBasedSizeChange, .timingFunction(.easeInOut)]
+        detailTopGestureView?.hero.modifiers = [.fade]
+        walletsContainerView?.hero.modifiers = [.fade]
+
+        self.onWalletDetails?(index, wallets, phone)
     }
 
     // MARK: - AdvancedTransitionDelegate
@@ -449,7 +461,7 @@ class HomeViewController: FloatingViewController, WalletsViewControllerDelegate,
 
     // MARK: - ContactsHorizontalComponentDelegate
 
-    func contactsHorizontalComponent(_ contactsHorizontalComponent: ContactsHorizontalComponent, itemWasTapped contactData: ContactData) {
+    func contactsHorizontalComponent(_ contactsHorizontalComponent: ContactsHorizontalComponent, itemWasTapped contactData: Contact) {
         contactsHorizontalComponent.isUserInteractionEnabled = false
 
         dismissKeyboard {

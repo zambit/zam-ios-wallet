@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct KYCPersonalInfoData: Equatable {
+struct KYCPersonaInfoProperties: Equatable {
 
     let email: String
     let firstName: String
@@ -37,7 +37,7 @@ struct KYCPersonalInfoData: Equatable {
         self.postalCode = postalCode
     }
 
-    init(codable: CodableKYCPersonalInfo.CodableInfoProperties) throws {
+    init(codable: CodableKYCPersonalInfo.CodableProperties) throws {
         self.email = codable.email
         self.firstName = codable.firstName
         self.lastName = codable.lastName
@@ -45,7 +45,7 @@ struct KYCPersonalInfoData: Equatable {
         self.birthDate = Date(unixTimestamp: codable.birthDate)
 
         guard let gender = GenderType(rawValue: codable.sex) else {
-            throw KYCPersonalInfoDataError.genderTypeResponseFormatError
+            throw KYCPersonalInfoPropertiesError.genderTypeInputFormatError
         }
         self.gender = gender
 
@@ -58,6 +58,7 @@ struct KYCPersonalInfoData: Equatable {
     }
 }
 
-enum KYCPersonalInfoDataError: Error {
-    case genderTypeResponseFormatError
+enum KYCPersonalInfoPropertiesError: Error {
+    
+    case genderTypeInputFormatError
 }

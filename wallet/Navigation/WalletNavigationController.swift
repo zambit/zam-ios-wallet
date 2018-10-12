@@ -143,7 +143,6 @@ extension BehaviorExtension where Base: WalletNavigationController {
         }
 
         viewController.modalPresentationStyle = .overFullScreen
-
         base.present(viewController, animated: true, completion: nil)
     }
 

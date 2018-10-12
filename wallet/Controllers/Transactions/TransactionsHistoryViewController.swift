@@ -11,7 +11,7 @@ import UIKit
 
 class TransactionsHistoryViewController: FlowViewController, WalletNavigable, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
 
-    var onFilter: ((TransactionsFilterData) -> Void)?
+    var onFilter: ((TransactionsFilterProperties) -> Void)?
 
     var contactsManager: UserContactsManager?
     var userManager: UserDefaultsManager?
@@ -21,14 +21,14 @@ class TransactionsHistoryViewController: FlowViewController, WalletNavigable, UI
     @IBOutlet var filterButton: UIButton?
     @IBOutlet var historyTableView: UITableView?
 
-    private var paginator: Paginator<TransactionsGroupData>?
+    private var paginator: Paginator<TransactionsGroup>?
 
     private var topRefreshControl: UIRefreshControl?
     private var bottomActivityIndicator: UIActivityIndicatorView?
 
-    private var contactsData: [ContactData] = []
+    private var contactsData: [Contact] = []
 
-    private var filterData: TransactionsFilterData = TransactionsFilterData()
+    private var filterData: TransactionsFilterProperties = TransactionsFilterProperties()
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -65,7 +65,7 @@ class TransactionsHistoryViewController: FlowViewController, WalletNavigable, UI
 
         let formatter = PhoneNumberFormatter()
 
-        self.paginator = Paginator<TransactionsGroupData>(pageSize: 20, fetchHandler: {
+        self.paginator = Paginator<TransactionsGroup>(pageSize: 20, fetchHandler: {
             [weak self]
             (paginator: Paginator, pageSize: Int, nextPage: String?) in
 
@@ -105,7 +105,7 @@ class TransactionsHistoryViewController: FlowViewController, WalletNavigable, UI
                 let sumAmount = try! last.amount.sum(with: first.amount)
                 let transactions = last.transactions + first.transactions
 
-                let concatiatedElement = TransactionsGroupData(dateInterval: last.dateInterval, amount: sumAmount, transactions: transactions)
+                let concatiatedElement = TransactionsGroup(dateInterval: last.dateInterval, amount: sumAmount, transactions: transactions)
 
                 let concatiatedResults = Array(old[0..<old.count - 1]) + [concatiatedElement] + Array(new[1..<new.count])
 
@@ -183,7 +183,7 @@ class TransactionsHistoryViewController: FlowViewController, WalletNavigable, UI
         }
     }
 
-    func update(filterData: TransactionsFilterData) {
+    func update(filterData: TransactionsFilterProperties) {
         if self.filterData != filterData {
             self.filterData = filterData
 

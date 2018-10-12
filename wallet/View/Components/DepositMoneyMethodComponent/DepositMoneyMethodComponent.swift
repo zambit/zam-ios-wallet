@@ -18,7 +18,7 @@ protocol DepositMoneyMethodComponentDelegate: class {
 
     func depositMoneyMethodSelected(_ depositMoneyMethodSelected: DepositMoneyMethodComponent, method: DepositMoneyMethod)
 
-    func depositMoneyMethodWalletChanged(_ depositMoneyMethodSelected: DepositMoneyMethodComponent, toIndex: Int, wallets: [WalletData])
+    func depositMoneyMethodWalletChanged(_ depositMoneyMethodSelected: DepositMoneyMethodComponent, toIndex: Int, wallets: [Wallet])
 
     func depositMoneyMethodCardChanged(_ depositMoneyMethodSelected: DepositMoneyMethodComponent, toCardId: String)
 }
@@ -32,7 +32,7 @@ class DepositMoneyMethodComponent: Component, SegmentedControlComponentDelegate,
     @IBOutlet private var walletsCollectionView: UICollectionView?
 
     private var phone: String?
-    private var wallets: [WalletData] = []
+    private var wallets: [Wallet] = []
     private var currentIndex: Int?
 
     // MARK: - Component
@@ -70,7 +70,7 @@ class DepositMoneyMethodComponent: Component, SegmentedControlComponentDelegate,
 
     // MARK: - Public methods
 
-    func prepare(wallets: [WalletData], currentIndex: Int, phone: String) {
+    func prepare(wallets: [Wallet], currentIndex: Int, phone: String) {
         self.phone = phone
         self.wallets = wallets
         self.currentIndex = currentIndex

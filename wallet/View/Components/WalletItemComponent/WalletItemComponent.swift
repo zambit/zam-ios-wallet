@@ -13,6 +13,7 @@ class WalletItemComponent: WalletSmallItemComponent {
 
     var onSendButtonTap: (() -> Void)?
     var onDepositButtonTap: (() -> Void)?
+    var onCardLongPress: (() -> Void)?
 
     @IBOutlet private var sendButton: UIButton!
     @IBOutlet private var depositButton: UIButton!
@@ -75,9 +76,12 @@ class WalletItemComponent: WalletSmallItemComponent {
     private func longPressGestureEvent(_ sender: UILongPressGestureRecognizer) {
         switch sender.state {
         case .began:
-            UIView.animate(withDuration: 0.5) {
+            UIView.animate(withDuration: 0.5, animations: {
                 self.view.transform = .init(scaleX: 0.95, y: 0.95)
-            }
+            }, completion: {
+                _ in
+                self.onCardLongPress?()
+            })
         case .ended:
             UIView.animate(withDuration: 0.5) {
                 self.view.transform = .identity

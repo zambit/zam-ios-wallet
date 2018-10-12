@@ -38,7 +38,7 @@ struct AuthAPI: NetworkService {
                     switch response {
                     case .data(_):
 
-                        let success: (CodableSuccessAuthTokenResponse) -> Void = { s in
+                        let success: (CodableTokenResponse) -> Void = { s in
                             seal.fulfill(s.data.token)
                         }
 
@@ -80,7 +80,7 @@ struct AuthAPI: NetworkService {
                     switch response {
                     case .data(_):
 
-                        let success: (CodableSuccessEmptyResponse) -> Void = { _ in
+                        let success: (CodableEmptyResponse) -> Void = { _ in
                             seal.fulfill(())
                         }
 
@@ -124,7 +124,7 @@ struct AuthAPI: NetworkService {
                     switch response {
                     case .data(_):
                         
-                        let success: (CodableSuccessAuthorizedPhoneResponse) -> Void = { s in
+                        let success: (CodablePhoneResponse) -> Void = { s in
                             seal.fulfill(s.data.phone)
                         }
 
@@ -169,7 +169,7 @@ struct AuthAPI: NetworkService {
                     switch response {
                     case .data(_):
 
-                        let success: (CodableSuccessAuthTokenResponse) -> Void = { s in
+                        let success: (CodableTokenResponse) -> Void = { s in
                             seal.fulfill(s.data.token)
                         }
 
@@ -209,7 +209,7 @@ struct AuthAPI: NetworkService {
                     switch response {
                     case .data(_):
 
-                        let success: (CodableSuccessAuthTokenResponse) -> Void = { s in
+                        let success: (CodableTokenResponse) -> Void = { s in
                             seal.fulfill(s.data.token)
                         }
 
@@ -253,7 +253,7 @@ struct AuthAPI: NetworkService {
                     switch response {
                     case .data(_):
 
-                        let success: (CodableSuccessAuthTokenResponse) -> Void = { s in
+                        let success: (CodableTokenResponse) -> Void = { s in
                             seal.fulfill(s.data.token)
                         }
 
