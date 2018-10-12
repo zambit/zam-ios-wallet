@@ -11,14 +11,14 @@ import Foundation
 struct CodableGroupedTransactionsPageResponse: Codable {
 
     let result: Bool
-    let data: GroupedTransactionsPage
+    let data: CodablePage
 
     private enum CodingKeys: String, CodingKey {
         case result
         case data
     }
 
-    struct GroupedTransactionsPage: Codable {
+    struct CodablePage: Codable {
         let count: Int
         let next: String?
         let transactions: [CodableTransactionsGroup]?

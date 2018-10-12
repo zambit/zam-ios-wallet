@@ -13,7 +13,7 @@ struct TransactionsPage: Equatable {
     let next: String?
     let transactions: [TransactionsGroup]
 
-    init(codable: CodableSuccessTransactionsGroupedSearchingResponse.GroupedTransactionsPage) throws {
+    init(codable: CodableGroupedTransactionsPageResponse.CodablePage) throws {
         self.next = codable.next
 
         self.transactions = try codable.transactions?.map {
