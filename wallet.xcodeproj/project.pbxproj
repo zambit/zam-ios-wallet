@@ -225,6 +225,7 @@
 		8C7DE71B2170BA5F00824A4B /* CodableCoinHistoricalData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7DE71A2170BA5F00824A4B /* CodableCoinHistoricalData.swift */; };
 		8C7DE71D2170BA7000824A4B /* CodableCoinDataResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7DE71C2170BA7000824A4B /* CodableCoinDataResponse.swift */; };
 		8C7DE7222170D81000824A4B /* Decimal+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7DE7212170D81000824A4B /* Decimal+Extensions.swift */; };
+		8C7DE7242174ED3600824A4B /* Skeletonable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7DE7232174ED3600824A4B /* Skeletonable.swift */; };
 		8CA2188F2121D97C0063C188 /* DecimalKeyboardComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CA2188E2121D97B0063C188 /* DecimalKeyboardComponent.xib */; };
 		8CA218922122E8D70063C188 /* SendMoneyComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CA218912122E8D70063C188 /* SendMoneyComponent.xib */; };
 		8CA218942122EAC90063C188 /* SendMoneyComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA218932122EAC90063C188 /* SendMoneyComponent.swift */; };
@@ -555,6 +556,7 @@
 		8C7DE71A2170BA5F00824A4B /* CodableCoinHistoricalData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableCoinHistoricalData.swift; sourceTree = "<group>"; };
 		8C7DE71C2170BA7000824A4B /* CodableCoinDataResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableCoinDataResponse.swift; sourceTree = "<group>"; };
 		8C7DE7212170D81000824A4B /* Decimal+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Decimal+Extensions.swift"; sourceTree = "<group>"; };
+		8C7DE7232174ED3600824A4B /* Skeletonable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Skeletonable.swift; sourceTree = "<group>"; };
 		8CA2188E2121D97B0063C188 /* DecimalKeyboardComponent.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DecimalKeyboardComponent.xib; sourceTree = "<group>"; };
 		8CA218912122E8D70063C188 /* SendMoneyComponent.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SendMoneyComponent.xib; sourceTree = "<group>"; };
 		8CA218932122EAC90063C188 /* SendMoneyComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMoneyComponent.swift; sourceTree = "<group>"; };
@@ -712,6 +714,7 @@
 				8C52FFEF211AE19300EB55EA /* OverlappingFlowLayout.swift */,
 				8C2D2766215913B1004CE1F8 /* PinForm.swift */,
 				8C7C3396214A972200EC6C96 /* SizePresetable.swift */,
+				8C7DE7232174ED3600824A4B /* Skeletonable.swift */,
 				8CF5F92E211327EB0083B36A /* StringParser.swift */,
 				9319BA862129FA9500033A7E /* Animations */,
 				8CA218D7212D68510063C188 /* Authentication */,
@@ -1960,12 +1963,8 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
-			);
-			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
@@ -2241,6 +2240,7 @@
 				8C09196D21089FA700703224 /* AuthRequest.swift in Sources */,
 				8CF5F94C21147F000083B36A /* EnterPinFlow.swift in Sources */,
 				8CA218D9212D889A0063C188 /* UserContactsManager.swift in Sources */,
+				8C7DE7242174ED3600824A4B /* Skeletonable.swift in Sources */,
 				8CF5F93821134E6D0083B36A /* CGPoint+Extensions.swift in Sources */,
 				8C333D3C2109FC2D00949AC0 /* OnboardingItemComponent.swift in Sources */,
 				8CA218E7212DA8300063C188 /* SearchTextField.swift in Sources */,
