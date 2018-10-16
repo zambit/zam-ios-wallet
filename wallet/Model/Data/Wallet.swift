@@ -1,5 +1,5 @@
 //
-//  WalletData.swift
+//  Wallet.swift
 //  wallet
 //
 //  Created by  me on 07/08/2018.
@@ -11,12 +11,12 @@ import Foundation
 /**
  Struct represents user wallet.
  */
-struct WalletData: Equatable {
+struct Wallet: Equatable {
 
     let id: String
     let name: String
     let coin: CoinType
-    let balance: BalanceData
+    let balance: Balance
     let address: String
 
     init(codable: CodableWallet) throws {
@@ -24,21 +24,21 @@ struct WalletData: Equatable {
         self.name = codable.name
 
         guard let coinType = CoinType(rawValue: codable.coin) else {
-            throw WalletDataError.coinTypeReponseFormatError
+            throw WalletDataError.coinTypeInputFormatError
         }
 
         self.coin = coinType
         do {
-            let balance = try BalanceData(coin: coinType, codable: codable.balances)
+            let balance = try Balance(coin: coinType, codable: codable.balances)
             self.balance = balance
         } catch {
-            throw WalletDataError.balanceFormatError
+            throw WalletDataError.balanceInputFormatError
         }
 
         self.address = codable.address
     }
 
-    init(id: String, name: String, coin: CoinType, balance: BalanceData, address: String) {
+    init(id: String, name: String, coin: CoinType, balance: Balance, address: String) {
         self.id = id
         self.name = name
         self.coin = coin
@@ -48,7 +48,8 @@ struct WalletData: Equatable {
 }
 
 enum WalletDataError: Error {
-    case coinTypeReponseFormatError
-    case balanceFormatError
+    
+    case coinTypeInputFormatError
+    case balanceInputFormatError
 }
 

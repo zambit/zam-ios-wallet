@@ -33,7 +33,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YDF-mT-L0m" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3309" y="-907"/>
+            <point key="canvasLocation" x="-3311" y="-906"/>
         </scene>
         <!--Send Money View Controller-->
         <scene sceneID="nZU-18-QLP">
@@ -214,7 +214,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LbQ-PG-kyn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1926" y="-1641"/>
+            <point key="canvasLocation" x="-1926" y="-220"/>
         </scene>
         <!--Deposit Money View Controller-->
         <scene sceneID="ssy-WP-N6a">
@@ -438,6 +438,36 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NEw-u1-Rps" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-4022" y="-906"/>
+        </scene>
+        <!--Wallet Details View Controller-->
+        <scene sceneID="aUH-eY-Yie">
+            <objects>
+                <viewController storyboardIdentifier="WalletDetailsViewController" id="XaR-mJ-b6j" customClass="WalletDetailsViewController" customModule="wallet" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="IpC-82-vFX">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="WRF-xu-0kW">
+                                <rect key="frame" x="0.0" y="20" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="WRF-xu-0kW" firstAttribute="leading" secondItem="PDi-0b-aqg" secondAttribute="leading" id="6mH-Fe-hNO"/>
+                            <constraint firstItem="WRF-xu-0kW" firstAttribute="top" secondItem="PDi-0b-aqg" secondAttribute="top" id="Q10-hi-db8"/>
+                            <constraint firstItem="WRF-xu-0kW" firstAttribute="bottom" secondItem="IpC-82-vFX" secondAttribute="bottom" constant="20" id="Xfr-uu-775"/>
+                            <constraint firstItem="WRF-xu-0kW" firstAttribute="trailing" secondItem="PDi-0b-aqg" secondAttribute="trailing" id="elQ-qj-pri"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="PDi-0b-aqg"/>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="WRF-xu-0kW" id="X80-Mj-1gP"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Grk-gt-ZOk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-3311.1999999999998" y="-221.73913043478262"/>
         </scene>
     </scenes>
 </document>

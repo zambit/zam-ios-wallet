@@ -7,6 +7,7 @@
 //
 
 enum ScreenType {
+    
     case extraSmall
     case small
     case medium

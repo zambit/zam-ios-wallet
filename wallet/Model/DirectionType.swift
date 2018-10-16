@@ -9,6 +9,7 @@
 import Foundation
 
 enum DirectionType: String, Equatable {
+    
     case incoming
     case outgoing
 

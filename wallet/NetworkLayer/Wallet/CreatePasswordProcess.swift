@@ -8,10 +8,9 @@
 
 import PromiseKit
 
-protocol ThreeStepsAPI {
+protocol CreatePasswordProcess {
 
     func sendVerificationCode(to phone: String, referrerPhone: String?) -> Promise<Void>
 
     func verifyPhoneNumber(_ phone: String, withCode verificationCode: String) -> Promise<String>
-
 }

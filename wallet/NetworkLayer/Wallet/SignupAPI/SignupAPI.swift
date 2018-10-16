@@ -12,7 +12,7 @@ import PromiseKit
 /**
  Signing up API. Provides requests for sending verification code to phone, verifing phone and providing password.
  */
-struct SignupAPI: NetworkService, ThreeStepsAPI {
+struct SignupAPI: NetworkService, CreatePasswordProcess {
 
     private let provider: Provider
 
@@ -32,7 +32,7 @@ struct SignupAPI: NetworkService, ThreeStepsAPI {
                     switch response {
                     case .data(_):
 
-                        let success: (CodableSuccessEmptyResponse) -> Void = { _ in
+                        let success: (CodableEmptyResponse) -> Void = { _ in
                             seal.fulfill(())
                         }
 
@@ -72,7 +72,7 @@ struct SignupAPI: NetworkService, ThreeStepsAPI {
                     switch response {
                     case .data(_):
 
-                        let success: (CodableSuccessSignUpTokenResponse) -> Void = { s in
+                        let success: (CodableSignupTokenResponse) -> Void = { s in
                             seal.fulfill(s.data.token)
                         }
 
@@ -111,7 +111,7 @@ struct SignupAPI: NetworkService, ThreeStepsAPI {
                     switch response {
                     case .data(_):
 
-                        let success: (CodableSuccessAuthTokenResponse) -> Void = { s in
+                        let success: (CodableTokenResponse) -> Void = { s in
                             seal.fulfill(s.data.token)
                         }
 

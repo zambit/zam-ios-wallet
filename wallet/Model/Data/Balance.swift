@@ -1,5 +1,5 @@
 //
-//  BalanceData.swift
+//  Balance.swift
 //  wallet
 //
 //  Created by  me on 13/08/2018.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct BalanceData: Equatable {
+struct Balance: Equatable {
 
     enum Currency {
         case usd
@@ -42,9 +42,11 @@ struct BalanceData: Equatable {
             stringNumber = codable.zam
         }
 
-        guard
-            let strNumber = stringNumber,
-            let original = Decimal(string: strNumber),
+        guard let strNumber = stringNumber else {
+            throw BalanceDataError.coinValueNotFound
+        }
+
+        guard let original = Decimal(string: strNumber),
             let usd = Decimal(string: codable.usd) else {
             throw BalanceDataError.decimalFormatsResponseError
         }
@@ -53,16 +55,16 @@ struct BalanceData: Equatable {
         self.original = original
     }
 
-    static func empty(coin: CoinType) -> BalanceData {
-        return BalanceData(coin: coin, usd: 0.0, original: 0.0)
+    static func empty(coin: CoinType) -> Balance {
+        return Balance(coin: coin, usd: 0.0, original: 0.0)
     }
 
-    func sum(with another: BalanceData) throws -> BalanceData {
+    func sum(with another: Balance) throws -> Balance {
         guard coin == another.coin else {
             throw BalanceDataError.sumDefferentCoinBalance
         }
 
-        return BalanceData(coin: coin, usd: usd + another.usd, original: original + another.original)
+        return Balance(coin: coin, usd: usd + another.usd, original: original + another.original)
     }
 
     func description(currency: Currency) -> String {
@@ -79,12 +81,12 @@ struct BalanceData: Equatable {
     func formattedShort(currency: Currency) -> String {
         switch currency {
         case .original:
-            guard let formatted = NumberFormatter.walletAmountShort.string(from: original as NSNumber) else {
+            guard let formatted = original.shortFormatted else {
                 fatalError()
             }
             return formatted
         case .usd:
-            guard let formatted = NumberFormatter.walletAmountShort.string(from: usd as NSNumber) else {
+            guard let formatted = usd.shortFormatted else {
                 fatalError()
             }
             return formatted
@@ -94,25 +96,26 @@ struct BalanceData: Equatable {
     func formatted(currency: Currency) -> String {
         switch currency {
         case .original:
-            guard let formatted = NumberFormatter.walletAmount.string(from: original as NSNumber) else {
+            guard let formatted = original.formatted else {
                 fatalError()
             }
             return formatted
         case .usd:
-            guard let formatted = NumberFormatter.walletAmount.string(from: usd as NSNumber) else {
+            guard let formatted = usd.formatted else {
                 fatalError()
             }
             return formatted
         }
     }
 
-    var negative: BalanceData {
-        let balance = BalanceData(coin: coin, usd: -usd, original: -original)
+    var negative: Balance {
+        let balance = Balance(coin: coin, usd: -usd, original: -original)
         return balance
     }
 }
 
 enum BalanceDataError: Error {
+    case coinValueNotFound
     case decimalFormatsResponseError
     case sumDefferentCoinBalance
 }

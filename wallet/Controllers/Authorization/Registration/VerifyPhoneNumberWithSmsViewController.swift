@@ -15,7 +15,7 @@ import Crashlytics
  */
 class VerifyPhoneNumberWithSmsViewController: СonsistentViewController, VerificationCodeFormComponentDelegate {
 
-    var verifyAPI: ThreeStepsAPI?
+    var verifyAPI: CreatePasswordProcess?
 
     /**
      Flow parameter for continue action. Needs to provide phone number and signUpToken for doing action.

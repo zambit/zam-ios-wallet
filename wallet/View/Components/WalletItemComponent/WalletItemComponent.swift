@@ -13,9 +13,17 @@ class WalletItemComponent: WalletSmallItemComponent {
 
     var onSendButtonTap: (() -> Void)?
     var onDepositButtonTap: (() -> Void)?
+    var onCardLongPress: (() -> Void)?
 
     @IBOutlet private var sendButton: UIButton!
     @IBOutlet private var depositButton: UIButton!
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
+        self.sendButton.gradientLayer.frame = self.sendButton.bounds
+        self.depositButton.gradientLayer.frame = self.depositButton.bounds
+    }
 
     override func initFromNib() {
         super.initFromNib()
@@ -61,6 +69,20 @@ class WalletItemComponent: WalletSmallItemComponent {
         self.view.layer.shadowOpacity = 0.5
     }
 
+    override func stiffen() {
+        super.stiffen()
+
+        sendButton?.stiffen()
+        depositButton?.stiffen()
+    }
+
+    override func relive() {
+        super.relive()
+
+        sendButton?.relive()
+        depositButton?.relive()
+    }
+
     @objc
     private func sendButtonTouchUpInsideEvent(_ sender: UIButton) {
         onSendButtonTap?()
@@ -75,9 +97,12 @@ class WalletItemComponent: WalletSmallItemComponent {
     private func longPressGestureEvent(_ sender: UILongPressGestureRecognizer) {
         switch sender.state {
         case .began:
-            UIView.animate(withDuration: 0.5) {
+            UIView.animate(withDuration: 0.5, animations: {
                 self.view.transform = .init(scaleX: 0.95, y: 0.95)
-            }
+            }, completion: {
+                _ in
+                self.onCardLongPress?()
+            })
         case .ended:
             UIView.animate(withDuration: 0.5) {
                 self.view.transform = .identity

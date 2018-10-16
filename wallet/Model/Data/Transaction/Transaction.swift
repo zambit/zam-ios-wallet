@@ -1,5 +1,5 @@
 //
-//  WalletTransactionData.swift
+//  Transaction.swift
 //  wallet
 //
 //  Created by Александр Пономарев on 19.08.2018.
@@ -9,12 +9,13 @@
 import Foundation
 
 enum TransactionParticipantType: Equatable {
+
     case sender
     case recipient
     case none
 }
 
-struct TransactionData: Equatable {
+struct Transaction: Equatable {
 
     let id: String
     let direction: DirectionType
@@ -22,12 +23,12 @@ struct TransactionData: Equatable {
     let coin: CoinType
     let participantType: TransactionParticipantType
     let participant: String
-    let amount: BalanceData
+    let amount: Balance
 
     var participantPhoneNumber: PhoneNumber?
-    var contact: ContactData?
+    var contact: Contact?
 
-    init(id: String, direction: DirectionType, status: TransactionStatus, coin: CoinType, participantType: TransactionParticipantType, participant: String, amount: BalanceData) {
+    init(id: String, direction: DirectionType, status: TransactionStatus, coin: CoinType, participantType: TransactionParticipantType, participant: String, amount: Balance) {
         self.id = id
         self.direction = direction
         self.status = status
@@ -41,17 +42,17 @@ struct TransactionData: Equatable {
         self.id = codable.id
 
         guard let direction = DirectionType(rawValue: codable.direction) else {
-            throw TransactionDataError.directionTypeResponseFormatError
+            throw TransactionError.directionTypeInputFormatError
         }
         self.direction = direction
 
         guard let status = TransactionStatus(rawValue: codable.status) else {
-            throw TransactionDataError.transactionStatusResponseFormatError
+            throw TransactionError.transactionStatusInputFormatError
         }
         self.status = status
 
         guard let coin = CoinType(rawValue: codable.coin) else {
-            throw TransactionDataError.coinTypeReponseFormatError
+            throw TransactionError.coinTypeInputFormatError
         }
         self.coin = coin
 
@@ -67,14 +68,14 @@ struct TransactionData: Equatable {
         }
 
         do {
-            let amount = try BalanceData(coin: coin, codable: codable.amount)
+            let amount = try Balance(coin: coin, codable: codable.amount)
             self.amount = amount
         } catch {
-            throw TransactionDataError.amountFormatError
+            throw TransactionError.amountInputFormatError
         }
     }
 
-    var formattedAmount: BalanceData {
+    var formattedAmount: Balance {
         switch direction {
         case .incoming:
             return amount
@@ -84,9 +85,10 @@ struct TransactionData: Equatable {
     }
 }
 
-enum TransactionDataError: Error {
-    case coinTypeReponseFormatError
-    case amountFormatError
-    case transactionStatusResponseFormatError
-    case directionTypeResponseFormatError
+enum TransactionError: Error {
+
+    case coinTypeInputFormatError
+    case amountInputFormatError
+    case transactionStatusInputFormatError
+    case directionTypeInputFormatError
 }

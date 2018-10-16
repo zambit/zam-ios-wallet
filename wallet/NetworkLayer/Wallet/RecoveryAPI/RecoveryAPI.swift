@@ -12,7 +12,7 @@ import PromiseKit
 /**
  Recovery password API. Provides requests for sending verification code to phone, verifing recovering account password and providing new password.
  */
-struct RecoveryAPI: NetworkService, ThreeStepsAPI {
+struct RecoveryAPI: NetworkService, CreatePasswordProcess {
 
     private let provider: Provider
 
@@ -32,7 +32,7 @@ struct RecoveryAPI: NetworkService, ThreeStepsAPI {
                     switch response {
                     case .data(_):
 
-                        let success: (CodableSuccessEmptyResponse) -> Void = { _ in
+                        let success: (CodableEmptyResponse) -> Void = { _ in
                             seal.fulfill(())
                         }
 
@@ -72,7 +72,7 @@ struct RecoveryAPI: NetworkService, ThreeStepsAPI {
                     switch response {
                     case .data(_):
 
-                        let success: (CodableSuccessRecoveryTokenResponse) -> Void = { s in
+                        let success: (CodableRecoveryTokenResponse) -> Void = { s in
                             seal.fulfill(s.data.token)
                         }
 
@@ -111,7 +111,7 @@ struct RecoveryAPI: NetworkService, ThreeStepsAPI {
                     switch response {
                     case .data(_):
 
-                        let success: (CodableSuccessEmptyResponse) -> Void = { s in
+                        let success: (CodableEmptyResponse) -> Void = { s in
                             seal.fulfill(())
                         }
 

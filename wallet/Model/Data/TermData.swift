@@ -12,6 +12,7 @@ import Foundation
  Struct represents term object.
  */
 struct TermData {
+    
     var text: String
     var linkText: [String]
 }

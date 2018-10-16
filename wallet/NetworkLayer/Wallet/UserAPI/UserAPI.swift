@@ -9,6 +9,9 @@
 import Foundation
 import PromiseKit
 
+/**
+ * User's data flow API. Provides request for getting general user's info, wallets and transactions and sending crypto.
+ */
 struct UserAPI: NetworkService {
 
     private let provider: Provider
@@ -17,18 +20,26 @@ struct UserAPI: NetworkService {
         self.provider = provider
     }
 
-    func getUserInfo(token: String, coin: CoinType?) -> Promise<UserData> {
+    /**
+     Get general user info: id, phone, kyc status and balance.
+
+     - parameter token: Current session's token.
+     - parameter coin: -
+
+     - returns: User's id, phone number, general balance, kyc status, registration time.
+     */
+    func getUserInfo(token: String, coin: CoinType?) -> Promise<User> {
         return provider.execute(UserRequest.userInfo(token: token, coin: coin?.rawValue))
             .then {
-                (response: Response) -> Promise<UserData> in
+                (response: Response) -> Promise<User> in
 
                 return Promise { seal in
                     switch response {
                     case .data(_):
 
-                        let success: (CodableSuccessUserInfoResponse) -> Void = { s in
+                        let success: (CodableUserInfoResponse) -> Void = { s in
                             do {
-                                let user = try UserData(codable: s.data)
+                                let user = try User(codable: s.data)
                                 seal.fulfill(user)
                             } catch let error {
                                 seal.reject(error)
@@ -58,18 +69,18 @@ struct UserAPI: NetworkService {
         }
     }
 
-    func createWallet(token: String, coin: CoinType, walletName: String?) -> Promise<WalletData> {
+    func createWallet(token: String, coin: CoinType, walletName: String?) -> Promise<Wallet> {
         return provider.execute(UserRequest.createWallet(token: token, coin: coin.rawValue, walletName: walletName))
             .then {
-                (response: Response) -> Promise<WalletData> in
+                (response: Response) -> Promise<Wallet> in
 
                 return Promise { seal in
                     switch response {
                     case .data(_):
 
-                        let success: (CodableSuccessWalletResponse) -> Void = { s in
+                        let success: (CodableWalletResponse) -> Void = { s in
                             do {
-                                let wallet = try WalletData(codable: s.data.wallet)
+                                let wallet = try Wallet(codable: s.data.wallet)
                                 seal.fulfill(wallet)
                             } catch let e {
                                 seal.reject(e)
@@ -99,18 +110,29 @@ struct UserAPI: NetworkService {
         }
     }
 
-    func getWallets(token: String, coin: CoinType? = nil, id: String? = nil, page: String? = nil, count: Int? = nil) -> Promise<[WalletData]> {
+    /**
+     Get users wallets list.
+
+     - parameter token: Current session's token.
+     - parameter coin: Filter receiving wallets list by coin.
+     - parameter id: Filter receiving wallets list by wallet id.
+     - parameter page: Link on specific page of list.
+     - parameter count: Count of wallets per page.
+
+     - returns: Array of wallets data structures.
+     */
+    func getWallets(token: String, coin: CoinType? = nil, id: String? = nil, page: String? = nil, count: Int? = nil) -> Promise<[Wallet]> {
         return provider.execute(UserRequest.getUserWallets(token: token, coin: coin?.rawValue, walletId: id, page: page, count: count))
             .then {
-                (response: Response) -> Promise<[WalletData]> in
+                (response: Response) -> Promise<[Wallet]> in
 
                 return Promise { seal in
                     switch response {
                     case .data(_):
 
-                        let success: (CodableSuccessWalletsPageResponse) -> Void = { s in
+                        let success: (CodableWalletsPageResponse) -> Void = { s in
                             let wallets = s.data.wallets.compactMap {
-                                return try? WalletData(codable: $0)
+                                return try? Wallet(codable: $0)
                             }
 
                             seal.fulfill(wallets)
@@ -139,18 +161,26 @@ struct UserAPI: NetworkService {
         }
     }
 
-    func getWalletInfo(token: String, walletId: String) -> Promise<WalletData> {
+    /**
+     Get wallet's info by id.
+
+     - parameter token: Current session's token.
+     - parameter walletId: Wallet's id.
+
+     - returns: Wallet's data.
+     */
+    func getWalletInfo(token: String, walletId: String) -> Promise<Wallet> {
         return provider.execute(UserRequest.getUserWalletInfo(token: token, walletId: walletId))
             .then {
-                (response: Response) -> Promise<WalletData> in
+                (response: Response) -> Promise<Wallet> in
 
                 return Promise { seal in
                     switch response {
                     case .data(_):
 
-                        let success: (CodableSuccessWalletResponse) -> Void = { s in
+                        let success: (CodableWalletResponse) -> Void = { s in
                             do {
-                                let wallet = try WalletData(codable: s.data.wallet)
+                                let wallet = try Wallet(codable: s.data.wallet)
                                 seal.fulfill(wallet)
                             } catch let e {
                                 seal.reject(e)
@@ -180,18 +210,28 @@ struct UserAPI: NetworkService {
         }
     }
 
-    func sendTransaction(token: String, walletId: String, recipient: String, amount: Decimal) -> Promise<TransactionData>  {
+    /**
+     Send money from specific wallet.
+
+     - parameter token: Current session's token.
+     - parameter walletId: Source wallet's id.
+     - parameter recipient: Recipient's phone or wallet address.
+     - parameter amount: Amount of crypto.
+
+     - returns: Information about sended transaction.
+     */
+    func sendTransaction(token: String, walletId: String, recipient: String, amount: Decimal) -> Promise<Transaction>  {
         return provider.execute(UserRequest.sendTransaction(token: token, walletId: walletId, recipient: recipient, amount: amount))
             .then {
-                (response: Response) -> Promise<TransactionData> in
+                (response: Response) -> Promise<Transaction> in
 
                 return Promise { seal in
                     switch response {
                     case .data(_):
 
-                        let success: (CodableSuccessTransactionResponse) -> Void = { s in
+                        let success: (CodableTransactionResponse) -> Void = { s in
                             do {
-                                let transaction = try TransactionData(codable: s.data.transaction)
+                                let transaction = try Transaction(codable: s.data.transaction)
                                 seal.fulfill(transaction)
                             } catch let error {
                                 seal.reject(error)
@@ -221,7 +261,17 @@ struct UserAPI: NetworkService {
         }
     }
 
-    func getTransactions(token: String, filter: TransactionsFilterData = TransactionsFilterData(), phoneNumberFormatter: PhoneNumberFormatter? = nil, localContacts: [ContactData]? = nil) -> Promise<GroupedTransactionsPageData>  {
+    /**
+     Get list of user's incoming and outgoing transactions.
+
+     - parameter token: Current session's token.
+     - parameter filter: List filter properties.
+     - parameter phoneNumberFormatter: Phone numbers formatter for converting transactions recipients phones to inner system format.
+     - parameter localContacts: List of users contacts for replacing transactions phone numbers with appropriated contacts names.
+
+     - returns: Page of grouped by time interval transactions.
+     */
+    func getTransactions(token: String, filter: TransactionsFilterProperties = TransactionsFilterProperties(), phoneNumberFormatter: PhoneNumberFormatter? = nil, localContacts: [Contact]? = nil) -> Promise<TransactionsPage>  {
 
         // Get timezone
         let timezoneOffset = Float(TimeZone.current.secondsFromGMT()) / 3600.0
@@ -229,15 +279,15 @@ struct UserAPI: NetworkService {
 
         return provider.execute(UserRequest.getTransactions(token: token, coin: filter.coin?.rawValue, walletId: filter.walletId, recipient: filter.recipient, direction: filter.direction?.rawValue, fromTime: filter.fromTime, untilTime: filter.untilTime, timezone: timezoneOffsetString, page: filter.page, count: filter.count, group: filter.group.rawValue))
             .then {
-                (response: Response) -> Promise<GroupedTransactionsPageData> in
+                (response: Response) -> Promise<TransactionsPage> in
 
                 return Promise { seal in
                     switch response {
                     case .data(_):
 
-                        let success: (CodableSuccessTransactionsGroupedSearchingResponse) -> Void = { s in
+                        let success: (CodableGroupedTransactionsPageResponse) -> Void = { s in
                             do {
-                                let page = try GroupedTransactionsPageData(codable: s.data)
+                                let page = try TransactionsPage(codable: s.data)
 
                                 guard let phoneNumberFormatter = phoneNumberFormatter else {
                                     seal.fulfill(page)
@@ -256,11 +306,11 @@ struct UserAPI: NetworkService {
                                     phoneNumberFormatter.getCompleted(from: input) {
                                         parsed in
 
-                                        var newGroups: [TransactionsGroupData] = []
+                                        var newGroups: [TransactionsGroup] = []
 
                                         for (i, phones) in parsed.enumerated() {
 
-                                            var newTransactions: [TransactionData] = []
+                                            var newTransactions: [Transaction] = []
 
                                             for (j, phone) in phones.enumerated() {
                                                 var newTransaction = page.transactions[i].transactions[j]
@@ -277,13 +327,13 @@ struct UserAPI: NetworkService {
                                                 newTransactions.append(newTransaction)
                                             }
 
-                                            let newGroup = TransactionsGroupData(dateInterval: page.transactions[i].dateInterval,
+                                            let newGroup = TransactionsGroup(dateInterval: page.transactions[i].dateInterval,
                                                                                  amount: page.transactions[i].amount,
                                                                                  transactions: newTransactions)
                                             newGroups.append(newGroup)
                                         }
 
-                                        let newPage = GroupedTransactionsPageData(next: page.next, transactions: newGroups)
+                                        let newPage = TransactionsPage(next: page.next, transactions: newGroups)
 
                                         DispatchQueue.main.async {
                                             seal.fulfill(newPage)
@@ -318,6 +368,13 @@ struct UserAPI: NetworkService {
         }
     }
 
+    /**
+     Get KYC personal info progress information.
+
+     - parameter token: Current session's token.
+
+     - returns: Approving status and sended data if it was.
+     */
     func getKYCPersonalInfo(token: String) -> Promise<KYCPersonalInfo> {
         return provider.execute(UserRequest.getKYCPersonalInfo(token: token))
             .then {
@@ -327,7 +384,7 @@ struct UserAPI: NetworkService {
                     switch response {
                     case .data(_):
 
-                        let success: (CodableSuccessKYCPersonalInfoResponse) -> Void = { s in
+                        let success: (CodableKYCPersonalInfoResponse) -> Void = { s in
                             do {
                                 let info = try KYCPersonalInfo(codable: s.data)
                                 seal.fulfill(info)
@@ -359,7 +416,13 @@ struct UserAPI: NetworkService {
         }
     }
 
-    func sendKYCPersonalInfo(token: String, personalData: KYCPersonalInfoData) -> Promise<Void> {
+    /**
+     Send KYC personal info data.
+
+     - parameter token: Current session's token.
+     - parameter personalData: All personal info properties.
+     */
+    func sendKYCPersonalInfo(token: String, personalData: KYCPersonaInfoProperties) -> Promise<Void> {
         return self.sendKYCPersonalInfo(token: token, email: personalData.email, firstName: personalData.firstName, lastName: personalData.lastName, birthDate: personalData.birthDate, gender: personalData.gender, country: personalData.country, city: personalData.city, region: personalData.region, street: personalData.street, house: personalData.house, postalCode: personalData.postalCode)
     }
 
@@ -372,7 +435,7 @@ struct UserAPI: NetworkService {
                     switch response {
                     case .data(_):
 
-                        let success: (CodableSuccessEmptyResponse) -> Void = { s in
+                        let success: (CodableEmptyResponse) -> Void = { s in
                             seal.fulfill(())
                         }
 
