@@ -31,6 +31,11 @@ class WalletSmallItemComponent: ItemComponent, Configurable {
     override func layoutSubviews() {
         super.layoutSubviews()
 
+        self.coinNameLabel.gradientLayer.frame = self.coinNameLabel.bounds
+        self.phoneNumberLabel.gradientLayer.frame = self.phoneNumberLabel.bounds
+        self.balanceLabel.gradientLayer.frame = self.balanceLabel.bounds
+        self.fiatBalanceLabel.gradientLayer.frame = self.fiatBalanceLabel.bounds
+
         self.view.layer.cornerRadius = 12.0
         self.view.layer.shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: 12.0).cgPath
 
@@ -44,16 +49,21 @@ class WalletSmallItemComponent: ItemComponent, Configurable {
         pageControl?.pageIndicatorTintColor = UIColor.blueGrey.withAlphaComponent(0.4)
         pageControl?.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
 
+        iconImageView.maskToBounds = true
+
         balanceLabel.textColor = .darkIndigo
         balanceLabel.font = UIFont.walletFont(ofSize: 18.0, weight: .bold)
         balanceLabel.lineBreakMode = .byCharWrapping
+        balanceLabel.text = "00.000"
 
         fiatBalanceLabel.textColor = .blueGrey
         fiatBalanceLabel.font = UIFont.walletFont(ofSize: 14.0, weight: .regular)
         fiatBalanceLabel.lineBreakMode = .byCharWrapping
+        fiatBalanceLabel.text = "$ 0.000"
 
         phoneNumberLabel.textColor = .blueGrey
         phoneNumberLabel.font = UIFont.walletFont(ofSize: 14.0, weight: .medium)
+        phoneNumberLabel.text = "+7 999 999-99-99"
 
         let mainColor = UIColor.darkIndigo
         let font = UIFont.walletFont(ofSize: 16.0, weight: .medium)
@@ -62,6 +72,8 @@ class WalletSmallItemComponent: ItemComponent, Configurable {
         let additColor = UIColor.blueGrey
         coinNameLabelAdditAttributes = [.foregroundColor: additColor, .font: font]
 
+        coinNameLabel.text = "Bitcoin wallet BTC"
+
         self.view.backgroundColor = .white
 
         self.view.layer.masksToBounds = false
@@ -69,6 +81,22 @@ class WalletSmallItemComponent: ItemComponent, Configurable {
         self.view.layer.shadowOffset = CGSize(width: -2.0, height: 4.0)
         self.view.layer.shadowRadius = 21.0
         self.view.layer.shadowOpacity = 0.5
+    }
+
+    override func stiffen() {
+        iconImageView?.stiffen()
+        coinNameLabel?.stiffen()
+        phoneNumberLabel?.stiffen()
+        balanceLabel?.stiffen()
+        fiatBalanceLabel?.stiffen()
+    }
+
+    override func relive() {
+        iconImageView?.relive()
+        coinNameLabel?.relive()
+        phoneNumberLabel?.relive()
+        balanceLabel?.relive()
+        fiatBalanceLabel?.relive()
     }
 
     func configure(with data: WalletItemData) {

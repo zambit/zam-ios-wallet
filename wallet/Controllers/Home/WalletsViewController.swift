@@ -53,6 +53,8 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
     var userAPI: UserAPI?
     var historyAPI: HistoryAPI?
 
+    private var didInitiallyLoaded: Bool = false
+
     private var wallets: [WalletData] = []
     private var walletsChartsPoints: [[ChartLayer.Point]] = []
     private var phone: String!
@@ -136,10 +138,6 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
     }
 
     func sendTo(contact: FormattedContactData) {
-        guard wallets.count > 0 else {
-            return
-        }
-
         prepareToAnimation(cellIndex: 0)
         owner?.performSendFromWallet(index: 0, wallets: wallets, phone: phone, recipient: contact)
     }
@@ -178,6 +176,10 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        guard didInitiallyLoaded else {
+            return 4
+        }
+
         return wallets.count
     }
 
@@ -188,8 +190,15 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
             fatalError()
         }
 
+        guard didInitiallyLoaded else {
+            cell.stiffen()
+            return cell
+        }
+
         let itemData = WalletItemData(data: wallets[indexPath.item], phoneNumber: phone)
 
+        cell.relive()
+        
         cell.configure(with: itemData)
         
         cell.setupChart(points: walletsChartsPoints[indexPath.item])
@@ -255,11 +264,13 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
             let newCount = wallets.count
 
             strongSelf.wallets = wallets
+            strongSelf.didInitiallyLoaded = true
 
             if oldCount != newCount {
 
                 strongSelf.loadChartsPoints(completion: {
                     _ in
+
                     strongSelf.collectionView?.reloadData()
                     strongSelf.refreshControl?.endRefreshing()
                 })

@@ -17,6 +17,13 @@ class WalletItemComponent: WalletSmallItemComponent {
     @IBOutlet private var sendButton: UIButton!
     @IBOutlet private var depositButton: UIButton!
 
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
+        self.sendButton.gradientLayer.frame = self.sendButton.bounds
+        self.depositButton.gradientLayer.frame = self.depositButton.bounds
+    }
+
     override func initFromNib() {
         super.initFromNib()
 
@@ -59,6 +66,20 @@ class WalletItemComponent: WalletSmallItemComponent {
         self.view.layer.shadowOffset = CGSize(width: 0.0, height: 4.0)
         self.view.layer.shadowRadius = 21.0
         self.view.layer.shadowOpacity = 0.5
+    }
+
+    override func stiffen() {
+        super.stiffen()
+
+        sendButton?.stiffen()
+        depositButton?.stiffen()
+    }
+
+    override func relive() {
+        super.relive()
+
+        sendButton?.relive()
+        depositButton?.relive()
     }
 
     @objc
