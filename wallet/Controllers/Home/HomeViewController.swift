@@ -157,17 +157,13 @@ class HomeViewController: FloatingViewController, WalletsViewControllerDelegate,
 
         if !contactsData.isEmpty {
             self.contactsComponent?.delegate = self
-            self.contactsComponent?.contactsCollectionView?.endLoading()
             self.contactsComponent?.prepare(contacts: contactsData)
             self.floatingViewInitialOffset = 350
-
+            self.floatingViewBottomConstraint?.constant = 350
         } else {
-            self.contactsComponent?.contactsCollectionView?.endLoading()
+            self.contactsComponent?.isHidden = true
             self.floatingViewInitialOffset = 200
-
-            if self.currentState == .closed {
-                self.set(state: .closed)
-            }
+            self.floatingViewBottomConstraint?.constant = 200
         }
 
         switch UIScreen.main.type {
