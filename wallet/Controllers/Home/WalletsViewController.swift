@@ -138,6 +138,10 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
     }
 
     func sendTo(contact: FormattedContactData) {
+        guard wallets.count > 0 else {
+            return
+        }
+        
         prepareToAnimation(cellIndex: 0)
         owner?.performSendFromWallet(index: 0, wallets: wallets, phone: phone, recipient: contact)
     }
