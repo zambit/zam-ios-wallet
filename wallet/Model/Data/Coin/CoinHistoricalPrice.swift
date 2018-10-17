@@ -1,5 +1,5 @@
 //
-//  CoinDailyPriceData.swift
+//  CoinHistoricalPrice.swift
 //  wallet
 //
 //  Created by Alexander Ponomarev on 03/10/2018.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct CoinDailyPrice: Equatable {
+struct CoinHistoricalPrice: Equatable {
 
     let coin: CoinType
 

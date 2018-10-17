@@ -296,7 +296,7 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
         for i in wallets.enumerated() {
             group.enter()
 
-            historyAPI.getHistoricalDailyData(for: i.element.coin, days: 30).done {
+            historyAPI.getHistoricalDailyPrice(for: i.element.coin, count: 30).done {
                 [weak self]
                 days in
 
