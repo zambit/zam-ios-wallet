@@ -42,9 +42,11 @@ struct BalanceData: Equatable {
             stringNumber = codable.zam
         }
 
-        guard
-            let strNumber = stringNumber,
-            let original = Decimal(string: strNumber),
+        guard let strNumber = stringNumber else {
+            throw BalanceDataError.coinValueNotFound
+        }
+
+        guard let original = Decimal(string: strNumber),
             let usd = Decimal(string: codable.usd) else {
             throw BalanceDataError.decimalFormatsResponseError
         }
@@ -113,6 +115,7 @@ struct BalanceData: Equatable {
 }
 
 enum BalanceDataError: Error {
+    case coinValueNotFound
     case decimalFormatsResponseError
     case sumDefferentCoinBalance
 }

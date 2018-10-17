@@ -10,7 +10,8 @@ import Foundation
 import PromiseKit
 
 /**
- Authorization process API. Provides requests for signing in, signing out, checking user authorization, confirming user phone with link and creating new user from pending transaction.
+ * Authorization process API. Provides requests for signing in, signing out,
+ * checking user authorization, confirming user phone with link and refreshing token.
  */
 struct AuthAPI: NetworkService {
 
@@ -21,7 +22,12 @@ struct AuthAPI: NetworkService {
     }
 
     /**
-     Authorize user and get auth token, works only for full-verified user accounts
+     Authorize user and get auth token, works only for full-verified user accounts.
+
+     - parameter phone: Account's phone.
+     - parameter password: Account's password.
+
+     - returns: Token.
      */
     func signIn(phone: String, password: String) -> Promise<String> {
         return provider.execute(AuthRequest.signIn(phone: phone, password: password))
@@ -61,6 +67,8 @@ struct AuthAPI: NetworkService {
 
     /**
      Invalidates user's current authorization session
+
+     - parameter token: Current session's token.
      */
     @discardableResult
     func signOut(token: String) -> Promise<Void> {
@@ -101,7 +109,11 @@ struct AuthAPI: NetworkService {
     }
 
     /**
-     Checks if user authorized, returns his phone on success
+     Checks if user authorized, returns his phone on success.
+
+     - parameter token: Current session's token.
+
+     - returns: User's phone number.
      */
     func checkIfUserAuthorized(token: String) -> Promise<String> {
         return provider.execute(AuthRequest.checkAuthorized(token: token))
@@ -141,7 +153,12 @@ struct AuthAPI: NetworkService {
     }
 
     /**
-     Confirm user phone
+     Confirm user's phone.
+
+     - parameter token: Current session's token.
+     - parameter link: -
+
+     - returns: Token.
      */
     func confirmUserPhone(token: String, link: String) -> Promise<String> {
         return provider.execute(AuthRequest.confirmUserPhone(token: token, confirmationId: link))
@@ -181,7 +198,7 @@ struct AuthAPI: NetworkService {
     }
 
     /**
-     Create new user from pending transaction
+     Create new user from pending transaction.
      */
     func createNewUserFromPendingTransaction(token: String, link: String) -> Promise <String> {
         return provider.execute(AuthRequest.createNewUserFromPendingTransaction(token: token, recvInvitationId: link))
@@ -220,6 +237,13 @@ struct AuthAPI: NetworkService {
         }
     }
 
+    /**
+     Refresh current unexpired existing token.
+
+     - parameter token: Current session's token.
+
+     - returns: Token.
+     */
     func refreshToken(token: String) -> Promise<String> {
         return provider.execute(AuthRequest.refreshToken(token: token))
             .then {

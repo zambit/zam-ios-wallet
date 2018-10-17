@@ -9,6 +9,9 @@
 import Foundation
 import PromiseKit
 
+/**
+ * User's data flow API. Provides request for getting general user's info, wallets and transactions and sending crypto.
+ */
 struct UserAPI: NetworkService {
 
     private let provider: Provider
@@ -17,6 +20,14 @@ struct UserAPI: NetworkService {
         self.provider = provider
     }
 
+    /**
+     Get general user info: id, phone, kyc status and balance.
+
+     - parameter token: Current session's token.
+     - parameter coin: -
+
+     - returns: User's id, phone number, general balance, kyc status, registration time.
+     */
     func getUserInfo(token: String, coin: CoinType?) -> Promise<UserData> {
         return provider.execute(UserRequest.userInfo(token: token, coin: coin?.rawValue))
             .then {
@@ -99,6 +110,17 @@ struct UserAPI: NetworkService {
         }
     }
 
+    /**
+     Get users wallets list.
+
+     - parameter token: Current session's token.
+     - parameter coin: Filter receiving wallets list by coin.
+     - parameter id: Filter receiving wallets list by wallet id.
+     - parameter page: Link on specific page of list.
+     - parameter count: Count of wallets per page.
+
+     - returns: Array of wallets data structures.
+     */
     func getWallets(token: String, coin: CoinType? = nil, id: String? = nil, page: String? = nil, count: Int? = nil) -> Promise<[WalletData]> {
         return provider.execute(UserRequest.getUserWallets(token: token, coin: coin?.rawValue, walletId: id, page: page, count: count))
             .then {
@@ -139,6 +161,14 @@ struct UserAPI: NetworkService {
         }
     }
 
+    /**
+     Get wallet's info by id.
+
+     - parameter token: Current session's token.
+     - parameter walletId: Wallet's id.
+
+     - returns: Wallet's data.
+     */
     func getWalletInfo(token: String, walletId: String) -> Promise<WalletData> {
         return provider.execute(UserRequest.getUserWalletInfo(token: token, walletId: walletId))
             .then {
@@ -180,6 +210,16 @@ struct UserAPI: NetworkService {
         }
     }
 
+    /**
+     Send money from specific wallet.
+
+     - parameter token: Current session's token.
+     - parameter walletId: Source wallet's id.
+     - parameter recipient: Recipient's phone or wallet address.
+     - parameter amount: Amount of crypto.
+
+     - returns: Information about sended transaction.
+     */
     func sendTransaction(token: String, walletId: String, recipient: String, amount: Decimal) -> Promise<TransactionData>  {
         return provider.execute(UserRequest.sendTransaction(token: token, walletId: walletId, recipient: recipient, amount: amount))
             .then {
@@ -221,6 +261,16 @@ struct UserAPI: NetworkService {
         }
     }
 
+    /**
+     Get list of user's incoming and outgoing transactions.
+
+     - parameter token: Current session's token.
+     - parameter filter: List filter properties.
+     - parameter phoneNumberFormatter: Phone numbers formatter for converting transactions recipients phones to inner system format.
+     - parameter localContacts: List of users contacts for replacing transactions phone numbers with appropriated contacts names.
+
+     - returns: Page of grouped by time interval transactions.
+     */
     func getTransactions(token: String, filter: TransactionsFilterData = TransactionsFilterData(), phoneNumberFormatter: PhoneNumberFormatter? = nil, localContacts: [ContactData]? = nil) -> Promise<GroupedTransactionsPageData>  {
 
         // Get timezone
@@ -318,6 +368,13 @@ struct UserAPI: NetworkService {
         }
     }
 
+    /**
+     Get KYC personal info progress information.
+
+     - parameter token: Current session's token.
+
+     - returns: Approving status and sended data if it was.
+     */
     func getKYCPersonalInfo(token: String) -> Promise<KYCPersonalInfo> {
         return provider.execute(UserRequest.getKYCPersonalInfo(token: token))
             .then {
@@ -359,6 +416,12 @@ struct UserAPI: NetworkService {
         }
     }
 
+    /**
+     Send KYC personal info data.
+
+     - parameter token: Current session's token.
+     - parameter personalData: All personal info properties.
+     */
     func sendKYCPersonalInfo(token: String, personalData: KYCPersonalInfoData) -> Promise<Void> {
         return self.sendKYCPersonalInfo(token: token, email: personalData.email, firstName: personalData.firstName, lastName: personalData.lastName, birthDate: personalData.birthDate, gender: personalData.gender, country: personalData.country, city: personalData.city, region: personalData.region, street: personalData.street, house: personalData.house, postalCode: personalData.postalCode)
     }

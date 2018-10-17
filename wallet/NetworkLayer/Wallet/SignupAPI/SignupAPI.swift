@@ -12,7 +12,7 @@ import PromiseKit
 /**
  Signing up API. Provides requests for sending verification code to phone, verifing phone and providing password.
  */
-struct SignupAPI: NetworkService, ThreeStepsAPI {
+struct SignupAPI: NetworkService, CreatePasswordProcess {
 
     private let provider: Provider
 
