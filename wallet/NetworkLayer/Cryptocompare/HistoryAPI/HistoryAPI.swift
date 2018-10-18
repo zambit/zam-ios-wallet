@@ -27,7 +27,7 @@ struct HistoryAPI: NetworkService {
 
      - returns: Array of price data structures.
      */
-    func getHistoricalDailyPrice(for coin: CoinType, convertingTo: FiatType = .usd, groupingBy: Int = 1, count: Int) -> Promise<[CoinHistoricalPrice]> {
+    func getHistoricalDailyPrice(for coin: CoinType, convertingTo: FiatType = .standard, groupingBy: Int = 1, count: Int) -> Promise<[CoinHistoricalPrice]> {
         return getHistoricalPrice(for: coin, convertingTo: convertingTo, interval: .day, groupingBy: groupingBy, count: count)
     }
 
@@ -41,7 +41,7 @@ struct HistoryAPI: NetworkService {
 
      - returns: Array of price data structures.
      */
-    func getHistoricalHourlyPrice(for coin: CoinType, convertingTo: FiatType = .usd, groupingBy: Int = 1, count: Int) -> Promise<[CoinHistoricalPrice]> {
+    func getHistoricalHourlyPrice(for coin: CoinType, convertingTo: FiatType = .standard, groupingBy: Int = 1, count: Int) -> Promise<[CoinHistoricalPrice]> {
         return getHistoricalPrice(for: coin, convertingTo: convertingTo, interval: .hour, groupingBy: groupingBy, count: count)
     }
 
@@ -55,17 +55,17 @@ struct HistoryAPI: NetworkService {
 
      - returns: Array of price data structures.
      */
-    func getHistoricalMinutePrice(for coin: CoinType, convertingTo: FiatType = .usd, groupingBy: Int = 1, count: Int) -> Promise<[CoinHistoricalPrice]> {
+    func getHistoricalMinutePrice(for coin: CoinType, convertingTo: FiatType = .standard, groupingBy: Int = 1, count: Int) -> Promise<[CoinHistoricalPrice]> {
         return getHistoricalPrice(for: coin, convertingTo: convertingTo, interval: .minute, groupingBy: groupingBy, count: count)
     }
 
-    private enum HistoricalInterval {
+    enum HistoricalInterval {
         case day
         case hour
         case minute
     }
 
-    private func getHistoricalPrice(for coin: CoinType, convertingTo: FiatType, interval: HistoricalInterval, groupingBy: Int, count: Int) -> Promise<[CoinHistoricalPrice]> {
+    func getHistoricalPrice(for coin: CoinType, convertingTo: FiatType, interval: HistoricalInterval, groupingBy: Int, count: Int) -> Promise<[CoinHistoricalPrice]> {
 
         var request: HistoryRequest
         switch interval {

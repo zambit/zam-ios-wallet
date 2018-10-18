@@ -88,9 +88,9 @@ struct CoinPrice: Equatable {
 
         switch property {
         case .price:
-            currency = price.formatted
+            currency = price.longFormatted
         case .marketCap:
-            currency = marketCap.formatted
+            currency = marketCap.longFormatted
         case .volumeDay:
             currency = volumeDay.shortFormatted
         case .volume24h:
@@ -112,7 +112,7 @@ struct CoinPrice: Equatable {
         case .low24h:
             currency = low24h.shortFormatted
         case .supply:
-            currency = supply.formatted
+            currency = supply.longFormatted
         }
 
         if let string = currency {

@@ -40,4 +40,17 @@ extension NumberFormatter {
 
         return formatter
     }
+
+    static func walletAmount(maximumFractionDigits: Int) -> NumberFormatter {
+        let formatter = NumberFormatter()
+        formatter.locale = Locale.current
+        formatter.decimalSeparator = Locale.current.decimalSeparator
+        formatter.numberStyle = .decimal
+        formatter.alwaysShowsDecimalSeparator = true
+
+        formatter.minimumFractionDigits = 0
+        formatter.maximumFractionDigits = maximumFractionDigits
+
+        return formatter
+    }
 }

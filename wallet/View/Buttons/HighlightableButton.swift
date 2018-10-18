@@ -10,17 +10,29 @@ import UIKit
 
 class HighlightableButton: UIButton {
 
-    private var normalColor: UIColor?
-    private var highlightedColor: UIColor?
+    private var normalTintColor: UIColor?
+    private var highlightedTintColor: UIColor?
+
+    private var normalBackgroundColor: UIColor?
+    private var highlightedBackgroundColor: UIColor?
 
     func setHighlightedTintColor(_ tintColor: UIColor) {
-        self.normalColor = self.tintColor
-        self.highlightedColor = tintColor
+        self.normalTintColor = self.tintColor
+        self.highlightedTintColor = tintColor
     }
 
-    override var isHighlighted: Bool{
+    func setHighlightedBackgroundColor(_ backgroundColor: UIColor) {
+        self.normalBackgroundColor = self.backgroundColor
+        self.highlightedBackgroundColor = backgroundColor
+    }
+
+    override var isHighlighted: Bool {
         didSet {
-            tintColor = isHighlighted ? highlightedColor : normalColor
+            tintColor = isHighlighted ? highlightedTintColor : normalTintColor
+
+            if let highlightedBackground = highlightedBackgroundColor {
+                backgroundColor = isHighlighted ? highlightedBackground : normalBackgroundColor
+            }
         }
     }
 }

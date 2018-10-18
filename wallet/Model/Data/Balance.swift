@@ -96,12 +96,12 @@ struct Balance: Equatable {
     func formatted(currency: Currency) -> String {
         switch currency {
         case .original:
-            guard let formatted = original.formatted else {
+            guard let formatted = original.longFormatted else {
                 fatalError()
             }
             return formatted
         case .usd:
-            guard let formatted = usd.formatted else {
+            guard let formatted = usd.longFormatted else {
                 fatalError()
             }
             return formatted

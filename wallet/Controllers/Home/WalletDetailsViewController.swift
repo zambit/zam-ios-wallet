@@ -8,8 +8,9 @@
 
 import Foundation
 import UIKit
+import Crashlytics
 
-class WalletDetailsViewController: FlowViewController, WalletNavigable, AdvancedTransitionDelegate, SendMoneyViewControllerDelegate, UITableViewDelegate, UITableViewDataSource, WalletDetailsBriefDelegate {
+class WalletDetailsViewController: FlowViewController, WalletNavigable, AdvancedTransitionDelegate, SendMoneyViewControllerDelegate, UITableViewDelegate, UITableViewDataSource, WalletDetailsBriefDelegate, WalletDetailsChartDelegate {
 
     var onSendFromWallet: ((_ index: Int, _ wallets: [Wallet], _ phone: String) -> Void)?
     var onDepositToWallet: ((_ index: Int, _ wallets: [Wallet], _ phone: String) -> Void)?
@@ -19,12 +20,14 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable, Advanced
     weak var advancedTransitionDelegate: AdvancedTransitionDelegate?
 
     var priceAPI: PriceAPI?
+    var historyAPI: HistoryAPI?
 
     class CellsBalancer {
 
         unowned var parent: WalletDetailsViewController
 
         private(set) weak var briefCell: WalletDetailsBriefTableViewCell?
+        private(set) weak var chartCell: WalletDetailsChartTableViewCell?
 
         init(parent: WalletDetailsViewController) {
             self.parent = parent
@@ -32,6 +35,7 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable, Advanced
 
         func registerCellsInTableView(_ tableView: UITableView) {
             tableView.register(WalletDetailsBriefTableViewCell.self, forCellReuseIdentifier: "WalletDetailsBriefTableViewCell")
+            tableView.register(WalletDetailsChartTableViewCell.self, forCellReuseIdentifier: "WalletDetailsChartTableViewCell")
         }
 
         func getNumbersOfSections() -> Int {
@@ -41,7 +45,7 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable, Advanced
         func getNumberOfRowsInSection(_ section: Int) -> Int {
             switch section {
             case 0:
-                return 1
+                return 2
             default:
                 return 0
             }
@@ -73,6 +77,19 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable, Advanced
                 cell.configure(currentIndex: currentIndex, wallets: cards)
 
                 return cell
+            case IndexPath(row: 1, section: 0):
+                let _cell = parent.tableView?.dequeueReusableCell(withIdentifier: "WalletDetailsChartTableViewCell", for: indexPath)
+
+                guard let cell = _cell as? WalletDetailsChartTableViewCell else {
+                    return nil
+                }
+
+                chartCell = cell
+
+                cell.delegate = parent
+                cell.beginChartLoading()
+
+                return cell
             default:
                 return nil
             }
@@ -81,6 +98,8 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable, Advanced
         func getHeightForRowAtIndexPath(_ indexPath: IndexPath) -> CGFloat? {
             switch indexPath {
             case IndexPath(row: 0, section: 0):
+                return 200.0
+            case IndexPath(row: 1, section: 0):
                 return 200.0
             default:
                 return nil
@@ -99,6 +118,8 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable, Advanced
     private var phone: String?
     private var wallets: [Wallet]?
     private var currentIndex: Int?
+
+    private var currentInterval: CoinPriceChartIntervalType = .day
 
     private lazy var balancer = CellsBalancer(parent: self)
 
@@ -170,6 +191,69 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable, Advanced
 
             print(error)
         }
+
+        balancer.chartCell?.beginChartLoading()
+        loadChartsPoints(for: currentInterval, completion: {
+            [weak self]
+
+            points in
+
+            self?.balancer.chartCell?.endChartLoading()
+            self?.balancer.chartCell?.setupChart(points: points)
+        })
+    }
+
+    private func loadChartsPoints(for interval: CoinPriceChartIntervalType, completion: @escaping ([ChartLayer.Coordinate]) -> Void) {
+        guard let currentIndex = currentIndex, let wallets = wallets, let historyAPI = historyAPI, wallets.count > currentIndex else {
+            return
+        }
+
+        var type: HistoryAPI.HistoricalInterval
+        var aggregate: Int
+        var limit: Int
+
+        switch interval {
+        case .day:
+            type = .minute
+            aggregate = 30
+            limit = 48
+        case .week:
+            type = .hour
+            aggregate = 3
+            limit = 56
+        case .month:
+            type = .hour
+            aggregate = 12
+            limit = 60
+        case .threeMonth:
+            type = .day
+            aggregate = 2
+            limit = 45
+        case .year:
+            type = .day
+            aggregate = 7
+            limit = 52
+        case .all:
+            type = .day
+            aggregate = 30
+            limit = 52
+        }
+
+        historyAPI.getHistoricalPrice(for: wallets[currentIndex].coin, convertingTo: .standard, interval: type, groupingBy: aggregate, count: limit).done {
+            prices in
+
+            let coordinates = prices.map {
+                return ChartLayer.Coordinate(x: $0.time.unixTimestamp,
+                                             y: Double(truncating: $0.closePrice as NSNumber))
+            }
+            performWithDelay {
+                completion(coordinates)
+            }
+        }.catch {
+            error in
+
+            Crashlytics.sharedInstance().recordError(error)
+        }
     }
 
     // MARK: - UITableViewDataSource
@@ -212,6 +296,17 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable, Advanced
         self.currentIndex = index
 
         loadData()
+    }
+
+    func walletDetailsChartIntervalSelected(_ walletDetailsChart: WalletDetailsChartTableViewCell, interval: CoinPriceChartIntervalType) {
+
+        self.currentInterval = interval
+
+        walletDetailsChart.beginChartLoading()
+        loadChartsPoints(for: interval, completion: {
+            walletDetailsChart.endChartLoading()
+            walletDetailsChart.setupChart(points: $0)
+        })
     }
 
     // MARK: - AdvancedTransitionDelegate
