@@ -31,7 +31,6 @@ extension Decimal {
             return NumberFormatter.walletAmount(maximumFractionDigits: 3).string(from: self as NSNumber)
         }
 
-        
         return NumberFormatter.walletAmount(maximumFractionDigits: 5).string(from: self as NSNumber)
     }
 
@@ -39,7 +38,11 @@ extension Decimal {
 
 extension Decimal {
 
+    var intValue: Int {
+        return NSDecimalNumber(decimal: self).intValue
+    }
+
     var doubleValue: Double {
-        return NSDecimalNumber(decimal:self).doubleValue
+        return NSDecimalNumber(decimal: self).doubleValue
     }
 }

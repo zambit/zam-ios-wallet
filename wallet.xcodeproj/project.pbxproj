@@ -315,6 +315,8 @@
 		8CFFBF9E2178A66F00C08C94 /* CoinPriceChartIntervalType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFFBF9D2178A66E00C08C94 /* CoinPriceChartIntervalType.swift */; };
 		8CFFBFA02178B4A900C08C94 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFFBF9F2178B4A900C08C94 /* ChartView.swift */; };
 		8CFFBFA22178CA9500C08C94 /* InitiatedPanGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFFBFA12178CA9500C08C94 /* InitiatedPanGestureRecognizer.swift */; };
+		8CFFBFA42179E56E00C08C94 /* CloudLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFFBFA32179E56E00C08C94 /* CloudLayer.swift */; };
+		8CFFBFA6217A0B5900C08C94 /* Double+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFFBFA5217A0B5900C08C94 /* Double+Extensions.swift */; };
 		9307AC66215BC1990093DB68 /* walletNetworkLayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9307AC65215BC1990093DB68 /* walletNetworkLayerTests.swift */; };
 		9307AC70215BC7D90093DB68 /* DispatcherMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9307AC6F215BC7D90093DB68 /* DispatcherMock.swift */; };
 		9307AC72215BCDAA0093DB68 /* EnvironmentMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9307AC71215BCDAA0093DB68 /* EnvironmentMock.swift */; };
@@ -649,6 +651,8 @@
 		8CFFBF9D2178A66E00C08C94 /* CoinPriceChartIntervalType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinPriceChartIntervalType.swift; sourceTree = "<group>"; };
 		8CFFBF9F2178B4A900C08C94 /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
 		8CFFBFA12178CA9500C08C94 /* InitiatedPanGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitiatedPanGestureRecognizer.swift; sourceTree = "<group>"; };
+		8CFFBFA32179E56E00C08C94 /* CloudLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudLayer.swift; sourceTree = "<group>"; };
+		8CFFBFA5217A0B5900C08C94 /* Double+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extensions.swift"; sourceTree = "<group>"; };
 		9307AC63215BC1990093DB68 /* walletNetworkLayerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = walletNetworkLayerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9307AC65215BC1990093DB68 /* walletNetworkLayerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = walletNetworkLayerTests.swift; sourceTree = "<group>"; };
 		9307AC67215BC1990093DB68 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -715,7 +719,6 @@
 				8C713B2B213EC77500AC2E25 /* CustomBehavioral.swift */,
 				8C04BC3821219D0600E90090 /* DrawingHelper.swift */,
 				8C52FFFD211B252F00EB55EA /* InstantPanGestureRecognizer.swift */,
-				8CFFBFA12178CA9500C08C94 /* InitiatedPanGestureRecognizer.swift */,
 				8C7C3390214A5ABC00EC6C96 /* InteractionsHelper.swift */,
 				8C713B1E213941FF00AC2E25 /* Networking.swift */,
 				8C52FFEF211AE19300EB55EA /* OverlappingFlowLayout.swift */,
@@ -1317,8 +1320,11 @@
 		8C7DE69D216CFD3600824A4B /* Charts */ = {
 			isa = PBXGroup;
 			children = (
+				8CFFBFA32179E56E00C08C94 /* CloudLayer.swift */,
 				8C7DE67521636CAE00824A4B /* ChartLayer.swift */,
 				8CFFBF9F2178B4A900C08C94 /* ChartView.swift */,
+				8CFFBFA12178CA9500C08C94 /* InitiatedPanGestureRecognizer.swift */,
+				8CFFBFA5217A0B5900C08C94 /* Double+Extensions.swift */,
 			);
 			path = Charts;
 			sourceTree = "<group>";
@@ -2021,6 +2027,7 @@
 				8C7DE6FE2170B4EB00824A4B /* CodableWalletResponse.swift in Sources */,
 				8CA218DD212D93570063C188 /* ContactsHorizontalComponent.swift in Sources */,
 				8CA2192C21355CF60063C188 /* TransactionsFeatureFilterComponent.swift in Sources */,
+				8CFFBFA42179E56E00C08C94 /* CloudLayer.swift in Sources */,
 				8C2314682153E461007340E7 /* FormattedContact.swift in Sources */,
 				8C04BC452121D48E00E90090 /* Balance.swift in Sources */,
 				8C7C33682146C9B000EC6C96 /* PhotoButton.swift in Sources */,
@@ -2085,6 +2092,7 @@
 				8C7C337D2147EF6400EC6C96 /* LikeButtonCell.swift in Sources */,
 				8C625F882154F9E100BEF1C5 /* LaunchScreenViewController.swift in Sources */,
 				8C333D7B210F767100949AC0 /* FlowViewController.swift in Sources */,
+				8CFFBFA6217A0B5900C08C94 /* Double+Extensions.swift in Sources */,
 				8C091934210620C800703224 /* OnboardingViewController.swift in Sources */,
 				8C52FFE32119C1CF00EB55EA /* TermData.swift in Sources */,
 				8CF5F9282112FE580083B36A /* DelayTimer.swift in Sources */,

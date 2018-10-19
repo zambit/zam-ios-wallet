@@ -79,7 +79,7 @@ class ChartView: UIView {
     private func panGestureRecognizerEvent(_ sender: InitiatedPanGestureRecognizer) {
         switch sender.state {
         case .began:
-            originalPoint = sender.initialTouchLocation
+            originalPoint = sender.initialLocation
             let translation = sender.translation(in: self)
             let point = CGPoint(x: originalPoint.x + translation.x, y: originalPoint.y + translation.y)
             chartLayer?.performChartSelection(for: point)

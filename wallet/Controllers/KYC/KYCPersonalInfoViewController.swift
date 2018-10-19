@@ -92,7 +92,7 @@ class KYCPersonalInfoViewController: FlowViewController, WalletNavigable, UITabl
                                     alert.addDatePicker(mode: .date, date: Date(), minimumDate: nil, maximumDate: Date()) {
                                         date in
 
-                                        textField.text = Date.walletLongString(from: date)
+                                        textField.text = date.longFormatted
                                         self?.progress.birthDate = date
                                     }
                                     alert.addAction(title: "Done", style: .cancel)

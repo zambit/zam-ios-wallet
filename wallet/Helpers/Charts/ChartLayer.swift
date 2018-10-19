@@ -13,6 +13,16 @@ class ChartLayer: CALayer {
     struct Coordinate {
         var x: Double
         var y: Double
+
+        var text: String?
+        var additional: String?
+
+        init(x: Double, y: Double, text: String? = nil, additional: String? = nil) {
+            self.x = x
+            self.y = y
+            self.text = text
+            self.additional = additional
+        }
     }
 
     let size: CGSize
@@ -50,6 +60,34 @@ class ChartLayer: CALayer {
 
     private let defaultInsets = UIEdgeInsets(top: 5.0, left: 0.0, bottom: 5.0, right: 0.0)
 
+    private lazy var cloudLayer: CloudLayer = {
+        let cloud = CloudLayer()
+        cloud.fillColor = UIColor.white.cgColor
+        cloud.shadowColor = UIColor.black.withAlphaComponent(0.3).cgColor
+        cloud.shadowOffset = CGSize(width: 0, height: 6.0)
+        cloud.shadowRadius = 18.0
+        cloud.shadowOpacity = 0.4
+
+        let path = UIBezierPath(roundedRect: CGRect(x: 0, y: 0, width: 80.0, height: 40.0), cornerRadius: 5.0)
+        cloud.path = path.cgPath
+
+        cloud.frame = CGRect(x: 0, y: 0, width: 80.0, height: 40.0)
+        cloud.name = "cloudLayer"
+        addSublayer(cloud)
+
+        return cloud
+    }()
+
+    private lazy var lineLayer: CAShapeLayer = {
+        let line = CAShapeLayer()
+        line.strokeColor = UIColor.lightishGreen.cgColor
+        line.lineWidth = 1.0
+        line.name = "lineLayer"
+        addSublayer(line)
+
+        return line
+    }()
+
     private lazy var dotLayer: CAShapeLayer = {
         let dot = CAShapeLayer()
         dot.strokeColor = UIColor.lightishGreen.cgColor
@@ -83,7 +121,10 @@ class ChartLayer: CALayer {
 
     override func draw(in ctx: CGContext) {
         self.sublayers?.forEach {
-            if $0.name == "strokeLayer" || $0.name == "gradientLayer" {
+            if $0.name == "strokeLayer" ||
+                $0.name == "gradientLayer" ||
+                $0.name?.contains("axisLayer") ?? false ||
+                $0.name?.contains("axisTextLayer") ?? false {
                 $0.removeFromSuperlayer()
             }
         }
@@ -94,7 +135,7 @@ class ChartLayer: CALayer {
 
         let path = UIBezierPath()
 
-        let widgetWidth = Double(size.width)
+        let widgetWidth = Double(size.width - defaultInsets.left - defaultInsets.right - insets.left - insets.right)
         let widgetHeight = Double(size.height - defaultInsets.bottom - defaultInsets.top - insets.bottom - insets.top)
 
         let xmax = points.max(by: { a, b in a.x < b.x })!.x
@@ -108,7 +149,7 @@ class ChartLayer: CALayer {
         var interpolationPoints: [CGPoint] = []
 
         for p in points {
-            let pathPointX = (p.x - xmin) * xt
+            let pathPointX = (p.x - xmin) * xt + Double(defaultInsets.left) + Double(insets.left)
             let pathPointY = Double(size.height) - ((p.y - ymin) * yt + Double(defaultInsets.bottom) + Double(insets.bottom))
 
             interpolationPoints.append(CGPoint(x: pathPointX,y: pathPointY))
@@ -126,9 +167,11 @@ class ChartLayer: CALayer {
             var curVerticalPosition: CGFloat = defaultInsets.top + insets.top
             var curValue: Double = ymax
 
+            var iterator: Int = 0
+
             while curVerticalPosition <= path.bounds.height + defaultInsets.top + insets.top  {
-                let from = CGPoint(x: insets.left + defaultInsets.left, y: curVerticalPosition)
-                let to = CGPoint(x: size.width - insets.right - defaultInsets.right, y: curVerticalPosition)
+                let from = CGPoint(x: defaultInsets.left, y: curVerticalPosition)
+                let to = CGPoint(x: size.width - defaultInsets.right - defaultInsets.left, y: curVerticalPosition)
 
                 let path = UIBezierPath()
                 path.move(to: from)
@@ -139,21 +182,23 @@ class ChartLayer: CALayer {
                 axisLayer.path = path.cgPath
                 axisLayer.lineWidth = 1.0
                 axisLayer.strokeColor = UIColor.black.withAlphaComponent(0.05).cgColor
-
-//                NSAttributedString(string: String(curValue), attributes: [.font : UIFont.walletFont(ofSize: 10, weight: .regular), .foregroundColor: UIColor.black.withAlphaComponent(0.1).cgColor])
+                axisLayer.name = "axisLayer\(iterator)"
 
                 let textLayer = CATextLayer()
-                textLayer.string = NumberFormatter.walletAmountShort.string(from: curValue as NSNumber)
-                textLayer.frame = CGRect(x: to.x - 65.0, y: curVerticalPosition - 15.0, width: 60.0, height: 15.0)
-                textLayer.alignmentMode = .right
+                textLayer.string = curValue.formatted
+                textLayer.frame = CGRect(x: to.x - 40.0, y: curVerticalPosition - 15.0, width: 40.0, height: 15.0)
+                textLayer.alignmentMode = .left
                 textLayer.font = UIFont.walletFont(ofSize: 10, weight: .regular)
                 textLayer.fontSize = 10
                 textLayer.foregroundColor = UIColor.black.withAlphaComponent(0.3).cgColor
                 textLayer.contentsScale = UIScreen.main.scale
                 textLayer.isWrapped = true
+                textLayer.truncationMode = .end
+                textLayer.name = "axisTextLayer\(iterator)"
 
                 curVerticalPosition += verticalSpacing
                 curValue -= valueSpacing
+                iterator -= 1
 
                 addSublayer(axisLayer)
                 addSublayer(textLayer)
@@ -207,7 +252,30 @@ class ChartLayer: CALayer {
             return
         }
 
+        let linePath = UIBezierPath()
+        linePath.move(to: CGPoint(x: chartPoints[index].x, y: size.height))
+        linePath.addLine(to: CGPoint(x: chartPoints[index].x, y: 0.0))
+        lineLayer.path = linePath.cgPath
+
         let dotPath = UIBezierPath(ovalIn: CGRect(origin: CGPoint(x: chartPoints[index].x - 5, y: chartPoints[index].y - 5), size: CGSize(width: 10, height: 10)))
         dotLayer.path = dotPath.cgPath
+
+        cloudLayer.text = points[index].text ?? ""
+        cloudLayer.additional = points[index].additional ?? ""
+
+        var x = chartPoints[index].x
+        var y = chartPoints[index].y - cloudLayer.bounds.height - 15.0
+
+        if x - cloudLayer.bounds.width / 2 < 5 {
+            x = cloudLayer.bounds.width / 2 + 5
+        } else if x + cloudLayer.bounds.width / 2 > bounds.width - 5 {
+            x = bounds.width - cloudLayer.bounds.width / 2 - 5
+        }
+
+        if y - cloudLayer.bounds.height / 2 < 5 {
+            y = cloudLayer.bounds.height / 2 + 5
+        }
+
+        cloudLayer.position = CGPoint(x: x, y: y)
     }
 }

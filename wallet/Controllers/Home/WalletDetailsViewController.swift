@@ -100,7 +100,7 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable, Advanced
             case IndexPath(row: 0, section: 0):
                 return 200.0
             case IndexPath(row: 1, section: 0):
-                return 200.0
+                return 250.0
             default:
                 return nil
             }
@@ -111,7 +111,7 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable, Advanced
         }
     }
 
-    @IBOutlet private var tableView: UITableView?
+    @IBOutlet private var tableView: UITableView!
 
     private var exitButton: HighlightableButton?
 
@@ -132,22 +132,21 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable, Advanced
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.hero.isEnabled = true
+        hero.isEnabled = true
 
-        self.setupDefaultStyle()
-        //self.view.isOpaque = false
+        setupDefaultStyle()
 
-        self.tableView?.hero.id = "floatingView"
-        self.tableView?.backgroundColor = .white
-        self.tableView?.cornerRadius = 16.0
-        self.tableView?.maskToBounds = true
-        self.tableView?.separatorStyle = .none
-        self.tableView?.allowsSelection = false
-        self.tableView?.delegate = self
-        self.tableView?.dataSource = self
-        self.tableView?.tableFooterView = UIView()
+        tableView.hero.id = "floatingView"
+        tableView.backgroundColor = .white
+        tableView.cornerRadius = 16.0
+        tableView.maskToBounds = true
+        tableView.separatorStyle = .none
+        tableView.allowsSelection = false
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.tableFooterView = UIView()
 
-        balancer.registerCellsInTableView(tableView!)
+        balancer.registerCellsInTableView(tableView)
 
         let exitButton = HighlightableButton(type: .custom)
         exitButton.contentEdgeInsets = UIEdgeInsets(top: 5.0, left: 5.0, bottom: 5.0, right: 5.0)
@@ -159,7 +158,7 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable, Advanced
         exitButton.translatesAutoresizingMaskIntoConstraints = false
         exitButton.heightAnchor.constraint(equalToConstant: 44.0).isActive = true
         exitButton.widthAnchor.constraint(equalToConstant: 44.0).isActive = true
-        exitButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -25.0).isActive = true
+        exitButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -15.0).isActive = true
         exitButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         exitButton.addTarget(self, action: #selector(exitButtonTouchUpInsideEvent(_:)), for: .touchUpInside)
 
@@ -195,7 +194,6 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable, Advanced
         balancer.chartCell?.beginChartLoading()
         loadChartsPoints(for: currentInterval, completion: {
             [weak self]
-
             points in
 
             self?.balancer.chartCell?.endChartLoading()
@@ -236,7 +234,7 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable, Advanced
         case .all:
             type = .day
             aggregate = 30
-            limit = 52
+            limit = 40
         }
 
         historyAPI.getHistoricalPrice(for: wallets[currentIndex].coin, convertingTo: .standard, interval: type, groupingBy: aggregate, count: limit).done {
@@ -244,7 +242,11 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable, Advanced
 
             let coordinates = prices.map {
                 return ChartLayer.Coordinate(x: $0.time.unixTimestamp,
-                                             y: Double(truncating: $0.closePrice as NSNumber))
+                                             y: $0.closePrice.doubleValue,
+                                             text: $0.description(property: .closePrice),
+                                             additional: interval == .day ?
+                                                    Date(unixTimestamp: $0.time.unixTimestamp).fullTimeFormatted : Date(unixTimestamp: $0.time.unixTimestamp).fullFormatted
+                )
             }
             performWithDelay {
                 completion(coordinates)

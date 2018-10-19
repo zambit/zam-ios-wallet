@@ -123,7 +123,7 @@ struct CoinPrice: Equatable {
             return "\(string)%"
         }
 
-        fatalError()
+        return ""
     }
 }
 

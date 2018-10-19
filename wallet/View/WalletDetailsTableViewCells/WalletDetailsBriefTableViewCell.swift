@@ -43,7 +43,7 @@ class WalletDetailsBriefTableViewCell: UITableViewCell, WalletsCollectionCompone
     }
 
     private func setupStyle() {
-        self.backgroundColor = .white
+        self.backgroundColor = .clear
     }
 
     private func setupSubviews() {

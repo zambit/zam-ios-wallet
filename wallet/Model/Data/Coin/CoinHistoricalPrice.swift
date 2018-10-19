@@ -11,6 +11,7 @@ import Foundation
 struct CoinHistoricalPrice: Equatable {
 
     let coin: CoinType
+    let fiat: FiatType
 
     let time: Date
 
@@ -21,8 +22,9 @@ struct CoinHistoricalPrice: Equatable {
     let volumeFrom: Decimal
     let volumeTo: Decimal
 
-    init(coin: CoinType, codable: CodableCoinHistoricalData) {
+    init(coin: CoinType, fiat: FiatType, codable: CodableCoinHistoricalData) {
         self.coin = coin
+        self.fiat = fiat
 
         self.time = Date(unixTimestamp: codable.time)
 
@@ -32,5 +34,39 @@ struct CoinHistoricalPrice: Equatable {
         self.openPrice = codable.open
         self.volumeFrom = codable.volumeFrom
         self.volumeTo = codable.volumeTo
+    }
+
+    enum Properties {
+        case closePrice
+        case highPrice
+        case lowPrice
+        case openPrice
+        case volumeFrom
+        case volumeTo
+    }
+
+    func description(property: Properties) -> String {
+        var currency: String?
+
+        switch property {
+        case .closePrice:
+            currency = closePrice.formatted
+        case .highPrice:
+            currency = highPrice.formatted
+        case .lowPrice:
+            currency = lowPrice.formatted
+        case .openPrice:
+            currency = openPrice.formatted
+        case .volumeFrom:
+            currency = volumeFrom.formatted
+        case .volumeTo:
+            currency = volumeTo.formatted
+        }
+
+        if let string = currency {
+            return "\(fiat.symbol) \(string)"
+        }
+
+        return ""
     }
 }

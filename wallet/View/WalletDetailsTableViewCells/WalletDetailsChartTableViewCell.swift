@@ -14,7 +14,6 @@ protocol WalletDetailsChartDelegate: class {
     func walletDetailsChartIntervalSelected(_ walletDetailsChart: WalletDetailsChartTableViewCell, interval: CoinPriceChartIntervalType)
 }
 
-
 class WalletDetailsChartTableViewCell: UITableViewCell {
 
     weak var delegate: WalletDetailsChartDelegate?
@@ -35,13 +34,16 @@ class WalletDetailsChartTableViewCell: UITableViewCell {
     }
 
     private func setupStyle() {
-        self.backgroundColor = .white
+        self.backgroundColor = .clear
     }
 
     private func setupSubviews() {
+        self.hero.isEnabled = true
+
         let chartView = ChartView()
+        chartView.hero.modifiers = [.fade]
         chartView.backgroundColor = .clear
-        chartView.insets = UIEdgeInsets(top: 10.0, left: 0.0, bottom: 10.0, right: 0.0)
+        chartView.insets = UIEdgeInsets(top: 10.0, left: 5.0, bottom: 10.0, right: 50.0)
         chartView.chartBorderColor = UIColor.skyBlue.cgColor
         chartView.chartBorderWidth = 2.0
         chartView.showAxis = true
@@ -50,7 +52,7 @@ class WalletDetailsChartTableViewCell: UITableViewCell {
         chartView.translatesAutoresizingMaskIntoConstraints = false
         chartView.leftAnchor.constraint(equalTo: leftAnchor, constant: 18.0).isActive = true
         chartView.rightAnchor.constraint(equalTo: rightAnchor, constant: -18.0).isActive = true
-        chartView.topAnchor.constraint(equalTo: topAnchor, constant: 30.0).isActive = true
+        chartView.topAnchor.constraint(equalTo: topAnchor, constant: 35.0).isActive = true
 
         self.chartView = chartView
 
@@ -64,11 +66,12 @@ class WalletDetailsChartTableViewCell: UITableViewCell {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         stackView.topAnchor.constraint(equalTo: chartView.bottomAnchor, constant: 15.0).isActive = true
-        stackView.heightAnchor.constraint(equalToConstant: 26.0).isActive = true
-        stackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 15.0).isActive = true
+        stackView.heightAnchor.constraint(equalToConstant: 30.0).isActive = true
+        stackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -15.0).isActive = true
 
         for interval in CoinPriceChartIntervalType.allCases {
             let button = SelectableButton(type: .custom)
+            button.hero.modifiers = [.fade]
             button.tag = interval.rawValue
             button.titleLabel?.font = UIFont.walletFont(ofSize: 14.0, weight: .regular)
             button.setTitle(interval.title, for: .normal)
@@ -78,7 +81,6 @@ class WalletDetailsChartTableViewCell: UITableViewCell {
             button.setSelectedBackgroundColor(.skyBlue)
             button.backgroundColor = .white
             button.layer.cornerRadius = 5.0
-            button.maskToBounds = true
             button.borderWidth = 1.0
             button.borderColor = UIColor.black.withAlphaComponent(0.1)
             button.addTarget(self, action: #selector(filterButtonTouchUpInsideEvent(_:)), for: .touchUpInside)
@@ -88,7 +90,6 @@ class WalletDetailsChartTableViewCell: UITableViewCell {
             }
 
             button.translatesAutoresizingMaskIntoConstraints = false
-            button.heightAnchor.constraint(equalToConstant: 26.0).isActive = true
             button.widthAnchor.constraint(equalToConstant: 45.0).isActive = true
 
             stackView.addArrangedSubview(button)

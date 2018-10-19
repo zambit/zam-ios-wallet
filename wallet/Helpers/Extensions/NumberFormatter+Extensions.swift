@@ -46,11 +46,15 @@ extension NumberFormatter {
         formatter.locale = Locale.current
         formatter.decimalSeparator = Locale.current.decimalSeparator
         formatter.numberStyle = .decimal
-        formatter.alwaysShowsDecimalSeparator = true
 
-        formatter.minimumFractionDigits = 0
-        formatter.maximumFractionDigits = maximumFractionDigits
-
+        if maximumFractionDigits > 0 {
+            formatter.alwaysShowsDecimalSeparator = true
+            formatter.minimumFractionDigits = 1
+            formatter.maximumFractionDigits = maximumFractionDigits
+        } else {
+            formatter.minimumFractionDigits = 0
+            formatter.maximumFractionDigits = 0
+        }
         return formatter
     }
 }

@@ -86,7 +86,7 @@ struct HistoryAPI: NetworkService {
                     case .data(_):
 
                         let success: (CodableCoinHistoricalDataResponse) -> Void = { s in
-                            let objects = s.data.map({ return CoinHistoricalPrice(coin: coin, codable: $0) })
+                            let objects = s.data.map({ return CoinHistoricalPrice(coin: coin, fiat: convertingTo, codable: $0) })
                             seal.fulfill(objects)
                         }
 
