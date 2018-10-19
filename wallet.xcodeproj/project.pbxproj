@@ -142,8 +142,8 @@
 		8C7C33472142924D00EC6C96 /* KYCMainScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C33462142924D00EC6C96 /* KYCMainScreenViewController.swift */; };
 		8C7C33492142973C00EC6C96 /* StageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C33482142973C00EC6C96 /* StageButton.swift */; };
 		8C7C334D2142C15100EC6C96 /* KYCPersonalInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C334C2142C15100EC6C96 /* KYCPersonalInfoViewController.swift */; };
-		8C7C334F2142C2F500EC6C96 /* TextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C334E2142C2F500EC6C96 /* TextFieldCell.swift */; };
-		8C7C3356214662CF00EC6C96 /* TextFieldCellData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C3355214662CF00EC6C96 /* TextFieldCellData.swift */; };
+		8C7C334F2142C2F500EC6C96 /* TextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C334E2142C2F500EC6C96 /* TextFieldTableViewCell.swift */; };
+		8C7C3356214662CF00EC6C96 /* TextFieldTableViewCellData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C3355214662CF00EC6C96 /* TextFieldTableViewCellData.swift */; };
 		8C7C335821466E5800EC6C96 /* GenderType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C335721466E5800EC6C96 /* GenderType.swift */; };
 		8C7C335A21468F5A00EC6C96 /* KYCPersonalInfoProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C335921468F5A00EC6C96 /* KYCPersonalInfoProgress.swift */; };
 		8C7C33602146ACBE00EC6C96 /* KYCUploadDocumentsMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C335F2146ACBE00EC6C96 /* KYCUploadDocumentsMenuViewController.swift */; };
@@ -317,6 +317,8 @@
 		8CFFBFA22178CA9500C08C94 /* InitiatedPanGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFFBFA12178CA9500C08C94 /* InitiatedPanGestureRecognizer.swift */; };
 		8CFFBFA42179E56E00C08C94 /* CloudLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFFBFA32179E56E00C08C94 /* CloudLayer.swift */; };
 		8CFFBFA6217A0B5900C08C94 /* Double+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFFBFA5217A0B5900C08C94 /* Double+Extensions.swift */; };
+		8CFFBFA9217A28B700C08C94 /* DetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFFBFA8217A28B700C08C94 /* DetailTableViewCell.swift */; };
+		8CFFBFAE217A2D4800C08C94 /* DetailTableViewCellData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFFBFAD217A2D4800C08C94 /* DetailTableViewCellData.swift */; };
 		9307AC66215BC1990093DB68 /* walletNetworkLayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9307AC65215BC1990093DB68 /* walletNetworkLayerTests.swift */; };
 		9307AC70215BC7D90093DB68 /* DispatcherMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9307AC6F215BC7D90093DB68 /* DispatcherMock.swift */; };
 		9307AC72215BCDAA0093DB68 /* EnvironmentMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9307AC71215BCDAA0093DB68 /* EnvironmentMock.swift */; };
@@ -478,9 +480,9 @@
 		8C7C33462142924D00EC6C96 /* KYCMainScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KYCMainScreenViewController.swift; sourceTree = "<group>"; };
 		8C7C33482142973C00EC6C96 /* StageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageButton.swift; sourceTree = "<group>"; };
 		8C7C334C2142C15100EC6C96 /* KYCPersonalInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KYCPersonalInfoViewController.swift; sourceTree = "<group>"; };
-		8C7C334E2142C2F500EC6C96 /* TextFieldCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldCell.swift; sourceTree = "<group>"; };
+		8C7C334E2142C2F500EC6C96 /* TextFieldTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldTableViewCell.swift; sourceTree = "<group>"; };
 		8C7C33502142C73900EC6C96 /* FloatTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatTextField.swift; sourceTree = "<group>"; };
-		8C7C3355214662CF00EC6C96 /* TextFieldCellData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldCellData.swift; sourceTree = "<group>"; };
+		8C7C3355214662CF00EC6C96 /* TextFieldTableViewCellData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldTableViewCellData.swift; sourceTree = "<group>"; };
 		8C7C335721466E5800EC6C96 /* GenderType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderType.swift; sourceTree = "<group>"; };
 		8C7C335921468F5A00EC6C96 /* KYCPersonalInfoProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KYCPersonalInfoProgress.swift; sourceTree = "<group>"; };
 		8C7C335F2146ACBE00EC6C96 /* KYCUploadDocumentsMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KYCUploadDocumentsMenuViewController.swift; sourceTree = "<group>"; };
@@ -653,6 +655,8 @@
 		8CFFBFA12178CA9500C08C94 /* InitiatedPanGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitiatedPanGestureRecognizer.swift; sourceTree = "<group>"; };
 		8CFFBFA32179E56E00C08C94 /* CloudLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudLayer.swift; sourceTree = "<group>"; };
 		8CFFBFA5217A0B5900C08C94 /* Double+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extensions.swift"; sourceTree = "<group>"; };
+		8CFFBFA8217A28B700C08C94 /* DetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTableViewCell.swift; sourceTree = "<group>"; };
+		8CFFBFAD217A2D4800C08C94 /* DetailTableViewCellData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTableViewCellData.swift; sourceTree = "<group>"; };
 		9307AC63215BC1990093DB68 /* walletNetworkLayerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = walletNetworkLayerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9307AC65215BC1990093DB68 /* walletNetworkLayerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = walletNetworkLayerTests.swift; sourceTree = "<group>"; };
 		9307AC67215BC1990093DB68 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -742,10 +746,9 @@
 			isa = PBXGroup;
 			children = (
 				8C04BC36211C872E00E90090 /* ContainerView.swift */,
-				8C7DE6E2216F619600824A4B /* WalletDetailsTableViewCells */,
+				8CFFBFA7217A282900C08C94 /* Cells */,
 				8C7C3341214290AB00EC6C96 /* Buttons */,
 				8C6088612111FB0A00470411 /* Components */,
-				8C7C3352214661C300EC6C96 /* TextFieldCell */,
 				8C7C3342214290BD00EC6C96 /* ImageViews */,
 				8C7DE6CD216D139800824A4B /* Labels */,
 				8C333D5B210B538700949AC0 /* CheckBox */,
@@ -1212,13 +1215,13 @@
 			path = KYC;
 			sourceTree = "<group>";
 		};
-		8C7C3352214661C300EC6C96 /* TextFieldCell */ = {
+		8C7C3352214661C300EC6C96 /* TextFieldTableViewCell */ = {
 			isa = PBXGroup;
 			children = (
-				8C7C334E2142C2F500EC6C96 /* TextFieldCell.swift */,
-				8C7C3355214662CF00EC6C96 /* TextFieldCellData.swift */,
+				8C7C334E2142C2F500EC6C96 /* TextFieldTableViewCell.swift */,
+				8C7C3355214662CF00EC6C96 /* TextFieldTableViewCellData.swift */,
 			);
-			path = TextFieldCell;
+			path = TextFieldTableViewCell;
 			sourceTree = "<group>";
 		};
 		8C7C336D2147C43800EC6C96 /* Pickers */ = {
@@ -1712,6 +1715,25 @@
 			path = CreatePinStageItem;
 			sourceTree = "<group>";
 		};
+		8CFFBFA7217A282900C08C94 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				8CFFBFAC217A29CD00C08C94 /* DetailTableViewCell */,
+				8C7C3352214661C300EC6C96 /* TextFieldTableViewCell */,
+				8C7DE6E2216F619600824A4B /* WalletDetailsTableViewCells */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		8CFFBFAC217A29CD00C08C94 /* DetailTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				8CFFBFA8217A28B700C08C94 /* DetailTableViewCell.swift */,
+				8CFFBFAD217A2D4800C08C94 /* DetailTableViewCellData.swift */,
+			);
+			path = DetailTableViewCell;
+			sourceTree = "<group>";
+		};
 		9307AC64215BC1990093DB68 /* walletNetworkLayerTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -2048,6 +2070,7 @@
 				8C7DE6DF216F5F1D00824A4B /* WalletDetailsChartTableViewCell.swift in Sources */,
 				8C7DE70E2170B5E400824A4B /* CodableUser.swift in Sources */,
 				8C091949210714D800703224 /* NetworkService.swift in Sources */,
+				8CFFBFAE217A2D4800C08C94 /* DetailTableViewCellData.swift in Sources */,
 				8C713B30213FD4A500AC2E25 /* WalletTabBarItem.swift in Sources */,
 				8C0919762108BE6000703224 /* UserRequest.swift in Sources */,
 				8C04BC37211C872E00E90090 /* ContainerView.swift in Sources */,
@@ -2144,6 +2167,7 @@
 				8C7C335821466E5800EC6C96 /* GenderType.swift in Sources */,
 				8C52FFF2211AF1FD00EB55EA /* HomeViewController.swift in Sources */,
 				8C52FFEC2119E09200EB55EA /* WalletsViewController.swift in Sources */,
+				8CFFBFA9217A28B700C08C94 /* DetailTableViewCell.swift in Sources */,
 				8CF5F944211459630083B36A /* DecimalButton.swift in Sources */,
 				8C4413D621199FFC00C9689C /* Dictionary+Extensions.swift in Sources */,
 				8C713B0F2137E54100AC2E25 /* UIRefreshControl+Extensions.swift in Sources */,
@@ -2268,9 +2292,9 @@
 				8CF5F93821134E6D0083B36A /* CGPoint+Extensions.swift in Sources */,
 				8C333D3C2109FC2D00949AC0 /* OnboardingItemComponent.swift in Sources */,
 				8CA218E7212DA8300063C188 /* SearchTextField.swift in Sources */,
-				8C7C3356214662CF00EC6C96 /* TextFieldCellData.swift in Sources */,
+				8C7C3356214662CF00EC6C96 /* TextFieldTableViewCellData.swift in Sources */,
 				8CF5F9632114AB000083B36A /* ItemComponent.swift in Sources */,
-				8C7C334F2142C2F500EC6C96 /* TextFieldCell.swift in Sources */,
+				8C7C334F2142C2F500EC6C96 /* TextFieldTableViewCell.swift in Sources */,
 				8C0919812108D99400703224 /* CreateNewPasswordViewController.swift in Sources */,
 				8C0919432106268900703224 /* HTTPDispatcher.swift in Sources */,
 				8C72AD1C2155107A0032ABD2 /* DeviceModel.swift in Sources */,

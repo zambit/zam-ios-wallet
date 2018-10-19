@@ -43,7 +43,7 @@ class WalletDetailsBriefTableViewCell: UITableViewCell, WalletsCollectionCompone
     }
 
     private func setupStyle() {
-        self.backgroundColor = .clear
+        self.backgroundColor = .white
     }
 
     private func setupSubviews() {
@@ -108,7 +108,6 @@ class WalletDetailsBriefTableViewCell: UITableViewCell, WalletsCollectionCompone
         sendButton.heightAnchor.constraint(equalToConstant: 30.0).isActive = true
         sendButton.widthAnchor.constraint(equalToConstant: 62.0).isActive = true
         sendButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10.0).isActive = true
-        //sendButton.topAnchor.constraint(greaterThanOrEqualTo: walletsCollection.bottomAnchor, constant: 0.0).isActive = true
         sendButton.leftAnchor.constraint(equalTo: leftAnchor, constant: 70.0).isActive = true
 
         self.sendButton = sendButton
@@ -133,7 +132,6 @@ class WalletDetailsBriefTableViewCell: UITableViewCell, WalletsCollectionCompone
         depositButton.heightAnchor.constraint(equalToConstant: 30.0).isActive = true
         depositButton.widthAnchor.constraint(equalToConstant: 78.0).isActive = true
         depositButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10.0).isActive = true
-        //depositButton.topAnchor.constraint(greaterThanOrEqualTo: walletsCollection.bottomAnchor, constant: 0.0).isActive = true
         depositButton.rightAnchor.constraint(equalTo: rightAnchor, constant: -60.0).isActive = true
 
         self.sendButton = sendButton
@@ -182,10 +180,14 @@ class WalletDetailsBriefTableViewCell: UITableViewCell, WalletsCollectionCompone
         self.walletsCollection?.custom.updateCurrentWallet(currentIndex)
     }
 
+    // MARK: - WalletsCollectionComponentDelegate
+
     func walletsCollectionComponentCurrentIndexChanged(_ walletsCollectionComponent: WalletsCollectionComponent, to index: Int) {
         walletsCollection?.custom.prepareForAnimation()
         delegate?.walletDetailsBriefCurrentWalletChanged(self, to: index)
     }
+
+    // MARK: - Buttons events
 
     @objc
     private func sendButtonTouchUpInsideEvent(_ sender: UIButton) {

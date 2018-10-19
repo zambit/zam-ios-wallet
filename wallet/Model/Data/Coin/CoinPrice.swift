@@ -83,40 +83,57 @@ struct CoinPrice: Equatable {
     }
 
     func description(property: Properties) -> String {
+        var prefix: String?
         var currency: String?
         var percents: String?
 
         switch property {
         case .price:
-            currency = price.longFormatted
+            prefix = fiat.symbol
+            currency = price.formatted
         case .marketCap:
-            currency = marketCap.longFormatted
+            prefix = fiat.symbol
+            currency = marketCap.formatted
         case .volumeDay:
-            currency = volumeDay.shortFormatted
+            prefix = coin.short
+            currency = volumeDay.formatted
         case .volume24h:
-            currency = volume24h.shortFormatted
+            prefix = coin.short
+            currency = volume24h.formatted
         case .changePct24h:
             percents = changePct24h.shortFormatted
         case .change24h:
+            prefix = fiat.symbol
             currency = change24h.shortFormatted
         case .openDay:
+            prefix = fiat.symbol
             currency = openDay.shortFormatted
         case .highDay:
+            prefix = fiat.symbol
             currency = highDay.shortFormatted
         case .lowDay:
+            prefix = fiat.symbol
             currency = lowDay.shortFormatted
         case .open24h:
+            prefix = fiat.symbol
             currency = open24h.shortFormatted
         case .high24h:
+            prefix = fiat.symbol
             currency = high24h.shortFormatted
         case .low24h:
+            prefix = fiat.symbol
             currency = low24h.shortFormatted
         case .supply:
-            currency = supply.longFormatted
+            prefix = coin.short
+            currency = supply.formatted
         }
 
         if let string = currency {
-            return "\(fiat.symbol) \(string)"
+            if let prefix = prefix {
+                return "\(prefix) \(string)"
+            } else {
+                return "\(string)"
+            }
         }
 
         if let string = percents {

@@ -28,6 +28,7 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable, Advanced
 
         private(set) weak var briefCell: WalletDetailsBriefTableViewCell?
         private(set) weak var chartCell: WalletDetailsChartTableViewCell?
+        private(set) weak var detailsCell: WalletDetailsListsTableViewCell?
 
         init(parent: WalletDetailsViewController) {
             self.parent = parent
@@ -36,6 +37,7 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable, Advanced
         func registerCellsInTableView(_ tableView: UITableView) {
             tableView.register(WalletDetailsBriefTableViewCell.self, forCellReuseIdentifier: "WalletDetailsBriefTableViewCell")
             tableView.register(WalletDetailsChartTableViewCell.self, forCellReuseIdentifier: "WalletDetailsChartTableViewCell")
+            tableView.register(WalletDetailsListsTableViewCell.self, forCellReuseIdentifier: "WalletDetailsListsTableViewCell")
         }
 
         func getNumbersOfSections() -> Int {
@@ -45,7 +47,7 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable, Advanced
         func getNumberOfRowsInSection(_ section: Int) -> Int {
             switch section {
             case 0:
-                return 2
+                return 3
             default:
                 return 0
             }
@@ -90,6 +92,16 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable, Advanced
                 cell.beginChartLoading()
 
                 return cell
+            case IndexPath(row: 2, section: 0):
+                let _cell = parent.tableView?.dequeueReusableCell(withIdentifier: "WalletDetailsListsTableViewCell", for: indexPath)
+
+                guard let cell = _cell as? WalletDetailsListsTableViewCell else {
+                    return nil
+                }
+
+                detailsCell = cell
+
+                return cell
             default:
                 return nil
             }
@@ -100,6 +112,8 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable, Advanced
             case IndexPath(row: 0, section: 0):
                 return 200.0
             case IndexPath(row: 1, section: 0):
+                return 250.0
+            case IndexPath(row: 2, section: 0):
                 return 250.0
             default:
                 return nil
@@ -118,10 +132,10 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable, Advanced
     private var phone: String?
     private var wallets: [Wallet]?
     private var currentIndex: Int?
-
     private var currentInterval: CoinPriceChartIntervalType = .day
 
     private lazy var balancer = CellsBalancer(parent: self)
+
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -137,6 +151,7 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable, Advanced
         setupDefaultStyle()
 
         tableView.hero.id = "floatingView"
+        tableView.hero.modifiers = [.useScaleBasedSizeChange]
         tableView.backgroundColor = .white
         tableView.cornerRadius = 16.0
         tableView.maskToBounds = true
@@ -184,7 +199,15 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable, Advanced
             [weak self]
             coinData in
 
-            self?.balancer.briefCell?.update(price: coinData.description(property: .price), change: coinData.description(property: .change24h), changePct: coinData.description(property: .changePct24h), isChangePositive: coinData.change24h >= 0)
+            self?.balancer.briefCell?.update(price: coinData.description(property: .price),
+                                             change: coinData.description(property: .change24h),
+                                             changePct: coinData.description(property: .changePct24h),
+                                             isChangePositive: coinData.change24h >= 0)
+
+            //self?.balancer.detailsCell?.endLoading()
+            self?.balancer.detailsCell?.update(marketCap: coinData.description(property: .marketCap),
+                                               volume: coinData.description(property: .volume24h),
+                                               supply: coinData.description(property: .supply))
         }.catch {
             error in
 
@@ -233,8 +256,8 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable, Advanced
             limit = 52
         case .all:
             type = .day
-            aggregate = 30
-            limit = 40
+            aggregate = 10
+            limit = 120
         }
 
         historyAPI.getHistoricalPrice(for: wallets[currentIndex].coin, convertingTo: .standard, interval: type, groupingBy: aggregate, count: limit).done {

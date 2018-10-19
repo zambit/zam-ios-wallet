@@ -34,14 +34,14 @@ class WalletDetailsChartTableViewCell: UITableViewCell {
     }
 
     private func setupStyle() {
-        self.backgroundColor = .clear
+        self.backgroundColor = .white
     }
 
     private func setupSubviews() {
         self.hero.isEnabled = true
+        self.hero.modifiers = [.fade]
 
         let chartView = ChartView()
-        chartView.hero.modifiers = [.fade]
         chartView.backgroundColor = .clear
         chartView.insets = UIEdgeInsets(top: 10.0, left: 5.0, bottom: 10.0, right: 50.0)
         chartView.chartBorderColor = UIColor.skyBlue.cgColor
@@ -71,7 +71,6 @@ class WalletDetailsChartTableViewCell: UITableViewCell {
 
         for interval in CoinPriceChartIntervalType.allCases {
             let button = SelectableButton(type: .custom)
-            button.hero.modifiers = [.fade]
             button.tag = interval.rawValue
             button.titleLabel?.font = UIFont.walletFont(ofSize: 14.0, weight: .regular)
             button.setTitle(interval.title, for: .normal)

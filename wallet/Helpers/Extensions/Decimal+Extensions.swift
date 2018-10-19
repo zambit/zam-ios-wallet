@@ -19,15 +19,17 @@ extension Decimal {
     }
 
     var formatted: String? {
-        if self >= 1000 {
+        if abs(self) >= 1000 {
             return NumberFormatter.walletAmount(maximumFractionDigits: 0).string(from: self as NSNumber)
         }
 
-        if self >= 100 {
+
+
+        if abs(self) >= 100 {
             return NumberFormatter.walletAmount(maximumFractionDigits: 2).string(from: self as NSNumber)
         }
 
-        if self >= 1 {
+        if abs(self) >= 1 {
             return NumberFormatter.walletAmount(maximumFractionDigits: 3).string(from: self as NSNumber)
         }
 
