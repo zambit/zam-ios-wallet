@@ -9,6 +9,7 @@
 import UIKit
 
 enum TextFieldTableViewCellDataAction {
+    
     case tap((UITextField) -> Void)
     case editingChanged((UITextField) -> Void)
 }

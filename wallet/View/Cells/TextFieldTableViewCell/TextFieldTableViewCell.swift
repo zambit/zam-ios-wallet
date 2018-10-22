@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class TextFieldTableViewCell: UITableViewCell, UITextFieldDelegate {
+class TextFieldTableViewCell: UITableViewCell, UITextFieldDelegate, Configurable {
 
     private var onTap: ((UITextField) -> Void)?
     private var onEditing: ((UITextField) -> Void)?

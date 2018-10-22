@@ -312,6 +312,14 @@
 		8CF5F95E2114A77D0083B36A /* CreatePinStageItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF5F95D2114A77D0083B36A /* CreatePinStageItem.swift */; };
 		8CF5F9602114A7880083B36A /* CreatePinStageItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CF5F95F2114A7880083B36A /* CreatePinStageItem.xib */; };
 		8CF5F9632114AB000083B36A /* ItemComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF5F9622114AB000083B36A /* ItemComponent.swift */; };
+		8CFFBF9C21789D7A00C08C94 /* SelectableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFFBF9B21789D7A00C08C94 /* SelectableButton.swift */; };
+		8CFFBF9E2178A66F00C08C94 /* CoinPriceChartIntervalType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFFBF9D2178A66E00C08C94 /* CoinPriceChartIntervalType.swift */; };
+		8CFFBFA02178B4A900C08C94 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFFBF9F2178B4A900C08C94 /* ChartView.swift */; };
+		8CFFBFA22178CA9500C08C94 /* InitiatedPanGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFFBFA12178CA9500C08C94 /* InitiatedPanGestureRecognizer.swift */; };
+		8CFFBFA42179E56E00C08C94 /* CloudLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFFBFA32179E56E00C08C94 /* CloudLayer.swift */; };
+		8CFFBFA6217A0B5900C08C94 /* Double+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFFBFA5217A0B5900C08C94 /* Double+Extensions.swift */; };
+		8CFFBFA9217A28B700C08C94 /* DetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFFBFA8217A28B700C08C94 /* DetailTableViewCell.swift */; };
+		8CFFBFAE217A2D4800C08C94 /* DetailTableViewCellData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFFBFAD217A2D4800C08C94 /* DetailTableViewCellData.swift */; };
 		8CFFBFB2217DF92300C08C94 /* URLComponents+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFFBFB1217DF92300C08C94 /* URLComponents+Extensions.swift */; };
 		9307AC66215BC1990093DB68 /* walletNetworkLayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9307AC65215BC1990093DB68 /* walletNetworkLayerTests.swift */; };
 		9307AC70215BC7D90093DB68 /* DispatcherMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9307AC6F215BC7D90093DB68 /* DispatcherMock.swift */; };
@@ -644,6 +652,14 @@
 		8CF5F95D2114A77D0083B36A /* CreatePinStageItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePinStageItem.swift; sourceTree = "<group>"; };
 		8CF5F95F2114A7880083B36A /* CreatePinStageItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreatePinStageItem.xib; sourceTree = "<group>"; };
 		8CF5F9622114AB000083B36A /* ItemComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemComponent.swift; sourceTree = "<group>"; };
+		8CFFBF9B21789D7A00C08C94 /* SelectableButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectableButton.swift; sourceTree = "<group>"; };
+		8CFFBF9D2178A66E00C08C94 /* CoinPriceChartIntervalType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinPriceChartIntervalType.swift; sourceTree = "<group>"; };
+		8CFFBF9F2178B4A900C08C94 /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
+		8CFFBFA12178CA9500C08C94 /* InitiatedPanGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitiatedPanGestureRecognizer.swift; sourceTree = "<group>"; };
+		8CFFBFA32179E56E00C08C94 /* CloudLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudLayer.swift; sourceTree = "<group>"; };
+		8CFFBFA5217A0B5900C08C94 /* Double+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extensions.swift"; sourceTree = "<group>"; };
+		8CFFBFA8217A28B700C08C94 /* DetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTableViewCell.swift; sourceTree = "<group>"; };
+		8CFFBFAD217A2D4800C08C94 /* DetailTableViewCellData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTableViewCellData.swift; sourceTree = "<group>"; };
 		8CFFBFB1217DF92300C08C94 /* URLComponents+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLComponents+Extensions.swift"; sourceTree = "<group>"; };
 		9307AC63215BC1990093DB68 /* walletNetworkLayerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = walletNetworkLayerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9307AC65215BC1990093DB68 /* walletNetworkLayerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = walletNetworkLayerTests.swift; sourceTree = "<group>"; };
@@ -721,7 +737,7 @@
 				9319BA862129FA9500033A7E /* Animations */,
 				8CA218D7212D68510063C188 /* Authentication */,
 				8CF5F93B21144BED0083B36A /* Extensions */,
-				8C7DE69D216CFD3600824A4B /* Graphics */,
+				8C7DE69D216CFD3600824A4B /* Charts */,
 				8C7DE69A216CF63500824A4B /* InitialsImage */,
 				8C7DE69C216CF90700824A4B /* Paginator */,
 				8C7DE69B216CF76900824A4B /* PhoneNumber */,
@@ -735,7 +751,7 @@
 			isa = PBXGroup;
 			children = (
 				8C04BC36211C872E00E90090 /* ContainerView.swift */,
-				8CFFBFB3217E006400C08C94 /* Cells */,
+				8CFFBFA7217A282900C08C94 /* Cells */,
 				8C7C3341214290AB00EC6C96 /* Buttons */,
 				8C6088612111FB0A00470411 /* Components */,
 				8C7C3342214290BD00EC6C96 /* ImageViews */,
@@ -1017,6 +1033,7 @@
 				8C7C338A21493A3600EC6C96 /* KYCStatus.swift */,
 				8C2D27642159014F004CE1F8 /* ScreenType.swift */,
 				8CA218FD21303BC30063C188 /* TransactionStatus.swift */,
+				8CFFBF9D2178A66E00C08C94 /* CoinPriceChartIntervalType.swift */,
 				8C0919542107347300703224 /* Codable */,
 				8C7DE6EE21709C6B00824A4B /* Data */,
 			);
@@ -1172,6 +1189,7 @@
 				8C333D43210B001500949AC0 /* LargeButton.swift */,
 				8C333D53210B394800949AC0 /* NextButton.swift */,
 				8C231446214C0058007340E7 /* HighlightableButton.swift */,
+				8CFFBF9B21789D7A00C08C94 /* SelectableButton.swift */,
 				8C7C33482142973C00EC6C96 /* StageButton.swift */,
 				8C231442214BE6FE007340E7 /* MenuButton.swift */,
 				8C7C33672146C9B000EC6C96 /* PhotoButton.swift */,
@@ -1308,12 +1326,16 @@
 			path = Paginator;
 			sourceTree = "<group>";
 		};
-		8C7DE69D216CFD3600824A4B /* Graphics */ = {
+		8C7DE69D216CFD3600824A4B /* Charts */ = {
 			isa = PBXGroup;
 			children = (
+				8CFFBFA32179E56E00C08C94 /* CloudLayer.swift */,
 				8C7DE67521636CAE00824A4B /* ChartLayer.swift */,
+				8CFFBF9F2178B4A900C08C94 /* ChartView.swift */,
+				8CFFBFA12178CA9500C08C94 /* InitiatedPanGestureRecognizer.swift */,
+				8CFFBFA5217A0B5900C08C94 /* Double+Extensions.swift */,
 			);
-			path = Graphics;
+			path = Charts;
 			sourceTree = "<group>";
 		};
 		8C7DE6CD216D139800824A4B /* Labels */ = {
@@ -1699,13 +1721,23 @@
 			path = CreatePinStageItem;
 			sourceTree = "<group>";
 		};
-		8CFFBFB3217E006400C08C94 /* Cells */ = {
+		8CFFBFA7217A282900C08C94 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				8CFFBFAC217A29CD00C08C94 /* DetailTableViewCell */,
 				8C7C3352214661C300EC6C96 /* TextFieldTableViewCell */,
 				8C7DE6E2216F619600824A4B /* WalletDetailsTableViewCells */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		8CFFBFAC217A29CD00C08C94 /* DetailTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				8CFFBFA8217A28B700C08C94 /* DetailTableViewCell.swift */,
+				8CFFBFAD217A2D4800C08C94 /* DetailTableViewCellData.swift */,
+			);
+			path = DetailTableViewCell;
 			sourceTree = "<group>";
 		};
 		9307AC64215BC1990093DB68 /* walletNetworkLayerTests */ = {
@@ -1974,8 +2006,12 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
+			inputFileListPaths = (
+			);
 			inputPaths = (
 				"$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
+			);
+			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
@@ -2019,6 +2055,7 @@
 				8C7DE6FE2170B4EB00824A4B /* CodableWalletResponse.swift in Sources */,
 				8CA218DD212D93570063C188 /* ContactsHorizontalComponent.swift in Sources */,
 				8CA2192C21355CF60063C188 /* TransactionsFeatureFilterComponent.swift in Sources */,
+				8CFFBFA42179E56E00C08C94 /* CloudLayer.swift in Sources */,
 				8C2314682153E461007340E7 /* FormattedContact.swift in Sources */,
 				8C04BC452121D48E00E90090 /* Balance.swift in Sources */,
 				8C7C33682146C9B000EC6C96 /* PhotoButton.swift in Sources */,
@@ -2039,6 +2076,7 @@
 				8C7DE6DF216F5F1D00824A4B /* WalletDetailsChartTableViewCell.swift in Sources */,
 				8C7DE70E2170B5E400824A4B /* CodableUser.swift in Sources */,
 				8C091949210714D800703224 /* NetworkService.swift in Sources */,
+				8CFFBFAE217A2D4800C08C94 /* DetailTableViewCellData.swift in Sources */,
 				8C713B30213FD4A500AC2E25 /* WalletTabBarItem.swift in Sources */,
 				8C0919762108BE6000703224 /* UserRequest.swift in Sources */,
 				8C04BC37211C872E00E90090 /* ContainerView.swift in Sources */,
@@ -2067,6 +2105,7 @@
 				8C713B212139911D00AC2E25 /* QRCodeScannerViewController.swift in Sources */,
 				8C7DE70C2170B5D100824A4B /* CodableBalance.swift in Sources */,
 				8C713B112137F95200AC2E25 /* DepositMoneyMethodComponent.swift in Sources */,
+				8CFFBFA02178B4A900C08C94 /* ChartView.swift in Sources */,
 				9319BA852129A07A00033A7E /* Transaction.swift in Sources */,
 				8C7C338F2149659100EC6C96 /* KYCPersonalInfo.swift in Sources */,
 				8C333D66210B6E7600949AC0 /* UITextField+Extensions.swift in Sources */,
@@ -2082,6 +2121,7 @@
 				8C7C337D2147EF6400EC6C96 /* LikeButtonCell.swift in Sources */,
 				8C625F882154F9E100BEF1C5 /* LaunchScreenViewController.swift in Sources */,
 				8C333D7B210F767100949AC0 /* FlowViewController.swift in Sources */,
+				8CFFBFA6217A0B5900C08C94 /* Double+Extensions.swift in Sources */,
 				8C091934210620C800703224 /* OnboardingViewController.swift in Sources */,
 				8C52FFE32119C1CF00EB55EA /* TermData.swift in Sources */,
 				8CF5F9282112FE580083B36A /* DelayTimer.swift in Sources */,
@@ -2133,6 +2173,7 @@
 				8C7C335821466E5800EC6C96 /* GenderType.swift in Sources */,
 				8C52FFF2211AF1FD00EB55EA /* HomeViewController.swift in Sources */,
 				8C52FFEC2119E09200EB55EA /* WalletsViewController.swift in Sources */,
+				8CFFBFA9217A28B700C08C94 /* DetailTableViewCell.swift in Sources */,
 				8CF5F944211459630083B36A /* DecimalButton.swift in Sources */,
 				8C4413D621199FFC00C9689C /* Dictionary+Extensions.swift in Sources */,
 				8C713B0F2137E54100AC2E25 /* UIRefreshControl+Extensions.swift in Sources */,
@@ -2145,6 +2186,7 @@
 				8C520002211B4B6400EB55EA /* FloatingViewController.swift in Sources */,
 				8CF41D912136B9BC006D4FE2 /* TransactionsGroupingFilterComponent.swift in Sources */,
 				8C09197F2108D8B600703224 /* VerifyPhoneNumberWithSmsViewController.swift in Sources */,
+				8CFFBFA22178CA9500C08C94 /* InitiatedPanGestureRecognizer.swift in Sources */,
 				8C333D40210A08A600949AC0 /* UIView+Extensions.swift in Sources */,
 				8CF5F9542114916E0083B36A /* DotView.swift in Sources */,
 				8C4413C4211882FC00C9689C /* CreatePinFlow.swift in Sources */,
@@ -2208,6 +2250,7 @@
 				8CF5F95B21149E460083B36A /* CreatePinComponent.swift in Sources */,
 				8C23144D21500529007340E7 /* PhoneNumberComponent.swift in Sources */,
 				8CA2191D21344C730063C188 /* Array+Extensions.swift in Sources */,
+				8CFFBF9E2178A66F00C08C94 /* CoinPriceChartIntervalType.swift in Sources */,
 				8C09197121089FBB00703224 /* AuthAPI.swift in Sources */,
 				8CA218B821248FA50063C188 /* SendMoneyAmountComponent.swift in Sources */,
 				8C09195F21076B5D00703224 /* RecoveryAPI.swift in Sources */,
@@ -2236,6 +2279,7 @@
 				8C7DE67B2164BE9B00824A4B /* CryptocompareEnvironment.swift in Sources */,
 				8C7C33772147E3B500EC6C96 /* CurrencyCell.swift in Sources */,
 				8C7DE6ED216FA5DA00824A4B /* FiatType.swift in Sources */,
+				8CFFBF9C21789D7A00C08C94 /* SelectableButton.swift in Sources */,
 				8CF41D8F2136B842006D4FE2 /* TransactionsDirectionFilterComponent.swift in Sources */,
 				8CA21931213561C70063C188 /* MultiStatableButton.swift in Sources */,
 				8C333D42210A094500949AC0 /* UIColor+Additions.swift in Sources */,
@@ -2439,7 +2483,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = zamzam.wallet.app;
+				PRODUCT_BUNDLE_IDENTIFIER = zamzam.wallet.dev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
@@ -2461,7 +2505,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = zamzam.wallet.app;
+				PRODUCT_BUNDLE_IDENTIFIER = zamzam.wallet.dev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;

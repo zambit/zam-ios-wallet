@@ -466,6 +466,7 @@ final class MainFlow: ScreenFlow {
         vc.onDepositToWallet = onDepositToWallet
         vc.onExit = onExit
         vc.priceAPI = PriceAPI(provider: Provider(environment: CryptocompareEnvironment(), dispatcher: HTTPDispatcher()))
+        vc.historyAPI = HistoryAPI(provider: Provider(environment: CryptocompareEnvironment(), dispatcher: HTTPDispatcher()))
         vc.flow = self
         return vc
     }

@@ -56,7 +56,7 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
     private var didInitiallyLoaded: Bool = false
 
     private var wallets: [Wallet] = []
-    private var walletsChartsPoints: [[ChartLayer.Point]] = []
+    private var walletsChartsPoints: [[ChartLayer.Coordinate]] = []
     private var phone: String!
 
     private var refreshControl: UIRefreshControl?
@@ -300,23 +300,23 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
     /**
      Load wallets history points to build chart, assign it to private property and call completion block.
      */
-    private func loadChartsPoints(completion: @escaping ([[ChartLayer.Point]]) -> Void) {
+    private func loadChartsPoints(completion: @escaping ([[ChartLayer.Coordinate]]) -> Void) {
         guard let historyAPI = historyAPI else {
             return
         }
 
-        self.walletsChartsPoints = [[ChartLayer.Point]](repeating: [], count: wallets.count)
+        self.walletsChartsPoints = [[ChartLayer.Coordinate]](repeating: [], count: wallets.count)
 
         let group = DispatchGroup()
         for i in wallets.enumerated() {
             group.enter()
 
-            historyAPI.getHistoricalDailyData(for: i.element.coin, days: 30).done {
+            historyAPI.getHistoricalDailyPrice(for: i.element.coin, count: 30).done {
                 [weak self]
                 days in
 
                 self?.walletsChartsPoints[i.offset] = days.map {
-                    return ChartLayer.Point(x: $0.time.unixTimestamp,
+                    return ChartLayer.Coordinate(x: $0.time.unixTimestamp,
                                             y: Double(truncating: $0.closePrice as NSNumber))
                 }
                 group.leave()

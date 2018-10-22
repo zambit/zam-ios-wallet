@@ -119,9 +119,11 @@ class WalletSmallItemComponent: ItemComponent, Configurable {
         pageControl?.numberOfPages = count
     }
 
-    func setupChart(points: [ChartLayer.Point]) {
+    func setupChart(points: [ChartLayer.Coordinate]) {
         let layer = ChartLayer(size: view.size, points: points)
         layer.insets = UIEdgeInsets(top: 30.0, left: 0.0, bottom: 20.0, right: 0.0)
+        layer.chartBorderColor = UIColor.lightblue.withAlphaComponent(0.25).cgColor
+        layer.chartFillingGradientColors = [UIColor.paleGrey.cgColor, UIColor.white.cgColor]
 
         layer.zPosition = -1
         layer.cornerRadius = 12.0

@@ -8,8 +8,9 @@
 
 import Foundation
 import UIKit
+import Crashlytics
 
-class WalletDetailsViewController: FlowViewController, WalletNavigable, AdvancedTransitionDelegate, SendMoneyViewControllerDelegate, UITableViewDelegate, UITableViewDataSource, WalletDetailsBriefDelegate {
+class WalletDetailsViewController: FlowViewController, WalletNavigable, AdvancedTransitionDelegate, SendMoneyViewControllerDelegate, UITableViewDelegate, UITableViewDataSource, WalletDetailsBriefDelegate, WalletDetailsChartDelegate {
 
     var onSendFromWallet: ((_ index: Int, _ wallets: [Wallet], _ phone: String) -> Void)?
     var onDepositToWallet: ((_ index: Int, _ wallets: [Wallet], _ phone: String) -> Void)?
@@ -19,12 +20,15 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable, Advanced
     weak var advancedTransitionDelegate: AdvancedTransitionDelegate?
 
     var priceAPI: PriceAPI?
+    var historyAPI: HistoryAPI?
 
     class CellsBalancer {
 
         unowned var parent: WalletDetailsViewController
 
         private(set) weak var briefCell: WalletDetailsBriefTableViewCell?
+        private(set) weak var chartCell: WalletDetailsChartTableViewCell?
+        private(set) weak var detailsCell: WalletDetailsListsTableViewCell?
 
         init(parent: WalletDetailsViewController) {
             self.parent = parent
@@ -32,6 +36,8 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable, Advanced
 
         func registerCellsInTableView(_ tableView: UITableView) {
             tableView.register(WalletDetailsBriefTableViewCell.self, forCellReuseIdentifier: "WalletDetailsBriefTableViewCell")
+            tableView.register(WalletDetailsChartTableViewCell.self, forCellReuseIdentifier: "WalletDetailsChartTableViewCell")
+            tableView.register(WalletDetailsListsTableViewCell.self, forCellReuseIdentifier: "WalletDetailsListsTableViewCell")
         }
 
         func getNumbersOfSections() -> Int {
@@ -41,7 +47,7 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable, Advanced
         func getNumberOfRowsInSection(_ section: Int) -> Int {
             switch section {
             case 0:
-                return 1
+                return 3
             default:
                 return 0
             }
@@ -72,6 +78,47 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable, Advanced
                 cell.delegate = parent
                 cell.configure(currentIndex: currentIndex, wallets: cards)
 
+                if let coinData = parent.coinPrice {
+                    cell.update(price: coinData.description(property: .price),
+                                change: coinData.description(property: .change24h),
+                                changePct: coinData.description(property: .changePct24h),
+                                isChangePositive: coinData.change24h >= 0)
+                }
+
+                return cell
+            case IndexPath(row: 1, section: 0):
+                let _cell = parent.tableView?.dequeueReusableCell(withIdentifier: "WalletDetailsChartTableViewCell", for: indexPath)
+
+                guard let cell = _cell as? WalletDetailsChartTableViewCell else {
+                    return nil
+                }
+
+                chartCell = cell
+
+                cell.delegate = parent
+
+                if let points = parent.walletsChartsPoints {
+                    cell.setupChart(points: points)
+                } else {
+                    cell.beginChartLoading()
+                }
+
+                return cell
+            case IndexPath(row: 2, section: 0):
+                let _cell = parent.tableView?.dequeueReusableCell(withIdentifier: "WalletDetailsListsTableViewCell", for: indexPath)
+
+                guard let cell = _cell as? WalletDetailsListsTableViewCell else {
+                    return nil
+                }
+
+                detailsCell = cell
+
+                if let coinData = parent.coinPrice {
+                    cell.update(marketCap: coinData.description(property: .marketCap),
+                                volume: coinData.description(property: .volume24h),
+                                supply: coinData.description(property: .supply))
+                }
+
                 return cell
             default:
                 return nil
@@ -82,6 +129,10 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable, Advanced
             switch indexPath {
             case IndexPath(row: 0, section: 0):
                 return 200.0
+            case IndexPath(row: 1, section: 0):
+                return 250.0
+            case IndexPath(row: 2, section: 0):
+                return 250.0
             default:
                 return nil
             }
@@ -92,13 +143,16 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable, Advanced
         }
     }
 
-    @IBOutlet private var tableView: UITableView?
+    @IBOutlet private var tableView: UITableView!
 
     private var exitButton: HighlightableButton?
 
     private var phone: String?
     private var wallets: [Wallet]?
+    private var walletsChartsPoints: [ChartLayer.Coordinate]?
     private var currentIndex: Int?
+    private var coinPrice: CoinPrice?
+    private var currentInterval: CoinPriceChartIntervalType = .day
 
     private lazy var balancer = CellsBalancer(parent: self)
 
@@ -111,22 +165,23 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable, Advanced
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.hero.isEnabled = true
+        hero.isEnabled = true
 
-        self.setupDefaultStyle()
+        setupDefaultStyle()
         //self.view.isOpaque = false
 
-        self.tableView?.hero.id = "floatingView"
-        self.tableView?.backgroundColor = .white
-        self.tableView?.cornerRadius = 16.0
-        self.tableView?.maskToBounds = true
-        self.tableView?.separatorStyle = .none
-        self.tableView?.allowsSelection = false
-        self.tableView?.delegate = self
-        self.tableView?.dataSource = self
-        self.tableView?.tableFooterView = UIView()
+        tableView.hero.id = "floatingView"
+        tableView.hero.modifiers = [.useScaleBasedSizeChange]
+        tableView.backgroundColor = .white
+        tableView.cornerRadius = 16.0
+        tableView.maskToBounds = true
+        tableView.separatorStyle = .none
+        tableView.allowsSelection = false
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.tableFooterView = UIView()
 
-        balancer.registerCellsInTableView(tableView!)
+        balancer.registerCellsInTableView(tableView)
 
         let exitButton = HighlightableButton(type: .custom)
         exitButton.contentEdgeInsets = UIEdgeInsets(top: 5.0, left: 5.0, bottom: 5.0, right: 5.0)
@@ -138,7 +193,7 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable, Advanced
         exitButton.translatesAutoresizingMaskIntoConstraints = false
         exitButton.heightAnchor.constraint(equalToConstant: 44.0).isActive = true
         exitButton.widthAnchor.constraint(equalToConstant: 44.0).isActive = true
-        exitButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -25.0).isActive = true
+        exitButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -15.0).isActive = true
         exitButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         exitButton.addTarget(self, action: #selector(exitButtonTouchUpInsideEvent(_:)), for: .touchUpInside)
 
@@ -164,11 +219,89 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable, Advanced
             [weak self]
             coinData in
 
-            self?.balancer.briefCell?.update(price: coinData.description(property: .price), change: coinData.description(property: .change24h), changePct: coinData.description(property: .changePct24h), isChangePositive: coinData.change24h >= 0)
+            self?.coinPrice = coinData
+
+            self?.balancer.briefCell?.update(price: coinData.description(property: .price),
+                                             change: coinData.description(property: .change24h),
+                                             changePct: coinData.description(property: .changePct24h),
+                                             isChangePositive: coinData.change24h >= 0)
+
+            self?.balancer.detailsCell?.update(marketCap: coinData.description(property: .marketCap),
+                                               volume: coinData.description(property: .volume24h),
+                                               supply: coinData.description(property: .supply))
         }.catch {
             error in
 
+            Crashlytics.sharedInstance().recordError(error)
             print(error)
+        }
+
+        balancer.chartCell?.beginChartLoading()
+        loadChartsPoints(for: currentInterval, completion: {
+            [weak self]
+            points in
+
+            self?.walletsChartsPoints = points
+
+            self?.balancer.chartCell?.endChartLoading()
+            self?.balancer.chartCell?.setupChart(points: points)
+        })
+    }
+
+    private func loadChartsPoints(for interval: CoinPriceChartIntervalType, completion: @escaping ([ChartLayer.Coordinate]) -> Void) {
+        guard let currentIndex = currentIndex, let wallets = wallets, let historyAPI = historyAPI, wallets.count > currentIndex else {
+            return
+        }
+
+        var type: HistoryAPI.HistoricalInterval
+        var aggregate: Int
+        var limit: Int
+
+        switch interval {
+        case .day:
+            type = .minute
+            aggregate = 30
+            limit = 48
+        case .week:
+            type = .hour
+            aggregate = 3
+            limit = 56
+        case .month:
+            type = .hour
+            aggregate = 12
+            limit = 60
+        case .threeMonth:
+            type = .day
+            aggregate = 2
+            limit = 45
+        case .year:
+            type = .day
+            aggregate = 7
+            limit = 52
+        case .all:
+            type = .day
+            aggregate = 10
+            limit = 120
+        }
+
+        historyAPI.getHistoricalPrice(for: wallets[currentIndex].coin, convertingTo: .standard, interval: type, groupingBy: aggregate, count: limit).done {
+            prices in
+
+            let coordinates = prices.map {
+                return ChartLayer.Coordinate(x: $0.time.unixTimestamp,
+                                             y: $0.closePrice.doubleValue,
+                                             text: $0.description(property: .closePrice),
+                                             additional: interval == .day ?
+                                                    Date(unixTimestamp: $0.time.unixTimestamp).fullTimeFormatted : Date(unixTimestamp: $0.time.unixTimestamp).fullFormatted
+                )
+            }
+            performWithDelay {
+                completion(coordinates)
+            }
+        }.catch {
+            error in
+
+            Crashlytics.sharedInstance().recordError(error)
         }
     }
 
@@ -212,6 +345,21 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable, Advanced
         self.currentIndex = index
 
         loadData()
+    }
+
+    func walletDetailsChartIntervalSelected(_ walletDetailsChart: WalletDetailsChartTableViewCell, interval: CoinPriceChartIntervalType) {
+        self.currentInterval = interval
+
+        walletDetailsChart.beginChartLoading()
+        loadChartsPoints(for: interval, completion: {
+            [weak self]
+            points in
+
+            self?.walletsChartsPoints = points
+
+            walletDetailsChart.endChartLoading()
+            walletDetailsChart.setupChart(points: points)
+        })
     }
 
     // MARK: - AdvancedTransitionDelegate

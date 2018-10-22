@@ -182,10 +182,14 @@ class WalletDetailsBriefTableViewCell: UITableViewCell, WalletsCollectionCompone
         self.walletsCollection?.custom.updateCurrentWallet(currentIndex)
     }
 
+    // MARK: - WalletsCollectionComponentDelegate
+
     func walletsCollectionComponentCurrentIndexChanged(_ walletsCollectionComponent: WalletsCollectionComponent, to index: Int) {
         walletsCollection?.custom.prepareForAnimation()
         delegate?.walletDetailsBriefCurrentWalletChanged(self, to: index)
     }
+
+    // MARK: - Buttons events
 
     @objc
     private func sendButtonTouchUpInsideEvent(_ sender: UIButton) {
