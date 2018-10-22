@@ -99,19 +99,20 @@ class EnterPinViewController: FlowViewController, WalletNavigable, DecimalKeyboa
                                    completionHandler: {
                                     [weak self] in
 
+                                    self?.pinForm?.isEnabled = false
                                     self?.dotsFieldComponent?.fillAll()
-                                    self?.dotsFieldComponent?.interactionsEnabled = false
 
                                     self?.authorize()
             },
                                    wrongHandler: {
                                     [weak self] in
 
+                                    self?.pinForm?.isEnabled = false
+
                                     self?.dotsFieldComponent?.endLoading()
-                                    self?.dotsFieldComponent?.interactionsEnabled = false
                                     self?.dotsFieldComponent?.showFailure {
                                         self?.dotsFieldComponent?.unfillAll()
-                                        self?.dotsFieldComponent?.interactionsEnabled = true
+                                        self?.pinForm?.isEnabled = true
                                     }
 
                                     InteractionsHelper.vibrateError()
