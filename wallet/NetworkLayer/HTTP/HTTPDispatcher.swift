@@ -63,25 +63,41 @@ struct HTTPDispatcher: Dispatcher {
 
         var urlRequest = URLRequest(url: fullURL)
 
+        guard var urlComponents = URLComponents(string: fullURLString) else {
+            throw HTTPDispatcherError.badURL
+        }
+
+        // Add parameters from environment
+        switch environment.parameters {
+        case .body(let params)?:
+            urlRequest.httpBody = try JSONSerialization.data(withJSONObject: params, options: [])
+
+        case .url(let params)?:
+            urlComponents.addQueryItems(params.map {
+                return URLQueryItem(name: $0.key, value: $0.value)
+            })
+
+            urlRequest.url = urlComponents.url
+        case .none:
+            break
+        }
+
+        // Add parameters from request
         switch request.parameters {
         case .body(let params)?:
             urlRequest.httpBody = try JSONSerialization.data(withJSONObject: params, options: [])
 
         case .url(let params)?:
-            guard var components = URLComponents(string: fullURLString) else {
-                throw HTTPDispatcherError.badURL
-            }
-
-            components.queryItems = params.map {
+            urlComponents.addQueryItems(params.map {
                 return URLQueryItem(name: $0.key, value: $0.value)
-            }
+            })
 
-            urlRequest.url = components.url
+            urlRequest.url = urlComponents.url
         case .none:
             break
         }
 
-        // Add headers from provider and request
+        // Add headers from environment
         guard let headers = environment.headers as? [String: String] else {
             throw HTTPDispatcherError.badInput
         }
@@ -90,6 +106,8 @@ struct HTTPDispatcher: Dispatcher {
             urlRequest.addValue($0.value, forHTTPHeaderField: $0.key)
         }
 
+
+        // Add headers from request
         if let requestHeaders = request.headers {
             guard let requestHeaders = requestHeaders as? [String: String] else {
                 throw HTTPDispatcherError.badInput

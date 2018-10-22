@@ -312,6 +312,7 @@
 		8CF5F95E2114A77D0083B36A /* CreatePinStageItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF5F95D2114A77D0083B36A /* CreatePinStageItem.swift */; };
 		8CF5F9602114A7880083B36A /* CreatePinStageItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CF5F95F2114A7880083B36A /* CreatePinStageItem.xib */; };
 		8CF5F9632114AB000083B36A /* ItemComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF5F9622114AB000083B36A /* ItemComponent.swift */; };
+		8CFFBFB2217DF92300C08C94 /* URLComponents+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFFBFB1217DF92300C08C94 /* URLComponents+Extensions.swift */; };
 		9307AC66215BC1990093DB68 /* walletNetworkLayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9307AC65215BC1990093DB68 /* walletNetworkLayerTests.swift */; };
 		9307AC70215BC7D90093DB68 /* DispatcherMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9307AC6F215BC7D90093DB68 /* DispatcherMock.swift */; };
 		9307AC72215BCDAA0093DB68 /* EnvironmentMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9307AC71215BCDAA0093DB68 /* EnvironmentMock.swift */; };
@@ -643,6 +644,7 @@
 		8CF5F95D2114A77D0083B36A /* CreatePinStageItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePinStageItem.swift; sourceTree = "<group>"; };
 		8CF5F95F2114A7880083B36A /* CreatePinStageItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreatePinStageItem.xib; sourceTree = "<group>"; };
 		8CF5F9622114AB000083B36A /* ItemComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemComponent.swift; sourceTree = "<group>"; };
+		8CFFBFB1217DF92300C08C94 /* URLComponents+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLComponents+Extensions.swift"; sourceTree = "<group>"; };
 		9307AC63215BC1990093DB68 /* walletNetworkLayerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = walletNetworkLayerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9307AC65215BC1990093DB68 /* walletNetworkLayerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = walletNetworkLayerTests.swift; sourceTree = "<group>"; };
 		9307AC67215BC1990093DB68 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -780,6 +782,7 @@
 			isa = PBXGroup;
 			children = (
 				8C0919422106268900703224 /* HTTPDispatcher.swift */,
+				8CFFBFB1217DF92300C08C94 /* URLComponents+Extensions.swift */,
 			);
 			path = HTTP;
 			sourceTree = "<group>";
@@ -2206,6 +2209,7 @@
 				8C34616B20EF8FA700746724 /* AppDelegate.swift in Sources */,
 				8CA2191821343FE10063C188 /* IllustrationalPlaceholder.swift in Sources */,
 				8C333D44210B001500949AC0 /* LargeButton.swift in Sources */,
+				8CFFBFB2217DF92300C08C94 /* URLComponents+Extensions.swift in Sources */,
 				8CA219402135949C0063C188 /* CoinItemComponent.swift in Sources */,
 				8CA218D6212D61EB0063C188 /* BiometricIDAuth.swift in Sources */,
 				8CA218EF212DCC030063C188 /* InitialsImage.swift in Sources */,

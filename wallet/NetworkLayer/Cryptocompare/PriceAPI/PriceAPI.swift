@@ -56,5 +56,4 @@ struct PriceAPI: NetworkService {
             }
         }
     }
-    
 }

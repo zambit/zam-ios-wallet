@@ -20,4 +20,8 @@ struct CryptocompareEnvironment: Environment {
             "Content-Type": "application/json"
         ]
     }
+
+    var parameters: RequestParams? {
+        return .url(["extraParams": "zam_wallet_debug"])
+    }
 }

@@ -15,5 +15,7 @@ protocol Environment {
 
     var host: String { get }
 
+    var parameters: RequestParams? { get }
+
     var headers: [String: Any] { get }
 }
