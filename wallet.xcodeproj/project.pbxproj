@@ -142,8 +142,8 @@
 		8C7C33472142924D00EC6C96 /* KYCMainScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C33462142924D00EC6C96 /* KYCMainScreenViewController.swift */; };
 		8C7C33492142973C00EC6C96 /* StageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C33482142973C00EC6C96 /* StageButton.swift */; };
 		8C7C334D2142C15100EC6C96 /* KYCPersonalInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C334C2142C15100EC6C96 /* KYCPersonalInfoViewController.swift */; };
-		8C7C334F2142C2F500EC6C96 /* TextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C334E2142C2F500EC6C96 /* TextFieldCell.swift */; };
-		8C7C3356214662CF00EC6C96 /* TextFieldCellData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C3355214662CF00EC6C96 /* TextFieldCellData.swift */; };
+		8C7C334F2142C2F500EC6C96 /* TextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C334E2142C2F500EC6C96 /* TextFieldTableViewCell.swift */; };
+		8C7C3356214662CF00EC6C96 /* TextFieldTableViewCellData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C3355214662CF00EC6C96 /* TextFieldTableViewCellData.swift */; };
 		8C7C335821466E5800EC6C96 /* GenderType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C335721466E5800EC6C96 /* GenderType.swift */; };
 		8C7C335A21468F5A00EC6C96 /* KYCPersonalInfoProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C335921468F5A00EC6C96 /* KYCPersonalInfoProgress.swift */; };
 		8C7C33602146ACBE00EC6C96 /* KYCUploadDocumentsMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C335F2146ACBE00EC6C96 /* KYCUploadDocumentsMenuViewController.swift */; };
@@ -474,9 +474,9 @@
 		8C7C33462142924D00EC6C96 /* KYCMainScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KYCMainScreenViewController.swift; sourceTree = "<group>"; };
 		8C7C33482142973C00EC6C96 /* StageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageButton.swift; sourceTree = "<group>"; };
 		8C7C334C2142C15100EC6C96 /* KYCPersonalInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KYCPersonalInfoViewController.swift; sourceTree = "<group>"; };
-		8C7C334E2142C2F500EC6C96 /* TextFieldCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldCell.swift; sourceTree = "<group>"; };
+		8C7C334E2142C2F500EC6C96 /* TextFieldTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldTableViewCell.swift; sourceTree = "<group>"; };
 		8C7C33502142C73900EC6C96 /* FloatTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatTextField.swift; sourceTree = "<group>"; };
-		8C7C3355214662CF00EC6C96 /* TextFieldCellData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldCellData.swift; sourceTree = "<group>"; };
+		8C7C3355214662CF00EC6C96 /* TextFieldTableViewCellData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldTableViewCellData.swift; sourceTree = "<group>"; };
 		8C7C335721466E5800EC6C96 /* GenderType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderType.swift; sourceTree = "<group>"; };
 		8C7C335921468F5A00EC6C96 /* KYCPersonalInfoProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KYCPersonalInfoProgress.swift; sourceTree = "<group>"; };
 		8C7C335F2146ACBE00EC6C96 /* KYCUploadDocumentsMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KYCUploadDocumentsMenuViewController.swift; sourceTree = "<group>"; };
@@ -1203,13 +1203,13 @@
 			path = KYC;
 			sourceTree = "<group>";
 		};
-		8C7C3352214661C300EC6C96 /* TextFieldCell */ = {
+		8C7C3352214661C300EC6C96 /* TextFieldTableViewCell */ = {
 			isa = PBXGroup;
 			children = (
-				8C7C334E2142C2F500EC6C96 /* TextFieldCell.swift */,
-				8C7C3355214662CF00EC6C96 /* TextFieldCellData.swift */,
+				8C7C334E2142C2F500EC6C96 /* TextFieldTableViewCell.swift */,
+				8C7C3355214662CF00EC6C96 /* TextFieldTableViewCellData.swift */,
 			);
-			path = TextFieldCell;
+			path = TextFieldTableViewCell;
 			sourceTree = "<group>";
 		};
 		8C7C336D2147C43800EC6C96 /* Pickers */ = {
@@ -1702,7 +1702,7 @@
 		8CFFBFB3217E006400C08C94 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				8C7C3352214661C300EC6C96 /* TextFieldCell */,
+				8C7C3352214661C300EC6C96 /* TextFieldTableViewCell */,
 				8C7DE6E2216F619600824A4B /* WalletDetailsTableViewCells */,
 			);
 			path = Cells;
@@ -2256,9 +2256,9 @@
 				8CF5F93821134E6D0083B36A /* CGPoint+Extensions.swift in Sources */,
 				8C333D3C2109FC2D00949AC0 /* OnboardingItemComponent.swift in Sources */,
 				8CA218E7212DA8300063C188 /* SearchTextField.swift in Sources */,
-				8C7C3356214662CF00EC6C96 /* TextFieldCellData.swift in Sources */,
+				8C7C3356214662CF00EC6C96 /* TextFieldTableViewCellData.swift in Sources */,
 				8CF5F9632114AB000083B36A /* ItemComponent.swift in Sources */,
-				8C7C334F2142C2F500EC6C96 /* TextFieldCell.swift in Sources */,
+				8C7C334F2142C2F500EC6C96 /* TextFieldTableViewCell.swift in Sources */,
 				8C0919812108D99400703224 /* CreateNewPasswordViewController.swift in Sources */,
 				8C0919432106268900703224 /* HTTPDispatcher.swift in Sources */,
 				8C72AD1C2155107A0032ABD2 /* DeviceModel.swift in Sources */,
