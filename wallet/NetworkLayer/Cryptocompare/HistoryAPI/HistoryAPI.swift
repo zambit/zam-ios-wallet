@@ -106,4 +106,8 @@ struct HistoryAPI: NetworkService {
                 }
         }
     }
+
+    func cancellAllTasks() {
+        provider.cancelAllTasks()
+    }
 }

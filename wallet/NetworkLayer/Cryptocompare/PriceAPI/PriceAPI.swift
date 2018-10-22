@@ -56,5 +56,8 @@ struct PriceAPI: NetworkService {
             }
         }
     }
-    
+
+    func cancelAllTasks() {
+        provider.cancelAllTasks()
+    }
 }
