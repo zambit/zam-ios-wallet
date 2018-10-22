@@ -109,12 +109,6 @@ struct UserDefaultsManager {
     }
 
     var isPinCreated: Bool {
-        let flag = try? getPin()
-
-        guard let pin = flag else {
-            return false
-        }
-
-        return pin != nil
+        return (try? getPin()) != nil
     }
 }

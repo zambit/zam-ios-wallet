@@ -215,6 +215,7 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable, Advanced
 
         let wallet = wallets[currentIndex]
 
+        priceAPI?.cancelAllTasks()
         priceAPI?.getCoinPrice(coin: wallet.coin).done {
             [weak self]
             coinData in
@@ -284,6 +285,7 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable, Advanced
             limit = 120
         }
 
+        historyAPI.cancellAllTasks()
         historyAPI.getHistoricalPrice(for: wallets[currentIndex].coin, convertingTo: .standard, interval: type, groupingBy: aggregate, count: limit).done {
             prices in
 
