@@ -735,10 +735,9 @@
 			isa = PBXGroup;
 			children = (
 				8C04BC36211C872E00E90090 /* ContainerView.swift */,
-				8C7DE6E2216F619600824A4B /* WalletDetailsTableViewCells */,
+				8CFFBFB3217E006400C08C94 /* Cells */,
 				8C7C3341214290AB00EC6C96 /* Buttons */,
 				8C6088612111FB0A00470411 /* Components */,
-				8C7C3352214661C300EC6C96 /* TextFieldCell */,
 				8C7C3342214290BD00EC6C96 /* ImageViews */,
 				8C7DE6CD216D139800824A4B /* Labels */,
 				8C333D5B210B538700949AC0 /* CheckBox */,
@@ -1698,6 +1697,15 @@
 				8CF5F95F2114A7880083B36A /* CreatePinStageItem.xib */,
 			);
 			path = CreatePinStageItem;
+			sourceTree = "<group>";
+		};
+		8CFFBFB3217E006400C08C94 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				8C7C3352214661C300EC6C96 /* TextFieldCell */,
+				8C7DE6E2216F619600824A4B /* WalletDetailsTableViewCells */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		9307AC64215BC1990093DB68 /* walletNetworkLayerTests */ = {
