@@ -68,10 +68,10 @@ class ChartLayer: CALayer {
         cloud.shadowRadius = 18.0
         cloud.shadowOpacity = 0.4
 
-        let path = UIBezierPath(roundedRect: CGRect(x: 0, y: 0, width: 80.0, height: 40.0), cornerRadius: 5.0)
+        let path = UIBezierPath(roundedRect: CGRect(x: 0, y: 0, width: 82.0, height: 40.0), cornerRadius: 5.0)
         cloud.path = path.cgPath
 
-        cloud.frame = CGRect(x: 0, y: 0, width: 80.0, height: 40.0)
+        cloud.frame = CGRect(x: 0, y: 0, width: 82.0, height: 40.0)
         cloud.name = "cloudLayer"
         addSublayer(cloud)
 

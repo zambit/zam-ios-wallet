@@ -25,7 +25,7 @@ class CloudLayer: CAShapeLayer {
     override var frame: CGRect {
         didSet {
             topTextLayer?.frame = CGRect(x: 7.0, y: 4.0, width: frame.width - 7.0 - 5.0, height: 15.0)
-            bottomTextLayer?.frame = CGRect(x: 7.0, y: 20.0, width: frame.width - 7.0 - 5.0, height: frame.height - 4.0 - 15.0 - 4.0 - 1.0)
+            bottomTextLayer?.frame = CGRect(x: 7.0, y: 17.0, width: frame.width - 7.0 - 5.0, height: frame.height - 17.0 - 3.0)
         }
     }
 
@@ -58,7 +58,7 @@ class CloudLayer: CAShapeLayer {
 
 
         let bottomTextLayer = CATextLayer()
-        bottomTextLayer.frame = CGRect(x: 7.0, y: 17.0, width: frame.width - 7.0 - 5.0, height: 40)
+        bottomTextLayer.frame = CGRect(x: 7.0, y: 17.0, width: frame.width - 7.0 - 5.0, height: frame.height - 17.0 - 3.0)
         bottomTextLayer.string = additional
         bottomTextLayer.alignmentMode = .left
         bottomTextLayer.font = UIFont.walletFont(ofSize: 8.0, weight: .regular)
