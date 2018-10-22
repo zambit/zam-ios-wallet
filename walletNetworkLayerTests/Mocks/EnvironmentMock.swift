@@ -14,6 +14,10 @@ struct EnvironmentMock: Environment {
         return "testing"
     }
 
+    var parameters: RequestParams? {
+        return nil
+    }
+
     var headers: [String : Any] {
         return [:]
     }

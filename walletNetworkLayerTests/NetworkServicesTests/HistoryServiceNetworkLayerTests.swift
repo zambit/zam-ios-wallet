@@ -43,7 +43,7 @@ class HistoryServiceNetworkLayerTests: ServiceNetworkLayerTests {
     func testGettingDailyDataCodeSucceed() {
         // given
         let stub = HistoryServiceNetworkLayerStubs.getDailyData
-        let preparedHistoricalObject = CodableHistoricalData(time: 1535846400, close: 7301.26, high: 7384.38, low: 7144.71, open: 7203.46, volumeFrom: 61424.38, volumeTo: 447453370.83)
+        let preparedHistoricalObject = CodableCoinHistoricalData(time: 1535846400, close: 7301.26, high: 7384.38, low: 7144.71, open: 7203.46, volumeFrom: 61424.38, volumeTo: 447453370.83)
         let preparedDailyData = CoinHistoricalPrice(coin: .btc, codable: preparedHistoricalObject)
         let comparingObject: [CoinHistoricalPrice] = [preparedDailyData]
 
