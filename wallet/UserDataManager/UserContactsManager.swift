@@ -28,8 +28,10 @@ enum UserContactFetchKey {
 
 class UserContactsManager {
 
-    private(set) static var `default`: UserContactsManager = UserContactsManager(fetchKeys: [.fullName, .phoneNumber, .avatar],
-                                                                 phoneNumberFormatter: PhoneNumberFormatter())
+    private(set) static var `default`: UserContactsManager = UserContactsManager(
+        fetchKeys: [.fullName, .phoneNumber, .avatar],
+        phoneNumberFormatter: PhoneNumberFormatter()
+    )
 
     private(set) var contacts: [Contact] = []
 
@@ -48,14 +50,8 @@ class UserContactsManager {
 
     func fetchContacts(_ completion: @escaping ([Contact]) -> Void) {
         let success: () -> Void = {
-            [weak self] in
-
-            guard let strongSelf = self else {
-                return
-            }
-
             DispatchQueue.global(qos: .default).async {
-                guard let contacts = try? strongSelf.getContacts() else {
+                guard let contacts = try? self.getContacts() else {
                     DispatchQueue.main.async {
                         completion([])
                     }
@@ -63,7 +59,7 @@ class UserContactsManager {
                 }
 
                 let result = contacts.map { Contact(contact: $0) }
-                strongSelf.contacts = result
+                self.contacts = result
 
                 DispatchQueue.main.async {
                     completion(result)
@@ -71,16 +67,22 @@ class UserContactsManager {
             }
         }
 
+        let failure: () -> Void = {
+            self.contacts = []
+
+            DispatchQueue.main.async {
+                completion([])
+            }
+        }
+
         if !UserContactsManager.isAvailable {
             contactStore.requestAccess(for: CNEntityType.contacts) {
-                [weak self]
                 (access, accessError) in
+
                 if access {
                     success()
-                }
-                else {
-                    self?.contacts = []
-                    completion([])
+                } else {
+                    failure()
                 }
             }
         } else {

@@ -1,5 +1,5 @@
 //
-//  TextFieldCell.swift
+//  TextFieldTableViewCell.swift
 //  wallet
 //
 //  Created by Alexander Ponomarev on 07/09/2018.
@@ -9,11 +9,11 @@
 import Foundation
 import UIKit
 
-class TextFieldCell: UITableViewCell, UITextFieldDelegate {
+class TextFieldTableViewCell: UITableViewCell, UITextFieldDelegate, Configurable {
 
     private var onTap: ((UITextField) -> Void)?
     private var onEditing: ((UITextField) -> Void)?
-    private var onBegin: ((TextFieldCell) -> Void)?
+    private var onBegin: ((TextFieldTableViewCell) -> Void)?
 
     private(set) var textField: FloatTextField!
 
@@ -49,7 +49,7 @@ class TextFieldCell: UITableViewCell, UITextFieldDelegate {
         textField.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8.0).isActive = true
     }
 
-    func configure(with data: TextFieldCellData) {
+    func configure(with data: TextFieldTableViewCellData) {
         textField.custom.setup(placeholder: data.placeholder)
         textField.keyboardType = data.keyboardType ?? .default
         textField.autocapitalizationType = data.autocapitalizationType ?? .none

@@ -83,47 +83,65 @@ struct CoinPrice: Equatable {
     }
 
     func description(property: Properties) -> String {
-        var currency: String?
-        var percents: String?
+        do {
+            switch property {
+            case .price:
+                let prefix = fiat.symbol
+                let currency = try price.format(to: .smart)
+                return "\(prefix)\(currency)"
+            case .marketCap:
+                let prefix = fiat.symbol
+                let postfix = fiat.short
+                let currency = try marketCap.format(to: .largeDecimals)
+                return "\(prefix)\(currency) \(postfix)"
+            case .volumeDay:
+                let postfix = coin.short
+                let currency = try volumeDay.format(to: .largeDecimals)
+                return "\(currency) \(postfix)"
+            case .volume24h:
+                let postfix = coin.short
+                let currency = try volume24h.format(to: .largeDecimals)
+                return "\(currency) \(postfix)"
+            case .changePct24h:
+                let percents = try changePct24h.format(to: .short)
+                return "\(percents)%"
+            case .change24h:
+                let prefix = fiat.symbol
+                let currency = try change24h.format(to: .short)
+                return "\(prefix)\(currency)"
+            case .openDay:
+                let prefix = fiat.symbol
+                let currency = try openDay.format(to: .short)
+                return "\(prefix)\(currency)"
+            case .highDay:
+                let prefix = fiat.symbol
+                let currency = try highDay.format(to: .short)
+                return "\(prefix)\(currency)"
+            case .lowDay:
+                let prefix = fiat.symbol
+                let currency = try lowDay.format(to: .short)
+                return "\(prefix)\(currency)"
+            case .open24h:
+                let prefix = fiat.symbol
+                let currency = try open24h.format(to: .short)
+                return "\(prefix)\(currency)"
+            case .high24h:
+                let prefix = fiat.symbol
+                let currency = try high24h.format(to: .short)
+                return "\(prefix)\(currency)"
+            case .low24h:
+                let prefix = fiat.symbol
+                let currency = try low24h.format(to: .short)
+                return "\(prefix)\(currency)"
+            case .supply:
+                let postfix = coin.short
+                let currency = try supply.format(to: .largeDecimals)
+                return "\(currency) \(postfix)"
+            }
 
-        switch property {
-        case .price:
-            currency = price.formatted
-        case .marketCap:
-            currency = marketCap.formatted
-        case .volumeDay:
-            currency = volumeDay.shortFormatted
-        case .volume24h:
-            currency = volume24h.shortFormatted
-        case .changePct24h:
-            percents = changePct24h.shortFormatted
-        case .change24h:
-            currency = change24h.shortFormatted
-        case .openDay:
-            currency = openDay.shortFormatted
-        case .highDay:
-            currency = highDay.shortFormatted
-        case .lowDay:
-            currency = lowDay.shortFormatted
-        case .open24h:
-            currency = open24h.shortFormatted
-        case .high24h:
-            currency = high24h.shortFormatted
-        case .low24h:
-            currency = low24h.shortFormatted
-        case .supply:
-            currency = supply.formatted
+        } catch {
+            return ""
         }
-
-        if let string = currency {
-            return "\(fiat.symbol) \(string)"
-        }
-
-        if let string = percents {
-            return "\(string)%"
-        }
-
-        fatalError()
     }
 }
 

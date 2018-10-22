@@ -10,12 +10,16 @@ import UIKit
 
 extension UIBezierPath
 {
-    func interpolatePointsWithHermite(interpolationPoints : [CGPoint], alpha: CGFloat = 1.0/3.0)
+
+    @discardableResult
+    func interpolatePointsWithHermite(interpolationPoints : [CGPoint], alpha: CGFloat = 1.0/3.0) -> [CGPoint]
     {
-        guard !interpolationPoints.isEmpty else { return }
+        guard !interpolationPoints.isEmpty else { return [] }
         self.move(to: interpolationPoints[0])
 
         let n = interpolationPoints.count - 1
+
+        var points: [CGPoint] = [interpolationPoints[0]]
 
         for index in 0..<n
         {
@@ -60,6 +64,9 @@ extension UIBezierPath
             let controlPoint2 = CGPoint(x: currentPoint.x - mx * alpha, y: currentPoint.y - my * alpha)
 
             self.addCurve(to: endPoint, controlPoint1: controlPoint1, controlPoint2: controlPoint2)
+            points.append(endPoint)
         }
+
+        return points
     }
 }

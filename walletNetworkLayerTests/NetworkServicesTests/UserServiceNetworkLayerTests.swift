@@ -418,7 +418,7 @@ class UserServiceNetworkLayerTests: ServiceNetworkLayerTests {
         let preparedTransaction = Transaction(id: "408", direction: .outgoing, status: .success, coin: .btc, participantType: .recipient, participant: "+79111511111", amount: preparedBalance)
         let preparedDateInterval = DateInterval(startUnixTimestamp: 1537995600, endUnixTimestamp: 1538082000)
         let preparedTransactionsGroup = TransactionsGroup(dateInterval: preparedDateInterval, amount: preparedBalance, transactions: [preparedTransaction])
-        let comparingObject = GroupedTransactionsPage(next: "382", transactions: [preparedTransactionsGroup])
+        let comparingObject = TransactionsPage(next: "382", transactions: [preparedTransactionsGroup])
 
         do {
             // Build provider with response test json file
@@ -503,7 +503,7 @@ class UserServiceNetworkLayerTests: ServiceNetworkLayerTests {
     func testGettingKYCPersonalInfoSucceed() {
         // given
         let stub = UserServiceNetworkLayerStubs.getKYCPersonalInfo
-        let preparedKYCData = KYCPersonaInfoResult(email: "test@mail.ru", firstName: "Name", lastName: "Surname", birthDate: Date(unixTimestamp: 717552000.0), gender: .male, country: "Test", city: "Test", region: "Test Region", street: "test street", house: "14", postalCode: 644122)
+        let preparedKYCData = KYCPersonaInfoProperties(email: "test@mail.ru", firstName: "Name", lastName: "Surname", birthDate: Date(unixTimestamp: 717552000.0), gender: .male, country: "Test", city: "Test", region: "Test Region", street: "test street", house: "14", postalCode: 644122)
         let comparingObject = KYCPersonalInfo(status: .pending, data: preparedKYCData)
 
         do {
