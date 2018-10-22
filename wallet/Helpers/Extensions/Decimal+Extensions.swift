@@ -14,6 +14,7 @@ extension Decimal {
         case long
         case short
         case smart
+        case largeDecimals
     }
 
     enum FormattingError: Error {
@@ -30,6 +31,8 @@ extension Decimal {
             string = shortFormatted
         case .smart:
             string = formatted
+        case .largeDecimals:
+            string = largeFormatted
         }
 
         guard let value = string else {
@@ -42,15 +45,24 @@ extension Decimal {
 
 extension Decimal {
 
-    var longFormatted: String? {
-        return NumberFormatter.walletAmount.string(from: self as NSNumber)
-    }
-
-    var shortFormatted: String? {
-        return NumberFormatter.walletAmountShort.string(from: self as NSNumber)
-    }
-
     var formatted: String? {
+
+        if abs(self) >= 1000 {
+            return NumberFormatter.amount(minimumFractionDigits: 0, maximumFractionDigits: 0).string(from: self as NSNumber)
+        }
+
+        if abs(self) >= 100 {
+            return NumberFormatter.amount(minimumFractionDigits: 1, maximumFractionDigits: 2).string(from: self as NSNumber)
+        }
+
+        if abs(self) >= 1 {
+            return NumberFormatter.amount(minimumFractionDigits: 1, maximumFractionDigits: 3).string(from: self as NSNumber)
+        }
+
+        return NumberFormatter.amount(minimumFractionDigits: 2, maximumFractionDigits: 5).string(from: self as NSNumber)
+    }
+
+    var largeFormatted: String? {
 
         if abs(self) >= 1000000000 {
             let value = self.doubleValue / 1000000000.0
@@ -66,7 +78,7 @@ extension Decimal {
             let value = self.doubleValue / 1000000.0
             guard let string = NumberFormatter.amount(minimumFractionDigits: 0,
                                                       maximumFractionDigits: 1).string(from: value as NSNumber) else {
-                return nil
+                                                        return nil
             }
 
             return string.appending("M")
@@ -82,19 +94,15 @@ extension Decimal {
             return string.appending("K")
         }
 
-        if abs(self) >= 1000 {
-            return NumberFormatter.amount(minimumFractionDigits: 0, maximumFractionDigits: 0).string(from: self as NSNumber)
-        }
+        return formatted
+    }
 
-        if abs(self) >= 100 {
-            return NumberFormatter.amount(minimumFractionDigits: 1, maximumFractionDigits: 2).string(from: self as NSNumber)
-        }
+    var longFormatted: String? {
+        return NumberFormatter.walletAmount.string(from: self as NSNumber)
+    }
 
-        if abs(self) >= 1 {
-            return NumberFormatter.amount(minimumFractionDigits: 1, maximumFractionDigits: 3).string(from: self as NSNumber)
-        }
-
-        return NumberFormatter.amount(minimumFractionDigits: 2, maximumFractionDigits: 5).string(from: self as NSNumber)
+    var shortFormatted: String? {
+        return NumberFormatter.walletAmountShort.string(from: self as NSNumber)
     }
 }
 

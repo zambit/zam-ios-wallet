@@ -92,15 +92,15 @@ struct CoinPrice: Equatable {
             case .marketCap:
                 let prefix = fiat.symbol
                 let postfix = fiat.short
-                let currency = try marketCap.format(to: .smart)
+                let currency = try marketCap.format(to: .largeDecimals)
                 return "\(prefix)\(currency) \(postfix)"
             case .volumeDay:
                 let postfix = coin.short
-                let currency = try volumeDay.format(to: .smart)
+                let currency = try volumeDay.format(to: .largeDecimals)
                 return "\(currency) \(postfix)"
             case .volume24h:
                 let postfix = coin.short
-                let currency = try volume24h.format(to: .smart)
+                let currency = try volume24h.format(to: .largeDecimals)
                 return "\(currency) \(postfix)"
             case .changePct24h:
                 let percents = try changePct24h.format(to: .short)
@@ -135,7 +135,7 @@ struct CoinPrice: Equatable {
                 return "\(prefix)\(currency)"
             case .supply:
                 let postfix = coin.short
-                let currency = try supply.format(to: .smart)
+                let currency = try supply.format(to: .largeDecimals)
                 return "\(currency) \(postfix)"
             }
 
