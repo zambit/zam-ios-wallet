@@ -78,6 +78,13 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable, Advanced
                 cell.delegate = parent
                 cell.configure(currentIndex: currentIndex, wallets: cards)
 
+                if let coinData = parent.coinPrice {
+                    cell.update(price: coinData.description(property: .price),
+                                change: coinData.description(property: .change24h),
+                                changePct: coinData.description(property: .changePct24h),
+                                isChangePositive: coinData.change24h >= 0)
+                }
+
                 return cell
             case IndexPath(row: 1, section: 0):
                 let _cell = parent.tableView?.dequeueReusableCell(withIdentifier: "WalletDetailsChartTableViewCell", for: indexPath)
@@ -89,7 +96,12 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable, Advanced
                 chartCell = cell
 
                 cell.delegate = parent
-                cell.beginChartLoading()
+
+                if let points = parent.walletsChartsPoints {
+                    cell.setupChart(points: points)
+                } else {
+                    cell.beginChartLoading()
+                }
 
                 return cell
             case IndexPath(row: 2, section: 0):
@@ -100,6 +112,12 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable, Advanced
                 }
 
                 detailsCell = cell
+
+                if let coinData = parent.coinPrice {
+                    cell.update(marketCap: coinData.description(property: .marketCap),
+                                volume: coinData.description(property: .volume24h),
+                                supply: coinData.description(property: .supply))
+                }
 
                 return cell
             default:
@@ -131,11 +149,12 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable, Advanced
 
     private var phone: String?
     private var wallets: [Wallet]?
+    private var walletsChartsPoints: [ChartLayer.Coordinate]?
     private var currentIndex: Int?
+    private var coinPrice: CoinPrice?
     private var currentInterval: CoinPriceChartIntervalType = .day
 
     private lazy var balancer = CellsBalancer(parent: self)
-
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -199,18 +218,20 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable, Advanced
             [weak self]
             coinData in
 
+            self?.coinPrice = coinData
+
             self?.balancer.briefCell?.update(price: coinData.description(property: .price),
                                              change: coinData.description(property: .change24h),
                                              changePct: coinData.description(property: .changePct24h),
                                              isChangePositive: coinData.change24h >= 0)
 
-            //self?.balancer.detailsCell?.endLoading()
             self?.balancer.detailsCell?.update(marketCap: coinData.description(property: .marketCap),
                                                volume: coinData.description(property: .volume24h),
                                                supply: coinData.description(property: .supply))
         }.catch {
             error in
 
+            Crashlytics.sharedInstance().recordError(error)
             print(error)
         }
 
@@ -218,6 +239,8 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable, Advanced
         loadChartsPoints(for: currentInterval, completion: {
             [weak self]
             points in
+
+            self?.walletsChartsPoints = points
 
             self?.balancer.chartCell?.endChartLoading()
             self?.balancer.chartCell?.setupChart(points: points)
@@ -324,13 +347,17 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable, Advanced
     }
 
     func walletDetailsChartIntervalSelected(_ walletDetailsChart: WalletDetailsChartTableViewCell, interval: CoinPriceChartIntervalType) {
-
         self.currentInterval = interval
 
         walletDetailsChart.beginChartLoading()
         loadChartsPoints(for: interval, completion: {
+            [weak self]
+            points in
+
+            self?.walletsChartsPoints = points
+
             walletDetailsChart.endChartLoading()
-            walletDetailsChart.setupChart(points: $0)
+            walletDetailsChart.setupChart(points: points)
         })
     }
 

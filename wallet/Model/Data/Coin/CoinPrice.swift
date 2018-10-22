@@ -83,64 +83,65 @@ struct CoinPrice: Equatable {
     }
 
     func description(property: Properties) -> String {
-        var prefix: String?
-        var currency: String?
-        var percents: String?
-
-        switch property {
-        case .price:
-            prefix = fiat.symbol
-            currency = price.formatted
-        case .marketCap:
-            prefix = fiat.symbol
-            currency = marketCap.formatted
-        case .volumeDay:
-            prefix = coin.short
-            currency = volumeDay.formatted
-        case .volume24h:
-            prefix = coin.short
-            currency = volume24h.formatted
-        case .changePct24h:
-            percents = changePct24h.shortFormatted
-        case .change24h:
-            prefix = fiat.symbol
-            currency = change24h.shortFormatted
-        case .openDay:
-            prefix = fiat.symbol
-            currency = openDay.shortFormatted
-        case .highDay:
-            prefix = fiat.symbol
-            currency = highDay.shortFormatted
-        case .lowDay:
-            prefix = fiat.symbol
-            currency = lowDay.shortFormatted
-        case .open24h:
-            prefix = fiat.symbol
-            currency = open24h.shortFormatted
-        case .high24h:
-            prefix = fiat.symbol
-            currency = high24h.shortFormatted
-        case .low24h:
-            prefix = fiat.symbol
-            currency = low24h.shortFormatted
-        case .supply:
-            prefix = coin.short
-            currency = supply.formatted
-        }
-
-        if let string = currency {
-            if let prefix = prefix {
-                return "\(prefix) \(string)"
-            } else {
-                return "\(string)"
+        do {
+            switch property {
+            case .price:
+                let prefix = fiat.symbol
+                let currency = try price.format(to: .smart)
+                return "\(prefix)\(currency)"
+            case .marketCap:
+                let prefix = fiat.symbol
+                let postfix = fiat.short
+                let currency = try marketCap.format(to: .smart)
+                return "\(prefix)\(currency) \(postfix)"
+            case .volumeDay:
+                let postfix = coin.short
+                let currency = try volumeDay.format(to: .smart)
+                return "\(currency) \(postfix)"
+            case .volume24h:
+                let postfix = coin.short
+                let currency = try volume24h.format(to: .smart)
+                return "\(currency) \(postfix)"
+            case .changePct24h:
+                let percents = try changePct24h.format(to: .short)
+                return "\(percents)%"
+            case .change24h:
+                let prefix = fiat.symbol
+                let currency = try change24h.format(to: .short)
+                return "\(prefix)\(currency)"
+            case .openDay:
+                let prefix = fiat.symbol
+                let currency = try openDay.format(to: .short)
+                return "\(prefix)\(currency)"
+            case .highDay:
+                let prefix = fiat.symbol
+                let currency = try highDay.format(to: .short)
+                return "\(prefix)\(currency)"
+            case .lowDay:
+                let prefix = fiat.symbol
+                let currency = try lowDay.format(to: .short)
+                return "\(prefix)\(currency)"
+            case .open24h:
+                let prefix = fiat.symbol
+                let currency = try open24h.format(to: .short)
+                return "\(prefix)\(currency)"
+            case .high24h:
+                let prefix = fiat.symbol
+                let currency = try high24h.format(to: .short)
+                return "\(prefix)\(currency)"
+            case .low24h:
+                let prefix = fiat.symbol
+                let currency = try low24h.format(to: .short)
+                return "\(prefix)\(currency)"
+            case .supply:
+                let postfix = coin.short
+                let currency = try supply.format(to: .smart)
+                return "\(currency) \(postfix)"
             }
-        }
 
-        if let string = percents {
-            return "\(string)%"
+        } catch {
+            return ""
         }
-
-        return ""
     }
 }
 

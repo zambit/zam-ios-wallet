@@ -17,6 +17,21 @@ extension NumberFormatter {
         return formatter
     }
 
+    static func amount(minimumFractionDigits: Int, maximumFractionDigits: Int) -> NumberFormatter {
+        let formatter = NumberFormatter()
+        formatter.locale = Locale.current
+        formatter.decimalSeparator = Locale.current.decimalSeparator
+        formatter.numberStyle = .decimal
+        formatter.minimumFractionDigits = minimumFractionDigits
+        formatter.maximumFractionDigits = maximumFractionDigits
+
+        if minimumFractionDigits > 0 {
+            formatter.alwaysShowsDecimalSeparator = true
+        }
+
+        return formatter
+    }
+
     static var walletAmountShort: NumberFormatter {
         let formatter = NumberFormatter()
         formatter.locale = Locale.current
