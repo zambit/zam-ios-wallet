@@ -18,6 +18,8 @@ class PinForm {
     private var completionHandler: () -> Void
     private var wrongHandler: () -> Void
 
+    var isEnabled: Bool = true
+
     init(compared: String,
          enterHandler: @escaping () -> Void,
          deleteHandler: @escaping () -> Void,
@@ -35,6 +37,10 @@ class PinForm {
     }
 
     func enter(_ string: String) {
+        guard isEnabled else {
+            return
+        }
+
         if progress.count >= compared.count {
             progress = ""
         }
@@ -55,6 +61,10 @@ class PinForm {
     }
 
     func remove() {
+        guard isEnabled else {
+            return
+        }
+
         if let _ = progress.popLast() {
             deleteHandler()
         }

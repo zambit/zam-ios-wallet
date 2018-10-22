@@ -209,14 +209,7 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable, Advanced
     }
 
     func loadData() {
-        guard let currentIndex = currentIndex, let wallets = wallets, wallets.count > currentIndex else {
-            return
-        }
-
-        let wallet = wallets[currentIndex]
-
-        priceAPI?.cancelAllTasks()
-        priceAPI?.getCoinPrice(coin: wallet.coin).done {
+        loadPrices(completion: {
             [weak self]
             coinData in
 
@@ -230,12 +223,8 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable, Advanced
             self?.balancer.detailsCell?.update(marketCap: coinData.description(property: .marketCap),
                                                volume: coinData.description(property: .volume24h),
                                                supply: coinData.description(property: .supply))
-        }.catch {
-            error in
+        })
 
-            Crashlytics.sharedInstance().recordError(error)
-            print(error)
-        }
 
         balancer.chartCell?.beginChartLoading()
         loadChartsPoints(for: currentInterval, completion: {
@@ -247,6 +236,23 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable, Advanced
             self?.balancer.chartCell?.endChartLoading()
             self?.balancer.chartCell?.setupChart(points: points)
         })
+    }
+
+    private func loadPrices(completion: @escaping (CoinPrice) -> Void) {
+        guard let currentIndex = currentIndex, let wallets = wallets, wallets.count > currentIndex else {
+            return
+        }
+
+        let wallet = wallets[currentIndex]
+
+        priceAPI?.cancelAllTasks()
+        priceAPI?.getCoinPrice(coin: wallet.coin).done {
+            coinData in
+            completion(coinData)
+        }.catch {
+            error in
+            Crashlytics.sharedInstance().recordError(error)
+        }
     }
 
     private func loadChartsPoints(for interval: CoinPriceChartIntervalType, completion: @escaping ([ChartLayer.Coordinate]) -> Void) {
@@ -302,7 +308,6 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable, Advanced
             }
         }.catch {
             error in
-
             Crashlytics.sharedInstance().recordError(error)
         }
     }
