@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct CoinDailyPrice: Equatable {
+struct CoinHistoricalPrice: Equatable {
 
     let coin: CoinType
 

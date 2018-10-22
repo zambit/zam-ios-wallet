@@ -17,17 +17,17 @@ struct HistoryAPI: NetworkService {
         self.provider = provider
     }
 
-    func getHistoricalDailyData(for coin: CoinType, days: Int) -> Promise<[CoinDailyPrice]> {
+    func getHistoricalDailyData(for coin: CoinType, days: Int) -> Promise<[CoinHistoricalPrice]> {
         return provider.execute(HistoryRequest.getDailyData(coin: coin.short, toCoin: FiatType.usd.short, limit: days))
             .then {
-                (response: Response) -> Promise<[CoinDailyPrice]> in
+                (response: Response) -> Promise<[CoinHistoricalPrice]> in
 
                 return Promise { seal in
                     switch response {
                     case .data(_):
 
                         let success: (CodableCoinHistoricalDataResponse) -> Void = { s in
-                            let objects = s.data.map({ return CoinDailyPrice(coin: coin, codable: $0) })
+                            let objects = s.data.map({ return CoinHistoricalPrice(coin: coin, codable: $0) })
                             seal.fulfill(objects)
                         }
 

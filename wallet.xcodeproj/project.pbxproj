@@ -181,7 +181,7 @@
 		8C7DE67B2164BE9B00824A4B /* CryptocompareEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7DE67A2164BE9B00824A4B /* CryptocompareEnvironment.swift */; };
 		8C7DE67E2164BF0500824A4B /* HistoryRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7DE67D2164BF0500824A4B /* HistoryRequest.swift */; };
 		8C7DE6802164BF0E00824A4B /* HistoryAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7DE67F2164BF0E00824A4B /* HistoryAPI.swift */; };
-		8C7DE6822164C5F800824A4B /* CoinDailyPrice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7DE6812164C5F800824A4B /* CoinDailyPrice.swift */; };
+		8C7DE6822164C5F800824A4B /* CoinHistoricalPrice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7DE6812164C5F800824A4B /* CoinHistoricalPrice.swift */; };
 		8C7DE6862164CAD400824A4B /* CryptocompareResponseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7DE6852164CAD400824A4B /* CryptocompareResponseError.swift */; };
 		8C7DE6882164EF8000824A4B /* HistoryServiceNetworkLayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7DE6872164EF8000824A4B /* HistoryServiceNetworkLayerTests.swift */; };
 		8C7DE68F2166104000824A4B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C7DE68E2166104000824A4B /* GoogleService-Info.plist */; };
@@ -513,7 +513,7 @@
 		8C7DE67A2164BE9B00824A4B /* CryptocompareEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptocompareEnvironment.swift; sourceTree = "<group>"; };
 		8C7DE67D2164BF0500824A4B /* HistoryRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryRequest.swift; sourceTree = "<group>"; };
 		8C7DE67F2164BF0E00824A4B /* HistoryAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryAPI.swift; sourceTree = "<group>"; };
-		8C7DE6812164C5F800824A4B /* CoinDailyPrice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinDailyPrice.swift; sourceTree = "<group>"; };
+		8C7DE6812164C5F800824A4B /* CoinHistoricalPrice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinHistoricalPrice.swift; sourceTree = "<group>"; };
 		8C7DE6852164CAD400824A4B /* CryptocompareResponseError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptocompareResponseError.swift; sourceTree = "<group>"; };
 		8C7DE6872164EF8000824A4B /* HistoryServiceNetworkLayerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryServiceNetworkLayerTests.swift; sourceTree = "<group>"; };
 		8C7DE68E2166104000824A4B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -1417,7 +1417,7 @@
 			isa = PBXGroup;
 			children = (
 				8C7DE6EA216FA2F900824A4B /* CoinPrice.swift */,
-				8C7DE6812164C5F800824A4B /* CoinDailyPrice.swift */,
+				8C7DE6812164C5F800824A4B /* CoinHistoricalPrice.swift */,
 			);
 			path = Coin;
 			sourceTree = "<group>";
@@ -2183,7 +2183,7 @@
 				8C4413D02118A8EC00C9689C /* KeychainConfiguration.swift in Sources */,
 				8C7DE6A1216D08E500824A4B /* SpinningAnimationView.swift in Sources */,
 				8CA218942122EAC90063C188 /* SendMoneyComponent.swift in Sources */,
-				8C7DE6822164C5F800824A4B /* CoinDailyPrice.swift in Sources */,
+				8C7DE6822164C5F800824A4B /* CoinHistoricalPrice.swift in Sources */,
 				8CA218A1212304590063C188 /* SendMoneyViewController.swift in Sources */,
 				8C0919832109CC2000703224 /* EnterLoginPasswordViewController.swift in Sources */,
 				8C2314532150EA66007340E7 /* PartialPhoneNumberTextField.swift in Sources */,
