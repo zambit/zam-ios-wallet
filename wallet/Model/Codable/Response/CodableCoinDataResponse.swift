@@ -2,7 +2,7 @@
 //  CodableCoinDataResponse.swift
 //  wallet
 //
-//  Created by Alexander Ponomarev on 12/10/2018.
+//  Created by Alexander Ponomarev on 23/10/2018.
 //  Copyright © 2018 zamzam. All rights reserved.
 //
 

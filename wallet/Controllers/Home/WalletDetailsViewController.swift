@@ -246,7 +246,7 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable, Advanced
         let wallet = wallets[currentIndex]
 
         priceAPI?.cancelAllTasks()
-        priceAPI?.getCoinPrice(coin: wallet.coin).done {
+        priceAPI?.getCoinDetailPrice(coin: wallet.coin).done {
             coinData in
             completion(coinData)
         }.catch {

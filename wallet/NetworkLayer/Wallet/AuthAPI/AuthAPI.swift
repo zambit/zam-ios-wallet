@@ -30,38 +30,41 @@ struct AuthAPI: NetworkService {
      - returns: Token.
      */
     func signIn(phone: String, password: String) -> Promise<String> {
-        return provider.execute(AuthRequest.signIn(phone: phone, password: password))
-            .then {
-                (response: Response) -> Promise<String> in
+        return Promise { seal in
+            let request = AuthRequest.signIn(phone: phone, password: password)
+            provider.execute(request).done {
+                response in
 
-                return Promise { seal in
-                    switch response {
-                    case .data(_):
+                switch response {
+                case .data(_):
 
-                        let success: (CodableTokenResponse) -> Void = { s in
-                            seal.fulfill(s.data.token)
-                        }
+                    let success: (CodableTokenResponse) -> Void = { s in
+                        seal.fulfill(s.data.token)
+                    }
 
-                        let failure: (CodableWalletFailure) -> Void = { f in
-                            guard f.errors.count > 0 else {
-                                let error = WalletResponseError.undefinedServerFailureResponse
-                                seal.reject(error)
-                                return
-                            }
-
-                            let error = WalletResponseError.serverFailureResponse(errors: f.errors)
+                    let failure: (CodableWalletFailure) -> Void = { f in
+                        guard f.errors.count > 0 else {
+                            let error = WalletResponseError.undefinedServerFailureResponse
                             seal.reject(error)
+                            return
                         }
 
-                        do {
-                            try response.extractResult(success: success, failure: failure)
-                        } catch let error {
-                            seal.reject(error)
-                        }
-                    case .error(let error):
+                        let error = WalletResponseError.serverFailureResponse(errors: f.errors)
                         seal.reject(error)
                     }
+
+                    do {
+                        try response.extractResult(success: success, failure: failure)
+                    } catch let error {
+                        seal.reject(error)
+                    }
+                case .error(let error):
+                    seal.reject(error)
                 }
+            }.catch {
+                error in
+                seal.reject(error)
+            }
         }
     }
 
@@ -72,39 +75,42 @@ struct AuthAPI: NetworkService {
      */
     @discardableResult
     func signOut(token: String) -> Promise<Void> {
-        return provider.execute(AuthRequest.signOut(token: token))
-            .then {
-                (response: Response) -> Promise<Void> in
+        return Promise { seal in
+            let request = AuthRequest.signOut(token: token)
+            provider.execute(request).done {
+                response in
 
-                return Promise { seal in
-                    switch response {
-                    case .data(_):
+                switch response {
+                case .data(_):
 
-                        let success: (CodableEmptyResponse) -> Void = { _ in
-                            seal.fulfill(())
-                        }
+                    let success: (CodableEmptyResponse) -> Void = { _ in
+                        seal.fulfill(())
+                    }
 
-                        let failure: (CodableWalletFailure) -> Void = { f in
-                            guard f.errors.count > 0 else {
-                                let error = WalletResponseError.undefinedServerFailureResponse
-                                seal.reject(error)
-                                return
-                            }
-
-                            let error = WalletResponseError.serverFailureResponse(errors: f.errors)
+                    let failure: (CodableWalletFailure) -> Void = { f in
+                        guard f.errors.count > 0 else {
+                            let error = WalletResponseError.undefinedServerFailureResponse
                             seal.reject(error)
+                            return
                         }
 
-                        do {
-                            try response.extractResult(success: success, failure: failure)
-                        } catch let error {
-                            seal.reject(error)
-                        }
-
-                    case .error(let error):
+                        let error = WalletResponseError.serverFailureResponse(errors: f.errors)
                         seal.reject(error)
                     }
+
+                    do {
+                        try response.extractResult(success: success, failure: failure)
+                    } catch let error {
+                        seal.reject(error)
+                    }
+
+                case .error(let error):
+                    seal.reject(error)
                 }
+            }.catch {
+                error in
+                seal.reject(error)
+            }
         }
     }
 
@@ -116,39 +122,42 @@ struct AuthAPI: NetworkService {
      - returns: User's phone number.
      */
     func checkIfUserAuthorized(token: String) -> Promise<String> {
-        return provider.execute(AuthRequest.checkAuthorized(token: token))
-            .then {
-                (response: Response) -> Promise<String> in
+        return Promise { seal in
+            let request = AuthRequest.checkAuthorized(token: token)
+            provider.execute(request).done {
+                response in
 
-                return Promise { seal in
-                    switch response {
-                    case .data(_):
-                        
-                        let success: (CodablePhoneResponse) -> Void = { s in
-                            seal.fulfill(s.data.phone)
-                        }
+                switch response {
+                case .data(_):
 
-                        let failure: (CodableWalletFailure) -> Void = { f in
-                            guard f.errors.count > 0 else {
-                                let error = WalletResponseError.undefinedServerFailureResponse
-                                seal.reject(error)
-                                return
-                            }
+                    let success: (CodablePhoneResponse) -> Void = { s in
+                        seal.fulfill(s.data.phone)
+                    }
 
-                            let error = WalletResponseError.serverFailureResponse(errors: f.errors)
+                    let failure: (CodableWalletFailure) -> Void = { f in
+                        guard f.errors.count > 0 else {
+                            let error = WalletResponseError.undefinedServerFailureResponse
                             seal.reject(error)
+                            return
                         }
 
-                        do {
-                            try response.extractResult(success: success, failure: failure)
-                        } catch let error {
-                            seal.reject(error)
-                        }
-
-                    case .error(let error):
+                        let error = WalletResponseError.serverFailureResponse(errors: f.errors)
                         seal.reject(error)
                     }
+
+                    do {
+                        try response.extractResult(success: success, failure: failure)
+                    } catch let error {
+                        seal.reject(error)
+                    }
+
+                case .error(let error):
+                    seal.reject(error)
                 }
+            }.catch {
+                error in
+                seal.reject(error)
+            }
         }
     }
 
@@ -161,39 +170,42 @@ struct AuthAPI: NetworkService {
      - returns: Token.
      */
     func confirmUserPhone(token: String, link: String) -> Promise<String> {
-        return provider.execute(AuthRequest.confirmUserPhone(token: token, confirmationId: link))
-            .then {
-                (response: Response) -> Promise<String> in
+        return Promise { seal in
+            let request = AuthRequest.confirmUserPhone(token: token, confirmationId: link)
+            provider.execute(request).done {
+                response in
 
-                return Promise { seal in
-                    switch response {
-                    case .data(_):
+                switch response {
+                case .data(_):
 
-                        let success: (CodableTokenResponse) -> Void = { s in
-                            seal.fulfill(s.data.token)
-                        }
+                    let success: (CodableTokenResponse) -> Void = { s in
+                        seal.fulfill(s.data.token)
+                    }
 
-                        let failure: (CodableWalletFailure) -> Void = { f in
-                            guard f.errors.count > 0 else {
-                                let error = WalletResponseError.undefinedServerFailureResponse
-                                seal.reject(error)
-                                return
-                            }
-
-                            let error = WalletResponseError.serverFailureResponse(errors: f.errors)
+                    let failure: (CodableWalletFailure) -> Void = { f in
+                        guard f.errors.count > 0 else {
+                            let error = WalletResponseError.undefinedServerFailureResponse
                             seal.reject(error)
+                            return
                         }
 
-                        do {
-                            try response.extractResult(success: success, failure: failure)
-                        } catch let error {
-                            seal.reject(error)
-                        }
-
-                    case .error(let error):
+                        let error = WalletResponseError.serverFailureResponse(errors: f.errors)
                         seal.reject(error)
                     }
+
+                    do {
+                        try response.extractResult(success: success, failure: failure)
+                    } catch let error {
+                        seal.reject(error)
+                    }
+
+                case .error(let error):
+                    seal.reject(error)
                 }
+            }.catch {
+                error in
+                seal.reject(error)
+            }
         }
     }
 
@@ -201,39 +213,42 @@ struct AuthAPI: NetworkService {
      Create new user from pending transaction.
      */
     func createNewUserFromPendingTransaction(token: String, link: String) -> Promise <String> {
-        return provider.execute(AuthRequest.createNewUserFromPendingTransaction(token: token, recvInvitationId: link))
-            .then {
-                (response: Response) -> Promise<String> in
+        return Promise { seal in
+            let request = AuthRequest.createNewUserFromPendingTransaction(token: token, recvInvitationId: link)
+            provider.execute(request).done {
+                response in
 
-                return Promise { seal in
-                    switch response {
-                    case .data(_):
+                switch response {
+                case .data(_):
 
-                        let success: (CodableTokenResponse) -> Void = { s in
-                            seal.fulfill(s.data.token)
-                        }
+                    let success: (CodableTokenResponse) -> Void = { s in
+                        seal.fulfill(s.data.token)
+                    }
 
-                        let failure: (CodableWalletFailure) -> Void = { f in
-                            guard f.errors.count > 0 else {
-                                let error = WalletResponseError.undefinedServerFailureResponse
-                                seal.reject(error)
-                                return
-                            }
-
-                            let error = WalletResponseError.serverFailureResponse(errors: f.errors)
+                    let failure: (CodableWalletFailure) -> Void = { f in
+                        guard f.errors.count > 0 else {
+                            let error = WalletResponseError.undefinedServerFailureResponse
                             seal.reject(error)
+                            return
                         }
 
-                        do {
-                            try response.extractResult(success: success, failure: failure)
-                        } catch let error {
-                            seal.reject(error)
-                        }
-
-                    case .error(let error):
+                        let error = WalletResponseError.serverFailureResponse(errors: f.errors)
                         seal.reject(error)
                     }
+
+                    do {
+                        try response.extractResult(success: success, failure: failure)
+                    } catch let error {
+                        seal.reject(error)
+                    }
+
+                case .error(let error):
+                    seal.reject(error)
                 }
+            }.catch {
+                error in
+                seal.reject(error)
+            }
         }
     }
 
@@ -245,39 +260,42 @@ struct AuthAPI: NetworkService {
      - returns: Token.
      */
     func refreshToken(token: String) -> Promise<String> {
-        return provider.execute(AuthRequest.refreshToken(token: token))
-            .then {
-                (response: Response) -> Promise<String> in
+        return Promise { seal in
+            let request = AuthRequest.refreshToken(token: token)
+            provider.execute(request).done {
+                response in
 
-                return Promise { seal in
-                    switch response {
-                    case .data(_):
+                switch response {
+                case .data(_):
 
-                        let success: (CodableTokenResponse) -> Void = { s in
-                            seal.fulfill(s.data.token)
-                        }
+                    let success: (CodableTokenResponse) -> Void = { s in
+                        seal.fulfill(s.data.token)
+                    }
 
-                        let failure: (CodableWalletFailure) -> Void = { f in
-                            guard f.errors.count > 0 else {
-                                let error = WalletResponseError.undefinedServerFailureResponse
-                                seal.reject(error)
-                                return
-                            }
-
-                            let error = WalletResponseError.serverFailureResponse(errors: f.errors)
+                    let failure: (CodableWalletFailure) -> Void = { f in
+                        guard f.errors.count > 0 else {
+                            let error = WalletResponseError.undefinedServerFailureResponse
                             seal.reject(error)
+                            return
                         }
 
-                        do {
-                            try response.extractResult(success: success, failure: failure)
-                        } catch let error {
-                            seal.reject(error)
-                        }
-
-                    case .error(let error):
+                        let error = WalletResponseError.serverFailureResponse(errors: f.errors)
                         seal.reject(error)
                     }
+
+                    do {
+                        try response.extractResult(success: success, failure: failure)
+                    } catch let error {
+                        seal.reject(error)
+                    }
+
+                case .error(let error):
+                    seal.reject(error)
                 }
+            }.catch {
+                error in
+                seal.reject(error)
+            }
         }
     }
 }

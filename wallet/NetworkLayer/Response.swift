@@ -67,7 +67,7 @@ enum Response {
                     let suc = try decoder.decode(Success.self, from: data)
                     success(suc)
                 } catch let s {
-                    throw ResponseError.responseDoesntCorrespondsToSuccessAndFailureTypes(successError: s, failureError: f)
+                    throw ResponseError.responseDoesntCorrespondsToSuccessOrFailureTypes(successError: s, failureError: f)
                 }
             }
         case .error(_):
@@ -80,5 +80,5 @@ enum ResponseError: Error {
     case invalidData
     case tryConvertApplicationErrorToCodable
     case cantConvertToGivenCodable
-    case responseDoesntCorrespondsToSuccessAndFailureTypes(successError: Error, failureError: Error)
+    case responseDoesntCorrespondsToSuccessOrFailureTypes(successError: Error, failureError: Error)
 }
