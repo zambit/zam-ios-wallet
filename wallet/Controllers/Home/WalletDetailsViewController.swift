@@ -10,20 +10,9 @@ import Foundation
 import UIKit
 import Crashlytics
 
-class WalletDetailsViewController: FlowViewController, WalletNavigable, AdvancedTransitionDelegate, SendMoneyViewControllerDelegate, UITableViewDelegate, UITableViewDataSource, WalletDetailsBriefDelegate, WalletDetailsChartDelegate {
-
-    var onSendFromWallet: ((_ index: Int, _ wallets: [Wallet], _ phone: String) -> Void)?
-    var onDepositToWallet: ((_ index: Int, _ wallets: [Wallet], _ phone: String) -> Void)?
-    var onExit: (() -> Void)?
-
-    weak var sendDelegate: SendMoneyViewControllerDelegate?
-    weak var advancedTransitionDelegate: AdvancedTransitionDelegate?
-
-    var priceAPI: PriceAPI?
-    var historyAPI: HistoryAPI?
+class WalletDetailsViewController: FlowViewController, WalletNavigable {
 
     class CellsBalancer {
-
         unowned var parent: WalletDetailsViewController
 
         private(set) weak var briefCell: WalletDetailsBriefTableViewCell?
@@ -68,7 +57,7 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable, Advanced
                     let currentIndex = parent.currentIndex,
                     let wallets = parent.wallets,
                     let phone = parent.phone else {
-                    return cell
+                        return cell
                 }
 
                 let cards = wallets.compactMap {
@@ -143,6 +132,16 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable, Advanced
         }
     }
 
+    var onSendFromWallet: ((_ index: Int, _ wallets: [Wallet], _ phone: String) -> Void)?
+    var onDepositToWallet: ((_ index: Int, _ wallets: [Wallet], _ phone: String) -> Void)?
+    var onExit: (() -> Void)?
+
+    weak var sendDelegate: SendMoneyViewControllerDelegate?
+    weak var advancedTransitionDelegate: AdvancedTransitionDelegate?
+
+    var priceAPI: PriceAPI?
+    var historyAPI: HistoryAPI?
+
     @IBOutlet private var tableView: UITableView!
 
     private var exitButton: HighlightableButton?
@@ -168,7 +167,6 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable, Advanced
         hero.isEnabled = true
 
         setupDefaultStyle()
-        //self.view.isOpaque = false
 
         tableView.hero.id = "floatingView"
         tableView.hero.modifiers = [.useScaleBasedSizeChange]
@@ -312,12 +310,29 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable, Advanced
         }
     }
 
-    // MARK: - UITableViewDataSource
+    // MARK: - Buttons events
+
+    @objc
+    private func exitButtonTouchUpInsideEvent(_ sender: Any) {
+        if let index = currentIndex {
+            advancedTransitionDelegate?.advancedTransitionWillBegin(from: self, params: ["walletIndex": index])
+        }
+
+        dismissKeyboard {
+            [weak self] in
+            self?.onExit?()
+        }
+    }
+}
+
+// MARK: - Extensions
+
+extension WalletDetailsViewController: UITableViewDataSource {
 
     func numberOfSections(in tableView: UITableView) -> Int {
         return balancer.getNumbersOfSections()
     }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return balancer.getNumberOfRowsInSection(section)
     }
@@ -325,12 +340,16 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable, Advanced
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         return balancer.getConfiguredCellForIndexPath(indexPath) ?? UITableViewCell()
     }
+}
+
+extension WalletDetailsViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return balancer.getHeightForRowAtIndexPath(indexPath) ?? 0.0
     }
+}
 
-    // MARK: - WalletDetailsBriefDelegate
+extension WalletDetailsViewController: WalletDetailsBriefDelegate {
 
     func walletDetailsBriefSendButtonTapped(_ walletDetailsBrief: WalletDetailsBriefTableViewCell, walletIndex: Int) {
         guard let wallets = wallets, let phone = phone else {
@@ -353,6 +372,9 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable, Advanced
 
         loadData()
     }
+}
+
+extension WalletDetailsViewController: WalletDetailsChartDelegate {
 
     func walletDetailsChartIntervalSelected(_ walletDetailsChart: WalletDetailsChartTableViewCell, interval: CoinPriceChartIntervalType) {
         self.currentInterval = interval
@@ -368,19 +390,9 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable, Advanced
             walletDetailsChart.setupChart(points: points)
         })
     }
+}
 
-    // MARK: - AdvancedTransitionDelegate
-
-    func advancedTransitionWillBegin(from viewController: FlowViewController, params: [String : Any]) {
-        guard let index = params["walletIndex"] as? Int else {
-            return
-        }
-
-        currentIndex = index
-        balancer.briefCell?.update(currentIndex: index)
-    }
-
-    // MARK: - SendMoneyViewControllerDelegate
+extension WalletDetailsViewController: SendMoneyViewControllerDelegate {
 
     func sendMoneyViewControllerSendingProceedWithSuccess(_ sendMoneyViewController: SendMoneyViewController) {
         sendDelegate?.sendMoneyViewControllerSendingProceedWithSuccess(sendMoneyViewController)
@@ -391,18 +403,16 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable, Advanced
 
         balancer.reloadBrief()
     }
+}
 
-    // MARK: - Buttons events
+extension WalletDetailsViewController: AdvancedTransitionDelegate {
 
-    @objc
-    private func exitButtonTouchUpInsideEvent(_ sender: Any) {
-        if let index = currentIndex {
-            advancedTransitionDelegate?.advancedTransitionWillBegin(from: self, params: ["walletIndex": index])
+    func advancedTransitionWillBegin(from viewController: FlowViewController, params: [String : Any]) {
+        guard let index = params["walletIndex"] as? Int else {
+            return
         }
 
-        dismissKeyboard {
-            [weak self] in
-            self?.onExit?()
-        }
+        currentIndex = index
+        balancer.briefCell?.update(currentIndex: index)
     }
 }

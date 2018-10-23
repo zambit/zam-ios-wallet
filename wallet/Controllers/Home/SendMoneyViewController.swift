@@ -24,7 +24,7 @@ extension SendMoneyViewControllerDelegate {
     func sendMoneyViewControllerSendingProceedWithSuccess(_ sendMoneyViewController: SendMoneyViewController, updated data: Wallet, index: Int) {}
 }
 
-class SendMoneyViewController: AvoidingViewController, WalletsCollectionComponentDelegate, SendMoneyComponentDelegate, TransactionDetailViewControllerDelegate, QRCodeScannerViewControllerDelegate {
+class SendMoneyViewController: AvoidingViewController {
 
     weak var delegate: SendMoneyViewControllerDelegate?
     weak var advancedTransitionDelegate: AdvancedTransitionDelegate?
@@ -158,44 +158,6 @@ class SendMoneyViewController: AvoidingViewController, WalletsCollectionComponen
         }
     }
 
-    // MARK: - WalletsCollectionComponentDelegate
-
-    func walletsCollectionComponentCurrentIndexChanged(_ walletsCollectionComponent: WalletsCollectionComponent, to index: Int) {
-        self.currentIndex = index
-        self.sendMoneyComponent?.prepare(coinType: wallets[index].coin, walletId: wallets[index].id)
-    }
-
-    // MARK: - SendMoneyComponentDelegate
-
-    func sendMoneyComponentRequestSending(_ sendMoneyComponent: SendMoneyComponent, output: SendingData) {
-        dismissKeyboard {
-            [weak self] in
-            
-            self?.onSend?(output)
-        }
-    }
-
-    // MARK: - TransactionDetailViewControllerDelegate
-
-    func transactionDetailViewControllerSendingProceedWithSuccess(_ transactionDetailViewController: TransactionDetailViewController) {
-        updateDataForCurrentWallet()
-        delegate?.sendMoneyViewControllerSendingProceedWithSuccess(self)
-    }
-
-    // MARK: - QRCodeScannerViewControllerDelegate
-
-    func qrCodeScannerViewController(_ qrCodeScannerViewController: QRCodeScannerViewController, didFindCode code: String) {
-        if let index = currentIndex, wallets.count > index {
-            sendMoneyComponent?.prepare(address: code, coinType: wallets[index].coin, walletId: wallets[index].id)
-        }
-    }
-
-    func qrCodeScannerViewControllerDidntFindCode(_ qrCodeScannerViewController: QRCodeScannerViewController) {
-        if let index = currentIndex, wallets.count > index {
-            sendMoneyComponent?.prepare(address: "", coinType: wallets[index].coin, walletId: wallets[index].id)
-        }
-    }
-
     // MARK: - Back button custom event
 
     @objc
@@ -211,5 +173,49 @@ class SendMoneyViewController: AvoidingViewController, WalletsCollectionComponen
             
             self?.walletNavigationController?.popViewController(animated: true)
         }
+    }
+}
+
+// MARK: - Extensions
+
+extension SendMoneyViewController: QRCodeScannerViewControllerDelegate {
+
+    func qrCodeScannerViewController(_ qrCodeScannerViewController: QRCodeScannerViewController, didFindCode code: String) {
+        if let index = currentIndex, wallets.count > index {
+            sendMoneyComponent?.prepare(address: code, coinType: wallets[index].coin, walletId: wallets[index].id)
+        }
+    }
+
+    func qrCodeScannerViewControllerDidntFindCode(_ qrCodeScannerViewController: QRCodeScannerViewController) {
+        if let index = currentIndex, wallets.count > index {
+            sendMoneyComponent?.prepare(address: "", coinType: wallets[index].coin, walletId: wallets[index].id)
+        }
+    }
+}
+
+extension SendMoneyViewController: TransactionDetailViewControllerDelegate {
+
+    func transactionDetailViewControllerSendingProceedWithSuccess(_ transactionDetailViewController: TransactionDetailViewController) {
+        updateDataForCurrentWallet()
+        delegate?.sendMoneyViewControllerSendingProceedWithSuccess(self)
+    }
+}
+
+extension SendMoneyViewController: SendMoneyComponentDelegate {
+
+    func sendMoneyComponentRequestSending(_ sendMoneyComponent: SendMoneyComponent, output: SendingData) {
+        dismissKeyboard {
+            [weak self] in
+
+            self?.onSend?(output)
+        }
+    }
+}
+
+extension SendMoneyViewController: WalletsCollectionComponentDelegate {
+
+    func walletsCollectionComponentCurrentIndexChanged(_ walletsCollectionComponent: WalletsCollectionComponent, to index: Int) {
+        self.currentIndex = index
+        self.sendMoneyComponent?.prepare(coinType: wallets[index].coin, walletId: wallets[index].id)
     }
 }
