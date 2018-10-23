@@ -14,6 +14,10 @@ struct WalletEnvironment: Environment {
         return "https://api.zam.io/api/v1"
     }
 
+    var parameters: RequestParams? {
+        return nil
+    }
+
     var headers: [String : Any] {
         return [
             "Accept": "application/json",

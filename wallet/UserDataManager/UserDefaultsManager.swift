@@ -9,16 +9,14 @@
 import Foundation
 import Crashlytics
 
-enum UserDataManagerError: Error {
+enum UserDefaultsError: Error {
+    case noSavedPhoneForReceivingPin
     case noSavedPhoneForRemovingPin
 }
 
 struct UserDefaultsManager {
 
     private enum UserDefaultsKey: String {
-        case formattingMaskSpace = "formatting_mask_space"
-        case formattingMaskSymbol = "formatting_mask_symbol"
-        case formattingMask = "formatting_mask"
         case phoneNumber = "phone_number"
         case token = "token"
     }
@@ -54,16 +52,6 @@ struct UserDefaultsManager {
         save(token: token)
     }
 
-    func save(phone: String, pin: String) throws {
-        try save(pin: pin, for: phone)
-        save(phoneNumber: phone)
-    }
-
-    func save(phone: String, pin: String, token: String) throws {
-        try save(pin: pin, for: phone)
-        save(phone: phone, token: token)
-    }
-
     func getToken() -> String? {
         return userDefaults.value(forKey: UserDefaultsKey.token.rawValue) as? String
     }
@@ -72,9 +60,9 @@ struct UserDefaultsManager {
         return userDefaults.value(forKey: UserDefaultsKey.phoneNumber.rawValue) as? String
     }
 
-    func getPin() throws -> String? {
+    func getPin() throws -> String {
         guard let accountName = getPhoneNumber() else {
-            return nil
+            throw UserDefaultsError.noSavedPhoneForReceivingPin
         }
 
         let passwordItem = KeychainPasswordItem(service: keychainConfiguration.serviceName,
@@ -82,16 +70,6 @@ struct UserDefaultsManager {
                                                 accessGroup: keychainConfiguration.accessGroup)
 
         return try passwordItem.readPassword()
-    }
-
-    func getMaskData() -> (String, Character, Character)? {
-        guard let mask = userDefaults.value(forKey: UserDefaultsKey.formattingMask.rawValue) as? String,
-            let symbol = userDefaults.value(forKey: UserDefaultsKey.formattingMaskSymbol.rawValue) as? Character,
-            let space = userDefaults.value(forKey: UserDefaultsKey.formattingMaskSpace.rawValue) as? Character else {
-                return nil
-        }
-
-        return (mask, symbol, space)
     }
 
     func clearToken() {
@@ -112,7 +90,7 @@ struct UserDefaultsManager {
 
     func clearPin() throws {
         guard let accountName = getPhoneNumber() else {
-            throw UserDataManagerError.noSavedPhoneForRemovingPin
+            throw UserDefaultsError.noSavedPhoneForRemovingPin
         }
 
         let passwordItem = KeychainPasswordItem(service: keychainConfiguration.serviceName,
@@ -131,12 +109,6 @@ struct UserDefaultsManager {
     }
 
     var isPinCreated: Bool {
-        let flag = try? getPin()
-
-        guard let pin = flag else {
-            return false
-        }
-
-        return pin != nil
+        return (try? getPin()) != nil
     }
 }

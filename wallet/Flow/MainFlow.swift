@@ -280,7 +280,7 @@ final class MainFlow: ScreenFlow {
             fatalError()
         }
 
-        let onFilter: (TransactionsFilterData) -> Void = {
+        let onFilter: (TransactionsFilterProperties) -> Void = {
             [weak self]
             filterData in
 
@@ -309,7 +309,7 @@ final class MainFlow: ScreenFlow {
             fatalError()
         }
 
-        let onDone: (TransactionsFilterData) -> Void = {
+        let onDone: (TransactionsFilterProperties) -> Void = {
             filterData in
 
             vc.walletNavigationController?.custom.popBack(nextViewController: {
@@ -338,7 +338,7 @@ final class MainFlow: ScreenFlow {
             fatalError()
         }
 
-        let onSendFromWallet: (Int, [WalletData], FormattedContactData?, String) -> Void = {
+        let onSendFromWallet: (Int, [Wallet], FormattedContact?, String) -> Void = {
             [weak self]
             index, wallets, contact, phone in
 
@@ -354,7 +354,7 @@ final class MainFlow: ScreenFlow {
             vc.walletNavigationController?.custom.pushAdvancedly(viewController: target)
         }
 
-        let onDepositToWallet: (Int, [WalletData], String) -> Void = {
+        let onDepositToWallet: (Int, [Wallet], String) -> Void = {
             [weak self]
             index, wallets, phone in
 
@@ -369,8 +369,27 @@ final class MainFlow: ScreenFlow {
             vc.walletNavigationController?.custom.pushAdvancedly(viewController: target)
         }
 
+        let onWalletDetails: (Int, [Wallet], String) -> Void = {
+            [weak self]
+            index, wallets, phone in
+
+            guard let strongSelf = self else {
+                return
+            }
+
+            let target = strongSelf.walletDetailsScreen
+            target.sendDelegate = vc
+            target.advancedTransitionDelegate = vc
+            target.prepare(wallets: wallets, currentIndex: index, phone: phone)
+            //target.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+
+            //strongSelf.navigationController.custom.present(viewController: target, animate: false)
+            vc.walletNavigationController?.custom.pushAdvancedly(viewController: target)
+        }
+
         vc.onSendFromWallet = onSendFromWallet
         vc.onDepositToWallet = onDepositToWallet
+        vc.onWalletDetails = onWalletDetails
         vc.walletsCollectionViewController = walletsScreen
         vc.walletsCollectionViewController?.owner = vc
         vc.contactsManager = UserContactsManager.default
@@ -389,6 +408,64 @@ final class MainFlow: ScreenFlow {
 
         vc.userManager = UserDefaultsManager(keychainConfiguration: WalletKeychainConfiguration())
         vc.userAPI = UserAPI(provider: Provider(environment: WalletEnvironment(), dispatcher: HTTPDispatcher()))
+        vc.historyAPI = HistoryAPI(provider: Provider(environment: CryptocompareEnvironment(), dispatcher: HTTPDispatcher()))
+        vc.flow = self
+        return vc
+    }
+
+    private var walletDetailsScreen: WalletDetailsViewController {
+        let _vc = ControllerHelper.instantiateViewController(identifier: "WalletDetailsViewController", storyboardName: "Home")
+
+        guard let vc = _vc as? WalletDetailsViewController else {
+            fatalError()
+        }
+
+        let onSendFromWallet: (Int, [Wallet], String) -> Void = {
+            [weak self]
+            index, wallets, phone in
+
+            guard let strongSelf = self else {
+                return
+            }
+
+            let target = strongSelf.sendMoneyScreen
+            target.prepare(wallets: wallets, currentIndex: index, phone: phone)
+            target.delegate = vc
+            target.advancedTransitionDelegate = vc
+
+            vc.walletNavigationController?.custom.pushAdvancedly(viewController: target)
+        }
+
+        let onDepositToWallet: (Int, [Wallet], String) -> Void = {
+            [weak self]
+            index, wallets, phone in
+
+            guard let strongSelf = self else {
+                return
+            }
+
+            let target = strongSelf.depositMoneyScreen
+            target.prepare(wallets: wallets, currentIndex: index, phone: phone)
+            target.advancedTransitionDelegate = vc
+
+            vc.walletNavigationController?.custom.pushAdvancedly(viewController: target)
+        }
+
+        let onExit: () -> Void = {
+            //[weak self] in
+
+//            guard let strongSelf = self else {
+//                return
+//            }
+
+            //strongSelf.navigationController.custom.dismissPresentedViewController()
+            vc.walletNavigationController?.custom.popViewController(animated: true)
+        }
+
+        vc.onSendFromWallet = onSendFromWallet
+        vc.onDepositToWallet = onDepositToWallet
+        vc.onExit = onExit
+        vc.priceAPI = PriceAPI(provider: Provider(environment: CryptocompareEnvironment(), dispatcher: HTTPDispatcher()))
         vc.historyAPI = HistoryAPI(provider: Provider(environment: CryptocompareEnvironment(), dispatcher: HTTPDispatcher()))
         vc.flow = self
         return vc

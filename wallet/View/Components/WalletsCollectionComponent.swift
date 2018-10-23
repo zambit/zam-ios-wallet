@@ -125,6 +125,17 @@ extension BehaviorExtension where Base: WalletsCollectionComponent {
         (base.collectionView.cellForItem(at: indexPath) as? WalletSmallItemComponent)?.setTargetToAnimation()
     }
 
+    func updateCurrentWallet(_ current: Int) {
+        guard base.data.count > current else {
+            return
+        }
+
+        base.currentIndex = current
+
+        let indexPath = IndexPath(item: 0, section: current)
+        base.collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
+    }
+
     fileprivate func setup() {
         setupStyle()
         setupSubviews()

@@ -10,30 +10,56 @@ import Foundation
 
 enum HistoryRequest: Request {
 
-    case getDailyData(coin: String, toCoin: String, limit: Int)
+    case getDailyPrice(coin: String, toCoin: String, aggregate: Int?, limit: Int)
+    case getHourlyPrice(coin: String, toCoin: String, aggregate: Int?, limit: Int)
+    case getMinutePrice(coin: String, toCoin: String, aggregate: Int?, limit: Int)
 
     var path: String {
         switch self {
-        case .getDailyData:
+        case .getDailyPrice:
             return "data/histoday"
+        case .getHourlyPrice:
+            return "data/histohour"
+        case .getMinutePrice:
+            return "data/histominute"
         }
     }
 
     var method: HTTPMethod {
-        switch self {
-        case .getDailyData:
-            return .get
-        }
+        return .get
     }
 
     var parameters: RequestParams? {
         switch self {
-        case let .getDailyData(coin: coin, toCoin: toCoin, limit: limit):
-            return .url([
+        case let .getDailyPrice(coin: coin, toCoin: toCoin, aggregate: aggregate, limit: limit):
+            let dict = [
                 "fsym": coin,
                 "tsym": toCoin,
-                "limit": String(limit)
-                ])
+                "limit": String(limit),
+                "aggregate": String(aggregate)
+            ]
+
+            return .url(dict.unwrapped())
+
+        case let .getHourlyPrice(coin: coin, toCoin: toCoin, aggregate: aggregate, limit: limit):
+            let dict = [
+                "fsym": coin,
+                "tsym": toCoin,
+                "limit": String(limit),
+                "aggregate": String(aggregate)
+            ]
+
+            return .url(dict.unwrapped())
+
+        case let .getMinutePrice(coin: coin, toCoin: toCoin, aggregate: aggregate, limit: limit):
+            let dict = [
+                "fsym": coin,
+                "tsym": toCoin,
+                "limit": String(limit),
+                "aggregate": String(aggregate)
+            ]
+
+            return .url(dict.unwrapped())
         }
     }
 

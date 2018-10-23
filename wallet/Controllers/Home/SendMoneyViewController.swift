@@ -13,6 +13,15 @@ import Crashlytics
 protocol SendMoneyViewControllerDelegate: class {
 
     func sendMoneyViewControllerSendingProceedWithSuccess(_ sendMoneyViewController: SendMoneyViewController)
+
+    func sendMoneyViewControllerSendingProceedWithSuccess(_ sendMoneyViewController: SendMoneyViewController, updated data: Wallet, index: Int)
+}
+
+extension SendMoneyViewControllerDelegate {
+
+    func sendMoneyViewControllerSendingProceedWithSuccess(_ sendMoneyViewController: SendMoneyViewController) {}
+
+    func sendMoneyViewControllerSendingProceedWithSuccess(_ sendMoneyViewController: SendMoneyViewController, updated data: Wallet, index: Int) {}
 }
 
 class SendMoneyViewController: AvoidingViewController, WalletsCollectionComponentDelegate, SendMoneyComponentDelegate, TransactionDetailViewControllerDelegate, QRCodeScannerViewControllerDelegate {
@@ -30,9 +39,9 @@ class SendMoneyViewController: AvoidingViewController, WalletsCollectionComponen
     @IBOutlet private var walletsCollectionComponent: WalletsCollectionComponent?
     @IBOutlet private var sendMoneyComponent: SendMoneyComponent?
 
-    private var recipient: FormattedContactData?
+    private var recipient: FormattedContact?
     private var phone: String?
-    private var wallets: [WalletData] = []
+    private var wallets: [Wallet] = []
     private var currentIndex: Int?
 
     override var fastenInitialOffset: CGFloat {
@@ -104,7 +113,7 @@ class SendMoneyViewController: AvoidingViewController, WalletsCollectionComponen
         walletNavigationController?.custom.addBackButton(for: self, target: self, action: #selector(backButtonTouchUpInsideEvent(_:)))
     }
 
-    func prepare(wallets: [WalletData], currentIndex: Int, recipient: FormattedContactData? = nil, phone: String) {
+    func prepare(wallets: [Wallet], currentIndex: Int, recipient: FormattedContact? = nil, phone: String) {
         self.phone = phone
         self.wallets = wallets
         self.currentIndex = currentIndex
@@ -133,9 +142,15 @@ class SendMoneyViewController: AvoidingViewController, WalletsCollectionComponen
             [weak self]
             wallet in
 
+            guard let strongSelf = self else {
+                return
+            }
+
             self?.wallets[currentIndex] = wallet
             let itemData = WalletItemData(data: wallet, phoneNumber: phone)
             currentCell.configure(with: itemData)
+
+            self?.delegate?.sendMoneyViewControllerSendingProceedWithSuccess(strongSelf, updated: wallet, index: currentIndex)
         }.catch {
             error in
 
@@ -146,6 +161,7 @@ class SendMoneyViewController: AvoidingViewController, WalletsCollectionComponen
     // MARK: - WalletsCollectionComponentDelegate
 
     func walletsCollectionComponentCurrentIndexChanged(_ walletsCollectionComponent: WalletsCollectionComponent, to index: Int) {
+        self.currentIndex = index
         self.sendMoneyComponent?.prepare(coinType: wallets[index].coin, walletId: wallets[index].id)
     }
 

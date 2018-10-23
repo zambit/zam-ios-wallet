@@ -13,6 +13,7 @@ class WalletItemComponent: WalletSmallItemComponent {
 
     var onSendButtonTap: (() -> Void)?
     var onDepositButtonTap: (() -> Void)?
+    var onCardLongPress: (() -> Void)?
 
     @IBOutlet private var sendButton: UIButton!
     @IBOutlet private var depositButton: UIButton!
@@ -41,8 +42,9 @@ class WalletItemComponent: WalletSmallItemComponent {
         sendButton.setTitleColor(.blueGrey, for: .normal)
         sendButton.titleLabel?.font = UIFont.walletFont(ofSize: 16.0, weight: .medium)
         sendButton.contentHorizontalAlignment = .left
-        sendButton.titleEdgeInsets = UIEdgeInsets.init(top: 0, left: 0, bottom: 0, right: 4.0)
-        sendButton.imageEdgeInsets = UIEdgeInsets.init(top: 0, left: 8.0, bottom: 0, right: -8)
+        //sendButton.contentEdgeInsets = UIEdgeInsets(top: 7, left: 0, bottom: 7, right: 0)
+        sendButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 4.0)
+        sendButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 8.0, bottom: 0, right: -8)
         sendButton.semanticContentAttribute = UIApplication.shared
             .userInterfaceLayoutDirection == .rightToLeft ? .forceLeftToRight : .forceRightToLeft
         sendButton.addTarget(self, action: #selector(sendButtonTouchUpInsideEvent(_:)), for: .touchUpInside)
@@ -53,8 +55,9 @@ class WalletItemComponent: WalletSmallItemComponent {
         depositButton.titleLabel?.font = UIFont.walletFont(ofSize: 16.0, weight: .medium)
         depositButton.tintColor = UIColor.blueGrey.withAlphaComponent(0.4)
         depositButton.contentHorizontalAlignment = .left
-        depositButton.titleEdgeInsets = UIEdgeInsets.init(top: 0, left: 0, bottom: 0, right: 4.0)
-        depositButton.imageEdgeInsets = UIEdgeInsets.init(top: 0, left: 8.0, bottom: 0, right: -8.0)
+        //depositButton.contentEdgeInsets = UIEdgeInsets(top: 7, left: 0, bottom: 7, right: 0)
+        depositButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 4.0)
+        depositButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 8.0, bottom: 0, right: -8.0)
         depositButton.semanticContentAttribute = UIApplication.shared
             .userInterfaceLayoutDirection == .rightToLeft ? .forceLeftToRight : .forceRightToLeft
         depositButton.addTarget(self, action: #selector(depositButtonTouchUpInsideEvent(_:)), for: .touchUpInside)
@@ -96,9 +99,12 @@ class WalletItemComponent: WalletSmallItemComponent {
     private func longPressGestureEvent(_ sender: UILongPressGestureRecognizer) {
         switch sender.state {
         case .began:
-            UIView.animate(withDuration: 0.5) {
+            UIView.animate(withDuration: 0.5, animations: {
                 self.view.transform = .init(scaleX: 0.95, y: 0.95)
-            }
+            }, completion: {
+                _ in
+                self.onCardLongPress?()
+            })
         case .ended:
             UIView.animate(withDuration: 0.5) {
                 self.view.transform = .identity

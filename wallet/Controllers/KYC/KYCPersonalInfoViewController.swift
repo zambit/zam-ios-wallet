@@ -23,10 +23,10 @@ class KYCPersonalInfoViewController: FlowViewController, WalletNavigable, UITabl
     private weak var helperLabel: UILabel?
     private var currentIndexPath: IndexPath?
 
-    private var forms: [(String, [TextFieldCellData])] = []
+    private var forms: [(String, [TextFieldTableViewCellData])] = []
     private var progress: KYCPersonalInfoProgress = KYCPersonalInfoProgress()
 
-    private var personalInfoData: KYCPersonalInfoData?
+    private var personalInfoData: KYCPersonaInfoProperties?
     private var approvingState: KYCStatus = .unloaded
 
     override func viewWillAppear(_ animated: Bool) {
@@ -41,7 +41,7 @@ class KYCPersonalInfoViewController: FlowViewController, WalletNavigable, UITabl
 
         forms = [
             ("Personal info",
-             [TextFieldCellData(placeholder: "Email",
+             [TextFieldTableViewCellData(placeholder: "Email",
                                 keyboardType: .emailAddress,
                                 autocapitalizationType: .none,
                                 autocorrectionType: .no,
@@ -54,7 +54,7 @@ class KYCPersonalInfoViewController: FlowViewController, WalletNavigable, UITabl
 
                                     self?.checkCellPosition(cell)}
                 ),
-              TextFieldCellData(placeholder: "First name",
+              TextFieldTableViewCellData(placeholder: "First name",
                                 keyboardType: .default,
                                 autocapitalizationType: .words,
                                 autocorrectionType: .no,
@@ -67,7 +67,7 @@ class KYCPersonalInfoViewController: FlowViewController, WalletNavigable, UITabl
 
                                     self?.checkCellPosition(cell)}
                 ),
-              TextFieldCellData(placeholder: "Last name",
+              TextFieldTableViewCellData(placeholder: "Last name",
                                 keyboardType: .default,
                                 autocapitalizationType: .words,
                                 autocorrectionType: .no,
@@ -80,7 +80,7 @@ class KYCPersonalInfoViewController: FlowViewController, WalletNavigable, UITabl
 
                                     self?.checkCellPosition(cell)}
                 ),
-              TextFieldCellData(placeholder: "Date of birth",
+              TextFieldTableViewCellData(placeholder: "Date of birth",
                                 keyboardType: nil,
                                 autocapitalizationType: .none,
                                 autocorrectionType: .no,
@@ -92,14 +92,14 @@ class KYCPersonalInfoViewController: FlowViewController, WalletNavigable, UITabl
                                     alert.addDatePicker(mode: .date, date: Date(), minimumDate: nil, maximumDate: Date()) {
                                         date in
 
-                                        textField.text = Date.walletLongString(from: date)
+                                        textField.text = date.longFormatted
                                         self?.progress.birthDate = date
                                     }
                                     alert.addAction(title: "Done", style: .cancel)
                                     alert.show() }),
                                 beginEditingAction: nil
                 ),
-              TextFieldCellData(placeholder: "Gender",
+              TextFieldTableViewCellData(placeholder: "Gender",
                                 keyboardType: nil,
                                 autocapitalizationType: .words,
                                 autocorrectionType: .no,
@@ -125,7 +125,7 @@ class KYCPersonalInfoViewController: FlowViewController, WalletNavigable, UITabl
                                 beginEditingAction: nil
                 )]),
             ("Personal address",
-             [TextFieldCellData(placeholder: "Country",
+             [TextFieldTableViewCellData(placeholder: "Country",
                                 keyboardType: .default,
                                 autocapitalizationType: .words,
                                 autocorrectionType: .no,
@@ -138,7 +138,7 @@ class KYCPersonalInfoViewController: FlowViewController, WalletNavigable, UITabl
 
                                     self?.checkCellPosition(cell)}
                 ),
-              TextFieldCellData(placeholder: "City",
+              TextFieldTableViewCellData(placeholder: "City",
                                 keyboardType: .default,
                                 autocapitalizationType: .words,
                                 autocorrectionType: .no,
@@ -151,7 +151,7 @@ class KYCPersonalInfoViewController: FlowViewController, WalletNavigable, UITabl
 
                                     self?.checkCellPosition(cell)}
                 ),
-              TextFieldCellData(placeholder: "State / Region",
+              TextFieldTableViewCellData(placeholder: "State / Region",
                                 keyboardType: .default,
                                 autocapitalizationType: .words,
                                 autocorrectionType: .no,
@@ -164,7 +164,7 @@ class KYCPersonalInfoViewController: FlowViewController, WalletNavigable, UITabl
 
                                     self?.checkCellPosition(cell)}
                 ),
-              TextFieldCellData(placeholder: "Street",
+              TextFieldTableViewCellData(placeholder: "Street",
                                 keyboardType: .default,
                                 autocapitalizationType: .none,
                                 autocorrectionType: .no,
@@ -177,7 +177,7 @@ class KYCPersonalInfoViewController: FlowViewController, WalletNavigable, UITabl
 
                                     self?.checkCellPosition(cell)}
                 ),
-              TextFieldCellData(placeholder: "House number",
+              TextFieldTableViewCellData(placeholder: "House number",
                                 keyboardType: .default,
                                 autocapitalizationType: .none,
                                 autocorrectionType: .no,
@@ -190,7 +190,7 @@ class KYCPersonalInfoViewController: FlowViewController, WalletNavigable, UITabl
 
                                     self?.checkCellPosition(cell)}
                 ),
-              TextFieldCellData(placeholder: "Postal code",
+              TextFieldTableViewCellData(placeholder: "Postal code",
                                 keyboardType: .numberPad,
                                 autocapitalizationType: .none,
                                 autocorrectionType: .no,
@@ -208,7 +208,7 @@ class KYCPersonalInfoViewController: FlowViewController, WalletNavigable, UITabl
         self.isKeyboardHidesOnTap = true
 
 
-        self.tableView?.register(TextFieldCell.self , forCellReuseIdentifier: "TextFieldCell")
+        self.tableView?.register(TextFieldTableViewCell.self , forCellReuseIdentifier: "TextFieldCell")
         self.tableView?.delegate = self
         self.tableView?.dataSource = self
         self.tableView?.backgroundColor = .white
@@ -277,7 +277,7 @@ class KYCPersonalInfoViewController: FlowViewController, WalletNavigable, UITabl
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let _cell = tableView.dequeueReusableCell(withIdentifier: "TextFieldCell", for: indexPath)
 
-        guard let cell = _cell as? TextFieldCell else {
+        guard let cell = _cell as? TextFieldTableViewCell else {
             fatalError()
         }
 
@@ -357,7 +357,7 @@ class KYCPersonalInfoViewController: FlowViewController, WalletNavigable, UITabl
         return 106.0
     }
 
-    private func checkCellPosition(_ cell: TextFieldCell) {
+    private func checkCellPosition(_ cell: TextFieldTableViewCell) {
         guard let app = UIApplication.shared.delegate as? AppDelegate, let window = app.window else {
             return
         }

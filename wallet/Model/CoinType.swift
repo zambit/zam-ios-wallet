@@ -9,6 +9,7 @@
 import UIKit
 
 enum CoinType: String, Equatable {
+    
     case eth
     case btc
     case bch

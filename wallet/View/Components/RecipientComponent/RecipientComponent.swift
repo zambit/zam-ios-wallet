@@ -83,7 +83,7 @@ extension BehaviorExtension where Base: RecipientComponent {
         base.addressRecipientComponent?.custom.setup(address: address)
     }
 
-    func setup(contact: FormattedContactData) {
+    func setup(contact: FormattedContact) {
         base.phoneRecipientComponent?.custom.setup(contact: contact)
     }
 

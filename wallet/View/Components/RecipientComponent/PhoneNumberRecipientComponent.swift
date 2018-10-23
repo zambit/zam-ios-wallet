@@ -72,7 +72,7 @@ extension BehaviorExtension where Base: PhoneNumberRecipientComponent {
         return base.textField?.isEditing ?? false
     }
 
-    func setup(contact: FormattedContactData) {
+    func setup(contact: FormattedContact) {
         self.base.contactName = contact.name
 
         self.base.phoneNumberFormatter.number = contact.formattedPhoneNumber
