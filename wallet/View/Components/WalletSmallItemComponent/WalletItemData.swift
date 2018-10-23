@@ -26,8 +26,7 @@ struct WalletItemData {
         self.short = data.coin.short
         self.phoneNumber = phoneNumber
 
-        self.balance = data.balance.formatted(currency: .original)
-        self.fiatBalance = data.balance.description(currency: .usd)
+        self.balance = data.balance.original.formatted ?? ""
+        self.fiatBalance = data.balance.description(property: .usd) 
     }
-
 }

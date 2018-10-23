@@ -11,104 +11,137 @@ import UIKit
 
 class SendMoneyButton: UIButton {
 
-    private var mainLabel: UILabel?
-    private var detailLabel: UILabel?
-
-    private var mainLabelVerticalConstraint: NSLayoutConstraint?
-    private var detailLabelVerticalConstraint: NSLayoutConstraint?
-
-    struct CustomAppearance {
-        weak var parent: SendMoneyButton?
-
-        func setEnabled(_ enabled: Bool) {
-            guard let parent = parent, enabled != parent.customEnabled else {
-                return
-            }
-
-            UIView.animate(withDuration: 0.1, animations: {
-                switch enabled {
-                case true:
-                    self.parent?.mainLabel?.alpha = 1
-                    self.parent?.customEnabled = true
-                case false:
-                    self.parent?.mainLabel?.alpha = 0.5
-
-                    self.parent?.customEnabled = false
-
-                    self.parent?.mainLabel?.text = "SEND"
-                }
-
-                self.parent?.layoutIfNeeded()
-            })
-        }
-
-        func provideData(amount: String, alternative: String) {
-            parent?.mainLabel?.text = "SEND \(amount)"
-            parent?.detailLabel?.text = alternative
-        }
+    enum EditingState {
+        case disabled
+        case editing
+        case clear
     }
 
-    private var customEnabled: Bool = false
+    fileprivate(set) var editingState: EditingState = .disabled
 
-    var customAppearance: CustomAppearance {
-        return CustomAppearance(parent: self)
-    }
+    fileprivate var mainLabel: UILabel?
+    fileprivate var detailLabel: UILabel?
 
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        setupLayouts()
-    }
+    fileprivate var mainLabelVerticalConstraint: NSLayoutConstraint?
+    fileprivate var detailLabelVerticalConstraint: NSLayoutConstraint?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupSubviews()
-        setupStyle()
+        custom.setupSubviews()
+        custom.setupStyle()
     }
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        setupSubviews()
-        setupStyle()
+        custom.setupSubviews()
+        custom.setupStyle()
+    }
+}
+
+extension BehaviorExtension where Base: SendMoneyButton {
+
+    var isEnabled: Bool {
+        get {
+            return base.editingState != .disabled
+        }
+
+        set {
+            if newValue {
+                changeState(to: .clear)
+            } else {
+                changeState(to: .disabled)
+            }
+        }
     }
 
-    private func setupStyle() {
-        applyGradient(colors: [.azure, .turquoiseBlueTwo])
+    fileprivate func setupStyle() {
+        base.applyGradient(colors: [.azure, .turquoiseBlueTwo])
 
-        setImage(nil, for: .normal)
-        setTitle(nil, for: .normal)
+        base.setImage(nil, for: .normal)
+        base.setTitle(nil, for: .normal)
     }
 
-    private func setupSubviews() {
-        mainLabel = UILabel()
-        mainLabel?.font = UIFont.walletFont(ofSize: 16.0, weight: .medium)
-        mainLabel?.textAlignment = .center
-        mainLabel?.textColor = .white
-        mainLabel?.alpha = 0.5
-        mainLabel?.text = "SEND"
-        mainLabel?.translatesAutoresizingMaskIntoConstraints = false
+    fileprivate func setupSubviews() {
+        let mainLabel = UILabel()
+        mainLabel.font = UIFont.walletFont(ofSize: 16.0, weight: .medium)
+        mainLabel.textAlignment = .center
+        mainLabel.textColor = .white
+        mainLabel.alpha = 0.5
+        mainLabel.text = "SEND"
 
-        addSubview(mainLabel!)
+        base.addSubview(mainLabel)
 
-        mainLabel?.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        mainLabelVerticalConstraint = mainLabel?.centerYAnchor.constraint(equalTo: centerYAnchor)
-        mainLabelVerticalConstraint?.isActive = true
+        mainLabel.translatesAutoresizingMaskIntoConstraints = false
+        mainLabel.leftAnchor.constraint(equalTo: base.leftAnchor, constant: 15.0).isActive = true
+        mainLabel.rightAnchor.constraint(equalTo: base.rightAnchor, constant: -15.0).isActive = true
+        base.mainLabelVerticalConstraint = mainLabel.centerYAnchor.constraint(equalTo: base.centerYAnchor)
+        base.mainLabelVerticalConstraint?.isActive = true
 
-        detailLabel = UILabel()
-        detailLabel?.font = UIFont.walletFont(ofSize: 10, weight: .medium)
-        detailLabel?.textAlignment = .center
-        detailLabel?.textColor = .white
-        detailLabel?.alpha = 0.0
-        detailLabel?.translatesAutoresizingMaskIntoConstraints = false
+        base.mainLabel = mainLabel
 
-        addSubview(detailLabel!)
 
-        detailLabel?.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        detailLabelVerticalConstraint = detailLabel?.centerYAnchor.constraint(equalTo: centerYAnchor)
-        detailLabelVerticalConstraint?.isActive = true
+        let detailLabel = UILabel()
+        detailLabel.font = UIFont.walletFont(ofSize: 10, weight: .medium)
+        detailLabel.textAlignment = .center
+        detailLabel.textColor = .white
+        detailLabel.alpha = 0.0
 
-        detailLabelVerticalConstraint?.constant = bounds.height / 5
+        base.addSubview(detailLabel)
+
+        detailLabel.translatesAutoresizingMaskIntoConstraints = false
+        detailLabel.leftAnchor.constraint(equalTo: base.leftAnchor, constant: 15.0).isActive = true
+        detailLabel.rightAnchor.constraint(equalTo: base.rightAnchor, constant: -15.0).isActive = true
+        base.detailLabelVerticalConstraint = detailLabel.centerYAnchor.constraint(equalTo: base.centerYAnchor)
+        base.detailLabelVerticalConstraint?.isActive = true
+
+        base.detailLabelVerticalConstraint?.constant = base.bounds.height / 5
+
+        base.detailLabel = detailLabel
     }
 
-    private func setupLayouts() {
+    func provide(amount: String, alternative: String) {
+        changeState(to: .editing)
+
+        base.mainLabel?.text = "SEND \(amount)"
+        base.detailLabel?.text = "$ \(amount)"
+
+        base.resignFirstResponder()
+        base.layoutIfNeeded()
+    }
+
+    fileprivate func changeState(to state: Base.EditingState) {
+        base.editingState = state
+
+        UIView.animate(withDuration: 0.15) {
+            switch state {
+            case .editing:
+                print("editing")
+                self.base.mainLabelVerticalConstraint?.constant = -9
+                self.base.detailLabelVerticalConstraint?.constant = 9
+
+                self.base.mainLabel?.alpha = 1.0
+                self.base.detailLabel?.alpha = 1.0
+            case .clear:
+                print("clear")
+                self.base.mainLabelVerticalConstraint?.constant = 0
+                self.base.detailLabelVerticalConstraint?.constant = 0
+
+                self.base.mainLabel?.alpha = 1.0
+                self.base.detailLabel?.alpha = 0.0
+
+                self.base.mainLabel?.text = "SEND"
+            case .disabled:
+                print("disabled")
+                self.base.mainLabelVerticalConstraint?.constant = 0
+                self.base.detailLabelVerticalConstraint?.constant = 0
+
+                self.base.mainLabel?.alpha = 0.5
+                self.base.detailLabel?.alpha = 0.0
+
+                self.base.mainLabel?.text = "SEND"
+            }
+
+            self.base.layoutIfNeeded()
+        }
     }
 }

@@ -10,11 +10,6 @@ import Foundation
 
 struct Balance: Equatable {
 
-    enum Currency {
-        case usd
-        case original
-    }
-
     let coin: CoinType
 
     let usd: Decimal
@@ -67,44 +62,25 @@ struct Balance: Equatable {
         return Balance(coin: coin, usd: usd + another.usd, original: original + another.original)
     }
 
-    func description(currency: Currency) -> String {
-        let string = formattedShort(currency: currency)
-
-        switch currency {
-        case .original:
-            return "\(string) \(coin.short.uppercased())"
-        case .usd:
-            return "$ \(string)"
-        }
+    enum Properties {
+        case usd
+        case original
     }
 
-    func formattedShort(currency: Currency) -> String {
-        switch currency {
+    func description(property: Properties) -> String {
+        switch property {
         case .original:
-            guard let formatted = original.shortFormatted else {
-                fatalError()
+            if let string = original.formatted {
+                return "\(string) \(coin.short.uppercased())"
             }
-            return formatted
-        case .usd:
-            guard let formatted = usd.shortFormatted else {
-                fatalError()
-            }
-            return formatted
-        }
-    }
 
-    func formatted(currency: Currency) -> String {
-        switch currency {
-        case .original:
-            guard let formatted = original.formatted else {
-                fatalError()
-            }
-            return formatted
+            return ""
         case .usd:
-            guard let formatted = usd.formatted else {
-                fatalError()
+            if let string = usd.shortFormatted {
+                return "$ \(string)"
             }
-            return formatted
+
+            return ""
         }
     }
 

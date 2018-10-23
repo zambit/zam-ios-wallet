@@ -159,7 +159,7 @@ class TransactionDetailViewController: FlowViewController, WalletNavigable {
             return
         }
 
-        amountLabel?.text = data.amountData.formatted(currency: .original)
+        amountLabel?.text = data.amountData.original.formatted
         amountDetailLabel?.text = data.amountData.coin.short.uppercased()
 
         switch data.recipient {

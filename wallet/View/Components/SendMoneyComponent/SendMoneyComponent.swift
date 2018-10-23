@@ -27,7 +27,7 @@ protocol SendMoneyComponentDelegate: class {
     func sendMoneyComponentRequestSending(_ sendMoneyComponent: SendMoneyComponent, output: SendingData)
 }
 
-class SendMoneyComponent: Component, SizePresetable, SendMoneyAmountComponentDelegate, SegmentedControlComponentDelegate, RecipientComponentDelegate {
+class SendMoneyComponent: Component, SizePresetable {
 
     var onQRCodeScanning: (() -> Void)?
 
@@ -140,49 +140,6 @@ class SendMoneyComponent: Component, SizePresetable, SendMoneyAmountComponentDel
         updateSendingData(for: .address)
     }
 
-    // MARK: - SendMoneyAmountComponentDelegate
-
-    func sendMoneyAmountComponent(_ sendMoneyAmountComponent: SendMoneyAmountComponent, amountDataEntered data: Balance) {
-        self.amountData = data
-
-        if let output = sendingData {
-            sendButton?.customAppearance.setEnabled(true)
-            sendButton?.customAppearance.provideData(amount: "\(output.amountData.formatted(currency: .original)) \(output.amountData.coin.short.uppercased())", alternative: "")
-        }
-    }
-
-    func sendMoneyAmountComponentValueEnteredIncorrectly(_ sendMoneyAmountComponent: SendMoneyAmountComponent) {
-        self.amountData = nil
-        sendButton?.customAppearance.setEnabled(false)
-    }
-
-    // MARK: - SegmentedControlComponentDelegate
-
-    func segmentedControlComponent(_ segmentedControlComponent: SegmentedControlComponent, willChangeTo index: Int) {
-        switch index {
-        case 0:
-            recipientComponent?.custom.showPhone()
-            updateSendingData(for: .phone)
-        case 1:
-            recipientComponent?.custom.showAddress()
-            updateSendingData(for: .address)
-        default:
-            return
-        }
-    }
-
-    // MARK: - RecipientComponentDelegate
-
-    func recipientComponentStatusChanged(_ recipientComponent: RecipientComponent, to status: FormEditingStatus, recipientType: RecipientType) {
-        switch status {
-        case .valid:
-            updateSendingData(for: recipientType)
-        case .invalid:
-            recipientData = nil
-            sendButton?.customAppearance.setEnabled(false)
-        }
-    }
-
     // MARK: - Update sending data
 
     private func updateSendingData(for coinType: CoinType) {
@@ -193,8 +150,9 @@ class SendMoneyComponent: Component, SizePresetable, SendMoneyAmountComponentDel
         self.amountData = Balance(coin: coinType, usd: amountData.usd, original: amountData.original)
 
         if let output = sendingData {
-            sendButton?.customAppearance.setEnabled(true)
-            sendButton?.customAppearance.provideData(amount: "\(output.amountData.formatted(currency: .original)) \(output.amountData.coin.short.uppercased())", alternative: "")
+            sendButton?.custom.provide(
+                amount: "\(output.amountData.original.longFormatted ?? "") \(output.amountData.coin.short.uppercased())",
+                alternative: "")
         }
     }
 
@@ -213,8 +171,7 @@ class SendMoneyComponent: Component, SizePresetable, SendMoneyAmountComponentDel
             }
 
             if let output = sendingData {
-                sendButton?.customAppearance.setEnabled(true)
-                sendButton?.customAppearance.provideData(amount: "\(output.amountData.formatted(currency: .original)) \(output.amountData.coin.short.uppercased())", alternative: "")
+                sendButton?.custom.provide(amount: "\(output.amountData.original.longFormatted ?? "") \(output.amountData.coin.short.uppercased())", alternative: "")
             }
         case .address:
             guard let address = recipientComponent?.custom.address, !address.isEmpty else {
@@ -225,8 +182,7 @@ class SendMoneyComponent: Component, SizePresetable, SendMoneyAmountComponentDel
             recipientData = .address(address)
 
             if let output = sendingData {
-                sendButton?.customAppearance.setEnabled(true)
-                sendButton?.customAppearance.provideData(amount: "\(output.amountData.formatted(currency: .original)) \(output.amountData.coin.short.uppercased())", alternative: "")
+                sendButton?.custom.provide(amount: "\(output.amountData.original.longFormatted ?? "") \(output.amountData.coin.short.uppercased())", alternative: "")
             }
         }
     }
@@ -258,5 +214,52 @@ class SendMoneyComponent: Component, SizePresetable, SendMoneyAmountComponentDel
     @objc
     private func scanQRAddressWithCamera(_ sender: Any) {
         onQRCodeScanning?()
+    }
+}
+
+extension SendMoneyComponent: SendMoneyAmountComponentDelegate {
+
+    func sendMoneyAmountComponent(_ sendMoneyAmountComponent: SendMoneyAmountComponent, amountDataEntered data: Balance) {
+        self.amountData = data
+
+        if let output = sendingData {
+            sendButton?.custom.provide(
+                amount: "\(output.amountData.original.longFormatted ?? "") \(output.amountData.coin.short.uppercased())",
+                alternative: "")
+        }
+    }
+
+    func sendMoneyAmountComponentValueEnteredIncorrectly(_ sendMoneyAmountComponent: SendMoneyAmountComponent) {
+        self.amountData = nil
+        sendButton?.custom.isEnabled = false
+    }
+}
+
+extension SendMoneyComponent: SegmentedControlComponentDelegate {
+
+    func segmentedControlComponent(_ segmentedControlComponent: SegmentedControlComponent, willChangeTo index: Int) {
+        switch index {
+        case 0:
+            recipientComponent?.custom.showPhone()
+            updateSendingData(for: .phone)
+        case 1:
+            recipientComponent?.custom.showAddress()
+            updateSendingData(for: .address)
+        default:
+            return
+        }
+    }
+}
+
+extension SendMoneyComponent: RecipientComponentDelegate {
+
+    func recipientComponentStatusChanged(_ recipientComponent: RecipientComponent, to status: FormEditingStatus, recipientType: RecipientType) {
+        switch status {
+        case .valid:
+            updateSendingData(for: recipientType)
+        case .invalid:
+            recipientData = nil
+            sendButton?.custom.isEnabled = false
+        }
     }
 }

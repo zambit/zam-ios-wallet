@@ -116,7 +116,7 @@ class TransactionsHistoryViewController: FlowViewController, WalletNavigable, UI
                 guard let header = self?.historyTableView?.headerView(forSection: old.count - 1) as? TransactionsGroupHeaderComponent else {
                     return
                 }
-                header.set(amount: concatiatedElement.amount.description(currency: .usd))
+                header.set(amount: concatiatedElement.amount.description(property: .usd) )
 
                 // Add rows for concatiated section
                 let section = old.count - 1
@@ -221,7 +221,7 @@ class TransactionsHistoryViewController: FlowViewController, WalletNavigable, UI
         }
 
         let data = provider.results[section]
-        header.configure(date: DateInterval.walletString(from: data.dateInterval), amount: data.amount.description(currency: .usd))
+        header.configure(date: DateInterval.walletString(from: data.dateInterval), amount: data.amount.description(property: .usd))
 
         return header
     }
@@ -268,7 +268,7 @@ class TransactionsHistoryViewController: FlowViewController, WalletNavigable, UI
 //            recipient = data.participant.address ?? ""
 //        }
 
-        cell.configure(image: data.coin.image, status: data.status.formatted, coinShort: data.coin.short, recipient: recipient, amount: data.amount.formatted(currency: .original), fiatAmount: data.amount.description(currency: .usd), direction: data.direction)
+        cell.configure(image: data.coin.image, status: data.status.formatted, coinShort: data.coin.short, recipient: recipient, amount: data.amount.original.formatted ?? "", fiatAmount: data.amount.description(property: .usd), direction: data.direction)
 
         return cell
     }
