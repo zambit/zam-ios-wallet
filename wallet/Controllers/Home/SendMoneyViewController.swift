@@ -34,6 +34,7 @@ class SendMoneyViewController: AvoidingViewController {
 
     var userManager: UserDefaultsManager?
     var userAPI: UserAPI?
+    var priceAPI: PriceAPI?
 
     @IBOutlet private var titleLabel: UILabel?
     @IBOutlet private var walletsCollectionComponent: WalletsCollectionComponent?
@@ -123,38 +124,13 @@ class SendMoneyViewController: AvoidingViewController {
         let itemsData = wallets.map { WalletItemData(data: $0, phoneNumber: phone) }
         walletsCollectionComponent?.custom.prepare(cards: itemsData, current: currentIndex)
 
-        sendMoneyComponent?.prepare(recipient: recipient, coinType: wallets[currentIndex].coin, walletId: wallets[currentIndex].id)
-    }
+        sendMoneyComponent?.prepare(recipient: recipient, coinType: wallets[currentIndex].coin, walletId: wallets[currentIndex].id, coinPrice: nil)
 
-    private func updateDataForCurrentWallet() {
-        guard
-            let token = userManager?.getToken(),
-            let phone = userManager?.getPhoneNumber(),
-            let currentIndex = walletsCollectionComponent?.currentIndex,
-            let currentCell = walletsCollectionComponent?.currentItem
-            else {
-                return
-        }
-
-        let wallet = wallets[currentIndex]
-
-        userAPI?.getWalletInfo(token: token, walletId: wallet.id).done {
+        updatePriceForCurrentCoin {
             [weak self]
-            wallet in
+            price in
 
-            guard let strongSelf = self else {
-                return
-            }
-
-            self?.wallets[currentIndex] = wallet
-            let itemData = WalletItemData(data: wallet, phoneNumber: phone)
-            currentCell.configure(with: itemData)
-
-            self?.delegate?.sendMoneyViewControllerSendingProceedWithSuccess(strongSelf, updated: wallet, index: currentIndex)
-        }.catch {
-            error in
-
-            Crashlytics.sharedInstance().recordError(error)
+            self?.sendMoneyComponent?.prepare(coinPrice: price)
         }
     }
 
@@ -199,6 +175,38 @@ extension SendMoneyViewController: TransactionDetailViewControllerDelegate {
         updateDataForCurrentWallet()
         delegate?.sendMoneyViewControllerSendingProceedWithSuccess(self)
     }
+
+    private func updateDataForCurrentWallet() {
+        guard
+            let token = userManager?.getToken(),
+            let phone = userManager?.getPhoneNumber(),
+            let currentIndex = walletsCollectionComponent?.currentIndex,
+            let currentCell = walletsCollectionComponent?.currentItem
+            else {
+                return
+        }
+
+        let wallet = wallets[currentIndex]
+
+        userAPI?.getWalletInfo(token: token, walletId: wallet.id).done {
+            [weak self]
+            wallet in
+
+            guard let strongSelf = self else {
+                return
+            }
+
+            self?.wallets[currentIndex] = wallet
+            let itemData = WalletItemData(data: wallet, phoneNumber: phone)
+            currentCell.configure(with: itemData)
+
+            self?.delegate?.sendMoneyViewControllerSendingProceedWithSuccess(strongSelf, updated: wallet, index: currentIndex)
+        }.catch {
+            error in
+
+            Crashlytics.sharedInstance().recordError(error)
+        }
+    }
 }
 
 extension SendMoneyViewController: SendMoneyComponentDelegate {
@@ -216,6 +224,29 @@ extension SendMoneyViewController: WalletsCollectionComponentDelegate {
 
     func walletsCollectionComponentCurrentIndexChanged(_ walletsCollectionComponent: WalletsCollectionComponent, to index: Int) {
         self.currentIndex = index
-        self.sendMoneyComponent?.prepare(coinType: wallets[index].coin, walletId: wallets[index].id)
+        self.sendMoneyComponent?.prepare(coinType: wallets[index].coin, walletId: wallets[index].id, coinPrice: nil)
+
+        updatePriceForCurrentCoin {
+            [weak self]
+            price in
+
+            self?.sendMoneyComponent?.prepare(coinPrice: price)
+        }
+    }
+
+    private func updatePriceForCurrentCoin(_ completion: @escaping (CoinPrice) -> Void) {
+        guard let currentIndex = walletsCollectionComponent?.currentIndex else {
+            return
+        }
+
+        let wallet = wallets[currentIndex]
+
+        priceAPI?.getCoinDetailPrice(coin: wallet.coin).done {
+            price in
+            completion(price)
+        }.catch {
+            error in
+            Crashlytics.sharedInstance().recordError(error)
+        }
     }
 }

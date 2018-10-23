@@ -103,7 +103,7 @@ extension BehaviorExtension where Base: SendMoneyButton {
         changeState(to: .editing)
 
         base.mainLabel?.text = "SEND \(amount)"
-        base.detailLabel?.text = "$ \(amount)"
+        base.detailLabel?.text = alternative
 
         base.resignFirstResponder()
         base.layoutIfNeeded()
@@ -115,14 +115,12 @@ extension BehaviorExtension where Base: SendMoneyButton {
         UIView.animate(withDuration: 0.15) {
             switch state {
             case .editing:
-                print("editing")
                 self.base.mainLabelVerticalConstraint?.constant = -9
                 self.base.detailLabelVerticalConstraint?.constant = 9
 
                 self.base.mainLabel?.alpha = 1.0
                 self.base.detailLabel?.alpha = 1.0
             case .clear:
-                print("clear")
                 self.base.mainLabelVerticalConstraint?.constant = 0
                 self.base.detailLabelVerticalConstraint?.constant = 0
 
@@ -131,7 +129,6 @@ extension BehaviorExtension where Base: SendMoneyButton {
 
                 self.base.mainLabel?.text = "SEND"
             case .disabled:
-                print("disabled")
                 self.base.mainLabelVerticalConstraint?.constant = 0
                 self.base.detailLabelVerticalConstraint?.constant = 0
 

@@ -9,12 +9,21 @@
 
 import Foundation
 
-struct Converter {
+struct AmountConverter {
 
-    private var api: PriceAPI?
+    var price: CoinPrice
 
-    init(api: PriceAPI) {
-        self.api = api
+    var amount: Decimal?
+
+    init(price: CoinPrice) {
+        self.price = price
     }
 
+    var converted: Decimal? {
+        guard let amount = amount else {
+            return nil
+        }
+
+        return price.price * amount
+    }
 }

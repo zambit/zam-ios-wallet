@@ -49,6 +49,8 @@ class SendMoneyComponent: Component, SizePresetable {
     private var walletId: String?
     private var recipientData: SendingData.RecipientType?
 
+    private var converter: AmountConverter?
+
     private var sendingData: SendingData? {
         guard let recipient = recipientData, let amount = amountData, let id = walletId else {
             return nil
@@ -118,7 +120,7 @@ class SendMoneyComponent: Component, SizePresetable {
         layoutIfNeeded()
     }
 
-    func prepare(recipient: FormattedContact? = nil, coinType: CoinType, walletId: String) {
+    func prepare(recipient: FormattedContact? = nil, coinType: CoinType, walletId: String, coinPrice: CoinPrice? = nil) {
         self.walletId = walletId
         
         sendMoneyAmountComponent?.prepare(coinType: coinType)
@@ -128,9 +130,15 @@ class SendMoneyComponent: Component, SizePresetable {
             recipientComponent?.custom.setup(contact: recipient)
             updateSendingData(for: .phone)
         }
+
+        if let coinPrice = coinPrice {
+            self.converter = AmountConverter(price: coinPrice)
+        } else {
+            self.converter = nil
+        }
     }
 
-    func prepare(address: String, coinType: CoinType, walletId: String) {
+    func prepare(address: String, coinType: CoinType, walletId: String, coinPrice: CoinPrice? = nil) {
         self.walletId = walletId
 
         sendMoneyAmountComponent?.prepare(coinType: coinType)
@@ -138,6 +146,16 @@ class SendMoneyComponent: Component, SizePresetable {
 
         recipientComponent?.custom.setup(address: address)
         updateSendingData(for: .address)
+
+        if let coinPrice = coinPrice {
+            self.converter = AmountConverter(price: coinPrice)
+        } else {
+            self.converter = nil
+        }
+    }
+
+    func prepare(coinPrice: CoinPrice) {
+        self.converter = AmountConverter(price: coinPrice)
     }
 
     // MARK: - Update sending data

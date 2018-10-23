@@ -534,6 +534,7 @@ final class MainFlow: ScreenFlow {
         vc.onSend = onSend
         vc.userManager = UserDefaultsManager(keychainConfiguration: WalletKeychainConfiguration())
         vc.userAPI = UserAPI(provider: Provider(environment: WalletEnvironment(), dispatcher: HTTPDispatcher()))
+        vc.priceAPI = PriceAPI(provider: Provider(environment: WalletEnvironment(), dispatcher: HTTPDispatcher()))
         vc.title = "Send money"
         vc.flow = self
         return vc
