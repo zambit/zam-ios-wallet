@@ -13,7 +13,8 @@ class SendMoneyButton: UIButton {
 
     enum EditingState {
         case disabled
-        case editing
+        case editingMain
+        case editingBoth
         case clear
     }
 
@@ -99,11 +100,15 @@ extension BehaviorExtension where Base: SendMoneyButton {
         base.detailLabel = detailLabel
     }
 
-    func provide(amount: String, alternative: String) {
-        changeState(to: .editing)
+    func provide(amount: String, detail: String? = nil) {
+        if let _ = detail {
+            changeState(to: .editingBoth)
+        } else {
+            changeState(to: .editingMain)
+        }
 
         base.mainLabel?.text = "SEND \(amount)"
-        base.detailLabel?.text = alternative
+        base.detailLabel?.text = detail
 
         base.resignFirstResponder()
         base.layoutIfNeeded()
@@ -114,9 +119,15 @@ extension BehaviorExtension where Base: SendMoneyButton {
 
         UIView.animate(withDuration: 0.15) {
             switch state {
-            case .editing:
-                self.base.mainLabelVerticalConstraint?.constant = -9
-                self.base.detailLabelVerticalConstraint?.constant = 9
+            case .editingMain:
+                self.base.mainLabelVerticalConstraint?.constant = 0
+                self.base.detailLabelVerticalConstraint?.constant = 0
+
+                self.base.mainLabel?.alpha = 1.0
+                self.base.detailLabel?.alpha = 0.0
+            case .editingBoth:
+                self.base.mainLabelVerticalConstraint?.constant = -7
+                self.base.detailLabelVerticalConstraint?.constant = 10
 
                 self.base.mainLabel?.alpha = 1.0
                 self.base.detailLabel?.alpha = 1.0

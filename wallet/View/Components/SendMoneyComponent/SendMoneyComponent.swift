@@ -17,7 +17,7 @@ struct SendingData {
         case phone(String)
     }
 
-    let amountData: Balance
+    let amount: Amount
     let walletId: String
     let recipient: RecipientType
 }
@@ -45,18 +45,16 @@ class SendMoneyComponent: Component, SizePresetable {
     @IBOutlet private var recipientTextFieldTopConstraint: NSLayoutConstraint?
     @IBOutlet private var recipientTextFieldHeightConstraint: NSLayoutConstraint?
 
-    private var amountData: Balance?
+    private var amountData: Amount?
     private var walletId: String?
     private var recipientData: SendingData.RecipientType?
-
-    private var converter: AmountConverter?
 
     private var sendingData: SendingData? {
         guard let recipient = recipientData, let amount = amountData, let id = walletId else {
             return nil
         }
 
-        return SendingData(amountData: amount, walletId: id, recipient: recipient)
+        return SendingData(amount: amount, walletId: id, recipient: recipient)
     }
 
     override func initFromNib() {
@@ -131,11 +129,7 @@ class SendMoneyComponent: Component, SizePresetable {
             updateSendingData(for: .phone)
         }
 
-        if let coinPrice = coinPrice {
-            self.converter = AmountConverter(price: coinPrice)
-        } else {
-            self.converter = nil
-        }
+        sendMoneyAmountComponent?.prepare(coinPrice: coinPrice)
     }
 
     func prepare(address: String, coinType: CoinType, walletId: String, coinPrice: CoinPrice? = nil) {
@@ -147,15 +141,23 @@ class SendMoneyComponent: Component, SizePresetable {
         recipientComponent?.custom.setup(address: address)
         updateSendingData(for: .address)
 
-        if let coinPrice = coinPrice {
-            self.converter = AmountConverter(price: coinPrice)
-        } else {
-            self.converter = nil
-        }
+        sendMoneyAmountComponent?.prepare(coinPrice: coinPrice)
     }
 
     func prepare(coinPrice: CoinPrice) {
-        self.converter = AmountConverter(price: coinPrice)
+        sendMoneyAmountComponent?.prepare(coinPrice: coinPrice)
+    }
+
+    private func updateSendButton(with amountData: Amount) {
+
+        var converted: String? = nil
+
+        if let convertedValue = amountData.convertedValue {
+            converted = "\(convertedValue.formatted ?? "") \(amountData.fiat.symbol)"
+        }
+
+        sendButton?.custom.provide(amount: "\(amountData.value.longFormatted ?? "") \(amountData.coin.short.uppercased())",
+            detail: converted)
     }
 
     // MARK: - Update sending data
@@ -165,12 +167,10 @@ class SendMoneyComponent: Component, SizePresetable {
             return
         }
 
-        self.amountData = Balance(coin: coinType, usd: amountData.usd, original: amountData.original)
+        self.amountData = Amount(value: amountData.value, coin: coinType, fiat: amountData.fiat, coinPrice: nil)
 
         if let output = sendingData {
-            sendButton?.custom.provide(
-                amount: "\(output.amountData.original.longFormatted ?? "") \(output.amountData.coin.short.uppercased())",
-                alternative: "")
+            updateSendButton(with: output.amount)
         }
     }
 
@@ -189,7 +189,7 @@ class SendMoneyComponent: Component, SizePresetable {
             }
 
             if let output = sendingData {
-                sendButton?.custom.provide(amount: "\(output.amountData.original.longFormatted ?? "") \(output.amountData.coin.short.uppercased())", alternative: "")
+                updateSendButton(with: output.amount)
             }
         case .address:
             guard let address = recipientComponent?.custom.address, !address.isEmpty else {
@@ -200,7 +200,7 @@ class SendMoneyComponent: Component, SizePresetable {
             recipientData = .address(address)
 
             if let output = sendingData {
-                sendButton?.custom.provide(amount: "\(output.amountData.original.longFormatted ?? "") \(output.amountData.coin.short.uppercased())", alternative: "")
+                updateSendButton(with: output.amount)
             }
         }
     }
@@ -237,13 +237,11 @@ class SendMoneyComponent: Component, SizePresetable {
 
 extension SendMoneyComponent: SendMoneyAmountComponentDelegate {
 
-    func sendMoneyAmountComponent(_ sendMoneyAmountComponent: SendMoneyAmountComponent, amountDataEntered data: Balance) {
-        self.amountData = data
+    func sendMoneyAmountComponentEditingChanged(_ sendMoneyAmountComponent: SendMoneyAmountComponent, amount: Amount) {
+        self.amountData = amount
 
         if let output = sendingData {
-            sendButton?.custom.provide(
-                amount: "\(output.amountData.original.longFormatted ?? "") \(output.amountData.coin.short.uppercased())",
-                alternative: "")
+            updateSendButton(with: output.amount)
         }
     }
 

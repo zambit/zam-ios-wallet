@@ -13,17 +13,11 @@ struct AmountConverter {
 
     var price: CoinPrice
 
-    var amount: Decimal?
-
     init(price: CoinPrice) {
         self.price = price
     }
 
-    var converted: Decimal? {
-        guard let amount = amount else {
-            return nil
-        }
-
+    func convert(_ amount: Decimal) -> Decimal {
         return price.price * amount
     }
 }

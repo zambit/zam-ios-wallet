@@ -11,7 +11,7 @@ import UIKit
 
 protocol SendMoneyAmountComponentDelegate: class {
 
-    func sendMoneyAmountComponent(_ sendMoneyAmountComponent: SendMoneyAmountComponent, amountDataEntered data: Balance)
+    func sendMoneyAmountComponentEditingChanged(_ sendMoneyAmountComponent: SendMoneyAmountComponent, amount: Amount)
 
     func sendMoneyAmountComponentValueEnteredIncorrectly(_ sendMoneyAmountComponent: SendMoneyAmountComponent)
 }
@@ -40,6 +40,7 @@ class SendMoneyAmountComponent: Component, SizePresetable, UITextFieldDelegate {
     @IBOutlet private var topGreaterThanConstraint: NSLayoutConstraint?
 
     private var coin: CoinType?
+    private var coinPrice: CoinPrice?
 
     private var coinPrefix: String {
         if let coin = coin {
@@ -50,7 +51,6 @@ class SendMoneyAmountComponent: Component, SizePresetable, UITextFieldDelegate {
     }
 
     private(set) var amount: Decimal = 0.0
-    private(set) var detail: Float = 0
 
     override func initFromNib() {
         super.initFromNib()
@@ -159,10 +159,15 @@ class SendMoneyAmountComponent: Component, SizePresetable, UITextFieldDelegate {
         layoutIfNeeded()
     }
 
-    func prepare(coinType: CoinType) {
+    func prepare(coinType: CoinType, coinPrice: CoinPrice? = nil) {
         self.coin = coinType
+        self.coinPrice = coinPrice
 
         altValueLabel?.text = coinPrefix
+    }
+
+    func prepare(coinPrice: CoinPrice? = nil) {
+        self.coinPrice = coinPrice
     }
 
     // MARK: - AmountTextField
@@ -175,18 +180,16 @@ class SendMoneyAmountComponent: Component, SizePresetable, UITextFieldDelegate {
 
         let value = NumberFormatter.walletAmount.number(from: text)?.decimalValue ?? 0.0
         //let value = Decimal(string: text) ?? 0.0
-        let detailValue: Float = 0.0
 
         if value != amount {
             if value > 0 {
-                let balanceData = Balance(coin: coin, usd: 0.0, original: value)
-                delegate?.sendMoneyAmountComponent(self, amountDataEntered: balanceData)
+                let amount = Amount(value: value, coin: coin, fiat: .standard, coinPrice: coinPrice)
+                delegate?.sendMoneyAmountComponentEditingChanged(self, amount: amount)
             } else {
                 delegate?.sendMoneyAmountComponentValueEnteredIncorrectly(self)
             }
 
             self.amount = value
-            self.detail = detailValue
         }
     }
 

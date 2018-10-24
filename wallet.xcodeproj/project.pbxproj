@@ -329,6 +329,7 @@
 		9307AC76215BDBEB0093DB68 /* Response+TestsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9307AC75215BDBEB0093DB68 /* Response+TestsExtensions.swift */; };
 		9307AC7A215BE0730093DB68 /* ProviderNetworkLayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9307AC79215BE0730093DB68 /* ProviderNetworkLayerTests.swift */; };
 		9307AC7E215BF6DB0093DB68 /* AuthServiceNetworkLayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9307AC7D215BF6DB0093DB68 /* AuthServiceNetworkLayerTests.swift */; };
+		930ED26821809E810016D26D /* Amount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930ED26721809E810016D26D /* Amount.swift */; };
 		9319BA852129A07A00033A7E /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9319BA842129A07A00033A7E /* Transaction.swift */; };
 		9319BAA6212A0AC200033A7E /* CrossAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9319BAA5212A0AC200033A7E /* CrossAnimationView.swift */; };
 /* End PBXBuildFile section */
@@ -672,6 +673,7 @@
 		9307AC75215BDBEB0093DB68 /* Response+TestsExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Response+TestsExtensions.swift"; sourceTree = "<group>"; };
 		9307AC79215BE0730093DB68 /* ProviderNetworkLayerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderNetworkLayerTests.swift; sourceTree = "<group>"; };
 		9307AC7D215BF6DB0093DB68 /* AuthServiceNetworkLayerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthServiceNetworkLayerTests.swift; sourceTree = "<group>"; };
+		930ED26721809E810016D26D /* Amount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Amount.swift; sourceTree = "<group>"; };
 		9319BA842129A07A00033A7E /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
 		9319BAA5212A0AC200033A7E /* CrossAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrossAnimationView.swift; sourceTree = "<group>"; };
 		ACA56559587AEA1EE2113A79 /* Pods-wallet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wallet.release.xcconfig"; path = "Pods/Target Support Files/Pods-wallet/Pods-wallet.release.xcconfig"; sourceTree = "<group>"; };
@@ -1397,6 +1399,7 @@
 			isa = PBXGroup;
 			children = (
 				8C04BC442121D48E00E90090 /* Balance.swift */,
+				930ED26721809E810016D26D /* Amount.swift */,
 				8C7DE6E8216FA2C100824A4B /* Price.swift */,
 				8C7DE6F22170A63A00824A4B /* Coin */,
 				8C7DE6F02170A39000824A4B /* PersonalInfo */,
@@ -2009,12 +2012,8 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
-			);
-			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
@@ -2306,6 +2305,7 @@
 				8CA218E7212DA8300063C188 /* SearchTextField.swift in Sources */,
 				8C7C3356214662CF00EC6C96 /* TextFieldTableViewCellData.swift in Sources */,
 				8CF5F9632114AB000083B36A /* ItemComponent.swift in Sources */,
+				930ED26821809E810016D26D /* Amount.swift in Sources */,
 				8C7C334F2142C2F500EC6C96 /* TextFieldTableViewCell.swift in Sources */,
 				8C0919812108D99400703224 /* CreateNewPasswordViewController.swift in Sources */,
 				8C0919432106268900703224 /* HTTPDispatcher.swift in Sources */,
