@@ -9,7 +9,18 @@
 import Foundation
 import UIKit
 
+protocol WalletDetailsListsTableViewCellDelegate: class {
+
+    func walletDetailsListsTableViewCellRequestsReloadCoinDetails(_ walletDetailsListsTableViewCell: WalletDetailsListsTableViewCell)
+
+    func walletDetailsListsTableViewCellRequestsReloadTransactions(_ walletDetailsListsTableViewCell: WalletDetailsListsTableViewCell)
+
+    func walletDetailsListsTableViewCellRequestsLoadNextTransactionsPage(_ walletDetailsListsTableViewCell: WalletDetailsListsTableViewCell)
+}
+
 class WalletDetailsListsTableViewCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate {
+
+    weak var delegate: WalletDetailsListsTableViewCellDelegate?
 
     private var titleLabel: UILabel!
     private var tableView: UITableView!
@@ -54,6 +65,7 @@ class WalletDetailsListsTableViewCell: UITableViewCell, UITableViewDataSource, U
 
         let tableView = UITableView(frame: .zero, style: .plain)
         tableView.register(DetailTableViewCell.self, forCellReuseIdentifier: "DetailTableViewCell")
+        tableView.register(TransactionCellComponent.self , forCellReuseIdentifier: "TransactionCellComponent")
         tableView.allowsSelection = false
         tableView.separatorStyle = .singleLine
         tableView.isScrollEnabled = false
