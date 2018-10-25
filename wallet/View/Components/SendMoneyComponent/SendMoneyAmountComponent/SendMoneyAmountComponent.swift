@@ -19,10 +19,12 @@ protocol SendMoneyAmountComponentDelegate: class {
 class SendMoneyAmountComponent: Component, SizePresetable, UITextFieldDelegate {
 
     weak var delegate: SendMoneyAmountComponentDelegate?
-    
+
     @IBOutlet private var titleLabel: UILabel?
     @IBOutlet private var valueTextField: UITextField?
     @IBOutlet private var altValueLabel: UILabel?
+
+    @IBOutlet private var exchangeButton: HighlightableButton?
 
     @IBOutlet private var feeContainer: UIView?
 
@@ -79,6 +81,11 @@ class SendMoneyAmountComponent: Component, SizePresetable, UITextFieldDelegate {
         altValueLabel?.textAlignment = .center
         altValueLabel?.textColor = .warmGrey
         altValueLabel?.text = coinPrefix
+
+        exchangeButton?.circleCorner = true
+        exchangeButton?.backgroundColor = UIColor.black.withAlphaComponent(0.1)
+        exchangeButton?.setHighlightedBackgroundColor(UIColor.black.withAlphaComponent(0.3))
+        exchangeButton?.setImage(#imageLiteral(resourceName: "icExchange"), for: .normal)
 
         blockchainFee?.font = UIFont.walletFont(ofSize: 14.0, weight: .regular)
         blockchainFee?.textAlignment = .left
