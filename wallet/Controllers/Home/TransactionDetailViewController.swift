@@ -161,7 +161,7 @@ class TransactionDetailViewController: FlowViewController, WalletNavigable {
 
         amountLabel?.text = "\(data.amount.value.longFormatted ?? "") \(data.amount.coin.short.uppercased())"
 
-        if let convertedValue = data.amount.convertedValue {
+        if let convertedValue = data.amount.fiatValue {
             amountDetailLabel?.text = "\(data.amount.fiat.symbol) \(convertedValue.formatted ?? "")"
         }
 

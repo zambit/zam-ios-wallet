@@ -17,7 +17,7 @@ struct Amount {
 
     let value: Decimal
 
-    var convertedValue: Decimal? {
+    var fiatValue: Decimal? {
         guard let price = coinPrice else {
             return nil
         }

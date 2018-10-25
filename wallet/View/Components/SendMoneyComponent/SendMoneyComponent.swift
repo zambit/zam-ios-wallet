@@ -150,14 +150,14 @@ class SendMoneyComponent: Component, SizePresetable {
 
     private func updateSendButton(with amountData: Amount) {
 
-        var converted: String? = nil
+        var detail: String? = nil
 
-        if let convertedValue = amountData.convertedValue {
-            converted = "\(convertedValue.formatted ?? "") \(amountData.fiat.symbol)"
+        if let detailValue = amountData.fiatValue {
+            detail = "\(detailValue.shortFormatted ?? "") \(amountData.fiat.symbol)"
         }
 
         sendButton?.custom.provide(amount: "\(amountData.value.longFormatted ?? "") \(amountData.coin.short.uppercased())",
-            detail: converted)
+            detail: detail)
     }
 
     // MARK: - Update sending data

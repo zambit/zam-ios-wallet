@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -16,6 +15,7 @@
                 <outlet property="altValueLabel" destination="qlR-ac-cJq" id="wbn-Qz-V8f"/>
                 <outlet property="blockchainFee" destination="rZ0-vl-O1e" id="2t6-gx-eOk"/>
                 <outlet property="contentView" destination="iN0-l3-epB" id="Wpj-Ru-k4t"/>
+                <outlet property="exchangeButton" destination="hOa-75-HQB" id="SFC-ze-7b3"/>
                 <outlet property="feeContainer" destination="XaW-xK-dtz" id="81i-4s-Ms5"/>
                 <outlet property="feesBottomGreaterThanConstraint" destination="bdN-eO-Que" id="S9p-v4-jPH"/>
                 <outlet property="feesHeightConstraint" destination="KPb-4a-ksd" id="rh1-Pr-1ij"/>
@@ -45,13 +45,12 @@
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Q45-Zq-EGm">
-                    <rect key="frame" x="16" y="63" width="553" height="54"/>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Q45-Zq-EGm">
+                    <rect key="frame" x="288.5" y="63" width="8" height="54"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="54" id="gJb-In-gev"/>
                     </constraints>
                     <nil key="textColor"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qlR-ac-cJq">
@@ -82,10 +81,10 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jIb-xs-uWB">
-                            <rect key="frame" x="276" y="0.0" width="277" height="51"/>
+                            <rect key="frame" x="276.5" y="0.0" width="276.5" height="51"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fWh-gm-WIt" customClass="IndentLabel" customModule="wallet" customModuleProvider="target">
-                                    <rect key="frame" x="19" y="15" width="258" height="21"/>
+                                    <rect key="frame" x="19" y="15" width="257.5" height="21"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
@@ -111,6 +110,13 @@
                         <constraint firstItem="jIb-xs-uWB" firstAttribute="leading" secondItem="GfN-es-gaT" secondAttribute="trailing" id="rxX-Hb-YHX"/>
                     </constraints>
                 </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hOa-75-HQB" customClass="HighlightableButton" customModule="wallet" customModuleProvider="target">
+                    <rect key="frame" x="236.5" y="69" width="42" height="42"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="42" id="SGM-RU-cdv"/>
+                        <constraint firstAttribute="height" constant="42" id="Tdc-eK-FwE"/>
+                    </constraints>
+                </button>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
@@ -118,14 +124,16 @@
                 <constraint firstItem="eg3-E9-yqy" firstAttribute="top" relation="greaterThanOrEqual" secondItem="vUN-kp-3ea" secondAttribute="top" constant="10" id="7kU-cK-Uky"/>
                 <constraint firstItem="Q45-Zq-EGm" firstAttribute="top" secondItem="eg3-E9-yqy" secondAttribute="bottom" constant="10" id="DAx-fa-YsA"/>
                 <constraint firstItem="qlR-ac-cJq" firstAttribute="top" secondItem="Q45-Zq-EGm" secondAttribute="bottom" constant="10" id="EAI-RW-EXA"/>
+                <constraint firstItem="hOa-75-HQB" firstAttribute="centerY" secondItem="Q45-Zq-EGm" secondAttribute="centerY" id="JlT-zQ-fcj"/>
+                <constraint firstItem="Q45-Zq-EGm" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="LOX-A9-WN1"/>
                 <constraint firstItem="eg3-E9-yqy" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="UUA-wZ-Wfu"/>
-                <constraint firstItem="Q45-Zq-EGm" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="YIS-iq-sJR"/>
+                <constraint firstItem="hOa-75-HQB" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="10" id="WHk-tE-WI0"/>
                 <constraint firstItem="XaW-xK-dtz" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="YW5-aJ-juC"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="XaW-xK-dtz" secondAttribute="bottom" id="bdN-eO-Que"/>
                 <constraint firstItem="qlR-ac-cJq" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="jGa-8c-mOb"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="XaW-xK-dtz" secondAttribute="trailing" constant="16" id="tjV-n1-Y0e"/>
+                <constraint firstItem="Q45-Zq-EGm" firstAttribute="leading" secondItem="hOa-75-HQB" secondAttribute="trailing" constant="10" id="vt7-oy-s04"/>
                 <constraint firstItem="XaW-xK-dtz" firstAttribute="top" secondItem="qlR-ac-cJq" secondAttribute="bottom" constant="19" id="wDy-mT-Hlm"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Q45-Zq-EGm" secondAttribute="trailing" constant="16" id="z5d-Bo-wzw"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>

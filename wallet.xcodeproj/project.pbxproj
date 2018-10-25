@@ -283,7 +283,6 @@
 		8CA21939213591D10063C188 /* TransactionsCoinFilterComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CA21938213591D00063C188 /* TransactionsCoinFilterComponent.xib */; };
 		8CA219402135949C0063C188 /* CoinItemComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA2193F2135949C0063C188 /* CoinItemComponent.swift */; };
 		8CDB0DDC217F38440006BF07 /* CodableCoinDataResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDB0DDB217F38440006BF07 /* CodableCoinDataResponse.swift */; };
-		8CDB0DDE217F3FCD0006BF07 /* Converter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDB0DDD217F3FCD0006BF07 /* Converter.swift */; };
 		8CF41D882135973F006D4FE2 /* RectItemComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CF41D862135973E006D4FE2 /* RectItemComponent.xib */; };
 		8CF41D892135973F006D4FE2 /* RectItemComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF41D872135973F006D4FE2 /* RectItemComponent.swift */; };
 		8CF41D8B21359776006D4FE2 /* ContactItemComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF41D8A21359776006D4FE2 /* ContactItemComponent.swift */; };
@@ -330,6 +329,7 @@
 		9307AC7A215BE0730093DB68 /* ProviderNetworkLayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9307AC79215BE0730093DB68 /* ProviderNetworkLayerTests.swift */; };
 		9307AC7E215BF6DB0093DB68 /* AuthServiceNetworkLayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9307AC7D215BF6DB0093DB68 /* AuthServiceNetworkLayerTests.swift */; };
 		930ED26821809E810016D26D /* Amount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930ED26721809E810016D26D /* Amount.swift */; };
+		930ED26A2181FC7A0016D26D /* Converter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930ED2692181FC7A0016D26D /* Converter.swift */; };
 		9319BA852129A07A00033A7E /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9319BA842129A07A00033A7E /* Transaction.swift */; };
 		9319BAA6212A0AC200033A7E /* CrossAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9319BAA5212A0AC200033A7E /* CrossAnimationView.swift */; };
 /* End PBXBuildFile section */
@@ -625,7 +625,6 @@
 		8CA21938213591D00063C188 /* TransactionsCoinFilterComponent.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransactionsCoinFilterComponent.xib; sourceTree = "<group>"; };
 		8CA2193F2135949C0063C188 /* CoinItemComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinItemComponent.swift; sourceTree = "<group>"; };
 		8CDB0DDB217F38440006BF07 /* CodableCoinDataResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableCoinDataResponse.swift; sourceTree = "<group>"; };
-		8CDB0DDD217F3FCD0006BF07 /* Converter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Converter.swift; sourceTree = "<group>"; };
 		8CF41D862135973E006D4FE2 /* RectItemComponent.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RectItemComponent.xib; sourceTree = "<group>"; };
 		8CF41D872135973F006D4FE2 /* RectItemComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RectItemComponent.swift; sourceTree = "<group>"; };
 		8CF41D8A21359776006D4FE2 /* ContactItemComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactItemComponent.swift; sourceTree = "<group>"; };
@@ -674,6 +673,7 @@
 		9307AC79215BE0730093DB68 /* ProviderNetworkLayerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderNetworkLayerTests.swift; sourceTree = "<group>"; };
 		9307AC7D215BF6DB0093DB68 /* AuthServiceNetworkLayerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthServiceNetworkLayerTests.swift; sourceTree = "<group>"; };
 		930ED26721809E810016D26D /* Amount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Amount.swift; sourceTree = "<group>"; };
+		930ED2692181FC7A0016D26D /* Converter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Converter.swift; sourceTree = "<group>"; };
 		9319BA842129A07A00033A7E /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
 		9319BAA5212A0AC200033A7E /* CrossAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrossAnimationView.swift; sourceTree = "<group>"; };
 		ACA56559587AEA1EE2113A79 /* Pods-wallet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wallet.release.xcconfig"; path = "Pods/Target Support Files/Pods-wallet/Pods-wallet.release.xcconfig"; sourceTree = "<group>"; };
@@ -728,7 +728,6 @@
 				8C7DE6922167916B00824A4B /* AdvancedTransitionDelegate.swift */,
 				8C6088502111A95100470411 /* Conditions.swift */,
 				8C09192C21061F3600703224 /* ControllerHelper.swift */,
-				8CDB0DDD217F3FCD0006BF07 /* Converter.swift */,
 				8C713B2B213EC77500AC2E25 /* CustomBehavioral.swift */,
 				8C04BC3821219D0600E90090 /* DrawingHelper.swift */,
 				8C52FFFD211B252F00EB55EA /* InstantPanGestureRecognizer.swift */,
@@ -1401,6 +1400,7 @@
 				8C04BC442121D48E00E90090 /* Balance.swift */,
 				930ED26721809E810016D26D /* Amount.swift */,
 				8C7DE6E8216FA2C100824A4B /* Price.swift */,
+				930ED2692181FC7A0016D26D /* Converter.swift */,
 				8C7DE6F22170A63A00824A4B /* Coin */,
 				8C7DE6F02170A39000824A4B /* PersonalInfo */,
 				8C7DE6F12170A46100824A4B /* Contact */,
@@ -2182,7 +2182,6 @@
 				8C7DE6EB216FA2F900824A4B /* CoinPrice.swift in Sources */,
 				8C333D60210B5E2900949AC0 /* NewPasswordFormComponent.swift in Sources */,
 				8CF5F94E21148BD90083B36A /* EnterPinViewController.swift in Sources */,
-				8CDB0DDE217F3FCD0006BF07 /* Converter.swift in Sources */,
 				8C7C336A2146D65800EC6C96 /* KYCUploadSelfieViewController.swift in Sources */,
 				8C333D4A210B1C4300949AC0 /* TextCheckBoxView.swift in Sources */,
 				8C6088672112120100470411 /* SpinningAnimationLayer.swift in Sources */,
@@ -2310,6 +2309,7 @@
 				8C0919812108D99400703224 /* CreateNewPasswordViewController.swift in Sources */,
 				8C0919432106268900703224 /* HTTPDispatcher.swift in Sources */,
 				8C72AD1C2155107A0032ABD2 /* DeviceModel.swift in Sources */,
+				930ED26A2181FC7A0016D26D /* Converter.swift in Sources */,
 				8C2D276321590124004CE1F8 /* UIScreen+Extensions.swift in Sources */,
 				8C7DE6F82170ACB200824A4B /* CodableSignupTokenResponse.swift in Sources */,
 				8C333D362109F09800949AC0 /* FirstEnterLoginFlow.swift in Sources */,

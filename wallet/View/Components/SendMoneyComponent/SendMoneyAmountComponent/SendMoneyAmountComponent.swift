@@ -44,6 +44,9 @@ class SendMoneyAmountComponent: Component, SizePresetable, UITextFieldDelegate {
     private var coin: CoinType?
     private var coinPrice: CoinPrice?
 
+    private var converter: Converter?
+    private var isAmountInFiat: Bool = false
+
     private var coinPrefix: String {
         if let coin = coin {
             return "\(coin.short.uppercased())"
@@ -83,9 +86,11 @@ class SendMoneyAmountComponent: Component, SizePresetable, UITextFieldDelegate {
         altValueLabel?.text = coinPrefix
 
         exchangeButton?.circleCorner = true
-        exchangeButton?.backgroundColor = UIColor.black.withAlphaComponent(0.1)
-        exchangeButton?.setHighlightedBackgroundColor(UIColor.black.withAlphaComponent(0.3))
+        exchangeButton?.backgroundColor = UIColor.black.withAlphaComponent(0.03)
+        exchangeButton?.setHighlightedBackgroundColor(UIColor.black.withAlphaComponent(0.1))
         exchangeButton?.setImage(#imageLiteral(resourceName: "icExchange"), for: .normal)
+        exchangeButton?.setHighlightedTintColor(UIColor.white)
+        exchangeButton?.addTarget(self, action: #selector(exchangeButtonTouchUpInsideEvent(_:)), for: .touchUpInside)
 
         blockchainFee?.font = UIFont.walletFont(ofSize: 14.0, weight: .regular)
         blockchainFee?.textAlignment = .left
@@ -170,33 +175,55 @@ class SendMoneyAmountComponent: Component, SizePresetable, UITextFieldDelegate {
         self.coin = coinType
         self.coinPrice = coinPrice
 
+        self.converter = Converter(coin: coinType, fiat: .standard, coinPrice: coinPrice)
+
         altValueLabel?.text = coinPrefix
     }
 
     func prepare(coinPrice: CoinPrice? = nil) {
         self.coinPrice = coinPrice
+
+        self.converter?.coinPrice = coinPrice
     }
 
     // MARK: - AmountTextField
 
     @objc
     private func valueTextFieldEditingChanged(_ sender: UITextField) {
-        guard let text = sender.text, let coin = coin else {
+        guard let text = sender.text, let converter = self.converter else {
             return
         }
 
         let value = NumberFormatter.walletAmount.number(from: text)?.decimalValue ?? 0.0
-        //let value = Decimal(string: text) ?? 0.0
 
-        if value != amount {
-            if value > 0 {
-                let amount = Amount(value: value, coin: coin, fiat: .standard, coinPrice: coinPrice)
-                delegate?.sendMoneyAmountComponentEditingChanged(self, amount: amount)
-            } else {
-                delegate?.sendMoneyAmountComponentValueEnteredIncorrectly(self)
+        if isAmountInFiat {
+            if value != converter.fiatValue {
+                self.converter?.fiatValue = value
+
+                guard let converter = self.converter else {
+                    return
+                }
+
+                if converter.coinValue > 0 {
+                    delegate?.sendMoneyAmountComponentEditingChanged(self, amount: converter.amount)
+                } else {
+                    delegate?.sendMoneyAmountComponentValueEnteredIncorrectly(self)
+                }
             }
+        } else {
+            if value != converter.coinValue {
+                self.converter?.coinValue = value
 
-            self.amount = value
+                guard let converter = self.converter else {
+                    return
+                }
+
+                if converter.coinValue > 0 {
+                    delegate?.sendMoneyAmountComponentEditingChanged(self, amount: converter.amount)
+                } else {
+                    delegate?.sendMoneyAmountComponentValueEnteredIncorrectly(self)
+                }
+            }
         }
     }
 
@@ -230,5 +257,24 @@ class SendMoneyAmountComponent: Component, SizePresetable, UITextFieldDelegate {
         }
 
         return true
+    }
+
+    // MARK: - ExchangeButton
+
+    @objc
+    private func exchangeButtonTouchUpInsideEvent(_ sender: UIButton) {
+        guard let converter = converter else {
+            return
+        }
+
+        isAmountInFiat.toggle()
+
+        if isAmountInFiat {
+            valueTextField?.text = converter.fiatValue.formatted ?? "0.0"
+            altValueLabel?.text = converter.fiat.short.uppercased()
+        } else {
+            valueTextField?.text = converter.coinValue.longFormatted ?? "0.0"
+            altValueLabel?.text = converter.coin.short.uppercased()
+        }
     }
 }

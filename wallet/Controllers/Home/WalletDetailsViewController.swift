@@ -153,6 +153,8 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable {
     private var coinPrice: CoinPrice?
     private var currentInterval: CoinPriceChartIntervalType = .day
 
+    
+
     private lazy var balancer = CellsBalancer(parent: self)
 
     override func viewWillAppear(_ animated: Bool) {
