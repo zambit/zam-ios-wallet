@@ -270,10 +270,10 @@ class SendMoneyAmountComponent: Component, SizePresetable, UITextFieldDelegate {
         isAmountInFiat.toggle()
 
         if isAmountInFiat {
-            valueTextField?.text = converter.fiatValue.formatted ?? "0.0"
+            valueTextField?.text = converter.fiatValue.longFormatted?.removingWhitespaces ?? "0.0"
             altValueLabel?.text = converter.fiat.short.uppercased()
         } else {
-            valueTextField?.text = converter.coinValue.longFormatted ?? "0.0"
+            valueTextField?.text = converter.coinValue.longFormatted?.removingWhitespaces ?? "0.0"
             altValueLabel?.text = converter.coin.short.uppercased()
         }
     }

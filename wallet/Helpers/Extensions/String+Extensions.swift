@@ -76,6 +76,10 @@ extension String {
     mutating func capitalizeFirst() {
         self = self.capitalizingFirst
     }
+
+    var removingWhitespaces: String {
+        return components(separatedBy: .whitespaces).joined()
+    }
 }
 
 // MARK: String Helper
