@@ -78,7 +78,7 @@ class SendMoneyAmountComponent: Component, SizePresetable, UITextFieldDelegate {
         valueTextField?.tintColor = .darkIndigo
         valueTextField?.keyboardType = .decimalPad
         valueTextField?.attributedPlaceholder =
-            NSAttributedString(string: NumberFormatter.walletAmount.string(from: 0.0)!, attributes: [NSAttributedString.Key.foregroundColor: UIColor.darkIndigo])
+            NSAttributedString(string: Decimal(0.0).longFormatted!, attributes: [NSAttributedString.Key.foregroundColor: UIColor.darkIndigo])
 
         altValueLabel?.font = UIFont.walletFont(ofSize: 14.0, weight: .regular)
         altValueLabel?.textAlignment = .center
@@ -96,13 +96,14 @@ class SendMoneyAmountComponent: Component, SizePresetable, UITextFieldDelegate {
         blockchainFee?.textAlignment = .left
         blockchainFee?.textColor = UIColor.warmGrey.withAlphaComponent(0.7)
         blockchainFee?.custom.setIndent("blockchain fee   ")
-        blockchainFee?.custom.setText("$ \(NumberFormatter.walletAmount.string(from: 0.0)!)")
+
+        blockchainFee?.custom.setText("$ \(Decimal(0.0).longFormatted!)")
 
         zamzamFee?.font = UIFont.walletFont(ofSize: 14.0, weight: .regular)
         zamzamFee?.textAlignment = .left
         zamzamFee?.textColor = UIColor.warmGrey.withAlphaComponent(0.7)
         zamzamFee?.custom.setIndent("zamzam fee   ")
-        zamzamFee?.custom.setText("$ \(NumberFormatter.walletAmount.string(from: 0.0)!)")
+        zamzamFee?.custom.setText("$ \(Decimal(0.0).longFormatted!)")
     }
 
     override func layoutSubviews() {
@@ -194,7 +195,7 @@ class SendMoneyAmountComponent: Component, SizePresetable, UITextFieldDelegate {
             return
         }
 
-        let value = NumberFormatter.walletAmount.number(from: text)?.decimalValue ?? 0.0
+        let value = NumberFormatter.amount.number(from: text)?.decimalValue ?? 0.0
 
         if isAmountInFiat {
             if value != converter.fiatValue {
@@ -229,7 +230,7 @@ class SendMoneyAmountComponent: Component, SizePresetable, UITextFieldDelegate {
 
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
 
-        let decimalSeparator = NumberFormatter.walletAmount.decimalSeparator!
+        let decimalSeparator = NumberFormatter.amount.decimalSeparator ?? "."
         let nondecimalCharacters = NSCharacterSet(charactersIn: "0123456789" + decimalSeparator).inverted
 
         let existingTextHasDecimalSeparator = textField.text?.range(of: decimalSeparator)
@@ -247,11 +248,11 @@ class SendMoneyAmountComponent: Component, SizePresetable, UITextFieldDelegate {
         }
 
         if textField.text == "", string == "0" {
-            textField.text?.append("0\(NumberFormatter.walletAmount.decimalSeparator!)")
+            textField.text?.append("0\(NumberFormatter.amount.decimalSeparator ?? "")")
             return false
         }
 
-        if textField.text == "0\(NumberFormatter.walletAmount.decimalSeparator!)", string == "" {
+        if textField.text == "0\(NumberFormatter.amount.decimalSeparator ?? "")", string == "" {
             textField.text = ""
             return false
         }

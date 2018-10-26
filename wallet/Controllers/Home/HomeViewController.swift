@@ -351,7 +351,7 @@ class HomeViewController: FloatingViewController {
 
         guard
             let totalBalance = totalBalance,
-            let separator = NumberFormatter.walletAmount.decimalSeparator!.first else {
+            let separator = NumberFormatter.amount.decimalSeparator.first else {
             return
         }
 
