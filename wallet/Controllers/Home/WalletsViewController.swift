@@ -177,7 +177,7 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         guard didInitiallyLoaded else {
-            return 4
+            return 3
         }
 
         return wallets.count
@@ -225,15 +225,19 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
             owner.performDepositFromWallet(index: indexPath.item, wallets: strongSelf.wallets, phone: strongSelf.phone)
         }
 
-        cell.onCardLongPress = {
-            [weak self] in
+        if wallets[indexPath.item].coin == .zam {
+            cell.onCardLongPress = {}
+        } else {
+            cell.onCardLongPress = {
+                [weak self] in
 
-            guard let strongSelf = self, let owner = strongSelf._owner else {
-                return
+                guard let strongSelf = self, let owner = strongSelf._owner else {
+                    return
+                }
+
+                strongSelf.prepareCellForAnimation(cell)
+                owner.performWalletDetails(index: indexPath.item, wallets: strongSelf.wallets, phone: strongSelf.phone)
             }
-
-            strongSelf.prepareCellForAnimation(cell)
-            owner.performWalletDetails(index: indexPath.item, wallets: strongSelf.wallets, phone: strongSelf.phone)
         }
         return cell
     }
