@@ -278,7 +278,6 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
             strongSelf.didInitiallyLoaded = true
 
             if oldCount != newCount {
-
                 strongSelf.loadChartsPoints(completion: {
                     _ in
 
@@ -324,7 +323,6 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
                 error in
 
                 Crashlytics.sharedInstance().recordError(error)
-                
                 group.leave()
             }
         }

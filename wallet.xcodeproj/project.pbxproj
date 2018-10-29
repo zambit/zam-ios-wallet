@@ -121,6 +121,7 @@
 		8C6088652112027300470411 /* CreatePasswordProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6088642112027300470411 /* CreatePasswordProcess.swift */; };
 		8C6088672112120100470411 /* SpinningAnimationLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6088662112120100470411 /* SpinningAnimationLayer.swift */; };
 		8C625F882154F9E100BEF1C5 /* LaunchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C625F872154F9E000BEF1C5 /* LaunchScreenViewController.swift */; };
+		8C6BEE7A218775D000AEF107 /* NSRange+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6BEE79218775D000AEF107 /* NSRange+Extensions.swift */; };
 		8C713B0D2136EA9E00AC2E25 /* UIAlertController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C713B0C2136EA9E00AC2E25 /* UIAlertController+Extensions.swift */; };
 		8C713B0F2137E54100AC2E25 /* UIRefreshControl+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C713B0E2137E54100AC2E25 /* UIRefreshControl+Extensions.swift */; };
 		8C713B112137F95200AC2E25 /* DepositMoneyMethodComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C713B102137F95200AC2E25 /* DepositMoneyMethodComponent.swift */; };
@@ -463,6 +464,7 @@
 		8C6088642112027300470411 /* CreatePasswordProcess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePasswordProcess.swift; sourceTree = "<group>"; };
 		8C6088662112120100470411 /* SpinningAnimationLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinningAnimationLayer.swift; sourceTree = "<group>"; };
 		8C625F872154F9E000BEF1C5 /* LaunchScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchScreenViewController.swift; sourceTree = "<group>"; };
+		8C6BEE79218775D000AEF107 /* NSRange+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSRange+Extensions.swift"; sourceTree = "<group>"; };
 		8C713B0C2136EA9E00AC2E25 /* UIAlertController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Extensions.swift"; sourceTree = "<group>"; };
 		8C713B0E2137E54100AC2E25 /* UIRefreshControl+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIRefreshControl+Extensions.swift"; sourceTree = "<group>"; };
 		8C713B102137F95200AC2E25 /* DepositMoneyMethodComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepositMoneyMethodComponent.swift; sourceTree = "<group>"; };
@@ -1684,6 +1686,7 @@
 				8C333D3F210A08A600949AC0 /* UIView+Extensions.swift */,
 				8C333D47210B0F3700949AC0 /* UIViewController+Extensions.swift */,
 				8C231448214FB7FE007340E7 /* UITapGestureRecognizer+Extensions.swift */,
+				8C6BEE79218775D000AEF107 /* NSRange+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -2308,6 +2311,7 @@
 				8C7C334F2142C2F500EC6C96 /* TextFieldTableViewCell.swift in Sources */,
 				8C0919812108D99400703224 /* CreateNewPasswordViewController.swift in Sources */,
 				8C0919432106268900703224 /* HTTPDispatcher.swift in Sources */,
+				8C6BEE7A218775D000AEF107 /* NSRange+Extensions.swift in Sources */,
 				8C72AD1C2155107A0032ABD2 /* DeviceModel.swift in Sources */,
 				930ED26A2181FC7A0016D26D /* Converter.swift in Sources */,
 				8C2D276321590124004CE1F8 /* UIScreen+Extensions.swift in Sources */,
