@@ -124,7 +124,7 @@ class SendMoneyViewController: AvoidingViewController {
         let itemsData = wallets.map { WalletItemData(data: $0, phoneNumber: phone) }
         walletsCollectionComponent?.custom.prepare(cards: itemsData, current: currentIndex)
 
-        sendMoneyComponent?.prepare(recipient: recipient, coinType: wallets[currentIndex].coin, walletId: wallets[currentIndex].id, walletCoinValue: wallets[currentIndex].balance.original, walletFiatValue: wallets[currentIndex].balance.usd, coinPrice: nil)
+        sendMoneyComponent?.prepare(recipient: recipient, coinType: wallets[currentIndex].coin, fiatType: .standard, walletId: wallets[currentIndex].id, walletCoinValue: wallets[currentIndex].balance.original, walletFiatValue: wallets[currentIndex].balance.usd, coinPrice: nil)
 
         updatePriceForCurrentCoin {
             [weak self]
@@ -158,13 +158,13 @@ extension SendMoneyViewController: QRCodeScannerViewControllerDelegate {
 
     func qrCodeScannerViewController(_ qrCodeScannerViewController: QRCodeScannerViewController, didFindCode code: String) {
         if let index = currentIndex, wallets.count > index {
-            sendMoneyComponent?.prepare(address: code, coinType: wallets[index].coin, walletId: wallets[index].id, walletCoinValue: wallets[index].balance.original, walletFiatValue: wallets[index].balance.usd)
+            sendMoneyComponent?.prepare(address: code, coinType: wallets[index].coin, fiatType: .standard, walletId: wallets[index].id, walletCoinValue: wallets[index].balance.original, walletFiatValue: wallets[index].balance.usd)
         }
     }
 
     func qrCodeScannerViewControllerDidntFindCode(_ qrCodeScannerViewController: QRCodeScannerViewController) {
         if let index = currentIndex, wallets.count > index {
-            sendMoneyComponent?.prepare(address: "", coinType: wallets[index].coin, walletId: wallets[index].id, walletCoinValue: wallets[index].balance.original, walletFiatValue: wallets[index].balance.usd)
+            sendMoneyComponent?.prepare(address: "", coinType: wallets[index].coin, fiatType: .standard, walletId: wallets[index].id, walletCoinValue: wallets[index].balance.original, walletFiatValue: wallets[index].balance.usd)
         }
     }
 }
@@ -224,7 +224,7 @@ extension SendMoneyViewController: WalletsCollectionComponentDelegate {
 
     func walletsCollectionComponentCurrentIndexChanged(_ walletsCollectionComponent: WalletsCollectionComponent, to index: Int) {
         self.currentIndex = index
-        self.sendMoneyComponent?.prepare(coinType: wallets[index].coin, walletId: wallets[index].id, walletCoinValue: wallets[index].balance.original, walletFiatValue: wallets[index].balance.usd, coinPrice: nil)
+        self.sendMoneyComponent?.prepare(coinType: wallets[index].coin, fiatType: .standard, walletId: wallets[index].id, walletCoinValue: wallets[index].balance.original, walletFiatValue: wallets[index].balance.usd, coinPrice: nil)
 
         updatePriceForCurrentCoin {
             [weak self]

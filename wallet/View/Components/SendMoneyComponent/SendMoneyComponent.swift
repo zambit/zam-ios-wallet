@@ -118,10 +118,10 @@ class SendMoneyComponent: Component, SizePresetable {
         layoutIfNeeded()
     }
 
-    func prepare(recipient: FormattedContact? = nil, coinType: CoinType, walletId: String, walletCoinValue: Decimal, walletFiatValue: Decimal, coinPrice: CoinPrice? = nil) {
+    func prepare(recipient: FormattedContact? = nil, coinType: CoinType, fiatType: FiatType, walletId: String, walletCoinValue: Decimal, walletFiatValue: Decimal, coinPrice: CoinPrice? = nil) {
         self.walletId = walletId
         
-        sendMoneyAmountComponent?.prepare(coinType: coinType, maxCoinValue: walletCoinValue, maxFiatValue: walletFiatValue)
+        sendMoneyAmountComponent?.prepare(coin: coinType, fiat: fiatType, maxCoinValue: walletCoinValue, maxFiatValue: walletFiatValue)
         updateSendingData(for: coinType)
 
         if let recipient = recipient {
@@ -132,10 +132,10 @@ class SendMoneyComponent: Component, SizePresetable {
         sendMoneyAmountComponent?.prepare(coinPrice: coinPrice)
     }
 
-    func prepare(address: String, coinType: CoinType, walletId: String, walletCoinValue: Decimal, walletFiatValue: Decimal, coinPrice: CoinPrice? = nil) {
+    func prepare(address: String, coinType: CoinType, fiatType: FiatType, walletId: String, walletCoinValue: Decimal, walletFiatValue: Decimal, coinPrice: CoinPrice? = nil) {
         self.walletId = walletId
 
-        sendMoneyAmountComponent?.prepare(coinType: coinType, maxCoinValue: walletCoinValue, maxFiatValue: walletFiatValue)
+        sendMoneyAmountComponent?.prepare(coin: coinType, fiat: fiatType, maxCoinValue: walletCoinValue, maxFiatValue: walletFiatValue)
         updateSendingData(for: coinType)
 
         recipientComponent?.custom.setup(address: address)

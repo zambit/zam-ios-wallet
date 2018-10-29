@@ -43,6 +43,7 @@ class SendMoneyAmountComponent: Component, SizePresetable, UITextFieldDelegate {
     @IBOutlet private var topGreaterThanConstraint: NSLayoutConstraint?
 
     private var coin: CoinType?
+    private var fiat: FiatType?
     private var coinPrice: CoinPrice?
     private var maxCoinValue: Decimal?
     private var maxFiatValue: Decimal?
@@ -182,13 +183,14 @@ class SendMoneyAmountComponent: Component, SizePresetable, UITextFieldDelegate {
         layoutIfNeeded()
     }
 
-    func prepare(coinType: CoinType, maxCoinValue: Decimal, maxFiatValue: Decimal, coinPrice: CoinPrice? = nil) {
-        self.coin = coinType
+    func prepare(coin: CoinType, fiat: FiatType, maxCoinValue: Decimal, maxFiatValue: Decimal, coinPrice: CoinPrice? = nil) {
+        self.coin = coin
+        self.fiat = fiat
         self.coinPrice = coinPrice
         self.maxCoinValue = maxCoinValue
         self.maxFiatValue = maxFiatValue
 
-        self.converter = Converter(coin: coinType, fiat: .standard, coinPrice: coinPrice)
+        self.converter = Converter(coin: coin, fiat: fiat, coinPrice: coinPrice)
 
 
         guard let converter = converter else {
@@ -220,6 +222,22 @@ class SendMoneyAmountComponent: Component, SizePresetable, UITextFieldDelegate {
     }
 
     // MARK: - AmountTextField
+
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        guard let coin = coin, let fiat = fiat else {
+            return
+        }
+
+        if isAmountInFiat {
+            titleLabel?.text = "\(fiat.symbol) \(maxFiatValue?.formatted?.removingWhitespaces ?? "")"
+        } else {
+            titleLabel?.text = "\(maxCoinValue?.formatted?.removingWhitespaces ?? "") \(coin.short.uppercased())"
+        }
+    }
+
+    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
+        titleLabel?.text = "Amount"
+    }
 
     @objc
     private func valueTextFieldEditingChanged(_ sender: UITextField) {
