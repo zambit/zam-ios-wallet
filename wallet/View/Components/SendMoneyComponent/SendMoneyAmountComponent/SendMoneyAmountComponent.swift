@@ -85,11 +85,8 @@ class SendMoneyAmountComponent: Component, SizePresetable, UITextFieldDelegate {
         altValueLabel?.textColor = .warmGrey
         altValueLabel?.text = coinPrefix
 
-        exchangeButton?.circleCorner = true
-        exchangeButton?.backgroundColor = UIColor.black.withAlphaComponent(0.03)
-        exchangeButton?.setHighlightedBackgroundColor(UIColor.black.withAlphaComponent(0.1))
         exchangeButton?.setImage(#imageLiteral(resourceName: "icExchange"), for: .normal)
-        exchangeButton?.setHighlightedTintColor(UIColor.white)
+        exchangeButton?.setHighlightedTintColor(.darkIndigo)
         exchangeButton?.addTarget(self, action: #selector(exchangeButtonTouchUpInsideEvent(_:)), for: .touchUpInside)
 
         blockchainFee?.font = UIFont.walletFont(ofSize: 14.0, weight: .regular)
