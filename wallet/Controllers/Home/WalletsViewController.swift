@@ -211,7 +211,7 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
             }
 
             strongSelf.prepareCellForAnimation(cell)
-            owner.performSendFromWallet(index: indexPath.item, wallets: strongSelf.wallets, phone: strongSelf.phone, recipient: nil)
+            owner.performSendFromWallet(index: indexPath.item, wallets: strongSelf.wallets.filter { $0.coin != .zam }, phone: strongSelf.phone, recipient: nil)
         }
 
         cell.onDepositButtonTap = {
@@ -222,7 +222,7 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
             }
 
             strongSelf.prepareCellForAnimation(cell)
-            owner.performDepositFromWallet(index: indexPath.item, wallets: strongSelf.wallets, phone: strongSelf.phone)
+            owner.performDepositFromWallet(index: indexPath.item, wallets: strongSelf.wallets.filter { $0.coin != .zam }, phone: strongSelf.phone)
         }
 
         if wallets[indexPath.item].coin == .zam {
@@ -236,7 +236,7 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
                 }
 
                 strongSelf.prepareCellForAnimation(cell)
-                owner.performWalletDetails(index: indexPath.item, wallets: strongSelf.wallets, phone: strongSelf.phone)
+                owner.performWalletDetails(index: indexPath.item, wallets: strongSelf.wallets.filter { $0.coin != .zam }, phone: strongSelf.phone)
             }
         }
         return cell
