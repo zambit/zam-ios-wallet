@@ -59,6 +59,8 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
     private var walletsChartsPoints: [[ChartLayer.Coordinate]] = []
     private var phone: String!
 
+    private var zamIndex: Int?
+
     private var refreshControl: UIRefreshControl?
 
     override func viewDidLoad() {
@@ -197,6 +199,17 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
 
         let itemData = WalletItemData(data: wallets[indexPath.item], phoneNumber: phone)
 
+        var detailsWallets = self.wallets
+        var detailsIndex = indexPath.item
+
+        if let zamIndex = self.zamIndex {
+            detailsWallets = self.wallets.filter({ $0.coin != .zam })
+
+            if indexPath.item > zamIndex {
+                detailsIndex = indexPath.item - 1
+            }
+        }
+
         cell.relive()
         
         cell.configure(with: itemData)
@@ -211,7 +224,7 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
             }
 
             strongSelf.prepareCellForAnimation(cell)
-            owner.performSendFromWallet(index: indexPath.item, wallets: strongSelf.wallets.filter { $0.coin != .zam }, phone: strongSelf.phone, recipient: nil)
+            owner.performSendFromWallet(index: detailsIndex, wallets: detailsWallets, phone: strongSelf.phone, recipient: nil)
         }
 
         cell.onDepositButtonTap = {
@@ -222,7 +235,7 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
             }
 
             strongSelf.prepareCellForAnimation(cell)
-            owner.performDepositFromWallet(index: indexPath.item, wallets: strongSelf.wallets.filter { $0.coin != .zam }, phone: strongSelf.phone)
+            owner.performDepositFromWallet(index: detailsIndex, wallets: detailsWallets, phone: strongSelf.phone)
         }
 
         if wallets[indexPath.item].coin == .zam {
@@ -236,7 +249,7 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
                 }
 
                 strongSelf.prepareCellForAnimation(cell)
-                owner.performWalletDetails(index: indexPath.item, wallets: strongSelf.wallets.filter { $0.coin != .zam }, phone: strongSelf.phone)
+                owner.performWalletDetails(index: detailsIndex, wallets: detailsWallets, phone: strongSelf.phone)
             }
         }
         return cell
@@ -279,6 +292,7 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
             let newCount = wallets.count
 
             strongSelf.wallets = wallets
+            strongSelf.zamIndex = wallets.index(where: { $0.coin == .zam })
             strongSelf.didInitiallyLoaded = true
 
             if oldCount != newCount {
