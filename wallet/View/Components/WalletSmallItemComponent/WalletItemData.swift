@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct WalletItemData {
+struct WalletItemData: Equatable {
 
     let name: String
 

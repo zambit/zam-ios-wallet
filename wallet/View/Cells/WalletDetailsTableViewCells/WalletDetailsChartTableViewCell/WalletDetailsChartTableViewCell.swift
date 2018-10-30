@@ -14,12 +14,17 @@ protocol WalletDetailsChartDelegate: class {
     func walletDetailsChartIntervalSelected(_ walletDetailsChart: WalletDetailsChartTableViewCell, interval: CoinPriceChartIntervalType)
 }
 
-class WalletDetailsChartTableViewCell: UITableViewCell {
+class WalletDetailsChartTableViewCell: UITableViewCell, Configurable {
 
     weak var delegate: WalletDetailsChartDelegate?
 
     private var chartView: ChartView?
+    private var currentInterval: CoinPriceChartIntervalType = .day
     private var buttonsStackView: UIStackView?
+
+    override func prepareForReuse() {
+        deselectFilterButtons()
+    }
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -71,7 +76,7 @@ class WalletDetailsChartTableViewCell: UITableViewCell {
 
         for interval in CoinPriceChartIntervalType.allCases {
             let button = SelectableButton(type: .custom)
-            button.tag = interval.rawValue
+            button.tag = interval.rawValue + 456
             button.titleLabel?.font = UIFont.walletFont(ofSize: 14.0, weight: .regular)
             button.setTitle(interval.title, for: .normal)
             button.setTitleColor(.darkIndigo, for: .normal)
@@ -84,10 +89,6 @@ class WalletDetailsChartTableViewCell: UITableViewCell {
             button.borderColor = UIColor.black.withAlphaComponent(0.1)
             button.addTarget(self, action: #selector(filterButtonTouchUpInsideEvent(_:)), for: .touchUpInside)
 
-            if interval.rawValue == 0 {
-                button.isSelected = true
-            }
-
             button.translatesAutoresizingMaskIntoConstraints = false
             button.widthAnchor.constraint(equalToConstant: 45.0).isActive = true
 
@@ -97,20 +98,35 @@ class WalletDetailsChartTableViewCell: UITableViewCell {
         self.buttonsStackView = stackView
     }
 
-    func beginChartLoading() {
+    override func beginLoading() {
         chartView?.beginLoading()
     }
 
-    func endChartLoading() {
+    override func endLoading() {
         chartView?.endLoading()
     }
 
-    func setupChart(points: [ChartLayer.Coordinate]) {
-        guard let chartView = chartView else {
+    func configure(with data: WalletDetailsChartViewData) {
+        if let data = data.points {
+            endLoading()
+            chartView?.layoutIfNeeded()
+            chartView?.setupChart(points: data)
+        } else {
+            beginLoading()
+        }
+
+        if let currentInterval = data.currentInterval {
+            self.currentInterval = currentInterval
+            selectButtonWithIndex(currentInterval.rawValue)
+        }
+    }
+
+    private func selectButtonWithIndex(_ index: Int) {
+        guard let button = buttonsStackView?.viewWithTag(index + 456) as? UIButton else {
             return
         }
 
-        chartView.setupChart(points: points)
+        button.isSelected = true
     }
 
     private func deselectFilterButtons() {
@@ -125,7 +141,7 @@ class WalletDetailsChartTableViewCell: UITableViewCell {
 
     @objc
     private func filterButtonTouchUpInsideEvent(_ sender: UIButton) {
-        guard let interval = CoinPriceChartIntervalType(rawValue: sender.tag) else {
+        guard let interval = CoinPriceChartIntervalType(rawValue: sender.tag - 456) else {
             return
         }
 
