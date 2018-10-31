@@ -21,6 +21,9 @@ protocol HomeController: class {
     func performWalletDetails(index: Int, wallets: [Wallet], phone: String)
 }
 
+/**
+ Home screen that have floating view with embeded view controller.
+ */
 class HomeViewController: FloatingViewController {
 
     var contactsManager: UserContactsManager?

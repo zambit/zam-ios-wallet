@@ -6,7 +6,6 @@
 //  Copyright © 2018 zamzam. All rights reserved.
 //
 
-import Foundation
 import UIKit
 import Crashlytics
 import Hero
@@ -37,6 +36,9 @@ protocol WalletsCollection {
     func reload()
 }
 
+/**
+ Delegate that provides callbacks for updating data and scrolling collection view.
+ */
 protocol WalletsViewControllerDelegate: class {
 
     func walletsViewControllerCallsUpdateData(_ walletsViewController: WalletsViewController)
@@ -44,7 +46,10 @@ protocol WalletsViewControllerDelegate: class {
     func walletsViewControllerScrollingEvent(_ walletsViewController: WalletsViewController, panGestureRecognizer: UIPanGestureRecognizer, offset: CGPoint)
 }
 
-class WalletsViewController: FlowCollectionViewController, UICollectionViewDelegateFlowLayout {
+/**
+ Wallets collection screen that controls it's behavior like "pull to refresh" and provides callbacks for it.
+ */
+class WalletsViewController: FlowCollectionViewController {
 
     private weak var _owner: HomeController?
     private weak var _delegate: WalletsViewControllerDelegate?
@@ -83,7 +88,7 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
         refreshControl?.layer.zPosition = -2
         collectionView?.refreshControl = refreshControl
 
-        loadData(self)
+        loadData()
 
         collectionView?.panGestureRecognizer.addTarget(self, action: #selector(collectionViewPanGestureEvent(recognizer:)))
     }
@@ -102,102 +107,13 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
         _delegate?.walletsViewControllerScrollingEvent(self, panGestureRecognizer: recognizer, offset: clearOffset)
     }
 
-    // MARK: - UICollectionViewDataSource
-
-    override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        guard didInitiallyLoaded else {
-            return 3
-        }
-
-        return wallets.count
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let _cell = collectionView.dequeueReusableCell(withReuseIdentifier: "WalletItemComponent", for: indexPath)
-
-        guard let cell = _cell as? WalletItemComponent else {
-            fatalError()
-        }
-
-        guard didInitiallyLoaded else {
-            cell.stiffen()
-            return cell
-        }
-
-        let itemData = WalletItemData(data: wallets[indexPath.item], phoneNumber: phone)
-
-        var detailsWallets = self.wallets
-        var detailsIndex = indexPath.item
-
-        if let zamIndex = self.zamIndex {
-            detailsWallets = self.wallets.filter({ $0.coin != .zam })
-
-            if indexPath.item > zamIndex {
-                detailsIndex = indexPath.item - 1
-            }
-        }
-
-        cell.relive()
-        
-        cell.configure(with: itemData)
-        
-        cell.setupChart(points: walletsChartsPoints[indexPath.item])
-
-        cell.onSendButtonTap = {
-            [weak self] in
-
-            guard let strongSelf = self, let owner = strongSelf._owner else {
-                return
-            }
-
-            strongSelf.prepareCellForAnimation(cell)
-            owner.performSendFromWallet(index: detailsIndex, wallets: detailsWallets, phone: strongSelf.phone, recipient: nil)
-        }
-
-        cell.onDepositButtonTap = {
-            [weak self] in
-
-            guard let strongSelf = self, let owner = strongSelf._owner else {
-                return
-            }
-
-            strongSelf.prepareCellForAnimation(cell)
-            owner.performDepositFromWallet(index: detailsIndex, wallets: detailsWallets, phone: strongSelf.phone)
-        }
-
-        if wallets[indexPath.item].coin == .zam {
-            cell.onCardLongPress = {}
-        } else {
-            cell.onCardLongPress = {
-                [weak self] in
-
-                guard let strongSelf = self, let owner = strongSelf._owner else {
-                    return
-                }
-
-                strongSelf.prepareCellForAnimation(cell)
-                owner.performWalletDetails(index: detailsIndex, wallets: detailsWallets, phone: strongSelf.phone)
-            }
-        }
-        return cell
-    }
-
-    // MARK: - UICollectionViewDelegateFlowLayout
-
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.bounds.width, height: 134.0)
-    }
-
-    // MARK: - Refresh
+    // MARK: - Refresh Control update event
 
     @objc
     private func refreshControlValueChangedEvent(_ sender: Any) {
         _delegate?.walletsViewControllerCallsUpdateData(self)
-        loadData(sender)
+
+        loadData()
     }
 
     // MARK: - Load data
@@ -205,7 +121,7 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
     /**
      Load wallets, assign it to private property and update collection view.
      */
-    private func loadData(_ sender: Any) {
+    private func loadData() {
         guard let token = userManager?.getToken() else {
             refreshControl?.endRefreshing()
             return
@@ -292,6 +208,8 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
     }
 }
 
+// MARK: - Extensions
+
 extension WalletsViewController: WalletsCollection {
 
     var delegate: WalletsViewControllerDelegate? {
@@ -358,6 +276,98 @@ extension WalletsViewController: WalletsCollection {
     }
 
     func reload() {
-        loadData(self)
+        loadData()
+    }
+}
+
+extension WalletsViewController {
+
+    override func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        guard didInitiallyLoaded else {
+            return 3
+        }
+
+        return wallets.count
+    }
+
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let _cell = collectionView.dequeueReusableCell(withReuseIdentifier: "WalletItemComponent", for: indexPath)
+
+        guard let cell = _cell as? WalletItemComponent else {
+            fatalError()
+        }
+
+        guard didInitiallyLoaded else {
+            cell.stiffen()
+            return cell
+        }
+
+        let itemData = WalletItemData(data: wallets[indexPath.item], phoneNumber: phone)
+
+        var detailsWallets = self.wallets
+        var detailsIndex = indexPath.item
+
+        if let zamIndex = self.zamIndex {
+            detailsWallets = self.wallets.filter({ $0.coin != .zam })
+
+            if indexPath.item > zamIndex {
+                detailsIndex = indexPath.item - 1
+            }
+        }
+
+        cell.relive()
+
+        cell.configure(with: itemData)
+
+        cell.setupChart(points: walletsChartsPoints[indexPath.item])
+
+        cell.onSendButtonTap = {
+            [weak self] in
+
+            guard let strongSelf = self, let owner = strongSelf._owner else {
+                return
+            }
+
+            strongSelf.prepareCellForAnimation(cell)
+            owner.performSendFromWallet(index: detailsIndex, wallets: detailsWallets, phone: strongSelf.phone, recipient: nil)
+        }
+
+        cell.onDepositButtonTap = {
+            [weak self] in
+
+            guard let strongSelf = self, let owner = strongSelf._owner else {
+                return
+            }
+
+            strongSelf.prepareCellForAnimation(cell)
+            owner.performDepositFromWallet(index: detailsIndex, wallets: detailsWallets, phone: strongSelf.phone)
+        }
+
+        if wallets[indexPath.item].coin == .zam {
+            cell.onCardLongPress = {}
+        } else {
+            cell.onCardLongPress = {
+                [weak self] in
+
+                guard let strongSelf = self, let owner = strongSelf._owner else {
+                    return
+                }
+
+                strongSelf.prepareCellForAnimation(cell)
+                owner.performWalletDetails(index: detailsIndex, wallets: detailsWallets, phone: strongSelf.phone)
+            }
+        }
+        return cell
+    }
+}
+
+extension WalletsViewController: UICollectionViewDelegateFlowLayout {
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: collectionView.bounds.width, height: 134.0)
     }
 }
