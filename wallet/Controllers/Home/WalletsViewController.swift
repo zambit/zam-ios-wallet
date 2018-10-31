@@ -44,7 +44,7 @@ protocol WalletsViewControllerDelegate: class {
     func walletsViewControllerScrollingEvent(_ walletsViewController: WalletsViewController, panGestureRecognizer: UIPanGestureRecognizer, offset: CGPoint)
 }
 
-class WalletsViewController: FlowCollectionViewController, UICollectionViewDelegateFlowLayout, WalletsCollection {
+class WalletsViewController: FlowCollectionViewController, UICollectionViewDelegateFlowLayout {
 
     private weak var _owner: HomeController?
     private weak var _delegate: WalletsViewControllerDelegate?
@@ -86,75 +86,6 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
         loadData(self)
 
         collectionView?.panGestureRecognizer.addTarget(self, action: #selector(collectionViewPanGestureEvent(recognizer:)))
-    }
-
-    // MARK: - WalletsCollection
-
-    var delegate: WalletsViewControllerDelegate? {
-        get {
-            return _delegate
-        }
-
-        set {
-            _delegate = newValue
-        }
-    }
-
-    var owner: HomeController? {
-        get {
-            return _owner
-        }
-
-        set {
-            _owner = newValue
-        }
-    }
-
-    var isTopExpanded: Bool {
-        return collectionView.contentOffset.y < -collectionView.contentInset.top
-    }
-
-    var isScrollEnabled: Bool {
-        get {
-            return collectionView.isScrollEnabled
-        }
-
-        set {
-            collectionView.isScrollEnabled = newValue
-        }
-    }
-
-    var contentInsets: UIEdgeInsets {
-        get {
-            return collectionView.contentInset
-        }
-
-        set {
-            collectionView.contentInset = newValue
-        }
-    }
-
-    func scrollToTop() {
-        let newContentOffset = CGPoint(x: 0.0, y: -collectionView.contentInset.top)
-        collectionView.setContentOffset(newContentOffset, animated: false)
-    }
-
-    func sendTo(contact: FormattedContact) {
-        prepareToAnimation(cellIndex: 0)
-        owner?.performSendFromWallet(index: 0, wallets: wallets, phone: phone, recipient: contact)
-    }
-
-    func prepareToAnimation(cellIndex: Int) {
-        let indexPath = IndexPath(item: cellIndex, section: 0)
-        guard let cell = collectionView.cellForItem(at: indexPath) as? WalletSmallItemComponent else {
-            return
-        }
-
-        prepareCellForAnimation(cell)
-    }
-
-    func reload() {
-        loadData(self)
     }
 
     // MARK: - UIPanGestureRecognizer
@@ -288,24 +219,16 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
                 return
             }
 
-            let oldCount = strongSelf.wallets.count
-            let newCount = wallets.count
-
             strongSelf.wallets = wallets
             strongSelf.zamIndex = wallets.index(where: { $0.coin == .zam })
             strongSelf.didInitiallyLoaded = true
 
-            if oldCount != newCount {
-                strongSelf.loadChartsPoints(completion: {
-                    _ in
+            strongSelf.loadChartsPoints(for: wallets, completion: {
+                _ in
 
-                    strongSelf.collectionView?.reloadData()
-                    strongSelf.refreshControl?.endRefreshing()
-                })
-            } else {
                 strongSelf.collectionView?.reloadData()
                 strongSelf.refreshControl?.endRefreshing()
-            }
+            })
         }.catch {
             [weak self]
             error in
@@ -317,7 +240,7 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
     /**
      Load wallets history points to build chart, assign it to private property and call completion block.
      */
-    private func loadChartsPoints(completion: @escaping ([[ChartLayer.Coordinate]]) -> Void) {
+    private func loadChartsPoints(for wallets: [Wallet], completion: @escaping ([[ChartLayer.Coordinate]]) -> Void) {
         guard let historyAPI = historyAPI else {
             return
         }
@@ -325,22 +248,30 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
         self.walletsChartsPoints = [[ChartLayer.Coordinate]](repeating: [], count: wallets.count)
 
         let group = DispatchGroup()
-        for i in wallets.enumerated() {
+        for (index, wallet) in wallets.enumerated() {
+
+            guard wallet.coin != .zam else {
+                continue
+            }
+
             group.enter()
 
-            historyAPI.getHistoricalDailyPrice(for: i.element.coin, count: 30).done {
+            historyAPI.getHistoricalDailyPrice(for: wallet.coin, count: 30).done {
                 [weak self]
                 days in
 
-                self?.walletsChartsPoints[i.offset] = days.map {
+                self?.walletsChartsPoints[index] = days.map {
                     return ChartLayer.Coordinate(x: $0.time.unixTimestamp,
                                             y: Double(truncating: $0.closePrice as NSNumber))
                 }
                 group.leave()
             }.catch {
+                [weak self]
                 error in
 
                 Crashlytics.sharedInstance().recordError(error)
+
+                self?.walletsChartsPoints[index] = []
                 group.leave()
             }
         }
@@ -358,5 +289,75 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
         }
 
         cell.setTargetToAnimation()
+    }
+}
+
+extension WalletsViewController: WalletsCollection {
+
+    var delegate: WalletsViewControllerDelegate? {
+        get {
+            return _delegate
+        }
+
+        set {
+            _delegate = newValue
+        }
+    }
+
+    var owner: HomeController? {
+        get {
+            return _owner
+        }
+
+        set {
+            _owner = newValue
+        }
+    }
+
+    var isTopExpanded: Bool {
+        return collectionView.contentOffset.y < -collectionView.contentInset.top
+    }
+
+    var isScrollEnabled: Bool {
+        get {
+            return collectionView.isScrollEnabled
+        }
+
+        set {
+            collectionView.isScrollEnabled = newValue
+        }
+    }
+
+    var contentInsets: UIEdgeInsets {
+        get {
+            return collectionView.contentInset
+        }
+
+        set {
+            collectionView.contentInset = newValue
+        }
+    }
+
+    func scrollToTop() {
+        let newContentOffset = CGPoint(x: 0.0, y: -collectionView.contentInset.top)
+        collectionView.setContentOffset(newContentOffset, animated: false)
+    }
+
+    func sendTo(contact: FormattedContact) {
+        prepareToAnimation(cellIndex: 0)
+        owner?.performSendFromWallet(index: 0, wallets: wallets, phone: phone, recipient: contact)
+    }
+
+    func prepareToAnimation(cellIndex: Int) {
+        let indexPath = IndexPath(item: cellIndex, section: 0)
+        guard let cell = collectionView.cellForItem(at: indexPath) as? WalletSmallItemComponent else {
+            return
+        }
+
+        prepareCellForAnimation(cell)
+    }
+
+    func reload() {
+        loadData(self)
     }
 }
