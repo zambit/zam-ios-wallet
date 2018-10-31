@@ -120,10 +120,10 @@
                     </constraints>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VQr-Sp-Gvr" customClass="HighlightableButton" customModule="wallet" customModuleProvider="target">
-                    <rect key="frame" x="316.5" y="71" width="38" height="38"/>
+                    <rect key="frame" x="311.5" y="69" width="42" height="42"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="38" id="bVU-FD-Pbx"/>
-                        <constraint firstAttribute="width" constant="38" id="mYK-A7-99w"/>
+                        <constraint firstAttribute="height" constant="42" id="bVU-FD-Pbx"/>
+                        <constraint firstAttribute="width" constant="42" id="mYK-A7-99w"/>
                     </constraints>
                 </button>
             </subviews>
@@ -141,7 +141,7 @@
                 <constraint firstItem="XaW-xK-dtz" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="YW5-aJ-juC"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="XaW-xK-dtz" secondAttribute="bottom" id="bdN-eO-Que"/>
                 <constraint firstItem="qlR-ac-cJq" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="jGa-8c-mOb"/>
-                <constraint firstItem="VQr-Sp-Gvr" firstAttribute="leading" secondItem="Q45-Zq-EGm" secondAttribute="trailing" constant="20" id="oCW-dd-3U7"/>
+                <constraint firstItem="VQr-Sp-Gvr" firstAttribute="leading" secondItem="Q45-Zq-EGm" secondAttribute="trailing" constant="15" id="oCW-dd-3U7"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="XaW-xK-dtz" secondAttribute="trailing" constant="16" id="tjV-n1-Y0e"/>
                 <constraint firstItem="Q45-Zq-EGm" firstAttribute="leading" secondItem="hOa-75-HQB" secondAttribute="trailing" constant="10" id="vt7-oy-s04"/>
                 <constraint firstItem="XaW-xK-dtz" firstAttribute="top" secondItem="qlR-ac-cJq" secondAttribute="bottom" constant="19" id="wDy-mT-Hlm"/>

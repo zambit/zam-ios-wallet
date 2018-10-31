@@ -95,12 +95,10 @@ class SendMoneyAmountComponent: Component, SizePresetable, UITextFieldDelegate {
         exchangeButton?.setHighlightedTintColor(.warmGrey)
         exchangeButton?.addTarget(self, action: #selector(exchangeButtonTouchUpInsideEvent(_:)), for: .touchUpInside)
 
-        maxButton?.circleCorner = true
-        maxButton?.titleLabel?.font = UIFont.walletFont(ofSize: 11.0, weight: .regular)
+        maxButton?.titleLabel?.font = UIFont.walletFont(ofSize: 14.0, weight: .medium)
         maxButton?.setTitle("Max", for: .normal)
-        maxButton?.setTitleColor(.white, for: .normal)
-        maxButton?.backgroundColor = .silver
-        maxButton?.setHighlightedBackgroundColor(.warmGrey)
+        maxButton?.setTitleColor(.silver, for: .normal)
+        maxButton?.setTitleColor(.warmGrey, for: .highlighted)
         maxButton?.addTarget(self, action: #selector(maxButtonTouchUpInsideEvent(_:)), for: .touchUpInside)
 
         blockchainFee?.font = UIFont.walletFont(ofSize: 14.0, weight: .regular)
