@@ -98,11 +98,11 @@ extension Decimal {
     }
 
     var longFormatted: String? {
-        return NumberFormatter.walletAmount.string(from: self as NSNumber)
+        return NumberFormatter.amount(minimumFractionDigits: 1, maximumFractionDigits: 8).string(from: self as NSNumber)
     }
 
     var shortFormatted: String? {
-        return NumberFormatter.walletAmountShort.string(from: self as NSNumber)
+        return NumberFormatter.amount(minimumFractionDigits: 1, maximumFractionDigits: 2).string(from: self as NSNumber)
     }
 }
 

@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class TransactionsGroupHeaderComponent: HeaderFooterComponent {
+class TransactionsGroupHeaderComponent: HeaderFooterComponent, Configurable {
 
     @IBOutlet private var dateLabel: UILabel?
     @IBOutlet var amountLabel: UILabel?
@@ -24,6 +24,11 @@ class TransactionsGroupHeaderComponent: HeaderFooterComponent {
         amountLabel?.font = UIFont.walletFont(ofSize: 16.0, weight: .bold)
         amountLabel?.textColor = .darkIndigo
         amountLabel?.textAlignment = .right
+    }
+
+    func configure(with data: WalletDetailsTransactionHeaderViewData) {
+        dateLabel?.text = data.date
+        amountLabel?.text = data.amount
     }
 
     func configure(date: String, amount: String) {

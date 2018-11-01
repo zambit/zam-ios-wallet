@@ -6,7 +6,6 @@
 //  Copyright © 2018 zamzam. All rights reserved.
 //
 
-import Foundation
 import UIKit
 import Crashlytics
 import Hero
@@ -37,6 +36,9 @@ protocol WalletsCollection {
     func reload()
 }
 
+/**
+ Delegate that provides callbacks for updating data and scrolling collection view.
+ */
 protocol WalletsViewControllerDelegate: class {
 
     func walletsViewControllerCallsUpdateData(_ walletsViewController: WalletsViewController)
@@ -44,7 +46,10 @@ protocol WalletsViewControllerDelegate: class {
     func walletsViewControllerScrollingEvent(_ walletsViewController: WalletsViewController, panGestureRecognizer: UIPanGestureRecognizer, offset: CGPoint)
 }
 
-class WalletsViewController: FlowCollectionViewController, UICollectionViewDelegateFlowLayout, WalletsCollection {
+/**
+ Wallets collection screen that controls it's behavior like "pull to refresh" and provides callbacks for it.
+ */
+class WalletsViewController: FlowCollectionViewController {
 
     private weak var _owner: HomeController?
     private weak var _delegate: WalletsViewControllerDelegate?
@@ -58,6 +63,8 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
     private var wallets: [Wallet] = []
     private var walletsChartsPoints: [[ChartLayer.Coordinate]] = []
     private var phone: String!
+
+    private var zamIndex: Int?
 
     private var refreshControl: UIRefreshControl?
 
@@ -81,12 +88,129 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
         refreshControl?.layer.zPosition = -2
         collectionView?.refreshControl = refreshControl
 
-        loadData(self)
+        loadData()
 
         collectionView?.panGestureRecognizer.addTarget(self, action: #selector(collectionViewPanGestureEvent(recognizer:)))
     }
 
-    // MARK: - WalletsCollection
+    // MARK: - UIPanGestureRecognizer
+
+    @objc
+    func collectionViewPanGestureEvent(recognizer: UIPanGestureRecognizer) {
+        guard let collectionView = collectionView else {
+            return
+        }
+
+        let translation = recognizer.translation(in: collectionView)
+        let clearOffset = CGPoint(x: translation.x, y: translation.y + collectionView.contentInset.top - collectionView.contentInset.bottom)
+
+        _delegate?.walletsViewControllerScrollingEvent(self, panGestureRecognizer: recognizer, offset: clearOffset)
+    }
+
+    // MARK: - Refresh Control update event
+
+    @objc
+    private func refreshControlValueChangedEvent(_ sender: Any) {
+        _delegate?.walletsViewControllerCallsUpdateData(self)
+
+        loadData()
+    }
+
+    // MARK: - Load data
+
+    /**
+     Load wallets, assign it to private property and update collection view.
+     */
+    private func loadData() {
+        guard let token = userManager?.getToken() else {
+            refreshControl?.endRefreshing()
+            return
+        }
+
+        userAPI?.getWallets(token: token).done {
+            [weak self]
+            wallets in
+
+            guard let strongSelf = self else {
+                return
+            }
+
+            strongSelf.wallets = wallets
+            strongSelf.zamIndex = wallets.index(where: { $0.coin == .zam })
+            strongSelf.didInitiallyLoaded = true
+
+            strongSelf.loadChartsPoints(for: wallets, completion: {
+                _ in
+
+                strongSelf.collectionView?.reloadData()
+                strongSelf.refreshControl?.endRefreshing()
+            })
+        }.catch {
+            [weak self]
+            error in
+
+            self?.refreshControl?.endRefreshing()
+        }
+    }
+
+    /**
+     Load wallets history points to build chart, assign it to private property and call completion block.
+     */
+    private func loadChartsPoints(for wallets: [Wallet], completion: @escaping ([[ChartLayer.Coordinate]]) -> Void) {
+        guard let historyAPI = historyAPI else {
+            return
+        }
+
+        self.walletsChartsPoints = [[ChartLayer.Coordinate]](repeating: [], count: wallets.count)
+
+        let group = DispatchGroup()
+        for (index, wallet) in wallets.enumerated() {
+
+            guard wallet.coin != .zam else {
+                continue
+            }
+
+            group.enter()
+
+            historyAPI.getHistoricalDailyPrice(for: wallet.coin, count: 30).done {
+                [weak self]
+                days in
+
+                self?.walletsChartsPoints[index] = days.map {
+                    return ChartLayer.Coordinate(x: $0.time.unixTimestamp,
+                                            y: Double(truncating: $0.closePrice as NSNumber))
+                }
+                group.leave()
+            }.catch {
+                [weak self]
+                error in
+
+                Crashlytics.sharedInstance().recordError(error)
+
+                self?.walletsChartsPoints[index] = []
+                group.leave()
+            }
+        }
+
+        group.notify(queue: .main) {
+            completion(self.walletsChartsPoints)
+        }
+    }
+
+    private func prepareCellForAnimation(_ cell: WalletSmallItemComponent) {
+        collectionView.visibleCells.compactMap {
+            return $0 as? WalletSmallItemComponent
+        }.forEach {
+            $0.removeTargetToAnimation()
+        }
+
+        cell.setTargetToAnimation()
+    }
+}
+
+// MARK: - Extensions
+
+extension WalletsViewController: WalletsCollection {
 
     var delegate: WalletsViewControllerDelegate? {
         get {
@@ -156,24 +280,11 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
     }
 
     func reload() {
-        loadData(self)
+        loadData()
     }
+}
 
-    // MARK: - UIPanGestureRecognizer
-
-    @objc
-    func collectionViewPanGestureEvent(recognizer: UIPanGestureRecognizer) {
-        guard let collectionView = collectionView else {
-            return
-        }
-
-        let translation = recognizer.translation(in: collectionView)
-        let clearOffset = CGPoint(x: translation.x, y: translation.y + collectionView.contentInset.top - collectionView.contentInset.bottom)
-
-        _delegate?.walletsViewControllerScrollingEvent(self, panGestureRecognizer: recognizer, offset: clearOffset)
-    }
-
-    // MARK: - UICollectionViewDataSource
+extension WalletsViewController {
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
@@ -181,7 +292,7 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         guard didInitiallyLoaded else {
-            return 4
+            return 3
         }
 
         return wallets.count
@@ -201,10 +312,21 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
 
         let itemData = WalletItemData(data: wallets[indexPath.item], phoneNumber: phone)
 
+        var detailsWallets = self.wallets
+        var detailsIndex = indexPath.item
+
+        if let zamIndex = self.zamIndex {
+            detailsWallets = self.wallets.filter({ $0.coin != .zam })
+
+            if indexPath.item > zamIndex {
+                detailsIndex = indexPath.item - 1
+            }
+        }
+
         cell.relive()
-        
+
         cell.configure(with: itemData)
-        
+
         cell.setupChart(points: walletsChartsPoints[indexPath.item])
 
         cell.onSendButtonTap = {
@@ -229,122 +351,27 @@ class WalletsViewController: FlowCollectionViewController, UICollectionViewDeleg
             owner.performDepositFromWallet(index: indexPath.item, wallets: strongSelf.wallets, phone: strongSelf.phone)
         }
 
-        cell.onCardLongPress = {
-            [weak self] in
+        if wallets[indexPath.item].coin == .zam {
+            cell.onCardLongPress = {}
+        } else {
+            cell.onCardLongPress = {
+                [weak self] in
 
-            guard let strongSelf = self, let owner = strongSelf._owner else {
-                return
+                guard let strongSelf = self, let owner = strongSelf._owner else {
+                    return
+                }
+
+                strongSelf.prepareCellForAnimation(cell)
+                owner.performWalletDetails(index: detailsIndex, wallets: detailsWallets, phone: strongSelf.phone)
             }
-
-            strongSelf.prepareCellForAnimation(cell)
-            owner.performWalletDetails(index: indexPath.item, wallets: strongSelf.wallets, phone: strongSelf.phone)
         }
         return cell
     }
+}
 
-    // MARK: - UICollectionViewDelegateFlowLayout
+extension WalletsViewController: UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.bounds.width, height: 134.0)
-    }
-
-    // MARK: - Refresh
-
-    @objc
-    private func refreshControlValueChangedEvent(_ sender: Any) {
-        _delegate?.walletsViewControllerCallsUpdateData(self)
-        loadData(sender)
-    }
-
-    // MARK: - Load data
-
-    /**
-     Load wallets, assign it to private property and update collection view.
-     */
-    private func loadData(_ sender: Any) {
-        guard let token = userManager?.getToken() else {
-            refreshControl?.endRefreshing()
-            return
-        }
-
-        userAPI?.getWallets(token: token).done {
-            [weak self]
-            wallets in
-
-            guard let strongSelf = self else {
-                return
-            }
-
-            let oldCount = strongSelf.wallets.count
-            let newCount = wallets.count
-
-            strongSelf.wallets = wallets
-            strongSelf.didInitiallyLoaded = true
-
-            if oldCount != newCount {
-
-                strongSelf.loadChartsPoints(completion: {
-                    _ in
-
-                    strongSelf.collectionView?.reloadData()
-                    strongSelf.refreshControl?.endRefreshing()
-                })
-            } else {
-                strongSelf.collectionView?.reloadData()
-                strongSelf.refreshControl?.endRefreshing()
-            }
-        }.catch {
-            [weak self]
-            error in
-
-            self?.refreshControl?.endRefreshing()
-        }
-    }
-
-    /**
-     Load wallets history points to build chart, assign it to private property and call completion block.
-     */
-    private func loadChartsPoints(completion: @escaping ([[ChartLayer.Coordinate]]) -> Void) {
-        guard let historyAPI = historyAPI else {
-            return
-        }
-
-        self.walletsChartsPoints = [[ChartLayer.Coordinate]](repeating: [], count: wallets.count)
-
-        let group = DispatchGroup()
-        for i in wallets.enumerated() {
-            group.enter()
-
-            historyAPI.getHistoricalDailyPrice(for: i.element.coin, count: 30).done {
-                [weak self]
-                days in
-
-                self?.walletsChartsPoints[i.offset] = days.map {
-                    return ChartLayer.Coordinate(x: $0.time.unixTimestamp,
-                                            y: Double(truncating: $0.closePrice as NSNumber))
-                }
-                group.leave()
-            }.catch {
-                error in
-
-                Crashlytics.sharedInstance().recordError(error)
-                
-                group.leave()
-            }
-        }
-
-        group.notify(queue: .main) {
-            completion(self.walletsChartsPoints)
-        }
-    }
-
-    private func prepareCellForAnimation(_ cell: WalletSmallItemComponent) {
-        collectionView.visibleCells.compactMap {
-            return $0 as? WalletSmallItemComponent
-        }.forEach {
-            $0.removeTargetToAnimation()
-        }
-
-        cell.setTargetToAnimation()
     }
 }

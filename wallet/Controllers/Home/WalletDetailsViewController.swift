@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import Crashlytics
 
-class WalletDetailsViewController: FlowViewController, WalletNavigable, AdvancedTransitionDelegate, SendMoneyViewControllerDelegate, UITableViewDelegate, UITableViewDataSource, WalletDetailsBriefDelegate, WalletDetailsChartDelegate {
+class WalletDetailsViewController: FlowViewController, WalletNavigable {
 
     var onSendFromWallet: ((_ index: Int, _ wallets: [Wallet], _ phone: String) -> Void)?
     var onDepositToWallet: ((_ index: Int, _ wallets: [Wallet], _ phone: String) -> Void)?
@@ -19,129 +19,12 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable, Advanced
     weak var sendDelegate: SendMoneyViewControllerDelegate?
     weak var advancedTransitionDelegate: AdvancedTransitionDelegate?
 
+    var userManager: UserDefaultsManager?
+    var contactsManager: UserContactsManager?
+
+    var userAPI: UserAPI?
     var priceAPI: PriceAPI?
     var historyAPI: HistoryAPI?
-
-    class CellsBalancer {
-
-        unowned var parent: WalletDetailsViewController
-
-        private(set) weak var briefCell: WalletDetailsBriefTableViewCell?
-        private(set) weak var chartCell: WalletDetailsChartTableViewCell?
-        private(set) weak var detailsCell: WalletDetailsListsTableViewCell?
-
-        init(parent: WalletDetailsViewController) {
-            self.parent = parent
-        }
-
-        func registerCellsInTableView(_ tableView: UITableView) {
-            tableView.register(WalletDetailsBriefTableViewCell.self, forCellReuseIdentifier: "WalletDetailsBriefTableViewCell")
-            tableView.register(WalletDetailsChartTableViewCell.self, forCellReuseIdentifier: "WalletDetailsChartTableViewCell")
-            tableView.register(WalletDetailsListsTableViewCell.self, forCellReuseIdentifier: "WalletDetailsListsTableViewCell")
-        }
-
-        func getNumbersOfSections() -> Int {
-            return 1
-        }
-
-        func getNumberOfRowsInSection(_ section: Int) -> Int {
-            switch section {
-            case 0:
-                return 3
-            default:
-                return 0
-            }
-        }
-
-        func getConfiguredCellForIndexPath(_ indexPath: IndexPath) -> UITableViewCell? {
-            switch indexPath {
-            case IndexPath(row: 0, section: 0):
-                let _cell = parent.tableView?.dequeueReusableCell(withIdentifier: "WalletDetailsBriefTableViewCell", for: indexPath)
-
-                guard let cell = _cell as? WalletDetailsBriefTableViewCell else {
-                    return nil
-                }
-
-                briefCell = cell
-
-                guard
-                    let currentIndex = parent.currentIndex,
-                    let wallets = parent.wallets,
-                    let phone = parent.phone else {
-                    return cell
-                }
-
-                let cards = wallets.compactMap {
-                    return WalletItemData(data: $0, phoneNumber: phone)
-                }
-
-                cell.delegate = parent
-                cell.configure(currentIndex: currentIndex, wallets: cards)
-
-                if let coinData = parent.coinPrice {
-                    cell.update(price: coinData.description(property: .price),
-                                change: coinData.description(property: .change24h),
-                                changePct: coinData.description(property: .changePct24h),
-                                isChangePositive: coinData.change24h >= 0)
-                }
-
-                return cell
-            case IndexPath(row: 1, section: 0):
-                let _cell = parent.tableView?.dequeueReusableCell(withIdentifier: "WalletDetailsChartTableViewCell", for: indexPath)
-
-                guard let cell = _cell as? WalletDetailsChartTableViewCell else {
-                    return nil
-                }
-
-                chartCell = cell
-
-                cell.delegate = parent
-
-                if let points = parent.walletsChartsPoints {
-                    cell.setupChart(points: points)
-                } else {
-                    cell.beginChartLoading()
-                }
-
-                return cell
-            case IndexPath(row: 2, section: 0):
-                let _cell = parent.tableView?.dequeueReusableCell(withIdentifier: "WalletDetailsListsTableViewCell", for: indexPath)
-
-                guard let cell = _cell as? WalletDetailsListsTableViewCell else {
-                    return nil
-                }
-
-                detailsCell = cell
-
-                if let coinData = parent.coinPrice {
-                    cell.update(marketCap: coinData.description(property: .marketCap),
-                                volume: coinData.description(property: .volume24h),
-                                supply: coinData.description(property: .supply))
-                }
-
-                return cell
-            default:
-                return nil
-            }
-        }
-
-        func getHeightForRowAtIndexPath(_ indexPath: IndexPath) -> CGFloat? {
-            switch indexPath {
-            case IndexPath(row: 0, section: 0):
-                return 200.0
-            case IndexPath(row: 1, section: 0):
-                return 250.0
-            case IndexPath(row: 2, section: 0):
-                return 250.0
-            default:
-                return nil
-            }
-        }
-
-        func reloadBrief() {
-            parent.tableView?.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .none)
-        }
-    }
 
     @IBOutlet private var tableView: UITableView!
 
@@ -153,8 +36,76 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable, Advanced
     private var currentIndex: Int?
     private var coinPrice: CoinPrice?
     private var currentInterval: CoinPriceChartIntervalType = .day
+    private var currentSwitcher: WalletDetailsSwitcherViewData.ChoiceType = .left
 
-    private lazy var balancer = CellsBalancer(parent: self)
+    private var paginator: Paginator<TransactionsGroup>?
+    private var contactsData: [Contact] = []
+    private var phoneNumberFormatter: PhoneNumberFormatter?
+    private var filterData: TransactionsFilterProperties = TransactionsFilterProperties()
+
+    private var viewData: [(WalletDetailsHeaderViewData?, [WalletDetailsViewData])] = []
+
+    private let semaphore = DispatchSemaphore(value: 1)
+
+
+    // MARK: - FooterViews
+
+    private lazy var loadingFooterView: UIView = {
+        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 44.0))
+        footerView.backgroundColor = UIColor.clear
+
+        // set up activity indicator
+        let activityIndicatorView = UIActivityIndicatorView(style: .gray)
+        activityIndicatorView.center = CGPoint(x: self.view.frame.width/2, y:22)
+        activityIndicatorView.hidesWhenStopped = true
+        activityIndicatorView.startAnimating()
+
+        footerView.addSubview(activityIndicatorView)
+
+        return footerView
+    }()
+
+    private lazy var refreshingFooterView: UIView = {
+        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 44.0))
+        footerView.backgroundColor = UIColor.clear
+
+        // set up activity indicator
+        let activityIndicatorFrame = CGRect(x: footerView.width / 2 - 10.0, y: footerView.height / 2 - 10.0, width: 20.0, height: 20.0)
+        let activityIndicator = SpinningAnimationLayer(frame: activityIndicatorFrame, color: .skyBlue)
+        activityIndicator.animate()
+
+        footerView.layer.addSublayer(activityIndicator)
+
+        return footerView
+    }()
+
+    private lazy var placeholderFooterView: UIView = {
+        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 250.0))
+        footerView.backgroundColor = UIColor.clear
+
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 102, height: 102))
+        imageView.image = #imageLiteral(resourceName: "sadFace")
+        imageView.center = CGPoint(x: footerView.width / 2, y: 50 + imageView.height / 2)
+
+        footerView.addSubview(imageView)
+
+        // set up label
+        let label = UILabel()
+        label.font = UIFont.walletFont(ofSize: 14.0, weight: .regular)
+        label.textColor = .silver
+        label.textAlignment = .center
+        label.text = "Sorry, but you don’t have any history"
+        label.sizeToFit()
+
+        footerView.addSubview(label)
+
+        label.center = CGPoint(x: footerView.width / 2, y: 50 + imageView.height + 25)
+
+        return footerView
+    }()
+
+
+    // MARK: - UIViewController lifecycle
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -168,20 +119,6 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable, Advanced
         hero.isEnabled = true
 
         setupDefaultStyle()
-        //self.view.isOpaque = false
-
-        tableView.hero.id = "floatingView"
-        tableView.hero.modifiers = [.useScaleBasedSizeChange]
-        tableView.backgroundColor = .white
-        tableView.cornerRadius = 16.0
-        tableView.maskToBounds = true
-        tableView.separatorStyle = .none
-        tableView.allowsSelection = false
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.tableFooterView = UIView()
-
-        balancer.registerCellsInTableView(tableView)
 
         let exitButton = HighlightableButton(type: .custom)
         exitButton.contentEdgeInsets = UIEdgeInsets(top: 5.0, left: 5.0, bottom: 5.0, right: 5.0)
@@ -199,46 +136,179 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable, Advanced
 
         self.exitButton = exitButton
 
-        loadData()
+        tableView.hero.id = "floatingView"
+        tableView.hero.modifiers = [.useScaleBasedSizeChange]
+        tableView.backgroundColor = .white
+        tableView.cornerRadius = 16.0
+        tableView.maskToBounds = true
+        tableView.separatorStyle = .none
+        tableView.allowsSelection = false
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.estimatedRowHeight = UITableView.automaticDimension
+        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 20.0, right: 0)
+
+        tableView.register(WalletDetailsBriefTableViewCell.self,
+                           forCellReuseIdentifier: "WalletDetailsBriefTableViewCell")
+        tableView.register(WalletDetailsChartTableViewCell.self,
+                           forCellReuseIdentifier: "WalletDetailsChartTableViewCell")
+        tableView.register(WalletDetailsSwitcherTableViewCell.self,
+                           forCellReuseIdentifier: "WalletDetailsSwitcherTableViewCell")
+        tableView.register(WalletDetailsInformationTableViewCell.self,
+                           forCellReuseIdentifier: "WalletDetailsInformationTableViewCell")
+        tableView.register(TransactionCellComponent.self,
+                           forCellReuseIdentifier: "TransactionCellComponent")
+        tableView.register(TransactionsGroupHeaderComponent.self,
+                           forHeaderFooterViewReuseIdentifier: "TransactionsGroupHeaderComponent")
+
+        self.paginator = Paginator<TransactionsGroup>(pageSize: 20, fetchHandler: {
+            [weak self]
+            (paginator: Paginator, pageSize: Int, nextPage: String?) in
+
+            guard let strongSelf = self else {
+                return
+            }
+
+            guard let token = strongSelf.userManager?.getToken() else {
+                fatalError()
+            }
+
+            let filterData = strongSelf.filterData
+
+            strongSelf.filterData.page = nextPage
+            strongSelf.userAPI?.cancelTasks()
+            strongSelf.userAPI?.getTransactions(token: token, filter: filterData, phoneNumberFormatter: strongSelf.phoneNumberFormatter, localContacts: strongSelf.contactsData).done {
+                [weak self]
+                page in
+
+                guard let strongSelf = self, strongSelf.filterData.walletId == filterData.walletId else {
+                    return
+                }
+
+                paginator.receivedResults(results: page.transactions, next: page.next ?? "")
+            }.catch {
+                error in
+
+                paginator.failed()
+            }
+
+        }, resultsHandler: {
+            [weak self]
+            (paginator, old, new) in
+
+            // Check for intersections
+            if let last = old.last, let first = new.first, last.dateInterval == first.dateInterval {
+
+                let sumAmount = try! last.amount.sum(with: first.amount)
+                let transactions = last.transactions + first.transactions
+
+                let concatiatedElement = TransactionsGroup(dateInterval: last.dateInterval, amount: sumAmount, transactions: transactions)
+
+                let concatiatedResults = Array(old[0..<old.count - 1]) + [concatiatedElement] + Array(new[1..<new.count])
+
+                // Update results
+                paginator.results = concatiatedResults
+            }
+
+            self?.updateTableView()
+
+            self?.updateTableViewFooter()
+        }, refreshHandler: {
+            [weak self]
+            (paginator, results) in
+
+            self?.updateTableView()
+
+            self?.updateTableViewFooter()
+        }, resetHandler: {
+            [weak self]
+            paginator in
+
+            self?.updateTableView()
+
+            self?.updateTableViewFooter()
+        }, failureHandler: {
+            [weak self]
+            paginator in
+
+            self?.updateTableView()
+
+            self?.updateTableViewFooter()
+        })
+
+        self.phoneNumberFormatter = PhoneNumberFormatter()
+
+        if let contacts = contactsManager?.contacts {
+            if contacts.count == 0 {
+                contactsManager?.fetchContacts {
+                    [weak self]
+                    contacts in
+
+                    self?.contactsData = contacts
+                    self?.paginator?.fetchFirstPage()
+                    self?.updateTableViewFooter()
+                }
+            } else {
+                self.contactsData = contacts
+                self.paginator?.fetchFirstPage()
+                self.updateTableViewFooter()
+            }
+        }
+
+        loadCoinData()
     }
+
+    // MARK: - Public functions
 
     func prepare(wallets: [Wallet], currentIndex: Int, phone: String) {
         self.wallets = wallets
         self.currentIndex = currentIndex
         self.phone = phone
+        self.filterData.walletId = wallets[currentIndex].id
+
+        updateTableView()
     }
 
-    func loadData() {
-        loadPrices(completion: {
+    // MARK: - Private functions
+
+    private func loadCoinData() {
+        let group = DispatchGroup()
+
+        group.enter()
+        loadCoinPrices(completion: {
             [weak self]
             coinData in
 
             self?.coinPrice = coinData
-
-            self?.balancer.briefCell?.update(price: coinData.description(property: .price),
-                                             change: coinData.description(property: .change24h),
-                                             changePct: coinData.description(property: .changePct24h),
-                                             isChangePositive: coinData.change24h >= 0)
-
-            self?.balancer.detailsCell?.update(marketCap: coinData.description(property: .marketCap),
-                                               volume: coinData.description(property: .volume24h),
-                                               supply: coinData.description(property: .supply))
+            group.leave()
         })
 
-
-        balancer.chartCell?.beginChartLoading()
+        group.enter()
         loadChartsPoints(for: currentInterval, completion: {
             [weak self]
             points in
 
             self?.walletsChartsPoints = points
+            group.leave()
+        })
 
-            self?.balancer.chartCell?.endChartLoading()
-            self?.balancer.chartCell?.setupChart(points: points)
+        group.notify(queue: .main, execute: {
+            [weak self] in
+
+            self?.updateTableView()
         })
     }
 
-    private func loadPrices(completion: @escaping (CoinPrice) -> Void) {
+    private func loadTransactions() {
+        guard let wallets = wallets, let index = currentIndex, index < wallets.count else {
+            return
+        }
+
+        self.filterData.walletId = wallets[index].id
+        paginator?.fetchFirstPage()
+    }
+
+    private func loadCoinPrices(completion: @escaping (CoinPrice) -> Void) {
         guard let currentIndex = currentIndex, let wallets = wallets, wallets.count > currentIndex else {
             return
         }
@@ -246,7 +316,7 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable, Advanced
         let wallet = wallets[currentIndex]
 
         priceAPI?.cancelAllTasks()
-        priceAPI?.getCoinPrice(coin: wallet.coin).done {
+        priceAPI?.getCoinDetailPrice(coin: wallet.coin).done {
             coinData in
             completion(coinData)
         }.catch {
@@ -308,29 +378,322 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable, Advanced
             }
         }.catch {
             error in
+
             Crashlytics.sharedInstance().recordError(error)
+
+            performWithDelay {
+                completion([])
+            }
         }
     }
 
-    // MARK: - UITableViewDataSource
+    /**
+     Construct new viewData from current data properties.
+     */
+    private var updatedViewData: [(WalletDetailsHeaderViewData?, [WalletDetailsViewData])] {
+        var viewData: [(WalletDetailsHeaderViewData?, [WalletDetailsViewData])] = []
+        var coinSection: [WalletDetailsViewData] = []
+        var transactionsSections: [(WalletDetailsHeaderViewData?, [WalletDetailsViewData])] = []
+
+        // Create brief row
+        if let currentIndex = currentIndex,
+            let wallets = wallets,
+            let phone = phone {
+
+            let walletsItems = wallets.compactMap {
+                return WalletItemData(data: $0, phoneNumber: phone)
+            }
+
+            let price = coinPrice?.description(property: .price)
+            let change = coinPrice?.description(property: .change24h)
+            let changePct = coinPrice?.description(property: .changePct24h)
+            let isChangePositive = coinPrice != nil ? coinPrice!.change24h >= 0 : nil
+
+
+            let briefData = WalletDetailsBriefViewData(currentIndex: currentIndex,
+                                                       wallets: walletsItems,
+                                                       price: price,
+                                                       change: change,
+                                                       changePct: changePct,
+                                                       isChangePositive: isChangePositive)
+            coinSection.append(briefData)
+        }
+
+        // Create chart row
+        let chartData = WalletDetailsChartViewData(points: walletsChartsPoints, currentInterval: currentInterval)
+        coinSection.append(chartData)
+
+        // Create swithcher row
+        let switcherData = WalletDetailsSwitcherViewData(choiceLeft: "History", choiceRight: "Information", currentChoice: currentSwitcher)
+        coinSection.append(switcherData)
+
+        switch currentSwitcher {
+        case .left:
+            guard let paginator = self.paginator else {
+                break
+            }
+
+            // Create transactions sections
+            transactionsSections = paginator.results.map {
+                group in
+
+                let header = WalletDetailsTransactionHeaderViewData(date: DateInterval.walletString(from: group.dateInterval), amount: group.amount.description(property: .usd))
+
+                let cells: [WalletDetailsTransactionViewData] = group.transactions.map {
+                    transaction in
+
+                    var recipient: String = transaction.participant
+
+                    if let number = transaction.participantPhoneNumber {
+                        recipient = number.formattedString
+                    }
+
+                    if let contact = transaction.contact {
+                        recipient = contact.name
+                    }
+
+                    let cell = WalletDetailsTransactionViewData(image: transaction.coin.image,
+                                                                status: transaction.status.formatted,
+                                                                coinShort: transaction.coin.short,
+                                                                recipient: recipient,
+                                                                amount: transaction.amount.original.formatted ?? "",
+                                                                fiatAmount: transaction.amount.description(property: .usd),
+                                                                direction: transaction.direction)
+                    return cell
+                }
+
+                return (header, cells)
+            }
+
+        case .right:
+            guard let price = coinPrice else {
+                break
+            }
+
+            // Create information rows
+            let marketCap = price.description(property: .marketCap)
+            let volume = price.description(property: .volume24h)
+            let supply = price.description(property: .supply)
+
+            let marketData = WalletDetailsInformationViewData(title: "Market Cap", detailValue: marketCap)
+            let volumeData = WalletDetailsInformationViewData(title: "24H Volume", detailValue: volume)
+            let supplyData = WalletDetailsInformationViewData(title: "Supply", detailValue: supply)
+
+            coinSection.append(contentsOf: [marketData, volumeData, supplyData])
+        }
+
+        viewData.append((nil, coinSection))
+        viewData.append(contentsOf: transactionsSections)
+        return viewData
+    }
+
+    private func updateTableView() {
+        DispatchQueue.main.async {
+            self.viewData = self.updatedViewData
+            self.tableView?.reloadData()
+        }
+    }
+
+    private func updateTableViewFooter() {
+        guard currentSwitcher == .left, let paginator = paginator else {
+            self.tableView.tableFooterView = UIView()
+            return
+        }
+
+        if paginator.requestStatus == .InProgress {
+            self.tableView.tableFooterView = refreshingFooterView
+            return
+        }
+
+        if paginator.reachedLastPage, !paginator.results.isEmpty {
+            self.tableView.tableFooterView = UIView()
+            return
+        }
+
+        if !paginator.reachedLastPage, !paginator.results.isEmpty {
+            self.tableView.tableFooterView = loadingFooterView
+            return
+        }
+
+        if paginator.reachedLastPage, paginator.results.isEmpty {
+            self.tableView.tableFooterView = placeholderFooterView
+            return
+        }
+    }
+
+    // MARK: - Buttons events
+
+    @objc
+    private func exitButtonTouchUpInsideEvent(_ sender: Any) {
+        if let index = currentIndex {
+            advancedTransitionDelegate?.advancedTransitionWillBegin(from: self, params: ["walletIndex": index])
+        }
+
+        dismissKeyboard {
+            [weak self] in
+            self?.onExit?()
+        }
+    }
+}
+
+// MARK: - Extensions
+
+extension WalletDetailsViewController: UITableViewDataSource {
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        return balancer.getNumbersOfSections()
+        return viewData.count
     }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return balancer.getNumberOfRowsInSection(section)
+        return viewData[section].1.count
+    }
+
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        guard let data = viewData[section].0 else {
+            return nil
+        }
+
+        switch data.type {
+        case .transaction:
+            let _header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "TransactionsGroupHeaderComponent")
+
+            guard let header = _header as? TransactionsGroupHeaderComponent else {
+                fatalError()
+            }
+
+            guard let viewData = data as? WalletDetailsTransactionHeaderViewData else {
+                fatalError()
+            }
+
+            header.configure(with: viewData)
+
+            return header
+        }
+    }
+
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        guard let data = viewData[section].0 else {
+            return 0
+        }
+
+        switch data.type {
+        case .transaction:
+            return 46.0
+        }
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return balancer.getConfiguredCellForIndexPath(indexPath) ?? UITableViewCell()
+        let data = viewData[indexPath.section].1[indexPath.row]
+
+        switch data.type {
+        case .brief:
+            let _cell = tableView.dequeueReusableCell(withIdentifier: "WalletDetailsBriefTableViewCell", for: indexPath)
+
+            guard let cell = _cell as? WalletDetailsBriefTableViewCell else {
+                fatalError()
+            }
+
+            guard let viewData = data as? WalletDetailsBriefViewData else {
+                fatalError()
+            }
+
+            cell.delegate = self
+            cell.configure(with: viewData)
+
+            return cell
+        case .chart:
+            let _cell = tableView.dequeueReusableCell(withIdentifier: "WalletDetailsChartTableViewCell", for: indexPath)
+
+            guard let cell = _cell as? WalletDetailsChartTableViewCell else {
+                fatalError()
+            }
+
+            guard let viewData = data as? WalletDetailsChartViewData else {
+                fatalError()
+            }
+
+            cell.delegate = self
+            cell.configure(with: viewData)
+
+            return cell
+        case .switcher:
+            let _cell = tableView.dequeueReusableCell(withIdentifier: "WalletDetailsSwitcherTableViewCell", for: indexPath)
+
+            guard let cell = _cell as? WalletDetailsSwitcherTableViewCell else {
+                fatalError()
+            }
+
+            guard let viewData = data as? WalletDetailsSwitcherViewData else {
+                fatalError()
+            }
+
+            cell.delegate = self
+            cell.configure(with: viewData)
+
+            return cell
+        case .information:
+            let _cell = tableView.dequeueReusableCell(withIdentifier: "WalletDetailsInformationTableViewCell", for: indexPath)
+
+            guard let cell = _cell as? WalletDetailsInformationTableViewCell else {
+                fatalError()
+            }
+
+            guard let viewData = data as? WalletDetailsInformationViewData else {
+                fatalError()
+            }
+
+            cell.configure(with: viewData)
+
+            return cell
+        case .transaction:
+            let _cell = tableView.dequeueReusableCell(withIdentifier: "TransactionCellComponent", for: indexPath)
+
+            guard let cell = _cell as? TransactionCellComponent else {
+                fatalError()
+            }
+
+            guard let viewData = data as? WalletDetailsTransactionViewData else {
+                fatalError()
+            }
+
+            cell.configure(with: viewData)
+            return cell
+        }
+    }
+}
+
+extension WalletDetailsViewController: UITableViewDelegate {
+
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        // when reaching bottom, load a new page
+        if scrollView.contentOffset.y == scrollView.contentSize.height - scrollView.bounds.size.height + scrollView.contentInset.bottom + scrollView.contentInset.top {
+
+            // ask next page only if we haven't reached last page
+            if let last = paginator?.reachedLastPage, last == false {
+                self.paginator?.fetchNextPage()
+            }
+        }
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return balancer.getHeightForRowAtIndexPath(indexPath) ?? 0.0
-    }
+        let data = viewData[indexPath.section].1[indexPath.row]
 
-    // MARK: - WalletDetailsBriefDelegate
+        switch data.type {
+        case .brief:
+            return 200.0
+        case .chart:
+            return 250.0
+        case .switcher:
+            return 50.0
+        case .information:
+            return 48.0
+        case .transaction:
+            return 74.0
+        }
+    }
+}
+
+extension WalletDetailsViewController: WalletDetailsBriefDelegate {
 
     func walletDetailsBriefSendButtonTapped(_ walletDetailsBrief: WalletDetailsBriefTableViewCell, walletIndex: Int) {
         guard let wallets = wallets, let phone = phone else {
@@ -351,36 +714,51 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable, Advanced
     func walletDetailsBriefCurrentWalletChanged(_ walletDetailsBrief: WalletDetailsBriefTableViewCell, to index: Int) {
         self.currentIndex = index
 
-        loadData()
+        self.walletsChartsPoints = nil
+        self.coinPrice = nil
+
+        self.updateTableView()
+
+        loadTransactions()
+        loadCoinData()
+
+        self.updateTableViewFooter()
     }
+}
+
+extension WalletDetailsViewController: WalletDetailsChartDelegate {
 
     func walletDetailsChartIntervalSelected(_ walletDetailsChart: WalletDetailsChartTableViewCell, interval: CoinPriceChartIntervalType) {
         self.currentInterval = interval
 
-        walletDetailsChart.beginChartLoading()
+        self.walletsChartsPoints = nil
+        self.updateTableView()
+
         loadChartsPoints(for: interval, completion: {
             [weak self]
             points in
 
             self?.walletsChartsPoints = points
-
-            walletDetailsChart.endChartLoading()
-            walletDetailsChart.setupChart(points: points)
+            self?.updateTableView()
         })
     }
+}
 
-    // MARK: - AdvancedTransitionDelegate
+extension WalletDetailsViewController: WalletDetailsSwitcherDelegate {
 
-    func advancedTransitionWillBegin(from viewController: FlowViewController, params: [String : Any]) {
-        guard let index = params["walletIndex"] as? Int else {
-            return
+    func walletDetailsSwitcher(_ walletDetailsSwitcher: WalletDetailsSwitcherTableViewCell, buttonSelected: WalletDetailsSwitcherViewData.ChoiceType) {
+        self.currentSwitcher = buttonSelected
+
+        updateTableViewFooter()
+        updateTableView()
+
+        if tableView.numberOfSections > 1 {
+            tableView.scrollToRow(at: IndexPath(row: 0, section: 1), at: .middle, animated: true)
         }
-
-        currentIndex = index
-        balancer.briefCell?.update(currentIndex: index)
     }
+}
 
-    // MARK: - SendMoneyViewControllerDelegate
+extension WalletDetailsViewController: SendMoneyViewControllerDelegate {
 
     func sendMoneyViewControllerSendingProceedWithSuccess(_ sendMoneyViewController: SendMoneyViewController) {
         sendDelegate?.sendMoneyViewControllerSendingProceedWithSuccess(sendMoneyViewController)
@@ -388,21 +766,17 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable, Advanced
 
     func sendMoneyViewControllerSendingProceedWithSuccess(_ sendMoneyViewController: SendMoneyViewController, updated data: Wallet, index: Int) {
         wallets?[index] = data
-
-        balancer.reloadBrief()
+        updateTableView()
     }
+}
 
-    // MARK: - Buttons events
+extension WalletDetailsViewController: AdvancedTransitionDelegate {
 
-    @objc
-    private func exitButtonTouchUpInsideEvent(_ sender: Any) {
-        if let index = currentIndex {
-            advancedTransitionDelegate?.advancedTransitionWillBegin(from: self, params: ["walletIndex": index])
+    func advancedTransitionWillBegin(from viewController: FlowViewController, params: [String : Any]) {
+        guard let index = params["walletIndex"] as? Int else {
+            return
         }
-
-        dismissKeyboard {
-            [weak self] in
-            self?.onExit?()
-        }
+        currentIndex = index
+        updateTableView()
     }
 }

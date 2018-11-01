@@ -1,14 +1,14 @@
 //
-//  DetailTableViewCell.swift
+//  WalletDetailsInformationTableViewCell.swift
 //  wallet
 //
-//  Created by Alexander Ponomarev on 19/10/2018.
+//  Created by Alexander Ponomarev on 31/10/2018.
 //  Copyright © 2018 zamzam. All rights reserved.
 //
 
 import UIKit
 
-class DetailTableViewCell: UITableViewCell, Configurable {
+class WalletDetailsInformationTableViewCell: UITableViewCell, Configurable {
 
     private var titleLabel: UILabel!
     private var detailLabel: UILabel!
@@ -30,6 +30,9 @@ class DetailTableViewCell: UITableViewCell, Configurable {
     }
 
     private func setupSubviews() {
+        self.hero.isEnabled = true
+        self.hero.modifiers = [.fade]
+        
         let titleLabel = UILabel()
         titleLabel.font = UIFont.walletFont(ofSize: 16.0, weight: .regular)
         titleLabel.textColor = .blueGrey
@@ -61,9 +64,8 @@ class DetailTableViewCell: UITableViewCell, Configurable {
         self.detailLabel = detailLabel
     }
 
-    func configure(with data: DetailTableViewCellData) {
+    func configure(with data: WalletDetailsInformationViewData) {
         titleLabel.text = data.title
         detailLabel.text = data.detailValue
     }
-
 }

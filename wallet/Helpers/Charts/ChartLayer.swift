@@ -10,7 +10,7 @@ import UIKit
 
 class ChartLayer: CALayer {
 
-    struct Coordinate {
+    struct Coordinate: Equatable {
         var x: Double
         var y: Double
 

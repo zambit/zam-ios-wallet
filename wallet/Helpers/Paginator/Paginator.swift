@@ -66,10 +66,6 @@ public class Paginator<Element> {
      */
     public var resultsHandler: ResultsHandler
 
-    /**
-     The resetHandler is called by `reset()`.  Here you can define a callback to be called after
-     the paginator has been reset.
-     */
     public var refreshHandler: RefreshHandler?
 
     /**

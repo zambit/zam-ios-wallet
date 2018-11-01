@@ -24,7 +24,7 @@ extension SendMoneyViewControllerDelegate {
     func sendMoneyViewControllerSendingProceedWithSuccess(_ sendMoneyViewController: SendMoneyViewController, updated data: Wallet, index: Int) {}
 }
 
-class SendMoneyViewController: AvoidingViewController, WalletsCollectionComponentDelegate, SendMoneyComponentDelegate, TransactionDetailViewControllerDelegate, QRCodeScannerViewControllerDelegate {
+class SendMoneyViewController: AvoidingViewController {
 
     weak var delegate: SendMoneyViewControllerDelegate?
     weak var advancedTransitionDelegate: AdvancedTransitionDelegate?
@@ -34,6 +34,7 @@ class SendMoneyViewController: AvoidingViewController, WalletsCollectionComponen
 
     var userManager: UserDefaultsManager?
     var userAPI: UserAPI?
+    var priceAPI: PriceAPI?
 
     @IBOutlet private var titleLabel: UILabel?
     @IBOutlet private var walletsCollectionComponent: WalletsCollectionComponent?
@@ -123,7 +124,56 @@ class SendMoneyViewController: AvoidingViewController, WalletsCollectionComponen
         let itemsData = wallets.map { WalletItemData(data: $0, phoneNumber: phone) }
         walletsCollectionComponent?.custom.prepare(cards: itemsData, current: currentIndex)
 
-        sendMoneyComponent?.prepare(recipient: recipient, coinType: wallets[currentIndex].coin, walletId: wallets[currentIndex].id)
+        sendMoneyComponent?.prepare(recipient: recipient, coinType: wallets[currentIndex].coin, fiatType: .standard, walletId: wallets[currentIndex].id, walletCoinValue: wallets[currentIndex].balance.original, walletFiatValue: wallets[currentIndex].balance.usd, coinPrice: nil)
+
+        updatePriceForCurrentCoin {
+            [weak self]
+            price in
+
+            self?.sendMoneyComponent?.prepare(coinPrice: price)
+        }
+    }
+
+    // MARK: - Back button custom event
+
+    @objc
+    private func backButtonTouchUpInsideEvent(_ sender: Any) {
+        if let index = currentIndex {
+            walletsCollectionComponent?.custom.prepareForAnimation()
+
+            advancedTransitionDelegate?.advancedTransitionWillBegin(from: self, params: ["walletIndex": index])
+        }
+
+        dismissKeyboard {
+            [weak self] in
+            
+            self?.walletNavigationController?.popViewController(animated: true)
+        }
+    }
+}
+
+// MARK: - Extensions
+
+extension SendMoneyViewController: QRCodeScannerViewControllerDelegate {
+
+    func qrCodeScannerViewController(_ qrCodeScannerViewController: QRCodeScannerViewController, didFindCode code: String) {
+        if let index = currentIndex, wallets.count > index {
+            sendMoneyComponent?.prepare(address: code, coinType: wallets[index].coin, fiatType: .standard, walletId: wallets[index].id, walletCoinValue: wallets[index].balance.original, walletFiatValue: wallets[index].balance.usd)
+        }
+    }
+
+    func qrCodeScannerViewControllerDidntFindCode(_ qrCodeScannerViewController: QRCodeScannerViewController) {
+        if let index = currentIndex, wallets.count > index {
+            sendMoneyComponent?.prepare(address: "", coinType: wallets[index].coin, fiatType: .standard, walletId: wallets[index].id, walletCoinValue: wallets[index].balance.original, walletFiatValue: wallets[index].balance.usd)
+        }
+    }
+}
+
+extension SendMoneyViewController: TransactionDetailViewControllerDelegate {
+
+    func transactionDetailViewControllerSendingProceedWithSuccess(_ transactionDetailViewController: TransactionDetailViewController) {
+        updateDataForCurrentWallet()
+        delegate?.sendMoneyViewControllerSendingProceedWithSuccess(self)
     }
 
     private func updateDataForCurrentWallet() {
@@ -157,59 +207,51 @@ class SendMoneyViewController: AvoidingViewController, WalletsCollectionComponen
             Crashlytics.sharedInstance().recordError(error)
         }
     }
+}
 
-    // MARK: - WalletsCollectionComponentDelegate
-
-    func walletsCollectionComponentCurrentIndexChanged(_ walletsCollectionComponent: WalletsCollectionComponent, to index: Int) {
-        self.currentIndex = index
-        self.sendMoneyComponent?.prepare(coinType: wallets[index].coin, walletId: wallets[index].id)
-    }
-
-    // MARK: - SendMoneyComponentDelegate
+extension SendMoneyViewController: SendMoneyComponentDelegate {
 
     func sendMoneyComponentRequestSending(_ sendMoneyComponent: SendMoneyComponent, output: SendingData) {
         dismissKeyboard {
             [weak self] in
-            
+
             self?.onSend?(output)
         }
     }
+}
 
-    // MARK: - TransactionDetailViewControllerDelegate
+extension SendMoneyViewController: WalletsCollectionComponentDelegate {
 
-    func transactionDetailViewControllerSendingProceedWithSuccess(_ transactionDetailViewController: TransactionDetailViewController) {
-        updateDataForCurrentWallet()
-        delegate?.sendMoneyViewControllerSendingProceedWithSuccess(self)
-    }
+    func walletsCollectionComponentCurrentIndexChanged(_ walletsCollectionComponent: WalletsCollectionComponent, to index: Int) {
+        self.currentIndex = index
+        self.sendMoneyComponent?.prepare(coinType: wallets[index].coin, fiatType: .standard, walletId: wallets[index].id, walletCoinValue: wallets[index].balance.original, walletFiatValue: wallets[index].balance.usd, coinPrice: nil)
 
-    // MARK: - QRCodeScannerViewControllerDelegate
+        updatePriceForCurrentCoin {
+            [weak self]
+            price in
 
-    func qrCodeScannerViewController(_ qrCodeScannerViewController: QRCodeScannerViewController, didFindCode code: String) {
-        if let index = currentIndex, wallets.count > index {
-            sendMoneyComponent?.prepare(address: code, coinType: wallets[index].coin, walletId: wallets[index].id)
+            self?.sendMoneyComponent?.prepare(coinPrice: price)
         }
     }
 
-    func qrCodeScannerViewControllerDidntFindCode(_ qrCodeScannerViewController: QRCodeScannerViewController) {
-        if let index = currentIndex, wallets.count > index {
-            sendMoneyComponent?.prepare(address: "", coinType: wallets[index].coin, walletId: wallets[index].id)
-        }
-    }
-
-    // MARK: - Back button custom event
-
-    @objc
-    private func backButtonTouchUpInsideEvent(_ sender: Any) {
-        if let index = currentIndex {
-            walletsCollectionComponent?.custom.prepareForAnimation()
-
-            advancedTransitionDelegate?.advancedTransitionWillBegin(from: self, params: ["walletIndex": index])
+    private func updatePriceForCurrentCoin(_ completion: @escaping (CoinPrice) -> Void) {
+        guard let currentIndex = walletsCollectionComponent?.currentIndex else {
+            return
         }
 
-        dismissKeyboard {
-            [weak self] in
-            
-            self?.walletNavigationController?.popViewController(animated: true)
+        let wallet = wallets[currentIndex]
+
+        if wallet.coin == .zam {
+            let price = CoinPrice(coin: .zam, fiat: .usd, price: Decimal(0.02), marketCap: Decimal(0.0), volumeDay: Decimal(0.0), volume24h: Decimal(0.0), changePct24h: Decimal(0.0), change24h: Decimal(0.0), openDay: Decimal(0.0), highDay: Decimal(0.0), lowDay: Decimal(0.0), open24h: Decimal(0.0), high24h: Decimal(0.0), low24h: Decimal(0.0), supply: Decimal(0.0))
+            return completion(price)
+        }
+
+        priceAPI?.getCoinDetailPrice(coin: wallet.coin).done {
+            price in
+            completion(price)
+        }.catch {
+            error in
+            Crashlytics.sharedInstance().recordError(error)
         }
     }
 }

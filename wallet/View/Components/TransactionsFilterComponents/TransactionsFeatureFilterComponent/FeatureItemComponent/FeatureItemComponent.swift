@@ -54,7 +54,6 @@ class FeatureItemComponent: ItemComponent {
         featureButton?.custom.setup(states: [title, title], colors: [UIColor.white, UIColor.white], backgroundColors: [.clear, .skyBlue])
         featureButton?.sizeToFit()
         invalidateIntrinsicContentSize()
-        print(intrinsicContentSize)
     }
 
     func select() {
