@@ -45,6 +45,8 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable {
 
     private var viewData: [(WalletDetailsHeaderViewData?, [WalletDetailsViewData])] = []
 
+    private let semaphore = DispatchSemaphore(value: 1)
+
 
     // MARK: - FooterViews
 
@@ -171,10 +173,17 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable {
                 fatalError()
             }
 
+            let filterData = strongSelf.filterData
+
             strongSelf.filterData.page = nextPage
             strongSelf.userAPI?.cancelTasks()
-            strongSelf.userAPI?.getTransactions(token: token, filter: strongSelf.filterData, phoneNumberFormatter: strongSelf.phoneNumberFormatter, localContacts: strongSelf.contactsData).done {
+            strongSelf.userAPI?.getTransactions(token: token, filter: filterData, phoneNumberFormatter: strongSelf.phoneNumberFormatter, localContacts: strongSelf.contactsData).done {
+                [weak self]
                 page in
+
+                guard let strongSelf = self, strongSelf.filterData.walletId == filterData.walletId else {
+                    return
+                }
 
                 paginator.receivedResults(results: page.transactions, next: page.next ?? "")
             }.catch {
@@ -212,6 +221,13 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable {
 
             self?.updateTableViewFooter()
         }, resetHandler: {
+            [weak self]
+            paginator in
+
+            self?.updateTableView()
+
+            self?.updateTableViewFooter()
+        }, failureHandler: {
             [weak self]
             paginator in
 
@@ -472,8 +488,10 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable {
     }
 
     private func updateTableView() {
-        self.viewData = self.updatedViewData
-        tableView?.reloadData()
+        DispatchQueue.main.async {
+            self.viewData = self.updatedViewData
+            self.tableView?.reloadData()
+        }
     }
 
     private func updateTableViewFooter() {
@@ -698,7 +716,7 @@ extension WalletDetailsViewController: WalletDetailsBriefDelegate {
 
         self.walletsChartsPoints = nil
         self.coinPrice = nil
-        self.paginator?.reset()
+
         self.updateTableView()
 
         loadTransactions()
@@ -733,6 +751,10 @@ extension WalletDetailsViewController: WalletDetailsSwitcherDelegate {
 
         updateTableViewFooter()
         updateTableView()
+
+        if tableView.numberOfSections > 1 {
+            tableView.scrollToRow(at: IndexPath(row: 0, section: 1), at: .middle, animated: true)
+        }
     }
 }
 
