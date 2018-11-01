@@ -30,12 +30,6 @@ class TransactionsHistoryViewController: FlowViewController, WalletNavigable, UI
 
     private var filterData: TransactionsFilterProperties = TransactionsFilterProperties()
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
-        //navigationController?.isNavigationBarHidden = true
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -116,7 +110,7 @@ class TransactionsHistoryViewController: FlowViewController, WalletNavigable, UI
                 guard let header = self?.historyTableView?.headerView(forSection: old.count - 1) as? TransactionsGroupHeaderComponent else {
                     return
                 }
-                header.set(amount: concatiatedElement.amount.description(currency: .usd))
+                header.set(amount: concatiatedElement.amount.description(property: .usd) )
 
                 // Add rows for concatiated section
                 let section = old.count - 1
@@ -221,7 +215,7 @@ class TransactionsHistoryViewController: FlowViewController, WalletNavigable, UI
         }
 
         let data = provider.results[section]
-        header.configure(date: DateInterval.walletString(from: data.dateInterval), amount: data.amount.description(currency: .usd))
+        header.configure(date: DateInterval.walletString(from: data.dateInterval), amount: data.amount.description(property: .usd))
 
         return header
     }
@@ -255,20 +249,7 @@ class TransactionsHistoryViewController: FlowViewController, WalletNavigable, UI
             recipient = contact.name
         }
 
-//        if let phone = data.participant.phone {
-//            recipient = phone.formattedString
-//
-//            if let recipientContact = contactsData.first(where: {
-//                contact in
-//                contact.phoneNumbers.contains(phone)
-//            }) {
-//                recipient = recipientContact.name
-//            }
-//        } else {
-//            recipient = data.participant.address ?? ""
-//        }
-
-        cell.configure(image: data.coin.image, status: data.status.formatted, coinShort: data.coin.short, recipient: recipient, amount: data.amount.formatted(currency: .original), fiatAmount: data.amount.description(currency: .usd), direction: data.direction)
+        cell.configure(image: data.coin.image, status: data.status.formatted, coinShort: data.coin.short, recipient: recipient, amount: data.amount.original.formatted ?? "", fiatAmount: data.amount.description(property: .usd), direction: data.direction)
 
         return cell
     }
@@ -324,12 +305,14 @@ class TransactionsHistoryViewController: FlowViewController, WalletNavigable, UI
 
         tableView.viewWithTag(199)?.removeFromSuperview()
 
-        let rect = CGRect(x: 0.0, y: 0.0, width: 250, height: 250)
+        let rect = CGRect(x: 0.0, y: 0.0, width: tableView.bounds.width, height: 200)
 
         let view = IllustrationalPlaceholder(frame: rect)
-        view.image = #imageLiteral(resourceName: "sadEmoji")
+        view.image = #imageLiteral(resourceName: "sadFace")
         view.tag = 199
         view.alpha = 0.0
+        view.text = "Sorry, but you don’t have any history"
+        view.textColor = .silver
 
         tableView.addSubview(view)
 

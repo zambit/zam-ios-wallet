@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class DepositMoneyViewController: FlowViewController, WalletNavigable, SegmentedControlComponentDelegate, WalletsCollectionComponentDelegate {
+class DepositMoneyViewController: FlowViewController, WalletNavigable{
 
     weak var advancedTransitionDelegate: AdvancedTransitionDelegate?
 
@@ -104,7 +104,21 @@ class DepositMoneyViewController: FlowViewController, WalletNavigable, Segmented
         addressContentComponent?.prepare(address: wallets[currentIndex].address)
     }
 
-    // MARK: - SegmentedControlComponentDelegate
+    @objc
+    private func backButtonTouchUpInsideEvent(_ sender: Any) {
+        if let index = currentIndex {
+            walletsCollectionComponent?.custom.prepareForAnimation()
+
+            advancedTransitionDelegate?.advancedTransitionWillBegin(from: self, params: ["walletIndex": index])
+        }
+
+        walletNavigationController?.popViewController(animated: true)
+    }
+}
+
+// MARK: - Extensions
+
+extension DepositMoneyViewController: SegmentedControlComponentDelegate  {
 
     func segmentedControlComponent(_ segmentedControlComponent: SegmentedControlComponent, currentIndexChangedTo index: Int) {
         switch index {
@@ -120,23 +134,13 @@ class DepositMoneyViewController: FlowViewController, WalletNavigable, Segmented
             break
         }
     }
+}
 
-    // MARK: - WalletsCollectionComponentDelegate
+extension DepositMoneyViewController: WalletsCollectionComponentDelegate {
 
     func walletsCollectionComponentCurrentIndexChanged(_ walletsCollectionComponent: WalletsCollectionComponent, to index: Int) {
         currentIndex = index
 
         addressContentComponent?.prepare(address: wallets[index].address)
-    }
-
-    @objc
-    private func backButtonTouchUpInsideEvent(_ sender: Any) {
-        if let index = currentIndex {
-            walletsCollectionComponent?.custom.prepareForAnimation()
-
-            advancedTransitionDelegate?.advancedTransitionWillBegin(from: self, params: ["walletIndex": index])
-        }
-
-        walletNavigationController?.popViewController(animated: true)
     }
 }

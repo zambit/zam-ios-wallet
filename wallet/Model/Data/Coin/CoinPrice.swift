@@ -34,6 +34,24 @@ struct CoinPrice: Equatable {
 
     let supply: Decimal
 
+    init(coin: CoinType, fiat: FiatType, price: Decimal, marketCap: Decimal, volumeDay: Decimal, volume24h: Decimal, changePct24h: Decimal, change24h: Decimal, openDay: Decimal, highDay: Decimal, lowDay: Decimal, open24h: Decimal, high24h: Decimal, low24h: Decimal, supply: Decimal) {
+        self.coin = coin
+        self.fiat = fiat
+        self.price = price
+        self.marketCap = marketCap
+        self.volumeDay = volumeDay
+        self.volume24h = volume24h
+        self.changePct24h = changePct24h
+        self.change24h = change24h
+        self.openDay = openDay
+        self.highDay = highDay
+        self.lowDay = lowDay
+        self.open24h = open24h
+        self.high24h = high24h
+        self.low24h = low24h
+        self.supply = supply
+    }
+
     init(codable: CodableCoinData) throws {
         guard let coin = CoinType(rawValue: codable.coin.lowercased()) else {
             throw CoinPriceError.coinTypeInputFormatError

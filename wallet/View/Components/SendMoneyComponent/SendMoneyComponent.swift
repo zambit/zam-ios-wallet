@@ -17,7 +17,7 @@ struct SendingData {
         case phone(String)
     }
 
-    let amountData: Balance
+    let amount: Amount
     let walletId: String
     let recipient: RecipientType
 }
@@ -27,7 +27,7 @@ protocol SendMoneyComponentDelegate: class {
     func sendMoneyComponentRequestSending(_ sendMoneyComponent: SendMoneyComponent, output: SendingData)
 }
 
-class SendMoneyComponent: Component, SizePresetable, SendMoneyAmountComponentDelegate, SegmentedControlComponentDelegate, RecipientComponentDelegate {
+class SendMoneyComponent: Component, SizePresetable {
 
     var onQRCodeScanning: (() -> Void)?
 
@@ -45,7 +45,7 @@ class SendMoneyComponent: Component, SizePresetable, SendMoneyAmountComponentDel
     @IBOutlet private var recipientTextFieldTopConstraint: NSLayoutConstraint?
     @IBOutlet private var recipientTextFieldHeightConstraint: NSLayoutConstraint?
 
-    private var amountData: Balance?
+    private var amountData: Amount?
     private var walletId: String?
     private var recipientData: SendingData.RecipientType?
 
@@ -54,7 +54,7 @@ class SendMoneyComponent: Component, SizePresetable, SendMoneyAmountComponentDel
             return nil
         }
 
-        return SendingData(amountData: amount, walletId: id, recipient: recipient)
+        return SendingData(amount: amount, walletId: id, recipient: recipient)
     }
 
     override func initFromNib() {
@@ -118,69 +118,46 @@ class SendMoneyComponent: Component, SizePresetable, SendMoneyAmountComponentDel
         layoutIfNeeded()
     }
 
-    func prepare(recipient: FormattedContact? = nil, coinType: CoinType, walletId: String) {
+    func prepare(recipient: FormattedContact? = nil, coinType: CoinType, fiatType: FiatType, walletId: String, walletCoinValue: Decimal, walletFiatValue: Decimal, coinPrice: CoinPrice? = nil) {
         self.walletId = walletId
         
-        sendMoneyAmountComponent?.prepare(coinType: coinType)
+        sendMoneyAmountComponent?.prepare(coin: coinType, fiat: fiatType, maxCoinValue: walletCoinValue, maxFiatValue: walletFiatValue)
         updateSendingData(for: coinType)
 
         if let recipient = recipient {
             recipientComponent?.custom.setup(contact: recipient)
             updateSendingData(for: .phone)
         }
+
+        sendMoneyAmountComponent?.prepare(coinPrice: coinPrice)
     }
 
-    func prepare(address: String, coinType: CoinType, walletId: String) {
+    func prepare(address: String, coinType: CoinType, fiatType: FiatType, walletId: String, walletCoinValue: Decimal, walletFiatValue: Decimal, coinPrice: CoinPrice? = nil) {
         self.walletId = walletId
 
-        sendMoneyAmountComponent?.prepare(coinType: coinType)
+        sendMoneyAmountComponent?.prepare(coin: coinType, fiat: fiatType, maxCoinValue: walletCoinValue, maxFiatValue: walletFiatValue)
         updateSendingData(for: coinType)
 
         recipientComponent?.custom.setup(address: address)
         updateSendingData(for: .address)
+
+        sendMoneyAmountComponent?.prepare(coinPrice: coinPrice)
     }
 
-    // MARK: - SendMoneyAmountComponentDelegate
+    func prepare(coinPrice: CoinPrice) {
+        sendMoneyAmountComponent?.prepare(coinPrice: coinPrice)
+    }
 
-    func sendMoneyAmountComponent(_ sendMoneyAmountComponent: SendMoneyAmountComponent, amountDataEntered data: Balance) {
-        self.amountData = data
+    private func updateSendButton(with amountData: Amount) {
 
-        if let output = sendingData {
-            sendButton?.customAppearance.setEnabled(true)
-            sendButton?.customAppearance.provideData(amount: "\(output.amountData.formatted(currency: .original)) \(output.amountData.coin.short.uppercased())", alternative: "")
+        var detail: String? = nil
+
+        if let detailValue = amountData.fiatValue {
+            detail = "\(detailValue.shortFormatted ?? "") \(amountData.fiat.symbol)"
         }
-    }
 
-    func sendMoneyAmountComponentValueEnteredIncorrectly(_ sendMoneyAmountComponent: SendMoneyAmountComponent) {
-        self.amountData = nil
-        sendButton?.customAppearance.setEnabled(false)
-    }
-
-    // MARK: - SegmentedControlComponentDelegate
-
-    func segmentedControlComponent(_ segmentedControlComponent: SegmentedControlComponent, willChangeTo index: Int) {
-        switch index {
-        case 0:
-            recipientComponent?.custom.showPhone()
-            updateSendingData(for: .phone)
-        case 1:
-            recipientComponent?.custom.showAddress()
-            updateSendingData(for: .address)
-        default:
-            return
-        }
-    }
-
-    // MARK: - RecipientComponentDelegate
-
-    func recipientComponentStatusChanged(_ recipientComponent: RecipientComponent, to status: FormEditingStatus, recipientType: RecipientType) {
-        switch status {
-        case .valid:
-            updateSendingData(for: recipientType)
-        case .invalid:
-            recipientData = nil
-            sendButton?.customAppearance.setEnabled(false)
-        }
+        sendButton?.custom.provide(amount: "\(amountData.value.longFormatted ?? "") \(amountData.coin.short.uppercased())",
+            detail: detail)
     }
 
     // MARK: - Update sending data
@@ -190,11 +167,10 @@ class SendMoneyComponent: Component, SizePresetable, SendMoneyAmountComponentDel
             return
         }
 
-        self.amountData = Balance(coin: coinType, usd: amountData.usd, original: amountData.original)
+        self.amountData = Amount(value: amountData.value, coin: coinType, fiat: amountData.fiat, coinPrice: nil)
 
         if let output = sendingData {
-            sendButton?.customAppearance.setEnabled(true)
-            sendButton?.customAppearance.provideData(amount: "\(output.amountData.formatted(currency: .original)) \(output.amountData.coin.short.uppercased())", alternative: "")
+            updateSendButton(with: output.amount)
         }
     }
 
@@ -213,8 +189,7 @@ class SendMoneyComponent: Component, SizePresetable, SendMoneyAmountComponentDel
             }
 
             if let output = sendingData {
-                sendButton?.customAppearance.setEnabled(true)
-                sendButton?.customAppearance.provideData(amount: "\(output.amountData.formatted(currency: .original)) \(output.amountData.coin.short.uppercased())", alternative: "")
+                updateSendButton(with: output.amount)
             }
         case .address:
             guard let address = recipientComponent?.custom.address, !address.isEmpty else {
@@ -225,8 +200,7 @@ class SendMoneyComponent: Component, SizePresetable, SendMoneyAmountComponentDel
             recipientData = .address(address)
 
             if let output = sendingData {
-                sendButton?.customAppearance.setEnabled(true)
-                sendButton?.customAppearance.provideData(amount: "\(output.amountData.formatted(currency: .original)) \(output.amountData.coin.short.uppercased())", alternative: "")
+                updateSendButton(with: output.amount)
             }
         }
     }
@@ -258,5 +232,50 @@ class SendMoneyComponent: Component, SizePresetable, SendMoneyAmountComponentDel
     @objc
     private func scanQRAddressWithCamera(_ sender: Any) {
         onQRCodeScanning?()
+    }
+}
+
+extension SendMoneyComponent: SendMoneyAmountComponentDelegate {
+
+    func sendMoneyAmountComponentEditingChanged(_ sendMoneyAmountComponent: SendMoneyAmountComponent, amount: Amount) {
+        self.amountData = amount
+
+        if let output = sendingData {
+            updateSendButton(with: output.amount)
+        }
+    }
+
+    func sendMoneyAmountComponentValueEnteredIncorrectly(_ sendMoneyAmountComponent: SendMoneyAmountComponent) {
+        self.amountData = nil
+        sendButton?.custom.isEnabled = false
+    }
+}
+
+extension SendMoneyComponent: SegmentedControlComponentDelegate {
+
+    func segmentedControlComponent(_ segmentedControlComponent: SegmentedControlComponent, willChangeTo index: Int) {
+        switch index {
+        case 0:
+            recipientComponent?.custom.showPhone()
+            updateSendingData(for: .phone)
+        case 1:
+            recipientComponent?.custom.showAddress()
+            updateSendingData(for: .address)
+        default:
+            return
+        }
+    }
+}
+
+extension SendMoneyComponent: RecipientComponentDelegate {
+
+    func recipientComponentStatusChanged(_ recipientComponent: RecipientComponent, to status: FormEditingStatus, recipientType: RecipientType) {
+        switch status {
+        case .valid:
+            updateSendingData(for: recipientType)
+        case .invalid:
+            recipientData = nil
+            sendButton?.custom.isEnabled = false
+        }
     }
 }

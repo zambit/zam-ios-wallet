@@ -159,8 +159,11 @@ class TransactionDetailViewController: FlowViewController, WalletNavigable {
             return
         }
 
-        amountLabel?.text = data.amountData.formatted(currency: .original)
-        amountDetailLabel?.text = data.amountData.coin.short.uppercased()
+        amountLabel?.text = "\(data.amount.value.longFormatted ?? "") \(data.amount.coin.short.uppercased())"
+
+        if let convertedValue = data.amount.fiatValue {
+            amountDetailLabel?.text = "\(data.amount.fiat.symbol) \(convertedValue.formatted ?? "")"
+        }
 
         switch data.recipient {
         case .phone(let phone):
@@ -241,7 +244,7 @@ class TransactionDetailViewController: FlowViewController, WalletNavigable {
 
             sendButton?.custom.setLoading()
 
-            userAPI?.sendTransaction(token: token, walletId: data.walletId, recipient: recipient, amount: data.amountData.original).done {
+            userAPI?.sendTransaction(token: token, walletId: data.walletId, recipient: recipient, amount: data.amount.value).done {
                 [weak self]
                 transaction in
 

@@ -44,7 +44,7 @@ struct HTTPDispatcher: Dispatcher {
 
     private let session: URLSession = {
         let config = URLSessionConfiguration.default
-        config.timeoutIntervalForRequest = 35.0
+        config.timeoutIntervalForRequest = 5.0
 
         let session = URLSession(configuration: config)
         return session

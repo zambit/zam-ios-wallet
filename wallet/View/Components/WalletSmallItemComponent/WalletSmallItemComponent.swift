@@ -115,8 +115,8 @@ class WalletSmallItemComponent: ItemComponent, Configurable {
     }
 
     func setupPages(currentIndex: Int, count: Int) {
-        pageControl?.currentPage = currentIndex
         pageControl?.numberOfPages = count
+        pageControl?.currentPage = currentIndex
     }
 
     func setupChart(points: [ChartLayer.Coordinate]) {

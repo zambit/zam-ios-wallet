@@ -21,7 +21,10 @@ protocol HomeController: class {
     func performWalletDetails(index: Int, wallets: [Wallet], phone: String)
 }
 
-class HomeViewController: FloatingViewController, WalletsViewControllerDelegate, ContactsHorizontalComponentDelegate, AdvancedTransitionDelegate, SendMoneyViewControllerDelegate, HomeController {
+/**
+ Home screen that have floating view with embeded view controller.
+ */
+class HomeViewController: FloatingViewController {
 
     var contactsManager: UserContactsManager?
     var userManager: UserDefaultsManager?
@@ -315,53 +318,6 @@ class HomeViewController: FloatingViewController, WalletsViewControllerDelegate,
         }
     }
 
-    // MARK: - HomeController
-
-    func performSendFromWallet(index: Int, wallets: [Wallet], phone: String, recipient: FormattedContact? = nil) {
-        floatingView?.hero.id = "floatingView"
-        floatingView?.hero.modifiers = [.useScaleBasedSizeChange]
-        detailTopGestureView?.hero.modifiers = [.fade]
-        walletsContainerView?.hero.modifiers = [.fade]
-
-        self.onSendFromWallet?(index, wallets, recipient, phone)
-    }
-
-    func performDepositFromWallet(index: Int, wallets: [Wallet], phone: String) {
-        floatingView?.hero.id = "floatingView"
-        floatingView?.hero.modifiers = [.useScaleBasedSizeChange]
-        detailTopGestureView?.hero.modifiers = [.fade]
-        walletsContainerView?.hero.modifiers = [.fade]
-
-        self.onDepositToWallet?(index, wallets, phone)
-    }
-
-    func performWalletDetails(index: Int, wallets: [Wallet], phone: String) {
-        floatingView?.hero.id = "floatingView"
-        floatingView?.hero.modifiers = [.useScaleBasedSizeChange, .timingFunction(.easeInOut)]
-        detailTopGestureView?.hero.modifiers = [.fade]
-        walletsContainerView?.hero.modifiers = [.fade]
-
-        self.onWalletDetails?(index, wallets, phone)
-    }
-
-    // MARK: - AdvancedTransitionDelegate
-
-    func advancedTransitionWillBegin(from viewController: FlowViewController, params: [String : Any]) {
-        guard let index = params["walletIndex"] as? Int else {
-            return
-        }
-
-        walletsCollectionViewController?.prepareToAnimation(cellIndex: index)
-    }
-
-    // MARK: - SendMoneyViewControllerDelegate
-
-    func sendMoneyViewControllerSendingProceedWithSuccess(_ sendMoneyViewController: SendMoneyViewController) {
-        loadData()
-
-        walletsCollectionViewController?.reload()
-    }
-
     // MARK: - Load data
 
     private func loadData() {
@@ -369,7 +325,8 @@ class HomeViewController: FloatingViewController, WalletsViewControllerDelegate,
             return
         }
 
-        dataWillLoading()
+        sumLabel?.endLoading()
+        sumLabel?.beginLoading()
 
         userAPI?.getUserInfo(token: token, coin: nil).done {
             [weak self]
@@ -387,17 +344,9 @@ class HomeViewController: FloatingViewController, WalletsViewControllerDelegate,
         }.catch {
             [weak self]
             error in
-            self?.dataWasntLoaded()
+
+            self?.sumLabel?.endLoading()
         }
-    }
-
-    private func dataWillLoading() {
-        sumLabel?.endLoading()
-        sumLabel?.beginLoading()
-    }
-
-    private func dataWasntLoaded() {
-        sumLabel?.endLoading()
     }
 
     private func dataWasLoaded() {
@@ -405,11 +354,11 @@ class HomeViewController: FloatingViewController, WalletsViewControllerDelegate,
 
         guard
             let totalBalance = totalBalance,
-            let separator = NumberFormatter.walletAmount.decimalSeparator!.first else {
+            let separator = NumberFormatter.amount.decimalSeparator.first else {
             return
         }
 
-        let usdBalance = totalBalance.description(currency: .usd)
+        let usdBalance = totalBalance.description(property: .usd) 
         let parts = usdBalance.split(separator: separator)
         guard parts.count == 2 else { return }
 
@@ -420,63 +369,7 @@ class HomeViewController: FloatingViewController, WalletsViewControllerDelegate,
         let fractionRange = (primary.count + 1)..<(primary.count + 1 + fraction.count)
         setupTotalBalanceLabel(text: usdBalance, primaryStyleRange: primaryRange, fractionStyleRange: fractionRange)
 
-        sumBtcLabel?.text = "\(totalBalance.formatted(currency: .original)) \(totalBalance.coin.short.uppercased())"
-    }
-
-
-    // MARK: - WalletsViewControllerDelegate
-
-    func walletsViewControllerCallsUpdateData(_ walletsViewController: WalletsViewController) {
-        loadData()
-    }
-
-    func walletsViewControllerScrollingEvent(_ walletsViewController: WalletsViewController, panGestureRecognizer: UIPanGestureRecognizer, offset: CGPoint) {
-        switch currentState {
-        case .closed:
-            switch panGestureRecognizer.state {
-            case .began:
-                // translate wallets collections view gesture recognizer to floating handler
-                floatingPanGestureEvent(recognizer: panGestureRecognizer)
-            case .changed:
-                // holds wallets collection view offset stable while floating view moves
-                let point = CGPoint(x: 0.0, y: -walletsViewController.collectionView.contentInset.top)
-                walletsViewController.collectionView.contentOffset = point
-
-                // translate wallets collections view gesture recognizer to floating handler
-                floatingPanGestureEvent(recognizer: panGestureRecognizer)
-            case .ended:
-                // holds wallets collection view offset stable while floating view moves
-                let point = CGPoint(x: 0.0, y: -walletsViewController.collectionView.contentInset.top)
-                walletsViewController.collectionView.contentOffset = point
-
-                // translate wallets collections view gesture recognizer to floating handler
-                floatingPanGestureEvent(recognizer: panGestureRecognizer)
-            default:
-                ()
-            }
-        default:
-            ()
-        }
-    }
-
-    // MARK: - ContactsHorizontalComponentDelegate
-
-    func contactsHorizontalComponent(_ contactsHorizontalComponent: ContactsHorizontalComponent, itemWasTapped contactData: Contact) {
-        contactsHorizontalComponent.isUserInteractionEnabled = false
-
-        dismissKeyboard {
-            [weak self] in
-
-            contactData.toFormatted {
-                formatted in
-
-                contactsHorizontalComponent.isUserInteractionEnabled = true
-
-                if let formatted = formatted {
-                    self?.walletsCollectionViewController?.sendTo(contact: formatted)
-                }
-            }
-        }
+        sumBtcLabel?.text = totalBalance.description(property: .original)
     }
 
     // MARK: - FloatingViewController
@@ -518,5 +411,115 @@ class HomeViewController: FloatingViewController, WalletsViewControllerDelegate,
         }
 
         return [transitionAnimator]
+    }
+}
+
+// MARK: - Extensions
+
+/// Extension implements HomeController protocol. It's interface to use from child view controller in contrainer.
+extension HomeViewController: HomeController {
+
+    func performSendFromWallet(index: Int, wallets: [Wallet], phone: String, recipient: FormattedContact? = nil) {
+        floatingView?.hero.id = "floatingView"
+        floatingView?.hero.modifiers = [.useScaleBasedSizeChange]
+        detailTopGestureView?.hero.modifiers = [.fade]
+        walletsContainerView?.hero.modifiers = [.fade]
+
+        self.onSendFromWallet?(index, wallets, recipient, phone)
+    }
+
+    func performDepositFromWallet(index: Int, wallets: [Wallet], phone: String) {
+        floatingView?.hero.id = "floatingView"
+        floatingView?.hero.modifiers = [.useScaleBasedSizeChange]
+        detailTopGestureView?.hero.modifiers = [.fade]
+        walletsContainerView?.hero.modifiers = [.fade]
+
+        self.onDepositToWallet?(index, wallets, phone)
+    }
+
+    func performWalletDetails(index: Int, wallets: [Wallet], phone: String) {
+        floatingView?.hero.id = "floatingView"
+        floatingView?.hero.modifiers = [.useScaleBasedSizeChange, .timingFunction(.easeInOut)]
+        detailTopGestureView?.hero.modifiers = [.fade]
+        walletsContainerView?.hero.modifiers = [.fade]
+
+        self.onWalletDetails?(index, wallets, phone)
+    }
+}
+
+extension HomeViewController: AdvancedTransitionDelegate {
+
+    func advancedTransitionWillBegin(from viewController: FlowViewController, params: [String : Any]) {
+        guard let index = params["walletIndex"] as? Int else {
+            return
+        }
+
+        walletsCollectionViewController?.prepareToAnimation(cellIndex: index)
+    }
+}
+
+extension HomeViewController: WalletsViewControllerDelegate {
+
+    func walletsViewControllerCallsUpdateData(_ walletsViewController: WalletsViewController) {
+        loadData()
+    }
+
+    func walletsViewControllerScrollingEvent(_ walletsViewController: WalletsViewController, panGestureRecognizer: UIPanGestureRecognizer, offset: CGPoint) {
+        switch currentState {
+        case .closed:
+            switch panGestureRecognizer.state {
+            case .began:
+                // translate wallets collections view gesture recognizer to floating handler
+                floatingPanGestureEvent(recognizer: panGestureRecognizer)
+            case .changed:
+                // holds wallets collection view offset stable while floating view moves
+                let point = CGPoint(x: 0.0, y: -walletsViewController.collectionView.contentInset.top)
+                walletsViewController.collectionView.contentOffset = point
+
+                // translate wallets collections view gesture recognizer to floating handler
+                floatingPanGestureEvent(recognizer: panGestureRecognizer)
+            case .ended:
+                // holds wallets collection view offset stable while floating view moves
+                let point = CGPoint(x: 0.0, y: -walletsViewController.collectionView.contentInset.top)
+                walletsViewController.collectionView.contentOffset = point
+
+                // translate wallets collections view gesture recognizer to floating handler
+                floatingPanGestureEvent(recognizer: panGestureRecognizer)
+            default:
+                ()
+            }
+        default:
+            ()
+        }
+    }
+}
+
+extension HomeViewController: ContactsHorizontalComponentDelegate {
+
+    func contactsHorizontalComponent(_ contactsHorizontalComponent: ContactsHorizontalComponent, itemWasTapped contactData: Contact) {
+        contactsHorizontalComponent.isUserInteractionEnabled = false
+
+        dismissKeyboard {
+            [weak self] in
+
+            contactData.toFormatted {
+                formatted in
+
+                contactsHorizontalComponent.isUserInteractionEnabled = true
+
+                if let formatted = formatted {
+                    self?.walletsCollectionViewController?.sendTo(contact: formatted)
+                }
+            }
+        }
+    }
+}
+
+extension HomeViewController: SendMoneyViewControllerDelegate {
+
+    func sendMoneyViewControllerSendingProceedWithSuccess(_ sendMoneyViewController: SendMoneyViewController) {
+        loadData()
+
+        walletsCollectionViewController?.reload()
     }
 }

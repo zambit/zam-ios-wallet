@@ -38,6 +38,7 @@ extension UIView {
 
 extension UIView {
 
+    @objc
     func beginLoading() {
         endLoading()
 
@@ -65,6 +66,7 @@ extension UIView {
         loadingView.widthAnchor.constraint(equalToConstant: 20.0).isActive = true
     }
 
+    @objc
     func endLoading() {
         alpha = 1.0
 

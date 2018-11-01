@@ -77,33 +77,36 @@ struct HistoryAPI: NetworkService {
             request = .getMinutePrice(coin: coin.short, toCoin: convertingTo.short, aggregate: groupingBy, limit: count)
         }
 
-        return provider.execute(request)
-            .then {
-                (response: Response) -> Promise<[CoinHistoricalPrice]> in
+        return Promise { seal in
 
-                return Promise { seal in
-                    switch response {
-                    case .data(_):
+            provider.execute(request).done {
+                response in
 
-                        let success: (CodableCoinHistoricalDataResponse) -> Void = { s in
-                            let objects = s.data.map({ return CoinHistoricalPrice(coin: coin, fiat: convertingTo, codable: $0) })
-                            seal.fulfill(objects)
-                        }
+                switch response {
+                case .data(_):
 
-                        let failure: (CodableCryptocompareFailure) -> Void = { f in
-                            let error = CryptocompareResponseError.serverFailureResponse(message: f.message)
-                            seal.reject(error)
-                        }
+                    let success: (CodableCoinHistoricalDataResponse) -> Void = { s in
+                        let objects = s.data.map({ return CoinHistoricalPrice(coin: coin, fiat: convertingTo, codable: $0) })
+                        seal.fulfill(objects)
+                    }
 
-                        do {
-                            try response.extractResult(success: success, failure: failure)
-                        } catch let error {
-                            seal.reject(error)
-                        }
-                    case .error(let error):
+                    let failure: (CodableCryptocompareFailure) -> Void = { f in
+                        let error = CryptocompareResponseError.serverFailureResponse(message: f.message)
                         seal.reject(error)
                     }
+
+                    do {
+                        try response.extractResult(success: success, failure: failure)
+                    } catch let error {
+                        seal.reject(error)
+                    }
+                case .error(let error):
+                    seal.reject(error)
                 }
+            }.catch {
+                error in
+                seal.reject(error)
+            }
         }
     }
 

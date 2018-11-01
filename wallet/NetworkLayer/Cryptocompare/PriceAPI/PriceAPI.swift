@@ -17,11 +17,14 @@ struct PriceAPI: NetworkService {
         self.provider = provider
     }
 
-    func getCoinPrice(coin: CoinType) -> Promise<CoinPrice> {
-        return provider.execute(PriceRequest.getDetailPrice(coin: coin.short, toCoin: FiatType.usd.short)).then {
-            (response: Response) -> Promise<CoinPrice> in
+    func getCoinDetailPrice(coin: CoinType) -> Promise<CoinPrice> {
+        return Promise {
+            seal in
 
-            return Promise { seal in
+            let request = PriceRequest.getDetailPrice(coin: coin.short, toCoin: FiatType.usd.short)
+            provider.execute(request).done {
+                response in
+
                 switch response {
                 case .data(_):
 
@@ -50,12 +53,34 @@ struct PriceAPI: NetworkService {
                     } catch let error {
                         seal.reject(error)
                     }
+
                 case .error(let error):
                     seal.reject(error)
                 }
+            }.catch {
+                error in
+                seal.reject(error)
             }
         }
     }
+
+    func convertCoinAmount(coin: CoinType, amount: Decimal, to fiat: FiatType) -> Promise<Decimal> {
+        return Promise {
+            seal in
+
+            cancelAllTasks()
+            getCoinDetailPrice(coin: coin).done {
+                price in
+
+                let fiatAmount = price.price * amount
+                seal.fulfill(fiatAmount)
+            }.catch {
+                error in
+                seal.reject(error)
+            }
+        }
+    }
+
 
     func cancelAllTasks() {
         provider.cancelAllTasks()

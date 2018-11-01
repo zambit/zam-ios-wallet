@@ -11,7 +11,7 @@ import UIKit
 
 protocol SendMoneyAmountComponentDelegate: class {
 
-    func sendMoneyAmountComponent(_ sendMoneyAmountComponent: SendMoneyAmountComponent, amountDataEntered data: Balance)
+    func sendMoneyAmountComponentEditingChanged(_ sendMoneyAmountComponent: SendMoneyAmountComponent, amount: Amount)
 
     func sendMoneyAmountComponentValueEnteredIncorrectly(_ sendMoneyAmountComponent: SendMoneyAmountComponent)
 }
@@ -19,10 +19,13 @@ protocol SendMoneyAmountComponentDelegate: class {
 class SendMoneyAmountComponent: Component, SizePresetable, UITextFieldDelegate {
 
     weak var delegate: SendMoneyAmountComponentDelegate?
-    
+
     @IBOutlet private var titleLabel: UILabel?
     @IBOutlet private var valueTextField: UITextField?
     @IBOutlet private var altValueLabel: UILabel?
+
+    @IBOutlet private var exchangeButton: HighlightableButton?
+    @IBOutlet private var maxButton: HighlightableButton?
 
     @IBOutlet private var feeContainer: UIView?
 
@@ -40,6 +43,13 @@ class SendMoneyAmountComponent: Component, SizePresetable, UITextFieldDelegate {
     @IBOutlet private var topGreaterThanConstraint: NSLayoutConstraint?
 
     private var coin: CoinType?
+    private var fiat: FiatType?
+    private var coinPrice: CoinPrice?
+    private var maxCoinValue: Decimal?
+    private var maxFiatValue: Decimal?
+
+    private var converter: Converter?
+    private var isAmountInFiat: Bool = false
 
     private var coinPrefix: String {
         if let coin = coin {
@@ -50,7 +60,6 @@ class SendMoneyAmountComponent: Component, SizePresetable, UITextFieldDelegate {
     }
 
     private(set) var amount: Decimal = 0.0
-    private(set) var detail: Float = 0
 
     override func initFromNib() {
         super.initFromNib()
@@ -72,25 +81,38 @@ class SendMoneyAmountComponent: Component, SizePresetable, UITextFieldDelegate {
         valueTextField?.textColor = .darkIndigo
         valueTextField?.tintColor = .darkIndigo
         valueTextField?.keyboardType = .decimalPad
+        valueTextField?.adjustsFontSizeToFitWidth = false
         valueTextField?.attributedPlaceholder =
-            NSAttributedString(string: NumberFormatter.walletAmount.string(from: 0.0)!, attributes: [NSAttributedString.Key.foregroundColor: UIColor.darkIndigo])
+            NSAttributedString(string: Decimal(0.0).longFormatted!, attributes: [NSAttributedString.Key.foregroundColor: UIColor.darkIndigo])
 
         altValueLabel?.font = UIFont.walletFont(ofSize: 14.0, weight: .regular)
         altValueLabel?.textAlignment = .center
         altValueLabel?.textColor = .warmGrey
-        altValueLabel?.text = coinPrefix
+        altValueLabel?.text = Decimal(0.0).longFormatted!
+
+        exchangeButton?.setImage(#imageLiteral(resourceName: "icExchange"), for: .normal)
+        exchangeButton?.tintColor = .silver
+        exchangeButton?.setHighlightedTintColor(.warmGrey)
+        exchangeButton?.addTarget(self, action: #selector(exchangeButtonTouchUpInsideEvent(_:)), for: .touchUpInside)
+
+        maxButton?.titleLabel?.font = UIFont.walletFont(ofSize: 14.0, weight: .medium)
+        maxButton?.setTitle("Max", for: .normal)
+        maxButton?.setTitleColor(.silver, for: .normal)
+        maxButton?.setTitleColor(.warmGrey, for: .highlighted)
+        maxButton?.addTarget(self, action: #selector(maxButtonTouchUpInsideEvent(_:)), for: .touchUpInside)
 
         blockchainFee?.font = UIFont.walletFont(ofSize: 14.0, weight: .regular)
         blockchainFee?.textAlignment = .left
         blockchainFee?.textColor = UIColor.warmGrey.withAlphaComponent(0.7)
         blockchainFee?.custom.setIndent("blockchain fee   ")
-        blockchainFee?.custom.setText("$ \(NumberFormatter.walletAmount.string(from: 0.0)!)")
+
+        blockchainFee?.custom.setText("$ \(Decimal(0.0).longFormatted!)")
 
         zamzamFee?.font = UIFont.walletFont(ofSize: 14.0, weight: .regular)
         zamzamFee?.textAlignment = .left
         zamzamFee?.textColor = UIColor.warmGrey.withAlphaComponent(0.7)
         zamzamFee?.custom.setIndent("zamzam fee   ")
-        zamzamFee?.custom.setText("$ \(NumberFormatter.walletAmount.string(from: 0.0)!)")
+        zamzamFee?.custom.setText("$ \(Decimal(0.0).longFormatted!)")
     }
 
     override func layoutSubviews() {
@@ -127,7 +149,7 @@ class SendMoneyAmountComponent: Component, SizePresetable, UITextFieldDelegate {
             blockchainFee?.custom.setIndent("blockchain fee   ")
             blockchainFee?.font = UIFont.walletFont(ofSize: 14.0, weight: .regular)
             zamzamFee?.font = UIFont.walletFont(ofSize: 14.0, weight: .regular)
-            valueTextField?.font = UIFont.walletFont(ofSize: 46.0, weight: .regular)
+            valueTextField?.font = UIFont.walletFont(ofSize: 42.0, weight: .regular)
             titleLabel?.font = UIFont.walletFont(ofSize: 16.0, weight: .regular)
 
             feesTopConstraint?.constant = 20.0
@@ -159,66 +181,208 @@ class SendMoneyAmountComponent: Component, SizePresetable, UITextFieldDelegate {
         layoutIfNeeded()
     }
 
-    func prepare(coinType: CoinType) {
-        self.coin = coinType
+    func prepare(coin: CoinType, fiat: FiatType, maxCoinValue: Decimal, maxFiatValue: Decimal, coinPrice: CoinPrice? = nil) {
+        self.coin = coin
+        self.fiat = fiat
+        self.coinPrice = coinPrice
+        self.maxCoinValue = maxCoinValue
+        self.maxFiatValue = maxFiatValue
 
-        altValueLabel?.text = coinPrefix
+        self.converter = Converter(coin: coin, fiat: fiat, coinPrice: coinPrice)
+
+
+        guard let converter = converter else {
+            return
+        }
+
+        if isAmountInFiat {
+            altValueLabel?.text = "\(converter.coinValue.longFormatted?.removingWhitespaces ?? "") \(converter.coin.short.uppercased())"
+        } else {
+            altValueLabel?.text = "\(converter.fiat.symbol) \(converter.fiatValue.longFormatted?.removingWhitespaces ?? "")"
+        }
+    }
+
+    func prepare(coinPrice: CoinPrice? = nil) {
+        self.coinPrice = coinPrice
+
+        self.converter?.coinPrice = coinPrice
+
+
+        guard let converter = converter else {
+            return
+        }
+
+        if isAmountInFiat {
+            altValueLabel?.text = "\(converter.coinValue.longFormatted?.removingWhitespaces ?? "") \(converter.coin.short.uppercased())"
+        } else {
+            altValueLabel?.text = "\(converter.fiat.symbol) \(converter.fiatValue.longFormatted?.removingWhitespaces ?? "")"
+        }
     }
 
     // MARK: - AmountTextField
 
-    @objc
-    private func valueTextFieldEditingChanged(_ sender: UITextField) {
-        guard let text = sender.text, let coin = coin else {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        guard let coin = coin, let fiat = fiat else {
             return
         }
 
-        let value = NumberFormatter.walletAmount.number(from: text)?.decimalValue ?? 0.0
-        //let value = Decimal(string: text) ?? 0.0
-        let detailValue: Float = 0.0
+        if isAmountInFiat {
+            titleLabel?.text = "\(fiat.symbol) \(maxFiatValue?.formatted?.removingWhitespaces ?? "")"
+        } else {
+            titleLabel?.text = "\(maxCoinValue?.formatted?.removingWhitespaces ?? "") \(coin.short.uppercased())"
+        }
+    }
 
-        if value != amount {
-            if value > 0 {
-                let balanceData = Balance(coin: coin, usd: 0.0, original: value)
-                delegate?.sendMoneyAmountComponent(self, amountDataEntered: balanceData)
-            } else {
-                delegate?.sendMoneyAmountComponentValueEnteredIncorrectly(self)
+    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
+        titleLabel?.text = "Amount"
+    }
+
+    @objc
+    private func valueTextFieldEditingChanged(_ sender: UITextField) {
+        guard let text = sender.text, let converter = self.converter else {
+            return
+        }
+
+        let value = NumberFormatter.amount.number(from: text)?.decimalValue ?? 0.0
+
+        if isAmountInFiat {
+            if value != converter.fiatValue {
+                self.converter?.fiatValue = value
+
+                guard let converter = self.converter else {
+                    return
+                }
+
+                self.altValueLabel?.text = "\(converter.coinValue.longFormatted?.removingWhitespaces ?? "") \(converter.coin.short.uppercased())"
+
+                if converter.coinValue > 0 {
+                    delegate?.sendMoneyAmountComponentEditingChanged(self, amount: converter.amount)
+                } else {
+                    delegate?.sendMoneyAmountComponentValueEnteredIncorrectly(self)
+                }
             }
+        } else {
+            if value != converter.coinValue {
+                self.converter?.coinValue = value
 
-            self.amount = value
-            self.detail = detailValue
+                guard let converter = self.converter else {
+                    return
+                }
+
+                self.altValueLabel?.text = "\(converter.fiat.symbol) \(converter.fiatValue.longFormatted?.removingWhitespaces ?? "")"
+
+                if converter.coinValue > 0 {
+                    delegate?.sendMoneyAmountComponentEditingChanged(self, amount: converter.amount)
+                } else {
+                    delegate?.sendMoneyAmountComponentValueEnteredIncorrectly(self)
+                }
+            }
         }
     }
 
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
 
-        let decimalSeparator = NumberFormatter.walletAmount.decimalSeparator!
-        let nondecimalCharacters = NSCharacterSet(charactersIn: "0123456789" + decimalSeparator).inverted
-
-        let existingTextHasDecimalSeparator = textField.text?.range(of: decimalSeparator)
-        let replacementTextHasDecimalSeparator = string.range(of: decimalSeparator)
-        let replacementTextHasNonDecimals = string.rangeOfCharacter(from: nondecimalCharacters)
+        let printingSeparator = "."
+        let decimalSeparator = NumberFormatter.amount.decimalSeparator ?? ""
+        let nondecimalCharacters = NSCharacterSet(charactersIn: "0123456789" + decimalSeparator + printingSeparator).inverted
 
         // Restricting write nondecimal characters
+
+        let replacementTextHasNonDecimals = string.rangeOfCharacter(from: nondecimalCharacters)
+
         if let _ = replacementTextHasNonDecimals {
             return false
         }
 
+        // Convert point to decimal separator
+
+        var replacementString = string
+        let separatorRanges = replacementString.ranges(of: printingSeparator)
+        separatorRanges.forEach {
+            replacementString.replaceSubrange($0, with: decimalSeparator)
+        }
+
         // Restricting write second decimal separator
+
+        let existingTextHasDecimalSeparator = textField.text?.range(of: decimalSeparator)
+        let replacementTextHasDecimalSeparator = replacementString.range(of: decimalSeparator)
+
         if let _ = existingTextHasDecimalSeparator, let _ = replacementTextHasDecimalSeparator {
             return false
         }
 
-        if textField.text == "", string == "0" {
-            textField.text?.append("0\(NumberFormatter.walletAmount.decimalSeparator!)")
+        if textField.text == "", string == printingSeparator {
+            textField.text?.append("0\(decimalSeparator)")
             return false
         }
 
-        if textField.text == "0\(NumberFormatter.walletAmount.decimalSeparator!)", string == "" {
+        if textField.text == "", string == "0" {
+            textField.text?.append("0\(decimalSeparator)")
+            return false
+        }
+
+        if textField.text == "0\(decimalSeparator)", string == "" {
             textField.text = ""
             return false
         }
 
+        // replace current content with stripped content
+        if let textRange = range.toTextRange(textInput: textField) {
+            textField.replace(textRange, withText: replacementString)
+            return false
+        }
+
         return true
+    }
+
+    // MARK: - ExchangeButton
+
+    @objc
+    private func exchangeButtonTouchUpInsideEvent(_ sender: UIButton) {
+        guard let converter = converter else {
+            return
+        }
+
+        isAmountInFiat.toggle()
+
+        if isAmountInFiat {
+            valueTextField?.text = converter.fiatValue.longFormatted?.removingWhitespaces ?? ""
+            altValueLabel?.text = "\(converter.coinValue.longFormatted?.removingWhitespaces ?? "") \(converter.coin.short.uppercased())"
+        } else {
+            valueTextField?.text = converter.coinValue.longFormatted?.removingWhitespaces ?? ""
+            altValueLabel?.text = "\(converter.fiat.symbol) \(converter.fiatValue.longFormatted?.removingWhitespaces ?? "")"
+        }
+    }
+
+    // MARK: - MarkButton
+
+    @objc
+    private func maxButtonTouchUpInsideEvent(_ sender: UIButton) {
+        if isAmountInFiat {
+
+            guard let maxValue = maxFiatValue else {
+                return
+            }
+
+            self.converter?.fiatValue = maxValue
+
+            valueTextField?.text = maxValue.longFormatted?.removingWhitespaces ?? ""
+
+            if let converter = converter {
+                altValueLabel?.text = "\(converter.coinValue.longFormatted?.removingWhitespaces ?? "") \(converter.coin.short.uppercased())"
+            }
+        } else {
+            guard let maxValue = maxCoinValue else {
+                return
+            }
+
+            self.converter?.coinValue = maxValue
+
+            valueTextField?.text = maxValue.longFormatted?.removingWhitespaces ?? ""
+
+            if let converter = converter {
+                altValueLabel?.text = "\(converter.fiat.symbol) \(converter.fiatValue.longFormatted?.removingWhitespaces ?? "")"
+            }
+        }
     }
 }
