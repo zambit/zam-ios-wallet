@@ -333,7 +333,7 @@ extension WalletsViewController {
             }
 
             strongSelf.prepareCellForAnimation(cell)
-            owner.performSendFromWallet(index: detailsIndex, wallets: detailsWallets, phone: strongSelf.phone, recipient: nil)
+            owner.performSendFromWallet(index: indexPath.item, wallets: strongSelf.wallets, phone: strongSelf.phone, recipient: nil)
         }
 
         cell.onDepositButtonTap = {
@@ -344,7 +344,7 @@ extension WalletsViewController {
             }
 
             strongSelf.prepareCellForAnimation(cell)
-            owner.performDepositFromWallet(index: detailsIndex, wallets: detailsWallets, phone: strongSelf.phone)
+            owner.performDepositFromWallet(index: indexPath.item, wallets: strongSelf.wallets, phone: strongSelf.phone)
         }
 
         if wallets[indexPath.item].coin == .zam {

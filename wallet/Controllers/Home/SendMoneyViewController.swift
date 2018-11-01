@@ -241,6 +241,11 @@ extension SendMoneyViewController: WalletsCollectionComponentDelegate {
 
         let wallet = wallets[currentIndex]
 
+        if wallet.coin == .zam {
+            let price = CoinPrice(coin: .zam, fiat: .usd, price: Decimal(0.02), marketCap: Decimal(0.0), volumeDay: Decimal(0.0), volume24h: Decimal(0.0), changePct24h: Decimal(0.0), change24h: Decimal(0.0), openDay: Decimal(0.0), highDay: Decimal(0.0), lowDay: Decimal(0.0), open24h: Decimal(0.0), high24h: Decimal(0.0), low24h: Decimal(0.0), supply: Decimal(0.0))
+            return completion(price)
+        }
+
         priceAPI?.getCoinDetailPrice(coin: wallet.coin).done {
             price in
             completion(price)
