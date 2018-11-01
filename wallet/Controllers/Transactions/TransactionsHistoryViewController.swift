@@ -255,19 +255,6 @@ class TransactionsHistoryViewController: FlowViewController, WalletNavigable, UI
             recipient = contact.name
         }
 
-//        if let phone = data.participant.phone {
-//            recipient = phone.formattedString
-//
-//            if let recipientContact = contactsData.first(where: {
-//                contact in
-//                contact.phoneNumbers.contains(phone)
-//            }) {
-//                recipient = recipientContact.name
-//            }
-//        } else {
-//            recipient = data.participant.address ?? ""
-//        }
-
         cell.configure(image: data.coin.image, status: data.status.formatted, coinShort: data.coin.short, recipient: recipient, amount: data.amount.original.formatted ?? "", fiatAmount: data.amount.description(property: .usd), direction: data.direction)
 
         return cell

@@ -8,11 +8,18 @@
 
 import Foundation
 
-struct WalletDetailsSwitcherViewData: WalletDetailsViewData {
+struct WalletDetailsSwitcherViewData: WalletDetailsViewData, Equatable {
+
+    enum ChoiceType {
+        case left
+        case right
+    }
 
     var type: WalletDetailsCellType {
         return .switcher
     }
 
-    
+    let choiceLeft: String
+    let choiceRight: String
+    let currentChoice: ChoiceType
 }

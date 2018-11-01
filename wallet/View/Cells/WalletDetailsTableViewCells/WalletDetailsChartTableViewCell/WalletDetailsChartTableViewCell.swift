@@ -24,6 +24,7 @@ class WalletDetailsChartTableViewCell: UITableViewCell, Configurable {
 
     override func prepareForReuse() {
         deselectFilterButtons()
+        chartView?.setupChart(points: [])
     }
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {

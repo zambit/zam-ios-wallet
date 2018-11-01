@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct WalletDetailsInformationViewData: WalletDetailsViewData {
+struct WalletDetailsInformationViewData: WalletDetailsViewData, Equatable {
 
     var type: WalletDetailsCellType {
         return .information

@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class TransactionCellComponent: CellComponent {
+class TransactionCellComponent: CellComponent, Configurable {
 
     @IBOutlet private var iconImageView: UIImageView!
     @IBOutlet private var titleLabel: UILabel!
@@ -40,6 +40,10 @@ class TransactionCellComponent: CellComponent {
         titleLabelAdditAttributes = [.foregroundColor: additColor, .font: font]
 
         self.view.backgroundColor = .white
+    }
+
+    func configure(with data: WalletDetailsTransactionViewData) {
+        self.configure(image: data.image, status: data.status, coinShort: data.coinShort, recipient: data.recipient, amount: data.amount, fiatAmount: data.fiatAmount, direction: data.direction)
     }
 
     func configure(image: UIImage, status: String, coinShort: String, recipient: String, amount: String, fiatAmount: String, direction: DirectionType) {
