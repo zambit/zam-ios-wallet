@@ -78,20 +78,26 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable {
     }()
 
     private lazy var placeholderFooterView: UIView = {
-        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 64.0))
+        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 250.0))
         footerView.backgroundColor = UIColor.clear
+
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 102, height: 102))
+        imageView.image = #imageLiteral(resourceName: "sadFace")
+        imageView.center = CGPoint(x: footerView.width / 2, y: 50 + imageView.height / 2)
+
+        footerView.addSubview(imageView)
 
         // set up label
         let label = UILabel()
-        label.font = UIFont.walletFont(ofSize: 16.0, weight: .regular)
-        label.textColor = .blueGrey
+        label.font = UIFont.walletFont(ofSize: 14.0, weight: .regular)
+        label.textColor = .silver
         label.textAlignment = .center
-        label.text = "Ooooops! No transactions for this wallet"
+        label.text = "Sorry, but you don’t have any history"
         label.sizeToFit()
 
         footerView.addSubview(label)
 
-        label.center = CGPoint(x: footerView.width / 2, y: footerView.height / 2)
+        label.center = CGPoint(x: footerView.width / 2, y: 50 + imageView.height + 25)
 
         return footerView
     }()
@@ -692,6 +698,7 @@ extension WalletDetailsViewController: WalletDetailsBriefDelegate {
 
         self.walletsChartsPoints = nil
         self.coinPrice = nil
+        self.paginator?.reset()
         self.updateTableView()
 
         loadTransactions()

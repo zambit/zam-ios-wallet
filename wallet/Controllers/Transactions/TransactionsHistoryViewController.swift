@@ -30,12 +30,6 @@ class TransactionsHistoryViewController: FlowViewController, WalletNavigable, UI
 
     private var filterData: TransactionsFilterProperties = TransactionsFilterProperties()
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
-        //navigationController?.isNavigationBarHidden = true
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -311,12 +305,14 @@ class TransactionsHistoryViewController: FlowViewController, WalletNavigable, UI
 
         tableView.viewWithTag(199)?.removeFromSuperview()
 
-        let rect = CGRect(x: 0.0, y: 0.0, width: 250, height: 250)
+        let rect = CGRect(x: 0.0, y: 0.0, width: tableView.bounds.width, height: 200)
 
         let view = IllustrationalPlaceholder(frame: rect)
-        view.image = #imageLiteral(resourceName: "sadEmoji")
+        view.image = #imageLiteral(resourceName: "sadFace")
         view.tag = 199
         view.alpha = 0.0
+        view.text = "Sorry, but you don’t have any history"
+        view.textColor = .silver
 
         tableView.addSubview(view)
 
