@@ -130,7 +130,6 @@ extension QRCodeScannerViewController: AVCaptureMetadataOutputObjectsDelegate {
             qrCodeFrameView?.frame = barCodeObject!.bounds
 
             if let result = metadataObj.stringValue {
-                print(result)
                 delegate?.qrCodeScannerViewController(self, didFindCode: result)
                 InteractionsHelper.vibrateSuccess()
                 onClose?(self)
