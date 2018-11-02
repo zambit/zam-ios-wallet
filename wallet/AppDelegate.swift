@@ -26,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
 
         // Enable debug mode for crashlytics
-        Crashlytics.sharedInstance().debugMode = true
+        Crashlytics.sharedInstance().debugMode = false
 
         userDefaultsManager = UserDefaultsManager(keychainConfiguration: WalletKeychainConfiguration())
 
