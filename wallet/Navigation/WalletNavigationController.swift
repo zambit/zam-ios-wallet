@@ -9,6 +9,9 @@
 import UIKit
 import Hero
 
+/**
+ Custom navigation controller, that have implemented custom extension behavior.
+ */
 class WalletNavigationController: UINavigationController {
 
     var custom: BehaviorExtension<WalletNavigationController> {
@@ -26,6 +29,9 @@ class WalletNavigationController: UINavigationController {
     }
 }
 
+/**
+ Extension determining custom behavior of `WalletNavigationController`
+ */
 extension BehaviorExtension where Base: WalletNavigationController {
 
     enum WalletNavigationControllerAnimationDirection {
@@ -54,15 +60,26 @@ extension BehaviorExtension where Base: WalletNavigationController {
         base.hero.navigationAnimationType = .selectBy(presenting: .slide(direction: .left), dismissing: .slide(direction: .right))
     }
 
+    /**
+     Push given view controller to navigation hierarchy.
+
+     - parameter viewController: View controller for pushing.
+     - parameter animated: Animation flag.
+     */
     func push(viewController: ScreenWalletNavigable, animated: Bool = true) {
         base.pushViewController(viewController, animated: animated)
-        hideBackButton(for: viewController)
+        removeBackButton(in: viewController)
         
         if base.viewControllers.count > 1 {
-            addBackButton(for: viewController)
+            addBackButton(in: viewController)
         }
     }
 
+    /**
+     Push given view controller to navigation hierarchy with non-default fade animation.
+
+     - parameter viewController: View controller for pushing.
+     */
     func pushAdvancedly(viewController: ScreenWalletNavigable) {
         base.hero.isEnabled = true
         base.hero.navigationAnimationType = .selectBy(presenting: .fade, dismissing: .fade)
@@ -70,10 +87,18 @@ extension BehaviorExtension where Base: WalletNavigationController {
         push(viewController: viewController)
     }
 
+    /**
+     Push given view controller to navigation hierarchy clearing current navigation stack.
+
+     - parameter viewController: View controller for pushing.
+     - parameter animated: Animation flag.
+     - parameter direction: Direction of animation (imitate moving forward/back)
+     */
     func pushFromRoot(viewController: ScreenWalletNavigable, animated: Bool = true, direction: WalletNavigationControllerAnimationDirection) {
+
         guard base.viewControllers.count > 0 else {
             push(viewController: viewController, animated: animated)
-            hideBackButton(for: viewController)
+            removeBackButton(in: viewController)
 
             (viewController as? WalletTabBarController)?.navigationController?.setNavigationBarHidden(true, animated: false)
             return
@@ -83,7 +108,7 @@ extension BehaviorExtension where Base: WalletNavigationController {
         case .forward:
 
             base.pushViewController(viewController, animated: animated)
-            hideBackButton(for: viewController)
+            removeBackButton(in: viewController)
 
             let newHierarchy = [viewController]
             base.setViewControllers(newHierarchy, animated: false)
@@ -98,7 +123,7 @@ extension BehaviorExtension where Base: WalletNavigationController {
             base.setViewControllers(newHierarchy, animated: false)
             base.popViewController(animated: animated)
 
-            hideBackButton(for: viewController)
+            removeBackButton(in: viewController)
         }
 
         if let tabBarController = viewController as? WalletTabBarController {
@@ -108,6 +133,11 @@ extension BehaviorExtension where Base: WalletNavigationController {
         }
     }
 
+    /**
+     Pop last view controller from navigation stack.
+
+     - parameter animated: Animation flag.
+     */
     func popViewController(animated: Bool) {
         let pop: () -> Void = {
             self.base.popViewController(animated: animated)
@@ -120,6 +150,12 @@ extension BehaviorExtension where Base: WalletNavigationController {
         }
     }
 
+    /**
+     Pop last view controller from navigation stack, returning new last view controller.
+
+     - parameter animated: Animation flag.
+     - parameter nextViewController: New last view controller in navigation hierachy.
+     */
     func popBack(animated: Bool = true, nextViewController: (ScreenWalletNavigable) -> Void) {
         base.popViewController(animated: animated)
 
@@ -130,10 +166,16 @@ extension BehaviorExtension where Base: WalletNavigationController {
         return nextViewController(next)
     }
 
-    func present(viewController: UIViewController, animate: Bool) {
+    /**
+     Present given view controller outside current navigation hierachy with navigation animation.
+
+     - parameter viewController: View controller for presenting.
+     - parameter animated: Animation flag.
+     */
+    func present(viewController: UIViewController, animated: Bool) {
         viewController.hero.isEnabled = true
 
-        if animate {
+        if animated {
             viewController.hero.modalAnimationType = .selectBy(
                 presenting: .slide(direction: .left),
                 dismissing: .slide(direction: .right)
@@ -146,11 +188,17 @@ extension BehaviorExtension where Base: WalletNavigationController {
         base.present(viewController, animated: true, completion: nil)
     }
 
-    func presentNavigable(viewController: ScreenWalletNavigable, animate: Bool) {
+    /**
+     Present new navigation hierachy, with given view controller as root, outside current navigation hierachy.
+
+     - parameter viewController: Root view controller for new navigation hierarchy.
+     - parameter animated: Animation flag.
+     */
+    func presentNavigable(viewController: ScreenWalletNavigable, animated: Bool) {
         let childNavigationController = WalletNavigationController(rootViewController: viewController)
         childNavigationController.hero.isEnabled = true
 
-        if animate {
+        if animated {
             childNavigationController.hero.modalAnimationType = .selectBy(
                 presenting: .slide(direction: .left),
                 dismissing: .slide(direction: .right)
@@ -162,21 +210,39 @@ extension BehaviorExtension where Base: WalletNavigationController {
         childNavigationController.modalPresentationStyle = .overFullScreen
         base.present(childNavigationController, animated: true, completion: nil)
 
-        hideBackButton(for: viewController)
+        removeBackButton(in: viewController)
     }
 
+    /**
+     Present new navigation hierachy, with given view controller as root, outside current navigation hierachy.
+
+     - parameter viewController: Root view controller for new navigation hierarchy.
+     - parameter animated: Animation flag.
+     */
     func dismissPresentedViewController() {
         base.presentedViewController?.hero.dismissViewController()
     }
 
-    func hideBackButton(for viewController: UIViewController) {
+    /**
+     Remove back button in given view controller.
+
+     - parameter viewController: View controller for removing back button.
+     */
+    func removeBackButton(in viewController: UIViewController) {
         viewController.navigationItem.hidesBackButton = true
 
         viewController.navigationItem.leftBarButtonItem = nil
     }
 
-    func addBackButton(for viewController: ScreenWalletNavigable, target: Any?, action: Selector) {
-        hideBackButton(for: viewController)
+    /**
+     Add custom style back button to given view controller with given action.
+
+     - parameter viewController: View controller for removing back button.
+     - parameter target: Object holding action selector.
+     - parameter action: Action selector for button.
+     */
+    func addBackButton(in viewController: ScreenWalletNavigable, target: Any?, action: Selector) {
+        removeBackButton(in: viewController)
 
         let backItem = UIBarButtonItem(
             image: #imageLiteral(resourceName: "icArrowLeft"),
@@ -188,8 +254,13 @@ extension BehaviorExtension where Base: WalletNavigationController {
         viewController.navigationItem.leftBarButtonItem = backItem
     }
 
-    func addBackButton(for viewController: ScreenWalletNavigable) {
-        hideBackButton(for: viewController)
+    /**
+     Add custom style back button to given view controller with default back action.
+
+     - parameter viewController: View controller for removing back button.
+     */
+    func addBackButton(in viewController: ScreenWalletNavigable) {
+        removeBackButton(in: viewController)
 
         let backItem = UIBarButtonItem(
             image: #imageLiteral(resourceName: "icArrowLeft"),
@@ -201,7 +272,15 @@ extension BehaviorExtension where Base: WalletNavigationController {
         viewController.navigationItem.leftBarButtonItem = backItem
     }
 
-    func addRightBarItemButton(for viewController: ScreenWalletNavigable, title: String, target: Any?, action: Selector) {
+    /**
+     Add custom style right bar button with given parameters.
+
+     - parameter viewController: View controller for removing back button.
+     - parameter title: Button title.
+     - parameter target: Object holding action selector.
+     - parameter action: Action selector for button.
+     */
+    func addRightDetailButton(in viewController: ScreenWalletNavigable, title: String, target: Any?, action: Selector) {
         let exitButton = UIBarButtonItem(title: title,
                                          style: .plain,
                                          target: target,
@@ -210,5 +289,4 @@ extension BehaviorExtension where Base: WalletNavigationController {
         exitButton.tintColor = .skyBlue
         viewController.navigationItem.rightBarButtonItem = exitButton
     }
-
 }

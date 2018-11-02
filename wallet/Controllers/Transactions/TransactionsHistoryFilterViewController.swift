@@ -6,10 +6,12 @@
 //  Copyright © 2018 zamzam. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
-class TransactionsHistoryFilterViewController: FlowViewController, WalletNavigable, UITableViewDelegate, UITableViewDataSource {
+/**
+ Transactions history filter screen controlling entering history filters.
+ */
+class TransactionsHistoryFilterViewController: FlowViewController, WalletNavigable {
 
     var onDone: ((TransactionsFilterProperties) -> Void)?
 
@@ -22,7 +24,7 @@ class TransactionsHistoryFilterViewController: FlowViewController, WalletNavigab
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        walletNavigationController?.custom.addRightBarItemButton(for: self, title: "DONE", target: self, action: #selector(doneButtonTouchEvent(_:)))
+        walletNavigationController?.custom.addRightDetailButton(in: self, title: "DONE", target: self, action: #selector(doneButtonTouchEvent(_:)))
     }
 
     override func viewDidLoad() {
@@ -43,7 +45,6 @@ class TransactionsHistoryFilterViewController: FlowViewController, WalletNavigab
     private func setupComponents(filterData: TransactionsFilterProperties) {
 
         // Transaction date component
-
         let datesComponent = TransactionsGroupingFilterComponent(frame: .zero)
         datesComponent.setTitle("Transaction date")
 
@@ -65,11 +66,10 @@ class TransactionsHistoryFilterViewController: FlowViewController, WalletNavigab
 
             self?.filterData?.group = selected
         }
-
         filterComponents.append(datesComponent)
 
-        // Select dates component
 
+        // Select dates component
         let dateIntervalComponent = TransactionsDateIntervalFilterComponent(frame: .zero)
         dateIntervalComponent.setTitle("Select dates")
         dateIntervalComponent.insets = UIEdgeInsets.init(top: 0.0, left: 0.0, bottom: 10.0, right: 0.0)
@@ -97,11 +97,10 @@ class TransactionsHistoryFilterViewController: FlowViewController, WalletNavigab
                 self?.filterData?.untilTime = String(Int(until.unixTimestamp))
             }
         }
-
         filterComponents.append(dateIntervalComponent)
 
-        // Operation component
 
+        // Operation component
         let directionsComponent = TransactionsDirectionFilterComponent(frame: .zero)
         directionsComponent.setTitle("Operation")
 
@@ -126,11 +125,10 @@ class TransactionsHistoryFilterViewController: FlowViewController, WalletNavigab
 
             self?.filterData?.direction = selected
         }
-
         filterComponents.append(directionsComponent)
 
-        // Coins component
 
+        // Coins component
         let coinsComponent = TransactionsCoinFilterComponent(frame: .zero)
         coinsComponent.setTitle("Coins")
 
@@ -150,7 +148,6 @@ class TransactionsHistoryFilterViewController: FlowViewController, WalletNavigab
 
             self?.filterData?.coin = selectedCoins.first
         }
-
         filterComponents.append(coinsComponent)
     }
 
@@ -160,6 +157,21 @@ class TransactionsHistoryFilterViewController: FlowViewController, WalletNavigab
         setupComponents(filterData: filterData)
     }
 
+    @objc
+    private func doneButtonTouchEvent(_ sender: Any) {
+        if let filter = filterData {
+            onDone?(filter)
+        }
+    }
+}
+
+// MARK: - Extensions
+
+/**
+ Extension implements UITableViewDataSource protocol.
+ */
+extension TransactionsHistoryFilterViewController: UITableViewDataSource {
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return filterComponents.count
     }
@@ -167,15 +179,14 @@ class TransactionsHistoryFilterViewController: FlowViewController, WalletNavigab
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         return filterComponents[indexPath.item]
     }
+}
+
+/**
+ Extension implements UITableViewDelegate protocol.
+ */
+extension TransactionsHistoryFilterViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return filterComponents[indexPath.item].intrinsicContentSize.height
-    }
-
-    @objc
-    private func doneButtonTouchEvent(_ sender: Any) {
-        if let filter = filterData {
-            onDone?(filter)
-        }
     }
 }

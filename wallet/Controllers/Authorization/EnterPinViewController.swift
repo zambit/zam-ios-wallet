@@ -39,7 +39,7 @@ class EnterPinViewController: FlowViewController, WalletNavigable, DecimalKeyboa
         dotsFieldComponent?.unfillAll()
         dotsFieldComponent?.interactionsEnabled = true
 
-        walletNavigationController?.custom.addRightBarItemButton(for: self, title: "EXIT", target: self, action: #selector(exitButtonTouchEvent(_:)))
+        walletNavigationController?.custom.addRightDetailButton(in: self, title: "EXIT", target: self, action: #selector(exitButtonTouchEvent(_:)))
     }
 
     override func viewDidAppear(_ animated: Bool) {

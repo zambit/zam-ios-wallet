@@ -9,6 +9,9 @@
 import UIKit
 import Crashlytics
 
+/**
+ Wallet details screen.
+ */
 class WalletDetailsViewController: FlowViewController, WalletNavigable {
 
     var onSendFromWallet: ((_ index: Int, _ wallets: [Wallet], _ phone: String) -> Void)?
@@ -42,18 +45,20 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable {
     private var phoneNumberFormatter: PhoneNumberFormatter?
     private var filterData: TransactionsFilterProperties = TransactionsFilterProperties()
 
+    /**
+     Data source of the table view, containing all data for determine sections.
+     */
     private var viewData: [(WalletDetailsHeaderViewData?, [WalletDetailsViewData])] = []
-
-    private let semaphore = DispatchSemaphore(value: 1)
 
 
     // MARK: - FooterViews
 
+    // Pagination loading footer view
     private lazy var loadingFooterView: UIView = {
         let footerView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 44.0))
         footerView.backgroundColor = UIColor.clear
 
-        // set up activity indicator
+        // Set up activity indicator
         let activityIndicatorView = UIActivityIndicatorView(style: .gray)
         activityIndicatorView.center = CGPoint(x: self.view.frame.width/2, y:22)
         activityIndicatorView.hidesWhenStopped = true
@@ -64,11 +69,12 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable {
         return footerView
     }()
 
+    // Initial loading footer view
     private lazy var refreshingFooterView: UIView = {
         let footerView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 44.0))
         footerView.backgroundColor = UIColor.clear
 
-        // set up activity indicator
+        // Set up activity indicator
         let activityIndicatorFrame = CGRect(x: footerView.width / 2 - 10.0, y: footerView.height / 2 - 10.0, width: 20.0, height: 20.0)
         let activityIndicator = SpinningAnimationLayer(frame: activityIndicatorFrame, color: .skyBlue)
         activityIndicator.animate()
@@ -78,6 +84,7 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable {
         return footerView
     }()
 
+    // Empty data footer view
     private lazy var placeholderFooterView: UIView = {
         let footerView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 250.0))
         footerView.backgroundColor = UIColor.clear
@@ -88,7 +95,7 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable {
 
         footerView.addSubview(imageView)
 
-        // set up label
+        // Set up label
         let label = UILabel()
         label.font = UIFont.walletFont(ofSize: 14.0, weight: .regular)
         label.textColor = .silver
@@ -160,6 +167,7 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable {
         tableView.register(TransactionsGroupHeaderComponent.self,
                            forHeaderFooterViewReuseIdentifier: "TransactionsGroupHeaderComponent")
 
+        // Setup paginator
         self.paginator = Paginator<TransactionsGroup>(pageSize: 20, fetchHandler: {
             [weak self]
             (paginator: Paginator, pageSize: Int, nextPage: String?) in
@@ -180,6 +188,7 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable {
                 [weak self]
                 page in
 
+                // Check if current walletId is not what response for.
                 guard let strongSelf = self, strongSelf.filterData.walletId == filterData.walletId else {
                     return
                 }
@@ -193,17 +202,17 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable {
 
         }, resultsHandler: {
             [weak self]
-            (paginator, old, new) in
+            (paginator, results, new) in
 
             // Check for intersections
-            if let last = old.last, let first = new.first, last.dateInterval == first.dateInterval {
+            if let last = results.last, let first = new.first, last.dateInterval == first.dateInterval {
 
                 let sumAmount = try! last.amount.sum(with: first.amount)
                 let transactions = last.transactions + first.transactions
 
                 let concatiatedElement = TransactionsGroup(dateInterval: last.dateInterval, amount: sumAmount, transactions: transactions)
 
-                let concatiatedResults = Array(old[0..<old.count - 1]) + [concatiatedElement] + Array(new[1..<new.count])
+                let concatiatedResults = Array(results[0..<results.count - 1]) + [concatiatedElement] + Array(new[1..<new.count])
 
                 // Update results
                 paginator.results = concatiatedResults
@@ -214,21 +223,21 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable {
             self?.updateTableViewFooter()
         }, refreshHandler: {
             [weak self]
-            (paginator, results) in
+            _, _ in
 
             self?.updateTableView()
 
             self?.updateTableViewFooter()
         }, resetHandler: {
             [weak self]
-            paginator in
+            _ in
 
             self?.updateTableView()
 
             self?.updateTableViewFooter()
         }, failureHandler: {
             [weak self]
-            paginator in
+            _ in
 
             self?.updateTableView()
 
@@ -315,7 +324,7 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable {
         let wallet = wallets[currentIndex]
 
         priceAPI?.cancelAllTasks()
-        priceAPI?.getCoinDetailPrice(coin: wallet.coin).done {
+        priceAPI?.getCoinDetailPrice(coin: wallet.coin, convertingTo: .usd).done {
             coinData in
             completion(coinData)
         }.catch {
@@ -385,6 +394,8 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable {
             }
         }
     }
+
+    // MARK: - Update
 
     /**
      Construct new viewData from current data properties.
@@ -486,6 +497,9 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable {
         return viewData
     }
 
+    /**
+     Update current viewData according current data properties and reload table view.
+     */
     private func updateTableView() {
         DispatchQueue.main.async {
             self.viewData = self.updatedViewData
@@ -493,6 +507,9 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable {
         }
     }
 
+    /**
+     Update table view footer according current paginator and switcher status.
+     */
     private func updateTableViewFooter() {
         guard currentSwitcher == .left, let paginator = paginator else {
             self.tableView.tableFooterView = UIView()
@@ -537,6 +554,9 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable {
 
 // MARK: - Extensions
 
+/**
+ Extension implements UITableViewDataSource protocol.
+ */
 extension WalletDetailsViewController: UITableViewDataSource {
 
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -661,6 +681,9 @@ extension WalletDetailsViewController: UITableViewDataSource {
     }
 }
 
+/**
+ Extension implements UITableViewDelegate protocol.
+ */
 extension WalletDetailsViewController: UITableViewDelegate {
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -692,6 +715,9 @@ extension WalletDetailsViewController: UITableViewDelegate {
     }
 }
 
+/**
+ Extension implements WalletDetailsBriefDelegate protocol. Provide callbacks from brief cell.
+ */
 extension WalletDetailsViewController: WalletDetailsBriefDelegate {
 
     func walletDetailsBriefSendButtonTapped(_ walletDetailsBrief: WalletDetailsBriefTableViewCell, walletIndex: Int) {
@@ -725,6 +751,9 @@ extension WalletDetailsViewController: WalletDetailsBriefDelegate {
     }
 }
 
+/**
+ Extension implements WalletDetailsChartDelegate protocol. Provide callbacks from chart cell.
+ */
 extension WalletDetailsViewController: WalletDetailsChartDelegate {
 
     func walletDetailsChartIntervalSelected(_ walletDetailsChart: WalletDetailsChartTableViewCell, interval: CoinPriceChartIntervalType) {
@@ -743,6 +772,9 @@ extension WalletDetailsViewController: WalletDetailsChartDelegate {
     }
 }
 
+/**
+ Extension implements WalletDetailsSwitcherDelegate protocol. Provide callbacks from switcher cell.
+ */
 extension WalletDetailsViewController: WalletDetailsSwitcherDelegate {
 
     func walletDetailsSwitcher(_ walletDetailsSwitcher: WalletDetailsSwitcherTableViewCell, buttonSelected: WalletDetailsSwitcherViewData.ChoiceType) {
@@ -757,8 +789,14 @@ extension WalletDetailsViewController: WalletDetailsSwitcherDelegate {
     }
 }
 
+/**
+ Extension implements SendMoneyViewControllerDelegate protocol. It provides callbacks from SendMoneyViewController screen.
+ */
 extension WalletDetailsViewController: SendMoneyViewControllerDelegate {
 
+    /**
+     Notifies that sending transaction was done and balances needs to be reloaded.
+     */
     func sendMoneyViewControllerSendingProceedWithSuccess(_ sendMoneyViewController: SendMoneyViewController) {
         sendDelegate?.sendMoneyViewControllerSendingProceedWithSuccess(sendMoneyViewController)
     }
@@ -769,8 +807,14 @@ extension WalletDetailsViewController: SendMoneyViewControllerDelegate {
     }
 }
 
+/**
+ Extension implements AdvancedTransitionDelegate protocol. It provides transitions callbacks.
+ */
 extension WalletDetailsViewController: AdvancedTransitionDelegate {
 
+    /**
+     Ask viewController for preparing views to upcoming transition.
+     */
     func advancedTransitionWillBegin(from viewController: FlowViewController, params: [String : Any]) {
         guard let index = params["walletIndex"] as? Int else {
             return

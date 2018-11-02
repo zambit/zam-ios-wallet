@@ -6,9 +6,11 @@
 //  Copyright © 2018 zamzam. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
+/**
+ Deposit money screen. Provides data of your wallets to receive money.
+ */
 class DepositMoneyViewController: FlowViewController, WalletNavigable{
 
     weak var advancedTransitionDelegate: AdvancedTransitionDelegate?
@@ -91,7 +93,7 @@ class DepositMoneyViewController: FlowViewController, WalletNavigable{
         walletsCollectionComponent?.delegate = self
         segmentedControlComponent?.delegate = self
 
-        walletNavigationController?.custom.addBackButton(for: self, target: self, action: #selector(backButtonTouchUpInsideEvent(_:)))
+        walletNavigationController?.custom.addBackButton(in: self, target: self, action: #selector(backButtonTouchUpInsideEvent(_:)))
     }
 
     func prepare(wallets: [Wallet], currentIndex: Int, phone: String) {
@@ -118,8 +120,14 @@ class DepositMoneyViewController: FlowViewController, WalletNavigable{
 
 // MARK: - Extensions
 
+/**
+ Extension implements `SegmentedControlComponentDelegate` protocol. Provides callbacks from SegmentedControl component.
+ */
 extension DepositMoneyViewController: SegmentedControlComponentDelegate  {
 
+    /**
+     Notifies about changing current segment.
+     */
     func segmentedControlComponent(_ segmentedControlComponent: SegmentedControlComponent, currentIndexChangedTo index: Int) {
         switch index {
         case 0:
@@ -136,8 +144,14 @@ extension DepositMoneyViewController: SegmentedControlComponentDelegate  {
     }
 }
 
+/**
+ Extension implements `WalletsCollectionComponentDelegate` protocol. Provides callbacks from top wallets horizontal collection - WalletsCollection component.
+ */
 extension DepositMoneyViewController: WalletsCollectionComponentDelegate {
 
+    /**
+     Notifies about changing current wallet.
+     */
     func walletsCollectionComponentCurrentIndexChanged(_ walletsCollectionComponent: WalletsCollectionComponent, to index: Int) {
         currentIndex = index
 

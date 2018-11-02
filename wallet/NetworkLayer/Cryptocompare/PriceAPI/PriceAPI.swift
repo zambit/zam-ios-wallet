@@ -17,11 +17,19 @@ struct PriceAPI: NetworkService {
         self.provider = provider
     }
 
-    func getCoinDetailPrice(coin: CoinType) -> Promise<CoinPrice> {
+    /**
+     Get coin current market details like price, market cap, ...
+
+     - parameter coin: Coin for getting market details.
+     - parameter fiat: Fiat all details values are converted to.
+
+     - returns: Coin price, volumes, changes, supply, market cap.
+     */
+    func getCoinDetailPrice(coin: CoinType, convertingTo fiat: FiatType) -> Promise<CoinPrice> {
         return Promise {
             seal in
 
-            let request = PriceRequest.getDetailPrice(coin: coin.short, toCoin: FiatType.usd.short)
+            let request = PriceRequest.getDetailPrice(coin: coin.short, toCoin: fiat.short)
             provider.execute(request).done {
                 response in
 
@@ -63,24 +71,6 @@ struct PriceAPI: NetworkService {
             }
         }
     }
-
-    func convertCoinAmount(coin: CoinType, amount: Decimal, to fiat: FiatType) -> Promise<Decimal> {
-        return Promise {
-            seal in
-
-            cancelAllTasks()
-            getCoinDetailPrice(coin: coin).done {
-                price in
-
-                let fiatAmount = price.price * amount
-                seal.fulfill(fiatAmount)
-            }.catch {
-                error in
-                seal.reject(error)
-            }
-        }
-    }
-
 
     func cancelAllTasks() {
         provider.cancelAllTasks()

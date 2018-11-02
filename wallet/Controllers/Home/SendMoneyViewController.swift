@@ -6,10 +6,12 @@
 //  Copyright © 2018 zamzam. All rights reserved.
 //
 
-import Foundation
 import UIKit
 import Crashlytics
 
+/**
+ Protocol providing sending money completion callbacks.
+ */
 protocol SendMoneyViewControllerDelegate: class {
 
     func sendMoneyViewControllerSendingProceedWithSuccess(_ sendMoneyViewController: SendMoneyViewController)
@@ -24,6 +26,9 @@ extension SendMoneyViewControllerDelegate {
     func sendMoneyViewControllerSendingProceedWithSuccess(_ sendMoneyViewController: SendMoneyViewController, updated data: Wallet, index: Int) {}
 }
 
+/**
+ Send money screen. Determines sending money details before send.
+ */
 class SendMoneyViewController: AvoidingViewController {
 
     weak var delegate: SendMoneyViewControllerDelegate?
@@ -111,7 +116,7 @@ class SendMoneyViewController: AvoidingViewController {
 
         walletsCollectionComponent?.delegate = self
 
-        walletNavigationController?.custom.addBackButton(for: self, target: self, action: #selector(backButtonTouchUpInsideEvent(_:)))
+        walletNavigationController?.custom.addBackButton(in: self, target: self, action: #selector(backButtonTouchUpInsideEvent(_:)))
     }
 
     func prepare(wallets: [Wallet], currentIndex: Int, recipient: FormattedContact? = nil, phone: String) {
@@ -154,14 +159,23 @@ class SendMoneyViewController: AvoidingViewController {
 
 // MARK: - Extensions
 
+/**
+ Extension implements `QRCodeScannerViewControllerDelegate` protocol. Provides callbacks from QRCodeScanner screen.
+ */
 extension SendMoneyViewController: QRCodeScannerViewControllerDelegate {
 
+    /**
+     Notifies about finding qr code and scanning data from it.
+     */
     func qrCodeScannerViewController(_ qrCodeScannerViewController: QRCodeScannerViewController, didFindCode code: String) {
         if let index = currentIndex, wallets.count > index {
             sendMoneyComponent?.prepare(address: code, coinType: wallets[index].coin, fiatType: .standard, walletId: wallets[index].id, walletCoinValue: wallets[index].balance.original, walletFiatValue: wallets[index].balance.usd)
         }
     }
 
+    /**
+     Notifies about failing finding qr code.
+     */
     func qrCodeScannerViewControllerDidntFindCode(_ qrCodeScannerViewController: QRCodeScannerViewController) {
         if let index = currentIndex, wallets.count > index {
             sendMoneyComponent?.prepare(address: "", coinType: wallets[index].coin, fiatType: .standard, walletId: wallets[index].id, walletCoinValue: wallets[index].balance.original, walletFiatValue: wallets[index].balance.usd)
@@ -169,8 +183,14 @@ extension SendMoneyViewController: QRCodeScannerViewControllerDelegate {
     }
 }
 
+/**
+ Extension implements `TransactionDetailViewControllerDelegate` protocol. Provides callbacks from TransactionDetails screen.
+ */
 extension SendMoneyViewController: TransactionDetailViewControllerDelegate {
 
+    /**
+     Notifies that sending transaction was done and balances needs to be reloaded.
+     */
     func transactionDetailViewControllerSendingProceedWithSuccess(_ transactionDetailViewController: TransactionDetailViewController) {
         updateDataForCurrentWallet()
         delegate?.sendMoneyViewControllerSendingProceedWithSuccess(self)
@@ -209,8 +229,14 @@ extension SendMoneyViewController: TransactionDetailViewControllerDelegate {
     }
 }
 
+/**
+ Extension implements `SendMoneyComponentDelegate` protocol. Provides callbacks from SendMoney component that controls entering amount, participant and tapping send button.
+ */
 extension SendMoneyViewController: SendMoneyComponentDelegate {
 
+    /**
+     Notifies that send money button was tapped for given sending output data.
+     */
     func sendMoneyComponentRequestSending(_ sendMoneyComponent: SendMoneyComponent, output: SendingData) {
         dismissKeyboard {
             [weak self] in
@@ -220,8 +246,14 @@ extension SendMoneyViewController: SendMoneyComponentDelegate {
     }
 }
 
+/**
+ Extension implements `WalletsCollectionComponentDelegate` protocol. Provides callbacks from top wallets horizontal collection - WalletsCollection component.
+ */
 extension SendMoneyViewController: WalletsCollectionComponentDelegate {
 
+    /**
+     Notifies about changing current wallet.
+     */
     func walletsCollectionComponentCurrentIndexChanged(_ walletsCollectionComponent: WalletsCollectionComponent, to index: Int) {
         self.currentIndex = index
         self.sendMoneyComponent?.prepare(coinType: wallets[index].coin, fiatType: .standard, walletId: wallets[index].id, walletCoinValue: wallets[index].balance.original, walletFiatValue: wallets[index].balance.usd, coinPrice: nil)
@@ -246,7 +278,7 @@ extension SendMoneyViewController: WalletsCollectionComponentDelegate {
             return completion(price)
         }
 
-        priceAPI?.getCoinDetailPrice(coin: wallet.coin).done {
+        priceAPI?.getCoinDetailPrice(coin: wallet.coin, convertingTo: .usd).done {
             price in
             completion(price)
         }.catch {
