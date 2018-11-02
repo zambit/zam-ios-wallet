@@ -6,8 +6,8 @@
 //  Copyright © 2018 zamzam. All rights reserved.
 //
 
-import Foundation
 import UIKit
+import Crashlytics
 
 class KYCPersonalInfoViewController: FlowViewController, WalletNavigable, UITableViewDelegate, UITableViewDataSource {
 
@@ -392,6 +392,8 @@ class KYCPersonalInfoViewController: FlowViewController, WalletNavigable, UITabl
         }.catch {
             [weak self]
             error in
+
+            Crashlytics.sharedInstance().recordError(error)
 
             self?.dismissKeyboard {
                 InteractionsHelper.vibrateError()

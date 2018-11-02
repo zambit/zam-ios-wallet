@@ -6,8 +6,8 @@
 //  Copyright © 2018 zamzam. All rights reserved.
 //
 
-import Foundation
 import UIKit
+import Crashlytics
 
 protocol TransactionDetailViewControllerDelegate: class {
 
@@ -261,6 +261,8 @@ class TransactionDetailViewController: FlowViewController, WalletNavigable {
             }.catch {
                 [weak self]
                 error in
+
+                Crashlytics.sharedInstance().recordError(error)
 
                 performWithDelay {
                     self?.sendButton?.custom.setFailure()
