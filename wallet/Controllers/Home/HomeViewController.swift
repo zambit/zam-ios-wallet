@@ -6,8 +6,8 @@
 //  Copyright © 2018 zamzam. All rights reserved.
 //
 
-import Foundation
 import UIKit
+import Crashlytics
 
 /**
  Protocol that provides interface to call some methods of home screen.
@@ -344,6 +344,8 @@ class HomeViewController: FloatingViewController {
         }.catch {
             [weak self]
             error in
+
+            Crashlytics.sharedInstance().recordError(error)
 
             self?.sumLabel?.endLoading()
         }

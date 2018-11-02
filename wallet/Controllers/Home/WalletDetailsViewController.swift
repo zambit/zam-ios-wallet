@@ -6,7 +6,6 @@
 //  Copyright © 2018 zamzam. All rights reserved.
 //
 
-import Foundation
 import UIKit
 import Crashlytics
 
@@ -188,7 +187,7 @@ class WalletDetailsViewController: FlowViewController, WalletNavigable {
                 paginator.receivedResults(results: page.transactions, next: page.next ?? "")
             }.catch {
                 error in
-
+                Crashlytics.sharedInstance().recordError(error)
                 paginator.failed()
             }
 

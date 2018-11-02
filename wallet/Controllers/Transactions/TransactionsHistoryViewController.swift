@@ -6,8 +6,8 @@
 //  Copyright © 2018 zamzam. All rights reserved.
 //
 
-import Foundation
 import UIKit
+import Crashlytics
 
 class TransactionsHistoryViewController: FlowViewController, WalletNavigable, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
 
@@ -79,6 +79,8 @@ class TransactionsHistoryViewController: FlowViewController, WalletNavigable, UI
                 paginator.receivedResults(results: page.transactions, next: page.next ?? "")
             }.catch {
                 error in
+
+                Crashlytics.sharedInstance().recordError(error)
 
                 paginator.failed()
             }
