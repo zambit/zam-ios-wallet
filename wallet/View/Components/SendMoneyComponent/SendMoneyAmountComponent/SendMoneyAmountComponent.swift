@@ -199,7 +199,7 @@ class SendMoneyAmountComponent: Component, SizePresetable, UITextFieldDelegate {
         if isAmountInFiat {
             altValueLabel?.text = "\(converter.coinValue.longFormatted?.removingWhitespaces ?? "") \(converter.coin.short.uppercased())"
         } else {
-            altValueLabel?.text = "\(converter.fiat.symbol) \(converter.fiatValue.longFormatted?.removingWhitespaces ?? "")"
+            altValueLabel?.text = "\(converter.fiat.symbol) \(converter.fiatValue.shortFormatted?.removingWhitespaces ?? "")"
         }
     }
 
@@ -217,7 +217,7 @@ class SendMoneyAmountComponent: Component, SizePresetable, UITextFieldDelegate {
         if isAmountInFiat {
             altValueLabel?.text = "\(converter.coinValue.longFormatted?.removingWhitespaces ?? "") \(converter.coin.short.uppercased())"
         } else {
-            altValueLabel?.text = "\(converter.fiat.symbol) \(converter.fiatValue.longFormatted?.removingWhitespaces ?? "")"
+            altValueLabel?.text = "\(converter.fiat.symbol) \(converter.fiatValue.shortFormatted?.removingWhitespaces ?? "")"
         }
     }
 
@@ -229,7 +229,7 @@ class SendMoneyAmountComponent: Component, SizePresetable, UITextFieldDelegate {
         }
 
         if isAmountInFiat {
-            titleLabel?.text = "\(fiat.symbol) \(maxFiatValue?.formatted?.removingWhitespaces ?? "")"
+            titleLabel?.text = "\(fiat.symbol) \(maxFiatValue?.shortFormatted?.removingWhitespaces ?? "")"
         } else {
             titleLabel?.text = "\(maxCoinValue?.formatted?.removingWhitespaces ?? "") \(coin.short.uppercased())"
         }
@@ -271,7 +271,7 @@ class SendMoneyAmountComponent: Component, SizePresetable, UITextFieldDelegate {
                     return
                 }
 
-                self.altValueLabel?.text = "\(converter.fiat.symbol) \(converter.fiatValue.longFormatted?.removingWhitespaces ?? "")"
+                self.altValueLabel?.text = "\(converter.fiat.symbol) \(converter.fiatValue.shortFormatted?.removingWhitespaces ?? "")"
 
                 if converter.coinValue > 0 {
                     delegate?.sendMoneyAmountComponentEditingChanged(self, amount: converter.amount)
@@ -348,11 +348,11 @@ class SendMoneyAmountComponent: Component, SizePresetable, UITextFieldDelegate {
         isAmountInFiat.toggle()
 
         if isAmountInFiat {
-            valueTextField?.text = converter.fiatValue.longFormatted?.removingWhitespaces ?? ""
+            valueTextField?.text = converter.fiatValue.shortFormatted?.removingWhitespaces ?? ""
             altValueLabel?.text = "\(converter.coinValue.longFormatted?.removingWhitespaces ?? "") \(converter.coin.short.uppercased())"
         } else {
             valueTextField?.text = converter.coinValue.longFormatted?.removingWhitespaces ?? ""
-            altValueLabel?.text = "\(converter.fiat.symbol) \(converter.fiatValue.longFormatted?.removingWhitespaces ?? "")"
+            altValueLabel?.text = "\(converter.fiat.symbol) \(converter.fiatValue.shortFormatted?.removingWhitespaces ?? "")"
         }
     }
 
@@ -368,7 +368,7 @@ class SendMoneyAmountComponent: Component, SizePresetable, UITextFieldDelegate {
 
             self.converter?.fiatValue = maxValue
 
-            valueTextField?.text = maxValue.longFormatted?.removingWhitespaces ?? ""
+            valueTextField?.text = maxValue.shortFormatted?.removingWhitespaces ?? ""
 
             if let converter = converter {
                 altValueLabel?.text = "\(converter.coinValue.longFormatted?.removingWhitespaces ?? "") \(converter.coin.short.uppercased())"
@@ -383,7 +383,7 @@ class SendMoneyAmountComponent: Component, SizePresetable, UITextFieldDelegate {
             valueTextField?.text = maxValue.longFormatted?.removingWhitespaces ?? ""
 
             if let converter = converter {
-                altValueLabel?.text = "\(converter.fiat.symbol) \(converter.fiatValue.longFormatted?.removingWhitespaces ?? "")"
+                altValueLabel?.text = "\(converter.fiat.symbol) \(converter.fiatValue.shortFormatted?.removingWhitespaces ?? "")"
             }
         }
     }
