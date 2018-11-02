@@ -148,7 +148,8 @@ class WalletsViewController: FlowCollectionViewController {
         }.catch {
             [weak self]
             error in
-
+            Crashlytics.sharedInstance().recordError(error)
+            
             self?.refreshControl?.endRefreshing()
         }
     }
