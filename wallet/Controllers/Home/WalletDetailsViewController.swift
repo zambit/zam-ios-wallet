@@ -776,6 +776,10 @@ extension WalletDetailsViewController: WalletDetailsChartDelegate {
             self?.walletsChartsPoints = points
             self?.updateTableView()
         })
+
+        if tableView.numberOfSections > 0 {
+            tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .middle, animated: true)
+        }
     }
 }
 
