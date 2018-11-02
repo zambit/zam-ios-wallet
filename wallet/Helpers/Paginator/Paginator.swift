@@ -62,14 +62,18 @@ public class Paginator<Element> {
 
     /**
      The resultsHandler is called by `receivedResults(_:total:)`. It contains the Array of Elements
-     for a given page and `isInitialPage` boolean flag.
+     before assigning received page and received page.
      */
     public var resultsHandler: ResultsHandler
 
-    public var refreshHandler: RefreshHandler?
+    /**
+     The refreshHandler is called by `receivedResults(_:total:)` for first receiving page. It contains the Array of Elements
+     for a given page.
+     */
+    public var refreshHandler: RefreshHandler
 
     /**
-     The resetHandler is called by `reset()`.  Here you can define a callback to be called after
+     The resetHandler is called by `reset()`. Here you can define a callback to be called after
      the paginator has been reset.
      */
     public var resetHandler: ResetHandler?
@@ -87,14 +91,14 @@ public class Paginator<Element> {
      - parameter fetchHandler:   Block to define fetch behaviour, required.
      NOTE: `receivedResults(_:total:)` or `failed()` must be called within.
      - parameter resultsHandler: Callback to handle new pages of resutls, required.
+     - parameter refreshHandler: Callback to handle first page of resutls, required.
      - parameter resetHandler:   Callback for `reset()`, will be called after data has been reset, optional.
      - parameter failureHandler: Callback for `failure()`, will be called
-
      */
     public init(pageSize: Int,
                 fetchHandler: @escaping FetchHandlerType,
                 resultsHandler: @escaping ResultsHandler,
-                refreshHandler: RefreshHandler? = nil,
+                refreshHandler: @escaping RefreshHandler,
                 resetHandler: ResetHandler? = nil,
                 failureHandler: FailureHandler? = nil) {
 
@@ -177,7 +181,7 @@ public class Paginator<Element> {
             resultsHandler(self, old, results)
         } else {
             self.results = results
-            refreshHandler?(self, results)
+            refreshHandler(self, results)
         }
     }
 
@@ -191,7 +195,7 @@ public class Paginator<Element> {
     }
 
     /**
-     Sets default values for total, page, and results.  Called by `reset()` and `init`
+     Sets default values for total, page, and results. Called by `reset()` and `init`
      */
     private func setDefaultValues() {
         next = nil

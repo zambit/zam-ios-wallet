@@ -9,6 +9,9 @@
 import Foundation
 import ContactsUI
 
+/**
+ Structure representing contact extracted from system with needed information.
+ */
 struct Contact: Equatable {
     
     var name: String
@@ -36,6 +39,9 @@ struct Contact: Equatable {
         self.phoneNumbers = phoneNumbers
     }
 
+    /**
+     Convert current Contact object to `formatted` representation with converted first phone number.
+     */
     func toFormatted(_ block: @escaping (FormattedContact?) -> Void) {
         let formatter = PhoneNumberFormatter()
 

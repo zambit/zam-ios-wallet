@@ -28,7 +28,7 @@ class CreatePinViewController: FlowViewController, WalletNavigable, DecimalKeybo
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        walletNavigationController?.custom.addRightBarItemButton(for: self, title: "SKIP", target: self, action: #selector(skipButtonTouchEvent(_:)))
+        walletNavigationController?.custom.addRightDetailButton(in: self, title: "SKIP", target: self, action: #selector(skipButtonTouchEvent(_:)))
     }
 
     override func viewDidLoad() {

@@ -22,24 +22,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         //HeroDebugPlugin.isEnabled = true
 
-        // configure firebase analytics
+        // Configure firebase analytics
         FirebaseApp.configure()
 
-        // disable debug mode for crashlytics
-        Crashlytics.sharedInstance().debugMode = false
+        // Enable debug mode for crashlytics
+        Crashlytics.sharedInstance().debugMode = true
 
         userDefaultsManager = UserDefaultsManager(keychainConfiguration: WalletKeychainConfiguration())
 
+        // Custom navigation controller
         let navigationController = WalletNavigationController()
+
+        // Determine initial state of the app
         switch (userDefaultsManager.isPhoneVerified, userDefaultsManager.isPinCreated) {
         case (true, true):
             guard let phone = userDefaultsManager.getPhoneNumber() else {
                 fatalError("isPhoneVerified property lies")
             }
 
-            // set crashlytics user id as his phone number
-            Crashlytics.sharedInstance().setUserIdentifier(phone)
-
+            // Set 'Entering Pin' main flow
             let screenFlow = EnterPinFlow(navigationController: navigationController)
             screenFlow.prepare(phone: phone)
 
@@ -51,9 +52,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 fatalError("isPhoneVerified property lies")
             }
 
-            // set crashlytics user id as his phone number
-            Crashlytics.sharedInstance().setUserIdentifier(phone)
-
+            // Set 'Entering password for saved phone' main flow
             let screenFlow = SecondEnterLoginFlow(navigationController: navigationController)
             screenFlow.prepare(phone: phone)
 
@@ -61,8 +60,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.mainScreenFlow.begin(animated: false)
             break
         case (false, true):
+            // Unreachable condition
             fatalError("Unexpected initial state")
         case (false, false):
+            // Set 'Onboarding' main flow
             let screenFlow = OnboardingFlow(navigationController: navigationController)
 
             self.mainScreenFlow = screenFlow
