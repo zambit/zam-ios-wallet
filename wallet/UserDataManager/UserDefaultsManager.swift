@@ -14,6 +14,9 @@ enum UserDefaultsError: Error {
     case noSavedPhoneForRemovingPin
 }
 
+/**
+ User defaults controller. Provide interface for saving and getting user data.
+ */
 struct UserDefaultsManager {
 
     private enum UserDefaultsKey: String {
@@ -29,17 +32,19 @@ struct UserDefaultsManager {
         self.keychainConfiguration = keychainConfiguration
     }
 
+    // MARK: - Save
+
     func save(token: String) {
         userDefaults.set(token, forKey: UserDefaultsKey.token.rawValue)
     }
 
     func save(phoneNumber: String) {
-        // set crashlytics user id as his phone number
-        Crashlytics.sharedInstance().setUserIdentifier(phoneNumber)
-
         userDefaults.set(phoneNumber, forKey: UserDefaultsKey.phoneNumber.rawValue)
     }
 
+    /**
+     Save pin to device keychain.
+     */
     func save(pin: String, for accountName: String) throws {
         let passwordItem = KeychainPasswordItem(service: keychainConfiguration.serviceName,
                                                 account: accountName,
@@ -51,6 +56,8 @@ struct UserDefaultsManager {
         save(phoneNumber: phone)
         save(token: token)
     }
+
+    // MARK: - Get
 
     func getToken() -> String? {
         return userDefaults.value(forKey: UserDefaultsKey.token.rawValue) as? String
@@ -72,10 +79,15 @@ struct UserDefaultsManager {
         return try passwordItem.readPassword()
     }
 
+    // MARK: - Clear
+
     func clearToken() {
         userDefaults.removeObject(forKey: UserDefaultsKey.token.rawValue)
     }
 
+    /**
+     Clear all user data: phone, token and pin from keychain
+     */
     func clearUserData() throws {
         if let accountName = getPhoneNumber() {
             let passwordItem = KeychainPasswordItem(service: keychainConfiguration.serviceName,
@@ -99,6 +111,8 @@ struct UserDefaultsManager {
 
         try passwordItem.deleteItem()
     }
+
+    // MARK: - Properties
 
     var isUserAuthorized: Bool {
         return getToken() != nil

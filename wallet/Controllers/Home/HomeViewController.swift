@@ -203,6 +203,9 @@ class HomeViewController: FloatingViewController {
             walletsCollectionViewController?.delegate = self
         }
 
+        let insets = UIEdgeInsets(top: 64, left: 0, bottom: 64, right: 0)
+        walletsCollectionViewController?.contentInsets = insets
+
         view.clipsToBounds = true
     }
 
@@ -232,46 +235,13 @@ class HomeViewController: FloatingViewController {
         sumTitleLabel?.textColor = .skyBlue
         sumTitleLabel?.text = "Total balance"
 
-        var sumSymbolFont: UIFont = UIFont()
-        var sumMainFont: UIFont = UIFont()
-
-        switch UIScreen.main.type {
-        case .extraSmall, .small:
-            sumSymbolFont = UIFont.walletFont(ofSize: 28.0, weight: .medium)
-            sumMainFont = UIFont.walletFont(ofSize: 28.0, weight: .regular)
-        case .medium, .extra, .extraLarge, .plus:
-            sumSymbolFont = UIFont.walletFont(ofSize: 36.0, weight: .medium)
-            sumMainFont = UIFont.walletFont(ofSize: 36.0, weight: .regular)
-        case .unknown:
-            fatalError()
-        }
-
-        let attributedString = NSMutableAttributedString(string: "$ 0.00", attributes: [
-            .font: sumSymbolFont,
-            .foregroundColor: UIColor.white,
-            .kern: -1.5
-            ])
-
-        attributedString.addAttributes([
-            .font: sumMainFont,
-            .foregroundColor: UIColor.skyBlue
-            ], range: NSRange(location: 0, length: 1))
-
-        attributedString.addAttributes([
-            .font: UIFont.walletFont(ofSize: 18.0, weight: .regular),
-            .foregroundColor: UIColor.skyBlue
-            ], range: NSRange(location: 4, length: 2))
-
-        sumLabel?.attributedText = attributedString
+        setupTotalBalanceLabel(text: "$ 0.00", primaryStyleRange:  2..<4, fractionStyleRange: 4..<6)
 
         sumBtcLabel?.font = UIFont.walletFont(ofSize: 14.0, weight: .regular)
         sumBtcLabel?.textColor = .skyBlue
         sumBtcLabel?.text = "0.0 BTC"
 
         detailTopGestureView?.applyGradient(colors: [.white, UIColor.white.withAlphaComponent(0.7), UIColor.white.withAlphaComponent(0.0)], locations: [0.0, 0.75, 1.0])
-
-        let insets = UIEdgeInsets(top: 64, left: 0, bottom: 64, right: 0)
-        walletsCollectionViewController?.contentInsets = insets
     }
 
     private func setupTotalBalanceLabel(text: String, primaryStyleRange: CountableRange<Int>, fractionStyleRange: CountableRange<Int>) {
@@ -339,7 +309,7 @@ class HomeViewController: FloatingViewController {
             self?.totalBalance = totalBalance
 
             performWithDelay {
-                self?.dataWasLoaded()
+                self?.updateLabels()
             }
         }.catch {
             [weak self]
@@ -351,7 +321,7 @@ class HomeViewController: FloatingViewController {
         }
     }
 
-    private func dataWasLoaded() {
+    private func updateLabels() {
         sumLabel?.endLoading()
 
         guard
@@ -367,7 +337,7 @@ class HomeViewController: FloatingViewController {
         let primary = String(parts[0])
         let fraction = String(parts[1])
 
-        let primaryRange = 2..<primary.count+1
+        let primaryRange = 2..<primary.count + 1
         let fractionRange = (primary.count + 1)..<(primary.count + 1 + fraction.count)
         setupTotalBalanceLabel(text: usdBalance, primaryStyleRange: primaryRange, fractionStyleRange: fractionRange)
 
@@ -376,13 +346,15 @@ class HomeViewController: FloatingViewController {
 
     // MARK: - FloatingViewController
 
-    override func stateChangingBegin(_ state: FloatingViewController.State) {
-        super.stateChangingBegin(state)
+    override func stateChangingBegin(to state: FloatingViewController.State) {
+        super.stateChangingBegin(to: state)
 
+        // Scroll wallets to top if moving floating view initiated
         if let embeded = walletsCollectionViewController, embeded.isTopExpanded {
             walletsCollectionViewController?.scrollToTop()
         }
 
+        // Prevent user scrolling during closing animation
         if state == .closed {
             walletsCollectionViewController?.isScrollEnabled = false
         }
@@ -396,6 +368,7 @@ class HomeViewController: FloatingViewController {
         walletsCollectionViewController?.isScrollEnabled = true
         contactsComponent?.isUserInteractionEnabled = true
 
+        // Explicity perform setting target values after animation, preventing bug, when sometimes animation breaks and some properties don't reach their target values.
         viewsAnimationBlock(state)
     }
 
@@ -407,7 +380,7 @@ class HomeViewController: FloatingViewController {
 
         self.contactsComponent?.searchTextField?.resignFirstResponder()
 
-        // an animator for the transition
+        // An animator for the transition
         transitionAnimator.addAnimations {
             self.viewsAnimationBlock(state)
         }
@@ -418,7 +391,9 @@ class HomeViewController: FloatingViewController {
 
 // MARK: - Extensions
 
-/// Extension implements HomeController protocol. It's interface to use from child view controller in contrainer.
+/**
+ Extension implements HomeController protocol. It's interface to use from child view controller in contrainer.
+ */
 extension HomeViewController: HomeController {
 
     func performSendFromWallet(index: Int, wallets: [Wallet], phone: String, recipient: FormattedContact? = nil) {
@@ -427,7 +402,9 @@ extension HomeViewController: HomeController {
         detailTopGestureView?.hero.modifiers = [.fade]
         walletsContainerView?.hero.modifiers = [.fade]
 
-        self.onSendFromWallet?(index, wallets, recipient, phone)
+        contactsComponent?.searchTextField?.resignFirstResponder()
+
+        onSendFromWallet?(index, wallets, recipient, phone)
     }
 
     func performDepositFromWallet(index: Int, wallets: [Wallet], phone: String) {
@@ -436,7 +413,9 @@ extension HomeViewController: HomeController {
         detailTopGestureView?.hero.modifiers = [.fade]
         walletsContainerView?.hero.modifiers = [.fade]
 
-        self.onDepositToWallet?(index, wallets, phone)
+        contactsComponent?.searchTextField?.resignFirstResponder()
+
+        onDepositToWallet?(index, wallets, phone)
     }
 
     func performWalletDetails(index: Int, wallets: [Wallet], phone: String) {
@@ -445,27 +424,27 @@ extension HomeViewController: HomeController {
         detailTopGestureView?.hero.modifiers = [.fade]
         walletsContainerView?.hero.modifiers = [.fade]
 
-        self.onWalletDetails?(index, wallets, phone)
+        contactsComponent?.searchTextField?.resignFirstResponder()
+
+        onWalletDetails?(index, wallets, phone)
     }
 }
 
-extension HomeViewController: AdvancedTransitionDelegate {
-
-    func advancedTransitionWillBegin(from viewController: FlowViewController, params: [String : Any]) {
-        guard let index = params["walletIndex"] as? Int else {
-            return
-        }
-
-        walletsCollectionViewController?.prepareToAnimation(cellIndex: index)
-    }
-}
-
+/**
+ Extension implements WalletsViewControllerDelegate protocol. It provides callbacks from WalletsViewController screen.
+ */
 extension HomeViewController: WalletsViewControllerDelegate {
 
+    /**
+     Notifies about refreshing.
+     */
     func walletsViewControllerCallsUpdateData(_ walletsViewController: WalletsViewController) {
         loadData()
     }
 
+    /**
+     Notifies about changing scrolling offset on WalletsViewController. Translate its scrolling to floating view if needed.
+     */
     func walletsViewControllerScrollingEvent(_ walletsViewController: WalletsViewController, panGestureRecognizer: UIPanGestureRecognizer, offset: CGPoint) {
         switch currentState {
         case .closed:
@@ -496,14 +475,21 @@ extension HomeViewController: WalletsViewControllerDelegate {
     }
 }
 
+/**
+ Extension implements ContactsHorizontalComponentDelegate protocol. It provides callbacks from contacts horizontal collection component.
+ */
 extension HomeViewController: ContactsHorizontalComponentDelegate {
 
+    /**
+     Notifies that given contact was tapped.
+     */
     func contactsHorizontalComponent(_ contactsHorizontalComponent: ContactsHorizontalComponent, itemWasTapped contactData: Contact) {
         contactsHorizontalComponent.isUserInteractionEnabled = false
 
         dismissKeyboard {
             [weak self] in
 
+            // Convert contact to formatted object for representing converted phone number.
             contactData.toFormatted {
                 formatted in
 
@@ -517,11 +503,34 @@ extension HomeViewController: ContactsHorizontalComponentDelegate {
     }
 }
 
+/**
+ Extension implements SendMoneyViewControllerDelegate protocol. It provides callbacks from SendMoneyViewController screen.
+ */
 extension HomeViewController: SendMoneyViewControllerDelegate {
 
+    /**
+     Notifies that sending transaction was done and balances needs to be reloaded.
+     */
     func sendMoneyViewControllerSendingProceedWithSuccess(_ sendMoneyViewController: SendMoneyViewController) {
         loadData()
 
         walletsCollectionViewController?.reload()
+    }
+}
+
+/**
+ Extension implements AdvancedTransitionDelegate protocol. It provides transitions callbacks.
+ */
+extension HomeViewController: AdvancedTransitionDelegate {
+
+    /**
+     Ask viewController for preparing views to upcoming transition.
+     */
+    func advancedTransitionWillBegin(from viewController: FlowViewController, params: [String : Any]) {
+        guard let index = params["walletIndex"] as? Int else {
+            return
+        }
+
+        walletsCollectionViewController?.prepareToAnimation(cellIndex: index)
     }
 }

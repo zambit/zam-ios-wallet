@@ -9,11 +9,17 @@
 import UIKit
 import Crashlytics
 
+/**
+ Protocol providing callback for succeed sending transaction.
+ */
 protocol TransactionDetailViewControllerDelegate: class {
 
     func transactionDetailViewControllerSendingProceedWithSuccess(_ transactionDetailViewController: TransactionDetailViewController)
 }
 
+/**
+ Transaction detail screen. Present all details of proceed transaction and asks for send.
+ */
 class TransactionDetailViewController: FlowViewController, WalletNavigable {
 
     enum State {
@@ -75,7 +81,7 @@ class TransactionDetailViewController: FlowViewController, WalletNavigable {
             self.sendButton?.alpha = 1.0
         }, completion: {
             _ in
-            self.walletNavigationController?.custom.addBackButton(for: self, target: self, action: #selector(self.closeButtonTouchUpInsideEvent(_:)))
+            self.walletNavigationController?.custom.addBackButton(in: self, target: self, action: #selector(self.closeButtonTouchUpInsideEvent(_:)))
         })
     }
 
@@ -134,7 +140,6 @@ class TransactionDetailViewController: FlowViewController, WalletNavigable {
         view.backgroundColor = .clear
 
         sendButton?.addTarget(self, action: #selector(sendButtonTouchUpInsideEvent(_:)), for: .touchUpInside)
-        dataWasLoaded()
 
         errorMessageLabel?.font = UIFont.walletFont(ofSize: 14.0, weight: .regular)
         errorMessageLabel?.textAlignment = .center
@@ -145,27 +150,23 @@ class TransactionDetailViewController: FlowViewController, WalletNavigable {
         closeButton?.titleLabel?.font = UIFont.walletFont(ofSize: 16.0, weight: .medium)
         closeButton?.addTarget(self, action: #selector(closeButtonTouchUpInsideEvent(_:)), for: .touchUpInside)
 
-        changeDataFor(state: .confirm)
+        if let sendingData = sendingData {
+            prepare(sendingData: sendingData)
+        }
+
+        updateViewsFor(state: .confirm)
     }
 
     func prepare(sendingData: SendingData) {
         self.sendingData = sendingData
 
-        dataWasLoaded()
-    }
+        amountLabel?.text = "\(sendingData.amount.value.longFormatted ?? "") \(sendingData.amount.coin.short.uppercased())"
 
-    private func dataWasLoaded() {
-        guard let data = sendingData else {
-            return
+        if let convertedValue = sendingData.amount.fiatValue {
+            amountDetailLabel?.text = "\(sendingData.amount.fiat.symbol) \(convertedValue.formatted ?? "")"
         }
 
-        amountLabel?.text = "\(data.amount.value.longFormatted ?? "") \(data.amount.coin.short.uppercased())"
-
-        if let convertedValue = data.amount.fiatValue {
-            amountDetailLabel?.text = "\(data.amount.fiat.symbol) \(convertedValue.formatted ?? "")"
-        }
-
-        switch data.recipient {
+        switch sendingData.recipient {
         case .phone(let phone):
             recipientPhoneLabel?.text = phone
         case let .contact(name: name, phone: phone):
@@ -176,7 +177,7 @@ class TransactionDetailViewController: FlowViewController, WalletNavigable {
         }
     }
 
-    private func changeDataFor(state: State) {
+    private func updateViewsFor(state: State) {
         switch state {
         case .confirm:
             titleLabel?.text = "Confirm transaction"
@@ -198,7 +199,7 @@ class TransactionDetailViewController: FlowViewController, WalletNavigable {
             //errorMessageLabel?.sizeToFit()
             closeButton?.isHidden = false
 
-            walletNavigationController?.custom.hideBackButton(for: self)
+            walletNavigationController?.custom.removeBackButton(in: self)
         case .success:
             let attributedString = NSMutableAttributedString(string: "Transaction completed", attributes: [
                 .font: UIFont.walletFont(ofSize: 40.0, weight: .bold),
@@ -215,9 +216,38 @@ class TransactionDetailViewController: FlowViewController, WalletNavigable {
             errorMessageLabel?.sizeToFit()
             closeButton?.isHidden = false
 
-            walletNavigationController?.custom.hideBackButton(for: self)
+            walletNavigationController?.custom.removeBackButton(in: self)
         }
     }
+
+    /**
+     Creare backgroundView and animate its blurring.
+     */
+    private func overlayBlurredBackgroundView() {
+        effectView = UIVisualEffectView()
+        effectView?.frame = view.frame
+
+        backgroundView = UIView()
+        backgroundView?.frame = view.frame
+        backgroundView?.alpha = 0.0
+        backgroundView?.backgroundColor = UIColor.cornflower.withAlphaComponent(0.5)
+
+        guard let effectView = effectView, let background = backgroundView else {
+            fatalError()
+        }
+
+        view.addSubview(background)
+        view.sendSubviewToBack(background)
+
+        view.insertSubview(effectView, aboveSubview: background)
+
+        UIView.animate(withDuration: 0.8) {
+            background.alpha = 1.0
+            effectView.effect = UIBlurEffect(style: UIBlurEffect.Style.dark)
+        }
+    }
+
+    // MARK: - Buttons events
 
     @objc
     private func sendButtonTouchUpInsideEvent(_ sender: SendButton) {
@@ -256,7 +286,7 @@ class TransactionDetailViewController: FlowViewController, WalletNavigable {
 
                 performWithDelay {
                     self?.sendButton?.custom.setSuccess()
-                    self?.changeDataFor(state: .success)
+                    self?.updateViewsFor(state: .success)
                 }
             }.catch {
                 [weak self]
@@ -266,7 +296,7 @@ class TransactionDetailViewController: FlowViewController, WalletNavigable {
 
                 performWithDelay {
                     self?.sendButton?.custom.setFailure()
-                    self?.changeDataFor(state: .failure)
+                    self?.updateViewsFor(state: .failure)
 
                     if let serverError = error as? WalletResponseError {
                         switch serverError {
@@ -292,7 +322,7 @@ class TransactionDetailViewController: FlowViewController, WalletNavigable {
 
     @objc
     private func closeButtonTouchUpInsideEvent(_ sender: UIButton) {
-        walletNavigationController?.custom.hideBackButton(for: self)
+        walletNavigationController?.custom.removeBackButton(in: self)
 
         UIView.animate(withDuration: 0.8, animations: {
             self.titleLabel?.alpha = 0.0
@@ -311,29 +341,5 @@ class TransactionDetailViewController: FlowViewController, WalletNavigable {
 
             self.onClose?(self)
         })
-    }
-
-    private func overlayBlurredBackgroundView() {
-        effectView = UIVisualEffectView()
-        effectView?.frame = view.frame
-
-        backgroundView = UIView()
-        backgroundView?.frame = view.frame
-        backgroundView?.alpha = 0.0
-        backgroundView?.backgroundColor = UIColor.cornflower.withAlphaComponent(0.5)
-
-        guard let effectView = effectView, let background = backgroundView else {
-            fatalError()
-        }
-
-        view.addSubview(background)
-        view.sendSubviewToBack(background)
-
-        view.insertSubview(effectView, aboveSubview: background)
-
-        UIView.animate(withDuration: 0.8) {
-            background.alpha = 1.0
-            effectView.effect = UIBlurEffect(style: UIBlurEffect.Style.dark)
-        }
     }
 }

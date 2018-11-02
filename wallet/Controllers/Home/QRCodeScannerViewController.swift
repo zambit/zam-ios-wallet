@@ -11,14 +11,19 @@ import AVFoundation
 import AudioToolbox
 import Crashlytics
 
+/**
+ Protocol providing callbacks about finding qr codes.
+ */
 protocol QRCodeScannerViewControllerDelegate: class {
 
     func qrCodeScannerViewController(_ qrCodeScannerViewController: QRCodeScannerViewController, didFindCode: String)
 
     func qrCodeScannerViewControllerDidntFindCode(_ qrCodeScannerViewController: QRCodeScannerViewController)
-
 }
 
+/**
+ Camera screen that detects qr codes and handle it.
+ */
 class QRCodeScannerViewController: FlowViewController, WalletNavigable {
 
     weak var delegate: QRCodeScannerViewControllerDelegate?
@@ -41,7 +46,7 @@ class QRCodeScannerViewController: FlowViewController, WalletNavigable {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        walletNavigationController?.custom.addBackButton(for: self, target: self, action: #selector(closeButtonTouchUpInsideEvent(_:)))
+        walletNavigationController?.custom.addBackButton(in: self, target: self, action: #selector(closeButtonTouchUpInsideEvent(_:)))
 
         // Get the back-facing camera for capturing videos
         guard let captureDevice = AVCaptureDevice.default(for: .video) else {
@@ -91,11 +96,9 @@ class QRCodeScannerViewController: FlowViewController, WalletNavigable {
         }
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
+    /**
+     Setup overlay view imitating small rectangle on screen center for scanning.
+     */
     private func setupOverlayView() {
         let overlay = OverlayView(frame: view.frame)
         overlay.innerFrame = CGRect(x: view.frame.width * (1 / 6), y: (view.frame.height - view.frame.width / 1.5) / 2, width: view.frame.width / 1.5, height: view.frame.width / 1.5)

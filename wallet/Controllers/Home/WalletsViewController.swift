@@ -13,7 +13,7 @@ import Hero
 typealias WalletsCollectionViewController = (UIViewController & WalletsCollection)
 
 /**
- Protocol that provides interface to control wallets collection from it's owner screen.
+ Protocol that provides interface to control wallets collection from outside.
  */
 protocol WalletsCollection {
 
@@ -51,12 +51,12 @@ protocol WalletsViewControllerDelegate: class {
  */
 class WalletsViewController: FlowCollectionViewController {
 
-    private weak var _owner: HomeController?
-    private weak var _delegate: WalletsViewControllerDelegate?
-
     var userManager: UserDefaultsManager?
     var userAPI: UserAPI?
     var historyAPI: HistoryAPI?
+
+    private weak var _owner: HomeController?
+    private weak var _delegate: WalletsViewControllerDelegate?
 
     private var didInitiallyLoaded: Bool = false
 
@@ -107,7 +107,7 @@ class WalletsViewController: FlowCollectionViewController {
         _delegate?.walletsViewControllerScrollingEvent(self, panGestureRecognizer: recognizer, offset: clearOffset)
     }
 
-    // MARK: - Refresh Control update event
+    // MARK: - RefreshControl update event
 
     @objc
     private func refreshControlValueChangedEvent(_ sender: Any) {
@@ -198,6 +198,8 @@ class WalletsViewController: FlowCollectionViewController {
         }
     }
 
+    // MARK: - Animation
+    
     private func prepareCellForAnimation(_ cell: WalletSmallItemComponent) {
         collectionView.visibleCells.compactMap {
             return $0 as? WalletSmallItemComponent
@@ -211,6 +213,9 @@ class WalletsViewController: FlowCollectionViewController {
 
 // MARK: - Extensions
 
+/**
+ Extension implements WalletsCollection protocol. It's interface to control some properties of WalletsViewController from outside.
+ */
 extension WalletsViewController: WalletsCollection {
 
     var delegate: WalletsViewControllerDelegate? {
@@ -281,6 +286,9 @@ extension WalletsViewController: WalletsCollection {
     }
 }
 
+/**
+ Overriding UICollectionViewDataSource methods
+ */
 extension WalletsViewController {
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -288,6 +296,7 @@ extension WalletsViewController {
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        // If wallets weren't loaded before show 3 skeleton cells.
         guard didInitiallyLoaded else {
             return 3
         }
@@ -302,6 +311,7 @@ extension WalletsViewController {
             fatalError()
         }
 
+        // If wallets weren't loaded before show cell skeleton.
         guard didInitiallyLoaded else {
             cell.stiffen()
             return cell
@@ -309,6 +319,7 @@ extension WalletsViewController {
 
         let itemData = WalletItemData(data: wallets[indexPath.item], phoneNumber: phone)
 
+        // Find zam wallet, prepare for not showing it on wallet details.
         var detailsWallets = self.wallets
         var detailsIndex = indexPath.item
 
@@ -320,12 +331,14 @@ extension WalletsViewController {
             }
         }
 
+        // Turn off skeleton mode for cell
         cell.relive()
 
         cell.configure(with: itemData)
 
         cell.setupChart(points: walletsChartsPoints[indexPath.item])
 
+        // Send button tap event
         cell.onSendButtonTap = {
             [weak self] in
 
@@ -337,6 +350,7 @@ extension WalletsViewController {
             owner.performSendFromWallet(index: indexPath.item, wallets: strongSelf.wallets, phone: strongSelf.phone, recipient: nil)
         }
 
+        // Deposit button tap event
         cell.onDepositButtonTap = {
             [weak self] in
 
@@ -348,6 +362,7 @@ extension WalletsViewController {
             owner.performDepositFromWallet(index: indexPath.item, wallets: strongSelf.wallets, phone: strongSelf.phone)
         }
 
+        // If coin isn't wallet assign non-empty card long press event
         if wallets[indexPath.item].coin == .zam {
             cell.onCardLongPress = {}
         } else {
@@ -366,6 +381,9 @@ extension WalletsViewController {
     }
 }
 
+/**
+ Extension implements UICollectionViewDelegateFlowLayout protocol.
+ */
 extension WalletsViewController: UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

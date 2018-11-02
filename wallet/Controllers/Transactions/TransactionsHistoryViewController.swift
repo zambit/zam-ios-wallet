@@ -9,7 +9,10 @@
 import UIKit
 import Crashlytics
 
-class TransactionsHistoryViewController: FlowViewController, WalletNavigable, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
+/**
+ Transactions history screen providing pagination.
+ */
+class TransactionsHistoryViewController: FlowViewController, WalletNavigable, UISearchBarDelegate {
 
     var onFilter: ((TransactionsFilterProperties) -> Void)?
 
@@ -59,6 +62,7 @@ class TransactionsHistoryViewController: FlowViewController, WalletNavigable, UI
 
         let formatter = PhoneNumberFormatter()
 
+        // Setup paginator
         self.paginator = Paginator<TransactionsGroup>(pageSize: 20, fetchHandler: {
             [weak self]
             (paginator: Paginator, pageSize: Int, nextPage: String?) in
@@ -191,89 +195,6 @@ class TransactionsHistoryViewController: FlowViewController, WalletNavigable, UI
         }
     }
 
-    // MARK: - UITableViewDataSource
-
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return paginator?.results.count ?? 0
-    }
-
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let provider = paginator, section < provider.results.count else {
-            fatalError()
-        }
-
-        return provider.results[section].transactions.count
-    }
-
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let _header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "TransactionsGroupHeaderComponent")
-
-        guard let header = _header as? TransactionsGroupHeaderComponent else {
-            return nil
-        }
-
-        guard let provider = paginator, section < provider.results.count else {
-            return UIView()
-        }
-
-        let data = provider.results[section]
-        header.configure(date: DateInterval.walletString(from: data.dateInterval), amount: data.amount.description(property: .usd))
-
-        return header
-    }
-
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 46.0
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let _cell = tableView.dequeueReusableCell(withIdentifier: "TransactionCellComponent", for: indexPath)
-
-        guard let cell = _cell as? TransactionCellComponent else {
-            fatalError()
-        }
-
-        guard let provider = paginator,
-            indexPath.section < provider.results.count,
-            indexPath.row < provider.results[indexPath.section].transactions.count else {
-            return UITableViewCell()
-        }
-
-        let data = provider.results[indexPath.section].transactions[indexPath.row]
-
-        var recipient: String = data.participant
-
-        if let number = data.participantPhoneNumber {
-            recipient = number.formattedString
-        }
-
-        if let contact = data.contact {
-            recipient = contact.name
-        }
-
-        cell.configure(image: data.coin.image, status: data.status.formatted, coinShort: data.coin.short, recipient: recipient, amount: data.amount.original.formatted ?? "", fiatAmount: data.amount.description(property: .usd), direction: data.direction)
-
-        return cell
-    }
-
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 74.0
-    }
-
-    // MARK: - UIScrollViewDelegate
-
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-
-        // when reaching bottom, load a new page
-        if scrollView.contentOffset.y == scrollView.contentSize.height - scrollView.bounds.size.height {
-
-            // ask next page only if we haven't reached last page
-            if let last = paginator?.reachedLastPage, last == false {
-                self.paginator?.fetchNextPage()
-            }
-        }
-    }
-
     // MARK: - Setup tableView subviews
 
     private func setupTableViewFooter() {
@@ -346,5 +267,98 @@ class TransactionsHistoryViewController: FlowViewController, WalletNavigable, UI
     @objc
     private func filterButtonTouchUpInsideEvent(_ sender: UIButton) {
         onFilter?(filterData)
+    }
+}
+
+// MARK: - Extensions
+
+/**
+ Extension implements UITableViewDataSource protocol.
+ */
+extension TransactionsHistoryViewController: UITableViewDataSource {
+
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return paginator?.results.count ?? 0
+    }
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        guard let provider = paginator, section < provider.results.count else {
+            fatalError()
+        }
+
+        return provider.results[section].transactions.count
+    }
+
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let _header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "TransactionsGroupHeaderComponent")
+
+        guard let header = _header as? TransactionsGroupHeaderComponent else {
+            return nil
+        }
+
+        guard let provider = paginator, section < provider.results.count else {
+            return UIView()
+        }
+
+        let data = provider.results[section]
+        header.configure(date: DateInterval.walletString(from: data.dateInterval), amount: data.amount.description(property: .usd))
+
+        return header
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let _cell = tableView.dequeueReusableCell(withIdentifier: "TransactionCellComponent", for: indexPath)
+
+        guard let cell = _cell as? TransactionCellComponent else {
+            fatalError()
+        }
+
+        guard let provider = paginator,
+            indexPath.section < provider.results.count,
+            indexPath.row < provider.results[indexPath.section].transactions.count else {
+                return UITableViewCell()
+        }
+
+        let data = provider.results[indexPath.section].transactions[indexPath.row]
+
+        var recipient: String = data.participant
+
+        if let number = data.participantPhoneNumber {
+            recipient = number.formattedString
+        }
+
+        if let contact = data.contact {
+            recipient = contact.name
+        }
+
+        cell.configure(image: data.coin.image, status: data.status.formatted, coinShort: data.coin.short, recipient: recipient, amount: data.amount.original.formatted ?? "", fiatAmount: data.amount.description(property: .usd), direction: data.direction)
+
+        return cell
+    }
+}
+
+/**
+ Extension implements UITableViewDelegate protocol.
+ */
+extension TransactionsHistoryViewController: UITableViewDelegate {
+
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 46.0
+    }
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 74.0
+    }
+
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+
+        // when reaching bottom, load a new page
+        if scrollView.contentOffset.y == scrollView.contentSize.height - scrollView.bounds.size.height {
+
+            // ask next page only if we haven't reached last page
+            if let last = paginator?.reachedLastPage, last == false {
+                self.paginator?.fetchNextPage()
+            }
+        }
     }
 }

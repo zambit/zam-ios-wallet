@@ -27,7 +27,7 @@ class EnterLoginPasswordViewController: СonsistentViewController, LoginPassword
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        walletNavigationController?.custom.addRightBarItemButton(for: self, title: "EXIT", target: self, action: #selector(exitButtonTouchEvent(_:)))
+        walletNavigationController?.custom.addRightDetailButton(in: self, title: "EXIT", target: self, action: #selector(exitButtonTouchEvent(_:)))
     }
 
     override func viewDidAppear(_ animated: Bool) {

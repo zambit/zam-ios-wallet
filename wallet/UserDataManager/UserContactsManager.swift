@@ -26,29 +26,45 @@ enum UserContactFetchKey {
     }
 }
 
+/**
+ User contacts controller. Provide interface to fetch contacts by different ways.
+ */
 class UserContactsManager {
 
-    private(set) static var `default`: UserContactsManager = UserContactsManager(
+    /**
+     Static property for getting default instance of this class.
+     */
+    static let `default`: UserContactsManager = UserContactsManager(
+        contactsStore: CNContactStore(),
         fetchKeys: [.fullName, .phoneNumber, .avatar],
         phoneNumberFormatter: PhoneNumberFormatter()
     )
 
     private(set) var contacts: [Contact] = []
 
-    let contactStore = CNContactStore()
+    let contactsStore: CNContactStore
     let fetchKeys: [UserContactFetchKey]
     let phoneNumberFormatter: PhoneNumberFormatter
 
+    /**
+     Is contacts access authorized
+     */
     static var isAvailable: Bool {
         return CNContactStore.authorizationStatus(for: CNEntityType.contacts) == .authorized
     }
 
-    init(fetchKeys: [UserContactFetchKey], phoneNumberFormatter: PhoneNumberFormatter) {
+    init(contactsStore: CNContactStore, fetchKeys: [UserContactFetchKey], phoneNumberFormatter: PhoneNumberFormatter) {
+        self.contactsStore = contactsStore
         self.fetchKeys = fetchKeys
         self.phoneNumberFormatter = phoneNumberFormatter
     }
 
+    /**
+     Fetch contacts asynchronously, parsing it to Contact structure.
+     */
     func fetchContacts(_ completion: @escaping ([Contact]) -> Void) {
+
+        // Success block
         let success: () -> Void = {
             DispatchQueue.global(qos: .default).async {
                 guard let contacts = try? self.getContacts() else {
@@ -67,6 +83,7 @@ class UserContactsManager {
             }
         }
 
+        // Failure block
         let failure: () -> Void = {
             self.contacts = []
 
@@ -75,41 +92,34 @@ class UserContactsManager {
             }
         }
 
-        if !UserContactsManager.isAvailable {
-            contactStore.requestAccess(for: CNEntityType.contacts) {
-                (access, accessError) in
+        guard !UserContactsManager.isAvailable else {
+            return success()
+        }
 
-                if access {
-                    success()
-                } else {
-                    failure()
-                }
+        contactsStore.requestAccess(for: CNEntityType.contacts) {
+            (access, accessError) in
+
+            if access {
+                success()
+            } else {
+                failure()
             }
-        } else {
-            success()
         }
     }
 
-    func enumerateContacts(usingBlock block: @escaping (Contact) -> Void) throws {
-        let fetchRequest = CNContactFetchRequest(keysToFetch: fetchKeys.map { $0.descriptor })
-
-        try contactStore.enumerateContacts(with: fetchRequest) {
-            (contact, last) in
-
-            block(Contact(contact: contact))
-        }
-    }
-
+    /**
+     Fetch user contacts from system synchronously.
+     */
     private func getContacts() throws -> [CNContact] {
         var containers: [CNContainer] = []
 
-        containers = try contactStore.containers(matching: nil)
+        containers = try contactsStore.containers(matching: nil)
 
         var results: [CNContact] = []
 
         for container in containers {
             let fetchPredicate = CNContact.predicateForContactsInContainer(withIdentifier: container.identifier)
-            let containerResults = try contactStore.unifiedContacts(matching: fetchPredicate, keysToFetch: fetchKeys.map { $0.descriptor })
+            let containerResults = try contactsStore.unifiedContacts(matching: fetchPredicate, keysToFetch: fetchKeys.map { $0.descriptor })
 
             results.append(contentsOf: containerResults)
         }

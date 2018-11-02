@@ -16,7 +16,6 @@ class WalletTabBarController: ESTabBarController, WalletNavigable {
 
         custom.setupStyle()
     }
-
 }
 
 extension BehaviorExtension where Base: WalletTabBarController {

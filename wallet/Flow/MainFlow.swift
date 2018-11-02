@@ -509,7 +509,7 @@ final class MainFlow: ScreenFlow {
             target.prepare(sendingData: data)
             target.delegate = vc
 
-            strongSelf.navigationController.custom.presentNavigable(viewController: target, animate: false)
+            strongSelf.navigationController.custom.presentNavigable(viewController: target, animated: false)
         }
 
         let onQRScanner: () -> Void = {
@@ -521,7 +521,7 @@ final class MainFlow: ScreenFlow {
 
             let target = strongSelf.qrScannerScreen
             target.delegate = vc
-            strongSelf.navigationController.custom.presentNavigable(viewController: target, animate: true)
+            strongSelf.navigationController.custom.presentNavigable(viewController: target, animated: true)
         }
 
         vc.definesPresentationContext = true
@@ -585,5 +585,4 @@ final class MainFlow: ScreenFlow {
         vc.flow = self
         return vc
     }
-
 }
