@@ -195,6 +195,7 @@ class SendMoneyAmountComponent: Component, SizePresetable, UITextFieldDelegate {
         }
 
         valueTextField?.text = ""
+        delegate?.sendMoneyAmountComponentValueEnteredIncorrectly(self)
 
         if isAmountInFiat {
             altValueLabel?.text = "\(converter.coinValue.longFormatted?.removingWhitespaces ?? "") \(converter.coin.short.uppercased())"
@@ -211,8 +212,6 @@ class SendMoneyAmountComponent: Component, SizePresetable, UITextFieldDelegate {
         guard let converter = converter else {
             return
         }
-
-        valueTextField?.text = ""
 
         if isAmountInFiat {
             altValueLabel?.text = "\(converter.coinValue.longFormatted?.removingWhitespaces ?? "") \(converter.coin.short.uppercased())"
