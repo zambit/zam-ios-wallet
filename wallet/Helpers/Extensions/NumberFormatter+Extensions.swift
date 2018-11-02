@@ -22,6 +22,7 @@ extension NumberFormatter {
         formatter.locale = Locale.current
         formatter.decimalSeparator = Locale.current.decimalSeparator
         formatter.numberStyle = .decimal
+        formatter.roundingMode = .floor
         formatter.minimumFractionDigits = minimumFractionDigits
         formatter.maximumFractionDigits = maximumFractionDigits
 
@@ -37,6 +38,7 @@ extension NumberFormatter {
         formatter.locale = Locale.current
         formatter.decimalSeparator = Locale.current.decimalSeparator
         formatter.numberStyle = .decimal
+        formatter.roundingMode = .floor
         formatter.alwaysShowsDecimalSeparator = true
         formatter.minimumFractionDigits = 1
         formatter.maximumFractionDigits = 8
