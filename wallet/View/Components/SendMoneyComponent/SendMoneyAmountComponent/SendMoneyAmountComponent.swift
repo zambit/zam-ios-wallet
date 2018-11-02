@@ -190,10 +190,11 @@ class SendMoneyAmountComponent: Component, SizePresetable, UITextFieldDelegate {
 
         self.converter = Converter(coin: coin, fiat: fiat, coinPrice: coinPrice)
 
-
         guard let converter = converter else {
             return
         }
+
+        valueTextField?.text = ""
 
         if isAmountInFiat {
             altValueLabel?.text = "\(converter.coinValue.longFormatted?.removingWhitespaces ?? "") \(converter.coin.short.uppercased())"
@@ -207,10 +208,11 @@ class SendMoneyAmountComponent: Component, SizePresetable, UITextFieldDelegate {
 
         self.converter?.coinPrice = coinPrice
 
-
         guard let converter = converter else {
             return
         }
+
+        valueTextField?.text = ""
 
         if isAmountInFiat {
             altValueLabel?.text = "\(converter.coinValue.longFormatted?.removingWhitespaces ?? "") \(converter.coin.short.uppercased())"
