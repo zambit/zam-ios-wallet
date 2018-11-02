@@ -669,7 +669,7 @@ extension WalletDetailsViewController: UITableViewDelegate {
         if scrollView.contentOffset.y == scrollView.contentSize.height - scrollView.bounds.size.height + scrollView.contentInset.bottom + scrollView.contentInset.top {
 
             // ask next page only if we haven't reached last page
-            if let last = paginator?.reachedLastPage, last == false {
+            if let last = paginator?.reachedLastPage, last == false, currentSwitcher == .left {
                 self.paginator?.fetchNextPage()
             }
         }
