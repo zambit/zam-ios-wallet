@@ -584,6 +584,9 @@ extension WalletDetailsViewController: UITableViewDataSource {
                 fatalError()
             }
 
+            header.hero.isEnabled = true
+            header.hero.modifiers = [.fade]
+
             header.configure(with: viewData)
 
             return header
@@ -675,7 +678,11 @@ extension WalletDetailsViewController: UITableViewDataSource {
                 fatalError()
             }
 
+            cell.hero.isEnabled = true
+            cell.hero.modifiers = [.fade]
+
             cell.configure(with: viewData)
+
             return cell
         }
     }
