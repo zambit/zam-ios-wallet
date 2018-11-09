@@ -13,13 +13,13 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>$(PRODUCT_NAME)</string>
+	<string>zamzam.wallet</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>0.1.5</string>
+	<string>0.1.6</string>
 	<key>CFBundleVersion</key>
-	<string>16</string>
+	<string>17</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -46,11 +46,11 @@
 	<key>NSCameraUsageDescription</key>
 	<string>Enabling Camera allows you to scan QR code directly.</string>
 	<key>NSContactsUsageDescription</key>
-	<string></string>
+	<string>It allows you to send money directly to your friends.</string>
 	<key>NSFaceIDUsageDescription</key>
 	<string>Enabling Face ID allows you quick and secure access to your account.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string></string>
+	<string>It allows you to add documents from Photo Library</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>MavenPro-Bold.ttf</string>
