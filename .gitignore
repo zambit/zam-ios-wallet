@@ -29,3 +29,6 @@ Preview.html
 *.lock
 
 Carthage/Build
+
+# IDE
+/.idea
